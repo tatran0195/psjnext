@@ -8,6 +8,10 @@ const i18nMiddleware = createI18nMiddleware(i18n);
 const { rewrite: rewriteLLM } = rewritePath('/docs/*path', '/llms.mdx/*path');
 const { rewrite: rewriteMdx } = rewritePath('/docs{/*path}.mdx', '/llms.mdx{/*path}');
 
+export const config = {
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+};
+
 export default async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
