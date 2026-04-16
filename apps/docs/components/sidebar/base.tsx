@@ -14,7 +14,7 @@ import {
 } from 'react';
 import Link, { type LinkProps } from 'fumadocs-core/link';
 import { useOnChange } from 'fumadocs-core/utils/use-on-change';
-import { cn } from '../../lib/cn';
+import { cn } from '@/lib/cn';
 import {
     Collapsible,
     CollapsibleContent,
