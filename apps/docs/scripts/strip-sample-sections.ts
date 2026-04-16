@@ -16,7 +16,7 @@
 
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { glob } from 'glob';
+import { glob } from 'tinyglobby';
 
 // ---------------------------------------------------------------------------
 // Paths
