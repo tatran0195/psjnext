@@ -1,0 +1,6 @@
+{
+    "$schema": "..\\..\\..\\..\\.source\\json-schema\\docs.meta.json",
+    "title": "Full A-Z",
+    "defaultOpen": false,
+    "pages": ["plane-stress/plane-stress", "creating-bolt/creating-bolt"]
+}

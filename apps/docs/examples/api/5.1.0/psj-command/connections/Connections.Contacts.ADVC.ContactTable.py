@@ -1,0 +1,65 @@
+# Title:   Connections.Contacts.ADVC.ContactTable()
+# Desc:    Create contacts for ADVC solver by using table
+# Version: 5.1.0
+# Docs:    /docs/cli/5.1.0/psj-command/connections/Connections.Contacts.ADVC.ContactTable
+# ---
+Geometry.Part.Cube()
+Geometry.Part.Cube(dlOrigin=[0.01, 0.0, 0.0], 
+                   strName="Cube_2", 
+                   iPartColor=6409934)
+Geometry.Part.Cube(dlOrigin=[0.0, 0.01, 0.0], 
+                   strName="Cube_3", 
+                   iPartColor=6417130)
+Geometry.Part.Cube(dlOrigin=[0.01, 0.01, 0.0], 
+                   strName="Cube_4", 
+                   iPartColor=6053060)
+
+created_contact = Connections.Contacts.ADVC.ContactTable(strName="ContactADVC", 
+                                                         iContactType=0, 
+                                                         iSlidingType=0, 
+                                                         iInitialState=0, 
+                                                         dInitialStateTol=DFLT_DBL, 
+                                                         dKineticFrictionCoef=DFLT_DBL, 
+                                                         dExponentialCoef=DFLT_DBL, 
+                                                         iBehavior=0, 
+                                                         dClearance=DFLT_DBL, 
+                                                         iAdjust2Clearance=0, 
+                                                         dInterference=DFLT_DBL, 
+                                                         iAdjust2Interference=0, 
+                                                         iAutoShrink=0, 
+                                                         iAdvAdjust=0, 
+                                                         dAdjustValue=DFLT_DBL, 
+                                                         dFrictionCoef=DFLT_DBL, 
+                                                         dMaxShear=DFLT_DBL, 
+                                                         dElasticSlip=DFLT_DBL, 
+                                                         dSlipTolerance=DFLT_DBL, 
+                                                         dSearchWidth=DFLT_DBL, 
+                                                         dSearchGap=DFLT_DBL, 
+                                                         dSearchDepth=DFLT_DBL, 
+                                                         dCritialPenetration=DFLT_DBL, 
+                                                         iEstimationImpactTime=0,
+                                                         iFormula=0, 
+                                                         iConstraintType=0, 
+                                                         iDataType=0, 
+                                                         iTypeId=0, 
+                                                         bTemperatureDependency=False, 
+                                                         iNumDependencies=0, 
+                                                         tshTableClearance=[],
+                                                         bStabilized=0, 
+                                                         iStabilizeType=0, 
+                                                         dResidualFactor=DFLT_DBL, 
+                                                         dEffectiveDist=DFLT_DBL, 
+                                                         dCN=DFLT_DBL, 
+                                                         dCT=DFLT_DBL, 
+                                                         crlClearance=[], 
+                                                         crplTarget=[], 
+                                                         crEdit=None, 
+                                                         dSearchAngle=DFLT_DBL, 
+                                                         iConstraintTypeExplicit=0, 
+                                                         dPenaltyFact=DFLT_DBL, 
+                                                         dPenaltyFactExplicit=DFLT_DBL, 
+                                                         iColor=16711680, 
+                                                         iAlg=0, 
+                                                         iMethod=0)
+
+JPT.Debugger(created_contact)

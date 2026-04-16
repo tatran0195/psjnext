@@ -1,0 +1,22 @@
+---
+title: GasketAdditionalBehavior
+id: GasketAdditionalBehavior
+---
+
+## Description
+
+This is an instance of a GasketAdditionalBehavior class, represents GasketAdditionalBehavior characteristic of material.
+
+## Properties
+
+| Attribute  | Description                                 |
+| ---------- | ------------------------------------------- |
+| initialGap | A _Float_ specifying the initial gap value. |
+
+```psj {2} title="Sample Code"
+sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
+                                    listMaterialProperty=[GasketAdditionalBehavior(initialGap=0.2)],
+                                    iMaterialID=1,
+                                    iMaterialColor=16131973)
+JPT.Debugger(sample_Mat) #for checking return value
+```

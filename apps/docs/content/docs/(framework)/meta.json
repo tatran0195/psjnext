@@ -1,0 +1,16 @@
+{
+    "title": "Documentation",
+    "description": "The documentation of PSJ",
+    "icon": "Building",
+    "root": true,
+    "pages": [
+        "---Introduction---",
+        "index",
+        "what-is-fumadocs",
+        "guides",
+        "---Core Components---",
+        "...concepts",
+        "---References---",
+        "faq"
+    ]
+}
