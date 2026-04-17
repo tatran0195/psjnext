@@ -1,7 +1,8 @@
+import { type Dispatch, type SetStateAction, useState } from 'react';
+
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from 'fumadocs-ui/components/ui/popover';
 import { ChevronDown } from 'lucide-react';
-import { type Dispatch, type SetStateAction, useState } from 'react';
 
 import { cn } from '@/lib/cn';
 

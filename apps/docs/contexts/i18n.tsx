@@ -1,5 +1,6 @@
 'use client';
 import { createContext, type ReactNode, useContext, useMemo, useRef } from 'react';
+
 import { usePathname, useRouter } from 'fumadocs-core/framework';
 
 export interface Translations {

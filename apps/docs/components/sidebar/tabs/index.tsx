@@ -1,4 +1,5 @@
 import type { LayoutTab, GetLayoutTabsOptions } from '@/layouts/shared';
+
 import type * as PageTree from 'fumadocs-core/page-tree';
 
 export type SidebarTab = LayoutTab;

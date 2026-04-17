@@ -1,4 +1,5 @@
 import { apiDocs as _, docs } from 'collections/server';
+import type { Folder } from 'fumadocs-core/page-tree';
 import {
     type InferMetaType,
     type InferPageType,
@@ -9,7 +10,6 @@ import {
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 
 import { i18n } from '@/lib/i18n';
-import { Folder } from 'fumadocs-core/page-tree';
 import { pageTreeCodeTitles } from '@/lib/plugins/code-title';
 import { customIconsPlugin } from '@/lib/plugins/custom-icon';
 import { getSection } from '@/lib/source/navigation';

@@ -1,7 +1,9 @@
-import { source } from '@/lib/source';
-import type { OramaDocument } from 'fumadocs-core/search/orama-cloud';
 import { getBreadcrumbItems } from 'fumadocs-core/breadcrumb';
+
+import { source } from '@/lib/source';
 import { getSection } from '@/lib/source/navigation';
+
+import type { OramaDocument } from 'fumadocs-core/search/orama-cloud';
 
 export const revalidate = false;
 

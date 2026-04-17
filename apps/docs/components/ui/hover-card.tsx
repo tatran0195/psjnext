@@ -1,10 +1,12 @@
 'use client';
 
-import type { ComponentProps } from 'react';
 import * as React from 'react';
+import type { ComponentProps } from 'react';
+
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card';
-import { cn } from '@/lib/cn';
 import Link from 'fumadocs-core/link';
+
+import { cn } from '@/lib/cn';
 
 const HoverCard = HoverCardPrimitive.Root;
 

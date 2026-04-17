@@ -1,4 +1,5 @@
 import { type Page } from '@/lib/source';
+
 import { getSection } from './source/navigation';
 
 export async function getLLMText(page: Page) {

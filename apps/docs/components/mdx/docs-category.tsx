@@ -1,8 +1,10 @@
-import { source } from '@/lib/source';
+import { ReactNode } from 'react';
+
 import * as PageTree from 'fumadocs-core/page-tree';
 import { findSiblings } from 'fumadocs-core/page-tree';
 import { Card, Cards } from 'fumadocs-ui/components/card';
-import { ReactNode } from 'react';
+
+import { source } from '@/lib/source';
 
 export function DocsCategory({ url, lang }: { url: string; lang: string }) {
     return (

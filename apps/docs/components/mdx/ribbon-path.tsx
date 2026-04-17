@@ -1,5 +1,6 @@
-import type { Ribbon } from '@/lib/source/schema';
 import { ChevronRight, MousePointerClick, Option } from 'lucide-react';
+
+import type { Ribbon } from '@/lib/source/schema';
 
 export function RibbonPath({ ribbon }: { ribbon: Ribbon }) {
     const { tab, panel } = ribbon;

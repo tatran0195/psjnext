@@ -1,4 +1,5 @@
 import type { Metadata } from 'next/types';
+
 import type { Page } from './source';
 
 export function createMetadata(override: Metadata): Metadata {

@@ -1,8 +1,11 @@
-import { source } from '@/lib/source';
 import { notFound } from 'next/navigation';
-import { generate as MetadataImage, getImageResponseOptions } from './generate';
+
 import { ImageResponse } from '@takumi-rs/image-response';
+
 import { getPageImage } from '@/lib/metadata';
+import { source } from '@/lib/source';
+
+import { generate as MetadataImage, getImageResponseOptions } from './generate';
 
 export const revalidate = false;
 

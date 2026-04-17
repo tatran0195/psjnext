@@ -1,7 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+
 import { MarkdownCopyButton } from '@/layouts/shared/page-actions';
 
 type PagerItem = {

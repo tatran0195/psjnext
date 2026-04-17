@@ -1,7 +1,4 @@
 'use client';
-import { I18nLabel, useI18n } from 'fumadocs-ui/contexts/i18n';
-import { cn } from '@/lib/cn';
-import { ChevronDown, Text } from 'lucide-react';
 import {
     createContext,
     RefObject,
@@ -14,14 +11,19 @@ import {
     type ComponentProps,
     type ReactNode,
 } from 'react';
+
+import * as Primitive from 'fumadocs-core/toc';
+import { useOnChange } from 'fumadocs-core/utils/use-on-change';
+import { I18nLabel, useI18n } from 'fumadocs-ui/contexts/i18n';
 import { useTreePath } from 'fumadocs-ui/contexts/tree';
+import { ChevronDown, Text } from 'lucide-react';
+
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
 import { useNotebookLayout } from '@/layouts/docs/client';
-import * as Primitive from 'fumadocs-core/toc';
-import { TOCItems, TOCEmpty, TOCItem } from './toc-clerk';
-
-import { useOnChange } from 'fumadocs-core/utils/use-on-change';
+import { cn } from '@/lib/cn';
 import { mergeRefs } from '@/lib/merge-refs';
+
+import { TOCItems, TOCEmpty, TOCItem } from './toc-clerk';
 
 const TOCContext = createContext<Primitive.TOCItemType[]>([]);
 

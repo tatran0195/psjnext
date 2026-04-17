@@ -8,8 +8,16 @@ import {
     useEffect,
     useState,
 } from 'react';
-import { cn } from '@/lib/cn';
+
 import { I18nLabel, useI18n } from 'fumadocs-ui/contexts/i18n';
+import { Edit } from 'lucide-react';
+
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/cn';
+
+import { Breadcrumb, type BreadcrumbProps } from './slots/breadcrumb';
+import { Container } from './slots/container';
+import { Footer, type FooterProps } from './slots/footer';
 import {
     TOC,
     TOCPopover,
@@ -18,12 +26,8 @@ import {
     type TOCPopoverProps,
     type TOCProps,
 } from './slots/toc';
-import { Footer, type FooterProps } from './slots/footer';
-import { Breadcrumb, type BreadcrumbProps } from './slots/breadcrumb';
-import { Container } from './slots/container';
+
 import type { TOCItemType } from 'fumadocs-core/toc';
-import { buttonVariants } from '@/components/ui/button';
-import { Edit } from 'lucide-react';
 
 export interface DocsPageProps extends ComponentProps<'article'> {
     toc?: TOCItemType[];

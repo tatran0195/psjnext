@@ -1,7 +1,9 @@
 'use client';
 
-import { cn } from '@/lib/cn';
 import { useEffect, useState, type ComponentProps } from 'react';
+
+import { cn } from '@/lib/cn';
+
 import { useNotebookLayout } from '../client';
 
 export function Container(props: ComponentProps<'div'>) {

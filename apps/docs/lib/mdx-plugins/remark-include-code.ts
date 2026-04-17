@@ -20,10 +20,11 @@
 
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
+import { visit } from 'unist-util-visit';
+
 import type { Code, Heading, Root, Text } from 'mdast';
 import type { Plugin } from 'unified';
 import type { VFile } from 'vfile';
-import { visit } from 'unist-util-visit';
 
 // ---------------------------------------------------------------------------
 // Marker parsing

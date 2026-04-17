@@ -1,7 +1,9 @@
-import Link from 'fumadocs-core/link';
 import { type ReactNode, Suspense } from 'react';
-import { cn } from '@/lib/cn';
+
+import Link from 'fumadocs-core/link';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
+
+import { cn } from '@/lib/cn';
 
 export interface Suggestion {
     id: string;

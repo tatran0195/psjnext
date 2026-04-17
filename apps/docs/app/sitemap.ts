@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+
 import { baseUrl } from '@/lib/metadata';
 import { source } from '@/lib/source';
 

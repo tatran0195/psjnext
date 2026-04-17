@@ -1,16 +1,20 @@
+import type { Metadata } from 'next';
+import type { ComponentProps, FC, ReactNode } from 'react';
+
 import Link from 'fumadocs-core/link';
+import { findNeighbour } from 'fumadocs-core/page-tree';
 import { PathUtils } from 'fumadocs-core/source';
 import * as Twoslash from 'fumadocs-twoslash/ui';
 import { Banner } from 'fumadocs-ui/components/banner';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
-import type { Metadata } from 'next';
-import type { ComponentProps, FC, ReactNode } from 'react';
+
 import { NotFound } from '@/components/layouts/not-found';
 import { getMDXComponents } from '@/components/mdx';
 import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-category';
 import { LinkPreview } from '@/components/mdx/link-preview';
 import { Mermaid } from '@/components/mdx/mermaid';
+import { RibbonPath } from '@/components/mdx/ribbon-path';
 import { SymbolLink } from '@/components/mdx/symbol-link';
 import * as Preview from '@/components/preview';
 import { Customisation } from '@/components/preview/customisation';
@@ -23,11 +27,9 @@ import {
     DocsTitle,
     PageLastUpdate,
 } from '@/layouts/docs/page';
+import { DocsPager } from '@/layouts/shared/docs-pager';
 import { createMetadata, getPageImage } from '@/lib/metadata';
 import { source } from '@/lib/source';
-import { RibbonPath } from '@/components/mdx/ribbon-path';
-import { findNeighbour } from 'fumadocs-core/page-tree';
-import { DocsPager } from '@/layouts/shared/docs-pager';
 
 function PreviewRenderer({ preview }: { preview: string }): ReactNode {
     if (preview && preview in Preview) {

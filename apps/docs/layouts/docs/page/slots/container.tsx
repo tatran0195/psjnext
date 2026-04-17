@@ -1,8 +1,10 @@
 'use client';
 
 import type { ComponentProps } from 'react';
-import { useDocsPage } from '..';
+
 import { cn } from '@/lib/cn';
+
+import { useDocsPage } from '..';
 
 export function Container(props: ComponentProps<'article'>) {
     const {

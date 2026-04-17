@@ -1,12 +1,14 @@
 'use client';
-import { Check, ChevronsUpDown } from 'lucide-react';
 import { type ComponentProps, type ReactNode, useMemo, useState } from 'react';
-import Link from 'fumadocs-core/link';
+
 import { usePathname } from 'fumadocs-core/framework';
-import { cn } from '@/lib/cn';
+import Link from 'fumadocs-core/link';
+import { Check, ChevronsUpDown } from 'lucide-react';
+
 import { useSidebar } from '@/components/sidebar/base';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { isLayoutTabActive, type LayoutTab } from '@/layouts/shared';
+import { cn } from '@/lib/cn';
 
 export type SidebarTabWithProps = LayoutTab;
 

@@ -1,5 +1,6 @@
-import type { LoaderPlugin } from 'fumadocs-core/source';
 import { Icons } from '@/components/icons';
+
+import type { LoaderPlugin } from 'fumadocs-core/source';
 
 export function customIconsPlugin(): LoaderPlugin {
     return {

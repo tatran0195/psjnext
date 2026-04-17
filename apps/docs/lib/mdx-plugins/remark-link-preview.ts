@@ -1,7 +1,8 @@
+import { visit } from 'unist-util-visit';
+
 import type { Root, Link, Parent, PhrasingContent } from 'mdast';
 import type { MdxJsxAttribute } from 'mdast-util-mdx';
 import type { Plugin } from 'unified';
-import { visit } from 'unist-util-visit';
 
 export interface RemarkLinkPreviewOptions {
     tag?: string;

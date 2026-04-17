@@ -1,13 +1,14 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import * as React from 'react';
-import { X, ExternalLink } from 'lucide-react';
-import { cn } from '@/lib/cn';
+
 import { Presence } from '@radix-ui/react-presence';
+import { X, ExternalLink } from 'lucide-react';
 
 import { getPreviewData, type PreviewData } from '@/app/api/preview/actions';
-import { usePathname } from 'next/navigation';
 import { LinkPreviewProvider } from '@/components/mdx/link-preview';
+import { cn } from '@/lib/cn';
 
 interface SidebarContextType {
     open: (href: string) => void;

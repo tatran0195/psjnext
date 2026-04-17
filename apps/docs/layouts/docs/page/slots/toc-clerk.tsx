@@ -1,5 +1,4 @@
 'use client';
-import * as Primitive from 'fumadocs-core/toc';
 import {
     type ComponentProps,
     type ReactNode,
@@ -9,10 +8,14 @@ import {
     useRef,
     useState,
 } from 'react';
-import { cn } from '@/lib/cn';
-import { TocThumb, useTOCItems } from './toc';
-import { mergeRefs } from '@/lib/merge-refs';
+
+import * as Primitive from 'fumadocs-core/toc';
 import { useI18n } from 'fumadocs-ui/contexts/i18n';
+
+import { cn } from '@/lib/cn';
+import { mergeRefs } from '@/lib/merge-refs';
+
+import { TocThumb, useTOCItems } from './toc';
 
 interface ComputedSVG {
     width: number;

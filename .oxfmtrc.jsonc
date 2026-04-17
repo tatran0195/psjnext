@@ -28,4 +28,36 @@
 
         "routeTree.gen.ts",
     ],
+    "sortImports": {
+        "ignoreCase": true,
+        "newlinesBetween": true,
+        "internalPattern": ["@/", "~/"],
+
+        "customGroups": [
+            {
+                "groupName": "react",
+                "elementNamePattern": ["react", "react-*", "next", "next/*"],
+            },
+            {
+                "groupName": "fumadocs",
+                "elementNamePattern": ["fumadocs", "fumadocs-*"],
+            },
+        ],
+
+        "groups": [
+            "react",
+            "fumadocs",
+
+            ["value-builtin", "value-external"],
+
+            "type-internal",
+            "value-internal",
+
+            ["type-parent", "type-sibling", "type-index"],
+            ["value-parent", "value-sibling", "value-index"],
+
+            "type-import",
+            "unknown",
+        ],
+    },
 }

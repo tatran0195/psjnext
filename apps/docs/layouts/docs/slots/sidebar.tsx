@@ -1,5 +1,20 @@
 'use client';
 
+import {
+    type ComponentProps,
+    createElement,
+    type FC,
+    type ReactNode,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
+
+import { cva } from 'class-variance-authority';
+import { usePathname } from 'fumadocs-core/framework';
+import Link from 'fumadocs-core/link';
+import { Check, ChevronsUpDown, Languages, Search, SidebarIcon, X } from 'lucide-react';
+
 import * as Base from '@/components/sidebar/base';
 import { createLinkItemRenderer } from '@/components/sidebar/link-item';
 import {
@@ -13,21 +28,10 @@ import { isLayoutTabActive, type LayoutTab, LinkItem } from '@/layouts/shared';
 import { cn } from '@/lib/cn';
 import { mergeRefs } from '@/lib/merge-refs';
 import { sidebarMatch } from '@/lib/tree-filter';
-import { cva } from 'class-variance-authority';
-import { usePathname } from 'fumadocs-core/framework';
-import Link from 'fumadocs-core/link';
-import type * as PageTree from 'fumadocs-core/page-tree';
-import { Check, ChevronsUpDown, Languages, Search, SidebarIcon, X } from 'lucide-react';
-import {
-    type ComponentProps,
-    createElement,
-    type FC,
-    type ReactNode,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+
 import { useNotebookLayout } from '../client';
+
+import type * as PageTree from 'fumadocs-core/page-tree';
 
 const itemVariants = cva(
     'relative flex flex-row items-center gap-2 rounded-lg p-2 text-start text-fd-muted-foreground wrap-anywhere [&_svg]:size-4 [&_svg]:shrink-0',

@@ -1,9 +1,7 @@
 'use client';
-import { ListMenu } from '@/components/ui/list-menu';
-import { useThrottledValue } from '@/hooks/use-throttle';
-import { compareSemver, matchesSearch } from '@/lib/search';
-import type { Item, Node } from 'fumadocs-core/page-tree';
-import type { SortedResult } from 'fumadocs-core/search';
+import { useRouter } from 'next/navigation';
+import { useMemo, useState } from 'react';
+
 import { useDocsSearch } from 'fumadocs-core/search/client';
 import {
     SearchDialog,
@@ -18,11 +16,16 @@ import {
     type SearchItemType,
     type SharedProps,
 } from 'fumadocs-ui/components/dialog/search';
+import { ArrowRight } from 'lucide-react';
+
+import { ListMenu } from '@/components/ui/list-menu';
 import { useI18n } from '@/contexts/i18n';
 import { useTreeContext } from '@/contexts/tree';
-import { ArrowRight } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useThrottledValue } from '@/hooks/use-throttle';
+import { compareSemver, matchesSearch } from '@/lib/search';
+
+import type { Item, Node } from 'fumadocs-core/page-tree';
+import type { SortedResult } from 'fumadocs-core/search';
 
 const TAGS = [
     {

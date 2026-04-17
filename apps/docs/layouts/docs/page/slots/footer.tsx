@@ -1,14 +1,17 @@
 'use client';
 
+import { type ComponentProps, useMemo } from 'react';
+
+import { usePathname } from 'fumadocs-core/framework';
+import Link from 'fumadocs-core/link';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
 import { useI18n } from '@/contexts/i18n';
+import { useFooterItems } from '@/hooks/use-footer-items';
 import { cn } from '@/lib/cn';
 import { isActive } from '@/lib/urls';
-import { useFooterItems } from '@/hooks/use-footer-items';
-import { usePathname } from 'fumadocs-core/framework';
+
 import type * as PageTree from 'fumadocs-core/page-tree';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Link from 'fumadocs-core/link';
-import { type ComponentProps, useMemo } from 'react';
 
 type Item = Pick<PageTree.Item, 'name' | 'description' | 'url'>;
 

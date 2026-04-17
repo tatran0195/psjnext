@@ -8,9 +8,10 @@
  * distinguish parameter types, class names, enum constants, etc.
  */
 
-import { useI18n } from 'fumadocs-ui/contexts/i18n';
 import Link from 'next/link';
 import { useId, useState } from 'react';
+
+import { useI18n } from 'fumadocs-ui/contexts/i18n';
 
 import type { SymbolEntry } from '@/lib/symbol-resolver';
 

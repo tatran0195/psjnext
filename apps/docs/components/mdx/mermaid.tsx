@@ -1,6 +1,7 @@
 'use client';
 
 import { use, useEffect, useId, useState } from 'react';
+
 import { useTheme } from 'next-themes';
 
 export function Mermaid({ chart }: { chart: string }) {

@@ -1,7 +1,8 @@
 'use client';
 
-import * as React from 'react';
 import Link from 'next/link';
+import * as React from 'react';
+
 import * as HoverCard from '@radix-ui/react-hover-card';
 import { PanelRight, ArrowUpRight } from 'lucide-react';
 

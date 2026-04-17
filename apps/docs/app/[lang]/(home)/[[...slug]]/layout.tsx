@@ -1,8 +1,7 @@
 import { TechnoStarLogo } from '@/components/icons/logo';
+import { LinkSidebar, LinkSidebarProvider } from '@/components/mdx/link-sidebar';
 import { DocsLayout } from '@/layouts/docs';
 import { source } from '@/lib/source';
-
-import { LinkSidebar, LinkSidebarProvider } from '@/components/mdx/link-sidebar';
 
 export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) {
     const params = await props.params;

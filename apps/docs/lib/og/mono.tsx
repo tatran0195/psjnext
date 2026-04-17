@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react';
-import fs from 'node:fs/promises';
 import type { ImageResponseOptions } from 'next/server';
+import type { ReactNode } from 'react';
+
+import fs from 'node:fs/promises';
 
 export interface GenerateProps {
     title: ReactNode;

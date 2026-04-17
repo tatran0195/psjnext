@@ -19,10 +19,9 @@
  *      * material-unit-types.md -> col 2 "Key Name" plain text              (e.g. "Length_mm")
  */
 
-import { glob } from 'tinyglobby';
-
 import fs from 'node:fs';
 import path from 'node:path';
+import { glob } from 'tinyglobby';
 
 // -- Public types (imported by symbol-resolver.ts) -------------------------
 

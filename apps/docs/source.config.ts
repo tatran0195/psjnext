@@ -1,8 +1,9 @@
-import { mdxOptions } from '@/lib/mdx-options';
-import { DocsSchema, MetaSchema } from '@/lib/source/schema';
 import { defineConfig, defineDocs } from 'fumadocs-mdx/config';
 import jsonSchema from 'fumadocs-mdx/plugins/json-schema';
 import lastModified from 'fumadocs-mdx/plugins/last-modified';
+
+import { mdxOptions } from '@/lib/mdx-options';
+import { DocsSchema, MetaSchema } from '@/lib/source/schema';
 
 export const docs = defineDocs({
     docs: {

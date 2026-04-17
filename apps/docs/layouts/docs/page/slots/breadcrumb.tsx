@@ -1,11 +1,13 @@
 'use client';
 
+import { type ComponentProps, useMemo, Fragment } from 'react';
+
+import { type BreadcrumbOptions, getBreadcrumbItemsFromPath } from 'fumadocs-core/breadcrumb';
+import Link from 'fumadocs-core/link';
+import { ChevronRight } from 'lucide-react';
+
 import { useTreeContext, useTreePath } from '@/contexts/tree';
 import { cn } from '@/lib/cn';
-import { type BreadcrumbOptions, getBreadcrumbItemsFromPath } from 'fumadocs-core/breadcrumb';
-import { ChevronRight } from 'lucide-react';
-import Link from 'fumadocs-core/link';
-import { type ComponentProps, useMemo, Fragment } from 'react';
 
 export type BreadcrumbProps = BreadcrumbOptions & ComponentProps<'div'>;
 

@@ -1,5 +1,4 @@
 'use client';
-import { ChevronDown, Languages, Sidebar as SidebarIcon } from 'lucide-react';
 import {
     Fragment,
     type HTMLAttributes,
@@ -9,14 +8,18 @@ import {
     useState,
     type ComponentProps,
 } from 'react';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/cn';
-import { LinkItem, type LinkItemType, type MenuItemType } from '@/layouts/shared';
-import { useNotebookLayout } from '../client';
-import { type LayoutTab, isLayoutTabActive } from '@/layouts/shared';
-import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
+
 import { usePathname } from 'fumadocs-core/framework';
 import Link from 'fumadocs-core/link';
+import { ChevronDown, Languages, Sidebar as SidebarIcon } from 'lucide-react';
+
+import { buttonVariants } from '@/components/ui/button';
+import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
+import { LinkItem, type LinkItemType, type MenuItemType } from '@/layouts/shared';
+import { type LayoutTab, isLayoutTabActive } from '@/layouts/shared';
+import { cn } from '@/lib/cn';
+
+import { useNotebookLayout } from '../client';
 
 export function Header(props: ComponentProps<'header'>) {
     const {

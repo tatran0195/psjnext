@@ -1,5 +1,6 @@
-import { type FileObject, printErrors, scanURLs, validateFiles } from 'next-validate-link';
 import { InferPageType } from 'fumadocs-core/source';
+import { type FileObject, printErrors, scanURLs, validateFiles } from 'next-validate-link';
+
 import { source } from '@/lib/source';
 
 type AnySource = typeof source;

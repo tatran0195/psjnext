@@ -1,6 +1,5 @@
-import type * as PageTree from 'fumadocs-core/page-tree';
 import { type HTMLAttributes, useMemo } from 'react';
-import type { SidebarProps, SidebarProviderProps } from './slots/sidebar';
+
 import {
     type GetLayoutTabsOptions,
     type LayoutTab,
@@ -8,7 +7,12 @@ import {
     type BaseLayoutProps,
     getLayoutTabs,
 } from '@/layouts/shared';
+
+import type { SidebarProps, SidebarProviderProps } from './slots/sidebar';
+
 import { type DocsSlots, LayoutBody } from './client';
+
+import type * as PageTree from 'fumadocs-core/page-tree';
 
 export interface DocsLayoutProps extends BaseLayoutProps {
     tree: PageTree.Root;

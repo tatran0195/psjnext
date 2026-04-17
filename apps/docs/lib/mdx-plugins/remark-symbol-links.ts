@@ -16,13 +16,15 @@
  * contain many identifiers in prose that should NOT all be auto-linked.
  */
 
-import type { Root, RootContent } from 'mdast';
-import type { Plugin } from 'unified';
+import { Link } from 'mdast';
 import { SKIP, visit } from 'unist-util-visit';
 
 import type { SymbolEntry } from '../symbol-resolver';
+
 import { resolveSymbol } from '../symbol-resolver';
-import { Link } from 'mdast';
+
+import type { Root, RootContent } from 'mdast';
+import type { Plugin } from 'unified';
 
 // ── MDX JSX node shapes ───────────────────────────────────────────────────
 

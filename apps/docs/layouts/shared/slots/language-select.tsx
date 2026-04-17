@@ -1,10 +1,12 @@
 'use client';
 import type { ComponentProps } from 'react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/lib/cn';
+
 import { buttonVariants } from '@/components/ui/button';
-import type { VariantProps } from 'class-variance-authority';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useI18n } from '@/contexts/i18n';
+import { cn } from '@/lib/cn';
+
+import type { VariantProps } from 'class-variance-authority';
 
 export interface LanguageSelectProps extends ComponentProps<'button'> {
     variant?: VariantProps<typeof buttonVariants>['variant'];

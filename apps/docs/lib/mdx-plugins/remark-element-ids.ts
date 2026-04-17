@@ -1,6 +1,7 @@
+import { visit } from 'unist-util-visit';
+
 import type { Root } from 'mdast';
 import type { Transformer } from 'unified';
-import { visit } from 'unist-util-visit';
 
 /**
  * Remark plugin that extracts `id` attributes from MDX JSX elements.

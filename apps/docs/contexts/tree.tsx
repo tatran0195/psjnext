@@ -1,9 +1,12 @@
 'use client';
-import { getFirstUrl, type LayoutTab } from '@/layouts/shared';
+import { createContext, type ReactNode, use, useMemo } from 'react';
+
 import { searchPath } from 'fumadocs-core/breadcrumb';
 import { usePathname } from 'fumadocs-core/framework';
+
+import { getFirstUrl, type LayoutTab } from '@/layouts/shared';
+
 import type * as PageTree from 'fumadocs-core/page-tree';
-import { createContext, type ReactNode, use, useMemo } from 'react';
 
 export interface NestedTab {
     tabs: LayoutTab[];

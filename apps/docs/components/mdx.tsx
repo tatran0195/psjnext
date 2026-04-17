@@ -1,11 +1,13 @@
-import defaultMdxComponents from 'fumadocs-ui/mdx';
-import * as FilesComponents from 'fumadocs-ui/components/files';
-import * as TabsComponents from 'fumadocs-ui/components/tabs';
-import type { MDXComponents } from 'mdx/types';
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import * as FilesComponents from 'fumadocs-ui/components/files';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
-import { SymbolLink } from '@/components/mdx/symbol-link';
+import * as TabsComponents from 'fumadocs-ui/components/tabs';
+import defaultMdxComponents from 'fumadocs-ui/mdx';
+
 import { RibbonPath } from '@/components/mdx/ribbon-path';
+import { SymbolLink } from '@/components/mdx/symbol-link';
+
+import type { MDXComponents } from 'mdx/types';
 
 export function getMDXComponents(components?: MDXComponents) {
     return {

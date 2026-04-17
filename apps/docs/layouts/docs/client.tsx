@@ -1,8 +1,11 @@
 'use client';
 import { type ComponentProps, createContext, type FC, use } from 'react';
-import { type DocsLayoutProps } from '.';
+
 import { useIsScrollTop } from 'fumadocs-ui/utils/use-is-scroll-top';
+
 import { type LinkItemType } from '@/layouts/shared';
+
+import { type DocsLayoutProps } from '.';
 import {
     baseSlots,
     type BaseSlots,
@@ -11,6 +14,7 @@ import {
     useLinkItems,
 } from '../shared';
 import { Container } from './slots/container';
+import { Header } from './slots/header';
 import {
     Sidebar,
     SidebarCollapseTrigger,
@@ -20,7 +24,6 @@ import {
     type SidebarProps,
     type SidebarProviderProps,
 } from './slots/sidebar';
-import { Header } from './slots/header';
 
 export interface DocsSlots extends BaseSlots {
     container: FC<ComponentProps<'div'>>;

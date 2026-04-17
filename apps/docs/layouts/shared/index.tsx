@@ -1,9 +1,12 @@
 import { type FC, useMemo, type ComponentProps, type ReactNode } from 'react';
+
 import * as PageTree from 'fumadocs-core/page-tree';
+
 import { isActive, normalize } from '@/lib/urls';
+
 import type { BaseSlots } from './client';
-import type { ThemeSwitchProps } from './slots/theme-switch';
 import type { FullSearchTriggerProps, SearchTriggerProps } from './slots/search-trigger';
+import type { ThemeSwitchProps } from './slots/theme-switch';
 
 export interface NavOptions {
     enabled?: boolean;

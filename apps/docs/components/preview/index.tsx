@@ -1,13 +1,14 @@
-import { Home } from 'lucide-react';
-import { Heading } from 'fumadocs-ui/components/heading';
-import { Card } from 'fumadocs-ui/components/card';
-import { Callout } from 'fumadocs-ui/components/callout';
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import { Step, Steps } from 'fumadocs-ui/components/steps';
-import { TypeTable } from 'fumadocs-ui/components/type-table';
 import { type ReactNode } from 'react';
-import { Wrapper } from './wrapper';
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Card } from 'fumadocs-ui/components/card';
+import { Heading } from 'fumadocs-ui/components/heading';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Home } from 'lucide-react';
+
 import {
     Banner,
     DynamicCodeBlock,
@@ -18,6 +19,8 @@ import {
     InlineTOC,
 } from '@/components/preview/lazy';
 import BannerImage from '@/public/banner.png';
+
+import { Wrapper } from './wrapper';
 
 export function heading(): ReactNode {
     return (

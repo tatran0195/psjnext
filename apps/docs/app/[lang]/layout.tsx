@@ -1,14 +1,16 @@
-import { baseUrl, createMetadata } from '@/lib/metadata';
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import type { ReactNode } from 'react';
-import { Provider } from '../provider';
-import { Body } from './layout.client';
+
 // import { i18n } from '@/lib/i18n';
 import { NextProvider } from 'fumadocs-core/framework/next';
+import { Geist, Geist_Mono } from 'next/font/google';
+
 import { TreeContextProvider } from '@/contexts/tree';
+import { baseUrl, createMetadata } from '@/lib/metadata';
 import { source } from '@/lib/source';
 
+import { Provider } from '../provider';
+import { Body } from './layout.client';
 import '@/styles/global.css';
 
 export const metadata: Metadata = createMetadata({

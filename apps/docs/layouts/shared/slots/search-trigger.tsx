@@ -1,10 +1,12 @@
 'use client';
 import type { ComponentProps } from 'react';
+
 import { Search } from 'lucide-react';
-import { useSearchContext } from '@/contexts/search';
-import { useI18n } from '@/contexts/i18n';
-import { cn } from '@/lib/cn';
+
 import { type ButtonProps, buttonVariants } from '@/components/ui/button';
+import { useI18n } from '@/contexts/i18n';
+import { useSearchContext } from '@/contexts/search';
+import { cn } from '@/lib/cn';
 
 export interface SearchTriggerProps extends Omit<ComponentProps<'button'>, 'color'>, ButtonProps {
     hideIfDisabled?: boolean;

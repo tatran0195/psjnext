@@ -1,6 +1,5 @@
-import { createHighlighter } from 'shiki';
-
 import fs from 'node:fs';
+import { createHighlighter } from 'shiki';
 
 export const psjGrammar = JSON.parse(fs.readFileSync('./lib/shiki/psj.json', 'utf8'));
 

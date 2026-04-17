@@ -1,5 +1,7 @@
-import * as Primitive from '@radix-ui/react-scroll-area';
 import * as React from 'react';
+
+import * as Primitive from '@radix-ui/react-scroll-area';
+
 import { cn } from '../../lib/cn';
 
 export function ScrollArea({

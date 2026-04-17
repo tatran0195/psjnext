@@ -1,11 +1,12 @@
 'use server';
 
+import React from 'react';
+
 import { getMDXComponents } from '@/components/mdx';
 import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-category';
-import { source } from '@/lib/source';
-import { i18n } from '@/lib/i18n';
-import React from 'react';
 import { LinkPreview } from '@/components/mdx/link-preview';
+import { i18n } from '@/lib/i18n';
+import { source } from '@/lib/source';
 
 export interface PreviewData {
     title: string;
