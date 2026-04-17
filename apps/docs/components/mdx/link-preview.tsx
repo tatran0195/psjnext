@@ -6,7 +6,6 @@ import * as HoverCard from '@radix-ui/react-hover-card';
 import { PanelRight, ArrowUpRight } from 'lucide-react';
 
 import { getPreviewData, type PreviewData } from '@/app/api/preview/actions';
-
 import { useLinkSidebar } from '@/components/mdx/link-sidebar';
 
 interface LinkPreviewConfig {
@@ -62,7 +61,7 @@ export function LinkPreview({
     const [error, setError] = React.useState(false);
 
     const isInternal = React.useMemo(() => {
-        if (href.startsWith('/') || href.startsWith('#')) return true;
+        if (href.startsWith('/') || href.startsWith('#') || href.startsWith('./')) return true;
         try {
             const url = new URL(href);
             return url.hostname === (typeof window !== 'undefined' ? window.location.hostname : '');

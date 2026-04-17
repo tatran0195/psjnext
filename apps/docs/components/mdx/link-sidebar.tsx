@@ -204,14 +204,14 @@ export function LinkSidebar() {
                     <div
                         onMouseDown={startResizing}
                         className={cn(
-                            'absolute left-0 top-0 bottom-0 w-1.5 z-50 cursor-col-resize hidden lg:block transition-colors shrink-0',
+                            'absolute left-0 top-0 bottom-0 w-1 z-50 cursor-col-resize hidden lg:block transition-colors shrink-0',
                             isResizing ? 'bg-fd-primary/40' : 'hover:bg-fd-primary/20',
                         )}
                     />
 
-                    <div className="flex flex-col size-full bg-fd-card">
+                    <div className="flex flex-col size-full bg-fd-background">
                         {/* Header */}
-                        <div className="flex items-center justify-between sticky top-0 z-20 border-b border-fd-border/50 bg-fd-card px-6 py-4">
+                        <div className="flex items-center justify-between sticky top-0 z-20 border-b border-fd-border/50 bg-fd-background px-4 py-3">
                             <div className="flex-1 min-w-0">
                                 {isLoading ? (
                                     <div className="space-y-2">
@@ -267,7 +267,7 @@ export function LinkSidebar() {
                                     'linear-gradient(to bottom, transparent, white 2rem, white calc(100% - 2rem), transparent 100%)',
                             }}
                         >
-                            <div className="p-6">
+                            <div className="p-4">
                                 {isLoading ? (
                                     <div className="space-y-6 max-w-2xl mx-auto py-4">
                                         <div className="space-y-2">

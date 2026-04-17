@@ -330,7 +330,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
         return (
             <div
                 {...props}
-                className={cn('flex flex-col gap-3 p-4 pb-2 empty:hidden', props.className)}
+                className={cn('flex flex-col gap-2 p-4 pb-0 empty:hidden', props.className)}
             >
                 {props.children}
                 {banner}
@@ -410,7 +410,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                     key={i}
                                     options={level.tabs}
                                     activeItem={level.active}
-                                    className={i < nestedTabs.length - 1 ? '-mb-2' : ''}
+                                    className={i < nestedTabs.length - 1 ? '-mb-1' : ''}
                                 />
                             ))}
                         </>

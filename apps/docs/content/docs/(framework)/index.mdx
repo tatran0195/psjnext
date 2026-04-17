@@ -1,39 +1,76 @@
 ---
 title: Introduction
-description: PSJ introduction and benefits
+description: PSJ (Python Scripting for Jupiter) is a full-featured Python API for automating, extending, and customising every layer of the Jupiter CAE platform — from one-click mesh tasks to complete pipelines with custom dialogs and external software integration.
+icon: BookOpen
 ---
 
-## Background problems in daily CAE work
+import { RepeatIcon, ShieldCheckIcon, GraduationCapIcon, SlidersHorizontalIcon, SparklesIcon, ZapIcon, Code2Icon, WorkflowIcon, DraftingCompassIcon, CpuIcon, CodeIcon, Building2Icon } from 'lucide-react';
 
-- Repeated operations can make CAE user **boring and uncomfortable**.
-- The iterative work without automation **cannot be completed within a desired duration**.
-- Manual operation by human can **create mistakes**.
-- **In depth CAE trainings** can be required if modelling is complicated.
-- Each firm has its own design rule/process, design specification/template, etc. thus **customized UI specific to each user** will be more convenient and helpful.
+## Why PSJ exists
 
-![Target users](/docs/target_users.png)
+CAE workflows have a natural tension: the software is powerful, but repetitive work is slow, error-prone, and hard to standardise across teams. PSJ was built to close that gap.
 
-## PSJ: for automation and customization
+<Cards>
 
-To solve the above problems and meet the requirements from our diverged users, PSJ (Python Scripting for Jupiter) is developed, with our **4F moto**:
+<Card icon={<RepeatIcon className="text-purple-300" />} title='Repetition kills productivity'>
+Manual operations that run dozens of times daily can't be completed within target durations — automation is the only path forward.
+</Card>
 
-![4F moto](/docs/benefit_V5.0.1.png)
+<Card icon={<ShieldCheckIcon className="text-blue-300" />} title='Human error is avoidable'>
+Complex multi-step procedures drift over time. A scripted workflow runs identically every run, eliminating rework cost entirely.
+</Card>
 
-### Notable features
+<Card icon={<GraduationCapIcon className="text-green-300" />} title='High CAE training cost'>
+Sophisticated modelling demands deep knowledge. A guided PSJ dialog abstracts complexity for occasional users without sacrificing capability.
+</Card>
 
-With PSJ, you would have these below features:
+<Card icon={<SlidersHorizontalIcon className="text-orange-300" />} title='Every team works differently'>
+Design rules, naming conventions, and approval processes vary. PSJ lets organisations embed their own logic directly into Jupiter's ribbon.
+</Card>
 
-1. Jupiter functions in **Python script**
-    - Incorporate with Jupiter’s powerful Pre/Post functions
-    - Connect with other software
-    - Compatible with Python 3.x and its vast libraries
+</Cards>
 
-2. **GUI Command Builder**: Easy creation of GUI dialog equivalent to Jupiter built-in's
-3. **Customized IDE**: With powerful predicting tips, programming support functions
-4. **Customized Shell**: Error output for debugging
+## The four pillars of PSJ
 
-<Callout title="More information">
-    To know all PSJ solutions, please check out [our dedicated sample applications](../../showcase).
-</Callout>
+PSJ is not a single tool — it's a layered system of six interconnected components. Knowing when to reach for each one is the key to writing efficient, maintainable automation.
+<Cards>
 
-![Introduction](/docs/leaflet_V5.0.1.png)
+<Card icon={<SparklesIcon className="text-purple-300" />} title='Friendly'>
+GUI Command Builder and a built-in IDE mean you don't need Python to create dialogs. Drag-and-drop composition, live previews, and full autocomplete lower the barrier to near zero.
+</Card>
+
+<Card icon={<ZapIcon className="text-blue-300" />} title='Fast'>
+Operations requiring 30 minutes of manual work run in seconds once scripted — triggerable from a single ribbon button with no additional clicks.
+</Card>
+
+<Card icon={<Code2Icon className="text-green-300" />} title='Functional'>
+A purpose-built IDE with highlighting, autocomplete and tooltips provides a professional environment inside Jupiter. The Shell gives an interactive REPL with one-click error navigation.
+</Card>
+
+<Card icon={<WorkflowIcon className="text-orange-300" />} title='Flexible'>
+Fully compatible with Python 3.x and its ecosystem. NumPy, pandas, matplotlib, scikit-learn bundled. Excel, PowerPoint, OpenFOAM, custom solvers — all first-class targets.
+</Card>
+
+</Cards>
+
+## Who is PSJ for?
+
+<Cards>
+
+<Card icon={<DraftingCompassIcon className="text-purple-300" />} title='CAD Designers'>
+Run design-rule checks and repeated analysis sequences via ribbon buttons. No scripting experience required.
+</Card>
+
+<Card icon={<CpuIcon className="text-blue-300" />} title='CAE Engineers'>
+Automate mesh generation, load application, and result extraction. Cut modelling time from hours to minutes.
+</Card>
+
+<Card icon={<CodeIcon className="text-green-300" />} title='CAE Experts (Python)'>
+Interface with external solvers, databases, or cloud services. Build advanced pipelines with the full Python data-science stack.
+</Card>
+
+<Card icon={<Building2Icon className="text-orange-300" />} title='CAE Organisations'>
+Deploy a maintainable in-house CAD-CAE automation system built on your own workflow templates and wizard dialogs.
+</Card>
+
+</Cards>
