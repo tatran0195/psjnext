@@ -1,4 +1,4 @@
-import { type LoaderPlugin, MetaData } from 'fumadocs-core/source';
+import { type LoaderPlugin } from 'fumadocs-core/source';
 
 import { getSection } from '@/lib/source/navigation';
 
@@ -11,21 +11,22 @@ export function pageTreeFoldersPlugin(): LoaderPlugin {
         transformPageTree: {
             folder(node, _dir, metaFile) {
                 let isGroup = false;
+                let isRoot = false;
 
                 if (metaFile) {
                     const meta = this.storage.read(metaFile);
-                    const data = meta?.data as MetaData & { group?: boolean; root?: boolean };
-                    if (data?.group === true || data?.root === true) {
-                        isGroup = true;
+                    const data = meta?.data as { group?: boolean; root?: boolean };
+                    if (data?.group === true) isGroup = true;
+                    if (data?.root === true) isRoot = true;
+                }
+
+                if ((node as FolderWithGroup).group === true) isGroup = true;
+                if ((node as unknown as Record<string, unknown>).root === true) isRoot = true;
+
+                if (isGroup || isRoot) {
+                    if (isGroup) {
+                        (node as FolderWithGroup).group = true;
                     }
-                }
-
-                if ((node as FolderWithGroup).group === true || node.root === true) {
-                    isGroup = true;
-                }
-
-                if (isGroup) {
-                    (node as FolderWithGroup).group = true;
 
                     // Derive color from metaFile if available, fallback to extracting from url
                     let pathForColor = metaFile ? metaFile : undefined;
@@ -55,10 +56,12 @@ export function pageTreeFoldersPlugin(): LoaderPlugin {
                         node.icon = <Box key={node.name?.toString()}>{node.icon}</Box>;
                     }
 
-                    // Apply the same themed box to immediate children so nestedTabs inherit it correctly
-                    for (const child of node.children) {
-                        if (child.type === 'folder' && child.icon) {
-                            child.icon = <Box key={child.name?.toString()}>{child.icon}</Box>;
+                    // Apply the same themed box to immediate children ONLY if it's a grouped node (populates nestedTabs)
+                    if (isGroup) {
+                        for (const child of node.children) {
+                            if (child.type === 'folder' && child.icon) {
+                                child.icon = <Box key={child.name?.toString()}>{child.icon}</Box>;
+                            }
                         }
                     }
                 }

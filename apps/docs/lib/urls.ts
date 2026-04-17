@@ -19,4 +19,3 @@ export function isActive(href: string, pathname: string, nested = false): boolea
 
     return href === pathname || (nested && pathname.startsWith(`${href}/`));
 }
-    
