@@ -1,8 +1,8 @@
 import { transformerTwoslash } from 'fumadocs-twoslash';
 import {
-    remarkAutoTypeTable,
-    createGenerator,
     createFileSystemGeneratorCache,
+    createGenerator,
+    remarkAutoTypeTable,
     type RemarkAutoTypeTableOptions,
 } from 'fumadocs-typescript';
 
@@ -11,7 +11,6 @@ import { remarkSteps } from 'fumadocs-core/mdx-plugins/remark-steps';
 import { applyMdxPreset, DocCollection } from 'fumadocs-mdx/config';
 import { createFileSystemTypesCache } from 'fumadocs-twoslash/cache-fs';
 import remarkMath from 'remark-math';
-import { visit } from 'unist-util-visit';
 
 import { remarkElementIds } from '@/lib/mdx-plugins/remark-element-ids';
 import { remarkLinkPreview } from '@/lib/mdx-plugins/remark-link-preview';
@@ -19,9 +18,7 @@ import { defaultShikiOptions } from '@/lib/shiki';
 import { psjGrammar } from '@/lib/shiki/psj';
 
 import type { ElementContent } from 'hast';
-import type { Root } from 'mdast';
 import type { ShikiTransformer } from 'shiki';
-import type { Transformer } from 'unified';
 
 const isLint = process.env.LINT === '1';
 const isDev = process.env.NODE_ENV !== 'production';

@@ -10,7 +10,6 @@
     "[json]": {
         "editor.defaultFormatter": "oxc.oxc-vscode"
     },
-    "prettier.enable": false,
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "oxc.oxc-vscode",
     "oxc.fmt.configPath": ".oxfmtrc.jsonc",
@@ -47,5 +46,10 @@
     },
     "[jsonc]": {
         "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.fixAll.oxc": "explicit",
+        "source.fixAll.oxlint": "explicit"
     }
 }

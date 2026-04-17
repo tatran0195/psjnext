@@ -1,6 +1,6 @@
 import type { LoaderPlugin } from 'fumadocs-core/source';
 
-export function pageTreeCodeTitles(): LoaderPlugin {
+export function pageTreeCodeTitlesPlugin(): LoaderPlugin {
     return {
         transformPageTree: {
             file(node) {

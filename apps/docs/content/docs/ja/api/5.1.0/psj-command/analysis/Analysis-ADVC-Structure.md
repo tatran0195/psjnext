@@ -290,7 +290,7 @@ Ribbon: <menuselection>Analysis &#187; ADVC &#187; Structure</menuselection>
     ### ` enFunctionType`
     - An _Integer_ specifying the function type.
       <a id="Optimization-Function-Type"></a>
-        <!-- <Link to="#Optimization-Function-Type">link</Link> -->
+          <!-- <Link to="#Optimization-Function-Type">link</Link> -->
 
     | ID  | Function                             | Description                          |
     | --- | ------------------------------------ | ------------------------------------ |
