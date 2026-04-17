@@ -114,14 +114,14 @@ export default function CustomSearchDialog(props: SharedProps) {
             return [
                 ...(Array.isArray(data)
                     ? data
-                        .filter((item) =>
-                            matchesSearch(item, throttledSearch, behavior === 'exact'),
-                        )
-                        .sort((a, b) => {
-                            const aVersion = a.id.split('/')[3];
-                            const bVersion = b.id.split('/')[3];
-                            return compareSemver(bVersion, aVersion);
-                        })
+                          .filter((item) =>
+                              matchesSearch(item, throttledSearch, behavior === 'exact'),
+                          )
+                          .sort((a, b) => {
+                              const aVersion = a.id.split('/')[3];
+                              const bVersion = b.id.split('/')[3];
+                              return compareSemver(bVersion, aVersion);
+                          })
                     : []),
             ];
         };

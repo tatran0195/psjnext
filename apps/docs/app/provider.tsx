@@ -14,10 +14,12 @@ const SearchDialog = dynamic(() => import('@/components/layouts/search'), {
 
 export function Provider({ children, locale }: { children: ReactNode; locale: string }) {
     return (
-        <ThemeProvider attribute="class"
+        <ThemeProvider
+            attribute="class"
             defaultTheme="system"
             enableSystem
-            disableTransitionOnChange>
+            disableTransitionOnChange
+        >
             <I18nProvider locale={locale} locales={localeItems}>
                 <SearchProvider SearchDialog={SearchDialog} preload>
                     <TooltipProvider>{children}</TooltipProvider>

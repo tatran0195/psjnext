@@ -37,17 +37,17 @@ export interface BaseSlots {
     navTitle: FC<ComponentProps<'a'>>;
     themeSwitch: FC<ThemeSwitchProps> | false;
     searchTrigger:
-    | {
-        sm: FC<SearchTriggerProps>;
-        full: FC<FullSearchTriggerProps>;
-    }
-    | false;
+        | {
+              sm: FC<SearchTriggerProps>;
+              full: FC<FullSearchTriggerProps>;
+          }
+        | false;
     languageSelect:
-    | {
-        root: FC<LanguageSelectProps>;
-        text: FC<LanguageSelectTextProps>;
-    }
-    | false;
+        | {
+              root: FC<LanguageSelectProps>;
+              text: FC<LanguageSelectTextProps>;
+          }
+        | false;
 }
 
 export interface BaseSlotsProps<P extends BaseLayoutProps = BaseLayoutProps> extends Pick<
@@ -102,12 +102,13 @@ export function baseSlots({ useProps }: { useProps: () => BaseSlotsProps }) {
                 baseSlots: {
                     navTitle: slots.navTitle ?? InlineNavTitle,
                     themeSwitch: themeSwitchEnabled && (slots.themeSwitch ?? InlineThemeSwitch),
-                    languageSelect: locales.length > 1
-                        ? (slots.languageSelect ?? {
-                            root: LanguageSelect,
-                            text: LanguageSelectText,
-                        })
-                        : false,
+                    languageSelect:
+                        locales.length > 1
+                            ? (slots.languageSelect ?? {
+                                  root: LanguageSelect,
+                                  text: LanguageSelectText,
+                              })
+                            : false,
                     searchTrigger:
                         searchToggleEnabled &&
                         (slots.searchTrigger ?? {

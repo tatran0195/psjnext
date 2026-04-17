@@ -102,7 +102,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[]; l
 
                 {/* Description below ribbon */}
                 {page.data.description && (
-                    <DocsDescription className='mt-3'>{page.data.description}</DocsDescription>
+                    <DocsDescription className="mt-3">{page.data.description}</DocsDescription>
                 )}
             </div>
             <DocsBody>

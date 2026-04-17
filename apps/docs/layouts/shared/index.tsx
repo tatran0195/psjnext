@@ -205,13 +205,13 @@ export interface MenuItemType extends Partial<WithHref>, Filterable {
 
     items: (
         | (MainItemType & {
-            /**
-             * Options when displayed on navigation menu
-             */
-            menu?: ComponentProps<'a'> & {
-                banner?: ReactNode;
-            };
-        })
+              /**
+               * Options when displayed on navigation menu
+               */
+              menu?: ComponentProps<'a'> & {
+                  banner?: ReactNode;
+              };
+          })
         | CustomItemType
     )[];
 

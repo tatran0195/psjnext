@@ -46,10 +46,14 @@ function pageTreeFolders(): LoaderPlugin {
 
                     // Derive color from metaFile if available, fallback to extracting from url
                     let pathForColor = metaFile ? metaFile : undefined;
-                    const folderUrl = (node as unknown as Record<string, unknown>).url as string | undefined || node.index?.url;
+                    const folderUrl =
+                        ((node as unknown as Record<string, unknown>).url as string | undefined) ||
+                        node.index?.url;
                     if (!pathForColor && folderUrl) {
                         const segments = folderUrl.split('/').filter(Boolean);
-                        const section = segments.find((s: string) => ['api', 'guides', 'data-type'].includes(s));
+                        const section = segments.find((s: string) =>
+                            ['api', 'guides', 'data-type'].includes(s),
+                        );
                         if (section) pathForColor = section;
                     }
 
@@ -80,7 +84,6 @@ function pageTreeFolders(): LoaderPlugin {
         },
     };
 }
-
 
 export type Page = InferPageType<typeof source>;
 export type Meta = InferMetaType<typeof source>;

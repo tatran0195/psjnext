@@ -13,8 +13,8 @@ export interface SidebarPageTreeComponents {
 
 const RendererContext = createContext<
     | (Partial<SidebarPageTreeComponents> & {
-        pathname: string;
-    })
+          pathname: string;
+      })
     | null
 >(null);
 
