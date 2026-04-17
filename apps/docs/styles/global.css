@@ -92,9 +92,9 @@
     --sidebar-ring: oklch(0.708 0 0);
 
     --api-color: hsl(250, 80%, 54%);
-    --guides-color: hsl(138, 100%, 40%);
+    --guides-color: hsl(41, 100%, 40%);
     --data-type-color: hsl(217, 100%, 58%);
-    --framework-color: hsl(41, 100%, 40%);
+    --framework-color:  hsl(217 91% 60%);
 }
 
 .dark {
@@ -131,9 +131,9 @@
     --sidebar-ring: oklch(0.556 0 0);
 
     --api-color: hsl(250 100% 80%);
-    --guides-color: #a9ceff;
-    --data-type-color: #66d9ef;
-    --framework-color: #fff383;
+    --guides-color: hsl(41, 100%, 40%);
+    --data-type-color: hsl(199, 96%, 45%);
+    --framework-color: hsl(217 91% 60%);
 }
 
 @layer base {

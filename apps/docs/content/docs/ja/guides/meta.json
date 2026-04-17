@@ -1,0 +1,14 @@
+{
+    "root": true,
+    "title": "Guides",
+    "description": "Guides",
+    "icon": "Terminal",
+    "pages": [
+        "---Basics---",
+        "...basic",
+        "---Intermediate---",
+        "...intermediate",
+        "---Advanced---",
+        "...advanced"
+    ]
+}

@@ -1,4 +1,4 @@
-import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
+import { type NextFetchEvent, type NextRequest, NextResponse } from 'next/server';
 import { isMarkdownPreferred, rewritePath } from 'fumadocs-core/negotiation';
 import { createI18nMiddleware } from 'fumadocs-core/i18n/middleware';
 import { i18n } from './lib/i18n';
@@ -13,29 +13,29 @@ export const config = {
 };
 
 export default async function proxy(request: NextRequest) {
-    const { pathname } = request.nextUrl;
+    // const { pathname } = request.nextUrl;
 
-    if (pathname.includes('/_next/')) {
-        const url = request.nextUrl.clone();
-        url.pathname = pathname.substring(pathname.indexOf('/_next/'));
-        return NextResponse.rewrite(url);
-    }
+    // if (pathname.includes('/_next/')) {
+    //     const url = request.nextUrl.clone();
+    //     url.pathname = pathname.substring(pathname.indexOf('/_next/'));
+    //     return NextResponse.rewrite(url);
+    // }
 
-    if (pathname.startsWith('/api') || pathname.includes('.')) {
-        return NextResponse.next();
-    }
+    // if (pathname.startsWith('/api') || pathname.includes('.')) {
+    //     return NextResponse.next();
+    // }
 
-    const DEFAULT_LOCALE = 'en';
+    // const DEFAULT_LOCALE = 'en';
 
-    const hasLocale = i18n.languages.some(
-        (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
-    );
+    // const hasLocale = i18n.languages.some(
+    //     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
+    // );
 
-    if (!hasLocale) {
-        const url = request.nextUrl.clone();
-        url.pathname = `/${DEFAULT_LOCALE}${pathname}`;
-        return NextResponse.redirect(url);
-    }
+    // if (!hasLocale) {
+    //     const url = request.nextUrl.clone();
+    //     url.pathname = `/${DEFAULT_LOCALE}${pathname}`;
+    //     return NextResponse.redirect(url);
+    // }
 
     // existing i18n middleware
     const i18nResult = await i18nMiddleware(request, {} as NextFetchEvent);

@@ -1,0 +1,76 @@
+---
+title: はじめに
+description: PSJ (Python Scripting for Jupiter) は、Jupiter CAEプラットフォームのあらゆるレイヤーを自動化、拡張、カスタマイズするためのフル機能のPython APIです。ワンクリックのメッシュ作成タスクから、カスタムダイアログや外部ソフトウェア統合を備えた完全なパイプラインまで対応します。
+icon: BookOpen
+---
+
+import { RepeatIcon, ShieldCheckIcon, GraduationCapIcon, SlidersHorizontalIcon, SparklesIcon, ZapIcon, Code2Icon, WorkflowIcon, DraftingCompassIcon, CpuIcon, CodeIcon, Building2Icon } from 'lucide-react';
+
+## PSJが存在する理由
+
+CAEワークフローには特有のジレンマがあります。ソフトウェアは強力ですが、反復作業は時間がかかり、エラーが発生しやすく、チーム間で標準化するのが困難です。PSJはそのギャップを埋めるために構築されました。
+
+<Cards>
+
+<Card icon={<RepeatIcon className="text-purple-300" />} title='反復作業は生産性を低下させる'>
+毎日数十回行われる手動操作は、目標時間内に完了することができません。自動化こそが唯一の道です。
+</Card>
+
+<Card icon={<ShieldCheckIcon className="text-blue-300" />} title='ヒューマンエラーは回避可能'>
+複雑な多段階の手順は、時間の経過とともに変化してしまいます。スクリプト化されたワークフローは実行するたびに同一に動作し、手戻りのコストを完全に排除します。
+</Card>
+
+<Card icon={<GraduationCapIcon className="text-green-300" />} title='高いCAEトレーニングコスト'>
+高度なモデリングには深い知識が必要です。ガイド付きのPSJダイアログは、機能を損なうことなく、時々しか使用しないユーザー向けに複雑さを抽象化します。
+</Card>
+
+<Card icon={<SlidersHorizontalIcon className="text-orange-300" />} title='チームごとに異なる作業手法'>
+設計ルール、命名規則、承認プロセスは多岐にわたります。PSJを使用すると、組織独自のロジックをJupiterのリボンに直接組み込むことができます。
+</Card>
+
+</Cards>
+
+## PSJの4つの柱
+
+PSJは単一のツールではありません。6つの相互接続されたコンポーネントからなる階層型システムです。それぞれをいつ活用すべきかを知ることが、効率的で保守性の高い自動化を実現する鍵となります。
+<Cards>
+
+<Card icon={<SparklesIcon className="text-purple-300" />} title='フレンドリー'>
+GUIコマンドビルダーと内蔵IDEにより、Pythonの知識がなくてもダイアログを作成できます。ドラッグ＆ドロップによる構成、ライブプレビュー、完全なオートコンプリートにより、ハードルはほぼゼロになります。
+</Card>
+
+<Card icon={<ZapIcon className="text-blue-300" />} title='高速'>
+手動で30分かかる操作も、スクリプト化すれば数秒で完了します。リボンのボタンをクリックするだけで実行でき、追加の操作は不要です。
+</Card>
+
+<Card icon={<Code2Icon className="text-green-300" />} title='機能的'>
+ハイライト、オートコンプリート、ツールチップを備えた専用IDEが、Jupiter内でプロフェッショナルな環境を提供します。シェルは、ワンクリックでエラー箇所へ移動できる対話型REPLを提供します。
+</Card>
+
+<Card icon={<WorkflowIcon className="text-orange-300" />} title='柔軟'>
+Python 3.xおよびそのエコシステムと完全に互換性があります。NumPy、pandas、matplotlib、scikit-learnが同梱されています。Excel、PowerPoint、OpenFOAM、カスタムソルバーなど、あらゆるものが統合の対象となります。
+</Card>
+
+</Cards>
+
+## PSJはどのような人のためのものか？
+
+<Cards>
+
+<Card icon={<DraftingCompassIcon className="text-purple-300" />} title='CADデザイナー'>
+リボンのボタンを使用して、設計ルールチェックや繰り返しの解析シーケンスを実行できます。スクリプトの経験は不要です。
+</Card>
+
+<Card icon={<CpuIcon className="text-blue-300" />} title='CAEエンジニア'>
+メッシュ作成、荷重設定、結果抽出を自動化します。モデリング時間を数時間から数分に短縮します。
+</Card>
+
+<Card icon={<CodeIcon className="text-green-300" />} title='CAEエキスパート (Python)'>
+外部ソルバー、データベース、クラウドサービスと連携します。Pythonのデータサイエンススタックをフル活用して、高度なパイプラインを構築します。
+</Card>
+
+<Card icon={<Building2Icon className="text-orange-300" />} title='CAE組織'>
+独自のワークフローテンプレートやウィザードダイアログに基づく、保守可能な社内CAD-CAE自動化システムを導入できます。
+</Card>
+
+</Cards>

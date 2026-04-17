@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { Provider } from '../provider';
 import { Body } from './layout.client';
-import { i18n } from '@/lib/i18n';
+// import { i18n } from '@/lib/i18n';
 import { NextProvider } from 'fumadocs-core/framework/next';
 import { TreeContextProvider } from '@/contexts/tree';
 import { source } from '@/lib/source';
@@ -62,5 +62,6 @@ export default async function RootLayout(props: {
 }
 
 export function generateStaticParams() {
-    return i18n.languages.map((lang) => ({ lang }));
+    // return i18n.languages.map((lang) => ({ lang }));
+    return source.generateParams('slug', 'locale');
 }

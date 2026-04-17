@@ -1,0 +1,20 @@
+{
+    "title": "Documentation",
+    "description": "The documentation of PSJ",
+    "icon": "Building",
+    "root": true,
+    "pages": [
+        "---Getting Started---",
+        "index",
+        "quick-start",
+        "psj-structure",
+        "install-libraries",
+        "---Core Components---",
+        "...core",
+        "---Extensions---",
+        "...extensions",
+        "---References---",
+        "errors",
+        "faq"
+    ]
+}

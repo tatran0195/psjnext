@@ -1,0 +1,16 @@
+---
+title: TVector3d
+id: TVector3d
+---
+
+## Description
+
+This is a list of floating numbers, represents a 3D vector inside Jupiter.
+
+## Properties
+
+| Attribute | Description           |
+| --------- | --------------------- |
+| x         | Double type variable. |
+| y         | Double type variable. |
+| z         | Double type variable. |

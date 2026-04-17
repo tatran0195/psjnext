@@ -187,5 +187,5 @@ export async function generateMetadata(props: {
 
 export function generateStaticParams() {
     if (!IS_PROD) return [];
-    return source.generateParams();
+    return source.generateParams('slug', 'locale');
 }

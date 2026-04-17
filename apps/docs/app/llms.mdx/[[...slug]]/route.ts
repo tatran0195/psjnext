@@ -18,5 +18,5 @@ export async function GET(_req: NextRequest, { params }: RouteContext<'/llms.mdx
 }
 
 export function generateStaticParams() {
-    return source.generateParams();
+    return source.generateParams('slug', 'locale');
 }

@@ -1,0 +1,40 @@
+---
+title: Install Libraries
+description: PSJ bundles a curated set of scientific Python libraries. When you need something not in the default install, a short `.bat` script installs any PyPI package directly into Jupiter's embedded Python environment.
+icon: ArrowDownToLine
+---
+
+## Bundled libraries
+
+`numpy` `pandas` `matplotlib` `scipy` `scikit-learn` `numba` `python-pptx` `openpyxl`
+
+## Installing a new library
+
+Create a `.bat` file with the content below. Double-click the file to run it.
+
+```bat
+set PYTHONLIB=%APPDATA%\TechnoStar\JPT5.1.0\PythonLib\Lib
+set PYTHONPACKAGE=%PYTHONLIB%\site-packages
+set PYTHONDLL=%APPDATA%\TechnoStar\JPT5.1.0\PythonLib\DLLs
+set PYTHONHOME=C:\Program Files\TechnoStar\Jupiter_5.1
+set PYTHONPATH=%PYTHONHOME%;%PYTHONLIB%;%PYTHONPACKAGE%;%PYTHONDLL%
+
+"%PYTHONHOME%\python.exe" -m pip install -t "%PYTHONPACKAGE%" <package_name>
+```
+
+## Example — installing plotly
+
+```bat
+set PYTHONHOME=C:\Program Files\TechnoStar\Jupiter_5.1
+set PYTHONPACKAGE=%APPDATA%\TechnoStar\JPT5.1.0\PythonLib\Lib\site-packages
+"%PYTHONHOME%\python.exe" -m pip install -t "%PYTHONPACKAGE%" -U plotly
+```
+
+## Verify the installation
+
+After running the .bat, open the built-in IDE and test the import:
+
+```python
+import plotly
+print(plotly.__version__)  # should print the installed version
+```

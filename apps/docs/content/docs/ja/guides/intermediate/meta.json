@@ -1,0 +1,10 @@
+{
+    "$schema": "..\\..\\..\\..\\.source\\json-schema\\docs.meta.json",
+    "title": "Intermediate",
+    "defaultOpen": false,
+    "pages": [
+        "plate-static/plate-static",
+        "user-material/user-material",
+        "parts-name-mesh-property/parts-name-mesh-property"
+    ]
+}
