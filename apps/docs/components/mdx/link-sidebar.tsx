@@ -168,6 +168,14 @@ export function LinkSidebar() {
                   from { width: var(--link-sidebar-width); }
                   to { width: 0px; }
                 }
+                @keyframes link-sidebar-mobile-open {
+                  from { transform: translateY(100%); }
+                  to { transform: translateY(0); }
+                }
+                @keyframes link-sidebar-mobile-close {
+                  from { transform: translateY(0); }
+                  to { transform: translateY(100%); }
+                }
                 `}
             </style>
 
@@ -185,18 +193,17 @@ export function LinkSidebar() {
                 <div
                     className={cn(
                         'overflow-hidden z-70 bg-fd-card text-fd-card-foreground',
-                        'max-lg:fixed max-lg:inset-x-2 max-lg:inset-y-4 max-lg:border max-lg:rounded-2xl max-lg:shadow-2xl',
-                        'lg:fixed lg:inset-y-0 lg:right-0 lg:h-screen lg:border-s lg:ms-auto',
+                        'max-lg:fixed max-lg:inset-x-0 max-lg:bottom-0 max-lg:w-full max-lg:h-[85dvh] max-lg:flex max-lg:flex-col max-lg:border-t max-lg:rounded-t-2xl max-lg:shadow-2xl',
+                        'lg:fixed lg:inset-y-0 lg:right-0 lg:h-screen lg:border-s lg:ms-auto lg:w-(--link-sidebar-width)',
                         isOpen
-                            ? 'animate-fd-dialog-in lg:animate-[link-sidebar-open_400ms_cubic-bezier(0.16,1,0.3,1)]'
-                            : 'animate-fd-dialog-out lg:animate-[link-sidebar-close_400ms_cubic-bezier(0.16,1,0.3,1)]',
+                            ? 'max-lg:animate-[link-sidebar-mobile-open_400ms_cubic-bezier(0.16,1,0.3,1)] lg:animate-[link-sidebar-open_400ms_cubic-bezier(0.16,1,0.3,1)]'
+                            : 'max-lg:animate-[link-sidebar-mobile-close_400ms_cubic-bezier(0.16,1,0.3,1)] lg:animate-[link-sidebar-close_400ms_cubic-bezier(0.16,1,0.3,1)]',
                         // Disable transitions during drag for 1:1 response
                         isResizing && 'transition-none animate-none',
                     )}
                     style={
                         {
                             '--link-sidebar-width': `${width}px`,
-                            width: 'var(--link-sidebar-width)',
                         } as React.CSSProperties
                     }
                 >

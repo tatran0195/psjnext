@@ -78,17 +78,8 @@ export interface GetLayoutTabsOptions {
     transform?: TransformFn;
 }
 
-const defaultTransform: GetLayoutTabsOptions['transform'] = (option, node) => {
-    if (!node.icon) return option;
-
-    return {
-        ...option,
-        icon: (
-            <div className="size-full [&_svg]:size-full max-md:p-1.5 max-md:rounded-md max-md:border max-md:bg-fd-secondary">
-                {node.icon}
-            </div>
-        ),
-    };
+const defaultTransform: GetLayoutTabsOptions['transform'] = (option, _node) => {
+    return option;
 };
 
 export function getFirstUrl(folder: PageTree.Folder): string | undefined {

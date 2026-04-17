@@ -554,11 +554,11 @@ function SidebarTabsDropdown({
 
     const item = selected ? (
         <>
-            <div className="size-9 shrink-0 empty:hidden md:size-5">{selected.icon}</div>
+            {selected.icon}
             <div>
-                <p className="text-sm font-medium">{selected.title}</p>
-                <p className="text-sm text-fd-muted-foreground empty:hidden md:hidden">
-                    {selected.description}
+                <p className="text-sm font-medium leading-5">{selected.title}</p>
+                <p className="text-xs text-fd-muted-foreground leading-4 empty:hidden">
+                    {selected.description !== selected.title ? selected.description : null}
                 </p>
             </div>
         </>
@@ -572,7 +572,7 @@ function SidebarTabsDropdown({
                 <PopoverTrigger
                     {...props}
                     className={cn(
-                        'flex items-center gap-2 rounded-lg p-2 text-start text-fd-secondary-foreground transition-colors hover:bg-fd-accent data-[state=open]:bg-fd-accent data-[state=open]:text-fd-accent-foreground',
+                        'flex items-center gap-2 rounded-lg p-2 text-start text-fd-secondary-foreground transition-colors hover:bg-fd-accent/15 data-[state=open]:bg-fd-accent/15 data-[state=open]:text-fd-accent-foreground',
                         props.className,
                     )}
                 >
@@ -582,8 +582,8 @@ function SidebarTabsDropdown({
             )}
             <PopoverContent className="flex flex-col gap-1 w-(--radix-popover-trigger-width) p-1 fd-scroll-container">
                 {options.map((item) => {
-                    const isActive = selected && item.url === selected.url;
-                    if (!isActive && item.unlisted) return;
+                    const active = isLayoutTabActive(item, pathname);
+                    if (!active && item.unlisted) return;
 
                     return (
                         <Link
@@ -592,24 +592,22 @@ function SidebarTabsDropdown({
                             onClick={onClick}
                             {...item.props}
                             className={cn(
-                                'flex items-center gap-2 rounded-lg p-1.5 hover:bg-fd-accent hover:text-fd-accent-foreground',
-                                item.props?.className,
+                                'flex items-center gap-2 rounded-lg p-1.5 hover:bg-fd-accent/15 hover:text-fd-accent-foreground',
+                                active && 'bg-fd-accent/15 text-fd-accent-foreground',
                             )}
                         >
-                            <div className="shrink-0 size-9 md:mb-auto md:size-5 empty:hidden">
-                                {item.icon}
-                            </div>
+                            {item.icon}
                             <div>
-                                <p className="text-sm font-medium leading-none">{item.title}</p>
-                                <p className="text-[0.8125rem] text-fd-muted-foreground mt-1 empty:hidden">
-                                    {item.description}
+                                <p className="text-sm font-medium leading-5">{item.title}</p>
+                                <p className="text-[0.8125rem] text-fd-muted-foreground leading-4 empty:hidden">
+                                    {item.description !== item.title ? item.description : null}
                                 </p>
                             </div>
 
                             <Check
                                 className={cn(
                                     'shrink-0 ms-auto size-3.5 text-fd-primary',
-                                    !isActive && 'invisible',
+                                    !active && 'invisible',
                                 )}
                             />
                         </Link>
