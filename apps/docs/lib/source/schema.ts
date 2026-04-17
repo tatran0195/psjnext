@@ -31,6 +31,7 @@ export const DocsSchema = pageSchema.extend({
     preview: z.string().optional(),
     index: z.boolean().default(false),
     method: z.string().optional(),
+    tag: z.string().optional(),
     ribbon: RibbonSchema.optional(),
 });
 
