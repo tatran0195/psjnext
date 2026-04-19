@@ -1,53 +1,40 @@
-// app/[lang]/api/[version]/layout.tsx
-//
-// Layout cho tất cả pages trong một version.
-// Resolve alias trước (stable → 5.1.0), load đúng source, render sidebar.
-//
-// Version switcher được inject qua tabs prop của DocsLayout —
-// fumadocs-ui không có built-in version switcher nên dùng links.
+import { notFound } from 'next/navigation';
+import type { ReactNode } from 'react';
 
-import { VersionSwitcher } from '@/components/layouts/VersionSwitcher'
-import { LinkSidebarProvider } from '@/components/mdx/link-sidebar'
-import { localeItems } from '@/lib/i18n'
-import { baseOptions } from '@/lib/layout.shared'
-import { apiSources, type ApiVersion } from '@/lib/source'
-import { isVersionActive, resolveVersion } from '@/lib/versions'
-import { I18nProvider } from 'fumadocs-ui/contexts/i18n'
-import { DocsLayout } from 'fumadocs-ui/layouts/docs'
-import { notFound } from 'next/navigation'
-import type { ReactNode } from 'react'
+import { TechnoStarLogo } from '@/components/icons/logo';
+import { VersionSwitcher } from '@/components/layouts/VersionSwitcher';
+import { LinkSidebarProvider } from '@/components/mdx/link-sidebar';
+import { DocsLayout } from '@/layouts/docs';
+import { apiSources, type ApiVersion } from '@/lib/source';
+import { isVersionActive } from '@/lib/versions';
 
 export default async function ApiVersionLayout({
-  params,
-  children,
+    params,
+    children,
 }: {
-  params: Promise<{ lang: string; version: string }>
-  children: ReactNode
+    params: Promise<{ lang: string; version: string }>;
+    children: ReactNode;
 }) {
-  const { lang, version } = await params
-  if (!isVersionActive(version)) notFound()
+    const { lang, version } = await params;
+    if (!isVersionActive(version)) notFound();
 
-  const canonical = resolveVersion(version)
-  if (!canonical) notFound()
+    const source = apiSources[version as ApiVersion];
+    if (!source) notFound();
 
-  const source = apiSources[canonical as ApiVersion]
-  if (!source) notFound()
+    const tree = source.getPageTree(lang);
 
-  return (
-    <I18nProvider locale={lang} locales={localeItems}>
-      <LinkSidebarProvider>
-        <DocsLayout
-          tree={source.getPageTree(lang)}
-          {...baseOptions(lang)}
-          sidebar={{
-            // VersionSwitcher render phía trên sidebar tree
-            // Client component — detect version từ URL params tự động
-            banner: <VersionSwitcher />,
-          }}
-        >
-          {children}
-        </DocsLayout>
-      </LinkSidebarProvider>
-    </I18nProvider>
-  )
+    return (
+        <LinkSidebarProvider>
+            <DocsLayout
+                tree={tree}
+                tabMode="navbar"
+                nav={{ mode: 'top', title: <TechnoStarLogo variant="inline" height={34} /> }}
+                sidebar={{
+                    banner: <VersionSwitcher key={version} />,
+                }}
+            >
+                {children}
+            </DocsLayout>
+        </LinkSidebarProvider>
+    );
 }

@@ -1,11 +1,11 @@
 'use client';
 import type { ComponentProps } from 'react';
 
+import { useI18n } from 'fumadocs-ui/contexts/i18n';
+import { useSearchContext } from 'fumadocs-ui/contexts/search';
 import { Search } from 'lucide-react';
 
 import { type ButtonProps, buttonVariants } from '@/components/ui/button';
-import { useI18n } from '@/contexts/i18n';
-import { useSearchContext } from '@/contexts/search';
 import { cn } from '@/lib/cn';
 
 export interface SearchTriggerProps extends Omit<ComponentProps<'button'>, 'color'>, ButtonProps {

@@ -4,9 +4,9 @@ import { type ComponentProps, useMemo } from 'react';
 
 import { usePathname } from 'fumadocs-core/framework';
 import Link from 'fumadocs-core/link';
+import { useI18n } from 'fumadocs-ui/contexts/i18n';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-import { useI18n } from '@/contexts/i18n';
 import { useFooterItems } from '@/hooks/use-footer-items';
 import { cn } from '@/lib/cn';
 import { isActive } from '@/lib/urls';

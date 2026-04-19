@@ -1,14 +1,14 @@
 import type { MetadataRoute } from 'next';
 
 import { baseUrl } from '@/lib/metadata';
-import { source } from '@/lib/source';
+import { apiSources, docsSource } from '@/lib/source';
 
 export const revalidate = false;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const url = (path: string): string => new URL(path, baseUrl).toString();
-    const items = await Promise.all(
-        source.getPages().map(async (page) => {
+    const items = await Promise.all([
+        ...docsSource.getPages().map(async (page) => {
             // if (page.data.type === 'openapi') return;
             const { lastModified } = await page.data.load();
 
@@ -19,7 +19,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 priority: 0.5,
             } as MetadataRoute.Sitemap[number];
         }),
-    );
+        ...Object.values(apiSources).flatMap((source) =>
+            source.getPages().map(async (page) => {
+                const { lastModified } = await page.data.load();
+
+                return {
+                    url: url(page.url),
+                    lastModified: lastModified ? new Date(lastModified) : undefined,
+                    changeFrequency: 'weekly',
+                    priority: 0.5,
+                } as MetadataRoute.Sitemap[number];
+            }),
+        ),
+    ]);
 
     return [
         {
@@ -37,6 +49,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'monthly',
             priority: 0.8,
         },
-        ...items.filter((v) => v !== undefined),
+        ...(items.filter(
+            (v): v is MetadataRoute.Sitemap[number] => v !== undefined,
+        ) as MetadataRoute.Sitemap),
     ];
 }

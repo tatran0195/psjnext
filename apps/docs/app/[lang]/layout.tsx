@@ -1,15 +1,16 @@
 import type { Metadata, Viewport } from 'next';
+import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 
-// import { i18n } from '@/lib/i18n';
 import { NextProvider } from 'fumadocs-core/framework/next';
-import { Geist, Geist_Mono } from 'next/font/google';
-
-import { TreeContextProvider } from '@/contexts/tree';
-import { baseUrl, createMetadata } from '@/lib/metadata';
-import { docsSource } from '@/lib/source';
+import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
 
 import '@/styles/global.css';
+import { Geist, Geist_Mono } from 'next/font/google';
+
+import { baseUrl, createMetadata } from '@/lib/metadata';
+import { apiSources, ApiVersion, docsSource } from '@/lib/source';
+
 import { Provider } from '../provider';
 import { Body } from './layout.client';
 
@@ -41,21 +42,25 @@ export const viewport: Viewport = {
 
 export default async function RootLayout(props: {
     children: ReactNode;
-    params: Promise<{ lang: string }>;
+    params: Promise<{ lang: string; version?: string }>;
 }) {
-    const params = await props.params;
+    const { lang, version } = await props.params;
+    const source = version ? apiSources[version as ApiVersion] : docsSource;
+    if (!source) notFound();
+
+    const tree = source.getPageTree(lang);
 
     return (
         <html
-            lang={params.lang}
+            lang={lang}
             className={`${geist.variable} ${mono.variable}`}
             suppressHydrationWarning
             data-scroll-behavior="smooth"
         >
             <Body>
                 <NextProvider>
-                    <TreeContextProvider tree={docsSource.getPageTree(params.lang)}>
-                        <Provider locale={params.lang}>{props.children}</Provider>
+                    <TreeContextProvider tree={tree}>
+                        <Provider>{props.children}</Provider>
                     </TreeContextProvider>
                 </NextProvider>
             </Body>
@@ -64,6 +69,5 @@ export default async function RootLayout(props: {
 }
 
 export function generateStaticParams() {
-    // return i18n.languages.map((lang) => ({ lang }));
     return docsSource.generateParams('slug', 'locale');
 }

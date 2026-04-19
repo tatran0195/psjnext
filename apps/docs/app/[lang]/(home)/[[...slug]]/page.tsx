@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { ComponentProps, FC, ReactNode } from 'react';
+import type { ComponentProps, FC } from 'react';
 
 import Link from 'fumadocs-core/link';
 import { findNeighbour } from 'fumadocs-core/page-tree';
@@ -16,7 +16,6 @@ import { LinkPreview } from '@/components/mdx/link-preview';
 import { Mermaid } from '@/components/mdx/mermaid';
 import { RibbonPath } from '@/components/mdx/ribbon-path';
 import { SymbolLink } from '@/components/mdx/symbol-link';
-import * as Preview from '@/components/preview';
 import { Customisation } from '@/components/preview/customisation';
 import { Installation } from '@/components/preview/installation';
 import { Wrapper } from '@/components/preview/wrapper';
@@ -30,15 +29,6 @@ import {
 import { DocsPager } from '@/layouts/shared/docs-pager';
 import { createMetadata, getPageImage } from '@/lib/metadata';
 import { docsSource } from '@/lib/source';
-
-function PreviewRenderer({ preview }: { preview: string }): ReactNode {
-    if (preview && preview in Preview) {
-        const Comp = Preview[preview as keyof typeof Preview];
-        return <Comp />;
-    }
-
-    return null;
-}
 
 export const revalidate = false;
 // Always allow dynamic params so all routes resolve on-demand.
@@ -108,7 +98,6 @@ export default async function Page(props: { params: Promise<{ slug?: string[]; l
                 )}
             </div>
             <DocsBody>
-                {page.data.preview && <PreviewRenderer preview={page.data.preview} />}
                 <Mdx
                     components={getMDXComponents({
                         ...Twoslash,

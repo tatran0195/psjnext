@@ -33,7 +33,6 @@ export const docsSource = loader({
 export type Page = InferPageType<typeof docsSource>;
 export type Meta = InferMetaType<typeof docsSource>;
 
-
 export const apiSources = {
     '5.1.0': loader({
         baseUrl: '/api/5.1.0',
@@ -45,7 +44,7 @@ export const apiSources = {
         i18n,
         source: apiDocs501.toFumadocsSource(),
     }),
-} as const
+} as const;
 
-export type ApiVersion = keyof typeof apiSources
-export type ApiPage = InferPageType<(typeof apiSources)[ApiVersion]>
+export type ApiVersion = keyof typeof apiSources;
+export type ApiPage = InferPageType<(typeof apiSources)[ApiVersion]>;

@@ -1,9 +1,10 @@
 'use client';
 import type { ComponentProps } from 'react';
 
+import { useI18n } from 'fumadocs-ui/contexts/i18n';
+
 import { buttonVariants } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useI18n } from '@/contexts/i18n';
 import { cn } from '@/lib/cn';
 
 import type { VariantProps } from 'class-variance-authority';
