@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-
-Host: https://psjdocs.e-technostar.com
-
-Sitemap: https://psjdocs.e-technostar.com/sitemap.xml

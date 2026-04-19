@@ -1,6 +1,0 @@
-# Title:   Connections.RigidElements.RBE2.ToCircleCenter()
-# Desc:    create RBE2
-# Version: 5.1.0
-# Docs:    /docs/cli/5.1.0/psj-command/connections/Connections.RigidElements.RBE2.ToCircleCenter
-# ---
-Connections.RigidElements.RBE2.ToCircleCenter(iMethod=19, crlMasterTargets=[], crlSlaveTargets=[], iEType=2, strName="RBE2_1", crCoordSys=None, dTolerance=0.0, iUlDOFs=63, dlVirtualNodePos=[0, 0, 0], iSurfaceDef=0, crEdit=None, iEnableUpdateDispCS=1, iEnableCornerOnly=0, iEnableCheckDulplicate=1, iDuplicateMode=0)
