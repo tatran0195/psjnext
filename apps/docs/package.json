@@ -6,9 +6,10 @@
         "dev": "next dev",
         "build": "next build",
         "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
-        "clean": "rm -rf .next .source",
+        "clean": "rm -rf .next && rm -rf .source && bun i",
         "lint": "fumadocs-mdx && bun ./scripts/lint.ts",
         "start": "next start",
+        "postinstall": "fumadocs-mdx",
         "extract:samples": "bun scripts/extract-sample-code.ts"
     },
     "dependencies": {

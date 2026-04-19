@@ -6,7 +6,7 @@ import { getMDXComponents } from '@/components/mdx';
 import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-category';
 import { LinkPreview } from '@/components/mdx/link-preview';
 import { i18n } from '@/lib/i18n';
-import { source } from '@/lib/source';
+import { docsSource } from '@/lib/source';
 
 export interface PreviewData {
     title: string;
@@ -30,7 +30,7 @@ export async function getPreviewData(url: string): Promise<PreviewData | null> {
             segments.shift();
         }
 
-        const page = source.getPage(segments, lang);
+        const page = docsSource.getPage(segments, lang);
 
         if (!page) return null;
 

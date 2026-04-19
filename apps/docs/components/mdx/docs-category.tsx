@@ -4,12 +4,12 @@ import * as PageTree from 'fumadocs-core/page-tree';
 import { findSiblings } from 'fumadocs-core/page-tree';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 
-import { source } from '@/lib/source';
+import { docsSource } from '@/lib/source';
 
 export function DocsCategory({ url, lang }: { url: string; lang: string }) {
     return (
         <Cards>
-            {findSiblings(source.getPageTree(lang), url).map((item) => {
+            {findSiblings(docsSource.getPageTree(lang), url).map((item) => {
                 if (item.type === 'separator') return null;
                 const node = item.type === 'folder' ? item.index : item;
                 if (!node || node.type !== 'page') return null;
@@ -47,7 +47,7 @@ export function DocsSectionOverview({ url, lang }: { url: string; lang: string }
         return null;
     }
 
-    const node = findNodeWithUrl(source.getPageTree(lang).children, url);
+    const node = findNodeWithUrl(docsSource.getPageTree(lang).children, url);
     const items = node?.children ?? [];
 
     return (

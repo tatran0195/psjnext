@@ -1,11 +1,11 @@
 import { TechnoStarLogo } from '@/components/icons/logo';
 import { LinkSidebar, LinkSidebarProvider } from '@/components/mdx/link-sidebar';
 import { DocsLayout } from '@/layouts/docs';
-import { source } from '@/lib/source';
+import { docsSource } from '@/lib/source';
 
 export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) {
     const params = await props.params;
-    const tree = source.getPageTree(params.lang);
+    const tree = docsSource.getPageTree(params.lang);
 
     return (
         <LinkSidebarProvider>

@@ -1,10 +1,22 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+// components/SearchDialog.tsx
+//
+// Search dialog dùng type: 'fetch' — mỗi keystroke query server.
+// Phù hợp với multi-source vì server merge kết quả từ tất cả versions.
+//
+// Static mode (type: 'static') không dùng ở đây vì:
+//   - Multi-source cần một endpoint per source để export index JSON
+//   - Merge nhiều static JSON files phức tạp và không cần thiết với docs site
+//   - fetch mode đơn giản hơn và vẫn đủ nhanh với revalidate: false (cached)
+//
+// Tag filter:
+//   Detect version từ URL → tự động filter kết quả theo version đang xem.
+//   User vẫn có thể clear filter để search toàn bộ.
 
-import { useDocsSearch } from 'fumadocs-core/search/client';
+'use client'
+
+import { useDocsSearch } from 'fumadocs-core/search/client'
 import {
-    SearchDialog,
+    SearchDialog as BaseSearchDialog,
     SearchDialogClose,
     SearchDialogContent,
     SearchDialogFooter,
@@ -13,128 +25,34 @@ import {
     SearchDialogInput,
     SearchDialogList,
     SearchDialogOverlay,
-    type SearchItemType,
     type SharedProps,
-} from 'fumadocs-ui/components/dialog/search';
-import { ArrowRight } from 'lucide-react';
+} from 'fumadocs-ui/components/dialog/search'
+import { useI18n } from 'fumadocs-ui/contexts/i18n'
+import { useParams } from 'next/navigation'
+import { useState } from 'react'
 
-import { ListMenu } from '@/components/ui/list-menu';
-import { useI18n } from '@/contexts/i18n';
-import { useTreeContext } from '@/contexts/tree';
-import { useThrottledValue } from '@/hooks/use-throttle';
-import { compareSemver, matchesSearch } from '@/lib/search';
+export default function SearchDialog(props: SharedProps) {
+    const params = useParams()
+    const { locale } = useI18n()
 
-import type { Item, Node } from 'fumadocs-core/page-tree';
-import type { SortedResult } from 'fumadocs-core/search';
+    // Version từ URL — dùng làm tag filter mặc định
+    const urlVersion = params['version'] as string | undefined
+    const [tag, setTag] = useState<string | undefined>(urlVersion)
 
-const TAGS = [
-    {
-        name: 'All',
-        description: 'All results',
-        value: undefined,
-    },
-    {
-        name: '5.0.1',
-        description: 'Only results about 5.0.1',
-        value: '5.0.1',
-    },
-    {
-        name: '5.1.0',
-        description: 'Only results about 5.1.0',
-        value: '5.1.0',
-    },
-];
-
-const BEHAVIORS = [
-    {
-        name: 'Partial Match',
-        description: 'Matches similar or partial terms',
-        value: undefined,
-    },
-    {
-        name: 'Phrases Match',
-        description: 'Matches the term as a phrase',
-        value: 'exact',
-    },
-];
-
-export default function CustomSearchDialog(props: SharedProps) {
-    const { locale } = useI18n();
-    const [tag, setTag] = useState<string | undefined>();
-    const [behavior, setBehavior] = useState<string | undefined>();
     const { search, setSearch, query } = useDocsSearch({
         type: 'fetch',
-        tag,
         locale,
-    });
-    const { full } = useTreeContext();
-    const router = useRouter();
-    const throttledSearch = useThrottledValue(search, 100);
+        tag,
+    })
 
-    const searchMap = useMemo(() => {
-        const map = new Map<string, Item>();
+    const placeholder =
+        locale === 'ja' ? 'ドキュメントを検索...' : 'Search documentation...'
 
-        function onNode(node: Node) {
-            if (node.type === 'page' && typeof node.name === 'string') {
-                map.set(node.name.toLowerCase(), node);
-            } else if (node.type === 'folder') {
-                if (node.index) onNode(node.index);
-                for (const item of node.children) onNode(item);
-            }
-        }
-
-        for (const item of full.children) onNode(item);
-        return map;
-    }, [full]);
-
-    const pageTreeAction = useMemo<SearchItemType | undefined>(() => {
-        if (search.length === 0) return;
-
-        const normalized = search.toLowerCase();
-        for (const [k, page] of searchMap) {
-            if (!k.startsWith(normalized)) continue;
-
-            return {
-                id: 'quick-action',
-                type: 'action',
-                node: (
-                    <div className="inline-flex items-center gap-2 text-fd-muted-foreground">
-                        <ArrowRight className="size-4" />
-                        <p>
-                            Jump to{' '}
-                            <span className="font-medium text-fd-foreground">{page.name}</span>
-                        </p>
-                    </div>
-                ),
-                onSelect: () => router.push(page.url),
-            };
-        }
-    }, [router, search, searchMap]);
-
-    const searchData = useMemo(() => {
-        const filter = (_data: SortedResult<string>[] | 'empty' | undefined) => {
-            const data = _data?.slice(0, 100);
-            return [
-                ...(Array.isArray(data)
-                    ? data
-                          .filter((item) =>
-                              matchesSearch(item, throttledSearch, behavior === 'exact'),
-                          )
-                          .sort((a, b) => {
-                              const aVersion = a.id.split('/')[3];
-                              const bVersion = b.id.split('/')[3];
-                              return compareSemver(bVersion, aVersion);
-                          })
-                    : []),
-            ];
-        };
-        return query.data !== 'empty' || pageTreeAction
-            ? [...(pageTreeAction ? [pageTreeAction] : []), ...filter(query.data)]
-            : null;
-    }, [behavior, throttledSearch, query.data, pageTreeAction]);
+    const results =
+        query.data !== 'empty' ? (query.data ?? []) : []
 
     return (
-        <SearchDialog
+        <BaseSearchDialog
             search={search}
             onSearchChange={setSearch}
             isLoading={query.isLoading}
@@ -144,20 +62,26 @@ export default function CustomSearchDialog(props: SharedProps) {
             <SearchDialogContent>
                 <SearchDialogHeader>
                     <SearchDialogIcon />
-                    <SearchDialogInput />
+                    <SearchDialogInput placeholder={placeholder} />
                     <SearchDialogClose />
                 </SearchDialogHeader>
-                <SearchDialogList items={searchData} />
-                <SearchDialogFooter className="flex flex-row flex-wrap gap-2 items-center">
-                    <ListMenu items={TAGS} label="Version" selected={tag} setSelected={setTag} />
-                    <ListMenu
-                        items={BEHAVIORS}
-                        label="Behavior"
-                        selected={behavior}
-                        setSelected={setBehavior}
-                    />
+
+                <SearchDialogList items={results} />
+
+                <SearchDialogFooter>
+                    {/* Tag toggle: filter theo version hiện tại hoặc search all */}
+                    {urlVersion && (
+                        <button
+                            className="text-xs text-fd-muted-foreground underline"
+                            onClick={() => setTag(tag ? undefined : urlVersion)}
+                        >
+                            {tag
+                                ? locale === 'ja' ? 'すべてのバージョンを検索' : 'Search all versions'
+                                : locale === 'ja' ? `${urlVersion} のみ検索` : `Search only ${urlVersion}`}
+                        </button>
+                    )}
                 </SearchDialogFooter>
             </SearchDialogContent>
-        </SearchDialog>
-    );
+        </BaseSearchDialog>
+    )
 }

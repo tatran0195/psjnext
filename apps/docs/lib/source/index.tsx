@@ -1,4 +1,4 @@
-import { docs } from 'collections/server';
+import { apiDocs501, apiDocsLatest, docs } from 'collections/server';
 import { type InferMetaType, type InferPageType, loader } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 
@@ -17,7 +17,7 @@ const TAG_STYLES: Record<string, string> = {
     Deprecated: 'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300',
 };
 
-export const source = loader({
+export const docsSource = loader({
     source: docs.toFumadocsSource(),
     i18n,
     baseUrl: '/',
@@ -30,5 +30,22 @@ export const source = loader({
     ],
 });
 
-export type Page = InferPageType<typeof source>;
-export type Meta = InferMetaType<typeof source>;
+export type Page = InferPageType<typeof docsSource>;
+export type Meta = InferMetaType<typeof docsSource>;
+
+
+export const apiSources = {
+    '5.1.0': loader({
+        baseUrl: '/api/5.1.0',
+        i18n,
+        source: apiDocsLatest.toFumadocsSource(),
+    }),
+    '5.0.1': loader({
+        baseUrl: '/api/5.0.1',
+        i18n,
+        source: apiDocs501.toFumadocsSource(),
+    }),
+} as const
+
+export type ApiVersion = keyof typeof apiSources
+export type ApiPage = InferPageType<(typeof apiSources)[ApiVersion]>

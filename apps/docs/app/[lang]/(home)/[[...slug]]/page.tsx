@@ -29,7 +29,7 @@ import {
 } from '@/layouts/docs/page';
 import { DocsPager } from '@/layouts/shared/docs-pager';
 import { createMetadata, getPageImage } from '@/lib/metadata';
-import { source } from '@/lib/source';
+import { docsSource } from '@/lib/source';
 
 function PreviewRenderer({ preview }: { preview: string }): ReactNode {
     if (preview && preview in Preview) {
@@ -50,7 +50,7 @@ const IS_PROD = process.env.NODE_ENV === 'production';
 
 export default async function Page(props: { params: Promise<{ slug?: string[]; lang: string }> }) {
     const params = await props.params;
-    const page = source.getPage(params.slug, params.lang);
+    const page = docsSource.getPage(params.slug, params.lang);
 
     if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
 
@@ -70,7 +70,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[]; l
     const { body: Mdx, toc, lastModified } = await page.data.load();
     const { ribbon } = page.data;
 
-    const neighbours = findNeighbour(source.getPageTree(), page.url);
+    const neighbours = findNeighbour(docsSource.getPageTree(), page.url);
     const footerPrevious = neighbours.previous
         ? { name: neighbours.previous.name, url: neighbours.previous.url }
         : undefined;
@@ -115,7 +115,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[]; l
                         a({ href, ...props }) {
                             if (!href) return <a {...props} />;
 
-                            const found = source.getPageByHref(href, {
+                            const found = docsSource.getPageByHref(href, {
                                 dir: PathUtils.dirname(page.path),
                             });
 
@@ -160,7 +160,7 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
     const params = await props.params;
     const { slug = [], lang } = params;
-    const page = source.getPage(slug, lang);
+    const page = docsSource.getPage(slug, lang);
     if (!page)
         return createMetadata({
             title: 'Not Found',
@@ -189,5 +189,5 @@ export async function generateMetadata(props: {
 
 export function generateStaticParams() {
     if (!IS_PROD) return [];
-    return source.generateParams('slug', 'locale');
+    return docsSource.generateParams('slug', 'locale');
 }

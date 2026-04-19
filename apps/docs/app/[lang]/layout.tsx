@@ -7,11 +7,11 @@ import { Geist, Geist_Mono } from 'next/font/google';
 
 import { TreeContextProvider } from '@/contexts/tree';
 import { baseUrl, createMetadata } from '@/lib/metadata';
-import { source } from '@/lib/source';
+import { docsSource } from '@/lib/source';
 
+import '@/styles/global.css';
 import { Provider } from '../provider';
 import { Body } from './layout.client';
-import '@/styles/global.css';
 
 export const metadata: Metadata = createMetadata({
     title: {
@@ -54,7 +54,7 @@ export default async function RootLayout(props: {
         >
             <Body>
                 <NextProvider>
-                    <TreeContextProvider tree={source.getPageTree(params.lang)}>
+                    <TreeContextProvider tree={docsSource.getPageTree(params.lang)}>
                         <Provider locale={params.lang}>{props.children}</Provider>
                     </TreeContextProvider>
                 </NextProvider>
@@ -65,5 +65,5 @@ export default async function RootLayout(props: {
 
 export function generateStaticParams() {
     // return i18n.languages.map((lang) => ({ lang }));
-    return source.generateParams('slug', 'locale');
+    return docsSource.generateParams('slug', 'locale');
 }
