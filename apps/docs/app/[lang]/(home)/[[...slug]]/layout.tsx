@@ -11,7 +11,7 @@ export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) 
         <LinkSidebarProvider>
             <DocsLayout
                 tree={tree}
-                tabMode="sidebar"
+                tabMode="navbar"
                 nav={{ mode: 'top', title: <TechnoStarLogo variant="inline" height={34} /> }}
             >
                 {props.children}

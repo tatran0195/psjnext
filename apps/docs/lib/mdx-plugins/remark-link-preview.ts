@@ -1,6 +1,6 @@
 import { visit } from 'unist-util-visit';
 
-import type { Root, Link, Parent, PhrasingContent } from 'mdast';
+import type { Link, Parent, PhrasingContent, Root } from 'mdast';
 import type { MdxJsxAttribute } from 'mdast-util-mdx';
 import type { Plugin } from 'unified';
 
@@ -30,12 +30,6 @@ export const remarkLinkPreview: Plugin<[RemarkLinkPreviewOptions?], Root> = (opt
                 },
             ];
 
-            // Object.assign(node, {
-            //     type: 'mdxJsxTextElement',
-            //     name: tag,
-            //     attributes,
-            //     children: node.children as PhrasingContent[],
-            // } satisfies MdxJsxTextElement);
             parent.children[index] = {
                 type: 'mdxJsxTextElement',
                 name: tag,

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import * as React from 'react';
 
 import * as HoverCard from '@radix-ui/react-hover-card';
-import { PanelRight, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, PanelRight } from 'lucide-react';
 
 import { getPreviewData, type PreviewData } from '@/app/api/preview/actions';
 import { useLinkSidebar } from '@/components/mdx/link-sidebar';
@@ -150,14 +150,14 @@ export function LinkPreview({
                 >
                     <div className="flex flex-col max-h-[min(500px,var(--radix-hover-card-content-available-height))]">
                         <div className="border-b bg-muted/30 px-4 py-3">
-                            {isLoading ? (
+                            {!data?.title && isLoading ? (
                                 <div className="h-5 w-1/2 animate-pulse rounded bg-muted" />
                             ) : (
                                 <p className="truncate text-sm font-semibold text-fd-foreground">
-                                    {data?.title}
+                                    {data?.title || children}
                                 </p>
                             )}
-                            {data?.description && !isLoading && (
+                            {data?.description && (
                                 <p className="truncate text-xs text-fd-muted-foreground mt-0.5">
                                     {data.description}
                                 </p>
@@ -201,16 +201,16 @@ export function LinkPreview({
                             </div>
                         </div>
 
-                        <div className="flex border-t divide-x bg-muted/10">
-                            <Link
-                                href={href}
-                                className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-[11px] font-medium text-fd-muted-foreground hover:bg-fd-accent hover:text-fd-accent-foreground transition-all active:bg-fd-accent/80 active:scale-[0.98]"
-                            >
-                                <ArrowUpRight className="size-3.5 opacity-70" />
-                                <span>Open Page</span>
-                            </Link>
+                        {isInternal && data?.content && (
+                            <div className="flex border-t divide-x bg-muted/10">
+                                <Link
+                                    href={href}
+                                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-[11px] font-medium text-fd-muted-foreground hover:bg-fd-accent hover:text-fd-accent-foreground transition-all active:bg-fd-accent/80 active:scale-[0.98]"
+                                >
+                                    <ArrowUpRight className="size-3.5 opacity-70" />
+                                    <span>Open Page</span>
+                                </Link>
 
-                            {isInternal && (
                                 <button
                                     type="button"
                                     onClick={(e) => {
@@ -222,8 +222,8 @@ export function LinkPreview({
                                     <PanelRight className="size-3.5 opacity-70" />
                                     <span>In Sidebar</span>
                                 </button>
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </div>
                 </HoverCard.Content>
             </HoverCard.Portal>
