@@ -1,7 +1,5 @@
 import { type HTMLAttributes, useMemo } from 'react';
 
-import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
-
 import {
     type BaseLayoutProps,
     getLayoutTabs,
@@ -54,17 +52,15 @@ export function DocsLayout({
     }, [tabs, tree]);
 
     return (
-        <TreeContextProvider tree={tree}>
-            <LayoutBody
-                tree={tree}
-                tabs={resolvedTabs}
-                tabMode={tabMode}
-                sidebar={sidebarProps}
-                {...props}
-            >
-                {children}
-            </LayoutBody>
-        </TreeContextProvider>
+        <LayoutBody
+            tree={tree}
+            tabs={resolvedTabs}
+            tabMode={tabMode}
+            sidebar={sidebarProps}
+            {...props}
+        >
+            {children}
+        </LayoutBody>
     );
 }
 

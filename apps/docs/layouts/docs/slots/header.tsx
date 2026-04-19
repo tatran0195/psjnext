@@ -1,12 +1,12 @@
 'use client';
 import {
+    type ComponentProps,
     Fragment,
     type HTMLAttributes,
     type PointerEvent,
     useMemo,
     useRef,
     useState,
-    type ComponentProps,
 } from 'react';
 
 import { usePathname } from 'fumadocs-core/framework';
@@ -14,9 +14,14 @@ import Link from 'fumadocs-core/link';
 import { ChevronDown, Languages, Sidebar as SidebarIcon } from 'lucide-react';
 
 import { buttonVariants } from '@/components/ui/button';
-import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
-import { LinkItem, type LinkItemType, type MenuItemType } from '@/layouts/shared';
-import { type LayoutTab, isLayoutTabActive } from '@/layouts/shared';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {
+    type LayoutTab,
+    LinkItem,
+    type LinkItemType,
+    type MenuItemType,
+    isLayoutTabActive,
+} from '@/layouts/shared';
 import { cn } from '@/lib/cn';
 
 import { useNotebookLayout } from '../client';
