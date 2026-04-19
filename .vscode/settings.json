@@ -30,7 +30,8 @@
         "stopwords",
         "takumi",
         "tinyexec",
-        "twoslash"
+        "twoslash",
+        "zipball"
     ],
     "[typescript]": {
         "editor.defaultFormatter": "oxc.oxc-vscode"

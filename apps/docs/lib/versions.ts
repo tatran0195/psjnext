@@ -11,8 +11,8 @@ export type VersionMeta = {
 };
 
 export const VERSION_META = {
-    latest: { label: 'latest', frozen: false, sourceType: 'local' },
-    '5.1.0': { label: '5.1.0', frozen: true, sourceType: 'github' },
+    // latest: { label: 'latest', frozen: false, sourceType: 'local' },
+    '5.1.0': { label: '5.1.0', frozen: false, sourceType: 'local' },
     '5.0.1': { label: '5.0.1', frozen: true, sourceType: 'github' },
 } satisfies Record<string, VersionMeta>;
 
@@ -24,7 +24,7 @@ export const VERSION_ALIASES: Record<string, CanonicalVersion> = {
 };
 
 // Chỉ các keys này mới được serve — cả canonical lẫn alias.
-export const ACTIVE_VERSIONS = ['latest', 'stable', '5.1.0', '5.0.1'] as const;
+export const ACTIVE_VERSIONS = ['5.1.0', '5.0.1'] as const;
 export type ActiveVersion = (typeof ACTIVE_VERSIONS)[number];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

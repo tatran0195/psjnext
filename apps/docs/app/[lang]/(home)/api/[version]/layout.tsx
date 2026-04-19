@@ -8,6 +8,7 @@
 
 import { VersionSwitcher } from '@/components/layouts/VersionSwitcher'
 import { LinkSidebarProvider } from '@/components/mdx/link-sidebar'
+import { localeItems } from '@/lib/i18n'
 import { baseOptions } from '@/lib/layout.shared'
 import { apiSources, type ApiVersion } from '@/lib/source'
 import { isVersionActive, resolveVersion } from '@/lib/versions'
@@ -24,19 +25,16 @@ export default async function ApiVersionLayout({
   children: ReactNode
 }) {
   const { lang, version } = await params
-  console.log({ lang, version })
   if (!isVersionActive(version)) notFound()
 
   const canonical = resolveVersion(version)
-  console.log(canonical)
   if (!canonical) notFound()
 
   const source = apiSources[canonical as ApiVersion]
-  console.log({ source, apiSources })
   if (!source) notFound()
 
   return (
-    <I18nProvider >
+    <I18nProvider locale={lang} locales={localeItems}>
       <LinkSidebarProvider>
         <DocsLayout
           tree={source.getPageTree(lang)}

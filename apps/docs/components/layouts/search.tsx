@@ -41,7 +41,7 @@ export default function SearchDialog(props: SharedProps) {
 
     const { search, setSearch, query } = useDocsSearch({
         type: 'fetch',
-        locale,
+        locale: "ja",
         tag,
     })
 
@@ -50,6 +50,7 @@ export default function SearchDialog(props: SharedProps) {
 
     const results =
         query.data !== 'empty' ? (query.data ?? []) : []
+    console.log({ results, locale })
 
     return (
         <BaseSearchDialog
