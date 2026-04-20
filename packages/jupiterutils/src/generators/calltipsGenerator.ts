@@ -1,13 +1,9 @@
 /**
  * IDE calltip .dat file generators.
  *
- * Produces three IDE data files:
- *   PSJCommandCalltips.dat  — one entry per PSJ command API function
- *   PSJUtilityCalltips.dat  — one entry per JPT utility function
- *   PSJGuiTooltip.dat       — one entry per dialog function
+ * Bun changes:
+ *   - `readFile` from node:fs/promises replaced with `Bun.file().text()`.
  */
-
-import { readFile } from 'node:fs/promises';
 
 import type { Config, PsjCommand, UtilFunction } from '../types';
 
@@ -20,13 +16,6 @@ const SEPARATOR_DLG = '---------------------------------------------------------
 // PSJCommandCalltips.dat
 // ---------------------------------------------------------------------------
 
-/**
- * Generate PSJCommandCalltips.dat content.
- *
- * Format per entry:
- *   Function: Ns.Sub.FnName()
- *   <separator>
- */
 export function generateCommandCalltips(commands: PsjCommand[]): string {
     const lines: string[] = [
         `////////////////////////////////////////////////////////////////////////////////////////////////////////////`,
@@ -39,7 +28,6 @@ export function generateCommandCalltips(commands: PsjCommand[]): string {
     for (const cmd of commands) {
         const { namespace, signature } = cmd;
 
-        // Derive the clean function name (strip params) for the calltip header
         const parenIdx = signature.indexOf('(');
         const fnName = parenIdx === -1 ? signature : signature.slice(0, parenIdx);
         const fqName = [...namespace, `${fnName}()`].join('.');
@@ -61,16 +49,13 @@ export interface UtilityCalltipsInput {
     config: Config;
 }
 
-/**
- * Generate PSJUtilityCalltips.dat content (async — reads doc sections).
- */
 export async function generateUtilityCalltips(input: UtilityCalltipsInput): Promise<string> {
     const { utilFunctions, baseCalltipsPath, config } = input;
 
-    // Read the base class documentation block
+    // Bun.file().text() replaces readFile(path, 'utf8')
     let baseContent = '';
     try {
-        baseContent = await readFile(baseCalltipsPath, 'utf8');
+        baseContent = await Bun.file(baseCalltipsPath).text();
     } catch {
         // base file is optional
     }
@@ -116,9 +101,6 @@ export async function generateUtilityCalltips(input: UtilityCalltipsInput): Prom
 // PSJGuiTooltip.dat
 // ---------------------------------------------------------------------------
 
-/**
- * Generate PSJGuiTooltip.dat content (async — reads doc sections).
- */
 export async function generateGuiTooltip(
     dlgFunctions: UtilFunction[],
     config: Config,

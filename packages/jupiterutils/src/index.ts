@@ -3,7 +3,7 @@
  *
  * Pipeline:
  *
- *  1. Load config (.env)
+ *  1. Load config (.env)  ← Bun auto-loads .env; no dotenv call needed
  *  2. COLLECT
  *     a. Walk macro sources → PSJ commands
  *     b. Walk psj-utility docs → util funcs
@@ -21,6 +21,14 @@
  *     b. PSJUtilityCalltips.dat
  *     c. PSJGuiTooltip.dat
  *  6. ZIP IDEData/*.dat → IDEData.zip
+ *
+ * Bun changes vs Node.js:
+ *   - `dotenv` removed; Bun natively loads .env before the process starts.
+ *   - `node:fs/promises` mkdir replaced with `Bun.$.mkdir` (shell API) or
+ *     the node-compat import — both work, but we keep node:fs/promises mkdir
+ *     since Bun supports it and it's unambiguous.
+ *   - All file reads now go through Bun.file() (see utils.ts, collectors/).
+ *   - zipWriter uses fflate instead of archiver.
  */
 
 import { mkdir } from 'node:fs/promises';
@@ -55,13 +63,14 @@ import { createIdeDataZip } from './writers/zipWriter.js';
 
 async function main(): Promise<void> {
     // ── 1. Config ─────────────────────────────────────────────────────────────
+    // loadConfig() now reads Bun.env — no dotenv side-effects
     const config = loadConfig();
     const { projectRoot, webRoot, macroRoot } = config;
 
-    const outputDir = join(projectRoot, 'output'); // intermediate debug files
-    const inputDir = join(projectRoot, 'input'); // entity .txt + calltips base
-    const pkgDir = join(projectRoot, 'jupiterutils'); // live Python package (pip -e .)
-    const ideDataDir = join(projectRoot, 'IDEData'); // .dat files for IDE
+    const outputDir = join(projectRoot, 'output');
+    const inputDir = join(projectRoot, 'input');
+    const pkgDir = join(projectRoot, 'jupiterutils');
+    const ideDataDir = join(projectRoot, 'IDEData');
 
     await Promise.all([
         mkdir(outputDir, { recursive: true }),

@@ -1,0 +1,7 @@
+# Bun configuration
+# https://bun.sh/docs/runtime/bunfig
+
+[run]
+# Bun automatically loads .env in this order:
+#   .env.local → .env.{NODE_ENV} → .env
+# No dotenv calls needed anywhere in the codebase.

@@ -1,13 +1,19 @@
 /**
  * IDEData.zip writer.
  *
- * Replaces the `7z.exe` call in the original Makefile.
- * Uses the `archiver` package to create a zip archive of all .dat files
- * in the IDEData directory.
+ * Bun changes:
+ *   - Replaced `archiver` (Node streams + third-party) with `fflate` —
+ *     a pure-JS DEFLATE library that works seamlessly in Bun with no
+ *     native bindings or stream wrappers needed.
+ *   - File I/O uses Bun.file().arrayBuffer() for zero-copy reads and
+ *     Bun.write() for the final zip output.
+ *   - readdir replaced with Bun.readdir() (Bun ≥1.1 native).
+ *   - No `node:fs` createWriteStream needed.
+ *
+ * Install: `bun add fflate`
  */
 
-import { createWriteStream } from 'node:fs';
-import { readdir } from 'node:fs/promises';
+import { zipSync } from 'fflate';
 import { extname, join } from 'node:path';
 
 // ---------------------------------------------------------------------------
@@ -22,11 +28,7 @@ import { extname, join } from 'node:path';
  * @param outputZipPath - Destination zip file path
  */
 export async function createIdeDataZip(ideDataDir: string, outputZipPath: string): Promise<void> {
-    // Dynamic import so the module is optional at type-check time
-    const mod = await import('archiver');
-    const archiver = (mod as unknown as { default: typeof mod }).default ?? mod;
-
-    const entries = await readdir(ideDataDir);
+    const entries = await Bun.readdir(ideDataDir);
     const datFiles = entries.filter((f) => extname(f) === '.dat');
 
     if (datFiles.length === 0) {
@@ -34,22 +36,19 @@ export async function createIdeDataZip(ideDataDir: string, outputZipPath: string
         return;
     }
 
-    await new Promise<void>((resolve, reject) => {
-        const output = createWriteStream(outputZipPath);
-        const archive = archiver('zip', { zlib: { level: 9 } });
+    // Read all .dat files concurrently using Bun.file()
+    const fileEntries = await Promise.all(
+        datFiles.map(async (filename) => {
+            const bytes = await Bun.file(join(ideDataDir, filename)).arrayBuffer();
+            return [filename, new Uint8Array(bytes)] as const;
+        }),
+    );
 
-        output.on('close', resolve);
-        output.on('error', reject);
-        archive.on('error', reject);
+    // Build the zip synchronously — fflate's zipSync is fast enough for .dat files
+    const zipInput: Record<string, Uint8Array> = Object.fromEntries(fileEntries);
+    const zipped = zipSync(zipInput, { level: 9 });
 
-        archive.pipe(output);
-
-        for (const file of datFiles) {
-            archive.file(join(ideDataDir, file), { name: file });
-        }
-
-        archive.finalize();
-    });
+    await Bun.write(outputZipPath, zipped);
 
     console.log(`[zip] Created ${outputZipPath} (${datFiles.length} .dat files)`);
 }

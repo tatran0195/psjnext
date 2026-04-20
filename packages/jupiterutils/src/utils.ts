@@ -1,10 +1,12 @@
 /**
  * Shared utility helpers used across collectors and generators.
+ *
+ * Bun changes:
+ *   - readLines / readNonEmptyLines: use `Bun.file().text()` instead of
+ *     `node:fs/promises` readFile — Bun.file() is the idiomatic, zero-copy path.
  */
 
-import { readFile } from 'node:fs/promises';
-
-import type { Param } from './types';
+import type { Param } from './types/index.js';
 
 // ---------------------------------------------------------------------------
 // File helpers
@@ -12,7 +14,7 @@ import type { Param } from './types';
 
 /** Read a UTF-8 text file and split into trimmed lines. */
 export async function readLines(filePath: string): Promise<string[]> {
-    const content = await readFile(filePath, 'utf8');
+    const content = await Bun.file(filePath).text();
     return content.split(/\r?\n/);
 }
 
@@ -123,7 +125,7 @@ export function parseParam(raw: string): Param {
 
 /**
  * For params whose names start with "cr" (cursor objects) we:
- *   - rename the runtime variable to `<name>Cursor`
+ *   - rename the runtime variable to `<n>Cursor`
  *   - emit a pre-call assignment that calls `.getPSJStr()` or builds a list
  *     comprehension for "crl" (cursor-list) params
  *

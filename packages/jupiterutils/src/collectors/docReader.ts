@@ -1,14 +1,15 @@
 /**
  * Markdown documentation reader.
  *
- * Reads a .md file and extracts the section from "## Description" onward.
- * Used to populate Python docstrings in the generated code.
+ * Bun changes:
+ *   - `access()` existence check replaced with `Bun.file().exists()` —
+ *     the idiomatic Bun API; avoids importing from node:fs/promises.
+ *   - readLines() already uses Bun.file() (see utils.ts).
  */
 
-import { access } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 
-import type { Config } from '../types/';
+import type { Config } from '../types';
 
 import { readLines } from '../utils';
 
@@ -32,11 +33,8 @@ export async function readDocSection(fqName: string, config: Config): Promise<st
     const filePath = resolveDocPath(fqName, config);
     if (filePath === null) return null;
 
-    try {
-        await access(filePath);
-    } catch {
-        return null;
-    }
+    // Bun.file().exists() is the idiomatic existence check — no try/catch needed
+    if (!(await Bun.file(filePath).exists())) return null;
 
     const lines = await readLines(filePath);
     const descIdx = lines.indexOf('## Description');
@@ -52,7 +50,7 @@ export async function readDocSection(fqName: string, config: Config): Promise<st
 /**
  * Resolve the filesystem path of the markdown document for a given reference.
  *
- * Three cases (matching the original TypeScript logic):
+ * Three cases:
  *
  *  1. Utility function:  `PSJ-Utility_FnName` (or full filename ending .md)
  *     → `{webRoot}/docs/psj-utility/{fqName}[.md]`
@@ -68,17 +66,14 @@ function resolveDocPath(fqName: string, config: Config): string | null {
     const { webRoot } = config;
 
     if (fqName.includes('PSJ-Utility_')) {
-        const name = ensureMd(fqName);
-        return join(webRoot, 'docs', 'psj-utility', name);
+        return join(webRoot, 'docs', 'psj-utility', ensureMd(fqName));
     }
 
     if (fqName.includes('dlg-')) {
-        const name = ensureMd(fqName);
-        return join(webRoot, 'docs', 'psj-gui', name);
+        return join(webRoot, 'docs', 'psj-gui', ensureMd(fqName));
     }
 
     // PSJ command: "Measurement.Section.getArea"
-    // The first segment is PascalCase like "Measurement" → "measurement"
     const parts = fqName.split('.');
     const firstSegment = parts[0];
     if (!firstSegment) return null;

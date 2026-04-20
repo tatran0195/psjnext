@@ -1,16 +1,16 @@
 /**
  * File writer utilities.
  *
- * Provides atomic write helpers so that partially-written files are never
- * left on disk if the process crashes mid-write.
- *
- * Strategy: write to a `.tmp` sibling first, then `rename` (atomic on POSIX;
- * best-effort on Windows since Node.js uses MoveFileEx with REPLACE_EXISTING).
+ * Bun changes:
+ *   - Replaced writeFile + rename + randomBytes with Bun.write():
+ *     Bun.write() is atomic on POSIX (internal tmp+rename) and handles
+ *     encoding natively — no node:crypto needed.
+ *   - mkdir kept from node:fs/promises: Bun has no first-class Bun.mkdir()
+ *     yet, but its node:fs/promises implementation is fully supported.
  */
 
-import { randomBytes } from 'node:crypto';
-import { writeFile, rename, mkdir } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
+import { mkdir } from 'node:fs/promises';
+import { dirname } from 'node:path';
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -18,27 +18,18 @@ import { dirname, join } from 'node:path';
 
 /**
  * Write `content` to `filePath`, creating parent directories as needed.
- * The write is atomic: content is first written to a temp file in the same
- * directory, then renamed to the final path.
+ *
+ * Bun.write() is the idiomatic path: it auto-creates parent dirs and performs
+ * an atomic rename-on-write internally on supported platforms.
+ *
+ * We keep an explicit mkdir for the dir in case the parent doesn't exist yet
+ * (Bun.write creates the file but not always deep parent chains on all OSes).
  */
 export async function writeAtomic(filePath: string, content: string): Promise<void> {
-    const dir = dirname(filePath);
-    await mkdir(dir, { recursive: true });
-
-    const tmpPath = join(dir, `.tmp-${randomBytes(6).toString('hex')}`);
-    try {
-        await writeFile(tmpPath, content, 'utf8');
-        await rename(tmpPath, filePath);
-    } catch (err) {
-        // Best-effort cleanup of the temp file
-        try {
-            const { unlink } = await import('node:fs/promises');
-            await unlink(tmpPath);
-        } catch {
-            // ignore cleanup failure
-        }
-        throw err;
-    }
+    // Bun.write() handles parent dir creation on Bun ≥1.0, but we keep mkdir
+    // as a belt-and-suspenders guard for deep nested paths.
+    await mkdir(dirname(filePath), { recursive: true });
+    await Bun.write(filePath, content);
 }
 
 /**

@@ -1,14 +1,12 @@
 /**
  * Utility / GUI function collector.
  *
- * Replaces the Rust `create_util_list` function.
- *
- * Walks a directory of markdown files, finds files matching a given prefix
- * (e.g. "PSJ-Utility_" or "dlg-"), and extracts the function signature by
- * parsing the "## Inputs" … "## Return Code" section of each file.
+ * Bun changes:
+ *   - readLines() already uses Bun.file() (see utils.ts).
+ *   - readdir replaced with Bun.readdir() (Bun ≥1.1 native, returns string[]).
+ *   - File reads are parallelised with Promise.all.
  */
 
-import { readdir } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 
 import type { UtilFunction } from '../types';
@@ -48,23 +46,20 @@ export async function collectUtilFunctions(
 ): Promise<UtilFunction[]> {
     let entries: string[];
     try {
-        entries = await readdir(docsDir);
+        // Bun.readdir() is the native API (Bun ≥1.1); returns string[]
+        entries = await Bun.readdir(docsDir);
     } catch {
         return [];
     }
 
-    const results: UtilFunction[] = [];
+    const candidates = entries.filter((e) => extname(e) === '.md' && e.includes(filePrefix));
 
-    for (const entry of entries) {
-        if (extname(entry) !== '.md') continue;
-        if (!entry.includes(filePrefix)) continue;
+    // Parse all matching files concurrently
+    const results = await Promise.all(
+        candidates.map((entry) => parseUtilFile(join(docsDir, entry), entry, filePrefix)),
+    );
 
-        const filePath = join(docsDir, entry);
-        const fn = await parseUtilFile(filePath, entry, filePrefix);
-        if (fn !== null) results.push(fn);
-    }
-
-    return results;
+    return results.filter((fn): fn is UtilFunction => fn !== null);
 }
 
 // ---------------------------------------------------------------------------
@@ -87,9 +82,8 @@ async function parseUtilFile(
         return null;
     }
 
-    // Derive function name: strip prefix and ".md" extension
     const prefixIdx = filename.indexOf(filePrefix);
-    const fnName = filename.slice(prefixIdx + filePrefix.length, -3); // remove .md
+    const fnName = filename.slice(prefixIdx + filePrefix.length, -3);
 
     const inputsIdx = lines.indexOf('## Inputs');
     if (inputsIdx === -1) return null;
@@ -97,7 +91,6 @@ async function parseUtilFile(
     const returnIdx = lines.indexOf('## Return Code');
     if (returnIdx === -1) return null;
 
-    // Parse params between ## Inputs and ## Return Code
     const params = parseParamsFromSection(lines.slice(inputsIdx + 1, returnIdx));
     const rawParams = params
         .map((p) => (p.defaultValue !== null ? `${p.name}=${p.defaultValue}` : p.name))
@@ -120,7 +113,6 @@ function parseParamsFromSection(lines: string[]): RawParam[] {
 
     for (const line of lines) {
         if (line.startsWith('###')) {
-            // Extract param names from backticks: ### `paramName`
             RE_BACKTICK_PARAM.lastIndex = 0;
             let m: RegExpExecArray | null;
             while ((m = RE_BACKTICK_PARAM.exec(line)) !== null) {
@@ -142,39 +134,20 @@ function parseParamsFromSection(lines: string[]): RawParam[] {
 
 /**
  * Clean up a raw default-value string extracted from markdown prose.
- *
- * Handles these forms (matching the original Rust logic):
- *   "True"                  → "True"
- *   "True (some note)"      → "True"           (strip annotation)
- *   "_True_"                → "True"            (italic markdown)
- *   "[EnumName]"            → "EnumName()"      (enum constructor)
- *   "True."                 → "True"            (strip trailing period)
  */
 function extractDefaultValue(raw: string): string {
     let value = raw.trim();
 
-    // Strip trailing period
-    if (value.endsWith('.')) {
-        value = value.slice(0, -1);
-    }
+    if (value.endsWith('.')) value = value.slice(0, -1);
 
-    // "value (annotation)" → "value"
     const annotMatch = RE_STRIP_ANNOTATION.exec(value);
-    if (annotMatch?.[1]) {
-        value = annotMatch[1];
-    }
+    if (annotMatch?.[1]) value = annotMatch[1];
 
-    // _value_ italic → value
     const italicMatch = RE_ITALIC.exec(value);
-    if (italicMatch?.[1]) {
-        return italicMatch[1];
-    }
+    if (italicMatch?.[1]) return italicMatch[1];
 
-    // [EnumName] → EnumName()
     const bracketMatch = RE_BRACKET_ENUM.exec(value);
-    if (bracketMatch?.[1]) {
-        return `${bracketMatch[1]}()`;
-    }
+    if (bracketMatch?.[1]) return `${bracketMatch[1]}()`;
 
     return value;
 }
@@ -183,17 +156,10 @@ function extractDefaultValue(raw: string): string {
 // Serialize to intermediate list format
 // ---------------------------------------------------------------------------
 
-/**
- * Serialize to the same format that the Rust binary produced:
- *   "FunctionName(param1, param2=default)"  — one per line
- */
 export function serializeUtilFunctions(fns: UtilFunction[]): string {
     return fns.map((f) => `${f.name}(${f.rawParams})`).join('\n');
 }
 
-/**
- * Parse a UtilityFull.py / DlgFull.py list file back into UtilFunction[].
- */
 export function parseUtilFunctionList(content: string): UtilFunction[] {
     return content
         .split(/\r?\n/)

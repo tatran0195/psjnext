@@ -1,15 +1,11 @@
 /**
  * Entity type collector.
  *
- * Parses input/*.txt enum definition files such as EntityType.txt:
- *   "3: JPT.EntityType.BODY"
- *   ↓
- *   varName = "BODY", value = "3"
- *
- * Used to generate enum classes in Utility.py.
+ * Bun changes:
+ *   - `access()` existence check replaced with `Bun.file().exists()`.
+ *   - readLines() already uses Bun.file() (see utils.ts).
  */
 
-import { access } from 'node:fs/promises';
 import { join } from 'node:path';
 
 import type { EntityEntry } from '../types';
@@ -30,11 +26,7 @@ export async function readEntityType(
 ): Promise<EntityEntry[] | null> {
     const filePath = join(inputDir, `${fileType}.txt`);
 
-    try {
-        await access(filePath);
-    } catch {
-        return null;
-    }
+    if (!(await Bun.file(filePath).exists())) return null;
 
     const lines = await readLines(filePath);
     return lines

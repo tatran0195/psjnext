@@ -1,12 +1,15 @@
 /**
  * PSJ Command collector.
  *
- * Replaces the Rust `create_psj_cmd_list` function.
- * Walks a macro source directory, finds all .py files (with exclusions),
- * extracts `def` signatures, and derives their fully-qualified PSJ path.
+ * Bun changes:
+ *   - readdir replaced with Bun.readdir() (Bun ≥1.1 native, returns string[]).
+ *   - stat() kept from node:fs/promises — needed for isDirectory() detection;
+ *     no Bun-native equivalent for directory checking yet.
+ *   - walk() now fans out entries concurrently with Promise.all.
+ *   - readLines() already uses Bun.file() (see utils.ts).
  */
 
-import { readdir, stat } from 'node:fs/promises';
+import { stat } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 
 import type { PsjCommand } from '../types';
@@ -50,59 +53,52 @@ export async function collectPsjCommands(macroRoot: string): Promise<PsjCommand[
 async function walk(baseRoot: string, dir: string, out: PsjCommand[]): Promise<void> {
     let entries: string[];
     try {
-        entries = await readdir(dir);
+        entries = await Bun.readdir(dir);
     } catch {
         return;
     }
 
-    for (const entry of entries) {
-        const fullPath = join(dir, entry);
+    // Process all entries concurrently for better throughput on large trees
+    await Promise.all(
+        entries.map(async (entry) => {
+            const fullPath = join(dir, entry);
 
-        let fileStat;
-        try {
-            fileStat = await stat(fullPath);
-        } catch {
-            continue;
-        }
-
-        if (fileStat.isDirectory()) {
-            if (!EXCLUDED_DIRS.has(entry)) {
-                await walk(baseRoot, fullPath, out);
+            let fileStat;
+            try {
+                fileStat = await stat(fullPath);
+            } catch {
+                return;
             }
-            continue;
-        }
 
-        if (extname(entry) !== '.py') continue;
-        if (EXCLUDED_FILES.has(entry)) continue;
+            if (fileStat.isDirectory()) {
+                if (!EXCLUDED_DIRS.has(entry)) {
+                    await walk(baseRoot, fullPath, out);
+                }
+                return;
+            }
 
-        const commands = await extractCommandsFromFile(baseRoot, fullPath);
-        out.push(...commands);
-    }
+            if (extname(entry) !== '.py') return;
+            if (EXCLUDED_FILES.has(entry)) return;
+
+            const commands = await extractCommandsFromFile(baseRoot, fullPath);
+            // push is safe: Promise.all runs concurrently but push is synchronous
+            out.push(...commands);
+        }),
+    );
 }
 
 /**
  * Given a .py file under macroRoot, extract all `def` lines and return the
  * corresponding PsjCommand entries.
- *
- * Path derivation (mirrors original Rust logic):
- *   fullPath = "C:/project/macro/Measurement/Section/area.py"
- *   relative from "macro/"  →  "Measurement/Section/area"
- *   replace path sep with "." → "Measurement.Section.area"
- *   strip "__init__." occurrences
- *   append the def name/signature
  */
 async function extractCommandsFromFile(macroRoot: string, filePath: string): Promise<PsjCommand[]> {
-    // Derive the module prefix from the path.
-    // normalise to forward slashes for consistent slicing
     const normalRoot = macroRoot.replace(/\\/g, '/');
     const normalFile = filePath.replace(/\\/g, '/');
 
-    // Find where "macro/" segment starts — the root itself ends right before it
-    // We need the path *after* macroRoot:
     if (!normalFile.startsWith(normalRoot)) return [];
 
-    const relative = normalFile.slice(normalRoot.length + 1); // e.g. "Measurement/Section/area.py"
-    const withoutExt = relative.slice(0, -3); // strip ".py"
+    const relative = normalFile.slice(normalRoot.length + 1);
+    const withoutExt = relative.slice(0, -3);
     const modulePrefix = withoutExt
         .replace(/\//g, '.')
         .replace(/\\/g, '.')
@@ -120,13 +116,12 @@ async function extractCommandsFromFile(macroRoot: string, filePath: string): Pro
 
     for (const line of lines) {
         const trimmed = line.trimStart();
-        // Skip comment lines; require both "def " and ":"
         if (trimmed.startsWith('#')) continue;
         if (!trimmed.includes('def ') || !trimmed.includes(':')) continue;
 
         const defIdx = trimmed.indexOf('def ');
         const colonIdx = trimmed.lastIndexOf(':');
-        const defBody = trimmed.slice(defIdx + 4, colonIdx); // e.g. "doThing(arg1, arg2)"
+        const defBody = trimmed.slice(defIdx + 4, colonIdx);
 
         const namespace = modulePrefix.split('.');
         commands.push({ namespace, signature: defBody });
@@ -140,8 +135,7 @@ async function extractCommandsFromFile(macroRoot: string, filePath: string): Pro
 // ---------------------------------------------------------------------------
 
 /**
- * Serialize collected commands to the same text format that the original
- * Rust binary wrote to PSJCmdFull.py:
+ * Serialize collected commands to the same text format:
  *   "Namespace.path.FunctionName(params)"  — one per line
  */
 export function serializePsjCommands(commands: PsjCommand[]): string {
@@ -150,7 +144,6 @@ export function serializePsjCommands(commands: PsjCommand[]): string {
 
 /**
  * Parse a PSJCmdFull.py-format file back into an array of {@link PsjCommand}.
- * Used when the list file already exists and we skip re-scanning.
  */
 export function parsePsjCommandList(content: string): PsjCommand[] {
     return content
@@ -162,11 +155,10 @@ export function parsePsjCommandList(content: string): PsjCommand[] {
             if (parenIdx === -1) {
                 return { namespace: line.split('.'), signature: '' };
             }
-            // Everything before the last "." before "(" is namespace
             const beforeParen = line.slice(0, parenIdx);
             const dotIdx = beforeParen.lastIndexOf('.');
             const namespace = dotIdx === -1 ? [] : beforeParen.slice(0, dotIdx).split('.');
-            const fnAndParams = line.slice(dotIdx + 1); // "FnName(params)"
+            const fnAndParams = line.slice(dotIdx + 1);
             return { namespace, signature: fnAndParams };
         });
 }

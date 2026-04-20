@@ -1,12 +1,14 @@
 /**
  * Configuration loader.
  *
- * Reads environment variables (via dotenv) and returns a validated Config.
+ * Bun natively loads `.env` files from the working directory —
+ * no dotenv package required. Environment variables are available
+ * directly via `Bun.env` / `process.env` at startup.
+ *
+ * CLI override: `bun --env-file=other/.env run index.ts`
+ *
  * Throws a descriptive error if required variables are missing.
  */
-
-import { config as loadDotenv } from 'dotenv';
-import { resolve } from 'node:path';
 
 import type { Config } from './types/index.js';
 
@@ -15,25 +17,18 @@ import type { Config } from './types/index.js';
 // ---------------------------------------------------------------------------
 
 /**
- * Load configuration from the `.env` file located in `projectRoot`
- * (defaults to `process.cwd()`).
+ * Load configuration from environment variables.
+ *
+ * Bun automatically sources `.env`, `.env.local`, `.env.production`, etc.
+ * from `process.cwd()` before the process starts — no explicit dotenv call needed.
  */
 export function loadConfig(projectRoot?: string): Config {
     const root = projectRoot ?? process.cwd();
 
-    // Load .env relative to the project root
-    loadDotenv({ path: resolve(root, '.env') });
-
     const webRoot = requireEnv('WEB_ROOT');
     const macroRoot = requireEnv('MACRO_ROOT');
-    console.log('webRoot', webRoot);
-    console.log('root', root);
-    console.log('macroRoot', macroRoot);
-    return {
-        webRoot,
-        macroRoot,
-        projectRoot: root,
-    };
+
+    return { webRoot, macroRoot, projectRoot: root };
 }
 
 // ---------------------------------------------------------------------------
@@ -41,7 +36,8 @@ export function loadConfig(projectRoot?: string): Config {
 // ---------------------------------------------------------------------------
 
 function requireEnv(key: string): string {
-    const value = process.env[key];
+    // Bun.env is the idiomatic accessor — same backing store as process.env
+    const value = Bun.env[key];
     if (!value) {
         throw new Error(
             `Environment variable "${key}" is required but not set.\n` +
