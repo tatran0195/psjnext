@@ -6,7 +6,7 @@ export function getSection(path: string | undefined) {
         {
             api: 'api',
             guides: 'guides',
-            dataType: 'data-type',
+            'data-type': 'data-type',
         }[dir] ?? 'framework'
     );
 }

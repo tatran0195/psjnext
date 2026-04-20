@@ -93,7 +93,7 @@
 
     --api-color: hsl(250, 80%, 54%);
     --guides-color: hsl(41, 100%, 40%);
-    --data-type-color: hsl(217, 100%, 58%);
+    --data-type-color: hsl(0, 72%, 67%);
     --framework-color: hsl(217 91% 60%);
 }
 
@@ -132,7 +132,7 @@
 
     --api-color: hsl(250 100% 80%);
     --guides-color: hsl(41, 100%, 40%);
-    --data-type-color: hsl(199, 96%, 45%);
+    --data-type-color: hsl(0, 72%, 67%);
     --framework-color: hsl(217 91% 60%);
 }
 
@@ -166,8 +166,8 @@
     --color-fd-primary: var(--guides-color);
 }
 
-.dataType {
-    --color-fd-primary: var(--dataType-color);
+.data-type {
+    --color-fd-primary: var(--data-type-color);
 }
 
 .framework {

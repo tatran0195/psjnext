@@ -3,13 +3,14 @@
 import { usePathname } from 'next/navigation';
 import { type ComponentProps, createElement, FC, type ReactNode, useMemo, useState } from 'react';
 
+import { searchPath } from 'fumadocs-core/breadcrumb';
 import Link from 'fumadocs-core/link';
 import { useTreeContext } from 'fumadocs-ui/contexts/tree';
 import { Check, ChevronsUpDown, Languages, Search, SidebarIcon, X } from 'lucide-react';
 
 import { buttonVariants } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { isLayoutTabActive, LayoutTab, LinkItem } from '@/layouts/shared';
+import { getFirstUrl, isLayoutTabActive, LayoutTab, LinkItem } from '@/layouts/shared';
 import { cn } from '@/lib/cn';
 import { sidebarMatch } from '@/lib/tree-filter';
 
@@ -49,8 +50,50 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
     } = useNotebookLayout();
     const navMode = nav?.mode ?? 'auto';
     const iconLinks = menuItems.filter((item) => item.type === 'icon');
-    const { root } = useTreeContext();
+    const { root: baseRoot, full } = useTreeContext();
+    const pathname = usePathname();
     const [filterQuery, setFilterQuery] = useState('');
+
+    const path = useMemo(() => {
+        return (
+            searchPath(full.children, pathname) ??
+            (full.fallback ? searchPath(full.fallback.children, pathname) : null) ??
+            []
+        );
+    }, [full, pathname]);
+
+    const nestedTabs = useMemo(() => {
+        const result: NestedTab[] = [];
+        for (const node of path) {
+            if (node.type === 'folder' && (node as PageTree.Folder & { group: boolean }).group) {
+                const options = node.children.filter(
+                    (n) => n.type === 'folder',
+                ) as PageTree.Folder[];
+                if (options.length === 0) continue;
+
+                const nodeTabs = options.map((folder) => {
+                    return {
+                        title: folder.name,
+                        url: getFirstUrl(folder) ?? '',
+                        icon: folder.icon,
+                        description: folder.description,
+                        $folder: folder,
+                    } as LayoutTab;
+                });
+
+                const active =
+                    nodeTabs.find((t) => path.includes(t.$folder as unknown as PageTree.Node)) ??
+                    nodeTabs[0];
+                result.push({ tabs: nodeTabs, active });
+            }
+        }
+        return result;
+    }, [path]);
+
+    const lastActiveTab = nestedTabs[nestedTabs.length - 1]?.active;
+    const root: PageTree.Root | PageTree.Folder = (lastActiveTab?.$folder ??
+        path.findLast((item) => item.type === 'folder' && item.root) ??
+        baseRoot) as PageTree.Root | PageTree.Folder;
 
     const filteredList = useMemo(() => {
         if (!filterQuery) return root.children;
@@ -105,8 +148,6 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
             </div>
         );
     }
-
-    const nestedTabs: NestedTab[] = []
 
     const viewport = (
         <SidebarViewport>
@@ -379,4 +420,3 @@ function SidebarTabsDropdown({
 
 export * from './components';
 export * from './provider';
-
