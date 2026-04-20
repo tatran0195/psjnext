@@ -1,0 +1,169 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 
+//  #PSJ Utility calltips (0 API functions) 
+//  #Base class: DItem
+//  #Child classes: DFace, DBody, DEdge, DNode, DGroup, DElem, DCoord, DLoadBC, DConnect, DItemPair...
+//  #List classes: DItemVector, BodyVector, NodeVector, ElemVector, 
+//  FaceVector, EdgeVector, GroupVector, ConnectVector, CoordVector, LoadBCVector, DItemPairVector,... 
+//  #Param types: DTableType, EntityType (DItemType), UnitType, 
+//  ElemType, ElemKind, BoolType, PathType, AssociateType, ...
+//  #Debugger: JPT.Debugger() ,JPT.PrintAppPathInfo(), print()
+//  
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+@Base class: DItem 
+@Description: class object for all of kind entity can cast to DFace, DBody, DEdge, DGroup, DNode, DElem, ...
+@Properties:
+isValid : check entity is valid or not : return bool
+type : get type of entity : return EntityType 
+typeID : get id of entity type : return int 
+tableID : get id of database table : return int 
+id : get id of entity (external key) : return int 
+name : get/set name of entity : return string 
+targets : get targets of entity (use for group, pressure, force,...) : return DItemVector 
+masters : get master targets of entity (use for RBE, MPC,...) : return DItemVector 
+slaves : get slave targets of entity (use for RBE, MPC,...) : return DItemVector 
+children : get childrens of entity (use for assembly tree): return DItemVector 
+parent : get parent of entity (use for assembly tree): return DItemVector 
+isHidden: check entity is show or hide in view
+info : object information
+@Example: 
+listEntityObject = JPT.GetAllByTypeID(JPT.EntityType.BODY)
+listEntityObject[0].isValid // read only
+listEntityObject[0].type // read only
+listEntityObject[0].typeID // read only
+listEntityObject[0].name = "new name" // read/write
+#==========================================================================================================
+@Child classes: DFace
+@Description: class object for face entity can cast to DItem
+@Properties:
+typeID: get type of entity : return EntityType 
+id: get id of entity (external key) : return int 
+nodes: get list of node : return NodeVector 
+elems: get list of element: return ElemVector
+edges: get list of element: return EdgeVector
+color: set/get color of face 
+#==========================================================================================================
+@Child classes: DBody
+@Description: class object for body entity can cast to DItem
+@Properties: 
+typeID: get type of entity : return EntityType 
+id: get id of entity (external key) : return int 
+name: get/set name of entity : return string 
+faces: get list of face : return FaceVector 
+elems: get list of element: return ElemVector
+edges: get list of element: return EdgeVector
+nodes: get list of node : return NodeVector  
+vertex: get list of vertex : return DItemVector 
+localMeshSettings: get list of local mesh settings : return DItemVector 
+loadAndBCs: get list of LBCs : return LoadBCVector 
+connections: get list of connections : return ConnectVector
+contacts: get list of contacts : return DItemVector
+properties: get list of properties : return DItemVector
+materials: get list of materials : return DItemVector
+mass: get mass value (double)
+volume: get volume value (double)
+gravityCenter: get gravity center (TVector3d)
+momentInertia: get moment inertia (double list)
+area: get area value (double)
+references: get list of references : return DItemVector
+color: set/get color of body 
+colorMesh: set/get color of mesh line 
+transparency: set/get transparency of body 
+#==========================================================================================================
+@Child classes: DEdge
+@Description: class object for edge entity can cast to DItem
+@Properties: 
+typeID: get type of entity : return EntityType 
+id: get id of entity (external key) : return int 
+edges: get list of element: return EdgeVector
+nodes: get list of node : return NodeVector  
+color: set/get color of edge 
+#==========================================================================================================
+@Child classes: DElem
+@Description: class object for element entity can cast to DItem
+@Properties: 
+typeID: get type of entity : return EntityType 
+id: get id of entity (external key) : return int 
+type: get element type : return int
+kind: get element kind : return ElemKind
+nodes: get list of node : return NodeVector  
+color: set/get color of element  
+#==========================================================================================================
+@Child classes: DGroup
+@Description: class object for group entity can cast to DItem
+@Properties: 
+typeID: get type of entity : return EntityType 
+id: get id of entity (external key) : return int 
+name: get/set name of group : return string 
+targets : get targets of group : return DItemVector 
+color: set/get color of group 
+#==========================================================================================================
+@Child classes: DNode
+@Description: class object for node entity can cast to Entity
+@Properties: 
+isFloating: check node is floating node or not : : return bool
+typeID: get type of entity : return EntityType 
+id: get id of entity (external key) : return int 
+pos: get x,y,z from node : return TVector3d
+color: set/get color of node  
+#==========================================================================================================
+@Child classes: DConnect
+@Description: class object for connection entity can cast to Entity
+@Properties: 
+connectMethod: check node is floating node or not : : return bool
+connectCoord: get related coordinate system of connection
+color: set/get color of connection  
+#==========================================================================================================
+@Child classes: DLoadBC
+@Description: class object for Load Boundary Condition entity can cast to Entity
+@Properties: 
+lbcAnalysisType: get Load Boundary Condition type
+lbcCoord: get related coordinate system of LBC
+color: set/get color of Load Boundary Condition  
+#==========================================================================================================
+@Child classes: DCoord
+@Description: class object for coordinate entity can cast to Entity
+@Properties: 
+coordType: get coordinate system type
+coordPoints: get position of 3 points coordinate system  
+#==========================================================================================================
+@Child classes: Document
+@Description: class object for document tab GUI
+@Properties: 
+docName: get document name
+docID: get document ID
+docType: get document type
+docPath: get document path
+#==========================================================================================================
+@Child classes: DItemPair
+@Description: class object for pair of entities (element edge,...)
+@Properties: 
+firstDItem: get fisrt entity in pair entities (get fisrt node element edge)
+secondDItem: get second entity in pair entities (get second node element edge)
+#==========================================================================================================
+@Child classes: VersionInfo
+@Description: class object for version info file jtdb
+@Properties: 
+major : major jupiter version Ex: 4
+minor : minor jupiter version Ex: 1
+sub : sub jupiter version Ex: 4
+build : release revision Ex: 47510
+#==========================================================================================================
+@Child classes: TVector3d
+@Description: class object for vector3d use for node position, double list
+@Properties: 
+x
+y
+z
+#==========================================================================================================
+@List classes: DItemVector, BodyVector, FaceVector, ElemVector, GroupVector, NodeVector, EdgeVector, DItemPairVector,...
+@Description: list of entity objects
+@Methods: 
+sizeVec() : return size of list
+clearVec() : clear all list
+addObj(entityObject) : append an entity to list
+extendVec(listEntityObject) : insert another list entity to current list
+deleteObj(1) : delete a entity in list by index
+isContainObj(entityObject) : check if entityObject is exist in current list
+#==========================================================================================================
+

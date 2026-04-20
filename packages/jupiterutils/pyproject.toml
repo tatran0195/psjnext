@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "jupiterutils"
+version = "4.1.0"
+description = "Jupiter PSJ Python utilities and class bindings"
+requires-python = ">=3.8"
+dependencies = ["pywin32", "psutil"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["jupiterutils*"]
+
+[tool.setuptools.package-data]
+jupiterutils = ["py.typed"]

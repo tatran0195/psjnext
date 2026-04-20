@@ -24,13 +24,25 @@
                 "css/generated/**",
                 "out",
                 "build",
-                ".vercel"
+                ".vercel",
+                "jupiterutils/**",
+                "IDEData/**",
+                "IDEData.zip",
+                "output/**"
             ]
         },
         "lint": {},
         "types:check": {
             "dependsOn": [],
             "outputs": []
+        },
+        "typecheck": {
+            "dependsOn": [],
+            "outputs": []
+        },
+        "generate": {
+            "dependsOn": ["build"],
+            "cache": false
         },
         "clean": {
             "cache": false

@@ -1,0 +1,42 @@
+{
+    "$schema": "https://v2-9-6.turborepo.dev/schema.json",
+    "extends": ["//"],
+    "tasks": {
+        "build": {
+            "outputs": ["dist/**"],
+            "inputs": ["src/**", "tsconfig.json", "package.json"]
+        },
+        "generate": {
+            "dependsOn": ["build"],
+            "outputs": [
+                "jupiterutils/PSJ_Classes.py",
+                "jupiterutils/Utility.py",
+                "jupiterutils/pyjdg.py",
+                "jupiterutils/__init__.py",
+                "output/**",
+                "IDEData/**",
+                "IDEData.zip"
+            ],
+            "inputs": [
+                "src/**",
+                "input/**",
+                "jupiterutils/macroTypes.py",
+                "jupiterutils/macro_defs.py",
+                "jupiterutils/macro_material.py",
+                "jupiterutils/PSJ_Interpreter.py",
+                "jupiterutils/table_material.py",
+                ".env"
+            ],
+            "env": ["WEB_ROOT", "MACRO_ROOT"],
+            "cache": false
+        },
+        "typecheck": {
+            "inputs": ["src/**", "tsconfig.json"],
+            "outputs": []
+        },
+        "dev": {
+            "cache": false,
+            "persistent": false
+        }
+    }
+}

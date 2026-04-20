@@ -1,0 +1,2 @@
+1: JPT.BoolType.TRUE_VAL
+0: JPT.BoolType.FALSE_VAL
