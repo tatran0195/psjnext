@@ -202,7 +202,7 @@ Data format type. [0:Single, 1:Double]
     ### ` enFunctionType`
     - An _Integer_ specifying the function type.
       <a id="Optimization-Function-Type" />
-          <!-- <Link to="#Optimization-Function-Type">link</Link> -->
+      <!-- <Link to="#Optimization-Function-Type">link</Link> -->
 
     | ID  | Function                             | Description                          |
     | --- | ------------------------------------ | ------------------------------------ |
