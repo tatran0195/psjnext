@@ -1,0 +1,4 @@
+[submodule "apps/docs/content/api/5.1.0"]
+	path = apps/docs/content/api/5.1.0
+	url = ./
+	branch = release/5.1.0
