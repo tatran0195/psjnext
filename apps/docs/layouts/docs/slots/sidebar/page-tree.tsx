@@ -5,7 +5,7 @@ import { useTreeContext, useTreePath } from 'fumadocs-ui/contexts/tree';
 
 import { isActive } from '@/lib/urls';
 
-import type * as Base from '.';
+import type * as Base from './components';
 
 import type * as PageTree from 'fumadocs-core/page-tree';
 
@@ -17,8 +17,8 @@ export interface SidebarPageTreeComponents {
 
 const RendererContext = createContext<
     | (Partial<SidebarPageTreeComponents> & {
-          pathname: string;
-      })
+        pathname: string;
+    })
     | null
 >(null);
 

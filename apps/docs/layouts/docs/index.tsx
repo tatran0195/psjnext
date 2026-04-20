@@ -28,7 +28,7 @@ interface Nav extends NavOptions {
     mode?: 'top' | 'auto';
 }
 
-interface SidebarOptions extends SidebarProps, SidebarProviderProps { }
+interface SidebarOptions extends SidebarProps, SidebarProviderProps {}
 
 export function DocsLayout({
     tree,
@@ -50,8 +50,6 @@ export function DocsLayout({
         }
         return [];
     }, [tabs, tree]);
-
-    console.log({ tree, resolvedTabs })
 
     return (
         <LayoutBody

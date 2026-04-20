@@ -1,6 +1,6 @@
 import { getBreadcrumbItems } from 'fumadocs-core/breadcrumb';
 
-import { source } from '@/lib/source';
+import { docsSource } from '@/lib/source';
 import { getSection } from '@/lib/source/navigation';
 
 import type { OramaDocument } from 'fumadocs-core/search/orama-cloud';
@@ -8,11 +8,11 @@ import type { OramaDocument } from 'fumadocs-core/search/orama-cloud';
 export const revalidate = false;
 
 export async function GET(): Promise<Response> {
-    const pages = source.getPages();
+    const pages = docsSource.getPages();
     const promises = pages.map(async (page) => {
         // if (page.data.type === 'openapi') return;
 
-        const items = getBreadcrumbItems(page.url, source.getPageTree(), {
+        const items = getBreadcrumbItems(page.url, docsSource.getPageTree(), {
             includePage: false,
             includeRoot: true,
         });
