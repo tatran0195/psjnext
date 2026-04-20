@@ -6,7 +6,7 @@
  *     `node:fs/promises` readFile — Bun.file() is the idiomatic, zero-copy path.
  */
 
-import type { Param } from './types/index.js';
+import type { Param } from '@/types/index.js';
 
 // ---------------------------------------------------------------------------
 // File helpers

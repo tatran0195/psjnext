@@ -8,16 +8,16 @@
  *     and all utility method stubs
  */
 
-import type { Config, EntityEntry, UtilFunction } from '../types';
+import type { Config, EntityEntry, UtilFunction } from '@/types';
 
-import { readDocSection } from '../collectors/docReader';
+import { readDocSection } from '@/collectors/docReader';
 import {
     buildCursorExpansion,
     fmtArgs,
     fmtPlaceholders,
     parseSignature,
     renderCursorSetup,
-} from '../utils';
+} from '@/utils';
 
 // ---------------------------------------------------------------------------
 // Constants mirrored from original index.ts

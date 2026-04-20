@@ -1,19 +1,9 @@
 /**
  * IDEData.zip writer.
- *
- * Bun changes:
- *   - Replaced `archiver` (Node streams + third-party) with `fflate` —
- *     a pure-JS DEFLATE library that works seamlessly in Bun with no
- *     native bindings or stream wrappers needed.
- *   - File I/O uses Bun.file().arrayBuffer() for zero-copy reads and
- *     Bun.write() for the final zip output.
- *   - readdir replaced with Bun.readdir() (Bun ≥1.1 native).
- *   - No `node:fs` createWriteStream needed.
- *
- * Install: `bun add fflate`
  */
 
 import { zipSync } from 'fflate';
+import { readdir } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 
 // ---------------------------------------------------------------------------
@@ -28,7 +18,7 @@ import { extname, join } from 'node:path';
  * @param outputZipPath - Destination zip file path
  */
 export async function createIdeDataZip(ideDataDir: string, outputZipPath: string): Promise<void> {
-    const entries = await Bun.readdir(ideDataDir);
+    const entries = await readdir(ideDataDir);
     const datFiles = entries.filter((f) => extname(f) === '.dat');
 
     if (datFiles.length === 0) {
@@ -38,7 +28,7 @@ export async function createIdeDataZip(ideDataDir: string, outputZipPath: string
 
     // Read all .dat files concurrently using Bun.file()
     const fileEntries = await Promise.all(
-        datFiles.map(async (filename) => {
+        datFiles.map(async (filename: string) => {
             const bytes = await Bun.file(join(ideDataDir, filename)).arrayBuffer();
             return [filename, new Uint8Array(bytes)] as const;
         }),

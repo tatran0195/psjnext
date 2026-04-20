@@ -34,28 +34,28 @@
 import { mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
-import type { EntityEntry } from './types/index.js';
+import type { EntityEntry } from '@/types/index.js';
 
-import { readEntityType } from './collectors/entityTypeCollector.js';
-import { collectPsjCommands, serializePsjCommands } from './collectors/psjCommandCollector.js';
+import { readEntityType } from '@/collectors/entityTypeCollector.js';
+import { collectPsjCommands, serializePsjCommands } from '@/collectors/psjCommandCollector.js';
 import {
     collectUtilFunctions,
     serializeUtilFunctions,
-} from './collectors/utilFunctionCollector.js';
-import { loadConfig } from './config.js';
+} from '@/collectors/utilFunctionCollector.js';
+import { loadConfig } from '@/config.js';
 import {
     generateCommandCalltips,
     generateGuiTooltip,
     generateUtilityCalltips,
-} from './generators/calltipsGenerator.js';
-import { buildClassTree } from './generators/classTreeBuilder.js';
-import { generateInit } from './generators/initGenerator.js';
-import { generatePsjClasses } from './generators/psjClassesGenerator.js';
-import { generatePyjdg } from './generators/pyjdgGenerator.js';
-import { ENTITY_TYPES, generateUtility } from './generators/utilityGenerator.js';
-import { logger } from './logger.js';
-import { writeMany } from './writers/fileWriter.js';
-import { createIdeDataZip } from './writers/zipWriter.js';
+} from '@/generators/calltipsGenerator.js';
+import { buildClassTree } from '@/generators/classTreeBuilder.js';
+import { generateInit } from '@/generators/initGenerator.js';
+import { generatePsjClasses } from '@/generators/psjClassesGenerator.js';
+import { generatePyjdg } from '@/generators/pyjdgGenerator.js';
+import { ENTITY_TYPES, generateUtility } from '@/generators/utilityGenerator.js';
+import { logger } from '@/logger.js';
+import { writeMany } from '@/writers/fileWriter.js';
+import { createIdeDataZip } from '@/writers/zipWriter.js';
 
 // ---------------------------------------------------------------------------
 // Main

@@ -1,20 +1,13 @@
 /**
  * PSJ Command collector.
- *
- * Bun changes:
- *   - readdir replaced with Bun.readdir() (Bun ≥1.1 native, returns string[]).
- *   - stat() kept from node:fs/promises — needed for isDirectory() detection;
- *     no Bun-native equivalent for directory checking yet.
- *   - walk() now fans out entries concurrently with Promise.all.
- *   - readLines() already uses Bun.file() (see utils.ts).
  */
 
-import { stat } from 'node:fs/promises';
+import { readdir, stat } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 
-import type { PsjCommand } from '../types';
+import type { PsjCommand } from '@/types';
 
-import { readLines } from '../utils';
+import { readLines } from '@/utils';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -53,7 +46,7 @@ export async function collectPsjCommands(macroRoot: string): Promise<PsjCommand[
 async function walk(baseRoot: string, dir: string, out: PsjCommand[]): Promise<void> {
     let entries: string[];
     try {
-        entries = await Bun.readdir(dir);
+        entries = await readdir(dir);
     } catch {
         return;
     }

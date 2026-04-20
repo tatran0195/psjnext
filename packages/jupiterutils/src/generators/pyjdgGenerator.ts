@@ -5,16 +5,16 @@
  * plus the spin / size_behavior enums.
  */
 
-import type { Config, UtilFunction } from '../types';
+import type { Config, UtilFunction } from '@/types';
 
-import { readDocSection } from '../collectors/docReader';
+import { readDocSection } from '@/collectors/docReader';
 import {
     buildCursorExpansion,
     fmtArgs,
     fmtPlaceholders,
     parseSignature,
     renderCursorSetup,
-} from '../utils';
+} from '@/utils';
 
 // ---------------------------------------------------------------------------
 // Public API

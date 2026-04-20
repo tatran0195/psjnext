@@ -10,7 +10,7 @@
  * Throws a descriptive error if required variables are missing.
  */
 
-import type { Config } from './types/index.js';
+import type { Config } from '@/types/index.js';
 
 // ---------------------------------------------------------------------------
 // Public API

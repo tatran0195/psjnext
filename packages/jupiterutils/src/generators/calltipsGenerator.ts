@@ -1,13 +1,10 @@
 /**
  * IDE calltip .dat file generators.
- *
- * Bun changes:
- *   - `readFile` from node:fs/promises replaced with `Bun.file().text()`.
  */
 
-import type { Config, PsjCommand, UtilFunction } from '../types';
+import type { Config, PsjCommand, UtilFunction } from '@/types';
 
-import { readDocSection } from '../collectors/docReader';
+import { readDocSection } from '@/collectors/docReader';
 
 const SEPARATOR_CMD = '--------------------------------------------------------------------------';
 const SEPARATOR_DLG = '------------------------------------------------------------';

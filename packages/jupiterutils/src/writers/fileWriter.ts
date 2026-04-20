@@ -1,12 +1,5 @@
 /**
  * File writer utilities.
- *
- * Bun changes:
- *   - Replaced writeFile + rename + randomBytes with Bun.write():
- *     Bun.write() is atomic on POSIX (internal tmp+rename) and handles
- *     encoding natively — no node:crypto needed.
- *   - mkdir kept from node:fs/promises: Bun has no first-class Bun.mkdir()
- *     yet, but its node:fs/promises implementation is fully supported.
  */
 
 import { mkdir } from 'node:fs/promises';

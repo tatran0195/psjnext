@@ -1,16 +1,12 @@
 /**
  * Entity type collector.
- *
- * Bun changes:
- *   - `access()` existence check replaced with `Bun.file().exists()`.
- *   - readLines() already uses Bun.file() (see utils.ts).
  */
 
 import { join } from 'node:path';
 
-import type { EntityEntry } from '../types';
+import type { EntityEntry } from '@/types';
 
-import { readLines } from '../utils';
+import { readLines } from '@/utils';
 
 // ---------------------------------------------------------------------------
 // Public API

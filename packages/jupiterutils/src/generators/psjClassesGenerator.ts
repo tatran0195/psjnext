@@ -6,17 +6,17 @@
  *   - Branch classes:  Python classes that expose sub-namespace instances
  */
 
-import type { ClassTree, Config } from '../types';
+import type { ClassTree, Config } from '@/types';
 
-import { readDocSection } from '../collectors/docReader';
+import { readDocSection } from '@/collectors/docReader';
+import { getChild, ownMethods, subKeys } from '@/generators/classTreeBuilder';
 import {
     buildCursorExpansion,
     fmtArgs,
     fmtPlaceholders,
     parseSignature,
     renderCursorSetup,
-} from '../utils';
-import { getChild, ownMethods, subKeys } from './classTreeBuilder';
+} from '@/utils';
 
 // ---------------------------------------------------------------------------
 // Header

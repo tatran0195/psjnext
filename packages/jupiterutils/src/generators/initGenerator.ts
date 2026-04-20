@@ -5,9 +5,9 @@
  * top-level classes from PSJ_Classes.py plus the standard utility modules.
  */
 
-import type { ClassTree } from '../types';
+import type { ClassTree } from '@/types';
 
-import { subKeys } from './classTreeBuilder';
+import { subKeys } from '@/generators/classTreeBuilder';
 
 // ---------------------------------------------------------------------------
 // Public API

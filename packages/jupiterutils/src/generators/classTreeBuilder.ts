@@ -9,7 +9,7 @@
  * stored under the special key `"own"` of the deepest branch node.
  */
 
-import type { ClassTree, PsjCommand } from '../types';
+import type { ClassTree, PsjCommand } from '@/types';
 
 // ---------------------------------------------------------------------------
 // Public API

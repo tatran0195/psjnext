@@ -1,17 +1,12 @@
 /**
  * Markdown documentation reader.
- *
- * Bun changes:
- *   - `access()` existence check replaced with `Bun.file().exists()` —
- *     the idiomatic Bun API; avoids importing from node:fs/promises.
- *   - readLines() already uses Bun.file() (see utils.ts).
  */
 
 import { extname, join } from 'node:path';
 
-import type { Config } from '../types';
+import type { Config } from '@/types';
 
-import { readLines } from '../utils';
+import { readLines } from '@/utils';
 
 // ---------------------------------------------------------------------------
 // Public API

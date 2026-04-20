@@ -1,17 +1,13 @@
 /**
  * Utility / GUI function collector.
- *
- * Bun changes:
- *   - readLines() already uses Bun.file() (see utils.ts).
- *   - readdir replaced with Bun.readdir() (Bun ≥1.1 native, returns string[]).
- *   - File reads are parallelised with Promise.all.
  */
 
+import { readdir } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 
-import type { UtilFunction } from '../types';
+import type { UtilFunction } from '@/types';
 
-import { readLines } from '../utils';
+import { readLines } from '@/utils';
 
 // ---------------------------------------------------------------------------
 // Regex helpers (compiled once)
@@ -46,8 +42,7 @@ export async function collectUtilFunctions(
 ): Promise<UtilFunction[]> {
     let entries: string[];
     try {
-        // Bun.readdir() is the native API (Bun ≥1.1); returns string[]
-        entries = await Bun.readdir(docsDir);
+        entries = await readdir(docsDir);
     } catch {
         return [];
     }
