@@ -1,12 +1,12 @@
 export type VersionMeta = {
     label: string;
     frozen: boolean;
-    sourceType: 'local' | 'github';
+    sourceType: 'local' | 'git';
 };
 
 export const VERSION_META = {
     '5.1.0': { label: '5.1.0', frozen: false, sourceType: 'local' },
-    '5.0.1': { label: '5.0.1', frozen: true, sourceType: 'github' },
+    '5.0.1': { label: '5.0.1', frozen: true, sourceType: 'git' },
 } satisfies Record<string, VersionMeta>;
 
 export type CanonicalVersion = keyof typeof VERSION_META;

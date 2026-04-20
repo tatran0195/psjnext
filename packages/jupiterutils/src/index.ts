@@ -52,6 +52,7 @@ import { buildClassTree } from '@/generators/classTreeBuilder.js';
 import { generateInit } from '@/generators/initGenerator.js';
 import { generatePsjClasses } from '@/generators/psjClassesGenerator.js';
 import { generatePyjdg } from '@/generators/pyjdgGenerator.js';
+import { generateTmLanguage } from '@/generators/tmlanguageGenerator.js';
 import { ENTITY_TYPES, generateUtility } from '@/generators/utilityGenerator.js';
 import { logger } from '@/logger.js';
 import { writeMany } from '@/writers/fileWriter.js';
@@ -140,7 +141,7 @@ async function main(): Promise<void> {
     // ── 5. Generate IDE calltip .dat files → IDEData/ ────────────────────────
 
     logger.step('Generating IDE calltip files…');
-    const [cmdCalltips, utilCalltips, guiTooltip] = await Promise.all([
+    const [cmdCalltips, utilCalltips, guiTooltip, tmLanguage] = await Promise.all([
         Promise.resolve(generateCommandCalltips(psjCommands)),
         generateUtilityCalltips({
             utilFunctions,
@@ -148,12 +149,14 @@ async function main(): Promise<void> {
             config,
         }),
         generateGuiTooltip(dlgFunctions, config),
+        Promise.resolve(generateTmLanguage(classTree)),
     ]);
 
     await writeMany([
         [join(ideDataDir, 'PSJCommandCalltips.dat'), cmdCalltips],
         [join(ideDataDir, 'PSJUtilityCalltips.dat'), utilCalltips],
         [join(ideDataDir, 'PSJGuiTooltip.dat'), guiTooltip],
+        [join(ideDataDir, 'psj.tmLanguage.json'), tmLanguage],
     ]);
     logger.ok('IDE calltip files written to IDEData/');
 
