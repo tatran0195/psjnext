@@ -7,6 +7,7 @@
         "CHANGELOG.md",
         "pnpm-lock.yaml",
         ".github/**/*.md",
+        "apps/docs/content/**/*.md",
 
         "packages/create-app/versions.json",
 

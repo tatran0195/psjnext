@@ -54,5 +54,6 @@
         "source.organizeImports": "explicit",
         "source.fixAll.oxc": "explicit",
         "source.fixAll.oxlint": "explicit"
-    }
+    },
+    "jupiterutils.pkgDir": "D:\\01_Development\\_01_Work\\_01_Active\\psjdocs-2\\packages\\jupiterutils\\jupiterutils"
 }
