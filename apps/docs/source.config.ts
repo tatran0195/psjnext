@@ -21,40 +21,6 @@ export const docs = defineDocs({
     },
 });
 
-export const apiDocsLatest = defineDocs({
-    dir: 'content/api/5.1.0',
-    docs: {
-        schema: DocsSchema,
-        postprocess: {
-            includeProcessedMarkdown: true,
-            extractLinkReferences: true,
-            valueToExport: ['elementIds'],
-        },
-        async: true,
-        mdxOptions,
-    },
-    meta: {
-        schema: MetaSchema,
-    },
-});
-
-export const apiDocs501 = defineDocs({
-    dir: 'content/api/5.0.1',
-    docs: {
-        schema: DocsSchema,
-        postprocess: {
-            includeProcessedMarkdown: true,
-            extractLinkReferences: true,
-            valueToExport: ['elementIds'],
-        },
-        async: true,
-        mdxOptions,
-    },
-    meta: {
-        schema: MetaSchema,
-    },
-});
-
 export default defineConfig({
     plugins: [
         jsonSchema({
@@ -66,4 +32,10 @@ export default defineConfig({
         remarkPlugins: [],
         rehypePlugins: [],
     },
+    // SYNC-VERSIONS:START
+    workspaces: {
+        '5.2.0': { dir: 'content/api/5.2.0', config: await import('./content/api/5.2.0/source.config.ts') },
+        '5.1.0': { dir: 'content/api/5.1.0', config: await import('./content/api/5.1.0/source.config.ts') },
+    },
+    // SYNC-VERSIONS:END
 });

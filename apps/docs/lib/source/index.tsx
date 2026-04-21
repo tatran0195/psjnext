@@ -1,8 +1,7 @@
-import { apiDocs501, apiDocsLatest, docs } from 'collections/server';
+import { i18n } from '@/lib/i18n';
+import { docs } from 'collections/server';
 import { type InferMetaType, type InferPageType, loader } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
-
-import { i18n } from '@/lib/i18n';
 
 import { customIconsPlugin } from './plugins/custom-icons-plugin';
 import { pageTreeCodeTitlesPlugin } from './plugins/page-tree-code-titles-plugin';
@@ -33,18 +32,18 @@ export const docsSource = loader({
 export type Page = InferPageType<typeof docsSource>;
 export type Meta = InferMetaType<typeof docsSource>;
 
+// SYNC-VERSIONS:START
+import * as apiV5_1_0 from 'collections/5.1.0/server';
+import * as apiV5_2_0 from 'collections/5.2.0/server';
+type VersionModule = { docs: { toFumadocsSource: () => Parameters<typeof loader>[0]['source'] } };
+const versionModules: Record<string, VersionModule> = {
+    '5.2.0': apiV5_2_0 as unknown as VersionModule,
+    '5.1.0': apiV5_1_0 as unknown as VersionModule,
+};
 export const apiSources = {
-    '5.1.0': loader({
-        baseUrl: '/api/5.1.0',
-        i18n,
-        source: apiDocsLatest.toFumadocsSource(),
-    }),
-    '5.0.1': loader({
-        baseUrl: '/api/5.0.1',
-        i18n,
-        source: apiDocs501.toFumadocsSource(),
-    }),
+    '5.2.0': loader({ baseUrl: '/api/5.2.0', i18n, source: versionModules['5.2.0'].docs.toFumadocsSource() }),
+    '5.1.0': loader({ baseUrl: '/api/5.1.0', i18n, source: versionModules['5.1.0'].docs.toFumadocsSource() }),
 } as const;
-
+// SYNC-VERSIONS:END
 export type ApiVersion = keyof typeof apiSources;
 export type ApiPage = InferPageType<(typeof apiSources)[ApiVersion]>;

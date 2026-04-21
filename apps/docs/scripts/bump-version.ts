@@ -6,7 +6,7 @@
  */
 
 import { existsSync } from 'node:fs';
-import { cp, readFile, writeFile } from 'node:fs/promises';
+import { cp } from 'node:fs/promises';
 import path from 'node:path';
 
 const [oldVersion, newVersion] = process.argv.slice(2);
@@ -141,54 +141,13 @@ async function main() {
         stderr: 'inherit',
     }).exited;
 
-    console.log(`\n--- Step 6: Auto-updating configurations ---`);
-    const versionsPath = path.join(docsRoot, 'lib', 'versions.ts');
-    if (existsSync(versionsPath)) {
-        let versionsContent = await readFile(versionsPath, 'utf8');
-        const oldVersionRegex = new RegExp(`'${oldVersion}':\\s*{[^}]*}`);
-        versionsContent = versionsContent.replace(
-            oldVersionRegex,
-            `'${oldVersion}': { label: '${oldVersion}', frozen: true, sourceType: 'git' }`,
-        );
-        versionsContent = versionsContent.replace(
-            `'${oldVersion}':`,
-            `'${newVersion}': { label: '${newVersion}', frozen: false, sourceType: 'local' },\n    '${oldVersion}':`,
-        );
-        await writeFile(versionsPath, versionsContent);
-        console.log('✓ Updated lib/versions.ts');
-    }
-
-    const sourceConfigPath = path.join(docsRoot, 'source.config.ts');
-    if (existsSync(sourceConfigPath)) {
-        let sourceConfigContent = await readFile(sourceConfigPath, 'utf8');
-        sourceConfigContent = sourceConfigContent.replace(
-            /export const apiDocsLatest = defineDocs\(\{\s*dir:\s*['"]content\/api\/[^'"]+['"]/,
-            `export const apiDocsLatest = defineDocs({\n    dir: 'content/api/${newVersion}'`,
-        );
-        const safeOldName = oldVersion.replace(/[^a-zA-Z0-9]/g, '');
-        const legacyBlock = `export const apiDocs${safeOldName} = defineDocs({
-    dir: 'content/api/${oldVersion}',
-    docs: {
-        schema: DocsSchema,
-        postprocess: {
-            includeProcessedMarkdown: true,
-            extractLinkReferences: true,
-            valueToExport: ['elementIds'],
-        },
-        async: true,
-        mdxOptions,
-    },
-    meta: {
-        schema: MetaSchema,
-    },
-});\n\n`;
-        sourceConfigContent = sourceConfigContent.replace(
-            /export default defineConfig/,
-            `${legacyBlock}export default defineConfig`,
-        );
-        await writeFile(sourceConfigPath, sourceConfigContent);
-        console.log('✓ Updated source.config.ts');
-    }
+    console.log(`\n--- Step 6: Syncing all version configs from .gitmodules ---`);
+    await Bun.spawn(['bun', 'scripts/sync-versions.ts'], {
+        cwd: docsRoot,
+        stdout: 'inherit',
+        stderr: 'inherit',
+    }).exited;
+    console.log('✓ sync-versions.ts updated lib/versions.ts, source.config.ts, lib/source/index.tsx');
 
     console.log(`\n======================================================`);
     console.log(`✅ Bump Success!`);

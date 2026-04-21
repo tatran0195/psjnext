@@ -2,6 +2,7 @@
     "extends": "tsconfig/nextjs.json",
     "compilerOptions": {
         "types": ["bun-types"],
+        "allowImportingTsExtensions": true,
         "paths": {
             "@/*": ["./*"],
             "collections/*": ["./.source/*"]
