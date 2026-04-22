@@ -1,0 +1,49 @@
+{
+    "name": "psjd",
+    "version": "1.0.0",
+    "description": "Fumadocs integration for psjd v2 — PSJ/Jupiter SDK documentation",
+    "files": [
+        "dist"
+    ],
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        },
+        "./server": {
+            "import": "./dist/server.js",
+            "types": "./dist/server.d.ts"
+        },
+        "./ui": {
+            "import": "./dist/ui/index.js",
+            "types": "./dist/ui/index.d.ts"
+        },
+        "./ui/styles.css": "./dist/ui/styles.css"
+    },
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "test:coverage": "vitest run --coverage",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "yaml": "^2.4.5"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@types/react": "^18.0.0",
+        "@types/react-dom": "^18.0.0",
+        "@vitest/coverage-v8": "^2.1.9",
+        "tsup": "^8.5.1",
+        "tsx": "^4.21.0",
+        "typescript": "^5.9.3",
+        "vitest": "^2.1.9"
+    },
+    "peerDependencies": {
+        "react": ">=18.0.0",
+        "react-dom": ">=18.0.0"
+    }
+}

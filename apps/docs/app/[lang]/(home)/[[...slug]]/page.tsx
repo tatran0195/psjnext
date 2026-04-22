@@ -28,7 +28,13 @@ import {
 } from '@/layouts/docs/page';
 import { DocsPager } from '@/layouts/shared/docs-pager';
 import { createMetadata, getPageImage } from '@/lib/metadata';
+import { psjd } from '@/lib/psjd';
 import { docsSource } from '@/lib/source';
+import { resolveItem } from 'psjd';
+import { CallablePage, en, ja, type PsjdLocale } from 'psjd/ui';
+
+const localeMap: Record<string, PsjdLocale> = { en, ja };
+
 
 export const revalidate = false;
 // Always allow dynamic params so all routes resolve on-demand.
@@ -43,12 +49,31 @@ export default async function Page(props: { params: Promise<{ slug?: string[]; l
     const page = docsSource.getPage(params.slug, params.lang);
     if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
 
-    if (page.data.type === 'jcall') {
-        const { JCallPage } = await import('jcall/ui');
+    if (page.data.type === 'psjd') {
+        const { psjdId, version } = page.data as unknown as { psjdId: string; version: string };
+
+        // Load the SDK for this locale (cached by module-level psjd instance)
+        const { createSDK } = await import('psjd/server');
+        const sdk = await createSDK(
+            psjd._options.input,
+            psjd._options.baseDir,
+            { locale: params.lang, strict: psjd._options.strict },
+        );
+
+        // Pre-resolve all versions so the VersionPicker can switch client-side
+        const versionItems = Object.fromEntries(
+            sdk.versionIds.map((v) => [v, resolveItem(sdk, psjdId, v)])
+        );
+        const item = versionItems[version] ?? resolveItem(sdk, psjdId, version);
+
         return (
-            <DocsPage full title={page.data.title}>
+            <DocsPage full>
                 <DocsBody>
-                    <JCallPage item={page.data.getItem()} />
+                    <CallablePage
+                        item={item}
+                        versionItems={versionItems}
+                        locale={localeMap[params.lang] ?? en}
+                    />
                 </DocsBody>
             </DocsPage>
         );

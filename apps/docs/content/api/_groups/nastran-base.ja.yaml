@@ -1,0 +1,26 @@
+psjd: '2.0'
+kind: sidecar
+id: nastran-base
+locale: ja
+description: すべての Nastran 解析エクスポートコマンドに共通のパラメータ。
+params:
+    - name: strName
+      description: Nastran 解析のジョブ名。
+    - name: strDescription
+      description: Nastran 解析ジョブの説明。
+    - name: crlTargets
+      description: 対象パーツのリスト。
+    - name: nastranAnalysis
+      description: Nastran 解析入力パラメータ。
+    - name: bDummyPropAutoAssign
+      description: 未割り当てパーツにダミープロパティを自動作成します。
+    - name: iDummyPropMaterialID
+      description: ダミープロパティ割り当てに使用するマテリアル ID。
+    - name: crEdit
+      description: 変更対象の既存 Nastran ジョブ。None の場合は新規作成。
+    - name: strPath
+      description: BDF ファイルのエクスポートパス。
+    - name: iModelCheckAnswer
+      description: ダミープロパティのモデルチェック (0=無効, 1=有効)。
+    - name: iDeleteSlaveNodesAnswer
+      description: スレーブノード削除チェック (0=無効, 1=有効)。

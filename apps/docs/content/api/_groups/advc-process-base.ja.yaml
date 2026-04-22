@@ -1,0 +1,21 @@
+psjd: '2.0'
+kind: sidecar
+id: advc-process-base
+locale: ja
+description: すべての ADVC プロセスコマンドに共通のコアパラメータ。
+params:
+    - name: strName
+      description: プロセス名。
+    - name: crEdit
+      description: 変更対象の既存プロセス。None の場合は新規作成。
+    - name: listLoadNode
+      description: 荷重が割り当てられたノード。
+    - name: ilOutputParamList
+      description: 出力リクエストリスト。
+    - name: iRefType
+      description: 参照結果タイプ。
+      enum_values:
+          - id: 0
+            label: 温度荷重
+          - id: 1
+            label: 応力

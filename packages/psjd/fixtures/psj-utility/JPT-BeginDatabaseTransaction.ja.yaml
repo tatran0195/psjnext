@@ -1,0 +1,20 @@
+psjd: '2.0'
+kind: sidecar
+id: JPT-BeginDatabaseTransaction
+locale: ja
+title: JPT.BeginDatabaseTransaction()
+description: >
+    バッチ操作中の Jupiter のパフォーマンスを向上させるため、
+    画面アニメーション、画面更新、ステータスバー更新を無効にします。
+callouts:
+    - index: 0
+      text: >
+          処理終了時に必ず JPT.EndDatabaseTransaction() を呼び出して
+          Jupiter を通常の状態に戻してください。
+params:
+    - name: transactionName
+      description: 元に戻す/やり直しメニューに表示されるトランザクション名。
+returns: {}
+see_also:
+    - $ref: psj-utility/JPT-EndDatabaseTransaction
+      label: JPT.EndDatabaseTransaction()

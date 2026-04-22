@@ -1,0 +1,27 @@
+psjd: '2.0'
+id: JPT-BeginDatabaseTransaction
+title: JPT.BeginDatabaseTransaction()
+domain: psj-utility
+group: performance
+namespace: JPT
+description: >
+    Disable screen animation, screen update, and status bar updates to improve
+    Jupiter's performance during batch operations.
+version_introduced: '5.0.0'
+syntax: 'JPT.BeginDatabaseTransaction("transactionName")'
+callouts:
+    - level: warn
+      text: >
+          JPT.EndDatabaseTransaction() must be called at the end of the process
+          to return Jupiter to the normal state.
+params:
+    - name: transactionName
+      type: String
+      required: true
+      default: ~
+      description: Transaction name displayed in the Undo/Redo menu.
+returns:
+    kind: void
+see_also:
+    - $ref: psj-utility/JPT-EndDatabaseTransaction
+      label: JPT.EndDatabaseTransaction()

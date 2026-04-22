@@ -1,0 +1,25 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "outputs": ["dist/**"],
+      "inputs": ["src/**", "tsup.config.ts", "tsconfig.json", "package.json"]
+    },
+    "test": {
+      "inputs": ["src/**", "fixtures/**", "vitest.config.ts"],
+      "outputs": ["coverage/**"]
+    },
+    "test:coverage": {
+      "inputs": ["src/**", "fixtures/**", "vitest.config.ts"],
+      "outputs": ["coverage/**"]
+    },
+    "typecheck": {
+      "inputs": ["src/**", "tsconfig.json"],
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

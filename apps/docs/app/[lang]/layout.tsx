@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 
 import { NextProvider } from 'fumadocs-core/framework/next';
@@ -7,9 +6,10 @@ import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
 
 import '@/styles/global.css';
 import { Geist, Geist_Mono } from 'next/font/google';
+import 'psjd/ui/styles.css';
 
 import { baseUrl, createMetadata } from '@/lib/metadata';
-import { apiSources, ApiVersion, docsSource } from '@/lib/source';
+import { docsSource } from '@/lib/source';
 
 import { Provider } from '../provider';
 import { Body } from './layout.client';
@@ -44,11 +44,9 @@ export default async function RootLayout(props: {
     children: ReactNode;
     params: Promise<{ lang: string; version?: string }>;
 }) {
-    const { lang, version } = await props.params;
-    const source = version ? apiSources[version as ApiVersion] : docsSource;
-    if (!source) notFound();
+    const { lang } = await props.params;
 
-    const tree = source.getPageTree(lang);
+    const tree = docsSource.getPageTree(lang);
 
     return (
         <html

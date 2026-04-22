@@ -1,2 +1,0 @@
-export { JCallPage } from './JCallPage';
-

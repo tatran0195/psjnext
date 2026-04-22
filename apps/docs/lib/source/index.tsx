@@ -1,11 +1,11 @@
-import { apiDocs501, apiDocsLatest, docs } from 'collections/server';
+import { docs } from 'collections/server';
 import { type InferMetaType, type InferPageType, loader, multiple } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 
 import { i18n } from '@/lib/i18n';
-import { jcallPlugin, jcallSource } from 'jcall';
+import { psjdPlugin, psjdSource } from 'psjd/server';
 
-import { jcall } from '@/lib/jcall';
+import { psjd } from '../psjd';
 import { customIconsPlugin } from './plugins/custom-icons-plugin';
 import { pageTreeCodeTitlesPlugin } from './plugins/page-tree-code-titles-plugin';
 import { pageTreeFoldersPlugin } from './plugins/page-tree-folders-plugin';
@@ -21,9 +21,14 @@ const TAG_STYLES: Record<string, string> = {
 
 export const docsSource = loader(multiple({
     docs: docs.toFumadocsSource(),
-    jcall: await jcallSource(jcall, {
-        baseDir: 'en/jcall',
-        meta: true,
+    psjd: await psjdSource(psjd, {
+        /**
+         * Virtual path prefix for generated pages.
+         * Pages will be at /docs/api/<namespace>/<item>
+         */
+        baseDir: 'api',
+        /** Sidebar grouping strategy */
+        groupBy: 'namespace',
     }),
 }), {
     i18n,
@@ -34,25 +39,9 @@ export const docsSource = loader(multiple({
         pageTreeCodeTitlesPlugin(),
         pageTreeFoldersPlugin(),
         pageTreeTagsPlugin(TAG_STYLES),
-        jcallPlugin()
+        psjdPlugin()
     ],
 });
 
 export type Page = InferPageType<typeof docsSource>;
 export type Meta = InferMetaType<typeof docsSource>;
-
-export const apiSources = {
-    '5.1.0': loader({
-        baseUrl: '/api/5.1.0',
-        i18n,
-        source: apiDocsLatest.toFumadocsSource(),
-    }),
-    '5.0.1': loader({
-        baseUrl: '/api/5.0.1',
-        i18n,
-        source: apiDocs501.toFumadocsSource(),
-    }),
-} as const;
-
-export type ApiVersion = keyof typeof apiSources;
-export type ApiPage = InferPageType<(typeof apiSources)[ApiVersion]>;

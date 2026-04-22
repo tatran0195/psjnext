@@ -1,4 +1,4 @@
-# JCALL v2 — Unified Callable Format
+# psjd v2 — Unified Callable Format
 # Efficient at scale: param inheritance + delta versioning + shared param groups
 
 ---
@@ -26,7 +26,7 @@ A `changes` block inside each version captures only the delta from the prior ver
 Three file kinds:
 
 ```
-sdk.jcall.yaml          ← root manifest (one file)
+sdk.psjd.yaml          ← root manifest (one file)
 _groups/<id>.yaml       ← reusable param groups (many files, shared library)
 <domain>/<id>.yaml      ← callable items (one file per unique callable)
 ```
@@ -38,10 +38,10 @@ at read time.
 ---
 ---
 
-## 1. Root manifest  `sdk.jcall.yaml`
+## 1. Root manifest  `sdk.psjd.yaml`
 
 ```yaml
-jcall: "2.0"
+psjd: "2.0"
 
 sdk:
   name: "Jupiter CAE Desktop Platform SDK"
@@ -84,7 +84,7 @@ it is only a reusable block of params.
 
 ```yaml
 # _groups/nastran-base.yaml
-jcall: "2.0"
+psjd: "2.0"
 kind: param_group
 id: nastran-base
 description: >
@@ -154,7 +154,7 @@ params:
 
 ```yaml
 # _groups/advc-process-base.yaml
-jcall: "2.0"
+psjd: "2.0"
 kind: param_group
 id: advc-process-base
 description: >
@@ -225,7 +225,7 @@ params:
 ```yaml
 # _groups/advc-process-struct.yaml
 # Extends advc-process-base with structural-analysis-specific params
-jcall: "2.0"
+psjd: "2.0"
 kind: param_group
 id: advc-process-struct
 extends: advc-process-base    # ← groups can extend other groups
@@ -319,7 +319,7 @@ Seven Nastran commands are fully described by their group. Their item file is ti
 
 ```yaml
 # psj-command/Analysis-Nastran-LinearStatic.yaml
-jcall: "2.0"
+psjd: "2.0"
 id: Analysis-Nastran-LinearStatic
 title: Analysis.Nastran.LinearStatic()
 domain: psj-command
@@ -341,7 +341,7 @@ returns:
 
 ```yaml
 # psj-command/Analysis-Nastran-NormalModes.yaml
-jcall: "2.0"
+psjd: "2.0"
 id: Analysis-Nastran-NormalModes
 title: Analysis.Nastran.NormalModes()
 domain: psj-command
@@ -368,7 +368,7 @@ live in one place (`nastran-base.yaml`) and are referenced, never repeated.
 
 ```yaml
 # psj-command/Analysis-Nastran-DirectFrequencyResponse.yaml
-jcall: "2.0"
+psjd: "2.0"
 id: Analysis-Nastran-DirectFrequencyResponse
 title: Analysis.Nastran.DirectFrequencyResponse()
 domain: psj-command
@@ -466,7 +466,7 @@ returns:
 
 ```yaml
 # psj-command/Analysis-ADVC-MakeProcess-Static.yaml
-jcall: "2.0"
+psjd: "2.0"
 id: Analysis-ADVC-MakeProcess-Static
 title: Analysis.ADVC.MakeProcess.Static()
 domain: psj-command
@@ -489,7 +489,7 @@ returns:
 
 ```yaml
 # psj-command/Analysis-ADVC-MakeProcess-Dynamic.yaml
-jcall: "2.0"
+psjd: "2.0"
 id: Analysis-ADVC-MakeProcess-Dynamic
 title: Analysis.ADVC.MakeProcess.Dynamic()
 domain: psj-command
@@ -525,7 +525,7 @@ returns:
 
 ```yaml
 # psj-command/Analysis-ADVC-MakeProcess-EigenValue.yaml
-jcall: "2.0"
+psjd: "2.0"
 id: Analysis-ADVC-MakeProcess-EigenValue
 title: Analysis.ADVC.MakeProcess.EigenValue()
 domain: psj-command
@@ -563,7 +563,7 @@ returns:
 
 ```yaml
 # macro/AdvcStaticProcess.yaml
-jcall: "2.0"
+psjd: "2.0"
 id: AdvcStaticProcess
 title: AdvcStaticProcess()
 domain: macro
@@ -699,7 +699,7 @@ examples:
 
 ```yaml
 # psj-utility/JPT-BeginDatabaseTransaction.yaml
-jcall: "2.0"
+psjd: "2.0"
 id: JPT-BeginDatabaseTransaction
 title: JPT.BeginDatabaseTransaction()
 domain: psj-utility
@@ -745,7 +745,7 @@ by applying deltas forward from `version_introduced`.
 
 ```yaml
 # psj-command/Analysis-ADVC-Structure.yaml  (excerpt showing delta versioning)
-jcall: "2.0"
+psjd: "2.0"
 id: Analysis-ADVC-Structure
 title: Analysis.ADVC.Structure()
 domain: psj-command
@@ -892,7 +892,7 @@ function resolve(item, version):
 = 400,000 total param definitions stored
 ```
 
-### With JCALL v2:
+### With psjd v2:
 
 ```
 1000 item files  (params written once, in the base version)
@@ -911,7 +911,7 @@ The Nastran example alone: 7 commands × 10 params = 70 definitions → 10 (in g
 ### Item file
 
 ```yaml
-jcall: "2.0"                 # required, format version
+psjd: "2.0"                 # required, format version
 id: string                   # required, slug unique within SDK
 title: string                # required, display call signature
 domain: macro | psj-command | psj-utility | psj-gui   # required
@@ -1037,7 +1037,7 @@ code: string
 ### ParamGroup file
 
 ```yaml
-jcall: "2.0"
+psjd: "2.0"
 kind: param_group
 id: string
 description: string?
