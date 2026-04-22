@@ -41,21 +41,18 @@ const IS_PROD = process.env.NODE_ENV === 'production';
 export default async function Page(props: { params: Promise<{ slug?: string[]; lang: string }> }) {
     const params = await props.params;
     const page = docsSource.getPage(params.slug, params.lang);
-
     if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
 
-    // if (page.data.type === 'openapi') {
-    //     const { APIPage } = await import('@/components/api-page');
-    //     return (
-    //         <DocsPage full>
-    //             <h1 className="text-[1.75em] font-semibold">{page.data.title}</h1>
-
-    //             <DocsBody>
-    //                 <APIPage {...page.data.getAPIPageProps()} />
-    //             </DocsBody>
-    //         </DocsPage>
-    //     );
-    // }
+    if (page.data.type === 'jcall') {
+        const { JCallPage } = await import('jcall/ui');
+        return (
+            <DocsPage full title={page.data.title}>
+                <DocsBody>
+                    <JCallPage item={page.data.getItem()} />
+                </DocsBody>
+            </DocsPage>
+        );
+    }
 
     const { body: Mdx, toc, lastModified } = await page.data.load();
     const { ribbon } = page.data;

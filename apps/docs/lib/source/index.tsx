@@ -1,9 +1,11 @@
 import { apiDocs501, apiDocsLatest, docs } from 'collections/server';
-import { type InferMetaType, type InferPageType, loader } from 'fumadocs-core/source';
+import { type InferMetaType, type InferPageType, loader, multiple } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 
 import { i18n } from '@/lib/i18n';
+import { jcallPlugin, jcallSource } from 'jcall';
 
+import { jcall } from '@/lib/jcall';
 import { customIconsPlugin } from './plugins/custom-icons-plugin';
 import { pageTreeCodeTitlesPlugin } from './plugins/page-tree-code-titles-plugin';
 import { pageTreeFoldersPlugin } from './plugins/page-tree-folders-plugin';
@@ -17,8 +19,13 @@ const TAG_STYLES: Record<string, string> = {
     Deprecated: 'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300',
 };
 
-export const docsSource = loader({
-    source: docs.toFumadocsSource(),
+export const docsSource = loader(multiple({
+    docs: docs.toFumadocsSource(),
+    jcall: await jcallSource(jcall, {
+        baseDir: 'en/jcall',
+        meta: true,
+    }),
+}), {
     i18n,
     baseUrl: '/',
     plugins: [
@@ -27,6 +34,7 @@ export const docsSource = loader({
         pageTreeCodeTitlesPlugin(),
         pageTreeFoldersPlugin(),
         pageTreeTagsPlugin(TAG_STYLES),
+        jcallPlugin()
     ],
 });
 

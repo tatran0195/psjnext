@@ -40,6 +40,7 @@
         "fumadocs-typescript": "5.2.1",
         "fumadocs-ui": "16.7.10",
         "hast-util-to-jsx-runtime": "^2.3.6",
+        "jcall": "workspace:*",
         "katex": "0.16.43",
         "lucide-react": "^1.7.0",
         "mermaid": "^11.13.0",
