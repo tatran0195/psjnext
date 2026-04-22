@@ -1,0 +1,18 @@
+jcall: '2.0'
+id: Analysis-Nastran-LinearStatic
+title: Analysis.Nastran.LinearStatic()
+domain: psj-command
+group: Nastran
+namespace: Analysis.Nastran
+ribbon: Analysis > Nastran > LinearStatic
+description: Export the Nastran BDF input file for Structure Linear Static analysis (SOL 101).
+version_introduced: '5.0.0'
+macro_link: NastranJob
+
+params:
+    - $group: nastran-base
+
+returns:
+    kind: typed
+    type: Cursor
+    description: The created Nastran job.
