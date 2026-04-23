@@ -11,7 +11,7 @@ Select face(s) then it results the Adjacent faces with the given constrainsts
 
 ## Syntax
 
-```psj
+```py
 ACM_ShowAdjacent(double stopAngle,bool IncludeStopFace,int Layer,bool IsPreview,
     bool bStopByNonma, bool bShowPartOnly,cursor[] startFaceCursor, cursor[] stopFaceCursor)
 ```
@@ -57,6 +57,6 @@ List of Stop face cursor([11:Elem ID])
 
 ## Sample Code
 
-```psj
+```py
 ACM_ShowAdjacent(0, 0, 100, 0, 0, 0, [6:22], [])
 ```

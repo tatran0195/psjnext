@@ -12,7 +12,7 @@ Display the deformation plot graph.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FFTAnalysis.CirclePlot(...)
 ```
 

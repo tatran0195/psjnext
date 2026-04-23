@@ -37,7 +37,7 @@ This is an instance of a DMaterialLib class, represents library material item in
     - For the non-unit material property, the unit should be set by None, -1, or set it empty.
 - The default value is -1.
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 mat0 = JPT.GetAllLibraryMaterials()[0]
 dict1 = mat0.dictMatProps
 list_keys=['Density', 'density', 'DENSITY']

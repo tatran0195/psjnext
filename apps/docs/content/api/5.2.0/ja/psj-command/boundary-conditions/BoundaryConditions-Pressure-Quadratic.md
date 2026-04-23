@@ -12,7 +12,7 @@ Create quadratic pressure.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Pressure.Quadratic(...)
 ```
 

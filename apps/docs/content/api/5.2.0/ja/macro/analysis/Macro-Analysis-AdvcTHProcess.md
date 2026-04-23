@@ -11,7 +11,7 @@ Create ADVC heat transfer transient process
 
 ## Syntax
 
-```psj
+```py
 AdvcTHProcess(string m_strName,int end_type,double max_time,double steady_rate,
     int fixed_or_auto,double max_change,double init_dt,int define_max_dt,double max_dt,
     int define_min_dt,double min_dt,double fixed_dt,int output_last,int output_interval,
@@ -194,7 +194,7 @@ output parameters
 
 ## Sample Code
 
-```psj
+```py
 AdvcTHProcess("Test",1,0.001,0.001,1,0.001,0.001,1,0.001,1,0.001,0.001,1,1,1,1,0.001,0.001,
     1,1,1,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,1,1,0.001,1,1:11,,,,)
 ```

@@ -13,7 +13,7 @@ All the parameters except for the setting and process indications are the same a
 
 ## Syntax
 
-```psj
+```py
 AbaqusStaticStep(string m_strName, string m_strDescription,	int m_bAutomatic, int m_maxInc, double m_initSize, double m_minSize, double m_maxSize,
 int m_Method, int m_MatrixStorage, int m_SolutionTech, int m_AllowedIters, double m_AdjustFactor, int m_MaxContactIter,  int m_Type, double m_dampingfactor,
 int m_bUseAdaptive, double m_maxRationofStrainEnergy, int m_bNlgeom, double m_TimePeriod, int m_bIncldHeatEffect, int m_ConvertDscntIter, int m_Ramp,
@@ -149,6 +149,6 @@ Indicate AbaqusStaticStep when edit it.
 
 ## Sample Code
 
-```psj
+```py
 JPT.Exec('AbaqusStaticStep("Step2", "", 1, 100, 1, 1e-05, 1, 0, 0, 0, 8, 1, 30, 0, 0.0002, 1, 0.05, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, [""], [], 0:0)')
 ```

@@ -26,7 +26,7 @@ To create a PSJMessageBox object, defines a variable with PSJMessageBox()
 
 ## Sample Code
 
-```psj {}
+```py {}
 from pyjdg import *
 
 def main():

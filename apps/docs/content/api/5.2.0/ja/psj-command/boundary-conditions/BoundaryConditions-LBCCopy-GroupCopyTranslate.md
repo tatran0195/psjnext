@@ -12,7 +12,7 @@ Copy a group translate.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.GroupCopyTranslate(...)
 ```
 

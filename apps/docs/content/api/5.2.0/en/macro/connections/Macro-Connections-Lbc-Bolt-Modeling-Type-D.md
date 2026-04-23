@@ -11,7 +11,7 @@ Create Lbc TypeD Bolt
 
 ## Syntax
 
-```psj
+```py
 Lbc_Bolt_Modeling_Type_D(cursor[] taEdgeTop, cursor[] taEdgeBot, string strMPCName, double dConnRadius, double dPlaneTol)
 ```
 
@@ -44,6 +44,6 @@ Plane Tolerance
 
 ## Sample Code
 
-```psj
+```py
 Lbc_Bolt_Modeling_Type_D([5:1], [5:7], "MPC", 5e-15, 2.42929e-08)
 ```

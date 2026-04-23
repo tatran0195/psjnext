@@ -12,7 +12,7 @@ Define contact settings between specified faces for the MSC Nastran solver.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.MSCNastran.ManualFace(...)
 ```
 

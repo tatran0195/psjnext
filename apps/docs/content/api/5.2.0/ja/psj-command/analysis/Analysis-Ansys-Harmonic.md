@@ -12,7 +12,7 @@ Export the Ansys Harmonic Structural solver file.
 
 ## Syntax
 
-```psj
+```py
 Analysis.Ansys.Harmonic(...)
 ```
 

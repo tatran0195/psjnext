@@ -13,7 +13,7 @@ This is an instance of a GasketAdditionalBehavior class, represents GasketAdditi
 | ---------- | ------------------------------------------- |
 | initialGap | A _Float_ specifying the initial gap value. |
 
-```psj {2} title="Sample Code"
+```py {2} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[GasketAdditionalBehavior(initialGap=0.2)],
                                     iMaterialID=1,

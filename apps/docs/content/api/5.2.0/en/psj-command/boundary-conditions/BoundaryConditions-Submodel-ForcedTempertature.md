@@ -12,7 +12,7 @@ Create a submodel by using temperature field from the coarse model and apply it 
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Submodel.ForcedTempertature(...)
 ```
 

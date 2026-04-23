@@ -11,7 +11,7 @@ Read the result and create a new result by using the result in Jupiter as a vari
 
 ## Syntax
 
-```psj
+```py
 PostCreateUserResult(cursor crTargetPostJob, int iResultVarType, str strName, int iResultSet, int iTimeStep, list listResultVariables, bool bUseResultExpression, bool bUseContourExpression, bool bUseVectorExpression, bool bUseDisplacementExpression, int iVectorType, str strResultExpression, str strContourExpression, str strVectorExpressionMagnitude, str strVectorExpression0, str strVectorExpression1, str strVectorExpression2, str strDisplacementExpression0, str strDisplacementExpression1, str strDisplacementExpression2, bool bIncrementName, str strIncrementName, cursor crEdit)
 ```
 
@@ -116,6 +116,6 @@ PostCreateUserResult(cursor crTargetPostJob, int iResultVarType, str strName, in
 
 ## Sample Code
 
-```psj
+```py
 PostCreateUserResult(183:1, 3, "Expr_1", 2, 1, [[183:1, "C1", 2, 1, 1, 0, 1], [183:1, "C2", 2, 1, 1, 1, 1]], 0, 1, 0, 0, 0, "", "C1+C2", "", "", "", "", "", "", "", 0, "", 0:0)
 ```

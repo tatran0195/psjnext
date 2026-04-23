@@ -12,7 +12,7 @@ Create a field data table that can be used when you set load, the boundary condi
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.FieldData(...)
 ```
 

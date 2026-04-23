@@ -11,7 +11,7 @@ Create Lbc TypeC Bolt Face method()
 
 ## Syntax
 
-```psj
+```py
 Lbc_Bolt_Modeling_Type_C_Face(Cursor taFaceCur1,Cursor taFaceCur2,string strRbeName,
     double dPlaneTol,double dMaxBoltHeight,double dMaxDiameter,double dMinDiameter,
     int nConnectionType,int nCoincidentNodes, double dTolerance, int nGround,double dStiffnessX,
@@ -140,7 +140,7 @@ bottom slave nodes in this range will not be considered
 
 ## Sample Code
 
-```psj
+```py
 Lbc_Bolt_Modeling_Type_C_Face([6:60], [6:49], "RBE", 20.0002, 0.1, 0.1, 0.001,
     0, 1, 2.22507e-308, 0, 1.79769e+308, 1.79769e+308, 1.79769e+308, 0, 1.79769e+308,
     1.79769e+308, 1.79769e+308, 0, 1.79769e+308, 1.79769e+308, 0:0, 0, 0.01, 0, 0, 0.01, 0)

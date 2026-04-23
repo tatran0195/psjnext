@@ -12,7 +12,7 @@ Export the Ansys Linear Static Structural solver file.
 
 ## Syntax
 
-```psj
+```py
 Analysis.Ansys.LinearStatic(...)
 ```
 

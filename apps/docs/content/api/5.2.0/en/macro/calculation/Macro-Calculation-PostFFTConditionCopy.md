@@ -11,7 +11,7 @@ Copy a FFT analysis.
 
 ## Syntax
 
-```psj
+```py
 PostFFTConditionCopy(cursor crTarget)
 ```
 
@@ -28,6 +28,6 @@ PostFFTConditionCopy(cursor crTarget)
 
 ## Sample Code
 
-```psj
+```py
 PostFFTConditionCopy(220:1)
 ```

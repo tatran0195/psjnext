@@ -23,7 +23,7 @@ To create a PSJFont object, defines a variable with PSJFont()
 
 ## Sample Code
 
-```psj {7-12,19}
+```py {7-12,19}
 from pyjdg import *
 
 def main():

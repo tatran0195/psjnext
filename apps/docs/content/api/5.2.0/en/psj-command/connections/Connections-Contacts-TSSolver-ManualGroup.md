@@ -12,7 +12,7 @@ Define contact settings between specified groups for TS SunShine solver. Create 
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.TSSolver.ManualGroup(...)
 ```
 

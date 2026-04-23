@@ -22,7 +22,7 @@ To create a TableCellVector object, defines a variable with TableCellVector().
 
 ## Sample Code
 
-```psj {6-7,12,18,25}
+```py {6-7,12,18,25}
 from pyjdg import *
 
 def on_right_click_menu(dlg,name,menu):

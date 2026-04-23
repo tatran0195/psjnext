@@ -12,7 +12,7 @@ In this tutorial, you'll learn how to show tooltip of a component to display inf
 
 ## 📖 Tutorial
 
-```psj
+```py
 # Encoding for Japanese
 # coding: cp932
 

@@ -12,7 +12,7 @@ Copy the loads and boundary conditions set on one part to another part.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopyMisc(...)
 ```
 

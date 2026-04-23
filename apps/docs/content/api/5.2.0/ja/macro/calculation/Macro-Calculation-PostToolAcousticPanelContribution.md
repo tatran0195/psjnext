@@ -11,7 +11,7 @@ Create a plot line for each panel property based on Actran's element contributio
 
 ## Syntax
 
-```psj
+```py
 PostToolAcousticPanelContribution(int[] ilLoadCase, cursor[] crlProperty, int iDocumentAreaUnit, bool bCalSum)
 ```
 
@@ -40,6 +40,6 @@ PostToolAcousticPanelContribution(int[] ilLoadCase, cursor[] crlProperty, int iD
 
 ## Sample Code
 
-```psj
+```py
 PostToolAcousticPanelContribution([], [0:0], 0, 1)
 ```

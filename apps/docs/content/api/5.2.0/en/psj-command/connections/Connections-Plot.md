@@ -12,7 +12,7 @@ Create 1D plot connection.
 
 ## Syntax
 
-```psj
+```py
 Connections.Plot(...)
 ```
 

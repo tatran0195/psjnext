@@ -12,7 +12,7 @@ Create load boundary condition of 2nodes pressure.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Pressure.By2Nodes(...)
 ```
 

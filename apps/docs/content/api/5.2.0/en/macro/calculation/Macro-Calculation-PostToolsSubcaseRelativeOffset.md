@@ -11,7 +11,7 @@ Create a subcase of relative displacement with zero displacement for any selecte
 
 ## Syntax
 
-```psj
+```py
 PostToolsSubcaseRelativeOffset(int iAnalysisType, int iResultSet, int iTimeStep, int iNodeID, int iSubcaseID, str strSubcaseName)
 ```
 
@@ -48,6 +48,6 @@ PostToolsSubcaseRelativeOffset(int iAnalysisType, int iResultSet, int iTimeStep,
 
 ## Sample Code
 
-```psj
+```py
 PostToolsSubcaseRelativeOffset(1, 1, 0, 0, 0, "strSubcaseName")
 ```

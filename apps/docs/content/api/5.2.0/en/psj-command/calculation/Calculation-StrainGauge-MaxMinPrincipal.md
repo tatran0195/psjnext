@@ -12,7 +12,7 @@ Display stress or strain in the direction of the maximum or minimum principle st
 
 ## Syntax
 
-```psj
+```py
 Calculation.StrainGauge.MaxMinPrincipal(...)
 ```
 

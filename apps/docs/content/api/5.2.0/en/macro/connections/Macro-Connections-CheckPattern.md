@@ -11,7 +11,7 @@ Check the mesh pattern on the selected faces. The matched/unmatched mesh pattern
 
 ## Syntax
 
-```psj
+```py
 CheckPattern(cursor[] Parts, bool bShowMismatch, bool bShowMatch, doulbe dTolerance)
 ```
 
@@ -39,6 +39,6 @@ Two lists of cursor list as a string: first list contains the entities mesh patt
 
 ## Sample Code
 
-```psj
+```py
 CheckPattern([3:1, 3:2], 0, 1, 1e-05)
 ```

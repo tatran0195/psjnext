@@ -11,7 +11,7 @@ Create Acoustic Boundary.
 
 ## Syntax
 
-```psj
+```py
 ACBoundaryMethod1(cursor[] crlParts, bool bIsMergePart, bool bIsRenumber)
 
 ```
@@ -37,6 +37,6 @@ Whether to renumber the nodes and elements. If True, the macro will assign new n
 
 ## Sample Code
 
-```psj
+```py
 ACBoundaryMethod1([3:1, 3:2], 1, 1)
 ```

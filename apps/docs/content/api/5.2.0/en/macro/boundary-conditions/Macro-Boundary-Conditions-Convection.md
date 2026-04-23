@@ -11,7 +11,7 @@ Create convection
 
 ## Syntax
 
-```psj
+```py
 Convection(string strName, double dExtTemp, cursor crTimeTempTbl, double dCoef,
     cursor crTimeCoefTbl, cursor crTempCoefTbl, cursor crTargets, cursor crEdit)
 ```
@@ -57,6 +57,6 @@ Cursor edit
 
 ## Sample Code
 
-```psj
+```py
 Convection("Convection_1", 373.15, 81:1, 2000, 81:1, 81:1, [6:3, 11:764], 0:0)
 ```

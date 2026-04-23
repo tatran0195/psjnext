@@ -28,7 +28,7 @@ For example: `SPECIFIC_HEAT` is equal to ID = 58.
 | 130          | `TEMPERATURE`   | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS`  | A _Tuple_ specifying the extra field data.           |
 
-```psj {2-4} title="Sample Code"
+```py {2-4} title="Sample Code"
 sample_Mat = Properties.Material.Modify(strMaterialName="Sample_Material",
                                         listMaterialProperty=[SpecificHeat(specificHeat=[
                                             (SPECIFIC_HEAT, [461.0]),

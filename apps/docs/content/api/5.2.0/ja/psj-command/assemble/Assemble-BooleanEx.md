@@ -12,7 +12,7 @@ Conduct a Boolean operation on selected bodies.
 
 ## Syntax
 
-```psj
+```py
 Assemble.BooleanEx(...)
 ```
 

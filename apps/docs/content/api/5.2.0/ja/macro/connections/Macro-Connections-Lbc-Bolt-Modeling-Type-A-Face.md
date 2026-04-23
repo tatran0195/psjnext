@@ -11,7 +11,7 @@ Create Lbc TypeA Bolt Face method
 
 ## Syntax
 
-```psj
+```py
 Lbc_Bolt_Modeling_Type_A_Face(Cursor taFaceCur1,Cursor taFaceCur2,string strRbeName,
     string strBarName,int nShaftType,Cursor curBarProperty,double dPlaneTol,double dMaxBoltHeight,
     double dMaxDiameter,double dMinDiameter,bool bPretensionLoad,int nSolverType,
@@ -116,7 +116,7 @@ Option ADVC Static process, 0: No, 1:Yes
 
 ## Sample Code
 
-```psj
+```py
 Lbc_Bolt_Modeling_Type_A_Face([6:60], [6:49], "RBE", "Bar_1", 1, 0:0, 20.0002, 0.1,
     0.1, 0.001, 0, 0, 0, 0, 0:0, 0, 1, 0.06, 1, 0.06, 3, 0)
 ```

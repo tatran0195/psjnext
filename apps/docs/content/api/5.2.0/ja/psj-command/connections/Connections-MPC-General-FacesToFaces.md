@@ -12,7 +12,7 @@ Create MPC by connecting selected faces together.
 
 ## Syntax
 
-```psj
+```py
 Connections.MPC.General.FacesToFaces(...)
 ```
 

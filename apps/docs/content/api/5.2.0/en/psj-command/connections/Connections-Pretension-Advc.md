@@ -12,7 +12,7 @@ Create bolt pretension for the ADVC solver.
 
 ## Syntax
 
-```psj
+```py
 Connections.Pretension.Advc(...)
 ```
 

@@ -13,7 +13,7 @@ In this tutorial, you'll learn how to customize the appearance of the table:
 1. **Fill color**: Change the color of background of cells in the table.
 2. **Text color**: Change the color of font of cells in the table.
 
-```psj
+```py
 # Encoding for Japanese
 # coding: cp932
 
@@ -62,7 +62,7 @@ if __name__=='__main__':
 </TabItem>
 <TabItem value="type2">
 
-```psj
+```py
 # Encoding for Japanese
 # coding: cp932
 

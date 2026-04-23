@@ -19,17 +19,17 @@ There are 3 cases:
 
 ## Syntax
 
-```psj
+```py
 COPY TRANS: CmdLbcCopy(int Method, int MatchMethod, double[3] TransVec, double Magnitude,
     double Offset, double Tolerance, Cursor Coordinate, Cursor[] Target)
 ```
 
-```psj
+```py
 COPY ROTATE: CmdLbcCopy(int Method, int MatchMethod, double[3] AxisVec,
     double[3] CenterVec, double Angle, double Tolerance, Cursor Coordinate , Cursor[] Target)
 ```
 
-```psj
+```py
 COPY MIRROR: CmdLbcCopy(int Method, int MatchMethod, double[3] Points,
     double Offset, double Tolerance, Cursor[] Target)
 ```
@@ -103,6 +103,6 @@ Target (LBC/Property/Connection/Group)
 
 ## Sample Code
 
-```psj
+```py
 CmdLbcCopy(0, 0, [0.001, 0, 0], 0.03, 0, 0.0001, 0:0, [40:1])
 ```

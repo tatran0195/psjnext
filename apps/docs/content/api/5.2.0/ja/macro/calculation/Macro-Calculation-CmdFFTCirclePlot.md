@@ -11,7 +11,7 @@ Display the deformation plot graph.
 
 ## Syntax
 
-```psj
+```py
 CmdFFTCirclePlot(int iKey, bool bOACircleOutput, str strOACircleLayers, bool bOADefine, str strOADefine, str strModeOutput, str strModesLayers)
 ```
 
@@ -52,6 +52,6 @@ CmdFFTCirclePlot(int iKey, bool bOACircleOutput, str strOACircleLayers, bool bOA
 
 ## Sample Code
 
-```psj
+```py
 CmdFFTCirclePlot(1, 1, "2", 1, "2-4", "2", "2")
 ```

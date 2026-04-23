@@ -12,7 +12,7 @@ Create one-to-one (master:slave) RBar (rigid elements) with nodes tolerance.
 
 ## Syntax
 
-```psj
+```py
 Connections.RigidElements.RBar.OneToOneNodesWithTolerance(...)
 ```
 

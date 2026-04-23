@@ -12,7 +12,7 @@ Create initial rotation angle.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.InitialNodalValue.RotationAngle(...)
 ```
 

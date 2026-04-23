@@ -11,7 +11,7 @@ Read a Punch file (\*.pch) containing information on the coupled surfaces output
 
 ## Syntax
 
-```psj
+```py
 AcousticTLPCHResult(str strPathName, cursor crEdit)
 ```
 
@@ -32,6 +32,6 @@ AcousticTLPCHResult(str strPathName, cursor crEdit)
 
 ## Sample Code
 
-```psj
+```py
 AcousticTLPCHResult("path/to/the/file", 0:0)
 ```

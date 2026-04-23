@@ -12,7 +12,7 @@ Contact clearance for ADVC contact
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.ADVC.ContactClearance(strName, dClearanceVal, iLocalUnit, iSolverType, crlTargets, crEdit=None)
 ```
 

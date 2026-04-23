@@ -12,7 +12,7 @@ Copy boundary conditions by using translation method.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.ConnectionCopyTranslate(...)
 ```
 

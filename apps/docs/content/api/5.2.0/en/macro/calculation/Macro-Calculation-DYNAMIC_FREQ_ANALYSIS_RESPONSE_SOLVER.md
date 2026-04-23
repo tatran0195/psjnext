@@ -11,7 +11,7 @@ Create a response solver for Gururi analysis.
 
 ## Syntax
 
-```psj
+```py
 DYNAMIC_FREQ_ANALYSIS_RESPONSE_SOLVER(cursor ParentAnalysis, cursor Coordinate, bool AllModesUsed, string[] ModesSelect, bool DampingFactor, double DampingFactor, cursor DampingFactor, int CurveStyle, double StyleParamTop, double StyleParamMid, double StyleParamBot, bool IncludeEigenValue, bool CreateNewResult, int ResultType, string[] SelectedResultName, int ResultPos, string DBFileName, string DBVersion, string MethodId, string SPCID, int RESVEC, string JobName, cursor[] Targets, cursor Edit)
 ```
 
@@ -120,6 +120,6 @@ A Cursor specifying an existing response condition.
 
 ## Sample Code
 
-```psj
+```py
 DYNAMIC_FREQ_ANALYSIS_RESPONSE_SOLVER(0:0, 0:0, True, [""], True, 1.0, 0:0, 0, 0.0,0.0,0.0, True,True, 0, [""],0,"","","","",0,"",[0:0], 0:0)
 ```

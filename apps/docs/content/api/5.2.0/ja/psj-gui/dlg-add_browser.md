@@ -12,7 +12,7 @@ Add a file/folder Browser component to the creating dialog.
 
 ## Syntax
 
-```psj
+```py
 dlg.add_browser(...)
 ```
 

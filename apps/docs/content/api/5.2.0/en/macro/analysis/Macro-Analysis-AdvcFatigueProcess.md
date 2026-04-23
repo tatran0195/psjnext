@@ -11,7 +11,7 @@ Create ADVC fatigue process
 
 ## Syntax
 
-```psj
+```py
 AdvcFatigueProcess(string m_strName,bool m_bFatigue,int method,int stress_axis,
     int safety_type,double search_resolution,double safety_max,cursor m_crEdit,
     list m_LoadNodeList,list m_LoadCaseNodeList,list m_LoadNodeContactList,
@@ -87,6 +87,6 @@ data of reference result
 
 ## Sample Code
 
-```psj
+```py
 AdvcFatigueProcess("Test",1,1,1,1,0.001,0.001,1:11,,,,,1,"Test",)
 ```

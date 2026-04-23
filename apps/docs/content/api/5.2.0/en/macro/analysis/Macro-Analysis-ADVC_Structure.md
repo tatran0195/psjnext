@@ -11,7 +11,7 @@ Create ADVC job (Structure)
 
 ## Syntax
 
-```psj
+```py
 ADVC_Structure(string Name, string Description, int JobType, cursor[] processSequence,
     cursor[] elemLocationGroup, cursor[] nodeLocationGroup, bool WriteGroup,
     cursor Edit, bool ResultReference, int iSeparateFile, bool ExportRelatedAllLBCs,
@@ -438,6 +438,6 @@ Data format type. [0:Single, 1:Double]
 
 ## Sample Code
 
-```psj
+```py
 ADVC_Structure("Job_1", "", 0, [119:1], [], [], 0, 0:0, 0, 0, 0, 0, 0, 0, 0, [3:2], 1, 1, 1, 1, 0, 1, 22:1, 0, "", 2147483647, 2147483647, 0, 1, [], 0, 0, "C:/Temp/Export.adx", 0, 10, 6, 0, 0, "", 1, 0, [(0, "Compliance_1", 0, "", 1.79769e+308, [119:1], -1, 1.79769e+308, -1, 1.79769e+308, 1, 0:0, 0:0, 0:0, -1, 1.79769e+308, 1.79769e+308, 2147483647)], [(9, "Volume_1", 0, "", 1.79769e+308, [], 0, 1.79769e+308, -1, 0.4, 1, 0:0, 0:0, 0:0, -1, 1.79769e+308, 1.79769e+308, 2147483647)], [], [(13, "ShapeOptimization_1", 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 100, 0.1, 1.79769e+308, 0.01, 1, 1, -1, 2147483647, -1, 1.79769e+308, "", -1, -1, 1.79769e+308, 1.79769e+308, 1, -1, 0:0, 0:0, 0:0, 0:0, [], -1, 1.79769e+308, -1, -1, -1, 1, 1)], (0, 1, 0, 0, 1, 1, 1, 1))
 ```

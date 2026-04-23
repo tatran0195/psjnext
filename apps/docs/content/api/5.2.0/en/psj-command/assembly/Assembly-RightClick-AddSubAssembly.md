@@ -12,7 +12,7 @@ Add a new assembly (Sub-assembly) to the selected assembly.
 
 ## Syntax
 
-```psj
+```py
 Assembly.RightClick.AddSubAssembly(...)
 ```
 

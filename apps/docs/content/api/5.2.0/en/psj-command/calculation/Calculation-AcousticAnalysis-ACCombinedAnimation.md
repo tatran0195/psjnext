@@ -12,7 +12,7 @@ Perform the animation with physical quantities that select deformation, contour 
 
 ## Syntax
 
-```psj
+```py
 Calculation.AcousticAnalysis.ACCombinedAnimation(...)
 ```
 

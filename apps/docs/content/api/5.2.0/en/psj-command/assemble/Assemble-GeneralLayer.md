@@ -12,7 +12,7 @@ Create a new face inside the part by offsetting a preceding face.
 
 ## Syntax
 
-```psj
+```py
 Assemble.GeneralLayer(...)
 ```
 

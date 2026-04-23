@@ -12,7 +12,7 @@ Copy a property rotate.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.PropertiesCopyRotate(...)
 ```
 

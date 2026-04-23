@@ -12,7 +12,7 @@ Clear all the drawings in Main Window.
 
 ## Syntax
 
-```psj
+```py
 JPT.ClearDraw()
 ```
 

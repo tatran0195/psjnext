@@ -12,7 +12,7 @@ Copy a group mirror.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.GroupCopyMirror(...)
 ```
 

@@ -12,7 +12,7 @@ Create a Structure - Eigenvalue analysis as an ADVC process.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.MakeProcess.EigenValue(...)
 ```
 

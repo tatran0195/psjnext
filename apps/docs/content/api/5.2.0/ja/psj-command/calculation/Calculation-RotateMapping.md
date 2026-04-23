@@ -12,7 +12,7 @@ Copy (mapping) stress to create continuous stress data in the direction of rotat
 
 ## Syntax
 
-```psj
+```py
 Calculation.RotateMapping(...)
 ```
 

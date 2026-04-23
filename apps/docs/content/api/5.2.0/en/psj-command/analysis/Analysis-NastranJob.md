@@ -12,7 +12,7 @@ Create a Nastran Analysis Job.
 
 ## Syntax
 
-```psj
+```py
 Analysis.NastranJob(...)
 ```
 

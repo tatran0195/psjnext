@@ -13,7 +13,7 @@ This process could be created in one time or multiple times.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.MakeProcess.ModalFreqResp(...)
 ```
 

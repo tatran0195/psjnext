@@ -11,7 +11,7 @@ Create Force (Quadratic)
 
 ## Syntax
 
-```psj
+```py
 ForceQuadratic(String name, double totalForce, double a, double b, Cursor crCoordinate,
     int angleBase, double angleRange, int arrowDir, Cursor[] targets, Cursor crEdit)
 ```
@@ -65,6 +65,6 @@ edit target
 
 ## Sample Code
 
-```psj
+```py
 ForceQuadratic("Force2", 1, 2, 3, 0:0, 0, 1.5708, 0, [6:22], 0:0)
 ```

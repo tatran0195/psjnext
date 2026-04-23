@@ -10,14 +10,14 @@ Below are some questions we often receive from customers:
 
 Using %
 
-```psj
+```py
 targetParts=[3:1]
 JPT.Exec('VolMeshing(%s, {1, 1.05, 0, 0.1, 1, 0, 1, 1, 0, 4, 1, 1, 1, 0}, 0, 65280)'%(targetParts))
 ```
 
 Using `.format{}`
 
-```psj
+```py
 targetParts=[3:1]
 params={1, 1.05, 0, 0.1, 1, 0, 1, 1, 0, 4, 1, 1, 1, 0}
 JPT.Exec('VolMeshing({0}, {1}, 0, 65280)'.format(targetParts,params)
@@ -25,7 +25,7 @@ JPT.Exec('VolMeshing({0}, {1}, 0, 65280)'.format(targetParts,params)
 
 or
 
-```psj
+```py
 targetParts=[3:1]
 JPT.Exec('VolMeshing({0}, {{1, 1.05, 0, 0.1, 1, 0, 1, 1, 0, 4, 1, 1, 1, 0}}, 0, 65280)'.format(targetParts)
 ```
@@ -34,7 +34,7 @@ JPT.Exec('VolMeshing({0}, {{1, 1.05, 0, 0.1, 1, 0, 1, 1, 0, 4, 1, 1, 1, 0}}, 0, 
 
 ## Q2. How can I get entities inside a group?
 
-```psj
+```py
 groups=JPT.GetAllGroups()
 for g in groups:
     for e in g.targets:
@@ -45,7 +45,7 @@ for g in groups:
 
 ## Q3. How can I get multiple return value splitting each of them?
 
-```psj
+```py
 import re
 from itertools import groupby
 
@@ -67,7 +67,7 @@ for s in splitted:
 
 ## Q4. Which and how many methods DItem has?
 
-```psj
+```py
 obj = JPT.DItem()
 for x in dir(obj):
       print(x)
@@ -77,7 +77,7 @@ for x in dir(obj):
 
 ## Q5. How can I get Master/Slave entities from the selected entity?
 
-```psj
+```py
 sel = JPT.GetAllSelected()
 for s in sel:
   for m in s.masters:
@@ -90,7 +90,7 @@ for s in sel:
 
 ## Q6. How can I get elapsed time for each command?
 
-```psj
+```py
 import time
 start = time.time()
 
@@ -102,7 +102,7 @@ elapsed_time = time.time() - start
 
 ## Q7. How can I rename a part?
 
-```psj
+```py
 JPT.Exec('RenameItem("newname", 3:5)')
 ```
 

@@ -12,7 +12,7 @@ Define a pressure load on the selected face or element surface based on a sine f
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Pressure.FunctionLoadToCylinderSine(...)
 ```
 

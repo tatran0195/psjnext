@@ -66,7 +66,7 @@ To use _filter_ option, user can set _True_ state to shows filter mode; set _Fal
 
 ## Sample Code
 
-```psj {5-8,10-17}
+```py {5-8,10-17}
 from pyjdg import *
 
 def on_button_check(dlg):

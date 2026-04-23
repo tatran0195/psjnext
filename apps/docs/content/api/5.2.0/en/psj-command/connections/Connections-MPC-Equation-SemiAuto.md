@@ -12,7 +12,7 @@ Creates the MPC between the nodes with a distance tolerance.
 
 ## Syntax
 
-```psj
+```py
 Connections.MPC.Equation.SemiAuto(...)
 
 ```

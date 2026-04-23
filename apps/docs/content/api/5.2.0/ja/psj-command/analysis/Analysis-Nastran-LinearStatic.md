@@ -12,7 +12,7 @@ Export the input file for Nastran Structure Linear Static anlysis (SOL 101).
 
 ## Syntax
 
-```psj
+```py
 Analysis.Nastran.LinearStatic(...)
 ```
 

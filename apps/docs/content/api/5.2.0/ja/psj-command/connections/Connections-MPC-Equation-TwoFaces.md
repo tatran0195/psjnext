@@ -12,7 +12,7 @@ Create MPC between multiple points of two faces.
 
 ## Syntax
 
-```psj
+```py
 Connections.MPC.Equation.TwoFaces(...)
 ```
 

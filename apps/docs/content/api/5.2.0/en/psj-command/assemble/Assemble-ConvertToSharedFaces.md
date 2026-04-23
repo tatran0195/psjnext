@@ -12,7 +12,7 @@ If a pair of Tri elements that share all three vertices exists within the docume
 
 ## Syntax
 
-```psj
+```py
 Assemble.ConvertToSharedFaces(...)
 ```
 

@@ -12,7 +12,7 @@ Load the fatigue limit diagrams for each material.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FatigueMaterial(...)
 ```
 

@@ -11,7 +11,7 @@ Create sub model forced displacement
 
 ## Syntax
 
-```psj
+```py
 SubmodelForcedDisp(string m_strName,int iSolver,string strFilePathName,int iProcessNo,
     bool bTranslationX,bool bTranslationY,bool bTranslationZ,int iReferType,
     double dExtensionRange,double dExtensionTol,double dExtensionLimitTol,
@@ -104,7 +104,7 @@ edit cursor
 
 ## Sample Code
 
-```psj
+```py
 SubmodelForcedDisp("SubmodelForcedDisplacement1", 0, "D:/test", 0, 1, 1, 1, -1, 1.79769e+308,
     1.79769e+308, 1.79769e+308, "", -1, 2147483647, 2147483647, 2147483647, -1, [6:21], 0:0)
 ```

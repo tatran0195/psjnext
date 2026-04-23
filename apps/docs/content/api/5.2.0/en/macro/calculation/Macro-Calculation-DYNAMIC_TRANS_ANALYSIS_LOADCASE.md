@@ -11,7 +11,7 @@ Create a load case for transient response analysis.
 
 ## Syntax
 
-```psj
+```py
 DYNAMIC_TRANS_ANALYSIS_LOADCASE(cursor crParentAnalysis, str strName, double dFactor, int iNewID, cursor[] crlSelectionLoad, double[] dlTargetFactor, cursor crEdit)
 ```
 
@@ -52,6 +52,6 @@ DYNAMIC_TRANS_ANALYSIS_LOADCASE(cursor crParentAnalysis, str strName, double dFa
 
 ## Sample Code
 
-```psj
+```py
 DYNAMIC_TRANS_ANALYSIS_LOADCASE(0:0, "LoadCase1", 1.0, 1, [0:0], [], 0:0)
 ```

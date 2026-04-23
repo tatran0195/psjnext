@@ -12,7 +12,7 @@ Create Lbc TypeA Bolt Face method.
 
 ## Syntax
 
-```psj
+```py
 Connections.BoltConnections.Face.TypeA(...)
 ```
 

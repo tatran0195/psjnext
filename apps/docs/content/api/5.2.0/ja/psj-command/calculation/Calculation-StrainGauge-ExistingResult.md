@@ -12,7 +12,7 @@ Obtain the strain in the vector direction of the existing result.
 
 ## Syntax
 
-```psj
+```py
 Calculation.StrainGauge.ExistingResult(...)
 ```
 

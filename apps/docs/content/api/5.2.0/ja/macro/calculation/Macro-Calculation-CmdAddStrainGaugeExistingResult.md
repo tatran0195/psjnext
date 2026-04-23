@@ -11,7 +11,7 @@ Obtain the strain in the vector direction of the existing result.
 
 ## Syntax
 
-```psj
+```py
 CmdAddStrainGaugeExistingResult(int[] ilNodeIDs, int iAnalysisType, int iResultSet, int iTimeStep, int iResultType, double dWidth, double dHeight, double dAmendFactor, str strGaugeName)
 ```
 
@@ -60,6 +60,6 @@ CmdAddStrainGaugeExistingResult(int[] ilNodeIDs, int iAnalysisType, int iResultS
 
 ## Sample Code
 
-```psj
+```py
 CmdAddStrainGaugeExistingResult([], 0, 1, 1, 1, 0.0, 0.0, 1.0, "strGaugeName")
 ```

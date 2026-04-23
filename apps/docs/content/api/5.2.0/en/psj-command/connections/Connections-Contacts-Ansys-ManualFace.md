@@ -12,7 +12,7 @@ Define contact settings between specified faces for the Ansys solver.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.Ansys.ManualFace(...)
 ```
 

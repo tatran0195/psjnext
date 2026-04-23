@@ -29,7 +29,7 @@ For example: `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 | 127          | DAMPING   | A _Tuple_ specifying the damping data.   |
 | 129          | FREQUENCY | A _Tuple_ specifying the frequency data. |
 
-```psj {2-4} title="Sample Code"
+```py {2-4} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Damping(damping=[
                                     (DAMPING, [100.0]),

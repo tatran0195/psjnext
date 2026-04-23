@@ -12,7 +12,7 @@ Create ADVC Contact Share Face
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.ADVC.ContactShareFace(...)
 ```
 

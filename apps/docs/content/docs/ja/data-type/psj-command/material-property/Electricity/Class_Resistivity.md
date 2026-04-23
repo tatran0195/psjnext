@@ -26,7 +26,7 @@ For example: `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 | 128          | RESISTIVITY | A _Tuple_ specifying the resistivity data            |
 | 130          | TEMPERATURE | A _Tuple_ specifying the temperature-dependent data. |
 
-```psj {2-4} title="Sample Code"
+```py {2-4} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Resistivity(resistivity=[
                                         (RESISTIVITY, [0.0005]),

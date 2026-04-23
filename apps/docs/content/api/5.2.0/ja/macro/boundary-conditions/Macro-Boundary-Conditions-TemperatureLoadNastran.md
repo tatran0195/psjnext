@@ -11,7 +11,7 @@ Create temperature load by Nastran punch file
 
 ## Syntax
 
-```psj
+```py
 TemperatureLoadNastran(string strName, string strFilePathName, cursor crTable,
     cursor[] taTarget, cursor crEdit, bool bUseAsMaterialReferenceTemp)
 ```
@@ -49,6 +49,6 @@ if use as material reference temperature
 
 ## Sample Code
 
-```psj
+```py
 TemperatureLoadNastran("TemperatureLoadsPunch1", "D:/1_heat.pch", 0:0, [], 0:0, 0)
 ```

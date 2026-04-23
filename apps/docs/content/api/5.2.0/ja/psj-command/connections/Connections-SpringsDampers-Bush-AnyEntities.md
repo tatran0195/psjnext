@@ -12,7 +12,7 @@ Create bush connection between nodes in target entities.
 
 ## Syntax
 
-```psj
+```py
 Connections.SpringsDampers.Bush.AnyEntities(...)
 ```
 

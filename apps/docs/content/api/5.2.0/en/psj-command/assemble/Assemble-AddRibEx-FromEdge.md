@@ -12,7 +12,7 @@ Specify an edge to define the path of the rib and the attachment surface, and ad
 
 ## Syntax
 
-```psj
+```py
 Assemble.AddRibEx.FromEdge(...)
 ```
 

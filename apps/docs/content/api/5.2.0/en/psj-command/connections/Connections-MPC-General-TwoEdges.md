@@ -12,7 +12,7 @@ Create MPC between two edges.
 
 ## Syntax
 
-```psj
+```py
 Connections.MPC.General.TwoEdges(...)
 ```
 

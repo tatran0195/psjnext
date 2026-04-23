@@ -12,7 +12,7 @@ Create bolt pretension for the SunShine solver.
 
 ## Syntax
 
-```psj
+```py
 Connections.Pretension.SunShine(...)
 ```
 

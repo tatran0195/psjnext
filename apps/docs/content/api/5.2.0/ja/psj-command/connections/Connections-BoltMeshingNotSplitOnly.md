@@ -12,7 +12,7 @@ For CAD bolts, divide the bolt into upper and lower parts, generate the mesh, an
 
 ## Syntax
 
-```psj
+```py
 Connections.BoltMeshingNotSplitOnly(...)
 ```
 

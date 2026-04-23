@@ -11,7 +11,7 @@ Create Dynamis job
 
 ## Syntax
 
-```psj
+```py
 DynamisJob(string strName, string strDescription, TCursor[] taTarget, int solverType,
     int writeType, int gridFormatType, int deleteFloatingNodes, int continuanceMarker,
     int defineLbcId, int definedLoadId, int definedSpcId, int definedMpcId, int uniqueLbcId,
@@ -543,7 +543,7 @@ Cursor for edit mode
 
 ## Sample Code
 
-```psj
+```py
 DynamisJob("TS-Solver", "", [], 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1.79769e+308, 2147483647,
     0, 1024, 0, 0, 101, "", [1.79769e+308, 1.79769e+308, 2147483647], [0, 1.79769e+308,
     1.79769e+308, 2147483647, 0, 0, 1.79769e+308, 1.79769e+308, 2147483647], [1.79769e+308,

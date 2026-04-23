@@ -11,7 +11,7 @@ Create contact clearance
 
 ## Syntax
 
-```psj
+```py
 ContactClearance(string strName, double dClearanceVal, int iLocalUnit,
     int iSolverType, cursor[] taTarget, cursor crEdit)
 ```
@@ -55,6 +55,6 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 ContactClearance("ContactClearance1", 0.002, 0, 0, [10:452, 6:26], 0:0)
 ```

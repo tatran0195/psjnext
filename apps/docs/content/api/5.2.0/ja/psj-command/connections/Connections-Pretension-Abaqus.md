@@ -12,7 +12,7 @@ Create bolt pretension for the Abaqus solver.
 
 ## Syntax
 
-```psj
+```py
 Connections.Pretension.Abaqus(...)
 ```
 

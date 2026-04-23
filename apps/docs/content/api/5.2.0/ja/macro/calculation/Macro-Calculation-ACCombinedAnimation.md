@@ -11,7 +11,7 @@ Animate deformations, contour colors, and vectors with separately selected physi
 
 ## Syntax
 
-```psj
+```py
 ACCombinedAnimation(int iTimeStep, int iAnalysisType, str strTargetAnalysisName, bool bDeform, bool bContour, bool bVector,  int iContourSetting, int iVectorSetting)
 ```
 
@@ -56,6 +56,6 @@ ACCombinedAnimation(int iTimeStep, int iAnalysisType, str strTargetAnalysisName,
 
 ## Sample Code
 
-```psj
+```py
 ACCombinedAnimation(1, 1, "Fluid Pressure", 1, 1, 1, 0, 0)
 ```

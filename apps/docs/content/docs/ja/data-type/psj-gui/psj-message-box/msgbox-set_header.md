@@ -9,7 +9,7 @@ An instance of a PSJMessageBox class, setting the header of the message box.
 
 ## Syntax
 
-```psj
+```py
 msgbox.set_header(...)
 ```
 
@@ -26,7 +26,7 @@ This function does not have output value.
 
 ## Sample Code
 
-```psj {6}
+```py {6}
 from pyjdg import *
 
 def main():

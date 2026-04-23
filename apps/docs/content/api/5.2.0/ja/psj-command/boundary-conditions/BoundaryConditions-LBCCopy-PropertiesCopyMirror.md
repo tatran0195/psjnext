@@ -12,7 +12,7 @@ Copy a property mirror.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.PropertiesCopyMirror(...)
 ```
 

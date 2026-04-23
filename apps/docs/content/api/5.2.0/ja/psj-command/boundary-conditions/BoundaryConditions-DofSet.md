@@ -12,7 +12,7 @@ Create the degrees of freedom in the analysis set(ASET) in TS-Solver.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.DofSet(...)
 ```
 

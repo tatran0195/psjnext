@@ -11,7 +11,7 @@ Create a contact check report
 
 ## Syntax
 
-```psj
+```py
 
 CreateContactReport(string path, double zoomFactor, int fitGroupBy, int listBy, int listOrder, int listFormat)
 ```
@@ -61,6 +61,6 @@ List format:
 
 ## Sample Code
 
-```psj
+```py
 CreateContactReport("D:/contact_report.html", 2, 0, 0, 0, 0)
 ```

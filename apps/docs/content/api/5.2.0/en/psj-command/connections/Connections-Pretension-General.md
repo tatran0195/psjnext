@@ -12,7 +12,7 @@ Create bolt pretension in general (Not for a specific solver).
 
 ## Syntax
 
-```psj
+```py
 Connections.Pretension.General(...)
 ```
 

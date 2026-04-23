@@ -11,7 +11,7 @@ Create Contact for ABAQUS
 
 ## Syntax
 
-```psj
+```py
 ContactAbaqus(String m_strName,int m_iMethod,int m_iType,int m_iAlg,double AdjustVal,
     double ExtensionZone,double MaxPenetration,int SmallSliding,double Smooth,
     int FrictionType,double FrictionCoef1,double FrictionCoef2,double ShearLimit,
@@ -181,7 +181,7 @@ contact maker color
 
 ## Sample Code
 
-```psj
+```py
 ContactAbaqus("Test",1,1,1,0.001,0.001,0.001,1,0.001,1,0.001,0.001,0.001,0.001,
     0.001,0.001,0.001,1,0.001,1,1,1,1,0.001,,1,1,1,1,,1,1,1,,[1:11,2:12],1:11,1)
 ```

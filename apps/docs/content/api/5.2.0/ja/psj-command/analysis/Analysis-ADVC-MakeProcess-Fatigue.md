@@ -12,7 +12,7 @@ Create ADVC fatigue process.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.MakeProcess.Fatigue(...)
 ```
 

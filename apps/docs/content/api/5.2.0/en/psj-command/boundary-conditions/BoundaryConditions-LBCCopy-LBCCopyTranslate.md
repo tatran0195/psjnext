@@ -12,7 +12,7 @@ Copy a LBC translate.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.LBCCopyTranslate(...)
 ```
 

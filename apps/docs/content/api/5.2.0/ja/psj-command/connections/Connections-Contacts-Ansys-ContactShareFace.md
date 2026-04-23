@@ -12,7 +12,7 @@ Define contact settings for ANSYS by using shared faces.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.Ansys.ContactShareFace(...)
 ```
 

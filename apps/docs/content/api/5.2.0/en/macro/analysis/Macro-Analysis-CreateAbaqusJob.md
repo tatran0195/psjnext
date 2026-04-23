@@ -11,7 +11,7 @@ Create Abaqus Job
 
 ## Syntax
 
-```psj
+```py
 CreateAbaqusJob(string m_strName,bool m_bRBE2toMPC,bool m_bRenameProcess,
     int m_iCodeType,int m_iSurfDefType,int m_iUnit,int m_iWriteType,
     string m_strDescription,cursor[] m_taStepSequence,cursor m_crEditCursor)
@@ -66,6 +66,6 @@ Edit Job cursor
 
 ## Sample Code
 
-```psj
+```py
 CreateAbaqusJob("Abaqus", 0, 0, 0, 0, 1, 0, "", [], 0:0, [], 0, 0, 0, 0, 1, 22:2)
 ```

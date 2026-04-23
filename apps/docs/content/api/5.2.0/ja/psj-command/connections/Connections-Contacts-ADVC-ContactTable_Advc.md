@@ -12,7 +12,7 @@ Create contacts for ADVC solver by using table.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.ADVC.ContactTable_Advc(...)
 ```
 

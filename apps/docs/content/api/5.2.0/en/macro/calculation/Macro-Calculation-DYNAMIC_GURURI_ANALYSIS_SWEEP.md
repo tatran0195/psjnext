@@ -11,7 +11,7 @@ Output specified element/frequency result output to external file.
 
 ## Syntax
 
-```psj
+```py
 DYNAMIC_GURURI_ANALYSIS_SWEEP(str strExportFilePath, cursor[] crlTargetElem, cursor crParentAnalysis, cursor crCoordinate, bool bAllModesUsed, str[] strlSelectedModesName, bool bUseDampingFactor, double dDampingFactor, cursor crDampingFactorTable, double[] dlInputFrequency, double dStartPhase, int iStepNumber, bool bOutputMaximumGururiResult, int iPrincipleType, bool bAllCase, cursor crSelectedLoadCase, cursor crEdit)
 ```
 
@@ -92,6 +92,6 @@ A Boolean specifying whether to use all modes.
 
 ## Sample Code
 
-```psj
+```py
 DYNAMIC_GURURI_ANALYSIS_SWEEP("path/to/the/file", [0:0], 0:0, 0:0, 1, [], 1, 1.0, 0:0, [], 0.0, 10, 1, 3, 1, 0:0, 0:0)
 ```

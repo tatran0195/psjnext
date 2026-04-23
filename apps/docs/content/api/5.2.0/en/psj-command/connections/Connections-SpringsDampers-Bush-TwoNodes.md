@@ -12,7 +12,7 @@ Create bush connection between nodes.
 
 ## Syntax
 
-```psj
+```py
 Connections.SpringsDampers.Bush.TwoNodes(...)
 ```
 

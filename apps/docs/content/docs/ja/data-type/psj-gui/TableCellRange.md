@@ -67,7 +67,7 @@ Index number of _left_, _top_, _right_ and _bottom_ of TableCellRange can not be
 
 ## Sample Code
 
-```psj {5-6,8-11}
+```py {5-6,8-11}
 from pyjdg import *
 
 def on_button_check(dlg):

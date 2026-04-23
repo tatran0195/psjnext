@@ -12,7 +12,7 @@ Make a graph of post result curve.
 
 ## Syntax
 
-```psj
+```py
 Chart.CreateGraph(...)
 ```
 

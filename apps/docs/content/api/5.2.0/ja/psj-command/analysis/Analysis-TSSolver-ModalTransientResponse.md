@@ -12,7 +12,7 @@ Export the Input Deck for TechnoStar Modal Transient Response analysis (SOL 112)
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSolver.ModalTransientResponse(...)
 ```
 

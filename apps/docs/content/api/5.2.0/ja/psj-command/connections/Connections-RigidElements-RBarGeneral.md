@@ -12,7 +12,7 @@ Unknown Description
 
 ## Syntax
 
-```psj
+```py
 Connections.RigidElements.RBarGeneral(rbarConnection=RBAR_CONNECTION(), crlMasterTargets=[], crlSlaveTargets=[], iUlDOFs=0, dTol=DFLT_DBL, crCoord=None, crEdit=None)
 ```
 

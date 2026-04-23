@@ -12,7 +12,7 @@ Copy boundary conditions by using mirror method.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.ConnectionCopyMirror(...)
 ```
 

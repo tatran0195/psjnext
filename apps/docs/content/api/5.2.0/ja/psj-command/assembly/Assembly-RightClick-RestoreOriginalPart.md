@@ -12,7 +12,7 @@ Replace the current part by using its reference. In case the number of reference
 
 ## Syntax
 
-```psj
+```py
 Assembly.RightClick.RestoreOriginalPart(...)
 ```
 

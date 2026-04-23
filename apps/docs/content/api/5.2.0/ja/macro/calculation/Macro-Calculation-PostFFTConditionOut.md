@@ -11,7 +11,7 @@ Perform a FFT analysis.
 
 ## Syntax
 
-```psj
+```py
 PostFFTConditionOut(str strName, cursor[] crlTargets, cursor[] crl2DElems, double dAngle,
     cursor crTopNode, cursor crBotNode, double[] dlCenterPoint, double dBoreRadius,
     double dBoreHeight, int iAxisDirection, double[] dlAxisDefined, int iDepthDirection,
@@ -96,7 +96,7 @@ PostFFTConditionOut(str strName, cursor[] crlTargets, cursor[] crl2DElems, doubl
 
 ## Sample Code
 
-```psj
+```py
 PostFFTConditionOut("BORE_1", [0:0], [0:0], 20.0, 0:0, 0:0, [0.0, 0.0, 0.0], 0.0, 0.0, 3, [0.0, 0.0, 0.0],
     0, 36, [], 0, [0.0, 0.0, 0.0], 0:0)
 ```

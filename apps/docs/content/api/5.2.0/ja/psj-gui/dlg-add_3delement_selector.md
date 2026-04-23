@@ -12,7 +12,7 @@ Add "Solid element" to the selection list, allowing user to select solid element
 
 ## Syntax
 
-```psj
+```py
 dlg.add_3delement_selector(...)
 ```
 

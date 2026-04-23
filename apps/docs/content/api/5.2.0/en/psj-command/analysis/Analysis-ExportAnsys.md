@@ -13,7 +13,7 @@ Export Ansys Analysis Job.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ExportAnsys(...)
 ```
 

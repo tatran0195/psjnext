@@ -12,7 +12,7 @@ Copy a property translate.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.PropertiesCopyTranslate(...)
 ```
 

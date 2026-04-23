@@ -28,7 +28,7 @@ This is an instance of a Plastic class, represents Plastic characteristic of mat
 
 ## Sample Code
 
-```psj {1-4}
+```py {1-4}
 structure_steel = Properties.Material.Add(strMaterialName="Structural_Steel",
     listMaterialProperty=[Density([(DENSITY, 7.85e-09)]),
     Elastic([(YOUNGS_MODULUS, 200000.0), (POISSONS_RATIO, 0.3)])],

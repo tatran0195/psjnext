@@ -13,7 +13,7 @@ All the parameters except for the setting and process indications are the same a
 
 ## Syntax
 
-```psj
+```py
 AdvcStaticProcess(string m_strName,int m_iGeomNonlinear,int fixed_or_auto,
     int num_of_inc,double max_time,double max_dt,double min_dt,int load_type,
     int output_last,int output_interval,int restart_last,int restart_interval,
@@ -327,6 +327,6 @@ data of reference result
 
 ## Sample Code
 
-```psj
+```py
 JPT.Exec('AdvcStaticProcess("ADVC_DEFAULT_PROCESS", 0, 0, 1, 1, 1, 1e-05, -1, -1, 2147483647, -1, 2147483647, 1.79769e+308, 1.79769e+308, 1.79769e+308, 0, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 2147483647, 2147483647, 1.79769e+308, 2147483647, 0, -1, 2147483647, 2147483647, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 2147483647, 0, 1.79769e+308, 1.79769e+308, 0, 0, 2147483647, 2147483647, 2147483647, 1.79769e+308, 1.79769e+308, 1.79769e+308, 2147483647, 2147483647, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 0, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 0:0, [(29:1, 0:0, 1), (29:2, 0:0, 1), (37:1, 0:0, 1)], [], [], [], -1, "", [], "", 2147483647)')
 ```

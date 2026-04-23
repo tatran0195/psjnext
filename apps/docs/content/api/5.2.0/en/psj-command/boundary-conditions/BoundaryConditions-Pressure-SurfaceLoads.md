@@ -12,7 +12,7 @@ Create distrubited pressure.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Pressure.SurfaceLoads(...)
 ```
 

@@ -26,7 +26,7 @@ For example: `HEAT_GENERATE_RATE` is equal to ID = 59.
 | 59           | `HEAT_GENERATE_RATE` | A _Tuple_ specifying the heat generate rate data.    |
 | 130          | `TEMPERATURE`        | A _Tuple_ specifying the temperature-dependent data. |
 
-```psj {2-4} title="Sample Code"
+```py {2-4} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[HeatGenerateRate(heatGenerateRate=[
                                         (HEAT_GENERATE_RATE, [0.1]),

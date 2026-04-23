@@ -11,7 +11,7 @@ Create mapping stress
 
 ## Syntax
 
-```psj
+```py
 InitialStressMapping(String m_strName,int m_dim,String m_strMappingFilePath,Cursor m_crTable,Cursor m_crEdit)
 ```
 
@@ -44,6 +44,6 @@ edit cursor
 
 ## Sample Code
 
-```psj
+```py
 InitialStressMapping("Test",1,"Test",1:11,1:11)
 ```

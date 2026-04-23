@@ -12,7 +12,7 @@ Open .poh5 / .poh5a file.
 
 ## Syntax
 
-```psj
+```py
 FileMenu.LoadPOH5(...)
 ```
 

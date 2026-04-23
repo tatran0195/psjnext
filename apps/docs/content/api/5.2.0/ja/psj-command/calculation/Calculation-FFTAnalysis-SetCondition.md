@@ -12,7 +12,7 @@ Perform a FFT analysis.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FFTAnalysis.SetCondition(...)
 ```
 

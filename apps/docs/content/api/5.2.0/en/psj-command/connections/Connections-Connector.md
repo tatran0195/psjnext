@@ -12,7 +12,7 @@ Create connectors between nodes, edges, and faces according to specified connect
 
 ## Syntax
 
-```psj
+```py
 Connections.Connector(...)
 ```
 

@@ -12,7 +12,7 @@ Boundary Conditions Lbc Initial Temperature.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.TemperatureLoads.LbcInitialTemperature(...)
 ```
 

@@ -11,7 +11,7 @@ Display a graph of the stress/strain in the direction cosine of the entered dire
 
 ## Syntax
 
-```psj
+```py
 CmdAddStrainGaugeDirCos(int[] ilNodeIDs, double[] dlDirectionInput, double dWidth, double dHeight, double dAmendFactor, str strGaugeName)
 ```
 
@@ -48,6 +48,6 @@ CmdAddStrainGaugeDirCos(int[] ilNodeIDs, double[] dlDirectionInput, double dWidt
 
 ## Sample Code
 
-```psj
+```py
 CmdAddStrainGaugeDirCos([], [0.0, 0.0, 1.0], 0.0, 0.0, 1.0, "strGaugeName")
 ```

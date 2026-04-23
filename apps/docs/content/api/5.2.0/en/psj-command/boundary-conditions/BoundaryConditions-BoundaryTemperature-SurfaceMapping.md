@@ -12,7 +12,7 @@ Create surface mapping boundary temperature.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.BoundaryTemperature.SurfaceMapping(...)
 ```
 

@@ -12,7 +12,7 @@ Define contact settings between specified faces for the TechnoStar Sunshine solv
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.SunShine.ManualFace(...)
 ```
 

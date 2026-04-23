@@ -12,7 +12,7 @@ Separate shared Nodes for Shell that is shared between the shell parts into doub
 
 ## Syntax
 
-```psj
+```py
 Assemble.SeparateFaces.Shell(...)
 ```
 

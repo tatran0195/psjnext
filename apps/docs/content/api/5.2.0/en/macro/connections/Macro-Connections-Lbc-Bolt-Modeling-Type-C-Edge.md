@@ -11,7 +11,7 @@ Create Lbc TypeC Bolt Edge method
 
 ## Syntax
 
-```psj
+```py
 Lbc_Bolt_Modeling_Type_C_Edge(Cursor taEdgeCur1,Cursor taEdgeCur2,string strRbeName,
     double dPlaneTol,double dMaxBoltHeight,int nConnectionType, int nCoincidentNodes,
     double dTolerance, int nGround,double dStiffnessX,double dStiffnessY,double dStiffnessZ,
@@ -134,7 +134,7 @@ bottom slave nodes in this range will not be considered
 
 ## Sample Code
 
-```psj
+```py
 Lbc_Bolt_Modeling_Type_C_Edge([5:66319], [5:10000031], "RBE", 20, 0.1, 0, 1, 2.22507e-308,
     0, 1.79769e+308, 1.79769e+308, 1.79769e+308, 0, 1.79769e+308, 1.79769e+308, 1.79769e+308,
     0, 1.79769e+308, 1.79769e+308, 0:0, 0, 0.01, 0, 0, 0.01, 0)

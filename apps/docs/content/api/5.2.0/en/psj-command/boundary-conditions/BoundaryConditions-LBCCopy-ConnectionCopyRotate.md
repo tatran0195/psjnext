@@ -12,7 +12,7 @@ Copy boundary conditions by using rotation method.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.ConnectionCopyRotate(...)
 ```
 

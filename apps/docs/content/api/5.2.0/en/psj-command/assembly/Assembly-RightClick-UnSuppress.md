@@ -12,7 +12,7 @@ Unsuppress part on Assembly tree.
 
 ## Syntax
 
-```psj
+```py
 Assembly.RightClick.UnSuppress(...)
 ```
 

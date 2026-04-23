@@ -12,7 +12,7 @@ Calculate AC power and transmittance from the selected nodal groups created by i
 
 ## Syntax
 
-```psj
+```py
 Calculation.AcousticAnalysis.TransmissionLoss.TransmissionLossCondition(...)
 ```
 

@@ -12,7 +12,7 @@ Export the Input Deck for TechnoStar Modal Frequency Response analysis (SOL 111)
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSolver.ModalFrequencyResponse(...)
 ```
 

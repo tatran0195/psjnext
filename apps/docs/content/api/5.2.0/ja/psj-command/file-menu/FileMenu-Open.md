@@ -12,7 +12,7 @@ Load JTDB file
 
 ## Syntax
 
-```psj
+```py
 FileMenu.Open(strFileName="", bUseTmpTable=False)
 ```
 

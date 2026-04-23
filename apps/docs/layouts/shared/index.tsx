@@ -1,4 +1,4 @@
-import { type FC, useMemo, type ComponentProps, type ReactNode } from 'react';
+import { useMemo, type ComponentProps, type FC, type ReactNode } from 'react';
 
 import * as PageTree from 'fumadocs-core/page-tree';
 
@@ -133,6 +133,54 @@ export function getLayoutTabs(
     return results;
 }
 
+const API_TABS = ["Macro", "PSJ Command", "PSJ GUI", "PSJ Utility"]
+
+export function getApiLayoutTab(
+    tree: PageTree.Root,
+    lang: string,
+    { transform = defaultTransform }: GetLayoutTabsOptions = {},
+): LayoutTab {
+    const result: LayoutTab = {
+        title: 'API',
+        icon: 'API',
+        description: 'API',
+        url: `/${lang}/api`,
+        unlisted: false,
+        urls: new Set<string>(),
+    };
+
+    function next(node: PageTree.Root | PageTree.Folder, unlisted?: boolean) {
+        if (node.type === 'folder' && API_TABS.includes(node.name?.toString() ?? '')) {
+            const url = getFirstUrl(node) ?? node.index?.url;
+
+            if (url) {
+                const option: LayoutTab = {
+                    title: node.name,
+                    icon: node.icon,
+                    description: node.description,
+                    url,
+                    unlisted,
+                    $folder: node,
+                };
+
+                const mapped = transform ? transform(option, node) : option;
+                if (mapped) {
+                    result.urls!.add(mapped.url);
+                };
+            }
+        }
+
+        for (const child of node.children) {
+            if (child.type === 'folder') next(child, unlisted);
+        }
+    }
+
+    next(tree);
+    if (tree.fallback) next(tree.fallback, true);
+
+    return result;
+}
+
 export function isLayoutTabActive(tab: LayoutTab, pathname: string) {
     if (tab.$folder) {
         return (
@@ -144,7 +192,13 @@ export function isLayoutTabActive(tab: LayoutTab, pathname: string) {
     }
 
     if (tab.urls) {
-        return tab.urls.has(normalize(pathname));
+        const norm = normalize(pathname);
+        for (const u of tab.urls) {
+            // entries ending with '/' → prefix match (e.g. '/en/api/' matches '/en/api/5.2.0/foo')
+            if (u.endsWith('/') ? norm.startsWith(u.slice(0, -1)) : norm === normalize(u))
+                return true;
+        }
+        return false;
     }
 
     return isActive(tab.url, pathname, true);
@@ -297,4 +351,5 @@ export function isLinkItemActive(link: LinkItemType, pathname: string) {
     return isActive(link.url, pathname, link.active === 'nested-url');
 }
 
-export { type BaseSlots, type BaseSlotsProps, baseSlots, LinkItem } from './client';
+export { baseSlots, LinkItem, type BaseSlots, type BaseSlotsProps } from './client';
+

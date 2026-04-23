@@ -11,7 +11,7 @@ Copy (mapping) stress to create continuous stress data in the direction of rotat
 
 ## Syntax
 
-```psj
+```py
 PostRotateMapping(doule dAngleInterval, int iRotateAxis, int iCoordinateReference, int iInterpolateType, doubled AreaTolerance, double dMeshTolerance, int iRegionType, cursor crPart)
 ```
 
@@ -56,6 +56,6 @@ PostRotateMapping(doule dAngleInterval, int iRotateAxis, int iCoordinateReferenc
 
 ## Sample Code
 
-```psj
+```py
 PostRotateMapping(7.5, 3, 0, 1, 1, 0.05, 0, 0:0)
 ```

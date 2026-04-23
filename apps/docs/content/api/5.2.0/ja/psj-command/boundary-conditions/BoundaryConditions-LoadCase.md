@@ -12,7 +12,7 @@ Create a load case that bundles loads and constraints. Load cases can be referen
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LoadCase(...)
 ```
 

@@ -12,7 +12,7 @@ Display stress and strain in the direction connecting two points.
 
 ## Syntax
 
-```psj
+```py
 Calculation.StrainGauge.TwoPoints(...)
 ```
 

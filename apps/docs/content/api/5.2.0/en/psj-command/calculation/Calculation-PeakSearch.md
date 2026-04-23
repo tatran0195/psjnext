@@ -12,7 +12,7 @@ Find peak nodes with higher or lower results (peaked) than nearby vertices at ea
 
 ## Syntax
 
-```psj
+```py
 Calculation.PeakSearch(...)
 ```
 

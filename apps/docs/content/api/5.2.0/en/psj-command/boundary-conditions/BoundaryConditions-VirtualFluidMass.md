@@ -12,7 +12,7 @@ Create a virtual fluid mass.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.VirtualFluidMass(...)
 ```
 

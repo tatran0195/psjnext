@@ -11,7 +11,7 @@ Create a subcase with the maximizes stress, MISES stress, beam MAX, MIN, and AXI
 
 ## Syntax
 
-```psj
+```py
 PostToolsSubcasePeakHoldEx(int iAnalysisType, bool bFatigue, double dQb, double dQw, double dQy, str strSubcaseName, int iSubcaseID, map mapPeakHoldSubcases)
 ```
 
@@ -56,6 +56,6 @@ PostToolsSubcasePeakHoldEx(int iAnalysisType, bool bFatigue, double dQb, double 
 
 ## Sample Code
 
-```psj
+```py
 PostToolsSubcasePeakHoldEx(1, 1, 270.0, 130.0, 165.0, "Subcase 1 Peak Hold", 1, [(1, [(1, "", 1, 1), (2, "", 1, 1), (3, "", 1, 1), (4, "", 1, 1), (5, "", 1, 1)])])
 ```

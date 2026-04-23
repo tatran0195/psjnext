@@ -12,7 +12,7 @@ Define contact settings between specified groups for the ADVC solver.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.ADVC.ManualGroup(...)
 ```
 

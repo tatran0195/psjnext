@@ -12,7 +12,7 @@ Create natural convection condition on selected face, element or group. User inp
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Convection.Constant(...)
 ```
 

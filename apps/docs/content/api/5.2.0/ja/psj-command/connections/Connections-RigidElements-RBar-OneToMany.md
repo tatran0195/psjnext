@@ -12,7 +12,7 @@ Create one-to-many (master:slave) RBar (rigid elements).
 
 ## Syntax
 
-```psj
+```py
 Connections.RigidElements.RBar.OneToMany(...)
 ```
 

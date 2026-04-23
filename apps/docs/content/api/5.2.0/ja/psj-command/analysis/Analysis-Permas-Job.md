@@ -12,7 +12,7 @@ Create a Permas Analysis Job.
 
 ## Syntax
 
-```psj
+```py
 Analysis.Permas.Job(...)
 ```
 

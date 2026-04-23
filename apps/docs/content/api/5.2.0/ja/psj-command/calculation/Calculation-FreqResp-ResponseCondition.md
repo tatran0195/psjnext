@@ -12,7 +12,7 @@ Output the result of the response point for frequency response.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FreqResp.ResponseCondition(...)
 ```
 

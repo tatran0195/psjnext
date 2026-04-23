@@ -12,7 +12,7 @@ Export the Input Deck for TechnoStar SunShine Nonlinear Static analysis (SOL 106
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSS.NonlinearStatic(...)
 ```
 

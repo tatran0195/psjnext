@@ -1,6 +1,6 @@
-# PSJ Sample Code Examples
+# py Sample Code Examples
 
-This folder contains runnable PSJ sample code extracted from the documentation.  
+This folder contains runnable py sample code extracted from the documentation.  
 Files mirror the docs folder structure exactly.
 
 ## Structure
@@ -23,5 +23,5 @@ These markers are **stripped from the rendered docs output** — they exist only
 
 ## Running
 
-Open any `.py` file in your PSJ environment and run it directly.  
+Open any `.py` file in your py environment and run it directly.  
 The header comment block at the top documents the function name, version, and docs URL.

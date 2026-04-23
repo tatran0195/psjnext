@@ -11,7 +11,7 @@ Create centrifugal force by coordinate system
 
 ## Syntax
 
-```psj
+```py
 CentrifugalForceCoordinateSystem(String m_strName,double fVelocity,double fAcceleration,
     int iAxisDirection,int iVelocityUnit,int iAccelerationUnit,Cursor curCoord,
     Cursor[] m_taTarget,Cursor m_crEdit)
@@ -62,6 +62,6 @@ edit cursor
 
 ## Sample Code
 
-```psj
+```py
 CentrifugalForceCoordinateSystem("Test",0.001,0.001,1,1,1,1:11,[1:11,2:12],1:11)
 ```

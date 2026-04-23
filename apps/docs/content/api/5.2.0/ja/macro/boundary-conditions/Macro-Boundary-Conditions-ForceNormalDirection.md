@@ -11,7 +11,7 @@ Create Force (normal direction)
 
 ## Syntax
 
-```psj
+```py
 ForceNormalDirection(string name, vector force, int arrowDir, int distributionMethod,
     cursor crCoordinate, cursor[] targets, cursor crEdit)
 ```
@@ -53,6 +53,6 @@ edit target
 
 ## Sample Code
 
-```psj
+```py
 ForceNormalDirection("Force3", [0, -1, 0], 0, 0, 0:0, [6:21], 0:0)
 ```

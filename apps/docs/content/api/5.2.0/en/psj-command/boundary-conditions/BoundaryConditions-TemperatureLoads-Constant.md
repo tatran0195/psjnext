@@ -12,7 +12,7 @@ Create temperature load constant.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.TemperatureLoads.Constant(...)
 ```
 

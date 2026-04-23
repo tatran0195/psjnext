@@ -12,7 +12,7 @@ Export the Input Deck for TechnoStar Nonlinear Frequency analysis (SOL 126).
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSolver.NonlinearFrequency(...)
 ```
 

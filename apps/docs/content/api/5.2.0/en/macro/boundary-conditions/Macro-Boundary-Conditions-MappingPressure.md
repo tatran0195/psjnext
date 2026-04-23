@@ -11,7 +11,7 @@ Create mapping pressure
 
 ## Syntax
 
-```psj
+```py
 MappingPressure(string name, Cursor[] target, int pos, int conflictMode, int component,
     int srcType, int mappedComponentIndex, double dSclFact, double[3] transitionVct, double[3] rotVct,
     double coordScl, double dSearchRange, int iInputUnit, string strDataScrFile, Cursor editCursor)
@@ -96,7 +96,7 @@ Edit mapping pressure
 
 ## Sample Code
 
-```psj
+```py
 MappingPressure("MappingPressure1", [6:30, 6:22], 2, 0, 1, 1, -1, 1, [0, 0, 0],
     [0, 0, 0], 1, 0, 0, "D:/Fluent.dat", 0:0)
 ```

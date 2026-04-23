@@ -12,7 +12,7 @@ Display MPC result of specific time in Model Participation Factor dialog.
 
 ## Syntax
 
-```psj
+```py
 Calculation.TransResp.MPFMCFCalculation.AtTime(...)
 ```
 

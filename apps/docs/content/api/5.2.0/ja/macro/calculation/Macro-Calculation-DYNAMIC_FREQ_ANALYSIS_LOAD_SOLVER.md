@@ -11,7 +11,7 @@ Create a load solver for Gururi analysis.
 
 ## Syntax
 
-```psj
+```py
 DYNAMIC_FREQ_ANALYSIS_LOAD_SOLVER(int AnalysisType, cursor ParentAnalysis, cursor Coordinate, string Name, int LoadDirection, double[] Force, double Amplitude, double Delay, double Phase, bool Bf, double Bf, cursor BfTable, bool Ff, double Ff, cursor FfTable, cursor[] TargetNode, int LoadType, cursor Edit)
 ```
 
@@ -96,6 +96,6 @@ A Cursor specifying an existing load condition.
 
 ## Sample Code
 
-```psj
+```py
 DYNAMIC_FREQ_ANALYSIS_LOAD_SOLVER(0, 0:0, 0:0, "FRQLOAD1", 0, [1.0,0.0,0.0], 1.0, 0.0, 0.0, False, 1.0, 0:0, False, 0.0, 0:0, [1.0,0.0,0.0], 0, 0:0)
 ```

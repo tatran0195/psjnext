@@ -12,7 +12,7 @@ Get table data of Auto Bolt Connection.
 
 ## Syntax
 
-```psj
+```py
 Connections.BoltConnections.FindAutoBoltConnection(...)
 ```
 

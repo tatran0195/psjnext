@@ -12,7 +12,7 @@ Export the input file for Nastran Transient Heat Transfer analysis (SOL 159).
 
 ## Syntax
 
-```psj
+```py
 Analysis.Nastran.Transient(...)
 ```
 

@@ -12,7 +12,7 @@ Create temperature load Desiner
 
 ## Syntax
 
-```psj
+```py
 Designer.LBC.TemperatureLoad(strName="", iDnType=0, dFTemp=0, strDstrFilePathName="", crDcrTable=None, crlTargets=[], crEdit=None, bDbUseAsMaterialReferenceTemp=False)
 ```
 

@@ -12,7 +12,7 @@ Export the input file for Nastran Modal Frequency Response Analysis (SOL 111).
 
 ## Syntax
 
-```psj
+```py
 Analysis.Nastran.ModalFrequencyResponse(...)
 ```
 

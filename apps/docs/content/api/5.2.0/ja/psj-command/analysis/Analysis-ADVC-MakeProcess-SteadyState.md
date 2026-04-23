@@ -12,7 +12,7 @@ Create a Heat Transfer - Steady State analysis as an ADVC process.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.MakeProcess.SteadyState(...)
 ```
 

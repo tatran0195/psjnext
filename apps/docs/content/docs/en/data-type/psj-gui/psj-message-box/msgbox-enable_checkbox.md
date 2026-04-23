@@ -9,7 +9,7 @@ An instance of a PSJMessageBox class, specifying a checkbox in the message box.
 
 ## Syntax
 
-```psj
+```py
 msgbox.enable_checkbox(...)
 ```
 
@@ -33,7 +33,7 @@ This function does not have output value.
 
 ## Sample Code
 
-```psj {9}
+```py {9}
 from pyjdg import *
 
 def main():

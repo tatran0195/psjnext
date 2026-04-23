@@ -11,7 +11,7 @@ Export ADX file
 
 ## Syntax
 
-```psj
+```py
 ExportAdx(cursor crJobAdx, string strPath, int NumType, int Width, int Precision)
 ```
 
@@ -44,6 +44,6 @@ precision
 
 ## Sample Code
 
-```psj
+```py
 ExportAdx(130:1, "D:/ADVC.adx", 2, 10, 5)
 ```

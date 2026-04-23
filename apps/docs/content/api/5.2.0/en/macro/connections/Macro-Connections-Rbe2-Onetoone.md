@@ -11,7 +11,7 @@ Create one-to-one RBE2 (rigid elements) connection
 
 ## Syntax
 
-```psj
+```py
 RBE2OneToOne(int iMethod, cursor[] taMasterTarget, cursor[] taSlaveTarget, int eType, string strName,
     cursor crCoordSys, double dTol, int ulDofs, double[3] virtualNodePos, int iSurfaceDef,
     cursor crEdit, int iEnableUpdateDispCS, int iEnableCornerOnly, int iEnableCheckDuplicate, int iDuplicatedMode)
@@ -93,6 +93,6 @@ Duplication mode
 
 ## Sample Code
 
-```psj
+```py
 RBE2OneToOne(17, [10:935], [10:469], 2, "RBE2_2", 0:0, 0, 63, [0, 0, 0], 0, 0:0, 1, 0, 1, 0)
 ```

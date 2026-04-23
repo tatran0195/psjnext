@@ -12,7 +12,7 @@ Change the color of the selected part.
 
 ## Syntax
 
-```psj
+```py
 Assembly.RightClick.ChangeBodyColor(...)
 ```
 

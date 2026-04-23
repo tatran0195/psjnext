@@ -12,7 +12,7 @@ Display the distance between parts as a contour.
 
 ## Syntax
 
-```psj
+```py
 Calculation.SurfaceDistance.DistanceCalculate(...)
 ```
 

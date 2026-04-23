@@ -11,7 +11,7 @@ Create ADVC creep process
 
 ## Syntax
 
-```psj
+```py
 AdvcCreepProcess(string m_strName,int m_iGeomNonlinear,int fixed_or_auto,int num_of_inc,
     double max_time,double max_dt,double min_dt,int load_type,int output_last,int output_interval,
     int restart_last,int restart_interval,double output_time_interval,double restart_time_interval,
@@ -333,7 +333,7 @@ Data of reference result
 
 ## Sample Code
 
-```psj
+```py
 AdvcCreepProcess("Test",1,1,1,0.001,0.001,0.001,1,1,1,1,1,0.001,0.001,1,0.001,0.001,0.001,
     0.001,0.001,0.001,0.001,0.001,0.001,0.001,1,1,0.001,1,1,1,1,1,0.001,0.001,0.001,0.001,
     1,1,0.001,0.001,1,1,1,1,1,0.001,0.001,0.001,1,1,0.001,0.001,0.001,0.001,0.001,1,0.001,

@@ -12,7 +12,7 @@ Calculate fatigue strength (safety factor, mean stress, stress amplitude) at any
 
 ## Syntax
 
-```psj
+```py
 Calculation.FatigueStrength(...)
 ```
 

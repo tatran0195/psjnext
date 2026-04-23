@@ -12,7 +12,7 @@ Create Connections Bar or Beam.
 
 ## Syntax
 
-```psj
+```py
 Connections.BarBeam(...)
 ```
 

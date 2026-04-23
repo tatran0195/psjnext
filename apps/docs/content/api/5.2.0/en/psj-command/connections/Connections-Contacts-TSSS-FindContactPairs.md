@@ -12,7 +12,7 @@ Find the contact pairs in model.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.TSSS.FindContactPairs(...)
 ```
 

@@ -11,7 +11,7 @@ ACM_ImportCmd_OnclickedImportButton
 
 ## Syntax
 
-```psj
+```py
 ACM_ImportCmd_OnclickedImportButton(string filePath, double dFaceAngle)
 ```
 
@@ -32,6 +32,6 @@ Nastran data face angle
 
 ## Sample Code
 
-```psj
+```py
 ACM_ImportCmd_OnclickedImportButton("D:/tri6.bdf", 15)
 ```

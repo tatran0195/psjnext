@@ -34,7 +34,7 @@ For example: `ALPHA` is equal to ID = 69.
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data.       |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.                |
 
-```psj {2-4} title="Sample Code"
+```py {2-4} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Expansion(expansion=[
                                         (ALPHA, [1.2e-05]),
@@ -59,7 +59,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Expansion(expansion=[
                                         (ALPHA11, [1.2e-05]),
@@ -87,7 +87,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-6} title="Sample Code"
+```py {2-6} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Expansion(expansion=[
                                         (ALPHA11, [1.2e-05]),
@@ -116,7 +116,7 @@ JPT.Debugger(density) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-6} title="Sample Code"
+```py {2-6} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Expansion(expansion=[
                                         (ALPHA11, [1.2e-05]),
@@ -148,7 +148,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-9} title="Sample Code"
+```py {2-9} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Expansion(expansion=[
                                         (ALPHA11, [1e-05]),

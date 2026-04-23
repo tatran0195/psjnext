@@ -11,7 +11,7 @@ Set the frequency response steady-state excitation input for the Gururi.
 
 ## Syntax
 
-```psj
+```py
 DYNAMIC_FREQ_ANALYSIS_LOAD(int AnalysisType, cursor ParentAnalysis, cursor Coordinate, string Name, int LoadDirection, double[] Force, double Amplitude, double Delay, double Phase, bool Bf, double Bf, cursor BfTable, bool Ff, double Ff, cursor FfTable, bool UnitLoad, bool CentrifugalForce, cursor[] TargetNode, cursor Edit)
 ```
 
@@ -99,6 +99,6 @@ A Cursor specifying the created gururi load condition.
 
 ## Sample Code
 
-```psj
+```py
 DYNAMIC_FREQ_ANALYSIS_LOAD(0, 3:1, 2:1, "FRQLOAD_1", 0, [1.0,0.0,0.0], 1.0, 0.0, 0.0, False, 1.0, 2:1, False, 0.0, 2:1, False, False, [], 2:1)
 ```

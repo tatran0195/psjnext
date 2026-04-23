@@ -12,7 +12,7 @@ Activate selector by selector id.
 
 ## Syntax
 
-```psj
+```py
 dlg.activate_selector(...)
 ```
 

@@ -12,7 +12,7 @@ Create contacts for TS Sunshine solver by using table.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.TSSS.ContactTable(...)
 ```
 

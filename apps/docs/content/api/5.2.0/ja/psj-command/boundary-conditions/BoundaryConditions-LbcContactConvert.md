@@ -12,7 +12,7 @@ BoundaryConditions LbcContactConvert
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LbcContactConvert(...)
 ```
 

@@ -12,7 +12,7 @@ Define the contact set between the specified group for Abaqus. Create a group wi
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.Abaqus.ManualGroup(...)
 ```
 

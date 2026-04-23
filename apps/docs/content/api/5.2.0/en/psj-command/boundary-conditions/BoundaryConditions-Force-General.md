@@ -12,7 +12,7 @@ Create a general force applied to the selected Face, Edge or Node. User inputs t
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Force.General(...)
 ```
 

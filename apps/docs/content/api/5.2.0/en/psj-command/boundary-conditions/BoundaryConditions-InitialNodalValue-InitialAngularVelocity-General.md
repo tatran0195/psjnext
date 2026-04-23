@@ -12,7 +12,7 @@ Create initial angular velocity for the general case.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.InitialNodalValue.InitialAngularVelocity.General(...)
 ```
 

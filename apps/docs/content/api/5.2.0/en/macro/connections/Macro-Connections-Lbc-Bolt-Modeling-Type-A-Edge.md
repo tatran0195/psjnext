@@ -11,7 +11,7 @@ Create Lbc TypeA Bolt Edge method
 
 ## Syntax
 
-```psj
+```py
 Lbc_Bolt_Modeling_Type_A_Edge(Cursor taEdgeCur1,TCursor taEdgeCur2,string strRbeName,
     string strBarName,int nShaftType,Cursor curBarProperty,double dPlaneTol,
     double dMaxBoltHeight,bool bPretensionLoad,int nSolverType,double dForceValue,
@@ -104,7 +104,7 @@ Option ADVC Static process, 0: No, 1:Yes
 
 ## Sample Code
 
-```psj
+```py
 Lbc_Bolt_Modeling_Type_A_Edge([5:66319], [5:10000031], "RBE", "Bar_2", 0, 0:0, 20,
     0.1, 0, 0, 0, 0, 0:0, 0, 0, 0.0081206, 0, 0.0081206, 0)
 ```

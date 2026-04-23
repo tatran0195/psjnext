@@ -12,7 +12,7 @@ Specify multiple points to define the path of the rib and the attachment surface
 
 ## Syntax
 
-```psj
+```py
 Assemble.AddRibEx.Curve(...)
 ```
 

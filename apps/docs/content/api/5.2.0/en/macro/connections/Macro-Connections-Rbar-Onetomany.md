@@ -11,7 +11,7 @@ Create one-to-many RBAR (rigid elements) connection
 
 ## Syntax
 
-```psj
+```py
 RBarOneToMany(string strName, cursor[] taMasterTarget, cursor[] taSlaveTarget, int iMethod, int ulDofs, double dTol,
             cursor crCoord, bool bUpdateDispCS, cursor crEdit)
 ```
@@ -63,6 +63,6 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 RBarOneToMany("RBar_1", [10:493], [10:6, 10:2, 10:3], 16, 63, 0, 0:0, 1, 0:0)
 ```

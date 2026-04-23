@@ -11,7 +11,7 @@ Display stress or strain in the direction of the maximum principle stress.
 
 ## Syntax
 
-```psj
+```py
 CmdAddStrainGaugeMaxPrincipal(int[] ilNodeIDs, double dWidth, double dHeight, double dAmendFactor, str strGaugeName)
 ```
 
@@ -44,6 +44,6 @@ CmdAddStrainGaugeMaxPrincipal(int[] ilNodeIDs, double dWidth, double dHeight, do
 
 ## Sample Code
 
-```psj
+```py
 CmdAddStrainGaugeMaxPrincipal([], 0.0, 0.0, 1.0, "strGaugeName")
 ```

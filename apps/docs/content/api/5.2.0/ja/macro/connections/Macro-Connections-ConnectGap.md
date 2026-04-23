@@ -11,7 +11,7 @@ Create gap connection
 
 ## Syntax
 
-```psj
+```py
 ConnectGap(cursor[] taEntityMaster, cursor[] taEntitySlave, int iMethod, int OrientType,
     cursor crCoord, string strName, double dU0, double dF0, double dKa, double dKb,
     double dKt, double dMar, double dMu1, double dMu2, double[3] orientVec,
@@ -110,7 +110,7 @@ Used in edit mode to specify edited object
 
 ## Sample Code
 
-```psj
+```py
 ConnectGap([6:62], [6:60], 3, 1, 27:1, "GAP_11", 0.001, 1, 1000, 1000, 1000, 1,
     1, 1, [0, 1, 0], 0.002, 0.05, 2, 0:0)
 ```

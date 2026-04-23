@@ -12,7 +12,7 @@ Add "Elem edge" to the selection list, allowing user to select element edges and
 
 ## Syntax
 
-```psj
+```py
 dlg.add_elementedge_selector(...)
 ```
 

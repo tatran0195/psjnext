@@ -11,7 +11,7 @@ Find mating faces
 
 ## Syntax
 
-```psj
+```py
 Assemble_Faces_MatingStep(cursor[] face_id_master_list, cursor[] face_id_slave_list, cursor[] body_id_list, double tol)
 ```
 
@@ -40,6 +40,6 @@ Tolerance to find mating faces
 
 ## Sample Code
 
-```psj
+```py
 Assemble_Faces_MatingStep([6:50, 6:47], [6:23, 6:21], [3:1, 3:2], 0.00022222)
 ```

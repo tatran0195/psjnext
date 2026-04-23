@@ -12,7 +12,7 @@ Create Abaqus step for Coupled Temperature-Displacement analysis.
 
 ## Syntax
 
-```psj
+```py
 Analysis.AbaqusStep.CoupledTDStep(...)
 ```
 

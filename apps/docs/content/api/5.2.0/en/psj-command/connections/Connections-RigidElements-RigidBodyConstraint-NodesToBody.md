@@ -12,7 +12,7 @@ Create Rigid Body Constraint (LS-DYNA)
 
 ## Syntax
 
-```psj
+```py
 Connections.RigidElements.RigidBodyConstraint.NodesToBody(...)
 ```
 

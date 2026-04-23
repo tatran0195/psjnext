@@ -59,7 +59,7 @@ For example: `PRESSURE_FORCE_LOADING` is equal to ID = 63.\
 | 40           | STRESS                | A _Tuple_ specifying the yield stress data.          |
 | 113          | TIME                  | A _Tuple_ specifying the time data.                  |
 
-```psj {2-6} title="Sample Code"
+```py {2-6} title="Sample Code"
 structure_steel = Properties.Material.Modify(strMaterialName="Structural_Steel",
     dictMaterialProperty={'HyperElastic': {'hyperElasticType': 'ARRUDA_BOYCE', 'moduli': 'LONG_TERM',
     'inputSource': 1, 'hyperElastic': {'MU': [3.5e-07], 'LAMDA_M': [1.2], 'D': [3000000.0],
@@ -88,7 +88,7 @@ JPT.Debugger(structure_steel) #for checking return value
 | 40           | STRESS                | A _Tuple_ specifying the yield stress data.          |
 | 113          | TIME                  | A _Tuple_ specifying the time data.                  |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 structure_steel = Properties.Material.Modify(strMaterialName="Structural_Steel",
     dictMaterialProperty={'HyperElastic': {'hyperElasticType': 'MARLOW', 'moduli': 'LONG_TERM',
     'inputSource': 0, 'hyperElastic': {'NOMIAL_STRESS': [0.00011], 'NOMIAL_STRAIN': [75.0],
@@ -116,7 +116,7 @@ JPT.Debugger(structure_steel) #for checking return value
 | 40           | STRESS                | A _Tuple_ specifying the yield stress data.          |
 | 113          | TIME                  | A _Tuple_ specifying the time data.                  |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 structure_steel = Properties.Material.Modify(strMaterialName="Structural_Steel",
     dictMaterialProperty={'HyperElastic': {'hyperElasticType': 'MOONEY_RIVLIN',
     'moduli': 'LONG_TERM', 'inputSource': 0, 'hyperElastic': {'NOMIAL_STRESS': [7.999999999999999e-05],
@@ -144,7 +144,7 @@ JPT.Debugger(structure_steel) #for checking return value
 | 40           | STRESS                | A _Tuple_ specifying the yield stress data.          |
 | 113          | TIME                  | A _Tuple_ specifying the time data.                  |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 structure_steel = Properties.Material.Add(strMaterialName="Structural_Steel",
     dictMaterialProperty={'HyperElastic': {'hyperElasticType': 'NEO_HOOKE', 'moduli': 'LONG_TERM',
     'inputSource': 0, 'hyperElastic': {'NOMIAL_STRESS': [9.999999999999999e-05], 'NOMIAL_STRAIN': [45.0],
@@ -172,7 +172,7 @@ JPT.Debugger(structure_steel) #for checking return value
 | 40           | STRESS                | A _Tuple_ specifying the yield stress data.          |
 | 113          | TIME                  | A _Tuple_ specifying the time data.                  |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 structure_steel = Properties.Material.Modify(strMaterialName="Structural_Steel",
     dictMaterialProperty={'HyperElastic': {'hyperElasticType': 'OGDEN', 'moduli': 'LONG_TERM',
     'inputSource': 0, 'hyperElastic': {'NOMIAL_STRESS': [5.999999999999999e-05], 'NOMIAL_STRAIN': [15.0],
@@ -204,7 +204,7 @@ JPT.Debugger(structure_steel) #for checking return value
 | 40           | STRESS                | A _Tuple_ specifying the yield stress data.          |
 | 113          | TIME                  | A _Tuple_ specifying the time data.                  |
 
-```psj {2-6} title="Sample Code"
+```py {2-6} title="Sample Code"
 structure_steel = Properties.Material.Modify(strMaterialName="Structural_Steel",
     dictMaterialProperty={'HyperElastic': {'hyperElasticType': 'POLYNOMIAL', 'moduli': 'LONG_TERM',
     'inputSource': 1, 'hyperElastic': {'C10': [3.5e-05], 'C01': [1.5e-05], 'D1': [30000000.0],
@@ -237,7 +237,7 @@ JPT.Debugger(structure_steel) #for checking return value
 | 40           | STRESS                | A _Tuple_ specifying the yield stress data.          |
 | 113          | TIME                  | A _Tuple_ specifying the time data.                  |
 
-```psj {2-6} title="Sample Code"
+```py {2-6} title="Sample Code"
 structure_steel = Properties.Material.Modify(strMaterialName="Structural_Steel",
     dictMaterialProperty={'HyperElastic': {'hyperElasticType': 'REDUCED_POLYNOMIAL',
     'moduli': 'LONG_TERM', 'inputSource': 1, 'hyperElastic': {'C10': [9.999999999999999e-06],
@@ -267,7 +267,7 @@ JPT.Debugger(structure_steel) #for checking return value
 | 40           | STRESS                | A _Tuple_ specifying the yield stress data.          |
 | 113          | TIME                  | A _Tuple_ specifying the time data.                  |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 structure_steel = Properties.Material.Modify(strMaterialName="Structural_Steel",
     dictMaterialProperty={'HyperElastic': {'hyperElasticType': 'USER', 'moduli': 'LONG_TERM',
     'inputSource': 1, 'hyperElastic': {'NOMIAL_STRESS': [0.000112], 'NOMIAL_STRAIN': [130.0],
@@ -301,7 +301,7 @@ JPT.Debugger(structure_steel) #for checking return value
 | 40           | STRESS                | A _Tuple_ specifying the yield stress data.          |
 | 113          | TIME                  | A _Tuple_ specifying the time data.                  |
 
-```psj {2-6} title="Sample Code"
+```py {2-6} title="Sample Code"
 structure_steel = Properties.Material.Modify(strMaterialName="Structural_Steel",
     dictMaterialProperty={'HyperElastic': {'hyperElasticType': 'VAN_DER_WAALS', 'moduli': 'LONG_TERM',
     'inputSource': 1, 'hyperElastic': {'MU': [3e-07], 'LAMDA_M': [0.5], 'ALPHA': [3.0], 'BETA': [2.5],
@@ -333,7 +333,7 @@ JPT.Debugger(structure_steel) #for checking return value
 | 68           | HARDENING_B     | A _Tuple_ specifying the hardening B data.            |
 | 133          | TEMPERATURE_SUB | A _Tuple_ specifying the temperature sub option data. |
 
-```psj {2-7} title="Sample Code"
+```py {2-7} title="Sample Code"
 structure_steel = Properties.Material.Modify(strMaterialName="Structural_Steel",
     dictMaterialProperty={'HyperElastic': {'hyperElasticType': 'YEOH', 'moduli': 'LONG_TERM',
     'inputSource': 1, 'hyperElastic': {'C00': [0.00012], 'C20': [5e-05], 'C30': [2e-06],

@@ -11,7 +11,7 @@ Create rbe2 connection
 
 ## Syntax
 
-```psj
+```py
 Rbe2(int iMethod, cursor[] taMasterTarget, cursor[] taSlaveTarget, int eType, string strName,
     cursor crCoord, double dTol, int ulDofs, double[3] virtualNodePos, int iSurfaceDef,
     cursor crEdit, bool bUpdateDispCS, bool bCornerOnly, int iDuplicatedMode)
@@ -91,6 +91,6 @@ duplicated mode
 
 ## Sample Code
 
-```psj
+```py
 Rbe2(17, [10:224983], [10:157853], 2, "RBE2_1", 0:0, 0, 63, [0, 0, 0], 0, 0:0, 1, 0, -1)
 ```

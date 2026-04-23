@@ -12,7 +12,7 @@ Create ADVC Structure Static process for analysis work. This process could be cr
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.MakeProcess.Static(...)
 ```
 

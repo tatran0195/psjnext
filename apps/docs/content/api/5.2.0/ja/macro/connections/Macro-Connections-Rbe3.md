@@ -11,7 +11,7 @@ Create rbe3 connection
 
 ## Syntax
 
-```psj
+```py
 Rbe3(int Method, Cursor[] MasterTarget, Cursor[] SlaveTarget, RBE3TermAttribute[] termAtbs,
     int RBE3Type, string name, Cursor CoordSystem, double Tolerance, double[3] VisualNodePos,
     int SurfaceDef, Cursor edit, bool UpdateDispCS, bool CornerOnly )
@@ -80,7 +80,7 @@ Corner only flag true = 1, false = 0
 
 ## Sample Code
 
-```psj
+```py
 Rbe3(17, [10:157854], [10:224981], [(0, 63, 1), (1, 7, 1)], 3,
     "RBE3_1", 0:0, 0, [0, 0, 0], 0, 0:0, 1, 0)
 ```

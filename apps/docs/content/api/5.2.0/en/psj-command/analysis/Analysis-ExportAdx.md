@@ -12,7 +12,7 @@ Export the ADVENTURECluster solver file in adx format with the existing Job in A
 
 ## Syntax
 
-```psj
+```py
 Analysis.ExportAdx(...)
 ```
 

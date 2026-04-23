@@ -12,7 +12,7 @@ Create a radiation applied to the selected Face or Element or Group. User inputs
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Radiation(...)
 ```
 

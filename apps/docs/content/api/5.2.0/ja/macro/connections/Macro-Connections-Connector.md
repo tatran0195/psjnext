@@ -11,7 +11,7 @@ Create a connector
 
 ## Syntax
 
-```psj
+```py
 Connector(string nameConnector, int iMethod, int iConnectType, int ReferenceNode,
     int ElementCS, Cursor LocalCS, Cursor[] Elasticity, Cursor[] Damping,
     Cursor[] MasterTarget, Cursor[] SlaveTarget, Cursor Edit)
@@ -70,7 +70,7 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 Connector("Connector_1", 1, 1, 0, 0, 0:0, [0:0, 0:0, 0:0, 0:0, 0:0, 0:0],
     [0:0, 0:0, 0:0, 0:0, 0:0, 0:0], [10:1], [10:2], 0:0)
 ```

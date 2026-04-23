@@ -12,7 +12,7 @@ Map temperagure load from solver data or csv.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.TemperatureLoads.WholeMapping(...)
 ```
 

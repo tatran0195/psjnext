@@ -12,7 +12,7 @@ Display the tangential strain at each node.
 
 ## Syntax
 
-```psj
+```py
 Calculation.StrainGauge.TangentProjection(...)
 ```
 

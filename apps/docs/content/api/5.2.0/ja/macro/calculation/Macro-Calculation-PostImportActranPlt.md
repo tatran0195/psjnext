@@ -11,7 +11,7 @@ Intensity is created from the sound pressure and particle velocity results.
 
 ## Syntax
 
-```psj
+```py
 PostImportActranPlt(str strPltPathFile)
 ```
 
@@ -28,6 +28,6 @@ PostImportActranPlt(str strPltPathFile)
 
 ## Sample Code
 
-```psj
+```py
 PostImportActranPlt("path/to/the/file")
 ```

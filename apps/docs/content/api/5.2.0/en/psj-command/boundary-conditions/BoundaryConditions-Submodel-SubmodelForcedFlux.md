@@ -12,7 +12,7 @@ Create submodel forced flux.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Submodel.SubmodelForcedFlux(...)
 ```
 

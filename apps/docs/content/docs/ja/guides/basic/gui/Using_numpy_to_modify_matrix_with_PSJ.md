@@ -14,7 +14,7 @@ In this tutorial, you'll learn how to use [_numpy library_](https://numpy.org/) 
 
 ## 📖 Tutorial
 
-```psj
+```py
 # Encoding for Japanese
 # coding: cp932
 

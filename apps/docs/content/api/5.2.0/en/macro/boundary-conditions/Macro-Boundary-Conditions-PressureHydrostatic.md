@@ -11,7 +11,7 @@ Create Pressure hydrostatic
 
 ## Syntax
 
-```psj
+```py
 PressureHydrostatic(String name, double staticPressure, double density, int densityUnit,
     double gravity, int gravityUnit, int gravityDir, double waterSurface, int surfaceUnit,
     int distributionMethod, Cursor[] targets, Cursor crEdit)
@@ -74,6 +74,6 @@ edit target
 
 ## Sample Code
 
-```psj
+```py
 PressureHydrostatic("PressureHydrostatic1", 0, 1000, 0, 0, 0, 0, 0, 0, 0, [6:23], 0:0)
 ```

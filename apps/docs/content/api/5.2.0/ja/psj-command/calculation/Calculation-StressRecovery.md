@@ -12,7 +12,7 @@ Recover stress (strain) in arbitrary elements from the calculation results of Re
 
 ## Syntax
 
-```psj
+```py
 Calculation.StressRecovery(...)
 ```
 

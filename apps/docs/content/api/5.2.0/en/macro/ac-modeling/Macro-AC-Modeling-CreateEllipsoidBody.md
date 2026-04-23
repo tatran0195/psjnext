@@ -11,7 +11,7 @@ Create Ellipsoid Body
 
 ## Syntax
 
-```psj
+```py
 CreateEllipsoidBody(bool bAuto, double dTol, int[] taBodyK, double[] dOrigin, double[] dMajorPt, double[] dMinorPt, int iLatitudeNodeCnt, int iLongitudeNodeCnt, string strName, color colBody, cursor curCoord)
 
 ```
@@ -72,6 +72,6 @@ Cursor of Reference Coordinate.
 
 ## Sample Code
 
-```psj
+```py
 CreateEllipsoidBody(1, 0.01, [1], [0, 0, 0], [0, 0, 0], [0, 0, 0], 0, 0, "INBoundary", 6409934, 0:0)
 ```

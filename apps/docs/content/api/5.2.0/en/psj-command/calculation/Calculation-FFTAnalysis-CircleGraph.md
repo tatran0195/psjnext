@@ -12,7 +12,7 @@ Display the circle graph.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FFTAnalysis.CircleGraph(...)
 ```
 

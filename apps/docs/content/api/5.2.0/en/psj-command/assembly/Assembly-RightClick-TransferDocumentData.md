@@ -12,7 +12,7 @@ Transfer data information of entity between documents.
 
 ## Syntax
 
-```psj
+```py
 Assembly.RightClick.TransferDocumentData(...)
 ```
 

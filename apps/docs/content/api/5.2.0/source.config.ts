@@ -7,42 +7,13 @@
  * imports won't resolve, so schemas and options are inlined here.
  */
 import { metaSchema, pageSchema } from 'fumadocs-core/source/schema';
-import { applyMdxPreset, defineConfig, defineDocs, type DocCollection } from 'fumadocs-mdx/config';
-import { z } from 'zod';
-
-const RibbonItemSchema = z.object({
-    label: z.string(),
-    icon: z.string().optional(),
-    shortcut: z.string().optional(),
-    tooltip: z.string().optional(),
-});
-
-const DocsSchema = pageSchema.extend({
-    preview: z.string().optional(),
-    index: z.boolean().default(false),
-    method: z.string().optional(),
-    tag: z.string().optional(),
-    ribbon: z
-        .object({
-            tab: z.string(),
-            panel: z.object({
-                label: z.string(),
-                item: RibbonItemSchema.extend({ flyout: z.array(RibbonItemSchema).optional() }),
-            }),
-            note: z.string().optional(),
-        })
-        .optional(),
-});
-
-const MetaSchema = metaSchema.extend({
-    description: z.string().optional(),
-    group: z.boolean().optional(),
-});
+import { applyMdxPreset, defineConfig, defineDocs, DocCollection } from 'fumadocs-mdx/config';
+import lastModified from 'fumadocs-mdx/plugins/last-modified';
 
 const mdxOptions: DocCollection['mdxOptions'] = (environment) =>
     applyMdxPreset({
         rehypeCodeOptions: {
-            langs: ['ts', 'js', 'html', 'tsx', 'mdx', 'py'],
+            langs: ['ts', 'js', 'html', 'tsx', 'mdx', 'python'],
             inline: 'tailing-curly-colon',
             themes: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
         },
@@ -50,8 +21,9 @@ const mdxOptions: DocCollection['mdxOptions'] = (environment) =>
     })(environment);
 
 export const docs = defineDocs({
+    dir: '.',
     docs: {
-        schema: DocsSchema,
+        schema: pageSchema,
         mdxOptions,
         async: true,
         postprocess: {
@@ -60,7 +32,11 @@ export const docs = defineDocs({
             valueToExport: ['elementIds'],
         },
     },
-    meta: { schema: MetaSchema },
+    meta: {
+        schema: metaSchema,
+    },
 });
 
-export default defineConfig();
+export default defineConfig({
+    plugins: [lastModified()],
+});

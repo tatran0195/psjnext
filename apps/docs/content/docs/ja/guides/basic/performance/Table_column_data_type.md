@@ -14,7 +14,7 @@ In this tutorial, you'll learn how to control input data type of table:
 
 ## 📖 Tutorial
 
-```psj
+```py
 # Encoding for Japanese
 # coding: cp932
 

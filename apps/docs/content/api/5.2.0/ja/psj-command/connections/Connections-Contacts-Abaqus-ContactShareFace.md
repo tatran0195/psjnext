@@ -12,7 +12,7 @@ Create LBC contact abaqus manual group.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.Abaqus.ContactShareFace(...)
 ```
 

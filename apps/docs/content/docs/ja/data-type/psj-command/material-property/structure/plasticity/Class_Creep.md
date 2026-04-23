@@ -36,7 +36,7 @@ For example: `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 | 124          | TIME_ORDER           | A _Tuple_ specifying the time order data.            |
 | 130          | TEMPERATURE          | A _Tuple_ specifying the temperature-dependent data. |
 
-```psj {2-6} title="Sample Code"
+```py {2-6} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Creep(creep=
                                         [(POWER_LAW_MULTIPLIER, [2.0]),
@@ -65,7 +65,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 124          | TIME_ORDER           | A _Tuple_ specifying the time order data.            |
 | 130          | TEMPERATURE          | A _Tuple_ specifying the temperature-dependent data. |
 
-```psj {2-6} title="Sample Code"
+```py {2-6} title="Sample Code"
 sample_Mat = Properties.Material.Modify(strMaterialName="Sample_Material",
                                         listMaterialProperty=[Creep(creep=
                                             [(POWER_LAW_MULTIPLIER, [2.0]),
@@ -96,7 +96,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 122          | UNIVERSAL_GAS_CONST  | A _Tuple_ specifying the Universal gas const data.   |
 | 130          | TEMPERATURE          | A _Tuple_ specifying the temperature-dependent data. |
 
-```psj {2-8} title="Sample Code"
+```py {2-8} title="Sample Code"
 sample_Mat = Properties.Material.Modify(strMaterialName="Sample_Material",
                                         listMaterialProperty=[Creep(creep=
                                             [(POWER_LAW_MULTIPLIER, [2.0]),
@@ -128,7 +128,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 103          | C2       | A _Tuple_ specifying the C2 data. |
 | 104          | C3       | A _Tuple_ specifying the C3 data. |
 
-```psj {2-6} title="Sample Code"
+```py {2-6} title="Sample Code"
 sample_Mat = Properties.Material.Modify(strMaterialName="Sample_Material",
                                         listMaterialProperty=[Creep(creep=
                                             [(C0, [100.0]),

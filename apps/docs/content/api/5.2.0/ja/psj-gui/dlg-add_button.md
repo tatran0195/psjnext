@@ -12,7 +12,7 @@ Add a Button to the creating dialog. The Button can be an image Button.
 
 ## Syntax
 
-```psj
+```py
 dlg.add_button(...)
 ```
 

@@ -11,7 +11,7 @@ Create one-to-many RBE2 (rigid elements) connection
 
 ## Syntax
 
-```psj
+```py
 RBE2OneToMany(int iMethod, cursor[] taMasterTarget, cursor[] taSlaveTarget, int eType, string strName,
     cursor crCoordSys, double dTol, int ulDofs, double[3] virtualNodePos, int iSurfaceDef,
     cursor crEdit, int iEnableUpdateDispCS, int iEnableCornerOnly, int iEnableCheckDuplicate, int iDuplicatedMode)
@@ -93,6 +93,6 @@ Duplication mode
 
 ## Sample Code
 
-```psj
+```py
 RBE2OneToMany(16, [10:947], [10:455, 10:470, 10:475], 2, "RBE2_1", 0:0, 0, 63, [0, 0, 0], 0, 0:0, 1, 0, 1, 0)
 ```

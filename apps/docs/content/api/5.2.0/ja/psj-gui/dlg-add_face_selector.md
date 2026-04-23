@@ -12,7 +12,7 @@ Add "Face" to the selection list, allowing user to select faces and store the se
 
 ## Syntax
 
-```psj
+```py
 dlg.add_face_selector(...)
 ```
 

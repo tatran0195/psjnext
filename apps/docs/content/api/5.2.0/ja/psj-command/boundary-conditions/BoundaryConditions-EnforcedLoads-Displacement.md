@@ -12,7 +12,7 @@ Create enforced displacement to face, edge or node. User inputs enforced displac
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.EnforcedLoads.Displacement(...)
 ```
 

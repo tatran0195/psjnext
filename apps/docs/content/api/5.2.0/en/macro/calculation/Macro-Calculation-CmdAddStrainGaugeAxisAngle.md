@@ -11,7 +11,7 @@ Display stress/strain data for an input rotation angle from the first defined ax
 
 ## Syntax
 
-```psj
+```py
 CmdAddStrainGaugeAxisAngle(int[] ilNodeIDs, int nAxis1, int nAxis2, double dAngle, double dWidth, double dHeight, double dAmendFactor, str strGaugeName)
 ```
 
@@ -56,6 +56,6 @@ CmdAddStrainGaugeAxisAngle(int[] ilNodeIDs, int nAxis1, int nAxis2, double dAngl
 
 ## Sample Code
 
-```psj
+```py
 CmdAddStrainGaugeAxisAngle([], 0, 1, 0.0, 0.0, 0.0, 1.0, "strGaugeName")
 ```

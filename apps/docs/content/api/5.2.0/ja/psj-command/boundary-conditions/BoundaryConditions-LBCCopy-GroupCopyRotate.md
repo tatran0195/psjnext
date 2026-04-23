@@ -12,7 +12,7 @@ Copy a group rotate.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.GroupCopyRotate(...)
 ```
 

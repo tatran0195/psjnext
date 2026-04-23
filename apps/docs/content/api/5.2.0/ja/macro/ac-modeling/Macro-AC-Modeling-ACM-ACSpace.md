@@ -11,7 +11,7 @@ ACM_ACSpace
 
 ## Syntax
 
-```psj
+```py
 ACM_ACSpace(cursor crBodyKey, double dGradingFact, int iRegion, bool bIntNode, bool bSafeMode,
     bool bIntMeshOnly, bool bPML, bool bSweGrd, double dWidth, int iLayer, int iAxis,
     double dSweCoord, double dSweMeshSize, int iLayer)
@@ -89,6 +89,6 @@ Sweep to ground layer
 
 ## Sample Code
 
-```psj
+```py
 ACM_ACSpace([1, 2], 10, 0, 0, 0, 0, 1, 0, 0.015, 3, 0, -0.02, 0.02, 1)
 ```

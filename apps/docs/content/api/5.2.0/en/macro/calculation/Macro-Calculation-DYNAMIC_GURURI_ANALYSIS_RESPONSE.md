@@ -11,7 +11,7 @@ Output the Gururi result of the response point.
 
 ## Syntax
 
-```psj
+```py
 DYNAMIC_GURURI_ANALYSIS_RESPONSE(cursor ParentAnalysis, cursor Coordinate, bool AllModesUsed, string[] SelectedModesName, bool UseDampingFactor, double DampingFactor, cursor DampingFactorTable, double InputFrequency, double StartPhase, int StepNumber, bool OutputMaximumGururiResult, int PrincipleType, bool AllCase, cursor SelectedLoadCase, cursor Edit)
 ```
 
@@ -83,6 +83,6 @@ A Cursor specifying the created gururi response condition.
 
 ## Sample Code
 
-```psj
+```py
 DYNAMIC_GURURI_ANALYSIS_RESPONSE(3:1, 2:1, True, [], True, 1.0, 2:1, 0.0, 0.0, 10, True, 3, True, 2:1, 2:1)
 ```

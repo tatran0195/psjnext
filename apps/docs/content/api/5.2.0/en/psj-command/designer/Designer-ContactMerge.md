@@ -12,7 +12,7 @@ Build contact for designer
 
 ## Syntax
 
-```psj
+```py
 Designer.ContactMerge(crlTargets)
 ```
 

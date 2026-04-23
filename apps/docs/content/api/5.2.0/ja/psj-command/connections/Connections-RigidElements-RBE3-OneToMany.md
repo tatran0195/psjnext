@@ -12,7 +12,7 @@ Create one to many (Slave:Master) RBE3 (Interpolation constraining Element).
 
 ## Syntax
 
-```psj
+```py
 Connections.RigidElements.RBE3.OneToMany(...)
 ```
 

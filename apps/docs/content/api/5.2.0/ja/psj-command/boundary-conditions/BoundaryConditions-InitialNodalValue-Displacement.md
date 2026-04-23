@@ -12,7 +12,7 @@ Create Initial Dynamic.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.InitialNodalValue.Displacement(...)
 ```
 

@@ -12,7 +12,7 @@ Add an option to the ComboBox component.
 
 ## Syntax
 
-```psj
+```py
 dlg.add_combobox_option(...)
 ```
 

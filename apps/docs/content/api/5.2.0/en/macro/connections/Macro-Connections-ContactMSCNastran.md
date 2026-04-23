@@ -11,7 +11,7 @@ Create contact for nastran
 
 ## Syntax
 
-```psj
+```py
 ContactMSCNastran(String m_strName,int iType,int iAlg,double dRROR,double dFNTOL,
     double dFRIC,double dCINTERF,int iISEARCH,int iICOORD,double dFRLIM,double dBIAS,
     int iISTYP,int faceSlave, int faceMaster, int slaveEdge,int masterEdge,
@@ -107,7 +107,7 @@ method type[0:MANUAL_FACE; 1:MANUAL_GROUP; 2:BY_GROUP_MATRIX; 3:SHARE_FACE; 4:AU
 
 ## Sample Code
 
-```psj
+```py
 ContactMSCNastran("ContactMSCNastran_1", 0, 0, 0.0005, 1.79769e+308, 1.79769e+308,
     1.79769e+308, 2147483647, 2147483647, 1.79769e+308, 1.79769e+308, 2147483647,
     0, 0, 0, 0, [79:1-79:2], 0:0, 16711680, 1)

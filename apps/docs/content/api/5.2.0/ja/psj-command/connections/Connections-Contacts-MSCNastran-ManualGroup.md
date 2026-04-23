@@ -12,7 +12,7 @@ Define contact settings between specified groups for MSC Nastran solver. Create 
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.MSCNastran.ManualGroup(...)
 ```
 

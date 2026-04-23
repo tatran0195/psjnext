@@ -2,6 +2,13 @@
     "root": true,
     "title": "Data Type",
     "description": "Data Type",
-    "icon": "Terminal",
-    "group": true
+    "icon": "BookType",
+    "pages": [
+        "---PSJ-Command---",
+        "...psj-command",
+        "---PSJ-Utility---",
+        "...psj-utility",
+        "---PSJ-GUI---",
+        "...psj-gui"
+    ]
 }

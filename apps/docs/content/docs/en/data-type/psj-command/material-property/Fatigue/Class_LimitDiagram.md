@@ -28,7 +28,7 @@ For example: `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 | 126          | STRESS_AMPLITUDE | A _Tuple_ specifying the stress amplitude data.      |
 | 130          | TEMPERATURE      | A _Tuple_ specifying the temperature-dependent data. |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[FatigueLimitDiagram(limitDiagram=[
                                         (MEAN_STRESS, [0.8]),

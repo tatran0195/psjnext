@@ -12,7 +12,7 @@ Any desired result can be created and added to the document by treating the resu
 
 ## Syntax
 
-```psj
+```py
 Calculation.UserResult(...)
 ```
 

@@ -10,7 +10,7 @@ description: Export Analysis Model Nastran BDF Files
 
 ## Syntax
 
-```psj
+```py
 Analysis.ACTRAN.ExportBdf(...)
 ```
 

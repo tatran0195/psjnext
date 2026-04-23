@@ -12,7 +12,7 @@ Make the section graph.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FFTAnalysis.SectionGraph(...)
 ```
 

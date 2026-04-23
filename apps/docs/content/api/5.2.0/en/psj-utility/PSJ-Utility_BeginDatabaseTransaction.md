@@ -15,7 +15,7 @@ Disable screen animation, screen update, and status bar update information to im
 </Callout>
 ## Syntax
 
-```psj
+```py
 JPT.BeginDatabaseTransaction("transactionName")
 ```
 

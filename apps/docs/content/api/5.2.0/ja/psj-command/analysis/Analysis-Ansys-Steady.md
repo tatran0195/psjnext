@@ -12,7 +12,7 @@ Export the Ansys Steady Static Heat Transfer solver file
 
 ## Syntax
 
-```psj
+```py
 Analysis.Ansys.Steady(...)
 ```
 

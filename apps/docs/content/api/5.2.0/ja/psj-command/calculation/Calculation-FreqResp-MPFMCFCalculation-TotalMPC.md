@@ -12,7 +12,7 @@ Display a graph (a chart) of total MPC.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FreqResp.MPFMCFCalculation.TotalMPC(...)
 ```
 

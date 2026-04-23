@@ -12,7 +12,7 @@ Create a material.
 
 ## Syntax
 
-```psj
+```py
 Designer.Material(strMatName, strPropName, dThickness, crlTargets)
 ```
 

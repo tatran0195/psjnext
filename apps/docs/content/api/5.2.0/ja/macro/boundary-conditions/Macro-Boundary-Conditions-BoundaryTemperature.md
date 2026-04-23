@@ -11,7 +11,7 @@ Create boundary temperature
 
 ## Syntax
 
-```psj
+```py
 BoundaryTemparature(string strName, double fTemp, cursor crTable, cursor[] taTarget, cursor crEdit)
 ```
 
@@ -44,6 +44,6 @@ Edit Cursor
 
 ## Sample Code
 
-```psj
+```py
 BoundaryTemperature("BoundaryTemperature_1", 373.15, 81:1, [3:1, 6:3], 0:0)
 ```

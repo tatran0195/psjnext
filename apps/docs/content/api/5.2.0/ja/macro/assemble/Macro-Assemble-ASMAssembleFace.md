@@ -11,7 +11,7 @@ Assemble multiple parts in a model
 
 ## Syntax
 
-```psj
+```py
 ASMAssembleFace(int[] taBodyKey, int[] taFaceKey, double tolerance, bool fitEdge, bool meshSetting)
 ```
 
@@ -44,6 +44,6 @@ Mesh setting bool flag True = 1, False = 0
 
 ## Sample Code
 
-```psj
+```py
 ASMAssembleFace([], [22, 47], 0.001, 0, 1)
 ```

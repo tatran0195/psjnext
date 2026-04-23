@@ -12,7 +12,7 @@ Create an assembled face/shared face group.
 
 ## Syntax
 
-```psj
+```py
 Assemble.SharedFace(...)
 ```
 

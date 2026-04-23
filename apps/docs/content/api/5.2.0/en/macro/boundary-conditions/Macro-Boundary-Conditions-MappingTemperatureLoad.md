@@ -11,7 +11,7 @@ Create mapping pressure
 
 ## Syntax
 
-```psj
+```py
 MappingTemperatureLoad(String name, Cursor[] target, int pos, int conflictMode,
     int component, int srcType, int mappedComponentIndex,double rltScale,
     double[3] tOffset, double[3] tRotateAngle, double tScale, String path, Cursor editObj )
@@ -78,6 +78,6 @@ used for edit mode
 
 ## Sample Code
 
-```psj
+```py
 MappingTemperatureLoad("Mapping", [], 2, 0, 1, 0, 0, 1, [0, 0, 0], [0, 0, 0], 1, "D:\Fluent.dat", 0:0)
 ```

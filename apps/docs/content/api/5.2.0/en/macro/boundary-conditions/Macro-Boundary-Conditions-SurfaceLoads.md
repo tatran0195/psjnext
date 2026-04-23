@@ -11,7 +11,7 @@ Create surface load
 
 ## Syntax
 
-```psj
+```py
 SurfaceLoads(string strName, cursor[] crPressure, int arrowDir, cursor coordinate, cursor[] taTarget, cursor crEdit)
 ```
 
@@ -51,6 +51,6 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 SurfaceLoads("SurfaceLoads3", [1, 2, 3], 1, 27:1, [6:5, 11:771, 11:772], 0:0)
 ```

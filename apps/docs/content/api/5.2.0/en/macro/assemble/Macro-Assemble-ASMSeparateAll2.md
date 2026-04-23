@@ -11,7 +11,7 @@ Separate all share nodes in a model.
 
 ## Syntax
 
-```psj
+```py
 ASMSeparateAII2()
 ```
 
@@ -26,6 +26,6 @@ No input value
 
 ## Sample Code
 
-```psj
+```py
 ASMSeparateAll2()
 ```

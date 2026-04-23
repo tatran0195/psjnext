@@ -11,7 +11,7 @@ Create Force (Sine)
 
 ## Syntax
 
-```psj
+```py
 ForceSine(String name, double totalForce, double a, Cursor crCoordinate, int angleBase,
     double angleRange, int arrowDir, int distributeInAxis, Cursor[] targets, Cursor crEdit)
 ```
@@ -65,6 +65,6 @@ edit target
 
 ## Sample Code
 
-```psj
+```py
 ForceSine("Force3", 1, 2, 0:0, 0, 1.5708, 0, 0, [6:22], 0:0)
 ```

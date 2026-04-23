@@ -12,7 +12,7 @@ Save the MPC results in CSV format.
 
 ## Syntax
 
-```psj
+```py
 Calculation.TransResp.MPFMCFCalculation.SaveMPCResultToCSV(...)
 ```
 

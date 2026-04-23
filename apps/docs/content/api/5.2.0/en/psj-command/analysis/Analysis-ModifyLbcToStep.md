@@ -12,7 +12,7 @@ Add/Modify Loads, Boundary Conditions, etc. of an Abaqus step.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ModifyLbcToStep(...)
 ```
 

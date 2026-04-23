@@ -11,7 +11,7 @@ Intensity is created from the sound pressure and particle velocity results.
 
 ## Syntax
 
-```psj
+```py
 AcousticIntensity(str strAnalysisName, cursor crEdit)
 ```
 
@@ -32,6 +32,6 @@ AcousticIntensity(str strAnalysisName, cursor crEdit)
 
 ## Sample Code
 
-```psj
+```py
 AcousticIntensity("MyAcousticIntensity", 0:0)
 ```

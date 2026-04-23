@@ -11,7 +11,7 @@ create initial temperature
 
 ## Syntax
 
-```psj
+```py
 InitialTemperature(string strName, int iLocalTemperatureUnit, int nType, double dTemp, string strFilePathName, bool bUseDefault, cursor crTable, cursor[] taTarget, cursor crEdit, int iTimeID, bool bSkipUnvailableNode, int[] vecUnvailableNodeId)
 ```
 
@@ -80,6 +80,6 @@ Corresponding to Thermal type 3.
 
 ## Sample Code
 
-```psj
+```py
 InitialTemperature("InitialTemperature_1", 1, 0, 274.15, "", 1, 0:0, [], 0:0, 0, 0, [])
 ```

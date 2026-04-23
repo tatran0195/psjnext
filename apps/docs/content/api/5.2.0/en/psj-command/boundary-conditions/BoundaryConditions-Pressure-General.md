@@ -12,7 +12,7 @@ Create a general pressure applied to the selected Face, Element or Group. User i
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Pressure.General(...)
 ```
 

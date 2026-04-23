@@ -12,7 +12,7 @@ Display MPC result of specific frequency in Model Participation Factor dialog.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FreqResp.MPFMCFCalculation.AtFrequency(...)
 ```
 

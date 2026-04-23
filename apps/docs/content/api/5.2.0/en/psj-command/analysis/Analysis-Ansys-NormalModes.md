@@ -12,7 +12,7 @@ Export the Ansys Normal Modes Structural solver file.
 
 ## Syntax
 
-```psj
+```py
 Analysis.Ansys.NormalModes(...)
 ```
 

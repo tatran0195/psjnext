@@ -12,7 +12,7 @@ Export the input file for Nastran Direct Frequency Response Analysis (SOL 108).
 
 ## Syntax
 
-```psj
+```py
 Analysis.Nastran.DirectFrequencyResponse(...)
 ```
 

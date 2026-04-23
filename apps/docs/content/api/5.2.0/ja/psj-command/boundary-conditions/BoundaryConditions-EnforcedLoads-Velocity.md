@@ -12,7 +12,7 @@ Create enforced velocity to face, edge or node. User inputs enforced velocity pa
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.EnforcedLoads.Velocity(...)
 ```
 

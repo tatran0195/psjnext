@@ -12,7 +12,7 @@ Create initial angular velocity for the Abaqus solver.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.InitialNodalValue.InitialAngularVelocity.Abaqus(...)
 ```
 

@@ -12,7 +12,7 @@ Make a simple design change for solid mesh parts.
 
 ## Syntax
 
-```psj
+```py
 Exchange.ClayWork(...)
 ```
 

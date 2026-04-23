@@ -12,7 +12,7 @@ Create the centrifugal force load to refer to the coordinate system in the analy
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.BodyLoads.CentrifugalForce.CoordinateSystems(...)
 ```
 

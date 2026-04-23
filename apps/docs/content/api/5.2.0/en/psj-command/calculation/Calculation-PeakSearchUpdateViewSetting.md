@@ -12,7 +12,7 @@ Update the view setting of peak search.
 
 ## Syntax
 
-```psj
+```py
 Calculation.PeakSearchUpdateViewSetting(...)
 ```
 

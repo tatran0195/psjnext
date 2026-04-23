@@ -11,7 +11,7 @@ Create Initial Condition
 
 ## Syntax
 
-```psj
+```py
 InitialDynamic(string m_strName,int m_Type,double[] fVel,BOOL bSelNodeSet,Cursor crNodeSet,
     Cursor crTable,Cursor curCoord,Cursor[] m_taTarget,Cursor m_crEdit)
 ```
@@ -61,6 +61,6 @@ edit mode
 
 ## Sample Code
 
-```psj
+```py
 InitialDynamic("InitialAngularVelocity1", 3, [1, 2, 3], 0, 0:0, 0:0, 0:0, [3:1], 0:0)
 ```

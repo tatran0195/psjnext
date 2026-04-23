@@ -11,7 +11,7 @@ Display stress and strain in the direction connecting two node.
 
 ## Syntax
 
-```psj
+```py
 CmdAddStrainGauge2Nodes(int iNode1, int iNode2, double dWidth, double dHeight, double dAmendFactor, str strGaugeName)
 ```
 
@@ -48,6 +48,6 @@ CmdAddStrainGauge2Nodes(int iNode1, int iNode2, double dWidth, double dHeight, d
 
 ## Sample Code
 
-```psj
+```py
 CmdAddStrainGauge2Nodes(0, 0, 0.0, 0.0, 1.0, "strGaugeName")
 ```

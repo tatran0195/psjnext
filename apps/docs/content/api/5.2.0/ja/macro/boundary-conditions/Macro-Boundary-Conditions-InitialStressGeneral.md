@@ -11,7 +11,7 @@ Create initial stress
 
 ## Syntax
 
-```psj
+```py
 InitialStressGeneral(String m_strName,int dim,int cs,double dval[0],double dval[1],
     double dval[2],Cursor crTable,Cursor[] m_taTarget,Cursor m_crEdit)
 ```
@@ -61,6 +61,6 @@ edit cursor
 
 ## Sample Code
 
-```psj
+```py
 InitialStressGeneral("Test",1,1,0.001,0.001,0.001,1:11,[1:11,2:12],1:11)
 ```

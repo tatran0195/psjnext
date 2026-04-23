@@ -12,7 +12,7 @@ Create temperature load by using Nastran punch.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.TemperatureLoads.NastranPunch(...)
 ```
 

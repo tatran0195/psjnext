@@ -12,7 +12,7 @@ Search and creat contact between the existing parts automatically based on the s
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.TSSolver.Auto(...)
 ```
 

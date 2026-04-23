@@ -11,7 +11,7 @@ Create assemble faces
 
 ## Syntax
 
-```psj
+```py
 Assemble_Faces(int[] id_mating_faces_list, double tol, int at_pos, double snap_tol, bool fit_edge)
 ```
 
@@ -44,6 +44,6 @@ Fit edge: to keep circle edge shape: flag 0 : false, 1 : true
 
 ## Sample Code
 
-```psj
+```py
 Assemble_Faces([24, 49], 0.00022232, 1, 5e-05, 0)
 ```

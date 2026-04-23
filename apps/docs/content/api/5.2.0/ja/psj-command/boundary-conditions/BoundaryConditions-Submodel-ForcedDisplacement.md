@@ -12,7 +12,7 @@ Create a forced displacement boundary condition for node-based submodeling.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Submodel.ForcedDisplacement(...)
 ```
 

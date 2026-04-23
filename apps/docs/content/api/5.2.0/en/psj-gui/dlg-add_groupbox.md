@@ -12,7 +12,7 @@ Add a GroupBox to the creating dialog.
 
 ## Syntax
 
-```psj
+```py
 dlg.add_groupbox(...)
 ```
 

@@ -11,7 +11,7 @@ Create mapping pressure
 
 ## Syntax
 
-```psj
+```py
 MappingConvection(String name, Cursor[] Target, int Position, int ViewCp, int Cp,
     int SourceType, int[6] MappedCpIndex, int[6] MappedCpIndex, double RScale,
     double[3] Offset, double[3] Rotate, double TScale, double seachRange, int HTCunit,
@@ -95,7 +95,7 @@ Edit mapping convection
 
 ## Sample Code
 
-```psj
+```py
 MappingConvection("MappingConvection2", [6:23], 2, 0, 2, 2, 0, 1, 1, [0, 0, 0],
     [1, 0, 0], 1, 0, 0, 1, "D:/wj-block-cold.csv", 0:0)
 ```

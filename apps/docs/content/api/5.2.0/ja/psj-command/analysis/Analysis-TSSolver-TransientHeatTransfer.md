@@ -12,7 +12,7 @@ Export the Input Deck for TechnoStar Transient Heat Transfer analysis (SOL 159).
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSolver.TransientHeatTransfer(...)
 ```
 

@@ -12,7 +12,7 @@ Create mapping pressure.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Pressure.SurfaceMapping(...)
 ```
 

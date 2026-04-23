@@ -12,7 +12,7 @@ Create initial temperature with constant value,
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.InitialTemperature.Constant(...)
 ```
 

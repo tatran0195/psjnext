@@ -12,7 +12,7 @@ Export TechnoStar Nonlinear Static solver file (SOL106).
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSolver.NonlinearStatic(...)
 ```
 

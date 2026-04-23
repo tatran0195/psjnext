@@ -9,7 +9,7 @@ An instance of a PSJMessageBox class, setting the caption of the message box.
 
 ## Syntax
 
-```psj
+```py
 msgbox.set_caption(...)
 ```
 
@@ -26,7 +26,7 @@ This function does not have output value.
 
 ## Sample Code
 
-```psj {5}
+```py {5}
 from pyjdg import *
 
 def main():

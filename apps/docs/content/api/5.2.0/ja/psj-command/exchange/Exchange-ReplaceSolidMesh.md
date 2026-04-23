@@ -12,7 +12,7 @@ Replace an adjacent solid part.
 
 ## Syntax
 
-```psj
+```py
 Exchange.ReplaceSolidMesh(...)
 ```
 

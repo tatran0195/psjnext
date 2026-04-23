@@ -12,7 +12,7 @@ Output the result of the response point for transient response.
 
 ## Syntax
 
-```psj
+```py
 Calculation.TransResp.ResponseCondition(...)
 ```
 

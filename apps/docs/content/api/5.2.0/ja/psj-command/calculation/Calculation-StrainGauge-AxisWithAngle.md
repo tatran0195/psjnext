@@ -12,7 +12,7 @@ Display stress/strain data for an input rotation angle from the first defined ax
 
 ## Syntax
 
-```psj
+```py
 Calculation.StrainGauge.AxisWithAngle(...)
 ```
 

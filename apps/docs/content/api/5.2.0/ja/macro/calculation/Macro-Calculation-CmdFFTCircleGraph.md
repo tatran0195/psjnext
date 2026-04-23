@@ -11,7 +11,7 @@ Display the circle graph.
 
 ## Syntax
 
-```psj
+```py
 CmdFFTCircleGraph(int iLayer)
 ```
 
@@ -28,6 +28,6 @@ CmdFFTCircleGraph(int iLayer)
 
 ## Sample Code
 
-```psj
+```py
 CmdFFTCircleGraph(1)
 ```

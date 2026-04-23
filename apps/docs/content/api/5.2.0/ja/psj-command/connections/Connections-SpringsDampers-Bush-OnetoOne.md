@@ -12,7 +12,7 @@ Create bush connection between target nodes within tolerance.
 
 ## Syntax
 
-```psj
+```py
 Connections.SpringsDampers.Bush.OnetoOne(...)
 ```
 

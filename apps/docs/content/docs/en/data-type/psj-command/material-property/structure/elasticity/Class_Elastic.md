@@ -44,7 +44,7 @@ For example: `YOUNGS_MODULUS` is equal to ID = 1.
 | 5            | `NASTRAN_FAILURE_INDEX_COMPRESSION` | A _Tuple_ specifying the Nastran failure index compression data. |
 | 6            | `NASTRAN_FAILURE_INDEX_SHEAR`       | A _Tuple_ specifying the Nastran failure index shear data.       |
 
-```psj {2-10} title="Sample Code"
+```py {2-10} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Elastic(elastic=[
                                         (YOUNGS_MODULUS, [200000000000.0]),
@@ -85,7 +85,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 26           | `F12`    | A _Tuple_ specifying the F12 data.  |
 | 27           | `STRN`   | A _Tuple_ specifying the STRN data. |
 
-```psj {2-15} title="Sample Code"
+```py {2-15} title="Sample Code"
 sample_Mat = Properties.Material.Modify(strMaterialName="Sample_Material",
                                         listMaterialProperty=[Elastic(elastic=[
                                             (E1, [10000000.0]),
@@ -128,7 +128,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-12} title="Sample Code"
+```py {2-12} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Data",
                                     listMaterialProperty=[Elastic(elastic=[
                                         (E1, [10.0]),
@@ -169,7 +169,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-12} title="Sample Code"
+```py {2-12} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Elastic(elastic=[
                                         (D1111, [10.0]),
@@ -205,7 +205,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 5            | `NASTRAN_FAILURE_INDEX_COMPRESSION` | A _Tuple_ specifying the Nastran failure index compression data. |
 | 6            | `NASTRAN_FAILURE_INDEX_SHEAR`       | A _Tuple_ specifying the Nastran failure index shear data.       |
 
-```psj {2-8} title="Sample Code"
+```py {2-8} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Elastic(elastic=[
                                         (E1, [100000000000.0, None, None]),
@@ -236,7 +236,7 @@ JPT.Debugger(density) #for checking return value
 | 11           | `E5`     | A _Tuple_ specifying the E5 data. |
 | 12           | `E6`     | A _Tuple_ specifying the E6 data. |
 
-```psj {2-8} title="Sample Code"
+```py {2-8} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Elastic(elastic=[
                                         (E1, [10000000.0, None, None, None, None, None]),
@@ -263,7 +263,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-3} title="Sample Code"
+```py {2-3} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Elastic(elastic=[
                                         (TEMPERATURE, [100.0])],
@@ -289,7 +289,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-6} title="Sample Code"
+```py {2-6} title="Sample Code"
 sample_Mat = Properties.Material.add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Elastic(elastic=[
                                         (EKNN, [0.1]),
@@ -315,7 +315,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-3} title="Sample Code"
+```py {2-3} title="Sample Code"
 sample_Mat = Properties.Material.Modify(strMaterialName="Sample_Material",
                                         listMaterialProperty=[Elastic(elastic=[
                                             (TEMPERATURE, [100.0])],
@@ -338,7 +338,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-3} title="Sample Code"
+```py {2-3} title="Sample Code"
 sample_Mat = Properties.Material.Modify(strMaterialName="Sample_Material",
                                         listMaterialProperty=[Elastic(elastic=[
                                             (TEMPERATURE, [100.0])],

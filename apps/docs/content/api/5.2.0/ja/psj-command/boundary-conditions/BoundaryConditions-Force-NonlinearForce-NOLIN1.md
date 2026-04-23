@@ -12,7 +12,7 @@ Create Nonlinear Force of NOLIN1(Table).
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Force.NonlinearForce.NOLIN1(...)
 ```
 

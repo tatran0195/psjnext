@@ -12,7 +12,7 @@ Create ADVC RDNLK process for analysis work. This process could be created in on
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.MakeProcess.RDNLK(...)
 ```
 

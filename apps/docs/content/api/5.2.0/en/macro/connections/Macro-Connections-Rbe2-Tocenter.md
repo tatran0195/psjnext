@@ -11,7 +11,7 @@ Create to-center RBE2 (rigid elements) connection
 
 ## Syntax
 
-```psj
+```py
 RBE2ToCenter(int iMethod, cursor[] taMasterTarget, cursor[] taSlaveTarget, int eType, string strName,
     cursor crCoordSys, double dTol, int ulDofs, double[3] virtualNodePos, int iSurfaceDef,
     cursor crEdit, int iEnableUpdateDispCS, int iEnableCornerOnly, int iEnableCheckDuplicate, int iDuplicatedMode)
@@ -93,6 +93,6 @@ Duplication mode
 
 ## Sample Code
 
-```psj
+```py
 RBE2ToCenter(18, [], [10:493, 10:489, 10:2, 10:6], 2, "RBE2_3", 0:0, 0, 63, [0.015, 0, 0.005], 0, 0:0, 1, 0, 1, 0)
 ```

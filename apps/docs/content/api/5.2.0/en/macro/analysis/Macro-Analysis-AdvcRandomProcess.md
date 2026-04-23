@@ -11,7 +11,7 @@ Create ADVC random response process
 
 ## Syntax
 
-```psj
+```py
 AdvcRandomProcess(string m_strName,string strRefEigenDir,double dRefLowFreq,
     double  dRefHighFreq,cursor crModalDampingRatio,cursor crExcitationFreq,
     Bool bAutoFreqInterval,double dMaxFreq,double dMinFreq,int iNumFreqPoint,
@@ -135,7 +135,7 @@ data of reference result
 
 ## Sample Code
 
-```psj
+```py
 AdvcRandomProcess("Test",,0.001,0.001,1:11,1:11,1,0.001,0.001,1,0.001,
     1,1,1,1:11,0.001,0.001,1,1:11,,,,,1,"Test",)
 ```

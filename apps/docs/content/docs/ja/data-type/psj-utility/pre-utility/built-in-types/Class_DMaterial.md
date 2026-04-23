@@ -37,7 +37,7 @@ This is an instance of a DMaterial class, represents user material item inside J
     - For the non-unit material property, the unit should be set by None, -1, or set it empty.
 - The default value is -1.
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 Properties.Material.Add(strMaterialName="Structural_Steel",
                         listMaterialProperty=[
                         Density(density=[
@@ -77,7 +77,7 @@ pprint(mat0.SetValues(values=[8500], keys=list_keys, unit=unit))
     - For the non-unit material property, the unit should be set by None, -1, or set it empty.
 - The default value is -1.
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 Properties.Material.Add(strMaterialName="Structural_Steel",
                         listMaterialProperty=[
                         Density(density=[

@@ -11,7 +11,7 @@ create advc heat transfer steady state process
 
 ## Syntax
 
-```psj
+```py
 AdvcSSHProcess(String m_strName,int end_type,double max_time,int fixed_or_auto,
     double max_change,double init_dt,int define_max_dt,double max_dt,
     int define_min_dt,double min_dt,double fixed_dt,int output_last,
@@ -191,7 +191,7 @@ output parameters
 
 ## Sample Code
 
-```psj
+```py
 AdvcSSHProcess("ADVC_DEFAULT_PROCESS", 1, 1, 0, 1.79769e+308, 1.79769e+308, 0, 1, 0,
     1e-05, 1.79769e+308, -1, 2147483647, -1, 2147483647, 1.79769e+308, 1.79769e+308, -1,
     2147483647, 0, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308,

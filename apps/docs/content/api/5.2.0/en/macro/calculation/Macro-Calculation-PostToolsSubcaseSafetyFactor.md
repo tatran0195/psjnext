@@ -11,7 +11,7 @@ Create a subcase by calculating the safety factor from the selected subcases bas
 
 ## Syntax
 
-```psj
+```py
 PostToolsSubcaseSafetyFactor(int iAnalysisType, int iResultSet, list int listSubcases, list SAFETY_ITEM listSafetyItems, int iSafetyType, str strResultName)
 ```
 
@@ -48,6 +48,6 @@ PostToolsSubcaseSafetyFactor(int iAnalysisType, int iResultSet, list int listSub
 
 ## Sample Code
 
-```psj
+```py
 PostToolsSubcaseSafetyFactor(2, 1, [(1, "", 1, 1), (2, "", 1, 1), (3, "", 1, 1), (4, "", 1, 1), (5, "", 1, 1)], [(3:1, 1), (3:2, 1), (3:3, 1)], 1, "Safety Break2")
 ```

@@ -11,7 +11,7 @@ Create mapping pressure
 
 ## Syntax
 
-```psj
+```py
 MappingHeatFlux(string strName, cursor[] taTarget, int pos, int iViewCp, int iCp,
     int iSrcType, int iMappedCpIndexArr0, double dScaleFactor, cursor[] crTrans,
     cursor[] crRotate, double dCoordScale, double dSearchTol, int iUnit,
@@ -140,7 +140,7 @@ Element set
 
 ## Sample Code
 
-```psj
+```py
 MappingHeatFlux("MappingHeatFlux1", [3:1], 2, 0, 1, 0, 0, 1.5, [4, 5, 6], [1, 2, 3], 0.5,
     0.003, 0, "D:/Fluent.dat", 0:0, 1, 0, 0, 0, "", 0, 1e-08, 0, "all")
 ```

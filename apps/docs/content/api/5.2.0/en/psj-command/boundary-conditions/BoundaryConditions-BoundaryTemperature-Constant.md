@@ -12,7 +12,7 @@ Create a constant temperature load to part, face, edge or node. User inputs temp
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.BoundaryTemperature.Constant(...)
 ```
 

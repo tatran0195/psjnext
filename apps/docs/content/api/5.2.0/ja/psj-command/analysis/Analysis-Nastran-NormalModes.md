@@ -12,7 +12,7 @@ Export the input file for Nastran structure normal modes analysis (SOL 103).
 
 ## Syntax
 
-```psj
+```py
 Analysis.Nastran.NormalModes(...)
 ```
 

@@ -12,7 +12,7 @@ Read a Punch file (\*.pch) containing information on the coupled surfaces output
 
 ## Syntax
 
-```psj
+```py
 Calculation.AcousticAnalysis.TransmissionLoss.PCHResult(...)
 ```
 

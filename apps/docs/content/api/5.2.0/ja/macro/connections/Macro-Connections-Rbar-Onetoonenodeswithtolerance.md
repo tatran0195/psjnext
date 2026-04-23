@@ -11,7 +11,7 @@ Create one-to-one (Nodes with tolerance) RBAR (rigid elements) connection
 
 ## Syntax
 
-```psj
+```py
 RBarOneToOneNodesWithTolerance(string strName, cursor[] taMasterTarget, cursor[] taSlaveTarget, int iMethod, int ulDofs, double dTol,
             cursor crCoord, bool bUpdateDispCS, cursor crEdit)
 ```
@@ -63,6 +63,6 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 RBarOneToOneNodesWithTolerance("RBar_1", [10:970, 10:356], [], 21, 63, 0.025, 0:0, 1, 0:0)
 ```

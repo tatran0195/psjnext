@@ -12,7 +12,7 @@ Create load boundary condition of inside heat generation.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.InsideHeatGeneration(...)
 ```
 

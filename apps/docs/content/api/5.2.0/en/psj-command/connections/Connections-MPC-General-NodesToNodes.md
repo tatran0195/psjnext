@@ -12,7 +12,7 @@ Create MPC between selected nodes.
 
 ## Syntax
 
-```psj
+```py
 Connections.MPC.General.NodesToNodes(...)
 ```
 

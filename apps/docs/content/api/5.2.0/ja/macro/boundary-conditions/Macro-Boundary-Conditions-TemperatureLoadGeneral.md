@@ -11,7 +11,7 @@ Create temperature load by constant value
 
 ## Syntax
 
-```psj
+```py
 TemperatureLoadGeneral(string strName, double dTemperature, cursor crTable,
     cursor[] taTarget, cursor crEdit, bool bUseAsMaterialReferenceTemp)
 ```
@@ -49,6 +49,6 @@ Use as material reference temperature bool flag True = 1, False = 0
 
 ## Sample Code
 
-```psj
+```py
 TemperatureLoadGeneral("TemperatureLoadsConstant1", 303.15, 0:0, [6:21], 0:0, 0)
 ```

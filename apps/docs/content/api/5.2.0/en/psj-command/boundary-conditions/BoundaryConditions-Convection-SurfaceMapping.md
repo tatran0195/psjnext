@@ -12,7 +12,7 @@ Create load boundary condition of convection surface mapping.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Convection.SurfaceMapping(...)
 ```
 

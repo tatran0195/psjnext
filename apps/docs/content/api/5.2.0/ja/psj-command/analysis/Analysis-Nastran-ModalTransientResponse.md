@@ -12,7 +12,7 @@ Export the input file for Nastran Modal Transient Response Analysis (SOL 112).
 
 ## Syntax
 
-```psj
+```py
 Analysis.Nastran.ModalTransientResponse(...)
 ```
 

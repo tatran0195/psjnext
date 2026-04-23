@@ -12,7 +12,7 @@ Export Abaqus (\*.inp) file.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ExportAbaqus(...)
 ```
 

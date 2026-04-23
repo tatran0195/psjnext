@@ -11,7 +11,7 @@ Export Ansys file
 
 ## Syntax
 
-```psj
+```py
 ExportAnsys(String m_strName,Cursor m_crAbaJob)
 ```
 
@@ -32,6 +32,6 @@ Ansys Job Cursor
 
 ## Sample Code
 
-```psj
+```py
 ExportAnsys("D:/Ansys.dat", 146:1)
 ```

@@ -12,7 +12,7 @@ Create one-to-many (master:slave) RBE2 (rigid elements).
 
 ## Syntax
 
-```psj
+```py
 Connections.RigidElements.RBE2.OneToMany(...)
 ```
 

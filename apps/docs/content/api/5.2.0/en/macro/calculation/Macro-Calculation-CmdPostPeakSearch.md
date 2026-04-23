@@ -11,7 +11,7 @@ Find peak nodes with higher or lower results (peaked) than nearby vertices at ea
 
 ## Syntax
 
-```psj
+```py
 CmdPostPeakSearch(int iOption, double dParameter, boolbStep)
 ```
 
@@ -36,6 +36,6 @@ CmdPostPeakSearch(int iOption, double dParameter, boolbStep)
 
 ## Sample Code
 
-```psj
+```py
 CmdPostPeakSearch(0, 0.1, 1)
 ```

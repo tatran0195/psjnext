@@ -33,7 +33,7 @@ For example: `CONDUCTIVITY` is equal to ID = 51.
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-4} title="Sample Code"
+```py {2-4} title="Sample Code"
 sample_Mat = Properties.Material.Modify(strMaterialName="Sample_Material",
                                         listMaterialProperty=[Conductivity(conductivity=[
                                             (CONDUCTIVITY, [59.0]),
@@ -59,7 +59,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-4} title="Sample Code"
+```py {2-4} title="Sample Code"
 sample_Mat = Properties.Material.Modify(strMaterialName="Sample_Material",
                                         listMaterialProperty=[Conductivity(conductivity=[
                                             (K11, [10.0]), (K22, [20.0]), (K33, [30.0]),
@@ -89,7 +89,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra fields data.          |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 sample_Mat = Properties.Material.Modify(strMaterialName="Sample_Material",
                                         listMaterialProperty=[Conductivity(conductivity=[
                                             (K11, [10.0]), (K12, [20.0]), (K22, [30.0]),

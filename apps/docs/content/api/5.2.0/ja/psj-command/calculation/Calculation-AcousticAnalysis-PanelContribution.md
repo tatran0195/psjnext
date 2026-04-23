@@ -12,7 +12,7 @@ Create a plot line for each panel property based on Actran's element contributio
 
 ## Syntax
 
-```psj
+```py
 Calculation.AcousticAnalysis.PanelContribution(...)
 ```
 

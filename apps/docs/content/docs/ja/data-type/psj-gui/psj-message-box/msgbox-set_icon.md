@@ -9,7 +9,7 @@ An instance of a PSJMessageBox class, specifying the type of icon used in the me
 
 ## Syntax
 
-```psj
+```py
 msgbox.set_icon(...)
 ```
 
@@ -32,7 +32,7 @@ This function does not have output value.
 
 ## Sample Code
 
-```psj {7}
+```py {7}
 from pyjdg import *
 
 def main():

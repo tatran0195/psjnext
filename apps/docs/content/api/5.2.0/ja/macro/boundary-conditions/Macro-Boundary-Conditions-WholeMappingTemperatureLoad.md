@@ -11,7 +11,7 @@ Create temperature load
 
 ## Syntax
 
-```psj
+```py
 WholeMapping(string strName, int iMappingSrcType, string strPath, int iMappingMethod,
     int iMappingFromStepNo, cursor crEdit)
 ```
@@ -54,6 +54,6 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 WholeMappingTemperatureLoad("TemperatureLoadsWholeMapping1", 3, "D:/CFD_Large_ForWholeMapping.csv", 0, 0, 0:0)
 ```

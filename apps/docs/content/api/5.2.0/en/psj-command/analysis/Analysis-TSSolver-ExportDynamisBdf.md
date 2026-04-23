@@ -12,7 +12,7 @@ Export the TechnoStar Dynamis solver file in bdf format.
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSolver.ExportDynamisBdf(...)
 ```
 

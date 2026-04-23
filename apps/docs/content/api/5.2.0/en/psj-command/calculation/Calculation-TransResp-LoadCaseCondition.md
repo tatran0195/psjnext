@@ -12,7 +12,7 @@ Create a load case for transient response analysis.
 
 ## Syntax
 
-```psj
+```py
 Calculation.TransResp.LoadCaseCondition(...)
 ```
 

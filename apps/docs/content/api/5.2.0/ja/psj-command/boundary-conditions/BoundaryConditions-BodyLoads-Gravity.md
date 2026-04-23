@@ -12,7 +12,7 @@ Define the acceleration load of gravity to the selected part. User inputs the va
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.BodyLoads.Gravity(...)
 ```
 

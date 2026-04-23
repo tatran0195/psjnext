@@ -12,7 +12,7 @@ Export LS-Dyna Analysis Job.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ExportLsdyna(...)
 ```
 

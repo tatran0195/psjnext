@@ -12,7 +12,7 @@ Add "Edge" to the selection list, allowing user to select edges and store the se
 
 ## Syntax
 
-```psj
+```py
 dlg.add_edge_selector(...)
 ```
 

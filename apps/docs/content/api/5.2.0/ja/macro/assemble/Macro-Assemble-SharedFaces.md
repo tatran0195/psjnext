@@ -24,6 +24,6 @@ No input value
 
 ## Sample Code
 
-```psj
+```py
 SharedFaces()
 ```

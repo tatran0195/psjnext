@@ -11,7 +11,7 @@ Display the distance between parts as a contour.
 
 ## Syntax
 
-```psj
+```py
 SurfaceDistanceDistanceCalculate(str strTitle, int iRegionType, double dTolerance, int iTypeMesh, int iAxisDirection, double[] dlDirection, cursor crRefNode, cursor crPartGroup1, cursor crPartGroup2)
 ```
 
@@ -60,6 +60,6 @@ SurfaceDistanceDistanceCalculate(str strTitle, int iRegionType, double dToleranc
 
 ## Sample Code
 
-```psj
+```py
 SurfaceDistanceDistanceCalculate("Untitled", 0, 2.0, 0, 0, [1.0, 0.0, 0.0], 10:124, 3:4, 3:6)
 ```

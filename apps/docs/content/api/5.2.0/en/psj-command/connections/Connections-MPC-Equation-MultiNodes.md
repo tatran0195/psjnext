@@ -12,7 +12,7 @@ Create a MPC connection between a slave node with multi-master nodes.
 
 ## Syntax
 
-```psj
+```py
 Connections.MPC.Equation.MultiNodes(...)
 ```
 

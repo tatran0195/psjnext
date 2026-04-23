@@ -12,7 +12,7 @@ Add "Condition" to the selection list, allowing user to select condition and sto
 
 ## Syntax
 
-```psj
+```py
 dlg.add_condition_selector(...)
 ```
 

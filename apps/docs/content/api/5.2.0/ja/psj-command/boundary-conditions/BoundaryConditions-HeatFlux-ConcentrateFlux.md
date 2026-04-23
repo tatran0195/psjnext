@@ -12,7 +12,7 @@ Create a heat flux condition.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.HeatFlux.ConcentrateFlux(...)
 ```
 

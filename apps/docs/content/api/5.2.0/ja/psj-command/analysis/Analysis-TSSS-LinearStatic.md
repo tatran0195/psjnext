@@ -12,7 +12,7 @@ Export the Input Deck for TechnoStar SunShine Linear Static analysis (SOL 101).
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSS.LinearStatic(...)
 ```
 

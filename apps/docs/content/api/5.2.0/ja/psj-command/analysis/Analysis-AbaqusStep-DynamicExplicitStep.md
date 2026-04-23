@@ -12,7 +12,7 @@ Create Abaqus Step - Dynamic Explicit Type.
 
 ## Syntax
 
-```psj
+```py
 Analysis.AbaqusStep.DynamicExplicitStep(...)
 ```
 

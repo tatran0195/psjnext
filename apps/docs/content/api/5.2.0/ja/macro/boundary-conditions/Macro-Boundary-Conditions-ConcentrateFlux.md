@@ -11,7 +11,7 @@ Create concentrate flux
 
 ## Syntax
 
-```psj
+```py
 ConcentrateFlux(String m_strName,double fflux,Cursor crTable,Cursor[] m_taTarget,Cursor m_crEdit)
 ```
 
@@ -44,6 +44,6 @@ edit cursor
 
 ## Sample Code
 
-```psj
+```py
 ConcentrateFlux("Test",0.001,1:11,[1:11,2:12],1:11)
 ```

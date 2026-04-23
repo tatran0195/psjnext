@@ -11,7 +11,7 @@ Export Abaqus Inp
 
 ## Syntax
 
-```psj
+```py
 ExportAbaqusInp(cursor m_crAbaJob,cursor[] m_taSelectBody,string strPath)
 ```
 
@@ -36,6 +36,6 @@ output directory for INP
 
 ## Sample Code
 
-```psj
+```py
 ExportAbaqusInp(143:2, [], "D:/Abaqus.inp")
 ```

@@ -38,7 +38,7 @@ For example: `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 | 134          | `TEMPERATURE_LOADING`    | A _Tuple_ specifying the temperature-dependent data of loading curve. |
 | 147          | `EXTRA_FIELDS_LOADING`   | A _Tuple_ specifying the extra field data of loading curve.           |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[GasketThickness(gasketThickness=[
                                         (PRESSURE_FORCE_LOADING, [100.0]),
@@ -63,7 +63,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 135          | `TEMPERATURE_UNLOADING`         | A _Tuple_ specifying the temperature-dependent data of unloading curve. |
 | 148          | `EXTRA_FIELDS_UNLOADING`        | A _Tuple_ specifying the extra field data of unloading curve.           |
 
-```psj {3-6} title="Sample Code"
+```py {3-6} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[GasketThickness(gasketThickness=[
                                         (PRESSURE_FORCE_UNLOADING, [100.0]),

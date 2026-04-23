@@ -12,7 +12,7 @@ Separate all shared nodes existing on the current model (Also separate all the e
 
 ## Syntax
 
-```psj
+```py
 Assemble.SeparateFaces.AllSharedNodes(...)
 ```
 

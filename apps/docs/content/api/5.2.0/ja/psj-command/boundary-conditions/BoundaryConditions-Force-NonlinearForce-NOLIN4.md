@@ -12,7 +12,7 @@ Create nonlinear force NOLIN4.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Force.NonlinearForce.NOLIN4(...)
 ```
 

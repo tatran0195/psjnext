@@ -12,7 +12,7 @@ Add a ComboBox component to the dialog.
 
 ## Syntax
 
-```psj
+```py
 dlg.add_combobox(...)
 ```
 

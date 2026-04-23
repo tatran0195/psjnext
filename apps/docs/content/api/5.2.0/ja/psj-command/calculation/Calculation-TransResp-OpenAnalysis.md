@@ -12,7 +12,7 @@ Load the results of a transient response analysis (\*.tsdv).
 
 ## Syntax
 
-```psj
+```py
 Calculation.TransResp.OpenAnalysis(...)
 ```
 

@@ -11,7 +11,7 @@ Make the section graph.
 
 ## Syntax
 
-```psj
+```py
 CmdFFTSectionGraph(int iPointIndex)
 ```
 
@@ -28,6 +28,6 @@ CmdFFTSectionGraph(int iPointIndex)
 
 ## Sample Code
 
-```psj
+```py
 CmdFFTSectionGraph(1)
 ```

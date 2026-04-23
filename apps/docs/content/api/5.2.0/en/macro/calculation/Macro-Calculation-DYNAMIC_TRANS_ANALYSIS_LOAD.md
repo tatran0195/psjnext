@@ -11,7 +11,7 @@ Set the transient response arbitrary excitation input.
 
 ## Syntax
 
-```psj
+```py
 DYNAMIC_TRANS_ANALYSIS_LOAD(cursor crParentAnalysis, cursor crCoordinate, str strName, int iLoadType, iLoadDirection, double[] dlForce, double dAmplitude, double dDelay, double dPhase, bool bFt, double dFt, cursor crFtTable, double dT1, double dT2, double dFrequency, double dExponent, double dPower, cursor[] crlTargetNodes, cursor crEdit)
 ```
 
@@ -100,6 +100,6 @@ DYNAMIC_TRANS_ANALYSIS_LOAD(cursor crParentAnalysis, cursor crCoordinate, str st
 
 ## Sample Code
 
-```psj
+```py
 DYNAMIC_TRANS_ANALYSIS_LOAD(0:0, 0:0, "TRNLoad1", 0, 0, [1, 0, 0], 1.0, 0.0, 0.0, 1, 1.0, 0:0, 0.0, 1.0, 0.0, 0.0, 0.0, [0:0], 0:0)
 ```

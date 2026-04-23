@@ -11,7 +11,7 @@ Display the circularity XY plot graph and export it to a specified file.
 
 ## Syntax
 
-```psj
+```py
 CmdFFTXYPlot(int iKey, bool bDefineOA, str strOADefined, str strModesDefined, bool b3DPlot, str strSavePath, bool bSaveFFTInfo, bool bExportTop, bool bExportAllPlotToFile, bool b2DPlot):
 ```
 
@@ -64,6 +64,6 @@ CmdFFTXYPlot(int iKey, bool bDefineOA, str strOADefined, str strModesDefined, bo
 
 ## Sample Code
 
-```psj
+```py
 CmdFFTXYPlot(1, 1, "2-4", "2, 3, 4", 1,  "path/to/the/file", 1, 1, 1, 1)
 ```

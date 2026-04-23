@@ -12,7 +12,7 @@ Display the circularity XY plot graph and export it to a specified file.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FFTAnalysis.XYPlot(...)
 ```
 

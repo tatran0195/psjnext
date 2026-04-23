@@ -12,7 +12,7 @@ Save.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FreqResp.MPFMCFCalculation.SaveMPCResultToCSV(...)
 ```
 

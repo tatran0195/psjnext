@@ -12,7 +12,7 @@ Define a rigid wall contact setting to simulate impact analyses with planar rigi
 
 ## Syntax
 
-```psj
+```py
 Connections.RigidWall(...)
 ```
 

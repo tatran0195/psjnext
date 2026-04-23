@@ -12,7 +12,7 @@ Add "Bar" to the selection list, allowing user to select bar parts and store the
 
 ## Syntax
 
-```psj
+```py
 dlg.add_barpart_selector(...)
 ```
 

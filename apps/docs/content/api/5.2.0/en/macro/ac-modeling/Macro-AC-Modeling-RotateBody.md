@@ -11,7 +11,7 @@ Rotate Body
 
 ## Syntax
 
-```psj
+```py
 RotateBody(cursor[] body, double[3] rotate_centre, double[3] rotate_axis, double rotate_angle,
     bool create_new, bool copy_lbc, int copy_count, bool merge_node, double tolerance)
 ```
@@ -61,6 +61,6 @@ Merge Node Tolerance
 
 ## Sample Code
 
-```psj
+```py
 RotateBody([3:1], [0.005, 0, 0.01], [0.001, 0, 0], 0.785398, 0, 0, 0, 0, 0)
 ```

@@ -12,7 +12,7 @@ Add the ribs to the body as a union part.
 
 ## Syntax
 
-```psj
+```py
 Assemble.AddRib(...)
 ```
 

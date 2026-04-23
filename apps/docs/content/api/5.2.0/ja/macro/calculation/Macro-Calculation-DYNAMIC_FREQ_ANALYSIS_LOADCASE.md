@@ -11,7 +11,7 @@ Create a load case for Gururi analysis.
 
 ## Syntax
 
-```psj
+```py
 DYNAMIC_FREQ_ANALYSIS_LOADCASE(int AnalysisType, cursor ParentAnalysis, string Name, double Factor, int NewID, cursor[] SelectedLoad, double[] TargetFactor, cursor Edit)
 ```
 
@@ -55,6 +55,6 @@ A Cursor specifying the created gururi load case.
 
 ## Sample Code
 
-```psj
+```py
 DYNAMIC_FREQ_ANALYSIS_LOADCASE(1, 3:1, "LoadCase_1", 1.0, 1, [], [1.0], 0:0)
 ```

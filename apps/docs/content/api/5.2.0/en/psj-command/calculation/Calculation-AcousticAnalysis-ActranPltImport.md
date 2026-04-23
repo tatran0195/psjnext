@@ -12,7 +12,7 @@ Create intensity from the sound pressure and particle velocity results.
 
 ## Syntax
 
-```psj
+```py
 Calculation.AcousticAnalysis.ActranPltImport(...)
 ```
 

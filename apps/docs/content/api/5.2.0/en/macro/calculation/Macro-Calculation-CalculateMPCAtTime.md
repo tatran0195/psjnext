@@ -11,7 +11,7 @@ Display MPC result of specific time in Model Participation Factor dialog.
 
 ## Syntax
 
-```psj
+```py
 CalculateMPCAtTime(cursor crResponse, double dTime)
 ```
 
@@ -32,6 +32,6 @@ CalculateMPCAtTime(cursor crResponse, double dTime)
 
 ## Sample Code
 
-```psj
+```py
 CalculateMPCAtTime(0:0, 0.0)
 ```

@@ -12,7 +12,7 @@ Change the color of the edges of selected part.
 
 ## Syntax
 
-```psj
+```py
 Assembly.RightClick.ChangeEdgeColor(...)
 ```
 

@@ -12,7 +12,7 @@ Export the input file for Nastran Steady State Heat Transfer analysis (SOL 153).
 
 ## Syntax
 
-```psj
+```py
 Analysis.Nastran.SteadyState(...)
 ```
 

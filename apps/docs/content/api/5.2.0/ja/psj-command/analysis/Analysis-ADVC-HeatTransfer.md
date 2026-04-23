@@ -12,7 +12,7 @@ Create and export the ADVC (\*.adx) file for the Heat Transfer analysis.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.HeatTransfer(...)
 ```
 

@@ -12,7 +12,7 @@ Add "Element" to the selection list, allowing user to select 2D elements and sto
 
 ## Syntax
 
-```psj
+```py
 dlg.add_2delement_selector(...)
 ```
 

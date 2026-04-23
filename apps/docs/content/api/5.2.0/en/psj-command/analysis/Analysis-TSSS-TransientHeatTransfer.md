@@ -12,7 +12,7 @@ Export the Input Deck for TechnoStar SunShine Transient Heat Transfer analysis (
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSS.TransientHeatTransfer(...)
 ```
 

@@ -12,7 +12,7 @@ Export content of measure notes to csv files.
 
 ## Syntax
 
-```psj
+```py
 Assembly.RightClick.ExportMeasureNote(...)
 ```
 

@@ -11,7 +11,7 @@ Create property 1D Plot
 
 ## Syntax
 
-```psj
+```py
 Property1DPlot(string strName, int iPlotID, cursor[] taTarget, cursor crCoord)
 ```
 
@@ -40,6 +40,6 @@ Whether use local coordinate or not True = 27:\*, False = 0:0
 
 ## Sample Code
 
-```psj
+```py
 Property1DPlot("PLOT_4", 4, [5:104, 10:692], 0:0)
 ```

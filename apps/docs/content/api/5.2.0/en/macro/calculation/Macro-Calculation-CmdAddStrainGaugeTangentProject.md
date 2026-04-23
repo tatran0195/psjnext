@@ -11,7 +11,7 @@ Display the tangential strain at each node.
 
 ## Syntax
 
-```psj
+```py
 CmdAddStrainGaugeTangentProject(int[] ilNodeIDs, double dWidth, double dHeight, int nDirection, double dAngle, double dVectorSize, double dAmendFactor, str strGaugeName)
 ```
 
@@ -56,6 +56,6 @@ CmdAddStrainGaugeTangentProject(int[] ilNodeIDs, double dWidth, double dHeight, 
 
 ## Sample Code
 
-```psj
+```py
 CmdAddStrainGaugeTangentProject([], 0.0, 0.0, 0, 0.0, 1.0, 1.0, "strGaugeName")
 ```

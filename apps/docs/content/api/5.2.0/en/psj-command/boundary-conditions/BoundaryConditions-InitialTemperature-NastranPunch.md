@@ -12,7 +12,7 @@ Load the temperature result output in Nastran Punch format and set as the initia
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.InitialTemperature.NastranPunch(...)
 ```
 

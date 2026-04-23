@@ -11,7 +11,7 @@ Save or load the results of a frequency response analysis (\*.tsdv).
 
 ## Syntax
 
-```psj
+```py
 CmdSaveOpenTsdv(str strFilePath, int  iSaveOpenMode, cursor crlTargetItems, bool bBdfMode, int iAnalysisType)
 ```
 
@@ -44,6 +44,6 @@ CmdSaveOpenTsdv(str strFilePath, int  iSaveOpenMode, cursor crlTargetItems, bool
 
 ## Sample Code
 
-```psj
+```py
 CmdSaveOpenTsdv("path/to/the/file", 0, [0:0], 1, 0)
 ```

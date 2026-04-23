@@ -12,7 +12,7 @@ Rename a specified entity.
 
 ## Syntax
 
-```psj
+```py
 Assembly.RightClick.Rename(...)
 ```
 

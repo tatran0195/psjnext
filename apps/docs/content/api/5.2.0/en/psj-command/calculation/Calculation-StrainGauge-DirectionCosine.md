@@ -12,7 +12,7 @@ Display a graph of the stress/strain in the direction cosine of the entered dire
 
 ## Syntax
 
-```psj
+```py
 Calculation.StrainGauge.DirectionCosine(...)
 ```
 

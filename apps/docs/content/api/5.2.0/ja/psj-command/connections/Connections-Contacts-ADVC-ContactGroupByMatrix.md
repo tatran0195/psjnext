@@ -12,7 +12,7 @@ Create ADVC contact Group By Matrix
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.ADVC.ContactGroupByMatrix(...)
 ```
 

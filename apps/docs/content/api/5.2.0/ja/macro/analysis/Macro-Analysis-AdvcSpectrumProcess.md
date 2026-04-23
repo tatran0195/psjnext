@@ -11,7 +11,7 @@ Create ADVC response spectrum process
 
 ## Syntax
 
-```psj
+```py
 AdvcSpectrumProcess(string m_strName,string strRefEigenDir,double dRefLowFreq,
     double dRefHighFreq,int iPropMethod,int iSpttype,double dSptFactor[0],
     cursor crSpt[0],double dSptFactor[1],cursor crSpt[1],double dSptFactor[2],
@@ -109,6 +109,6 @@ data of reference result
 
 ## Sample Code
 
-```psj
+```py
 AdvcSpectrumProcess("Test",,0.001,0.001,1,1,0.001,1:11,0.001,1:11,0.001,1:11,1:11,,,,,1,"Test",)
 ```

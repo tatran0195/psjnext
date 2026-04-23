@@ -12,7 +12,7 @@ Create Force (Quadratic) y = a\*x^2 + b.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Force.FunctionLoadCylinder.Quadratic(...)
 ```
 

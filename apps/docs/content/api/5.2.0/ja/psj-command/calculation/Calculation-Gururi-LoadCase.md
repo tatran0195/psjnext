@@ -12,7 +12,7 @@ Create a load case for Gururi analysis.
 
 ## Syntax
 
-```psj
+```py
 Calculation.Gururi.LoadCase(...)
 ```
 

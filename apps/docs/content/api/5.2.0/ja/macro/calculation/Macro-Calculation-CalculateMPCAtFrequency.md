@@ -11,7 +11,7 @@ Display MPC result of specific frequency in Model Participation Factor dialog.
 
 ## Syntax
 
-```psj
+```py
 CalculateMPCAtFrequency(cursor crResponse, double dFrequency)
 ```
 
@@ -32,6 +32,6 @@ CalculateMPCAtFrequency(cursor crResponse, double dFrequency)
 
 ## Sample Code
 
-```psj
+```py
 CalculateMPCAtFrequency(0:0, 0.0)
 ```

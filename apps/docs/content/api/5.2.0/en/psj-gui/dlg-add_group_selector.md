@@ -12,7 +12,7 @@ Add "Group" to the selection list, allowing user to select group and store the g
 
 ## Syntax
 
-```psj
+```py
 dlg.add_group_selector(...)
 ```
 

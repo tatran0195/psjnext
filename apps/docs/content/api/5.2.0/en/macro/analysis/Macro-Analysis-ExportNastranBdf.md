@@ -11,7 +11,7 @@ Export Nastran bdf file
 
 ## Syntax
 
-```psj
+```py
 ExportNastranBdf(string strPath, TCursor job, int modelCheckAnswer, int deleteSlaveNodesAnswer)
 ```
 
@@ -40,6 +40,6 @@ Delete Slave Nodes Answer
 
 ## Sample Code
 
-```psj
+```py
 ExportNastranBdf("D:/NastranBdf.bdf", 147:2, 1, 0)
 ```

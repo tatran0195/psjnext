@@ -12,7 +12,7 @@ Create Lbc TypeC Bolt Edge method.
 
 ## Syntax
 
-```psj
+```py
 Connections.BoltConnections.Edge.TypeC(...)
 ```
 

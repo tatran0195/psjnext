@@ -12,7 +12,7 @@ Connection new mass
 
 ## Syntax
 
-```psj
+```py
 Connections.MassElements(...)
 ```
 

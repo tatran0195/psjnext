@@ -11,7 +11,7 @@ Create Pressure general
 
 ## Syntax
 
-```psj
+```py
 PressureGeneral(string strName, double pressure, int distrbute, cursor crTable,
     double phase, double delay, cursor phaseTable, string formulaValue, cursor crCoord,
     cursor[] dirPressCoord, string formulaDirX, string formulaDirY, string formulaDirZ,
@@ -98,6 +98,6 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 PressureGeneral("Pressure1", 5000, 0, 81:1, 0.0174533, 2, 81:3, "", 27:1, [1, 2, 3], "", "", "", 1, [6:5, 11:700, 11:699], 0:0)
 ```

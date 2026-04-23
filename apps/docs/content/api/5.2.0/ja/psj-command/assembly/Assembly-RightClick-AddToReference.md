@@ -12,7 +12,7 @@ Add the current part to its Reference and use the added one as the current refer
 
 ## Syntax
 
-```psj
+```py
 Assembly.RightClick.AddToReference(...)
 ```
 

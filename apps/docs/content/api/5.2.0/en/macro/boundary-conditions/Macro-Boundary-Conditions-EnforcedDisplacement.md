@@ -11,7 +11,7 @@ Create enforced displacement
 
 ## Syntax
 
-```psj
+```py
 EnforcedDisplacement(string strName, int dwDof, double dTransR, double dTransTheta,
     double dTransZ, double dRotR, double dRotTheta, double dRotZ, cursor crCoord,
     int iArrowDir, cursor crTable, cursor crNodeSet, double dPhase, double dDelay,
@@ -98,7 +98,7 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 EnforcedDisplacement("EnforcedDisplacement1", 63, 0.001, 0.002, 0.003, 1, 2, 3, 27:1,
     0, 81:1, 0:0, 1, 1, 0:0, [6:3, 5:1, 10:70], 0:0)
 ```

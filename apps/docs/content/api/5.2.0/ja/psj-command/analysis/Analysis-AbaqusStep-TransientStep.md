@@ -12,7 +12,7 @@ Create Abaqus step for Transient analysis.
 
 ## Syntax
 
-```psj
+```py
 Analysis.AbaqusStep.TransientStep(...)
 ```
 

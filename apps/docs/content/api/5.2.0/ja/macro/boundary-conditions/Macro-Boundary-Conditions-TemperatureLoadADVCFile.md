@@ -11,7 +11,7 @@ Create temperature load by advc file
 
 ## Syntax
 
-```psj
+```py
 TemperatureLoadADVCFile(string strName, string strFilePathName, cursor crTable, cursor[] taTarget, cursor crEdit)
 ```
 
@@ -44,6 +44,6 @@ edit cursor
 
 ## Sample Code
 
-```psj
+```py
 TemperatureLoadGeneral("TemperatureLoadsConstant1", 303.15, 0:0, [6:21], 0:0, 0)
 ```

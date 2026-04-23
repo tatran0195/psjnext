@@ -11,7 +11,7 @@ Add Rib
 
 ## Syntax
 
-```psj
+```py
 AddRib(cursor part, cursor[] face_list, Cursor[] node_list, int width, int depth)
 ```
 
@@ -44,6 +44,6 @@ Rib depth
 
 ## Sample Code
 
-```psj
+```py
 AddRib(3:10, [6:260, 6:26], [], 10, 0)
 ```

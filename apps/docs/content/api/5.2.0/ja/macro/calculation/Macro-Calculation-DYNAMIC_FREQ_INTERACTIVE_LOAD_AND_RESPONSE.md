@@ -11,7 +11,7 @@ Execute Frequency Analysis (Interactive) command.
 
 ## Syntax
 
-```psj
+```py
 DYNAMIC_FREQ_INTERACTIVE_LOAD_AND_RESPONSE(curl arTarget, string strName, double Amplitude, double Delay, double Phase, double dBf, double dFf, double dDampingFactor, double StyleParamTop, double StyleParamMid, double StyleParamBot, int iLoadPtn, double[] vecForce, bool bBf, bool bFf, bool bUnitLoad, bool bCentripetalForce, bool bAllModesUsed, bool bIncludeEigenValue, bool bDampingFactor, cursor crBfCurve, cursor crFfCurve, cursor crCoord, string[] vecstrModesSelect, cursor crParentAnalysis, int CurStyle, int ResultType, int ResultPos, string[] vecstrSelectedResultName)
 ```
 
@@ -183,6 +183,6 @@ Data for draw curve (string)
 
 ## Sample Code
 
-```psj
+```py
 DYNAMIC_FREQ_INTERACTIVE_LOAD_AND_RESPONSE([10:788], "Freq_Response_1", 1, 0, 0, 1, 0, 0.01, 0, 1, 200, 6, [0, -0.7071067811865476, 0.7071067811865476], 0, 0, 0, 0, 1, 0, 1, 0:0, 0:0, 0:0, 0:0, [], 0:0, 1, 0, 0, ["Normal"])
 ```

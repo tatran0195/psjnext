@@ -12,7 +12,7 @@ Create hydrostatic pressure.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Pressure.Hydrostatic(...)
 ```
 

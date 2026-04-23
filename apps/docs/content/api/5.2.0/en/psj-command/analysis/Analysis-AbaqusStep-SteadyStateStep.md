@@ -12,7 +12,7 @@ Create Abaqus step for Steady State analysis.
 
 ## Syntax
 
-```psj
+```py
 Analysis.AbaqusStep.SteadyStateStep(...)
 ```
 

@@ -35,7 +35,7 @@ For example: `YOUNGS_MODULUS` is equal to ID = 1.
 | 144          | `EXTRA_FIELDS_H`    | A _Tuple_ specifying the extra field data in horizontal transverse.           |
 | 145          | `EXTRA_FIELDS_V`    | A _Tuple_ specifying the extra field data in vertical transverse.             |
 
-```psj {2-4} title="Sample Code"
+```py {2-4} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[GasketTransverseElastic(gasketTransverseElastic=[
                                         (SHEAR_STIFFNESS_H, [400.0]),

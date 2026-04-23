@@ -11,7 +11,7 @@ Create contact for advc
 
 ## Syntax
 
-```psj
+```py
 ContactManualFaceADVC(cursor[] m_crlMasterFaces, cursor[] crlSlaveFaces,
     string m_strName,int m_iType,int slidingType,int InitialState,
     double initialStateTol,double kineticFrictionCoef,double exponentialCoef,
@@ -250,6 +250,6 @@ tying type [0:blank, 1:Rigid, 2:Shear Tying]
 
 ## Sample Code
 
-```psj
+```py
 ContactManualFaceADVC([6:24], [6:49], "ContactADVC_1", 1, 0, 0, 1.79769e+308, 1.79769e+308, 1.79769e+308, 0, 0, 0, 1.79769e+308, 0, 0, 1, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 0, 0, 0, 1, 1, 0, 0, [1, 2, 0, 0], 0, 0, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, [], 0:0, 1.79769e+308, 0, 1.79769e+308, 1.79769e+308, 65280, 0, 0, 2, 0, 0, [1, 2, 0, 0], 0)
 ```

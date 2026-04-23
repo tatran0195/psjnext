@@ -12,7 +12,7 @@ Create a fixed constraint on selected Face, Edge or Node. User inputs the degree
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.FixedConstraint(...)
 ```
 

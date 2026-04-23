@@ -12,7 +12,7 @@ Convert the selected object to _[DItem](/docs/cli/5.1.0/data-type/psj-utility/pr
 
 ## Syntax
 
-```psj
+```py
 JPT.CastToDItem(Object)
 ```
 

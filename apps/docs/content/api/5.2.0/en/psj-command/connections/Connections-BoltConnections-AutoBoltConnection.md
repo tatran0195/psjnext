@@ -12,7 +12,7 @@ Create bolt connection for all the detected bolt holes at one time
 
 ## Syntax
 
-```psj
+```py
 Connections.BoltConnections.AutoBoltConnection(...)
 ```
 

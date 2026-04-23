@@ -11,7 +11,7 @@ Separate assembled faces in a shell model
 
 ## Syntax
 
-```psj
+```py
 ASMSeparateShell(int iType, int[] taKeyEntity, bool bCreateGroup)
 ```
 
@@ -39,6 +39,6 @@ Create group
 
 ## Sample Code
 
-```psj
+```py
 ASMSeparateShell(1, [4, 1], 0)
 ```

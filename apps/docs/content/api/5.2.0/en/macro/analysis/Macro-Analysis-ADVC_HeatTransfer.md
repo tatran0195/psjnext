@@ -11,7 +11,7 @@ Create ADVC job (ADVC_HeatTransfer)
 
 ## Syntax
 
-```psj
+```py
 ADVC_Structure(string Name, string Description, int JobType, cursor[] processSequence,
     cursor[] elemLocationGroup, cursor[] nodeLocationGroup, bool WriteGroup,
     cursor Edit, bool ResultReference, int iSeparateFile, bool ExportRelatedAllLBCs,
@@ -196,7 +196,7 @@ Data format type. [0:Single; 1:Double]
 
 ## Sample Code
 
-```psj
+```py
 ADVC_HeatTransfer("Job_1", "", 1, [128:1], [], [], 0, 0:0, 0, 0, 0, 0, 0, 0, 0, [3:1], 1, 1, 1, 1, 0, 1, 22:1, 0, "", 2147483647, 2147483647, 0, 1, [], 1, "C:/Temp/Job_1.adx", 0, 10, 7, 0, 0, "", 1, 0)
 
 ```

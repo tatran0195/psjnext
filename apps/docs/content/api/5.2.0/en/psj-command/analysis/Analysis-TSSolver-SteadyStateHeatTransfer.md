@@ -12,7 +12,7 @@ Export the Input Deck for TechnoStar Steady State Heat Transfer analysis (SOL 15
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSolver.SteadyStateHeatTransfer(...)
 ```
 

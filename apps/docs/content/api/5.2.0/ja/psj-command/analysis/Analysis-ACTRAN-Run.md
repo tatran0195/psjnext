@@ -12,7 +12,7 @@ Run Actran analysis
 
 ## Syntax
 
-```psj
+```py
 Analysis.ACTRAN.Run(...)
 ```
 

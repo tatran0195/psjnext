@@ -12,7 +12,7 @@ Abaqus Static Risk Step
 
 ## Syntax
 
-```psj
+```py
 Analysis.AbaqusStep.StaticRiskStep(...)
 ```
 

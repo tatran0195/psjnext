@@ -12,7 +12,7 @@ Add "Coordinate" to the selection list, allowing user to select coordinate and s
 
 ## Syntax
 
-```psj
+```py
 dlg.add_coordinate_selector(...)
 ```
 

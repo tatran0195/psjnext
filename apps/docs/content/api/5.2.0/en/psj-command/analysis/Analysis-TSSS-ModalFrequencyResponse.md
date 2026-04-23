@@ -12,7 +12,7 @@ Export the Input Deck for TechnoStar SunShine Modal Frequency Response analysis 
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSS.ModalFrequencyResponse(...)
 ```
 

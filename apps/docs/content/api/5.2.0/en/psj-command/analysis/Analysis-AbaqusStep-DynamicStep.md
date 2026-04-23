@@ -12,7 +12,7 @@ Create Abaqus step for Dynamic analysis.
 
 ## Syntax
 
-```psj
+```py
 Analysis.AbaqusStep.DyanmicStep(...)
 ```
 

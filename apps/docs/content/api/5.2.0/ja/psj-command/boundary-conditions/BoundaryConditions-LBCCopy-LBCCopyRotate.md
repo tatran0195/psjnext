@@ -12,7 +12,7 @@ Copy a LBC rotate.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.LBCCopyRotate(...)
 ```
 

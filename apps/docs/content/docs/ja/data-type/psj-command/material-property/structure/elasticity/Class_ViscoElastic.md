@@ -30,7 +30,7 @@ For example: `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 | 78           | SHIFT_FACTOR  | A _Tuple_ specifying the shift factor data.          |
 | 130          | TEMPERATURE   | A _Tuple_ specifying the temperature-dependent data. |
 
-```psj {2-7} title="Sample Code"
+```py {2-7} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[ViscoElastic(viscoElastic=[
                                         (SHEAR_MODULUS, [180.0]),

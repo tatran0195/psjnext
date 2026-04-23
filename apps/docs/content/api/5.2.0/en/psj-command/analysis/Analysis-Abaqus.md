@@ -12,7 +12,7 @@ Create an Abaqus job.
 
 ## Syntax
 
-```psj
+```py
 Analysis.Abaqus(...)
 ```
 

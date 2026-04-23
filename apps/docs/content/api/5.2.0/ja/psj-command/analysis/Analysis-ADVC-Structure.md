@@ -12,7 +12,7 @@ Create and export the ADVC (\*.adx) file for the Structure analysis.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.Structure(...)
 ```
 

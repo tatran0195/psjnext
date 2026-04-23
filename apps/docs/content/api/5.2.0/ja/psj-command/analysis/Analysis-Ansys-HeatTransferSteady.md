@@ -12,7 +12,7 @@ Export the Ansys Heat Transfer solver file
 
 ## Syntax
 
-```psj
+```py
 Analysis.Ansys.HeadTransferSteady(...)
 ```
 

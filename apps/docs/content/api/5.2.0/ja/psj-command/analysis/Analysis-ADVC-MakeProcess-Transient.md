@@ -12,7 +12,7 @@ Create ADVC Heat Transfer for Transient process.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.MakeProcess.Transient(...)
 ```
 

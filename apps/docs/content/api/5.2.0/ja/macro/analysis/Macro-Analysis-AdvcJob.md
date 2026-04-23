@@ -11,7 +11,7 @@ Create ADVC job
 
 ## Syntax
 
-```psj
+```py
 AdvcJob(string Name, string Description, int eJobType, cursor[] processSequence,
     cursor[] elemLocationGroup, cursor[] nodeLocationGroup, bool WriteGroup,
     cursor Edit, bool ResultReference, int iSeparateFile, bool ExportRelatedAllLBCs,
@@ -160,7 +160,7 @@ Heat Convection
 
 ## Sample Code
 
-```psj
+```py
 AdvcJob("ADVC", "", 1, [128:2], [], [], 0, 0:0, 0, 0, 0, 0, 0, 0, 0, [3:1],
     1, 1, 1, 1, 0, 1, 22:2, 0, "", 2147483647, 2147483647, 0, 1, [], 1)
 ```

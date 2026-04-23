@@ -12,7 +12,7 @@ Add "1D element" to the selection list, allowing user to select 1D elements and 
 
 ## Syntax
 
-```psj
+```py
 dlg.add_1delement_selector(...)
 ```
 

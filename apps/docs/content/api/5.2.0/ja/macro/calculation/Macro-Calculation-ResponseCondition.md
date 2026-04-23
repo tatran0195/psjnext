@@ -11,7 +11,7 @@ Output the result of the response point for transient response.
 
 ## Syntax
 
-```psj
+```py
 DYNAMIC_FREQ_ANALYSIS_RESPONSE(cursor crParentAnalysis, cursor crCoordinate, bool bAllModesUsed, str[] strlModesSelect, bool bDampingFactor, double dDampingFactor, cursor crDampingFactor, int iCurveStyle, double dStyleParamTop, double dStyleParamMid, double dStyleParamBot, bool bIncludeEigenValue, bool bCreateNewResult, int iResultType, str[]strlSelectedResultName, int iResultPos, bool bAllCase, cursor crSelectedLoadCase, bool bSeparateLoad, cursor[] crlTargets, cursor crEdit)
 ```
 
@@ -108,6 +108,6 @@ DYNAMIC_FREQ_ANALYSIS_RESPONSE(cursor crParentAnalysis, cursor crCoordinate, boo
 
 ## Sample Code
 
-```psj
+```py
 DYNAMIC_FREQ_ANALYSIS_RESPONSE(0:0, 0:0, 1, [], 1, 0.01, 0:0, 1, 0.0, 1.0, 1.0, 0, 0, 0, ["TX"], 0, 1, 0:0, 1, [0:0], 0:0)
 ```

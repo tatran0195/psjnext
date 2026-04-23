@@ -12,7 +12,7 @@ In this tutorial, you'll learn how a table set cell alignment and check if the v
 
 ## 📖 Tutorial
 
-```psj showLineNumbers
+```py showLineNumbers
 # Encoding for Japanese
 # coding: cp932
 

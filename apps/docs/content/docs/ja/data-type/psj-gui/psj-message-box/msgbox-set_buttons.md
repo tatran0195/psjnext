@@ -9,7 +9,7 @@ An instance of a PSJMessageBox class, specifying a set of available buttons supp
 
 ## Syntax
 
-```psj {2}
+```py {2}
 msgbox.set_buttons(...)
 ```
 
@@ -26,7 +26,7 @@ This function does not have output value.
 
 ## Sample Code
 
-```psj {9}
+```py {9}
 from pyjdg import *
 
 def main():

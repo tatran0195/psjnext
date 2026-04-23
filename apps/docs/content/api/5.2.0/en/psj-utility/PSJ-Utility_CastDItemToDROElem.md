@@ -12,7 +12,7 @@ Convert _[DItem](/docs/cli/5.1.0/data-type/psj-utility/pre-utility/built-in-type
 
 ## Syntax
 
-```psj
+```py
 JPT.CastDItemToDROElem(DItemObject)
 ```
 

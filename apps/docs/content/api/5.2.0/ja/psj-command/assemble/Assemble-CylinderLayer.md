@@ -12,7 +12,7 @@ Create an inner cylindrical face based on specified top face/bottom face of the 
 
 ## Syntax
 
-```psj
+```py
 Assemble.CylinderLayer(...)
 ```
 

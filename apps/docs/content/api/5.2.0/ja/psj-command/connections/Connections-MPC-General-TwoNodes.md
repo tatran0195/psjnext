@@ -12,7 +12,7 @@ Create a MPC connection between slave nodes to master nodes one-to-one correspon
 
 ## Syntax
 
-```psj
+```py
 Connections.MPC.General.TwoNodes(...)
 ```
 

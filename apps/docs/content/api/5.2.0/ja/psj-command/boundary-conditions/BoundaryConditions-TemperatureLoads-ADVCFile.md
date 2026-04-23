@@ -12,7 +12,7 @@ Create temperature load by using ADVC file.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.TemperatureLoads.ADVCFile(...)
 ```
 

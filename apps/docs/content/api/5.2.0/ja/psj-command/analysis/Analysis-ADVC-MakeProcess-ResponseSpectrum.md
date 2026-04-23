@@ -12,7 +12,7 @@ Create advc response spectrum process.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.MakeProcess.ResponseSpectrum(...)
 ```
 

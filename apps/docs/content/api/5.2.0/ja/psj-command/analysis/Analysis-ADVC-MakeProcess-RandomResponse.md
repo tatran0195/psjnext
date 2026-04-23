@@ -12,7 +12,7 @@ Create ADVC random response process
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.MakeProcess.RandomResponse(...)
 ```
 

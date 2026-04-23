@@ -12,7 +12,7 @@ Create a layer (PRISM6 part) with the entire surface mesh of the part offset inw
 
 ## Syntax
 
-```psj
+```py
 Assemble.FullLayer(...)
 ```
 

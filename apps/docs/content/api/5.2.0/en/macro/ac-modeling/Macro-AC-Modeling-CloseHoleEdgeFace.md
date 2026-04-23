@@ -11,7 +11,7 @@ ACM_CloseHole_EdgeFace
 
 ## Syntax
 
-```psj
+```py
 CloseHoleEdgeFace(cursor[] crBody, cursor[] crFace, cursor[] crEdge, bool bSelBelPart,
     bool SpecPart, bool bNewPart, string strName, bool bRemesh, double dElemSize)
 ```
@@ -61,6 +61,6 @@ Element size
 
 ## Sample Code
 
-```psj
+```py
 CloseHoleEdgeFace([], [6:62], [5:10000157], 0, 0, 0, "", 1, 0.008)
 ```

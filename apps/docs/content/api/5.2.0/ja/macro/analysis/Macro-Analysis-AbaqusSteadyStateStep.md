@@ -13,7 +13,7 @@ All the parameters except for the setting and process indications are the same a
 
 ## Syntax
 
-```psj
+```py
 AbaqusSteadyStateStep(string m_strName, string m_strDesp, int m_bAutomatic, int m_maxInc, double m_initSize, double m_minSize, double m_maxSize, double  m_MaxAllowTChange, int m_EndStepT.bChecked,               std::vector<double> m_EndStepT.TList double m_MaxAllowEmissivityChange, int m_Method, int m_MatrixStorage, int m_SolutionTech,	int m_AllowedIters,	double m_AdjustFactor, int m_MaxContactIter,
 int m_bNlgeom, double m_TimePeriod, int m_ConvertDscntIter,	int m_Ramp,	int m_ExtrapolateMethod, AbaOutputParam[] m_Output)
 ```
@@ -123,6 +123,6 @@ Indicate AbaqusSteadyStateStep when edit it.
 
 ## Sample Code
 
-```psj
+```py
 JPT.Exec('AbaqusSteadyStateStep("Step1", "", 1, 100, 1, 1e-05, 1, 1.79769e+308, 0, [], 0.1, 0, 0, 0, 8, 1, 30, 0, 1, 0, 1, 0, [], 0:0)')
 ```

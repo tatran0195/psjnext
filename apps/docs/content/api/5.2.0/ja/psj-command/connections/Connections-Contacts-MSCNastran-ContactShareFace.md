@@ -12,7 +12,7 @@ Create contacts of MSC Nastran Contact Share Face
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.MSCNastran.ContactShareFace(crlShareFace=[], strName="", nastranContact=NASTRAN_CONTACT(), crEdit=None, iColor=65280, iMethod=3)
 ```
 

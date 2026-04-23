@@ -11,7 +11,7 @@ Create ADVC eigen value process
 
 ## Syntax
 
-```psj
+```py
 AdvcEigenProcess(string m_strName,bool m_bEigenValue,int number_of_modes,
     int eigenvec_norm,double shift,double cgcgpi_tol,double cgcgpi_eig_tol,
     int cgcgpi_loop_max,double cgcgpi_inner_tol,int cgcgpi_block_size,
@@ -105,6 +105,6 @@ data of reference result
 
 ## Sample Code
 
-```psj
+```py
 AdvcEigenProcess("Test",1,1,1,0.001,0.001,0.001,1,0.001,1,1,1:11,,,,,1,"Test",)
 ```

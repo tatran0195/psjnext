@@ -12,7 +12,7 @@ Set the arbitrary excitation input for transient response (Solver).
 
 ## Syntax
 
-```psj
+```py
 Calculation.TransRespSolver.LoadCondition(...)
 ```
 

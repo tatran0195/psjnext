@@ -12,7 +12,7 @@ This method defines a contact setting between specified groups for TechnoStar Su
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.TSSS.ManualGroup(...)
 ```
 

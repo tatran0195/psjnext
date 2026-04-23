@@ -9,7 +9,7 @@ authorURL: https://www.e-technostar.com/
 
 ## Syntax
 
-```psj
+```py
 Connections.CreateConnConm(strName, iEType, iMethod, iCoordSys, iConmId, crMatCoord, dMass, dlX=[0, 0, 0], dlVintertia0=[0, 0, 0], dlVintertia1=[0, 0, 0])
 ```
 

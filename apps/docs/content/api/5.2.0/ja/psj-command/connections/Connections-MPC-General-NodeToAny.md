@@ -12,7 +12,7 @@ Create MPC between a selected node and any types of entities such as nodes, edge
 
 ## Syntax
 
-```psj
+```py
 Connections.MPC.General.NodeToAny(...)
 ```
 

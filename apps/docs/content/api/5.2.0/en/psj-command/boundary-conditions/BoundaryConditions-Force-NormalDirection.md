@@ -12,7 +12,7 @@ Create a force in the normal direction applies on selected Face, Edge, Node/MidN
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Force.NormalDirection(...)
 ```
 

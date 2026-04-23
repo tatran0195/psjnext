@@ -13,7 +13,7 @@ User inputs the pair faces output from [Assemble.FindMatingFaceEx()](/docs/cli/5
 
 ## Syntax
 
-```psj
+```py
 Assemble.AssembleFaceEx(...)
 ```
 

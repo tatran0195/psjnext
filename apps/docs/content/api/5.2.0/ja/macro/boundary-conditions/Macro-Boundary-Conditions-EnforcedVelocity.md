@@ -11,7 +11,7 @@ Create enforced velocity
 
 ## Syntax
 
-```psj
+```py
 EnforcedVelocity(String m_strName,int dwDof,double fVel[0],double fVel[1],double fVel[2],
     double fVel[3],double fVel[4],double fVel[5],Cursor curCoord,int enArrowDir,
     Cursor crTable,Cursor crNodeSet,double m_fPhase,double m_fDelay,Cursor crPhaseTable,
@@ -137,7 +137,7 @@ If Create 2 ADVC Static Process For Bolt Fix Length
 
 ## Sample Code
 
-```psj
+```py
 EnforcedVelocity("EnforcedVelocity1", 63, 0.001, 0.002, 0.003, 1, 2, 3, 0:0, 0,0:0, 0:0,
     1.79769e+308, 1.79769e+308, 0:0, 0, 0, 0, 0:0, 0:0, 0:0, 0:0, 0:0, 0:0, [6:26], 0:0, 0)
 ```

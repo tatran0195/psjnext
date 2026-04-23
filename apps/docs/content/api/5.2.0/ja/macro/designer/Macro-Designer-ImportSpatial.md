@@ -11,7 +11,7 @@ Import CAD file by Spatial interface
 
 ## Syntax
 
-```psj
+```py
 ImportSpatial(String[] vecPath, double surface_plane_tolerance, double surface_plane_angle,
     double max_facet_width, int isNXDirect)
 ```
@@ -45,6 +45,6 @@ flag of NXDirect
 
 ## Sample Code
 
-```psj
+```py
 ImportSpatial(["D:/assy1.sat"], 0.002, 30, 0, 0)
 ```

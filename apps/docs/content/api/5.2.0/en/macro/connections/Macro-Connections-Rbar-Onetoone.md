@@ -11,7 +11,7 @@ Create one-to-one RBAR (rigid elements) connection
 
 ## Syntax
 
-```psj
+```py
 RBarOneToOne(string strName, cursor[] taMasterTarget, cursor[] taSlaveTarget, int iMethod, int ulDofs, double dTol,
             cursor crCoord, bool bUpdateDispCS, cursor crEdit)
 ```
@@ -63,6 +63,6 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 RBarOneToOne("RBar_1", [10:957], [10:179], 17, 63, 0, 0:0, 1, 0:0)
 ```

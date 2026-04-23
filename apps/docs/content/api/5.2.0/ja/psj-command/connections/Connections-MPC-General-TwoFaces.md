@@ -12,7 +12,7 @@ Create MPC between two faces.
 
 ## Syntax
 
-```psj
+```py
 Connections.MPC.General.TwoFaces(...)
 ```
 

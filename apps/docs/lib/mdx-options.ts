@@ -6,10 +6,12 @@ import {
     type RemarkAutoTypeTableOptions,
 } from 'fumadocs-typescript';
 
+import { remarkDirectiveAdmonition } from 'fumadocs-core/mdx-plugins';
 import { rehypeCodeDefaultOptions } from 'fumadocs-core/mdx-plugins/rehype-code';
 import { remarkSteps } from 'fumadocs-core/mdx-plugins/remark-steps';
 import { applyMdxPreset, DocCollection } from 'fumadocs-mdx/config';
 import { createFileSystemTypesCache } from 'fumadocs-twoslash/cache-fs';
+import remarkDirective from 'remark-directive';
 import remarkMath from 'remark-math';
 
 import { remarkElementIds } from '@/lib/mdx-plugins/remark-element-ids';
@@ -98,6 +100,8 @@ export const mdxOptions: DocCollection['mdxOptions'] = (environment) => {
                 : [
                       ...plugins,
                       //   remarkIncludeCode,
+                      remarkDirective,
+                      remarkDirectiveAdmonition,
                       remarkSteps,
                       remarkMath,
                       [remarkLinkPreview, {}],

@@ -49,7 +49,7 @@ For example: `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 | 68           | HARDENING_B     | A _Tuple_ specifying the hardening B data.            |
 | 133          | TEMPERATURE_SUB | A _Tuple_ specifying the temperature sub option data. |
 
-```psj {2-6} title="Sample Code"
+```py {2-6} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Plastic(plastic=[
                                         (STRESS, [0.0005]),
@@ -81,7 +81,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 68           | HARDENING_B     | A _Tuple_ specifying the hardening B data.            |
 | 133          | TEMPERATURE_SUB | A _Tuple_ specifying the temperature sub option data. |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Plastic(plastic=[
                                         (STRESS, [0.0005]),
@@ -113,7 +113,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 68           | HARDENING_B     | A _Tuple_ specifying the hardening B data.            |
 | 133          | TEMPERATURE_SUB | A _Tuple_ specifying the temperature sub option data. |
 
-```psj {2-8} title="Sample Code"
+```py {2-8} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                 listMaterialProperty=[Plastic(plastic=[
                                     (A, [10.0]),
@@ -142,7 +142,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 68           | HARDENING_B     | A _Tuple_ specifying the hardening B data.            |
 | 133          | TEMPERATURE_SUB | A _Tuple_ specifying the temperature sub option data. |
 
-```psj {2-3} title="Sample Code"
+```py {2-3} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                 listMaterialProperty=[Plastic(plastic=[
                                     (HARDENING_PROP, [10.0])],
@@ -170,7 +170,7 @@ JPT.Debugger(sample_Mat) #for checking return value
 | 49           | GAMMA           | A _Tuple_ specifying the gamma data.                                |
 | 50           | HARD_PARAM      | A _Tuple_ specifying the hardening parameter data.                  |
 
-```psj {2-9} title="Sample Code"
+```py {2-9} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[Plastic(plastic=[
                                         (STRESS, [0.0005]),

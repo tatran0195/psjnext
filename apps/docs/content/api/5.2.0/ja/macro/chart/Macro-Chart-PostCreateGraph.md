@@ -11,7 +11,7 @@ Invert hide targets by context menu
 
 ## Syntax
 
-```psj
+```py
 PostCreateGraph(cursor TargetCurve, int NumData, string LineTitle, double[] AxisDataX, double[] AxisDataY, string ChartTitle, string AxisTitleX, string AxisTitleY, bool NewChart)
 ```
 
@@ -60,6 +60,6 @@ A Boolean specifying whether to create new chart.
 
 ## Sample Code
 
-```psj
+```py
 PostCreateGraph(3:1,1,"",[0.0,1.0],[1.0,2.0],"","","",True)
 ```

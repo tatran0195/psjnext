@@ -12,7 +12,7 @@ Find contact pairs.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.ADVC.FindContactPairs(...)
 ```
 

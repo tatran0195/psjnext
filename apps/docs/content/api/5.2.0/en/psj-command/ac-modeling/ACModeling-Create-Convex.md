@@ -12,7 +12,7 @@ Create Convex In Boundary
 
 ## Syntax
 
-```psj
+```py
 ACModeling.Create.Convex(...)
 ```
 

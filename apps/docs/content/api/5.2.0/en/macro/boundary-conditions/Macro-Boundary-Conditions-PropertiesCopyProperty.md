@@ -11,7 +11,7 @@ Copy properties by translation
 
 ## Syntax
 
-```psj
+```py
 PropertiesCopyProperty(String strPathSource,String strPathTarget,int[] keyTarget,int axis,
     Cursor crCoord,Vector transVec,double dMag,double dOffset,double dTol)
 ```
@@ -61,6 +61,6 @@ tolerance
 
 ## Sample Code
 
-```psj
+```py
 PropertiesCopyProperty("D:/Source","D:/Target",[1,2],1,1:11,,0.001,0.001,0.001)
 ```

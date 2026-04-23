@@ -12,7 +12,7 @@ Create moment
 
 ## Syntax
 
-```psj
+```py
 Designer.Load.Moment(strName="", crlFaces=[], dlVecMomentXYZ=[0.0,0.0,0.0], crCoord=None, crEdit=None)
 ```
 

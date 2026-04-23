@@ -12,7 +12,7 @@ Check the mesh pattern on the selected faces. The matched/unmatched mesh pattern
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.CheckPattern(...)
 ```
 

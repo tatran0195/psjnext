@@ -11,7 +11,7 @@ Create inside heat generation
 
 ## Syntax
 
-```psj
+```py
 InsideHeatGeneration(string strName, double dInsideFlux, cursor crTable, cursor[] crTarget, cursor crEdit)
 ```
 
@@ -44,6 +44,6 @@ Edit Cursor
 
 ## Sample Code
 
-```psj
+```py
 InsideHeatGeneration("InsideHeatGeneration3", 0.001, 81:1, [3:1], 0:0)
 ```

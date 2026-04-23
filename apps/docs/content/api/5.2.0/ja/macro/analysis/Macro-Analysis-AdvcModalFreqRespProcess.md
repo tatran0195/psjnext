@@ -11,7 +11,7 @@ Create ADVC modal frequency response process
 
 ## Syntax
 
-```psj
+```py
 AdvcModalFreqRespProcess(string m_strName,string strRefEigenDir,double dRefLowFreq,
     double dRefHighFreq,Cursor crModalDampingRatio,Cursor crExcitationFreq,
     bool bAutoFreqInterval,double dMaxFreq,double dMinFreq,int iNumFreqPoint,
@@ -105,6 +105,6 @@ data of reference result
 
 ## Sample Code
 
-```psj
+```py
 AdvcModalFreqRespProcess("Test",,0.001,0.001,1:11,1:11,1,0.001,0.001,1,0.001,1:11,,,,,1,"Test",)
 ```

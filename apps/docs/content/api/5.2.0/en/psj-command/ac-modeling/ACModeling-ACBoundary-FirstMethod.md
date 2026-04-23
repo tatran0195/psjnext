@@ -20,7 +20,7 @@ Unknown Description
 
 ## Syntax
 
-```psj
+```py
 ACModeling.ACBoundary.FirstMethod(...)
 ```
 

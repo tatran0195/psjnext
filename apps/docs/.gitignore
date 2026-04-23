@@ -4,3 +4,5 @@ content/docs/openapi/**/*.mdx
 
 public/r
 public/registry
+
+versions.json

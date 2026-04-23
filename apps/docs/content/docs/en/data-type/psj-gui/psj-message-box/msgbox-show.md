@@ -9,7 +9,7 @@ An instance of a PSJMessageBox class, used to show the message box.
 
 ## Syntax
 
-```psj {2}
+```py {2}
 msgbox.show()
 ```
 
@@ -23,7 +23,7 @@ A _String_ specifying the name of clicked button.
 
 ## Sample Code
 
-```psj {10}
+```py {10}
 from pyjdg import *
 
 def main():

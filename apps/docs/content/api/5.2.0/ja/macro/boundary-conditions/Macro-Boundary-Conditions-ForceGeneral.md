@@ -11,7 +11,7 @@ Create Force general
 
 ## Syntax
 
-```psj
+```py
 ForceGeneral(string name, vector force, vector moment, int arrowDir, int distributionMethod,
     cursor crCoordinate, cursor crTable, cursor crNodeSet, double phase, double delay,
     cursor crPhaseTable, string formulaFX, string formulaFY, string formulaFZ,
@@ -103,7 +103,7 @@ edit target
 
 ## Sample Code
 
-```psj
+```py
 ForceGeneral("Force2", [1, 2, 3], [0.004, 0.005, 0.006], 0, 0, 0:0, 0:0, 0:0,
     0, 0, 0:0, "", "", "", "", "", "", [6:25], 0:0)
 ```

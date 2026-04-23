@@ -119,8 +119,8 @@ export default function CustomSearchDialog(props: SharedProps) {
                               matchesSearch(item, throttledSearch, behavior === 'exact'),
                           )
                           .sort((a, b) => {
-                              const aVersion = a.id.split('/')[3];
-                              const bVersion = b.id.split('/')[3];
+                              const aVersion = a.url.split('/')[2];
+                              const bVersion = b.url.split('/')[2];
                               return compareSemver(bVersion, aVersion);
                           })
                     : []),

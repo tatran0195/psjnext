@@ -11,7 +11,7 @@ Cylinder Layer
 
 ## Syntax
 
-```psj
+```py
 CylinderLayer(cursor crFace, cursor crNode)
 ```
 
@@ -32,6 +32,6 @@ Node cursor(10:Node ID)
 
 ## Sample Code
 
-```psj
+```py
 CylinderLayer(6:8, 10:478)
 ```

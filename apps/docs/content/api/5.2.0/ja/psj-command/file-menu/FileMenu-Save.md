@@ -12,7 +12,7 @@ Save file JTDB
 
 ## Syntax
 
-```psj
+```py
 FileMenu.Save(strFileName="")
 ```
 

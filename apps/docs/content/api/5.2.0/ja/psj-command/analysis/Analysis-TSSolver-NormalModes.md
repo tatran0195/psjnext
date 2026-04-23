@@ -12,7 +12,7 @@ Export the Input Deck for TechnoStar Normal Modes analysis (SOL 103).
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSolver.NormalModes(...)
 ```
 

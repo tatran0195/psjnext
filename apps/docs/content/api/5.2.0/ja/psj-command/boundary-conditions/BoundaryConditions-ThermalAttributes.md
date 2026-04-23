@@ -12,7 +12,7 @@ Create a thermal attribute.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.ThermalAttributes(...)
 ```
 

@@ -11,7 +11,7 @@ Create initial temperature by whole mapping
 
 ## Syntax
 
-```psj
+```py
 WholeMappingInitTemperature(cursor[] targetpParts, string strName, int iMappingSrcType, string strPath, int iMappingMethod, int iMappingFromStepNo, int iLocalUnit, cursor crEdit)
 ```
 
@@ -61,6 +61,6 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 WholeMappingInitTemperature([], "TemperatureInitsWholeMapping_1", 0, "C:/Temp/transient.op2", 0, 0, 1, 0:0)
 ```

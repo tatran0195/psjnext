@@ -12,7 +12,7 @@ Copy a LBC mirror.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.LBCCopy.LBCCopyMirror(...)
 ```
 

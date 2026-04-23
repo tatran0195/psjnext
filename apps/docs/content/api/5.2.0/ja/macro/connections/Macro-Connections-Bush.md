@@ -11,7 +11,7 @@ Create bush connection
 
 ## Syntax
 
-```psj
+```py
 Bush(int iMethod, string strName, cursor[] vcrMasterTarget, cursor[] vcrSlaveTarget,
     cursor crCoord, double dTol, bool bBushGrounded, int iOriMode, bool iEqual,
     double[3] oriVector, double[] dStiffness, double[] dDampCoef, double[] dDampConst,
@@ -106,7 +106,7 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 Bush(16, "BUSH_1", [10:48, 10:46], [], 0:0, 0.003, 1, 0, 1, [0, 1, 0],
     [1000, 2000, 3000, 0.004, 0.005, 0.006], [1000, 2000, 3000, 0.004, 0.005, 0.006],
     [1, 2, 3, 4, 5, 6], 4, 3, 2, 1, 0:0)

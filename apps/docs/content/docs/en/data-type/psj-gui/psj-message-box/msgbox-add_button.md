@@ -9,7 +9,7 @@ An instance of a PSJMessageBox class, adding a button whose button name can be d
 
 ## Syntax
 
-```psj
+```py
 msgbox.add_button(...)
 ```
 
@@ -31,7 +31,7 @@ This function does not have output value.
 
 ## Sample Code
 
-```psj {9-11}
+```py {9-11}
 from pyjdg import *
 
 def main():

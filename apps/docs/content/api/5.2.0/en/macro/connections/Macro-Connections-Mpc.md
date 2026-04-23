@@ -11,7 +11,7 @@ Create mpc connection
 
 ## Syntax
 
-```psj
+```py
 Mpc(int method, String name, Cursor[] master, Cursor[] slave, MPCTermAttribute[] termAtb,
     double tol, double value, double mpcType, int searchType, int coordId, Cursor editObj)
 ```
@@ -69,6 +69,6 @@ used for edit mode
 
 ## Sample Code
 
-```psj
+```py
 Mpc(1, "MPC_1", [10:10546], [10:483], [(2, 1), (0, 2), (0, 4), (0, 0), (0, 0), (0, 0)], 0, 0, 0, 1, 0, 0:0)
 ```

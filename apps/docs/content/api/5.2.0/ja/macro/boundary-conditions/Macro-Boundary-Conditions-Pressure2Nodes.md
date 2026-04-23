@@ -11,7 +11,7 @@ Create Pressure 2 nodes
 
 ## Syntax
 
-```psj
+```py
 Pressure2Nodes(string strName, cursor crNodeA, double dPressureA, int iNodeAUnit,
     cursor crNodeB, double dPressureB, int iNodeBUnit, cursor[] taTarget, cursor crEdit)
 ```
@@ -61,6 +61,6 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 Pressure2Nodes("PressureLinear1", 10:351, 2000, 0, 10:350, 4000, 0, 2, [6:5, 11:553, 11:554, 10:351, 10:350], 0:0)
 ```

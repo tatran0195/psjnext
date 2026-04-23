@@ -11,7 +11,7 @@ Export Dynamis bdf file
 
 ## Syntax
 
-```psj
+```py
 ExportDynamisBdf(string strPath, TCursor job)
 ```
 
@@ -32,6 +32,6 @@ job cursor
 
 ## Sample Code
 
-```psj
+```py
 ExportDynamisBdf("D:/TS-Solver.bdf", 148:2)
 ```

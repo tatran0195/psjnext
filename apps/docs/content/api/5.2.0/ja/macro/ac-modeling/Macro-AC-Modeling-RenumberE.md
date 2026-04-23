@@ -11,7 +11,7 @@ RenumberE
 
 ## Syntax
 
-```psj
+```py
 RenumberE(renumberItem[] Item, bool AssignProperty, bool SurfaceCornerFirst)
 ```
 
@@ -51,6 +51,6 @@ Surface Corner first flag True = 1, False = 0
 
 ## Sample Code
 
-```psj
+```py
 RenumberE([(3:1, 1, 0, 7743, 0, 0, 0, 0:0, [0, 0, 0], [10000, 100, 1], [0.1, 0.1, 0.1], 0, 0, 1)], 1, 0)
 ```

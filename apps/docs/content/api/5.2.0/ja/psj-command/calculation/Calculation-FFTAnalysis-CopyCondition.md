@@ -12,7 +12,7 @@ Create a copy of the specified FFT condition.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FFTAnalysis.CopyCondition(...)
 ```
 

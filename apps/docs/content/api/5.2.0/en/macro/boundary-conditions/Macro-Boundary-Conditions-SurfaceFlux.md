@@ -11,7 +11,7 @@ Create surface flux
 
 ## Syntax
 
-```psj
+```py
 SurfaceFlux(string strName, double dFlux, int iDistributionMethod, cursor crTable, cursor[] taTarget, cursor crEdit)
 ```
 
@@ -55,6 +55,6 @@ Edit cursor
 
 ## Sample Code
 
-```psj
+```py
 SurfaceFlux("SurfaceHeatFlux1", 1000, 1, 81:4, [6:3, 11:693], 0:0)
 ```

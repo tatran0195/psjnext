@@ -12,7 +12,7 @@ Set the frequency response steady-state excitation input for the Gururi.
 
 ## Syntax
 
-```psj
+```py
 Calculation.Gururi.LoadCondition(...)
 ```
 

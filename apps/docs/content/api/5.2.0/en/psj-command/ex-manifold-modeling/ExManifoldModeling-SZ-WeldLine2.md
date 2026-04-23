@@ -9,7 +9,7 @@ authorURL: https://www.e-technostar.com/
 
 ## Syntax
 
-```psj
+```py
 ExManifoldModeling.SZ.WeldLine2(crlFaces, crlParts, dLayerWidth, iLayerNumber)
 ```
 

@@ -12,7 +12,7 @@ Save the mapped result to file (\*unv).
 
 ## Syntax
 
-```psj
+```py
 Calculation.RotateMappingExportUnv(...)
 ```
 

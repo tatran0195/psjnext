@@ -12,7 +12,7 @@ Define the force load on selected entity based on the distribution of the sine f
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.Force.FunctionLoadCylinder.Sine(...)
 ```
 

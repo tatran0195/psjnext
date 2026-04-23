@@ -11,7 +11,7 @@ Create Pressure sine
 
 ## Syntax
 
-```psj
+```py
 PressureSine(String name, double a, Cursor crCoordinate, double angleRange, int distributionAxis,
     int pressureDirectionMode, int isTotalForceAdjustment, double totalForce, Vector pressureDirection,
     Cursor crCoordinateSystemForDirection, int isCornerNodesDistribution, String formulaForA,
@@ -83,6 +83,6 @@ edit target
 
 ## Sample Code
 
-```psj
+```py
 PressureSine("PressureSine1", 1e+07, 0:0, 0.523599, 0, 0, 0, 0, [0, 0, 0], 0:0, 0, "", [6:23], 0:0)
 ```

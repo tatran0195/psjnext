@@ -12,7 +12,7 @@ Set the steady-state excitation input for frequency response.
 
 ## Syntax
 
-```psj
+```py
 Calculation.FreqResp.LoadCondition(...)
 ```
 

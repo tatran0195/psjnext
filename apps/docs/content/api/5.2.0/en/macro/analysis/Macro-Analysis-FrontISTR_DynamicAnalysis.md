@@ -11,7 +11,7 @@ Create FrontISTR job (Dynamic Analysis)
 
 ## Syntax
 
-```psj
+```py
 FrontISTR_Dynamic(string strFilePath, cursor[] stepSequence, int nOpn, String jobName,
 	int solverVersion, int iterCount, int iterCountSchwartz, int numKrylov,
 	int numColor, double threhold, double sigma_diag, double sigma,
@@ -607,6 +607,6 @@ Step interval for visualization output
 
 ## Sample Code
 
-```psj
+```py
 JPT.Exec('FrontISTR_Dynamic("D:/", [], "Job_1", 3, 20000, 2, 0, 0, 1e-06, 1, 0, 0, 0, "", "STEP0", 0, ["AP1", 0.25, 10, 50, 10, 1, 1.25, 1, 1, 1, 5, 0.25, 5], 0, ["TP1", 0, 0, 0, 0, 0, 0], 1e-05, 10, 0, 0, 0, "", "", 0, 0, 0, 3, 0, 0, 0, 1, 1, 0, 3, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, "", "", "", "", "", "", "", "", 0, 0, 1, "10", "1.0e-8", "60", 0, 0, "0", "1000", "10", "10", "0.0", "1.0", 0, 0, "0.0", "0.0", "0.log", "0", "1000", "10", 1, "1", 0, 0, 0, 0, "", "", 1, 1, 1)')
 ```

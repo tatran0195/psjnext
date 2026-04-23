@@ -11,7 +11,7 @@ Create pretension
 
 ## Syntax
 
-```psj
+```py
 Pretension(string strName, int iDir, double dValue, bool bFixLength, cursor crTable,
     cursor crCoord, int iLocalUnit, cursor[] taFace, cursor crEdit, bool bIfCreate2ADVCStatic)
 ```
@@ -69,6 +69,6 @@ Create 2 ADVC Static bool flag True = 1, False = 0
 
 ## Sample Code
 
-```psj
+```py
 Pretension("BoltLoad007", 2, 0.05, 1, 0:0, 27:1, 0, [6:180, 6:178], 0:0, 0)
 ```

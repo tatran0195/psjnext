@@ -11,7 +11,7 @@ Create spring connection
 
 ## Syntax
 
-```psj
+```py
 Spring(int method, String name, Cursor[] master, Cursor[] slave,Cursor coord, int springType,
     int ground, double tol, int dir, int distMode, int dof1, int dof2, double dampCoef,
     double stressCoef, double[3] transStiffness, double[3] rotStiffness, Cursor editObj )
@@ -94,7 +94,7 @@ used for edit mode
 
 ## Sample Code
 
-```psj
+```py
 Spring(17, "Spring_1", [5:66316], [5:66299], 0:0, 2, 0, 0, 0, 0, 0, 0, 1.2, 1.5,
     [1000, 2000, 1000], [1.7976931e+308, 1.7976931e+308, 1.7976931e+308], 1, 0:0)
 ```

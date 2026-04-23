@@ -12,7 +12,7 @@ Create TechnoStar Solver Job which is necessary for _[Analysis.TSSolver.ExportDy
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSolver.Job(...)
 ```
 

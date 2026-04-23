@@ -12,7 +12,7 @@ Create contacts of MSC Nastran Contact Group By Matrix
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.MSCNastran.ContactGroupByMatrix(strName="", nastranContact=NASTRAN_CONTACT(), crplTarget=[], crEdit=None, iColor=65280, iMethod=1)
 ```
 

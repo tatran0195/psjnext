@@ -12,7 +12,7 @@ Create a MPC between a node and multiple edges.
 
 ## Syntax
 
-```psj
+```py
 Connections.MPC.General.NodeToEdges(...)
 ```
 

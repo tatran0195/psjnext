@@ -11,7 +11,7 @@ Display stress or strain in the direction of the minimum principle stress.
 
 ## Syntax
 
-```psj
+```py
 CmdAddStrainGaugeMinPrincipal(int[] ilNodeIDs, double dWidth, double dHeight, double dAmendFactor, str strGaugeName)
 ```
 
@@ -44,6 +44,6 @@ A String specifying the gauge name.
 
 ## Sample Code
 
-```psj
+```py
 CmdAddStrainGaugeMinPrincipal([], 0.0, 0.0, 1.0, "strGaugeName")
 ```

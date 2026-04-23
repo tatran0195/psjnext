@@ -12,7 +12,7 @@ Create LBC contact abaqus group by matrix.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.Abaqus.ContactGroupByMatrix(...)
 ```
 

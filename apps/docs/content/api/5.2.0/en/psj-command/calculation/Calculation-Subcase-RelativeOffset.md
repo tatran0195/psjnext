@@ -12,7 +12,7 @@ Create a subcase of relative displacement with zero displacement for any selecte
 
 ## Syntax
 
-```psj
+```py
 Calculation.Subcase.RelativeOffset(...)
 ```
 

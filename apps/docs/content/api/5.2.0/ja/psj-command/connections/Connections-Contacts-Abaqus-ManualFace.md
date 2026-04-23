@@ -12,7 +12,7 @@ Define contact settings between specified faces for the Abaqus solver.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.Abaqus.ManualFace(...)
 ```
 

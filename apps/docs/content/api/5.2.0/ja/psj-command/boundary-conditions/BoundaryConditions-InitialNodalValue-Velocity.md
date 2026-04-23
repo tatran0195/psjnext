@@ -12,7 +12,7 @@ Create initial velocity.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.InitialNodalValue.Velocity(...)
 ```
 

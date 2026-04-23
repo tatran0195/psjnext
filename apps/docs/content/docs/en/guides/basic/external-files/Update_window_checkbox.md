@@ -13,7 +13,7 @@ In this tutorial, you'll learn how to control checkboxes of Assembly Tree and Wa
 
 ## 📖 Tutorial
 
-```psj
+```py
 # Clear the log message in Python API window
 JPT.ClearLog()
 

@@ -12,7 +12,7 @@ Create enforced acceleration to face, edge or node. User inputs enforced acceler
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.EnforcedLoads.Acceleration(...)
 ```
 

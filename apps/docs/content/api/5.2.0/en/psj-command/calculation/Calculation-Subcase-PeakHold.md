@@ -12,7 +12,7 @@ Create a subcase with the maximizes stress, MISES stress, beam MAX, MIN, and AXI
 
 ## Syntax
 
-```psj
+```py
 Calculation.Subcase.PeakHold(...)
 ```
 

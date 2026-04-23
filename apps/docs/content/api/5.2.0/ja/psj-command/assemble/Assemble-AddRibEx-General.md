@@ -12,7 +12,7 @@ Add rib part on a part.
 
 ## Syntax
 
-```psj
+```py
 Assemble.AddRibEx.General(...)
 ```
 

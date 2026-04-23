@@ -12,7 +12,7 @@ Create initial temperature whole mapping.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.InitialTemperature.WholeMapping(...)
 ```
 

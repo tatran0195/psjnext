@@ -12,7 +12,7 @@ Cut for ACModeling
 
 ## Syntax
 
-```psj
+```py
 ACModeling.Cut(...)
 ```
 

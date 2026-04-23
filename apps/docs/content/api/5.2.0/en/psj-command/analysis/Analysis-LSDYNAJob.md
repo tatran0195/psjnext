@@ -12,7 +12,7 @@ Create LS-Dyna Analysis Job.
 
 ## Syntax
 
-```psj
+```py
 Analysis.LSDYNAJob(...)
 ```
 

@@ -11,7 +11,7 @@ ACM_CloseHole_EdgeFace
 
 ## Syntax
 
-```psj
+```py
 ACM_CloseHoleEdgeFace(cursor[] FaceCursor, cursor[] EdgeCursor, bool bNewBody,
     string newBodyname, bool bRemesh, double dAvgMeshSize)
 ```
@@ -49,6 +49,6 @@ Average Remesh Size
 
 ## Sample Code
 
-```psj
+```py
 CloseHoleEdgeFace([6:13049, 6:13059], [5:290520], 1, "NewBody", 1, 0.008)
 ```

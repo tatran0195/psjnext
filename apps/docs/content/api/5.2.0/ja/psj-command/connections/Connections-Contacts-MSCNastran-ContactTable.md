@@ -12,7 +12,7 @@ Create contacts of MSC Nastran Contact Table
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.MSCNastran.ContactTable(strName="", nastranContact=NASTRAN_CONTACT(), crplTarget=[], crEdit=None, iColor=65280, iMethod=1)
 ```
 

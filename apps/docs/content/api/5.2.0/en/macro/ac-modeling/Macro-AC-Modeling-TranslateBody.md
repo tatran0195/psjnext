@@ -11,7 +11,7 @@ Translate Body
 
 ## Syntax
 
-```psj
+```py
 TranslateBody(cursor[] body, double[3] trans_vector, cursor coordinate, bool create_new,
     bool copy_lbc, int copy_count)
 ```
@@ -49,6 +49,6 @@ Copy Count
 
 ## Sample Code
 
-```psj
+```py
 TranslateBody([3:2], [[0.002, 0, 0]], 0:0, 0, 0, 0)
 ```

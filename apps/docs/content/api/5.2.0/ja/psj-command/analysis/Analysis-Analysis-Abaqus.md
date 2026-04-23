@@ -12,7 +12,7 @@ Unknown Description
 
 ## Syntax
 
-```psj
+```py
 Analysis.Abaqus(strName, bRBE2toMPC, bRenameProcess, iCodeType,
     iSurfDefType, iUnit, iWriteType, strDescription, crlStepSequence,
     crEdit, strlUserText, bExptNdEleGroups, bDeleteFloatingNodes,

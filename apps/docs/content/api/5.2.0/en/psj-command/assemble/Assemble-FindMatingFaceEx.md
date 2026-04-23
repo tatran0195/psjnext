@@ -12,7 +12,7 @@ Find the mating faces which can be used in [Assemble.AssembleFaceEx()](/docs/cli
 
 ## Syntax
 
-```psj
+```py
 Assemble.FindMatingFaceEx(...)
 ```
 

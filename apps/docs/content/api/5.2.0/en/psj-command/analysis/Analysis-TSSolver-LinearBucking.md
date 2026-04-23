@@ -12,7 +12,7 @@ Export the Input Deck for TechnoStar solver Linear Buckling analysis (SOL 105).
 
 ## Syntax
 
-```psj
+```py
 Analysis.TSSolver.LinearBucking(...)
 ```
 

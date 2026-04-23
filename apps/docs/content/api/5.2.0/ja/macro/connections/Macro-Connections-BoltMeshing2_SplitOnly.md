@@ -11,7 +11,7 @@ Create a bolt by surface meshing and add Abaqus pre tension.
 
 ## Syntax
 
-```psj
+```py
 BoltMeshing2_SplitOnly(string strName, int method , double offset, int shared_face, int separate_face, int split_only, int make_section_face, cursor local_c, meshParam param, int direction, double value, bool bolt_fix_length, cursor pretension_table, cursor pretension_coord, int unit, cursor[] targets, pos[] cut_positions)'
 
 ```
@@ -209,6 +209,6 @@ List of cut positions.
 
 ## Sample Code
 
-```psj
+```py
 BoltMeshing2_SplitOnly("BoltMeshing_1", 1, 0, 0, 0, 1, 1, 0:0, {0.005, 0.01, 0.001, 1, 0.7853981634, 0.001, 1.25, 0.1, 0.1, 0.7, 0.5, 1, 3, 0, 0, 0, 0.5235987902, 0, 0, 0, 0, 0, 0, 0, 0, 10000000, 0, 0}, 0, 0:0, 100, 0, "", [0, 0, 0], [3:2], [[0.005, 0.05, 0.008]])'
 ```

@@ -11,7 +11,7 @@ Create enforced acceleration
 
 ## Syntax
 
-```psj
+```py
 EnforcedAcceleration(String m_strName,int dwDof,double fVel[0],double fVel[1],double fVel[2],
     double fVel[3],double fVel[4],double fVel[5],Cursor curCoord,int enArrowDir,Cursor crTable,
     Cursor crNodeSet,double m_fPhase,double m_fDelay,Cursor crPhaseTable,BOOL bExport,
@@ -132,7 +132,7 @@ edit cursor
 
 ## Sample Code
 
-```psj
+```py
 EnforcedAcceleration("EnforcedAcceleration1", 63, 0.001, 0.002, 0.003, 3, 2, 1,0:0, 0, 0:0,
     0:0, 1.79769e+308, 1.79769e+308, 0:0, 0, 0:0, 0:0, 0:0, 0:0, 0:0, 0:0, 0, 0, [6:26], 0:0)
 ```

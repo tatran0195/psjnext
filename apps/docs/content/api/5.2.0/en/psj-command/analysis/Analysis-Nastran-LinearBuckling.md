@@ -12,7 +12,7 @@ Export the input file for Nastran Linear Buckling Analysis (SOL 105).
 
 ## Syntax
 
-```psj
+```py
 Analysis.Nastran.LinearBuckling(...)
 ```
 

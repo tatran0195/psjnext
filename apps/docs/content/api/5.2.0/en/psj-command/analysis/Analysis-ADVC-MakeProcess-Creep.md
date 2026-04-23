@@ -12,7 +12,7 @@ Create a Structure - Creep analysis as an ADVC process.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ADVC.MakeProcess.Creep()
 ```
 

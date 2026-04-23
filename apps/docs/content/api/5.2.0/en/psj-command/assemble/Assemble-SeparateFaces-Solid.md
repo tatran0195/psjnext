@@ -12,7 +12,7 @@ Separate a shared face between parts into distinct faces.
 
 ## Syntax
 
-```psj
+```py
 Assemble.SeparateFaces.Solid(...)
 ```
 

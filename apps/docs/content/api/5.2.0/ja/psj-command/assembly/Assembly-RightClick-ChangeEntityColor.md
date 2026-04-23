@@ -12,7 +12,7 @@ Change color of a specific entity/a list of entities (By ID).
 
 ## Syntax
 
-```psj
+```py
 Assembly.RightClick.ChangeEntityColor(...)
 ```
 

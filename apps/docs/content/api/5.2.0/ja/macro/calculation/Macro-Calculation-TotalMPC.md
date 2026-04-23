@@ -11,7 +11,7 @@ Display a graph (a chart) of total MPC.
 
 ## Syntax
 
-```psj
+```py
 TotalMPC(crResponse)
 ```
 
@@ -28,6 +28,6 @@ TotalMPC(crResponse)
 
 ## Sample Code
 
-```psj
+```py
 TotalMPC(0:0)
 ```

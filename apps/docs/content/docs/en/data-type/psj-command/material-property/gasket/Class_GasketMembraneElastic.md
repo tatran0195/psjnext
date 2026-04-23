@@ -29,7 +29,7 @@ For example: `YOUNGS_MODULUS` is equal to ID = 1.
 | 130          | `TEMPERATURE`    | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS`   | A _Tuple_ specifying the extra field data.           |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[GasketMembraneElastic(gasketMembraneElastic=[
                                         (YOUNGS_MODULUS, [200000000000.0]),

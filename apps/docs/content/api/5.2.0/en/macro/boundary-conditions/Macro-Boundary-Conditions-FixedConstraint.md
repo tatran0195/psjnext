@@ -11,7 +11,7 @@ Create fixed constraint
 
 ## Syntax
 
-```psj
+```py
 FixedConstraint(string name, int dof, Cursor crCoord, int functionType, int USETType,
     bool bAbqOpt,Cursor crTable, Cursor[] targets, Cursor crEdit)
 ```
@@ -61,6 +61,6 @@ edit target
 
 ## Sample Code
 
-```psj
+```py
 FixedConstraint("Constraint1", 7, 0:0, 0, 0, 0:0, [6:26], 0:0)
 ```

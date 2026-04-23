@@ -12,7 +12,7 @@ Create a subcase by calculating the safety factor from the selected subcases bas
 
 ## Syntax
 
-```psj
+```py
 Calculation.Subcase.ShowSafety(...)
 ```
 

@@ -11,7 +11,7 @@ Create contact for Nastran
 
 ## Syntax
 
-```psj
+```py
 ContactNXNastran(String m_strName,int iType,int iAlg,double dNorPenFactor,
     double dTanPenFactor,double dForceConTol,double dMaxForceIter,double dMaxStaIter,
     double dChangeNum,double dMinContactPer,int iShellThickness,int iContactStatus,
@@ -129,7 +129,7 @@ method type[0:MANUAL_FACE; 1:MANUAL_GROUP; 2:BY_GROUP_MATRIX; 3:SHARE_FACE; 4:AU
 
 ## Sample Code
 
-```psj
+```py
 ContactNXNastran("ContactNXNastran_1", 0, 0, 10, 1, 0.01, 10, 20, 0.02, 100, 0, 0, 0,
     0, 1, 0, 0.01, 0, 10, 1, 0, [79:1-79:2], 0:0, 16711680, 1)
 ```

@@ -12,7 +12,7 @@ Create a solid bolt composed of hexa elements.
 
 ## Syntax
 
-```psj
+```py
 Connections.SolidBoltModeling(...)
 ```
 

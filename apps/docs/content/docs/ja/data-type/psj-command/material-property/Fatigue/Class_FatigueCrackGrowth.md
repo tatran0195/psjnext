@@ -26,7 +26,7 @@ For example: `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 | 157          | FATIGUE_GROWTH_EXPONENT | A _Tuple_ specifying the exponent of crack growth m |
 | 158          | FATIGUE_GROWTH_CRIT_DMG | A _Tuple_ specifying the critical damage            |
 
-```psj {2-14} title="Sample Code"
+```py {2-14} title="Sample Code"
 sample_Mat = Properties.Material.Add(
     strMaterialName="Sample_Material",
     dictMaterialProperty={

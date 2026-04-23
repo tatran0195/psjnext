@@ -12,7 +12,7 @@ Create a surface flux.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.HeatFlux.SurfaceFlux(...)
 ```
 

@@ -11,7 +11,7 @@ Import Nastran bdf file
 
 ## Syntax
 
-```psj
+```py
 ImportBdf(String[] vecPath, int importType, double faceAngle, double edgeAngle)
 ```
 
@@ -40,6 +40,6 @@ edge angle (radian)
 
 ## Sample Code
 
-```psj
+```py
 ImportBdf(["D:/test.bdf"], 2, 1.0472, 1.0472)
 ```

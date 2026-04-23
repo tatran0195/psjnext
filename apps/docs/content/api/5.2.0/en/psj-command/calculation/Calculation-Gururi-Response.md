@@ -12,7 +12,7 @@ Output the Gururi result of the response point.
 
 ## Syntax
 
-```psj
+```py
 Calculation.Gururi.Response(...)
 ```
 

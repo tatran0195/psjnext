@@ -12,7 +12,7 @@ Define contact settings between specified faces for the TS solver.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.TSSolver.ManualFace(...)
 ```
 

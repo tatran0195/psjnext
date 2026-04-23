@@ -28,7 +28,7 @@ For example: `DENSITY` is equal to ID = 0.
 | 130          | `TEMPERATURE`  | A _Tuple_ specifying the temperature-dependent data. |
 | 143          | `EXTRA_FIELDS` | A _Tuple_ specifying the extra field data.           |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                 listMaterialProperty=[Density(density=[
                                     (DENSITY, [7850.000000000001]),

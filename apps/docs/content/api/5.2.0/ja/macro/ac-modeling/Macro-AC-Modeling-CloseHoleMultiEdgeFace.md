@@ -11,7 +11,7 @@ CloseHoleMultiEdgeFace
 
 ## Syntax
 
-```psj
+```py
 CloseHoleMultiEdgeFace(cursor[] crBody, cursor[] crFace, cursor[] crEdge, bool bSelBelPart,
     bool SpecPart, bool bNewPart, string strName, bool bRemesh, double dElemSize))
 ```
@@ -61,6 +61,6 @@ Element size
 
 ## Sample Code
 
-```psj
+```py
 CloseHoleMultiEdgeFace([], [6:62], [5:10000162, 5:10000153], 0, 0, 0, "", 1, 0.008)
 ```

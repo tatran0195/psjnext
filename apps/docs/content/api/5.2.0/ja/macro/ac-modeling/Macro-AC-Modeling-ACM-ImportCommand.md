@@ -11,7 +11,7 @@ ACM_ImportCommand
 
 ## Syntax
 
-```psj
+```py
 ACM_ImportCommand(bool bOutShelFile, string srtImportFilePathTri6, string strImportFilePathTri3)
 ```
 
@@ -36,6 +36,6 @@ bdf file path of Tri3 model exported using bdf export
 
 ## Sample Code
 
-```psj
+```py
 ACM_ImportCommand(1, "D:/tri6.bdf", "D:/tri3.bdf")
 ```

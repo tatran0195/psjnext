@@ -11,7 +11,7 @@ Create temperature load
 
 ## Syntax
 
-```psj
+```py
 TemperatureLoad(string m_strName,int nType,double fTemp,string strFilePathName,
     Cursor crTable,Cursor[] m_taTarget,Cursor m_crEdit,bool bUseAsMaterialReferenceTemp)
 ```
@@ -57,6 +57,6 @@ if use as material reference temperature
 
 ## Sample Code
 
-```psj
+```py
 TemperatureLoad("Test",1,0.001,"Test",1:11,[1:11,2:12],1:11,1)
 ```

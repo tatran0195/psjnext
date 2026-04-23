@@ -31,7 +31,7 @@ For example: `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 | 117          | STRAIN_TENSION      | A _Tuple_ specifying the strain tension data. |
 | 142          | STRAIN_RATE_TENSION | A _Tuple_ specifying the strain rate tension. |
 
-```psj {2-5} title="Sample Code"
+```py {2-5} title="Sample Code"
 sample_Mat = Properties.Material.Add(strMaterialName="Sample_Material",
                                     listMaterialProperty=[LowDensityFoam(lowDensityFoam=[
                                         (STRESS_TENSION, [5e-07]),

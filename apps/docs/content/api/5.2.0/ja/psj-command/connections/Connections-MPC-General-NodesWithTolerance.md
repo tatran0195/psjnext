@@ -12,7 +12,7 @@ Create a one-to-one MPC pair between multiple selected nodes within an arbitrary
 
 ## Syntax
 
-```psj
+```py
 Connections.MPC.General.NodesWithTolerance(...)
 ```
 

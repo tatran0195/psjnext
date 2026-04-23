@@ -12,7 +12,7 @@ Output specified element/frequency result output to external file.
 
 ## Syntax
 
-```psj
+```py
 Calculation.Gururi.Sweep(...)
 ```
 

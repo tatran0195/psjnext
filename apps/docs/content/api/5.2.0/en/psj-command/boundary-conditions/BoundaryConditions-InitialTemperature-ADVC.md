@@ -12,7 +12,7 @@ Read the temperature result output from format of Adventure Cluster solver and d
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.InitialTemperature.ADVC(...)
 ```
 

@@ -11,7 +11,7 @@ Create contact at shared face for advc
 
 ## Syntax
 
-```psj
+```py
 LbcContactShareFaceAdvcCr(String m_strName,int m_iType,int slidingType,int InitialState,
     double initialStateTol,double kineticFrictionCoef,double exponentialCoef,
     int Behavior,double Clearance,int adjust2Clearance,double interference,
@@ -245,6 +245,6 @@ tying type [0:blank, 1:Rigid, 2:Shear Tying]
 
 ## Sample Code
 
-```psj
+```py
 LbcContactShareFaceAdvcCr([6:49], "ContactADVC_1", 0, 0, 0, 1.79769e+308, 1.79769e+308, 1.79769e+308, 0, 1.79769e+308, 0, 1.79769e+308, 0, 0, 0, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, 0, 0, 0, 0, 1, 0, 0, [1, 2, 0, 0], 0, 0, 1.79769e+308, 1.79769e+308, 1.79769e+308, 1.79769e+308, [], 0:0, 1.79769e+308, 0, 1.79769e+308, 1.79769e+308, 16711680, 0, 3, 2, 0, 0, [1, 2, 0, 0], 0)
 ```

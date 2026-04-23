@@ -12,7 +12,7 @@ Add boss shape to specific body as a union part.
 
 ## Syntax
 
-```psj
+```py
 Assemble.AddBoss(...)
 ```
 

@@ -11,7 +11,7 @@ ACM_ACB_Renumber
 
 ## Syntax
 
-```psj
+```py
 ACM_ACB_Renumber(TArrayK[] taBodyKey)
 ```
 
@@ -28,6 +28,6 @@ ID of part
 
 ## Sample Code
 
-```psj
+```py
 ACM_ACB_Renumber([2])
 ```

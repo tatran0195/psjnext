@@ -12,7 +12,7 @@ Create Abaqus Step - Modal Type.
 
 ## Syntax
 
-```psj
+```py
 Analysis.AbaqusStep.ModalStep(...)
 ```
 

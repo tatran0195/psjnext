@@ -11,7 +11,7 @@ Save MPC Result To CSV file.
 
 ## Syntax
 
-```psj
+```py
 SaveMPCResultToCSV(cursor crResponse, double dTime, str strFilePath)
 ```
 
@@ -36,6 +36,6 @@ SaveMPCResultToCSV(cursor crResponse, double dTime, str strFilePath)
 
 ## Sample Code
 
-```psj
+```py
 SaveMPCResultToCSV(0:0, 0.0, "path/to/the/file")
 ```

@@ -11,7 +11,7 @@ Create field data table
 
 ## Syntax
 
-```psj
+```py
 FieldData(String m_strName,int m_iType,TSheetd m_Sheet,Cursor m_crEdit, bool bAbaqusAmp, int iChartType, bool bFrequencyPSDLogX, bool bFrequencyPSDLogY)
 ```
 
@@ -56,6 +56,6 @@ A _Boolean_ specifying whether or not enable data interplation of LogY for Frequ
 
 ## Sample Code
 
-```psj
+```py
 FieldData("Test", 15, [1, 2, 1000, 1e+08], 0:0, 0, 0, 0, 0)
 ```

@@ -12,7 +12,7 @@ Create the centrifugal force load in the analysis model.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.BodyLoads.CentrifugalForce.TwoPositions(...)
 ```
 

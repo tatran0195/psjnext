@@ -11,7 +11,7 @@ Create Pretension Abaqus
 
 ## Syntax
 
-```psj
+```py
 PretensionAbaqus(string strName, bool bFixedLength, cursor crTable, double dValue,
     int iLocalUnit, string stNormal, double[3] dNodePos, cursor crEdit, cursor[] taTarget)
 ```
@@ -67,6 +67,6 @@ Target entities cursor: Face/1D Element
 
 ## Sample Code
 
-```psj
+```py
 PretensionAbaqus("PreTensionAbaqus1", 1, 0:0, 100, 0, "1,0,0", [0.0083333, 0.015556, 0.025], 0:0, [6:180])
 ```

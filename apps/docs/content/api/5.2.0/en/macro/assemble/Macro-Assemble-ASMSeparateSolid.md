@@ -11,7 +11,7 @@ Separate assembled parts in a solid model
 
 ## Syntax
 
-```psj
+```py
 ASMSeparateSolid(int[] bodyID, int[] faceID, bool createGroup)
 ```
 
@@ -36,6 +36,6 @@ Group creation option
 
 ## Sample Code
 
-```psj
+```py
 ASMSeparateSolid([2, 29], [], 0)
 ```

@@ -11,7 +11,7 @@ Create Nastran job
 
 ## Syntax
 
-```psj
+```py
 NastranJob(string strName, string strDescription, TCursor[] taTarget, int solverType,
     int writeType, int gridFormatType, int deleteFloatingNodes, int continuanceMarker,
     int defineLbcId, int definedLoadId, int definedSpcId, int definedMpcId,
@@ -545,7 +545,7 @@ Cursor for edit mode
 
 ## Sample Code
 
-```psj
+```py
 NastranJob("TS-Solver1", "", [], 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1.79769e+308,
     2147483647, 0, 2147483647, 0, 1, 101, "", [1.79769e+308, 1.79769e+308, 2147483647],
     [0, 1.79769e+308, 1.79769e+308, 2147483647, 0, 0, 1.79769e+308, 1.79769e+308, 2147483647],

@@ -11,7 +11,7 @@ Create sub model forced temperature
 
 ## Syntax
 
-```psj
+```py
 SubmodelForcedTemp(string m_strName,int iSolver,String strFilePathName,int iProcessNo,
     int iReferType,double dExtensionRange,double dExtensionTol,double dExtensionLimitTol,
     string strGlobalElementSet,int iUseBucket,int iNumBucketMaxX,int iNumBucketMaxY,
@@ -91,7 +91,7 @@ edit cursor
 
 ## Sample Code
 
-```psj
+```py
 SubmodelForcedTemp("SubmodelForcedTemperature1", 0, "D:/test", 0, -1,1.79769e+308, 1.79769e+308,
     1.79769e+308, "", -1, 2147483647, 2147483647, 2147483647, -1, [6:26], 0:0)
 ```

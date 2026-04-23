@@ -42,7 +42,7 @@ Index number of _row_number_ and _col_number_ of TableCellID can not be out of r
 
 ## Sample Code
 
-```psj {5-6,8-11}
+```py {5-6,8-11}
 from pyjdg import *
 
 def on_button_check(dlg):

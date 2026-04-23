@@ -11,7 +11,7 @@ Create Pressure quadratic
 
 ## Syntax
 
-```psj
+```py
 PressureQuadratic(string name, double a, double b, Cursor crCoordinate, double angleRange,
     int pressureDirectionMode, Vector pressureDirection, Cursor[] targets, Cursor crEdit)
 ```
@@ -61,6 +61,6 @@ edit target
 
 ## Sample Code
 
-```psj
+```py
 PressureQuadratic("PressureQuadratic1", 1e+06, 2e+06, 0:0, 0.523599, 0, [0, 0, 0], [6:23], 0:0)
 ```

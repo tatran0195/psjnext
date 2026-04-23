@@ -11,7 +11,7 @@ Create centrifugal force by 2 positions
 
 ## Syntax
 
-```psj
+```py
 CentrifugalForce2Positions(String m_strName,double fBasePoint[0],double fBasePoint[1],
     double fBasePoint[2],double fTipPoint[0],double fTipPoint[1],double fTipPoint[2],
     double fVelocity,double fAcceleration,int iVelocityUnit,int iAccelerationUnit,
@@ -79,7 +79,7 @@ edit cursor
 
 ## Sample Code
 
-```psj
+```py
 CentrifugalForce2Positions("CentrifugalForce1", 0.01, 0.0022222, 0.01, 0.01,
     0.0044444, 0.01, 0.174533, 0.0872665, 0, 0, [3:1, 10:82, 10:84], 0:0)
 ```

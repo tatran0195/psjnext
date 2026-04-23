@@ -9,7 +9,7 @@ authorURL: https://www.e-technostar.com/
 
 ## Syntax
 
-```psj
+```py
 ConnectionNewMass(String m_strName, Cursor[] m_taTarget, double value, int dof, bool designer, Cursor coordinate, double offset0, double offset1, double offset2, double inertia0, double inertia1, double inertia2, double inertia3, double inertia4, double inertia5,Cursor m_crEdit)
 ```
 

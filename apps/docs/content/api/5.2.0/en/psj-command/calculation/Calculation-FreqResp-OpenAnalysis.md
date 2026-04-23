@@ -12,7 +12,7 @@ Load the results of a frequency response analysis (\*.tsdv).
 
 ## Syntax
 
-```psj
+```py
 Calculation.FreqResp.OpenAnalysis(...)
 ```
 

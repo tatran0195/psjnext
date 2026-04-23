@@ -11,7 +11,7 @@ Calculate AC power and transmittance from the selected nodal groups created by i
 
 ## Syntax
 
-```psj
+```py
 AcousticTLCondition(cursor crGroupIn, cursor crGroupOut, cursor crEdit)
 ```
 
@@ -36,6 +36,6 @@ AcousticTLCondition(cursor crGroupIn, cursor crGroupOut, cursor crEdit)
 
 ## Sample Code
 
-```psj
+```py
 AcousticTLCondition(0:0, 0:0, 0:0)
 ```

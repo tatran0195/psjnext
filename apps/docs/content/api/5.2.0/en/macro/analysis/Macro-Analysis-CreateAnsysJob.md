@@ -11,7 +11,7 @@ Create Ansys Job
 
 ## Syntax
 
-```psj
+```py
 CreateAnsysJob(string name, int analysisType, int SolverType, string JobName,
     string JobDescription, bool bOutputDisplacements, bool bOutputReactionLoad,
     bool bOutputStrain, bool bOutputStress, int iAnalysisOpt, bool bCal_Press_effects,
@@ -446,7 +446,7 @@ Edit job
 
 ## Sample Code
 
-```psj
+```py
 CreateAnsysJob("Ansys", 2, 5, "Nastran4", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     , 0, 0, 1, 1, 0, 0, 1.79769e+308, 1.79769e+308, 0, 0.05, 64, 0, 0, 0, 0, 0, 0, 0,
     1.1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,

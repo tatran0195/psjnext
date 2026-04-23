@@ -12,7 +12,7 @@ Create mapping stress.
 
 ## Syntax
 
-```psj
+```py
 BoundaryConditions.InitialElementalValue.InitialStress(...)
 ```
 

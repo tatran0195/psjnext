@@ -12,7 +12,7 @@ Export the contact report of the current model to html/excel format. This functi
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.ExportCheckReport(...)
 ```
 

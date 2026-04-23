@@ -11,7 +11,7 @@ ACM_CloseHole_MultiEdgeFace
 
 ## Syntax
 
-```psj
+```py
 ACM_CloseHoleMultiEdgeFace(cursor[] FaceCursor, cursor[] EdgeCursor, bool bNewBody,
     string newBodyname, bool bRemesh, double dAvgMeshSize)
 ```
@@ -49,6 +49,6 @@ Average Remesh Size
 
 ## Sample Code
 
-```psj
+```py
 CloseHoleMultiEdgeFace([6:13049, 6:13059], [5:290520], 1, "NewBody", 1, 0.008)
 ```

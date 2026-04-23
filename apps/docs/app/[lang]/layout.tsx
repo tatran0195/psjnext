@@ -4,12 +4,12 @@ import type { ReactNode } from 'react';
 
 import { NextProvider } from 'fumadocs-core/framework/next';
 import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
-
-import '@/styles/global.css';
 import { Geist, Geist_Mono } from 'next/font/google';
 
+import { i18n } from '@/lib/i18n';
 import { baseUrl, createMetadata } from '@/lib/metadata';
-import { apiSources, ApiVersion, docsSource } from '@/lib/source';
+import { docsSource } from '@/lib/source';
+import '@/styles/global.css';
 
 import { Provider } from '../provider';
 import { Body } from './layout.client';
@@ -23,15 +23,8 @@ export const metadata: Metadata = createMetadata({
     metadataBase: baseUrl,
 });
 
-const geist = Geist({
-    variable: '--font-sans',
-    subsets: ['latin'],
-});
-
-const mono = Geist_Mono({
-    variable: '--font-mono',
-    subsets: ['latin'],
-});
+const geist = Geist({ variable: '--font-sans', subsets: ['latin'] });
+const mono = Geist_Mono({ variable: '--font-mono', subsets: ['latin'] });
 
 export const viewport: Viewport = {
     themeColor: [
@@ -42,13 +35,16 @@ export const viewport: Viewport = {
 
 export default async function RootLayout(props: {
     children: ReactNode;
-    params: Promise<{ lang: string; version?: string }>;
+    params: Promise<{ lang: string }>;
 }) {
-    const { lang, version } = await props.params;
-    const source = version ? apiSources[version as ApiVersion] : docsSource;
-    if (!source) notFound();
+    const { lang } = await props.params;
+    if (!i18n.languages.includes(lang as (typeof i18n.languages)[number])) notFound();
 
-    const tree = source.getPageTree(lang);
+    // Provide the docs tree at the top level so global components (e.g. search)
+    // that call useTreeContext() always have a valid context.
+    // Each sub-layout (docs / api) wraps its own TreeContextProvider which
+    // shadows this one for the sidebar via React's nearest-provider rule.
+    const tree = docsSource.getPageTree(lang);
 
     return (
         <html
@@ -69,5 +65,5 @@ export default async function RootLayout(props: {
 }
 
 export function generateStaticParams() {
-    return docsSource.generateParams('slug', 'locale');
+    return i18n.languages.map((lang) => ({ lang }));
 }

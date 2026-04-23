@@ -12,7 +12,7 @@ Export edat file.
 
 ## Syntax
 
-```psj
+```py
 Analysis.ACTRAN.CreateEdat(...)
 ```
 

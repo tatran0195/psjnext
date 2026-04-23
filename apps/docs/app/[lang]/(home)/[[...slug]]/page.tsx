@@ -43,19 +43,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[]; l
     const page = docsSource.getPage(params.slug, params.lang);
 
     if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
-
-    // if (page.data.type === 'openapi') {
-    //     const { APIPage } = await import('@/components/api-page');
-    //     return (
-    //         <DocsPage full>
-    //             <h1 className="text-[1.75em] font-semibold">{page.data.title}</h1>
-
-    //             <DocsBody>
-    //                 <APIPage {...page.data.getAPIPageProps()} />
-    //             </DocsBody>
-    //         </DocsPage>
-    //     );
-    // }
+    console.log(page.type)
 
     const { body: Mdx, toc, lastModified } = await page.data.load();
     const { ribbon } = page.data;
@@ -137,7 +125,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[]; l
                         Customisation,
                     })}
                 />
-                {page.data.index ? <DocsCategory url={page.url} lang={params.lang} /> : null}
+                {/* {page.data.index ? <DocsCategory url={page.url} lang={params.lang} /> : null} */}
             </DocsBody>
             {lastModified && <PageLastUpdate date={lastModified} />}
         </DocsPage>

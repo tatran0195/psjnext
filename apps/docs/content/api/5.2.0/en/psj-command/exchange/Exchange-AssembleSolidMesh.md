@@ -12,7 +12,7 @@ Assemble solid mesh parts.
 
 ## Syntax
 
-```psj
+```py
 Exchange.AssembleSolidMesh(...)
 ```
 

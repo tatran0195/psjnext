@@ -12,7 +12,7 @@ ACModeling CloseHoleAuto
 
 ## Syntax
 
-```psj
+```py
 ACModeling.CloseHoleAuto(...)
 ```
 

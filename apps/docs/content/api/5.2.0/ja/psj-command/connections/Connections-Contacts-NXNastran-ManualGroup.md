@@ -12,7 +12,7 @@ Define contact settings between specified groups for the NX solver.
 
 ## Syntax
 
-```psj
+```py
 Connections.Contacts.NXNastran.ManualGroup(...)
 ```
 
