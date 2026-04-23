@@ -3,5 +3,12 @@
     "title": "Data Type",
     "description": "Data Type",
     "icon": "BookType",
-    "group": true
+    "pages": [
+        "---PSJ Command Data Type---",
+        "...psj-command",
+        "---PSJ GUI Data Type---",
+        "...psj-gui",
+        "---PSJ Utility Data Type---",
+        "...psj-utility"
+    ]
 }

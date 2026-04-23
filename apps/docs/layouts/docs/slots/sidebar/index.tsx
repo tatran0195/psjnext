@@ -1,0 +1,422 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+import { type ComponentProps, createElement, FC, type ReactNode, useMemo, useState } from 'react';
+
+import { searchPath } from 'fumadocs-core/breadcrumb';
+import Link from 'fumadocs-core/link';
+import { useTreeContext } from 'fumadocs-ui/contexts/tree';
+import { Check, ChevronsUpDown, Languages, Search, SidebarIcon, X } from 'lucide-react';
+
+import { buttonVariants } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { getFirstUrl, isLayoutTabActive, LayoutTab, LinkItem } from '@/layouts/shared';
+import { cn } from '@/lib/cn';
+import { sidebarMatch } from '@/lib/tree-filter';
+
+import type { SidebarPageTreeComponents } from './page-tree';
+
+import { useNotebookLayout } from '../../client';
+import {
+    SidebarCollapseTrigger,
+    SidebarContent,
+    SidebarDrawer,
+    SidebarLinkItem,
+    SidebarPageTree,
+    SidebarTrigger,
+    SidebarViewport,
+} from './components';
+import { useSidebar } from './provider';
+
+import type * as PageTree from 'fumadocs-core/page-tree';
+
+export interface NestedTab {
+    tabs: LayoutTab[];
+    active?: LayoutTab;
+}
+
+export interface SidebarProps extends ComponentProps<'aside'> {
+    components?: Partial<SidebarPageTreeComponents>;
+    banner?: ReactNode | FC<ComponentProps<'div'>>;
+    footer?: ReactNode | FC<ComponentProps<'div'>>;
+    collapsible?: boolean;
+}
+
+export function Sidebar({ banner, footer, components, collapsible = true, ...rest }: SidebarProps) {
+    const {
+        menuItems,
+        slots,
+        props: { nav, tabs, tabMode },
+    } = useNotebookLayout();
+    const navMode = nav?.mode ?? 'auto';
+    const iconLinks = menuItems.filter((item) => item.type === 'icon');
+    const { root: baseRoot, full } = useTreeContext();
+    const pathname = usePathname();
+    const [filterQuery, setFilterQuery] = useState('');
+
+    const path = useMemo(() => {
+        return (
+            searchPath(full.children, pathname) ??
+            (full.fallback ? searchPath(full.fallback.children, pathname) : null) ??
+            []
+        );
+    }, [full, pathname]);
+
+    const nestedTabs = useMemo(() => {
+        const result: NestedTab[] = [];
+        for (const node of path) {
+            if (node.type === 'folder' && (node as PageTree.Folder & { group: boolean }).group) {
+                const options = node.children.filter(
+                    (n) => n.type === 'folder',
+                ) as PageTree.Folder[];
+                if (options.length === 0) continue;
+
+                const nodeTabs = options.map((folder) => {
+                    return {
+                        title: folder.name,
+                        url: getFirstUrl(folder) ?? '',
+                        icon: folder.icon,
+                        description: folder.description,
+                        $folder: folder,
+                    } as LayoutTab;
+                });
+
+                const active =
+                    nodeTabs.find((t) => path.includes(t.$folder as unknown as PageTree.Node)) ??
+                    nodeTabs[0];
+                result.push({ tabs: nodeTabs, active });
+            }
+        }
+        return result;
+    }, [path]);
+
+    const lastActiveTab = nestedTabs[nestedTabs.length - 1]?.active;
+    const root: PageTree.Root | PageTree.Folder = (lastActiveTab?.$folder ??
+        path.findLast((item) => item.type === 'folder' && item.root) ??
+        baseRoot) as PageTree.Root | PageTree.Folder;
+
+    const filteredList = useMemo(() => {
+        if (!filterQuery) return root.children;
+
+        function filterNodes(nodes: PageTree.Node[]): PageTree.Node[] {
+            return nodes
+                .map((node) => {
+                    const isMatch = sidebarMatch(filterQuery, node.name);
+                    if (node.type === 'separator') return isMatch ? node : null;
+                    if (node.type === 'folder') {
+                        const filtered = filterNodes(node.children);
+                        if (filtered.length > 0 || isMatch) {
+                            return {
+                                ...node,
+                                defaultOpen: true,
+                                children: isMatch ? node.children : filtered,
+                            };
+                        }
+                        return null;
+                    }
+                    if (isMatch) {
+                        return node;
+                    }
+                    return null;
+                })
+                .filter(Boolean) as PageTree.Node[];
+        }
+        return filterNodes(root.children);
+    }, [filterQuery, root.children]);
+
+    function renderHeader(props: ComponentProps<'div'>) {
+        if (typeof banner === 'function') return createElement(banner, props);
+
+        return (
+            <div
+                {...props}
+                className={cn('flex flex-col gap-2 p-4 pb-0 empty:hidden', props.className)}
+            >
+                {props.children}
+                {banner}
+            </div>
+        );
+    }
+
+    function renderFooter(props: ComponentProps<'div'>) {
+        if (typeof footer === 'function') return createElement(footer, props);
+
+        return (
+            <div {...props}>
+                {props.children}
+                {footer}
+            </div>
+        );
+    }
+
+    const viewport = (
+        <SidebarViewport>
+            {menuItems
+                .filter((item) => item.type !== 'icon')
+                .map((item, i, arr) => (
+                    <SidebarLinkItem
+                        key={i}
+                        item={item}
+                        className={cn('lg:hidden', i === arr.length - 1 && 'mb-3')}
+                    />
+                ))}
+            <SidebarPageTree {...components} list={filteredList} />
+        </SidebarViewport>
+    );
+
+    return (
+        <>
+            <SidebarContent {...rest}>
+                {renderHeader({
+                    children: (
+                        <>
+                            {navMode === 'auto' && (
+                                <div className="flex justify-between">
+                                    {slots.navTitle && (
+                                        <slots.navTitle className="inline-flex items-center gap-2.5 font-medium" />
+                                    )}
+                                    {nav?.children}
+                                    {collapsible && (
+                                        <SidebarCollapseTrigger
+                                            className={cn(
+                                                buttonVariants({
+                                                    color: 'ghost',
+                                                    size: 'icon-sm',
+                                                    className:
+                                                        'mt-px mb-auto text-fd-muted-foreground',
+                                                }),
+                                            )}
+                                        >
+                                            <SidebarIcon />
+                                        </SidebarCollapseTrigger>
+                                    )}
+                                </div>
+                            )}
+
+                            {tabs.length > 0 && (
+                                <SidebarTabsDropdown
+                                    options={tabs}
+                                    className={cn(tabMode === 'navbar' && 'lg:hidden')}
+                                />
+                            )}
+
+                            <SearchInput
+                                filterQuery={filterQuery}
+                                setFilterQuery={setFilterQuery}
+                            />
+
+                            {nestedTabs.map((level, i) => (
+                                <SidebarTabsDropdown
+                                    key={i}
+                                    options={level.tabs}
+                                    activeItem={level.active}
+                                    className={i < nestedTabs.length - 1 ? '-mb-1' : ''}
+                                />
+                            ))}
+                        </>
+                    ),
+                })}
+                {viewport}
+                {renderFooter({
+                    className: cn(
+                        'hidden flex-row text-fd-muted-foreground items-center border-t px-4 py-2.5',
+                        iconLinks.length > 0 && 'max-lg:flex',
+                    ),
+                    children: iconLinks.map((item, i) => (
+                        <LinkItem
+                            key={i}
+                            item={item}
+                            className={cn(
+                                buttonVariants({
+                                    size: 'icon-sm',
+                                    color: 'ghost',
+                                    className: 'lg:hidden',
+                                }),
+                            )}
+                            aria-label={item.label}
+                        >
+                            {item.icon}
+                        </LinkItem>
+                    )),
+                })}
+            </SidebarContent>
+            <SidebarDrawer {...rest}>
+                {renderHeader({
+                    children: (
+                        <>
+                            <SidebarTrigger
+                                className={cn(
+                                    buttonVariants({
+                                        size: 'icon-sm',
+                                        color: 'ghost',
+                                        className: 'ms-auto text-fd-muted-foreground',
+                                    }),
+                                )}
+                            >
+                                <X />
+                            </SidebarTrigger>
+                            {tabs.length > 0 && <SidebarTabsDropdown options={tabs} />}
+                            <SearchInput
+                                filterQuery={filterQuery}
+                                setFilterQuery={setFilterQuery}
+                            />
+                            {nestedTabs.map((level, i) => (
+                                <SidebarTabsDropdown
+                                    key={i}
+                                    options={level.tabs}
+                                    activeItem={level.active}
+                                />
+                            ))}
+                        </>
+                    ),
+                })}
+                {viewport}
+                {renderFooter({
+                    className: cn(
+                        'hidden flex-row text-fd-muted-foreground items-center border-t p-4 pt-2 justify-end',
+                        (slots.languageSelect || slots.themeSwitch) && 'flex',
+                        iconLinks.length > 0 && 'max-lg:flex',
+                    ),
+                    children: (
+                        <>
+                            {iconLinks.map((item, i) => (
+                                <LinkItem
+                                    key={i}
+                                    item={item}
+                                    className={cn(
+                                        buttonVariants({
+                                            size: 'icon-sm',
+                                            color: 'ghost',
+                                        }),
+                                        'text-fd-muted-foreground lg:hidden',
+                                        i === iconLinks.length - 1 && 'me-auto',
+                                    )}
+                                    aria-label={item.label}
+                                >
+                                    {item.icon}
+                                </LinkItem>
+                            ))}
+                            {slots.languageSelect && (
+                                <slots.languageSelect.root>
+                                    <Languages className="size-4.5 text-fd-muted-foreground" />
+                                </slots.languageSelect.root>
+                            )}
+                            {slots.themeSwitch && <slots.themeSwitch />}
+                        </>
+                    ),
+                })}
+            </SidebarDrawer>
+        </>
+    );
+}
+
+function SearchInput({
+    filterQuery,
+    setFilterQuery,
+}: {
+    filterQuery: string;
+    setFilterQuery: (value: string) => void;
+}) {
+    return (
+        <div className="inline-flex items-center gap-2 rounded-lg p-1.5 ps-2 text-sm hover:text-fd-muted-foreground transition-colors focus-within:bg-fd-accent focus-within:text-fd-accent-foreground">
+            <Search className="size-4 shrink-0 text-fd-muted-foreground" />
+            <input
+                type="text"
+                value={filterQuery}
+                onChange={(e) => setFilterQuery(e.target.value)}
+                placeholder="Filter composition..."
+                className="w-full min-w-0 bg-transparent outline-none placeholder:text-fd-muted-foreground"
+            />
+        </div>
+    );
+}
+
+function SidebarTabsDropdown({
+    options,
+    placeholder,
+    activeItem,
+    ...props
+}: {
+    placeholder?: ReactNode;
+    options: LayoutTab[];
+    activeItem?: LayoutTab;
+} & ComponentProps<'button'>) {
+    const { closeOnRedirect } = useSidebar();
+    const pathname = usePathname();
+
+    const selected = useMemo(() => {
+        return activeItem ?? options.findLast((item) => isLayoutTabActive(item, pathname));
+    }, [activeItem, options, pathname]);
+
+    const onClick = () => {
+        closeOnRedirect.current = false;
+    };
+
+    const item = selected ? (
+        <>
+            {selected.icon}
+            <div>
+                <p className="text-sm font-medium leading-5">{selected.title}</p>
+                <p className="text-xs text-fd-muted-foreground leading-4 empty:hidden">
+                    {selected.description !== selected.title ? selected.description : null}
+                </p>
+            </div>
+        </>
+    ) : (
+        placeholder
+    );
+
+    return (
+        <Popover>
+            {item && (
+                <PopoverTrigger
+                    {...props}
+                    className={cn(
+                        'flex items-center gap-2 rounded-lg p-2 text-start text-fd-secondary-foreground transition-colors hover:bg-fd-accent/15 data-[state=open]:bg-fd-accent/15 data-[state=open]:text-fd-accent-foreground',
+                        props.className,
+                    )}
+                >
+                    {item}
+                    <ChevronsUpDown className="shrink-0 ms-auto size-4 text-fd-muted-foreground" />
+                </PopoverTrigger>
+            )}
+            <PopoverContent className="flex flex-col gap-1 w-(--radix-popover-trigger-width) p-1 fd-scroll-container">
+                {options.map((item) => {
+                    const active = isLayoutTabActive(item, pathname);
+                    if (!active && item.unlisted) return;
+
+                    return (
+                        <Link
+                            key={item.url}
+                            href={item.url}
+                            onClick={onClick}
+                            {...item.props}
+                            className={cn(
+                                'flex items-center gap-2 rounded-lg p-1.5 hover:bg-fd-accent/15 hover:text-fd-accent-foreground',
+                                active && 'bg-fd-accent/15 text-fd-accent-foreground',
+                            )}
+                        >
+                            {item.icon}
+                            <div>
+                                <p className="text-sm font-medium leading-5">{item.title}</p>
+                                <p className="text-[0.8125rem] text-fd-muted-foreground leading-4 empty:hidden">
+                                    {item.description !== item.title ? item.description : null}
+                                </p>
+                            </div>
+
+                            <Check
+                                className={cn(
+                                    'shrink-0 ms-auto size-3.5 text-fd-primary',
+                                    !active && 'invisible',
+                                )}
+                            />
+                        </Link>
+                    );
+                })}
+            </PopoverContent>
+        </Popover>
+    );
+}
+
+export * from './components';
+export * from './provider';

@@ -1,7 +1,15 @@
 {
-    "root": true,
-    "title": "Data Type",
-    "description": "Data Type",
-    "icon": "Terminal",
-    "group": true
+  "$schema": "..\\..\\..\\..\\.source\\json-schema\\docs.meta.json",
+  "root": true,
+  "title": "Data Type",
+  "description": "Data Type",
+  "icon": "BookType",
+  "pages": [
+    "---PSJ Command Data Type---",
+    "...psj-command",
+    "---PSJ GUI Data Type---",
+    "...psj-gui",
+    "---PSJ Utility Data Type---",
+    "...psj-utility"
+  ]
 }

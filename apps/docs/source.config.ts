@@ -21,23 +21,6 @@ export const docs = defineDocs({
     },
 });
 
-export const apiDocs = defineDocs({
-    dir: 'content/api',
-    docs: {
-        schema: DocsSchema,
-        postprocess: {
-            includeProcessedMarkdown: true,
-            extractLinkReferences: true,
-            valueToExport: ['elementIds'],
-        },
-        async: true,
-        mdxOptions,
-    },
-    meta: {
-        schema: MetaSchema,
-    },
-});
-
 export default defineConfig({
     plugins: [
         jsonSchema({
