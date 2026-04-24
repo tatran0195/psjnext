@@ -1,6 +1,5 @@
-import { RemarkAutoTypeTableOptions } from 'fumadocs-typescript';
 
-export const defaultShikiOptions: RemarkAutoTypeTableOptions['shiki'] = {
+export const defaultShikiOptions = {
     themes: {
         light: 'github-light',
         dark: 'vesper',

@@ -54,18 +54,18 @@ export default async function Page(props: { params: Promise<{ slug?: string[]; l
 
     if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
 
-    // if (page.data.type === 'openapi') {
-    //     const { APIPage } = await import('@/components/api-page');
-    //     return (
-    //         <DocsPage full>
-    //             <h1 className="text-[1.75em] font-semibold">{page.data.title}</h1>
+    if (page.type === 'psjapi') {
+        const { APIPage } = await import('@/components/api-page');
+        return (
+            <DocsPage full>
+                <h1 className="text-[1.75em] font-semibold">{page.data.title}</h1>
 
-    //             <DocsBody>
-    //                 <APIPage {...page.data.getAPIPageProps()} />
-    //             </DocsBody>
-    //         </DocsPage>
-    //     );
-    // }
+                <DocsBody>
+                    <APIPage itemKey="/" schemaId={"hello"} version='5.1.0' locale={params.lang} {...page.data.getItem("5.1.0", params.lang)} />
+                </DocsBody>
+            </DocsPage>
+        );
+    }
 
     const { body: Mdx, toc, lastModified } = await page.data.load();
     const { ribbon } = page.data;

@@ -1,0 +1,11 @@
+psjapi: '2.0'
+kind: sidecar
+id: Analysis-Nastran-LinearStatic
+locale: ja
+title: Analysis.Nastran.LinearStatic()
+description: 構造線形静解析 (SOL 101) の Nastran BDF 入力ファイルをエクスポートします。
+returns:
+    description: 作成された Nastran ジョブ。
+examples:
+    - index: 0
+      title: 基本的な使用例

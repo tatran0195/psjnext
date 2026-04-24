@@ -1,0 +1,79 @@
+{
+    "name": "psjapi",
+    "version": "0.1.0",
+    "description": "Generate MDX docs for your PSJ spec",
+    "license": "MIT",
+    "files": [
+        "dist"
+    ],
+    "type": "module",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": "./dist/index.js",
+        "./server": "./dist/server/index.js",
+        "./ui": "./dist/ui/index.js",
+        "./ui/context": "./dist/ui/context.js",
+        "./ui/item": "./dist/ui/item.js",
+        "./ui/page": "./dist/ui/page.js",
+        "./package.json": "./package.json",
+        "./css/*": "./css/*"
+    },
+    "scripts": {
+        "build": "tsdown --config-loader unrun",
+        "clean": "rimraf dist",
+        "dev": "tsdown --watch --clean false",
+        "lint": "oxlint .",
+        "types:check": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@fumari/json-schema-ts": "^0.0.2",
+        "@radix-ui/react-accordion": "^1.2.12",
+        "@radix-ui/react-dialog": "^1.1.15",
+        "@radix-ui/react-select": "^2.2.6",
+        "@radix-ui/react-slot": "^1.2.4",
+        "ajv": "^8.18.0",
+        "chokidar": "^5.0.0",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "fumadocs-core": "*",
+        "fumadocs-ui": "*",
+        "github-slugger": "^2.0.0",
+        "hast-util-to-jsx-runtime": "^2.3.6",
+        "js-yaml": "^4.1.1",
+        "lucide-react": "^1.8.0",
+        "remark": "^15.0.1",
+        "remark-rehype": "^11.1.2",
+        "shiki": "^4.0.2",
+        "tailwind-merge": "^3.5.0",
+        "xml-js": "^1.6.11",
+        "yaml": "^2.8.3"
+    },
+    "devDependencies": {
+        "@fastify/deepmerge": "^3.2.1",
+        "@fumadocs/tailwind": "0.0.5",
+        "@scalar/api-client-react": "2.0.6",
+        "@scalar/json-magic": "^0.12.8",
+        "@scalar/openapi-upgrader": "^0.2.6",
+        "@types/js-yaml": "^4.0.9",
+        "@types/node": "25.6.0",
+        "@types/react": "^19.2.14",
+        "fast-content-type-parse": "^3.0.0",
+        "fumadocs-core": "16.8.2",
+        "fumadocs-ui": "16.8.2",
+        "json-schema-typed": "^8.0.2",
+        "react": "^19.2.5",
+        "react-dom": "^19.2.5",
+        "tailwindcss": "^4.2.2",
+        "tsconfig": "workspace:*",
+        "tsdown": "0.21.9"
+    },
+    "peerDependencies": {
+        "@types/react": "*",
+        "fumadocs-core": "*",
+        "fumadocs-ui": "*",
+        "react": ">=18",
+        "react-dom": ">=18"
+    }
+}

@@ -1,0 +1,28 @@
+psjapi: '2.0'
+kind: param_group
+id: advc-process-struct
+description: Structural analysis parameters extending advc-process-base.
+extends: advc-process-base
+params:
+    - name: iGeomNonlinear
+      type: Integer
+      required: false
+      default: '0'
+      description: Geometry nonlinearity mode.
+      enum_values:
+          - id: 0
+            label: None
+          - id: 1
+            label: Total Lagrange
+          - id: 2
+            label: Updated Lagrange
+    - name: bConvergence
+      type: Boolean
+      required: false
+      default: 'False'
+      description: Enable convergence parameter settings.
+    - name: dStabilizationFactor
+      type: Double
+      required: false
+      default: '0.0'
+      description: Stabilization factor.

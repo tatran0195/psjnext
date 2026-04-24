@@ -90,7 +90,7 @@ export const docs = defineDocs({
                               'shell',
                               'bat',
                               'python',
-                              psjGrammar as any,
+                              psjGrammar,
                           ],
                       } satisfies RehypeCodeOptions),
                 remarkCodeTabOptions: {
