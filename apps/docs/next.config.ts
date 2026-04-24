@@ -21,7 +21,6 @@ const config: NextConfig = {
         'twoslash',
         'shiki',
         '@takumi-rs/image-response',
-        'fumadocs-typescript', // uses TS compiler internally — don't bundle
     ],
     images: {
         remotePatterns: [
@@ -31,15 +30,6 @@ const config: NextConfig = {
                 port: '',
             },
         ],
-    },
-    async redirects() {
-        return [
-            {
-                source: '/docs/versioning',
-                destination: '/docs/navigation',
-                permanent: false,
-            },
-        ];
     },
 };
 
