@@ -14,6 +14,7 @@ import { getMDXComponents } from '@/components/mdx';
 import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-category';
 import { LinkPreview } from '@/components/mdx/link-preview';
 import { Mermaid } from '@/components/mdx/mermaid';
+import { RibbonPath } from '@/components/mdx/ribbon-path';
 import { SymbolLink } from '@/components/mdx/symbol-link';
 import * as Preview from '@/components/preview';
 import { Customisation } from '@/components/preview/customisation';
@@ -54,6 +55,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[]; l
     if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
 
     const { body: Mdx, toc, lastModified } = await page.data.load();
+    const { ribbon } = page.data;
 
     const neighbours = findNeighbour(source.getPageTree(), page.url);
     const footerPrevious = neighbours.previous
@@ -85,7 +87,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[]; l
                 </div>
 
                 {/* Ribbon path — sits quietly below the title */}
-                {/* {ribbon && <RibbonPath ribbon={ribbon} />} */}
+                {ribbon && <RibbonPath ribbon={ribbon} />}
 
                 {/* Description below ribbon */}
                 {page.data.description && (
