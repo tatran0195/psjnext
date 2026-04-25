@@ -2,10 +2,7 @@ import { docs } from 'collections/server';
 import { type InferMetaType, type InferPageType, loader } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 
-import { psjSource } from 'psjapi/server';
 import { i18n } from '../i18n';
-
-import { psjapi } from '@/lib/psjapi';
 import { customIconsPlugin } from './plugins/custom-icons-plugin';
 import { pageTreeCodeTitlesPlugin } from './plugins/page-tree-code-titles-plugin';
 import { pageTreeFoldersPlugin } from './plugins/page-tree-folders-plugin';
@@ -20,15 +17,7 @@ const TAG_STYLES: Record<string, string> = {
 };
 
 export const source = loader({
-    docs: docs.toFumadocsSource(),
-    psj: await psjSource(psjapi, {
-        baseDir: 'psj',
-        meta: {
-            folderStyle: 'separator',
-        },
-        groupBy: 'domain',
-    })
-}, {
+    source: docs.toFumadocsSource(),
     i18n,
     baseUrl: '/',
     plugins: [

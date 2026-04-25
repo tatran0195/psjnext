@@ -11,38 +11,38 @@
 
 // Core types
 export type {
-  // Spec types
-  SdkManifest,
-  SdkInfo,
-  VersionEntry,
-  LocaleEntry,
-  DomainEntry,
-  Domain,
-  ParamStyle,
-  ReturnKind,
-  CalloutLevel,
-  ExampleLanguage,
-  EnumValue,
-  Param,
-  GroupRef,
-  ParamOrGroupRef,
-  Returns,
-  ReturnCode,
-  Callout,
-  Example,
-  SeeAlsoRef,
-  VersionDelta,
-  ItemFile,
-  ParamGroupFile,
-  ItemLocaleSidecar,
-  GroupLocaleSidecar,
-  // Resolved types
-  ResolvedParam,
-  ResolvedItem,
-  // Server types
-  ProcessedSdk,
-  PSJAPIServer,
-  PSJAPIOptions,
+    // Spec types
+    SdkManifest,
+    SdkInfo,
+    VersionEntry,
+    LocaleEntry,
+    DomainEntry,
+    Domain,
+    ParamStyle,
+    ReturnKind,
+    CalloutLevel,
+    ExampleLanguage,
+    EnumValue,
+    Param,
+    GroupRef,
+    ParamOrGroupRef,
+    Returns,
+    ReturnCode,
+    Callout,
+    Example,
+    SeeAlsoRef,
+    VersionDelta,
+    ItemFile,
+    ParamGroupFile,
+    ItemLocaleSidecar,
+    GroupLocaleSidecar,
+    // Resolved types
+    ResolvedParam,
+    ResolvedItem,
+    // Server types
+    ProcessedSdk,
+    PSJAPIServer,
+    PSJAPIOptions,
 } from './types';
 
 // Server factory
@@ -58,12 +58,12 @@ export { DEFAULT_SHIKI_OPTIONS } from './ui/context';
 
 // Builder types (useful when per: 'custom')
 export type {
-  OutputEntry,
-  ItemOutput,
-  GroupOutput,
-  PageOutput,
-  ItemRef,
-  PsjPagesBuilderConfig,
+    OutputEntry,
+    ItemOutput,
+    GroupOutput,
+    PageOutput,
+    ItemRef,
+    PsjPagesBuilderConfig,
 } from './utils/pages/builder';
 export { fromSdk, fromServer } from './utils/pages/builder';
 

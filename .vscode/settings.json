@@ -15,6 +15,7 @@
     "oxc.fmt.configPath": ".oxfmtrc.jsonc",
     "terminal.integrated.scrollback": 10000,
     "typescript.tsdk": "node_modules/typescript/lib",
+    "biome.enabled": false,
     "cSpell.words": [
         "algoliasearch",
         "customisation",
@@ -36,7 +37,7 @@
         "editor.defaultFormatter": "oxc.oxc-vscode"
     },
     "[markdown]": {
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
     },
     "[mdx]": {
         "editor.defaultFormatter": "unifiedjs.vscode-mdx"

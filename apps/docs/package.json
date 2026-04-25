@@ -46,6 +46,7 @@
         "mermaid": "^11.14.0",
         "next": "16.2.4",
         "next-themes": "^0.4.6",
+        "psjapi": "workspace:*",
         "react": "^19.2.5",
         "react-dom": "^19.2.5",
         "rehype-katex": "^7.0.1",
@@ -57,7 +58,6 @@
         "shiki": "^4.0.2",
         "tailwind-merge": "^3.5.0",
         "twoslash": "^0.3.8",
-        "psjapi": "workspace:*",
         "unist-util-visit": "^5.1.0",
         "zod": "^4.3.6"
     },

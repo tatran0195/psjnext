@@ -16,11 +16,11 @@ import {
     type SearchItemType,
     type SharedProps,
 } from 'fumadocs-ui/components/dialog/search';
+import { useI18n } from 'fumadocs-ui/contexts/i18n';
+import { useTreeContext } from 'fumadocs-ui/contexts/tree';
 import { ArrowRight } from 'lucide-react';
 
 import { ListMenu } from '@/components/ui/list-menu';
-import { useI18n } from '@/contexts/i18n';
-import { useTreeContext } from '@/contexts/tree';
 import { useThrottledValue } from '@/hooks/use-throttle';
 import { compareSemver, matchesSearch } from '@/lib/search';
 

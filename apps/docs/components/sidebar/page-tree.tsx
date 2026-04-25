@@ -1,8 +1,8 @@
 import { type FC, Fragment, type ReactNode, createContext, use, useMemo } from 'react';
 
 import { usePathname } from 'fumadocs-core/framework';
+import { useTreeContext, useTreePath } from 'fumadocs-ui/contexts/tree';
 
-import { useTreeContext, useTreePath } from '@/contexts/tree';
 import { isActive } from '@/lib/urls';
 
 import type * as Base from './base';

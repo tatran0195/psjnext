@@ -1,12 +1,11 @@
 'use client';
-import type { FC, ComponentProps } from 'react';
+import type { ComponentProps, FC } from 'react';
 
 import { usePathname } from 'fumadocs-core/framework';
 import Link from 'fumadocs-core/link';
+import { useI18n } from 'fumadocs-ui/contexts/i18n';
 
-import { useI18n } from '@/contexts/i18n';
-
-import { isLinkItemActive, type BaseLayoutProps, type LinkItemType } from '.';
+import { type BaseLayoutProps, type LinkItemType, isLinkItemActive } from '.';
 import {
     type LanguageSelectProps,
     type LanguageSelectTextProps,
@@ -14,10 +13,10 @@ import {
     LanguageSelectText,
 } from './slots/language-select';
 import {
-    type SearchTriggerProps,
     type FullSearchTriggerProps,
-    SearchTrigger,
+    type SearchTriggerProps,
     FullSearchTrigger,
+    SearchTrigger,
 } from './slots/search-trigger';
 import { type ThemeSwitchProps, ThemeSwitch } from './slots/theme-switch';
 
