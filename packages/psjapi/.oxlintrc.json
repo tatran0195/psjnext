@@ -1,6 +1,6 @@
 {
-    "$schema": "../../node_modules/oxlint/configuration_schema.json",
-    "plugins": ["typescript", "react", "import", "nextjs"],
+    "$schema": "./node_modules/oxlint/configuration_schema.json",
+    "plugins": ["typescript", "react", "import"],
     "categories": {
         "correctness": "off"
     },
@@ -9,14 +9,10 @@
     },
     "settings": {
         "react": {
-            "version": "18.3.1"
-        },
-        "tailwindcss": {
-            "config": "./tailwind.config.js",
-            "callees": ["clsx", "cva", "cn"]
+            "version": "19.0.0"
         }
     },
-    "ignorePatterns": ["dist/", "node_modules/", "test/out/"],
+    "ignorePatterns": ["dist/", "node_modules/", "css/generated/"],
     "rules": {
         "constructor-super": "error",
         "for-direction": "error",
@@ -60,7 +56,6 @@
         "no-shadow-restricted-names": "error",
         "no-sparse-arrays": "error",
         "no-this-before-super": "error",
-        "no-unassigned-vars": "error",
         "no-unexpected-multiline": "error",
         "no-unsafe-finally": "error",
         "no-unsafe-negation": "error",
@@ -79,7 +74,6 @@
         "no-useless-catch": "error",
         "no-useless-escape": "error",
         "no-with": "error",
-        "preserve-caught-error": "error",
         "require-yield": "error",
         "use-isnan": "error",
         "valid-typeof": "error",
@@ -116,9 +110,7 @@
         "react/no-render-return-value": "error",
         "react/no-string-refs": "error",
         "react/no-unescaped-entities": "error",
-        "react/no-unknown-property": "error",
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn"
+        "react/no-unknown-property": "error"
     },
     "overrides": [
         {

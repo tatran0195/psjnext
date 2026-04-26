@@ -1,0 +1,13 @@
+/**
+ * fumadocs-psjapi — preset CSS
+ *
+ * Import this in your app to apply psjapi component styles:
+ *
+ *   import 'fumadocs-psjapi/css/preset.css'
+ *
+ * The generated/shared.css file is produced at build time by
+ * scripts/compile-inline.utils.ts (Tailwind utility compilation).
+ * It is committed to dist/ — consumers do not need to run the
+ * compiler themselves.
+ */
+@import './generated/shared.css';

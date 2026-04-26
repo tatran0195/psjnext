@@ -5,7 +5,7 @@
  * fumadocs-openapi's toText() function.
  */
 
-import type { ItemOutput, PageOutput, OutputEntry } from './builder';
+import type { ItemOutput, PageOutput } from './builder';
 
 export interface PsjToTextOptions {
     /**

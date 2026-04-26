@@ -70,3 +70,7 @@ export { fromSdk, fromServer } from './utils/pages/builder';
 // MDX text generation
 export { toText, generateDocument } from './utils/pages/to-text';
 export type { PsjToTextOptions } from './utils/pages/to-text';
+
+// i18n — UI translations (re-exported for convenience; primary export is fumadocs-psjapi/i18n)
+export type { PsjAPITranslations } from './i18n';
+export { defaultTranslations, defineI18nPsjAPI } from './i18n';

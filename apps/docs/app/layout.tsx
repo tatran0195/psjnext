@@ -1,16 +1,15 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 
-// import { i18n } from '@/lib/i18n';
-import { NextProvider } from 'fumadocs-core/framework/next';
 import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
 import { Geist, Geist_Mono } from 'next/font/google';
 
 import { baseUrl, createMetadata } from '@/lib/metadata';
 import { source } from '@/lib/source';
 import '@/styles/global.css';
-import { Provider } from '../provider';
+import { NextProvider } from 'fumadocs-core/framework/next';
 import { Body } from './layout.client';
+import { Provider } from './provider';
 
 export const metadata: Metadata = createMetadata({
     title: {
@@ -54,7 +53,9 @@ export default async function RootLayout(props: {
             <Body>
                 <NextProvider>
                     <TreeContextProvider tree={source.getPageTree(params.lang)}>
-                        <Provider locale={params.lang}>{props.children}</Provider>
+                        <Provider locale={params.lang}>
+                            {props.children}
+                        </Provider>
                     </TreeContextProvider>
                 </NextProvider>
             </Body>

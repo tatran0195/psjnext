@@ -1,15 +1,26 @@
-psjapi: '2.0'
+psjapi: '1.0'
+
 sdk:
     name: 'Jupiter CAE Desktop Platform SDK'
     vendor: 'TechnoStar Co., Ltd.'
     vendor_url: 'https://www.e-technostar.com/'
+
 versions:
     - id: '5.0.0'
     - id: '5.0.1'
       notes: 'Removed iEJobType and iHeatConvection from Analysis.ADVC.Structure'
     - id: '5.1.0'
       notes: 'Current release'
+
 current_version: '5.1.0'
+
+locales:
+    - id: en
+      label: English
+      default: true
+    - id: ja
+      label: 日本語
+
 domains:
     - id: macro
       title: Macros

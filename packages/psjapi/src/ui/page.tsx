@@ -8,7 +8,7 @@
  * client renderer.  Analogous to APIPage in fumadocs-openapi.
  */
 
-import type { ReactNode, HTMLAttributes } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 
 import { highlightHast } from 'fumadocs-core/highlight/shiki';
 import { defaultShikiFactory } from 'fumadocs-core/highlight/shiki/full';
@@ -30,7 +30,7 @@ import { DEFAULT_SHIKI_OPTIONS } from './context';
 import { PSJAPIItemRenderer } from './item';
 
 import type { Root } from 'hast';
-import type { Transformer } from 'unified';
+import type { Processor } from 'unified';
 import type { VFile } from 'vfile';
 
 // ─── Server-side page factory ─────────────────────────────────────────────────
@@ -73,7 +73,7 @@ export function createPSJAPIPage(
     let processor: ReturnType<typeof createMarkdownProcessor> | undefined;
 
     function createMarkdownProcessor() {
-        function rehypeReact(this: Transformer<Root>) {
+        function rehypeReact(this: Processor) {
             // @ts-expect-error — attaches a custom compiler to the unified processor
             this.compiler = (tree: Root, file: VFile): ReactNode => {
                 return toJsxRuntime(tree, {

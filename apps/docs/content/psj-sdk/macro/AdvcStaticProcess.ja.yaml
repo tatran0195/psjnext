@@ -1,0 +1,83 @@
+psjapi: '1.0'
+locale: ja
+id: AdvcStaticProcess
+
+description: >
+    ADVC静的構造解析プロセスを作成または変更するローレベルマクロ。
+    Analysis.ADVC.MakeProcess.Static()の内部で呼び出されます。
+    JPT.Exec()を通じてマクロレベルのスクリプトで直接使用できます。
+
+callouts:
+    - level: warn
+      text: >
+          スクリプト記述にはAnalysis.ADVC.MakeProcess.Static()を推奨します。
+          このマクロはすべての引数を位置で指定するため、
+          誤った位置に値を渡すとサイレントエラーが発生します。
+    - level: info
+      text: >
+          位置9〜14（出力・リスタート間隔）および16〜29（収束ブロック）、
+          31〜42（コンタクトブロック）、44〜63（自動増分ブロック）は
+          完全なマクロリファレンスに記載されています。
+
+params:
+    1:
+        description: ADVCスタティックプロセスの名前。
+    2:
+        description: 幾何非線形オプション。
+        enum_values:
+            0: (空白) — 線形
+            1: トータルラグランジュ法
+            2: 更新ラグランジュ法
+    3:
+        description: タイムステップ制御モード。
+        enum_values:
+            0: 自動
+            1: 固定
+    4:
+        description: 増分数。
+    5:
+        description: 最大解析時間。
+    6:
+        description: 最大タイムステップサイズ。
+    7:
+        description: 最小タイムステップサイズ。
+    8:
+        description: 荷重適用タイプ。
+        enum_values:
+            -1: デフォルト
+            0: ステップ
+            1: ランプ
+    15:
+        description: 収束パラメータが定義されているかどうか。
+    30:
+        description: コンタクトイテレータパラメータが定義されているかどうか。
+    43:
+        description: 自動増分パラメータが定義されているかどうか。
+    64:
+        description: 既存プロセスの編集カーソル。新規作成の場合は0:0を使用。
+    65:
+        description: 荷重ノード割り当てリスト。
+    66:
+        description: ロードケースノード割り当てリスト。
+    67:
+        description: コンタクトノード割り当てリスト。
+    68:
+        description: 出力パラメータリスト。
+    69:
+        description: 参照結果のタイプ。
+        enum_values:
+            0: 温度荷重
+            1: 応力
+    70:
+        description: 参照結果ファイルのパス。
+    71:
+        description: 参照結果データリスト。
+
+returns:
+    codes:
+        '"1"': 関数が正常に実行されました。
+        '"0"': 関数を実行できませんでした。
+
+examples:
+    - title: JPT.Execによる最小限のスタティックプロセス
+    - title: 戻りコードの確認

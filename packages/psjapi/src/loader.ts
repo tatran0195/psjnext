@@ -1,4 +1,3 @@
-// oxlint-disable typescript/no-explicit-any
 /**
  * psjapi loader
  *
@@ -187,16 +186,14 @@ function expandParams(raw: ParamOrGroupRef[], groups: Map<string, ParamGroupFile
         // insert_after + insert
         if (entry.insert_after && entry.insert && entry.insert.length > 0) {
             const idx = groupParams.findIndex((p) => p.name === entry.insert_after);
-            const insertItems = entry.insert.map((p) => {
-                return {
-                    ...p,
-                    _fromGroup: entry.$group,
-                };
-            });
+            const inserted = entry.insert.map((p) => ({
+                ...p,
+                _fromGroup: entry.$group,
+            }));
             if (idx !== -1) {
-                groupParams.splice(idx + 1, 0, ...insertItems);
+                groupParams.splice(idx + 1, 0, ...inserted);
             } else {
-                groupParams.push(...insertItems);
+                groupParams.push(...inserted);
             }
         }
 
@@ -395,7 +392,7 @@ export function resolveItem(
             // Translate item-specific params (not from a group)
             if (itemSidecar.params) {
                 params = params.map((p) => {
-                    if ((p as any)._fromGroup) return p; // handled by group sidecar below
+                    if ((p as Param & { _fromGroup?: string })._fromGroup) return p; // handled by group sidecar below
                     const key = p.position !== undefined ? String(p.position) : (p.name ?? '');
                     const t = (itemSidecar.params as Record<string, ParamTranslation>)?.[key];
                     return translateParam(p, key, t);
@@ -404,14 +401,18 @@ export function resolveItem(
         }
 
         // Translate params that came from groups
-        const groupIds = new Set(params.map((p) => (p as any)._fromGroup).filter(Boolean));
+        const groupIds = new Set(
+            params
+                .map((p) => (p as Param & { _fromGroup?: string })._fromGroup)
+                .filter((g): g is string => typeof g === 'string'),
+        );
         for (const groupId of groupIds) {
             const groupSidecarKey = `${groupId}.${locale}`;
             const groupSidecar = groupSidecars.get(groupSidecarKey);
             if (!groupSidecar?.params) continue;
 
             params = params.map((p) => {
-                if ((p as any)._fromGroup !== groupId) return p;
+                if ((p as Param & { _fromGroup?: string })._fromGroup !== groupId) return p;
                 const key = p.position !== undefined ? String(p.position) : (p.name ?? '');
                 const t = (groupSidecar.params as Record<string, ParamTranslation>)?.[key];
                 return translateParam(p, key, t);
@@ -424,7 +425,7 @@ export function resolveItem(
                 const parentSidecar = groupSidecars.get(parentSidecarKey);
                 if (parentSidecar?.params) {
                     params = params.map((p) => {
-                        if ((p as any)._fromGroup !== groupId) return p;
+                        if ((p as Param & { _fromGroup?: string })._fromGroup !== groupId) return p;
                         // Only translate if not already translated by child group sidecar
                         const key = p.position !== undefined ? String(p.position) : (p.name ?? '');
                         const childTranslation = (

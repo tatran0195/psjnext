@@ -6,9 +6,9 @@
  * psjapi-specific ones (domain rendering, example-right-panel layout, etc.).
  */
 
-import type { ReactNode, HTMLAttributes } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 
-import type { ResolvedItem, ResolvedParam, Domain, CalloutLevel, Example } from '../types';
+import type { CalloutLevel, Example, ResolvedItem, ResolvedParam } from '../types';
 
 import type { ShikiFactory } from 'fumadocs-core/highlight/shiki';
 import type { BundledTheme, CodeOptionsThemes, CodeToHastOptionsCommon } from 'shiki';

@@ -1,0 +1,20 @@
+psjapi: '1.0'
+locale: ja
+id: Analysis-ADVC-MakeProcess-Dynamic
+
+description: >
+    ADVC構造ダイナミックプロセスを作成します。慣性効果が重要な
+    過渡構造解析に使用します。
+
+params:
+    bDynamic:
+        description: ダイナミックパラメータ設定の有効/無効。
+    advcDynamic:
+        description: ダイナミックパラメータの設定。bDynamic=Trueの場合に有効。
+
+returns:
+    description: 作成または変更されたADVCダイナミックプロセスのカーソル。
+
+examples:
+    - title: デフォルト設定でのダイナミックプロセス作成
+    - title: ダイナミック積分パラメータの有効化

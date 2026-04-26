@@ -1,11 +1,11 @@
 {
     "extends": "tsconfig/react-library.json",
     "compilerOptions": {
-        "jsx": "react-jsx",
+        "allowImportingTsExtensions": true,
         "paths": {
             "@/*": ["./src/*"]
         },
-        "types": ["react"]
+        "types": ["react/experimental"]
     },
-    "exclude": ["node_modules", "dist", "eslint.config.mjs", "tailwind.config.js"]
+    "exclude": ["node_modules", "dist"]
 }

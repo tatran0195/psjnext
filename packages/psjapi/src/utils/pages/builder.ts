@@ -6,8 +6,7 @@
  * that the same Source API integration pattern works.
  */
 
-import type { ProcessedSdk, Domain, PSJAPIServer } from '../../types';
-import type { ItemFile } from '../../types';
+import type { Domain, ItemFile, ProcessedSdk, PSJAPIServer } from '../../types';
 
 // ─── Output entry types ───────────────────────────────────────────────────────
 
@@ -101,7 +100,7 @@ export function fromSdk(
     type DomainMap = Map<string, Map<string, ItemFile[]>>; // domain → (group → items[])
     const byDomain: DomainMap = new Map();
 
-    for (const [key, item] of sdk.items) {
+    for (const [_, item] of sdk.items) {
         if (!byDomain.has(item.domain)) byDomain.set(item.domain, new Map());
         const domainMap = byDomain.get(item.domain)!;
         const g = item.group ?? '__ungrouped__';
@@ -112,7 +111,7 @@ export function fromSdk(
     if (per === 'item') {
         if (groupBy === 'none') {
             // Flat list, one OutputEntry per item
-            for (const [key, item] of sdk.items) {
+            for (const [_, item] of sdk.items) {
                 const filePath = nameFn ? nameFn(item) : defaultItemPath(item);
                 entries.push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
             }

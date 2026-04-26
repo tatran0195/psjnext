@@ -4,9 +4,7 @@ import dynamic from 'next/dynamic';
 import type { ReactNode } from 'react';
 
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-import { I18nProvider } from 'fumadocs-ui/contexts/i18n';
-import { SearchProvider } from 'fumadocs-ui/contexts/search';
-import { ThemeProvider } from 'next-themes';
+import { RootProvider } from 'fumadocs-ui/provider/next';
 
 import { localeItems } from '@/lib/i18n';
 
@@ -16,17 +14,12 @@ const SearchDialog = dynamic(() => import('@/components/layouts/search'), {
 
 export function Provider({ children, locale }: { children: ReactNode; locale: string }) {
     return (
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+        <RootProvider
+            search={{ SearchDialog }}
+            i18n={{ locale, locales: localeItems }}
+            theme={{ enabled: true, defaultTheme: 'system', enableSystem: true }}
         >
-            <I18nProvider locale={locale} locales={localeItems}>
-                <SearchProvider SearchDialog={SearchDialog} preload>
-                    <TooltipProvider>{children}</TooltipProvider>
-                </SearchProvider>
-            </I18nProvider>
-        </ThemeProvider>
+            <TooltipProvider>{children}</TooltipProvider>
+        </RootProvider>
     );
 }
