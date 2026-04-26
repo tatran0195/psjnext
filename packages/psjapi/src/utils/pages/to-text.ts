@@ -1,10 +1,3 @@
-/**
- * psjapi MDX text generator
- *
- * Converts an OutputEntry into MDX frontmatter + body text, analogous to
- * fumadocs-openapi's toText() function.
- */
-
 import type { ItemOutput, PageOutput } from './builder';
 
 export interface PsjToTextOptions {

@@ -1,19 +1,12 @@
-/**
- * psjapi static file generator
- *
- * Analogous to fumadocs-openapi's generateFiles() / generateFilesOnly().
- * Produces .mdx files on disk from a PSJAPIServer.
- */
-
 import { mkdir, writeFile } from 'node:fs/promises';
 import * as path from 'node:path';
 
 import type { PSJAPIServer } from './types';
 import type {
-    PsjPagesBuilderConfig,
-    OutputEntry,
     ItemOutput,
+    OutputEntry,
     PageOutput,
+    PsjPagesBuilderConfig,
 } from './utils/pages/builder';
 
 import { fromServer } from './utils/pages/builder';

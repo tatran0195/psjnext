@@ -1,11 +1,3 @@
-/**
- * psjapi core type definitions.
- *
- * These model the psjapi 1.0 YAML schema for the Jupiter CAE Desktop Platform SDK.
- * The types are framework-agnostic — UI components import them; the loader produces
- * them; utility functions consume them.
- */
-
 // ─── Primitive helpers ──────────────────────────────────────────────────────
 
 export type Domain = 'macro' | 'psj-command' | 'psj-utility' | 'psj-gui';

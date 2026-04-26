@@ -1,18 +1,3 @@
-/**
- * psjapi Fumadocs Source API integration
- *
- * Call psjSource() to generate virtual pages, and pass psjPlugin() to
- * the `plugins` array in Fumadocs loader().
- *
- * i18n support:
- *   When `i18nParser` is set, psjSource emits one virtual file per locale so
- *   Fumadocs loader() can build a per-locale page tree.
- *
- *   - 'dir'  → files prefixed:  en/psj-command/Foo.mdx, ja/psj-command/Foo.mdx
- *   - 'dot'  → files suffixed:  psj-command/Foo.en.mdx, psj-command/Foo.ja.mdx
- *   - unset  → single file, no locale in path (non-i18n setup)
- */
-
 import { PathUtils } from 'fumadocs-core/source';
 import * as path from 'node:path';
 
@@ -186,8 +171,8 @@ export async function psjSource(
                 entry.type === 'item'
                     ? { domain: entry.item.domain }
                     : entry.type === 'page' && entry.items.length > 0
-                      ? { domain: entry.items[0].domain }
-                      : {};
+                        ? { domain: entry.items[0].domain }
+                        : {};
 
             for (const locale of emitLocales) {
                 const localeId = locale.id;

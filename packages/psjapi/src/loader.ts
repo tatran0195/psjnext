@@ -1,11 +1,3 @@
-/**
- * psjapi loader
- *
- * Reads the sdk.psjapi.yaml manifest plus every item and group YAML file from
- * disk, resolves param group references, applies version deltas, and merges
- * locale translations, producing ResolvedItem objects ready for the UI.
- */
-
 import { readdir, readFile } from 'node:fs/promises';
 import * as path from 'node:path';
 import { parse as parseYaml } from 'yaml';

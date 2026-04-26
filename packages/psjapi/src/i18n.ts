@@ -1,29 +1,3 @@
-/**
- * UI string translations used by psjapi components.
- *
- * Usage with fumadocs-ui i18n:
- * ```ts
- * import { defineI18nPsjAPI } from 'fumadocs-psjapi/i18n';
- *
- * export const { getPage, pageTree } = loader({
- *   i18n: defineI18nPsjAPI(
- *     {
- *       languages: ['en', 'ja'],
- *       defaultLanguage: 'en',
- *       parser: 'dir',
- *     },
- *     {
- *       ja: {
- *         parameters: 'パラメータ',
- *         returns: '戻り値',
- *         // ... override any key
- *       },
- *     },
- *   ),
- * });
- * ```
- */
-
 import type { I18nUIConfig } from 'fumadocs-ui/i18n';
 
 // ─── Default translations (English) ──────────────────────────────────────────

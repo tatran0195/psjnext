@@ -1,42 +1,26 @@
-/**
- * psjapi — PSJAPIItem React component (React Server Component)
- *
- * Renders a single resolved SDK item.
- *
- * KEY DIFFERENCE FROM OPENAPI:
- *   In fumadocs-openapi, the right panel shows an API playground / curl
- *   generator.  In psjapi, the right panel shows the item's EXAMPLE CODES —
- *   there is no network call to make.  The left column holds description,
- *   params, and returns; examples are placed in the right column.
- *
- * This is a React Server Component — async render functions (Shiki, remark)
- * are awaited here. Interactive sub-components (CodeBlockTabs etc.) are
- * already client components supplied by fumadocs-ui.
- */
-
-import { type ReactNode, type HTMLAttributes, Fragment } from 'react';
+import { type HTMLAttributes, type ReactNode, Fragment } from 'react';
 
 import {
     CodeBlock,
-    Pre,
     CodeBlockTab,
     CodeBlockTabs,
     CodeBlockTabsList,
     CodeBlockTabsTrigger,
+    Pre,
 } from 'fumadocs-ui/components/codeblock';
 import { Heading } from 'fumadocs-ui/components/heading';
 
 import type {
     CalloutLevel,
     Domain,
+    EnumValue,
     Example,
     ResolvedItem,
     ResolvedParam,
     Returns,
     SeeAlsoRef,
-    EnumValue,
 } from '../types';
-import type { ResolvedPSJAPIPageOptions, ItemLayoutSlots, PsjRenderContext } from './context';
+import type { ItemLayoutSlots, PsjRenderContext, ResolvedPSJAPIPageOptions } from './context';
 
 import { cn } from '../utils/cn';
 

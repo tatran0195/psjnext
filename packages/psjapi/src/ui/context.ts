@@ -1,11 +1,3 @@
-/**
- * psjapi UI — RenderContext and page-level options
- *
- * Analogous to fumadocs-openapi's RenderContext / CreateAPIPageOptions in
- * src/ui/base.tsx, but stripped of HTTP-specific concepts and extended with
- * psjapi-specific ones (domain rendering, example-right-panel layout, etc.).
- */
-
 import type { HTMLAttributes, ReactNode } from 'react';
 
 import type { CalloutLevel, Example, ResolvedItem, ResolvedParam } from '../types';

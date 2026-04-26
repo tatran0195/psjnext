@@ -1,13 +1,3 @@
-/**
- * PSJAPIItem — server component entry point
- *
- * This is what MDX pages render:
- *   <PSJAPIItem schemaId="..." itemKey="macro/AdvcStaticProcess" />
- *
- * It fetches the resolved item from the PSJAPIServer and passes it to the
- * client renderer.  Analogous to APIPage in fumadocs-openapi.
- */
-
 import type { HTMLAttributes, ReactNode } from 'react';
 
 import { highlightHast } from 'fumadocs-core/highlight/shiki';
@@ -110,38 +100,38 @@ export function createPSJAPIPage(
             renderMarkdown: options.renderMarkdown
                 ? options.renderMarkdown
                 : async (text: string) => {
-                      processor ??= createMarkdownProcessor();
-                      const out = await processor.process({ value: text });
-                      return out.result as ReactNode;
-                  },
+                    processor ??= createMarkdownProcessor();
+                    const out = await processor.process({ value: text });
+                    return out.result as ReactNode;
+                },
             renderCodeBlock: options.renderCodeBlock
                 ? options.renderCodeBlock
                 : async ({ lang, code }: { lang: string; code: string }) => {
-                      const hast = await highlightHast(await shiki.getOrInit(), code, {
-                          lang,
-                          defaultColor: false,
-                          ...shikiOptions,
-                      });
-                      const rendered = toJsxRuntime(hast, {
-                          ...JsxRuntime,
-                          components: { pre: Pre },
-                      });
-                      return <CodeBlock className="my-0">{rendered}</CodeBlock>;
-                  },
+                    const hast = await highlightHast(await shiki.getOrInit(), code, {
+                        lang,
+                        defaultColor: false,
+                        ...shikiOptions,
+                    });
+                    const rendered = toJsxRuntime(hast, {
+                        ...JsxRuntime,
+                        components: { pre: Pre },
+                    });
+                    return <CodeBlock className="my-0">{rendered}</CodeBlock>;
+                },
             renderHeading: options.renderHeading
                 ? options.renderHeading
                 : (props: HTMLAttributes<HTMLHeadingElement>, depth: number) => {
-                      const id =
-                          props.id ??
-                          (typeof props.children === 'string'
-                              ? slugger.slug(props.children)
-                              : undefined);
-                      return (
-                          <Heading id={id} key={id} as={`h${depth}` as 'h1'} {...props}>
-                              {props.children}
-                          </Heading>
-                      );
-                  },
+                    const id =
+                        props.id ??
+                        (typeof props.children === 'string'
+                            ? slugger.slug(props.children)
+                            : undefined);
+                    return (
+                        <Heading id={id} key={id} as={`h${depth}` as 'h1'} {...props}>
+                            {props.children}
+                        </Heading>
+                    );
+                },
         };
     }
 

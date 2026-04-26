@@ -1,11 +1,3 @@
-/**
- * psjapi pages builder
- *
- * Converts a ProcessedSdk into a tree of OutputEntry objects that Fumadocs
- * Source API can consume.  Mirrors the shape of fumadocs-openapi's builder so
- * that the same Source API integration pattern works.
- */
-
 import type { Domain, ItemFile, ProcessedSdk, PSJAPIServer } from '../../types';
 
 // ─── Output entry types ───────────────────────────────────────────────────────
