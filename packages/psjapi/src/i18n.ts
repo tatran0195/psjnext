@@ -134,31 +134,3 @@ export function defineI18nPsjAPI<Languages extends string>(
         },
     };
 }
-
-// ─── usePsjTranslations hook (client components) ──────────────────────────────
-
-/**
- * Extract psjapi translations from the fumadocs-ui I18n context.
- * Use inside any client component that needs localised labels.
- *
- * ```tsx
- * 'use client';
- * import { usePsjTranslations } from 'fumadocs-psjapi/i18n';
- *
- * export function ParamLabel() {
- *   const t = usePsjTranslations();
- *   return <span>{t.parameters}</span>;
- * }
- * ```
- */
-export function usePsjTranslations(): PsjAPITranslations {
-    // Dynamic import to avoid bundling the hook in server-only builds
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { useI18n } = require('fumadocs-ui/contexts/i18n') as {
-        useI18n: () => { translations?: Record<string, unknown> };
-    };
-    const ctx = useI18n();
-    const t = (ctx.translations as Record<string, unknown> | undefined)?.psjapi;
-    if (t && typeof t === 'object') return t as PsjAPITranslations;
-    return defaultTranslations;
-}

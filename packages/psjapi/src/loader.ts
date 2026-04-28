@@ -28,6 +28,8 @@ import type {
     VersionDelta,
 } from './types';
 
+type ParamWithGroup = Param & { _fromGroup?: string }
+
 // ─── Internal cache ───────────────────────────────────────────────────────────
 
 interface LoadedSdk extends ProcessedSdk {
@@ -136,7 +138,7 @@ async function loadSdk(rootDir: string): Promise<LoadedSdk> {
 // ─── Group expansion ──────────────────────────────────────────────────────────
 
 /** Recursively expand a group, respecting `extends`, returning flat Param list */
-function expandGroup(groupId: string, groups: Map<string, ParamGroupFile>): Param[] {
+function expandGroup(groupId: string, groups: Map<string, ParamGroupFile>): ParamWithGroup[] {
     const group = groups.get(groupId);
     if (!group) {
         console.warn(`[psjapi] Unknown group: ${groupId}`);
@@ -155,7 +157,10 @@ function expandGroup(groupId: string, groups: Map<string, ParamGroupFile>): Para
 }
 
 /** Expand param list (which may contain GroupRef entries) into a flat Param list */
-function expandParams(raw: ParamOrGroupRef[], groups: Map<string, ParamGroupFile>): Param[] {
+function expandParams(
+    raw: ParamOrGroupRef[],
+    groups: Map<string, ParamGroupFile>,
+): ParamWithGroup[] {
     const result: Param[] = [];
 
     for (const entry of raw) {
@@ -164,7 +169,7 @@ function expandParams(raw: ParamOrGroupRef[], groups: Map<string, ParamGroupFile
             continue;
         }
 
-        let groupParams = expandGroup(entry.$group, groups).map((p) => ({
+        let groupParams: ParamWithGroup[] = expandGroup(entry.$group, groups).map((p) => ({
             ...p,
             _fromGroup: entry.$group,
         }));
@@ -178,14 +183,10 @@ function expandParams(raw: ParamOrGroupRef[], groups: Map<string, ParamGroupFile
         // insert_after + insert
         if (entry.insert_after && entry.insert && entry.insert.length > 0) {
             const idx = groupParams.findIndex((p) => p.name === entry.insert_after);
-            const inserted = entry.insert.map((p) => ({
-                ...p,
-                _fromGroup: entry.$group,
-            }));
             if (idx !== -1) {
-                groupParams.splice(idx + 1, 0, ...inserted);
+                groupParams.splice(idx + 1, 0, ...entry.insert);
             } else {
-                groupParams.push(...inserted);
+                groupParams.push(...entry.insert);
             }
         }
 
@@ -217,11 +218,11 @@ function applyEnumPatch(current: EnumValue[] | undefined, patch: EnumValuePatch)
 }
 
 function applyDeltasToParams(
-    params: Param[],
+    params: ParamWithGroup[],
     deltas: VersionDelta[],
     targetVersions: string[],
-): Param[] {
-    let result = [...params];
+): ParamWithGroup[] {
+    let result: ParamWithGroup[] = [...params];
 
     for (const delta of deltas) {
         if (!targetVersions.includes(delta.version)) continue;
@@ -343,12 +344,16 @@ export function resolveItem(
     const { manifest, groups, itemSidecars, groupSidecars } = sdk;
 
     // 1. Expand group refs → flat params (as of version_introduced)
-    let params = expandParams(item.params, groups);
+    let params: ParamWithGroup[] = expandParams(item.params, groups);
 
     // 2. Apply deltas up to requested version
     if (item.changes && item.changes.length > 0) {
         const targetVersions = versionsUpTo(manifest, version);
-        params = applyDeltasToParams(params, item.changes, targetVersions);
+        params = applyDeltasToParams(
+            params as Param[],
+            item.changes,
+            targetVersions,
+        ) as ParamWithGroup[];
     }
 
     // 3. Determine top-level item fields including delta item patches
@@ -384,7 +389,7 @@ export function resolveItem(
             // Translate item-specific params (not from a group)
             if (itemSidecar.params) {
                 params = params.map((p) => {
-                    if ((p as Param & { _fromGroup?: string })._fromGroup) return p; // handled by group sidecar below
+                    if ((p as ParamWithGroup)._fromGroup) return p; // handled by group sidecar below
                     const key = p.position !== undefined ? String(p.position) : (p.name ?? '');
                     const t = (itemSidecar.params as Record<string, ParamTranslation>)?.[key];
                     return translateParam(p, key, t);
@@ -394,9 +399,7 @@ export function resolveItem(
 
         // Translate params that came from groups
         const groupIds = new Set(
-            params
-                .map((p) => (p as Param & { _fromGroup?: string })._fromGroup)
-                .filter((g): g is string => typeof g === 'string'),
+            params.map((p) => (p as ParamWithGroup)._fromGroup).filter((p) => p !== undefined),
         );
         for (const groupId of groupIds) {
             const groupSidecarKey = `${groupId}.${locale}`;
@@ -404,7 +407,7 @@ export function resolveItem(
             if (!groupSidecar?.params) continue;
 
             params = params.map((p) => {
-                if ((p as Param & { _fromGroup?: string })._fromGroup !== groupId) return p;
+                if ((p as ParamWithGroup)._fromGroup !== groupId) return p;
                 const key = p.position !== undefined ? String(p.position) : (p.name ?? '');
                 const t = (groupSidecar.params as Record<string, ParamTranslation>)?.[key];
                 return translateParam(p, key, t);
@@ -417,7 +420,7 @@ export function resolveItem(
                 const parentSidecar = groupSidecars.get(parentSidecarKey);
                 if (parentSidecar?.params) {
                     params = params.map((p) => {
-                        if ((p as Param & { _fromGroup?: string })._fromGroup !== groupId) return p;
+                        if ((p as ParamWithGroup)._fromGroup !== groupId) return p;
                         // Only translate if not already translated by child group sidecar
                         const key = p.position !== undefined ? String(p.position) : (p.name ?? '');
                         const childTranslation = (
@@ -434,7 +437,7 @@ export function resolveItem(
 
     // 5. Build resolved params (clean up internal _fromGroup marker)
     const resolvedParams: ResolvedParam[] = params.map((p) => {
-        const { _fromGroup, ...rest } = p as Param & { _fromGroup?: string };
+        const { _fromGroup, ...rest } = p as ParamWithGroup;
         return {
             ...rest,
             name: rest.name ?? String(rest.position ?? ''),
@@ -482,7 +485,7 @@ export function createPSJAPI(options: PSJAPIOptions): PSJAPIServer {
     return {
         options,
 
-        async getProcessedSdk(_version?: string, _locale?: string): Promise<ProcessedSdk> {
+        async getProcessedSdk(): Promise<ProcessedSdk> {
             const sdk = await getLoadedSdk();
             return { manifest: sdk.manifest, items: sdk.items, groups: sdk.groups };
         },

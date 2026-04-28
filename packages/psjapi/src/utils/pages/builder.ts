@@ -70,7 +70,7 @@ function slugify(str: string): string {
 }
 
 function defaultItemPath(item: ItemFile): string {
-    return `${item.domain}/${item.id.toLowerCase().replace(/\./g, '-')}`;
+    return `${item.domain}/${item.id.replace(/\./g, '-')}`;
 }
 
 // ─── fromSdk ──────────────────────────────────────────────────────────────────
@@ -114,7 +114,7 @@ export function fromSdk(
                     for (const item of items) {
                         const filePath = nameFn
                             ? nameFn(item)
-                            : `${domain}/${item.id.toLowerCase().replace(/\./g, '-')}`;
+                            : `${domain}/${item.id.replace(/\./g, '-')}`;
                         domainEntries.push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
                     }
                 }
@@ -140,7 +140,7 @@ export function fromSdk(
                 const groupEntries: OutputEntry[] = items.map((item) => {
                     const filePath = nameFn
                         ? nameFn(item)
-                        : `${slugify(group === '__ungrouped__' ? 'misc' : group)}/${item.id.toLowerCase().replace(/\./g, '-')}`;
+                        : `${slugify(group === '__ungrouped__' ? 'misc' : group)}/${item.id.replace(/\./g, '-')}`;
                     return makeItemOutput(schemaId, item, `${filePath}.mdx`);
                 });
                 const groupLabel = group === '__ungrouped__' ? 'Miscellaneous' : group;

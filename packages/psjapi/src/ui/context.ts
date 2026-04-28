@@ -118,6 +118,20 @@ export interface CreatePSJAPIPageOptions {
     renderReturns?: (item: ResolvedItem, ctx: PsjRenderContext) => ReactNode;
 
     /**
+     * Resolve a $ref string or "domain/id" key to a page URL.
+     *
+     * Used for:
+     *   - type strings containing $ref: e.g. "List[$ref:data-type/JPT_FOO]"
+     *   - see_also refs: e.g. { $ref: "macro/AdvcStaticProcess" }
+     *
+     * The second argument is the active locale (e.g. `'en'`, `'ja'`), so you
+     * can generate locale-prefixed URLs:
+     *
+     *   resolveRef: (ref, locale) => `/${locale}/sdk/${ref}`
+     */
+    resolveRef?: (ref: string, locale: string) => string;
+
+    /**
      * Show/hide the domain badge in the header.
      * @defaultValue true
      */

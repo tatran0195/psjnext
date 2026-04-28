@@ -16,9 +16,8 @@ import type {
     LoaderPlugin,
     MetaData,
     PageData,
-    PageTreeTransformer,
     Source,
-    VirtualFile,
+    VirtualFile
 } from 'fumadocs-core/source';
 import type { TOCItemType } from 'fumadocs-core/toc';
 
@@ -103,9 +102,18 @@ export interface PSJPageData extends PageData {
 export type I18nParser = 'dir' | 'dot';
 
 export type PsjSourceOptions = PsjPagesBuilderConfig & {
-    baseDir?: string;
     /** Generate meta.json files */
     meta?: boolean | { folderStyle?: 'folder' | 'separator' };
+    /**
+     * Optional directory prefix to prepend to every emitted virtual file path.
+     *
+     * Use this when you want the PSJ source to appear rooted under a sub-path
+     * in the virtual file system, e.g. `baseDir: 'sdk'` causes files to be
+     * emitted as `sdk/macro/Foo.mdx` instead of `macro/Foo.mdx`.
+     *
+     * Mirrors the `baseDir` option in `fumadocs-openapi`'s `openapiSource`.
+     */
+    baseDir?: string;
     /**
      * Set this to match the `i18n.parser` value passed to Fumadocs loader().
      *
@@ -125,19 +133,13 @@ function stripExt(p: string): string {
     return p.endsWith('.mdx') ? p.slice(0, -4) : p;
 }
 
-function localeFilePath(
-    baseDir: string,
-    entryPath: string,
-    localeId: string,
-    parser: I18nParser,
-): string {
-    const base = baseDir ? `${baseDir}/` : '';
+function localeFilePath(entryPath: string, localeId: string, parser: I18nParser): string {
     if (parser === 'dir') {
-        return `${base}${localeId}/${entryPath}`;
+        return `${localeId}/${entryPath}`;
     }
     // dot parser
     const withoutExt = stripExt(entryPath);
-    return `${base}${withoutExt}.${localeId}.mdx`;
+    return `${withoutExt}.${localeId}.mdx`;
 }
 
 // ─── psjSource ───────────────────────────────────────────────────────────────
@@ -151,7 +153,7 @@ export async function psjSource(
         pageData: PSJPageData;
     }>
 > {
-    const { baseDir = '', meta = false, i18nParser } = options;
+    const { meta = false, i18nParser, baseDir = '' } = options;
 
     const files: VirtualFile<{
         pageData: PSJPageData;
@@ -177,10 +179,11 @@ export async function psjSource(
             for (const locale of emitLocales) {
                 const localeId = locale.id;
 
-                const filePath =
+                const rawPath =
                     i18nParser && localeId
-                        ? localeFilePath(baseDir, entry.path, localeId, i18nParser)
-                        : `${baseDir ? `${baseDir}/` : ''}${entry.path}`;
+                        ? localeFilePath(entry.path, localeId, i18nParser)
+                        : entry.path;
+                const filePath = baseDir ? `${baseDir}/${rawPath}` : rawPath;
 
                 files.push({
                     type: 'page',
@@ -213,13 +216,8 @@ export async function psjSource(
                                 : [entry.type === 'item' ? entry.item.key : ''],
 
                         structuredData: {
-                            headings: [{ content: entry.info.title, id: entry.path }],
-                            contents: [
-                                {
-                                    content: entry.info.description ?? entry.info.title,
-                                    heading: entry.info.title,
-                                },
-                            ],
+                            headings: [],
+                            contents: [{ content: entry.info.description ?? entry.info.title, heading: entry.info.title }],
                         },
                         toc: [],
                     } satisfies PSJPageData,
@@ -265,10 +263,13 @@ export async function psjSource(
             // Emit meta.json per locale for dir parser
             for (const locale of emitLocales) {
                 const localeId = locale.id;
-                const metaPath =
+                const rawMetaPath =
                     i18nParser === 'dir' && localeId
-                        ? path.join(baseDir, localeId, parent?.path ?? '', 'meta.json')
-                        : path.join(baseDir, parent?.path ?? '', 'meta.json');
+                        ? path.join(localeId, parent?.path ?? '', 'meta.json')
+                        : path.join(parent?.path ?? '', 'meta.json');
+                const metaPath = baseDir
+                    ? path.join(baseDir, rawMetaPath)
+                    : rawMetaPath;
 
                 files.push({
                     type: 'meta',
@@ -286,9 +287,4 @@ export async function psjSource(
     }
 
     return { files };
-}
-
-/** @deprecated use psjPlugin() */
-export function transformerPsj(): PageTreeTransformer {
-    return psjPlugin().transformPageTree!;
 }
