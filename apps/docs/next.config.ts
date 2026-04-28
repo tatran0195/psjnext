@@ -9,11 +9,13 @@ const withAnalyzer = createBundleAnalyzer({
 
 const config: NextConfig = {
     reactStrictMode: true,
+
     logging: {
         fetches: {
             fullUrl: true,
         },
     },
+
     serverExternalPackages: [
         'ts-morph',
         'typescript',
@@ -22,6 +24,7 @@ const config: NextConfig = {
         'shiki',
         '@takumi-rs/image-response',
     ],
+
     images: {
         remotePatterns: [
             {
@@ -30,6 +33,22 @@ const config: NextConfig = {
                 port: '',
             },
         ],
+    },
+
+    async redirects() {
+        return [
+            {
+                source: '/:lang/docs',
+                destination: '/:lang',
+                permanent: true,
+            },
+
+            {
+                source: '/:lang/docs/:path*',
+                destination: '/:lang/:path*',
+                permanent: true,
+            },
+        ];
     },
 };
 
