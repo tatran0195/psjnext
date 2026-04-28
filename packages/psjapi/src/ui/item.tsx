@@ -124,11 +124,10 @@ function InfoTag({ label, value }: { label: string; value: string }) {
 }
 
 // ─── Enum chips ───────────────────────────────────────────────────────────────
-// Renders each enum value as an individual chip: `id — label`
 
 function EnumChips({ values }: { values: EnumValue[] }) {
     return (
-        <div className="not-prose mt-2">
+        <div className="not-prose mt-2.5">
             <p className="text-[0.65rem] font-semibold uppercase tracking-wider text-fd-muted-foreground mb-1.5">
                 Allowed values
             </p>
@@ -136,11 +135,11 @@ function EnumChips({ values }: { values: EnumValue[] }) {
                 {values.map((ev) => (
                     <span
                         key={String(ev.id)}
-                        className="inline-flex items-center gap-1 rounded-md border border-fd-border bg-fd-secondary/50 px-2 py-0.5 font-mono text-[0.7rem] text-fd-foreground"
+                        className="inline-flex items-center gap-1.5 rounded-md border border-fd-border bg-fd-secondary/50 px-2 py-0.5 font-mono text-[0.75rem] text-fd-foreground"
                         title={ev.description}
                     >
                         <span className="text-fd-primary font-bold">{ev.id}</span>
-                        <span className="text-fd-muted-foreground">—</span>
+                        <span className="text-fd-muted-foreground/50">—</span>
                         <span className="text-fd-foreground/80">{ev.label}</span>
                     </span>
                 ))}
@@ -150,8 +149,6 @@ function EnumChips({ values }: { values: EnumValue[] }) {
 }
 
 // ─── Property — Stripe-style param row ────────────────────────────────────────
-// Used inside the bordered ParamsPanel container — no outer border needed,
-// dividers are handled by the container's divide-y.
 
 function Property({
     name,
@@ -159,7 +156,6 @@ function Property({
     required,
     deprecated,
     removed,
-    groupId,
     className,
     children,
 }: {
@@ -168,13 +164,11 @@ function Property({
     required?: boolean;
     deprecated?: boolean;
     removed?: boolean;
-    /** Which param group this property came from */
-    groupId?: string;
     className?: string;
     children?: ReactNode;
 }) {
     return (
-        <div className={cn('px-4 py-3 text-sm', removed && 'opacity-40', className)}>
+        <div className={cn('px-4 py-3.5 text-sm', removed && 'opacity-40', className)}>
             {/* name + type + badges row */}
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 not-prose">
                 <span
@@ -192,12 +186,6 @@ function Property({
                 </span>
 
                 {type && <span className="text-xs">{type}</span>}
-
-                {groupId && (
-                    <span className="text-[0.6rem] font-mono text-fd-muted-foreground/60 border border-fd-border/50 rounded px-1 py-px">
-                        {groupId}
-                    </span>
-                )}
 
                 {deprecated && !removed && (
                     <span className="ms-auto rounded-sm bg-amber-100 dark:bg-amber-900/30 px-1.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
@@ -253,12 +241,11 @@ function ParamProperty({
             required={param.required}
             deprecated={param.deprecated}
             removed={param.removed}
-            groupId={param._fromGroup}
         >
             {descriptionNode}
 
             {/* Inline meta tags */}
-            <div className="flex flex-wrap gap-2 mt-1.5 not-prose empty:hidden">
+            <div className="flex flex-wrap gap-2 mt-2 not-prose empty:hidden">
                 {param.default !== undefined && <InfoTag label="Default" value={param.default} />}
                 {param.deprecated_in && (
                     <InfoTag label="Deprecated in" value={param.deprecated_in} />
@@ -289,7 +276,7 @@ function ReturnsSection({
 
     if (returns.kind === 'typed') {
         return (
-            <div className="rounded-lg border border-fd-border overflow-hidden">
+            <div className="rounded-lg border border-fd-border bg-fd-card overflow-hidden">
                 <Property
                     name="return"
                     type={<TypeWithRefs type={returns.type ?? 'unknown'} resolveRef={resolveRef} />}
@@ -306,7 +293,7 @@ function ReturnsSection({
     // macro_code — each code value as its own row
     if (returns.kind === 'macro_code' && returns.codes && returns.codes.length > 0) {
         return (
-            <div className="rounded-lg border border-fd-border overflow-hidden divide-y divide-fd-border/60">
+            <div className="rounded-lg border border-fd-border bg-fd-card overflow-hidden divide-y divide-fd-border/50">
                 {returns.codes.map((code) => (
                     <Property
                         key={code.value}
@@ -335,20 +322,34 @@ function SeeAlsoSection({
 }) {
     if (refs.length === 0) return null;
     return (
-        <div className="not-prose flex flex-col gap-1.5">
+        <div className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-3">
             {refs.map((ref) => {
                 const href = resolveRef(ref.$ref);
                 const label = ref.label ?? ref.$ref.split('/').pop() ?? ref.$ref;
+                const domain = ref.$ref.split('/')[0];
                 return (
                     <a
                         key={ref.$ref}
                         href={href}
-                        className="inline-flex items-center gap-1.5 text-sm text-fd-primary underline-offset-2 hover:underline"
+                        className="group flex flex-col gap-1 rounded-lg border border-fd-border bg-fd-card p-4 hover:bg-fd-muted hover:border-fd-primary/50 transition-colors"
                     >
-                        <span className="text-fd-muted-foreground text-xs font-mono">
-                            {ref.$ref.split('/')[0]}
+                        <span className="text-xs font-mono text-fd-muted-foreground">{domain}</span>
+                        <span className="text-sm font-semibold text-fd-foreground group-hover:text-fd-primary transition-colors flex items-center gap-1.5">
+                            {label}
+                            <svg
+                                className="size-3.5 opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-4px] group-hover:translate-x-0 transition-transform"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M9 5l7 7-7 7"
+                                />
+                            </svg>
                         </span>
-                        {label}
                     </a>
                 );
             })}
@@ -359,55 +360,91 @@ function SeeAlsoSection({
 // ─── Syntax block ─────────────────────────────────────────────────────────────
 
 function SyntaxBlock({ syntaxNode }: { syntaxNode: ReactNode }) {
-    return <div className="prose-no-margin">{syntaxNode}</div>;
+    return <div className="prose-no-margin mb-6">{syntaxNode}</div>;
 }
 
-// ─── Item meta (domain badge + ribbon + namespace + deprecated) ───────────────
+// ─── Item meta (domain badge + ribbon + namespace + links) ────────────────────
 
 function ItemMeta({
     item,
     showDomainBadge,
     showRibbon,
+    resolveRef,
 }: {
     item: ResolvedItem;
     showDomainBadge: boolean;
     showRibbon: boolean;
+    resolveRef: (ref: string) => string;
 }) {
     return (
-        <div className="not-prose flex flex-wrap items-center gap-2">
-            {showDomainBadge && <DomainBadge domain={item.domain} />}
-            {item.namespace && (
-                <code className="text-fd-muted-foreground text-xs bg-fd-muted rounded px-1.5 py-0.5">
-                    {item.namespace}
-                </code>
-            )}
-            {showRibbon && item.ribbon && (
-                <span className="text-fd-muted-foreground text-xs">
-                    <span className="font-medium">Ribbon:</span> <code>{item.ribbon}</code>
-                </span>
-            )}
-            {item.version_introduced && (
-                <span className="text-fd-muted-foreground text-xs">
-                    Since <code>{item.version_introduced}</code>
-                </span>
-            )}
-            {item.deprecated && (
-                <span className="rounded-full border border-red-400/50 bg-red-50/50 dark:bg-red-900/10 px-2 py-0.5 text-xs text-red-700 dark:text-red-300 font-medium">
-                    Deprecated
-                </span>
+        <div className="not-prose flex flex-col gap-3">
+            {/* Badges Row */}
+            <div className="flex flex-wrap items-center gap-2">
+                {showDomainBadge && <DomainBadge domain={item.domain} />}
+
+                {item.namespace && (
+                    <code className="text-fd-muted-foreground text-xs font-semibold bg-fd-muted rounded-md px-2 py-0.5 border border-fd-border">
+                        {item.namespace}
+                    </code>
+                )}
+
+                {showRibbon && item.ribbon && (
+                    <span className="rounded-full border border-fd-border bg-fd-secondary px-2.5 py-0.5 text-[0.65rem] uppercase tracking-wider font-semibold text-fd-muted-foreground">
+                        {item.ribbon}
+                    </span>
+                )}
+
+                {item.version_introduced && (
+                    <span className="text-fd-muted-foreground text-xs ml-1">
+                        Added in <code>{item.version_introduced}</code>
+                    </span>
+                )}
+
+                {item.deprecated && (
+                    <span className="rounded-full border border-red-400/50 bg-red-50/50 dark:bg-red-900/10 px-2.5 py-0.5 text-[0.65rem] uppercase tracking-wider font-semibold text-red-700 dark:text-red-300">
+                        Deprecated
+                    </span>
+                )}
+            </div>
+
+            {/* Reference Links Row (Macro <-> Command) */}
+            {(item.macro_link || item.command_link) && (
+                <div className="flex flex-wrap items-center gap-2 text-xs border border-fd-border bg-fd-card rounded-md px-3 py-2 mt-1 shadow-sm w-fit">
+                    {item.macro_link && (
+                        <>
+                            <span className="text-fd-muted-foreground">Wraps macro:</span>
+                            <a
+                                href={resolveRef(`macro/${item.macro_link}`)}
+                                className="font-mono text-fd-primary hover:underline hover:text-fd-accent-foreground transition-colors"
+                            >
+                                {item.macro_link}
+                            </a>
+                        </>
+                    )}
+                    {item.command_link && (
+                        <>
+                            <span className="text-fd-muted-foreground">Wrapped by command:</span>
+                            <a
+                                href={resolveRef(`psj-command/${item.command_link}`)}
+                                className="font-mono text-fd-primary hover:underline hover:text-fd-accent-foreground transition-colors"
+                            >
+                                {item.command_link}
+                            </a>
+                        </>
+                    )}
+                </div>
             )}
         </div>
     );
 }
 
 // ─── Section heading helper ────────────────────────────────────────────────────
-// A subtle section divider that matches fumadocs heading style but adds a rule.
 
 function SectionDivider() {
-    return <div className="border-t border-fd-border/50 -mx-0 mb-4" />;
+    return <div className="border-t border-fd-border/60 -mx-0 mb-5" />;
 }
 
-// ─── Examples panel (fumadocs-aligned, theme-aware) ───────────────────────────
+// ─── Examples panel (fumadocs-aligned, native codeblocks) ─────────────────────
 
 function ExamplesPanel({
     examples,
@@ -428,19 +465,13 @@ function ExamplesPanel({
         const ex = examples[0];
         return (
             <div className="rounded-xl overflow-hidden border border-fd-border bg-fd-card shadow-sm">
-                {/* header bar */}
-                <div className="flex items-center justify-between gap-3 border-b border-fd-border bg-fd-secondary/50 px-4 py-2.5">
-                    <span className="text-xs font-medium text-fd-foreground truncate">
+                <div className="flex items-center justify-between gap-3 border-b border-fd-border bg-fd-secondary/30 px-4 py-2.5">
+                    <span className="text-xs font-semibold text-fd-foreground truncate">
                         {ex.title ?? 'Example'}
                     </span>
-                    {ex.language && (
-                        <span className="shrink-0 rounded-full border border-fd-border bg-fd-muted px-2 py-0.5 font-mono text-[0.6rem] uppercase tracking-wider text-fd-muted-foreground">
-                            {ex.language}
-                        </span>
-                    )}
                 </div>
-                {/* code block — stripped of extra margin */}
-                <div className="[&_.fd-codeblock]:my-0 [&_.fd-codeblock]:rounded-none [&_.fd-codeblock]:border-0 [&_.fd-codeblock]:shadow-none">
+                <div className="p-1">
+                    {/* Native Fumadocs CodeBlock rendering handles the copy button and rounded corners naturally here! */}
                     {renderedNodes[0]}
                 </div>
             </div>
@@ -448,16 +479,15 @@ function ExamplesPanel({
     }
 
     return (
-        <div className="rounded-xl overflow-hidden border border-fd-border bg-fd-card shadow-sm">
+        <div className="rounded-xl border border-fd-border bg-fd-card shadow-sm">
             <CodeBlockTabs groupId="psjapi_examples" defaultValue="0">
-                {/* tab bar */}
-                <div className="border-b border-fd-border bg-fd-secondary/50 px-3 pt-2">
+                <div className="border-b border-fd-border bg-fd-secondary/30 px-3 pt-2">
                     <CodeBlockTabsList className="gap-0 bg-transparent p-0">
                         {examples.map((ex, i) => (
                             <CodeBlockTabsTrigger
                                 key={i}
                                 value={String(i)}
-                                className="rounded-t-md rounded-b-none border-0 border-b-2 border-transparent px-3 py-2 text-xs font-medium text-fd-muted-foreground transition-colors data-[state=active]:border-fd-primary data-[state=active]:bg-transparent data-[state=active]:text-fd-foreground hover:text-fd-foreground"
+                                className="rounded-t-md rounded-b-none border-0 border-b-2 border-transparent px-3 py-2 text-xs font-semibold text-fd-muted-foreground transition-colors data-[state=active]:border-fd-primary data-[state=active]:bg-transparent data-[state=active]:text-fd-foreground hover:text-fd-foreground"
                             >
                                 {ex.title ?? `Example ${i + 1}`}
                             </CodeBlockTabsTrigger>
@@ -465,10 +495,8 @@ function ExamplesPanel({
                     </CodeBlockTabsList>
                 </div>
                 {examples.map((_ex, i) => (
-                    <CodeBlockTab key={i} value={String(i)}>
-                        <div className="[&_.fd-codeblock]:my-0 [&_.fd-codeblock]:rounded-none [&_.fd-codeblock]:border-0 [&_.fd-codeblock]:shadow-none">
-                            {renderedNodes[i]}
-                        </div>
+                    <CodeBlockTab key={i} value={String(i)} className="p-1">
+                        {renderedNodes[i]}
                     </CodeBlockTab>
                 ))}
             </CodeBlockTabs>
@@ -480,29 +508,25 @@ function ExamplesPanel({
 
 function DefaultItemLayout({ slots }: { slots: ItemLayoutSlots }) {
     return (
-        <div className="flex flex-col gap-x-8 gap-y-6 xl:flex-row xl:items-start">
+        <div className="flex flex-col gap-x-8 gap-y-6 lg:flex-row lg:items-start">
             {/* ── LEFT: documentation content ── */}
-            <div className="min-w-0 flex-1 flex flex-col gap-5">
-                {/* header + meta */}
-                <div className="flex flex-col gap-2">
+            <div className="min-w-0 flex-1 flex flex-col gap-6">
+                {/* Header Sequence */}
+                <div className="flex flex-col gap-4">
                     {slots.header}
                     {slots.meta}
                 </div>
 
+                {/* Pull Syntax up prominently under header! */}
+                {slots.syntax && <section className="mb-2">{slots.syntax}</section>}
+
                 {slots.description && (
-                    <div className="text-fd-muted-foreground leading-relaxed">
+                    <div className="text-fd-foreground/90 leading-relaxed text-sm lg:text-base">
                         {slots.description}
                     </div>
                 )}
 
                 {slots.callouts}
-
-                {slots.syntax && (
-                    <section>
-                        <SectionDivider />
-                        {slots.syntax}
-                    </section>
-                )}
 
                 {slots.params && (
                     <section>
@@ -527,7 +551,7 @@ function DefaultItemLayout({ slots }: { slots: ItemLayoutSlots }) {
             </div>
 
             {/* ── RIGHT: sticky examples panel ── */}
-            <div className="xl:sticky xl:top-[calc(var(--fd-docs-row-1,2rem)+4rem)] xl:w-[420px] xl:shrink-0">
+            <div className="lg:sticky lg:top-[calc(var(--fd-docs-row-1,2rem)+4rem)] lg:w-[420px] xl:w-[480px] lg:shrink-0 pt-2 lg:pt-0">
                 {slots.examplesPanel}
             </div>
         </div>
@@ -576,7 +600,7 @@ export async function PSJAPIItemRenderer({
     async function renderCodeBlock(lang: string, code: string): Promise<ReactNode> {
         if (options.renderCodeBlock) return await options.renderCodeBlock({ lang, code });
         return (
-            <CodeBlock className="my-0">
+            <CodeBlock>
                 <Pre>{code}</Pre>
             </CodeBlock>
         );
@@ -584,7 +608,7 @@ export async function PSJAPIItemRenderer({
 
     async function renderMarkdown(md: string): Promise<ReactNode> {
         if (options.renderMarkdown) return await options.renderMarkdown(md);
-        return <p className="text-sm text-fd-muted-foreground">{md}</p>;
+        return <div className="text-sm text-fd-muted-foreground">{md}</div>;
     }
 
     function renderHeading(
@@ -611,11 +635,34 @@ export async function PSJAPIItemRenderer({
         renderHeading,
     };
 
+    function generateSyntax(item: ResolvedItem): string {
+        if (item.syntax) return item.syntax;
+
+        const title = item.title.replace('()', '');
+
+        if (item.domain === 'macro') {
+            const args = [`"${title}"`];
+            item.params.forEach((p) => {
+                args.push(p.required ? `<${p.name}>` : `[${p.name}]`);
+            });
+            return `JPT.Exec(${args.join(', ')})`;
+        }
+
+        if (item.domain === 'psj-command') {
+            const args = item.params.map((p) => `${p.name}=<value>`);
+            return `${title}(${args.join(', ')})`;
+        }
+
+        return `${title}(...)`;
+    }
+
+    const autoSyntax = generateSyntax(item);
+
     // ── Build all async content in parallel ───────────────────────────────────
 
     const [descriptionNode, syntaxCodeNode, ...calloutNodes] = await Promise.all([
         item.description ? renderMarkdown(item.description) : Promise.resolve(null),
-        item.syntax ? renderCodeBlock(psjLanguage, item.syntax) : Promise.resolve(null),
+        autoSyntax ? renderCodeBlock(psjLanguage, autoSyntax) : Promise.resolve(null),
         ...item.callouts.map((c) => renderMarkdown(c.text)),
     ]);
 
@@ -636,7 +683,12 @@ export async function PSJAPIItemRenderer({
     const headerSlot = renderHeading(headingLevel, item.title, { id: item.id });
 
     const metaSlot = (
-        <ItemMeta item={item} showDomainBadge={showDomainBadge} showRibbon={showRibbon} />
+        <ItemMeta
+            item={item}
+            showDomainBadge={showDomainBadge}
+            showRibbon={showRibbon}
+            resolveRef={resolveRef}
+        />
     );
 
     const descriptionSlot = descriptionNode ? (
@@ -645,7 +697,7 @@ export async function PSJAPIItemRenderer({
 
     const calloutsSlot =
         item.callouts.length > 0 ? (
-            <>
+            <div className="flex flex-col gap-2">
                 {item.callouts.map((c, i) => {
                     const text = calloutNodes[i];
                     if (renderCallout)
@@ -656,20 +708,19 @@ export async function PSJAPIItemRenderer({
                         </CalloutBox>
                     );
                 })}
-            </>
+            </div>
         ) : null;
 
-    const syntaxSlot = syntaxCodeNode ? (
-        <>
-            {renderHeading(headingLevel + 1, 'Syntax', { id: `${item.id}-syntax` })}
-            <SyntaxBlock syntaxNode={syntaxCodeNode} />
-        </>
-    ) : null;
+    // Syntax is now elevated!
+    const syntaxSlot = syntaxCodeNode ? <SyntaxBlock syntaxNode={syntaxCodeNode} /> : null;
 
     const paramsSlot =
         item.params.length > 0 ? (
-            <>
-                {renderHeading(headingLevel + 1, 'Parameters', { id: `${item.id}-params` })}
+            <div className="flex flex-col gap-4">
+                {renderHeading(headingLevel + 1, 'Parameters', {
+                    id: `${item.id}-params`,
+                    className: 'mb-0',
+                })}
                 <ParamsPanel
                     entries={item.params.map((p, i) => ({
                         key: `${p.name}-${p.position ?? i}`,
@@ -686,26 +737,32 @@ export async function PSJAPIItemRenderer({
                         ),
                     }))}
                 />
-            </>
+            </div>
         ) : null;
 
     const returnsSlot = (
-        <>
-            {renderHeading(headingLevel + 1, 'Returns', { id: `${item.id}-returns` })}
+        <div className="flex flex-col gap-4">
+            {renderHeading(headingLevel + 1, 'Returns', {
+                id: `${item.id}-returns`,
+                className: 'mb-0',
+            })}
             {renderReturns ? (
                 renderReturns(item, ctx)
             ) : (
                 <ReturnsSection returns={item.returns} resolveRef={resolveRef} />
             )}
-        </>
+        </div>
     );
 
     const seeAlsoSlot =
         item.see_also.length > 0 ? (
-            <>
-                {renderHeading(headingLevel + 1, 'See Also', { id: `${item.id}-see-also` })}
+            <div className="flex flex-col gap-4">
+                {renderHeading(headingLevel + 1, 'See Also', {
+                    id: `${item.id}-see-also`,
+                    className: 'mb-0',
+                })}
                 <SeeAlsoSection refs={item.see_also} resolveRef={resolveRef} />
-            </>
+            </div>
         ) : null;
 
     const examplesPanelSlot = (

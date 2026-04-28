@@ -4,7 +4,7 @@ import { type ReactNode, useMemo, useState } from 'react';
 
 import type { ResolvedParam } from '../types';
 
-// ─── Params panel with search + deprecated/removed toggles ────────────────────
+// ─── Params panel with search + inline filters ───────────────────────────────
 
 export interface ParamEntry {
     key: string;
@@ -12,43 +12,52 @@ export interface ParamEntry {
     node: ReactNode;
 }
 
+type FilterType = 'all' | 'deprecated' | 'removed';
+
 export function ParamsPanel({ entries }: { entries: ParamEntry[] }) {
-    const hasDeprecated = entries.some((e) => e.param.deprecated && !e.param.removed);
-    const hasRemoved = entries.some((e) => e.param.removed);
+    const isDeprecated = (p: ResolvedParam) => p.deprecated || !!p.deprecated_in;
+    const isRemoved = (p: ResolvedParam) => p.removed || !!p.removed_in;
+
+    const hasDeprecated = entries.some((e) => isDeprecated(e.param) && !isRemoved(e.param));
+    const hasRemoved = entries.some((e) => isRemoved(e.param));
 
     const [search, setSearch] = useState('');
-    const [showDeprecated, setShowDeprecated] = useState(true);
-    const [showRemoved, setShowRemoved] = useState(false);
+    const [activeFilter, setActiveFilter] = useState<FilterType>('all');
+
+    const deprecatedCount = entries.filter(
+        (e) => isDeprecated(e.param) && !isRemoved(e.param),
+    ).length;
+    const removedCount = entries.filter((e) => isRemoved(e.param)).length;
+    // Total count for 'All' includes all valid (non-removed, non-deprecated) + deprecated params,
+    // or you can just show all non-removed params. Let's make 'all' show everything except removed.
+    const allCount = entries.filter((e) => !isRemoved(e.param)).length;
 
     const visible = useMemo(() => {
         const q = search.trim().toLowerCase();
         return entries.filter((e) => {
-            // deprecated/removed gates
-            if (e.param.removed && !showRemoved) return false;
-            if (e.param.deprecated && !e.param.removed && !showDeprecated) return false;
-            // search filter
+            // 1. Tag filters
+            if (activeFilter === 'all' && isRemoved(e.param)) return false;
+            if (activeFilter === 'deprecated' && (!isDeprecated(e.param) || isRemoved(e.param)))
+                return false;
+            if (activeFilter === 'removed' && !isRemoved(e.param)) return false;
+
+            // 2. Search filter
             if (q) {
                 const name = (e.param.display_name ?? e.param.name).toLowerCase();
                 return name.includes(q);
             }
             return true;
         });
-    }, [entries, search, showDeprecated, showRemoved]);
-
-    const total = entries.filter((e) => {
-        if (e.param.removed && !showRemoved) return false;
-        if (e.param.deprecated && !e.param.removed && !showDeprecated) return false;
-        return true;
-    }).length;
+    }, [entries, search, activeFilter]);
 
     return (
-        <div className="flex flex-col gap-2">
-            {/* ── Search row ──────────────────────────────────────────── */}
-            <div className="flex flex-wrap items-center gap-2 not-prose">
-                <div className="relative flex-1 min-w-[160px]">
-                    {/* magnifier icon */}
+        <div className="flex flex-col gap-3">
+            {/* ── Search & Filter row ──────────────────────────────────────────── */}
+            <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between not-prose">
+                {/* Search Input */}
+                <div className="relative flex-1 min-w-[200px] max-w-sm">
                     <svg
-                        className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-fd-muted-foreground"
+                        className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-fd-muted-foreground"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth={2}
@@ -61,73 +70,82 @@ export function ParamsPanel({ entries }: { entries: ParamEntry[] }) {
                     <input
                         type="search"
                         aria-label="Filter parameters"
-                        placeholder="Filter parameters…"
+                        placeholder="Search parameters..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="h-8 w-full rounded-md border border-fd-border bg-fd-card pl-8 pr-3 text-xs text-fd-foreground placeholder:text-fd-muted-foreground outline-none focus:ring-1 focus:ring-fd-ring focus:border-fd-ring transition-colors"
+                        className="h-9 w-full rounded-md border border-fd-border bg-fd-card pl-9 pr-3 text-sm text-fd-foreground placeholder:text-fd-muted-foreground outline-none focus:ring-1 focus:ring-fd-ring focus:border-fd-ring transition-colors"
                     />
                 </div>
 
-                {/* match count */}
-                {search.trim() && (
-                    <span className="text-xs text-fd-muted-foreground shrink-0 tabular-nums">
-                        {visible.length} / {total}
-                    </span>
-                )}
+                {/* Inline filter pills */}
+                {(hasDeprecated || hasRemoved) && (
+                    <div className="flex bg-fd-secondary/50 p-1 rounded-md border border-fd-border shrink-0 overflow-x-auto">
+                        <button
+                            type="button"
+                            onClick={() => setActiveFilter('all')}
+                            className={[
+                                'px-3 py-1 text-xs font-semibold rounded-sm transition-colors whitespace-nowrap',
+                                activeFilter === 'all'
+                                    ? 'bg-fd-background text-fd-foreground shadow-sm'
+                                    : 'text-fd-muted-foreground hover:text-fd-foreground',
+                            ].join(' ')}
+                        >
+                            All ({allCount})
+                        </button>
 
-                {/* deprecated toggle */}
-                {hasDeprecated && (
-                    <button
-                        type="button"
-                        onClick={() => setShowDeprecated((v) => !v)}
-                        className={[
-                            'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors shrink-0',
-                            showDeprecated
-                                ? 'border-amber-400/60 bg-amber-50/60 text-amber-700 dark:bg-amber-900/20 dark:text-amber-300'
-                                : 'border-fd-border bg-fd-card text-fd-muted-foreground hover:text-fd-foreground',
-                        ].join(' ')}
-                    >
-                        <span className="size-1.5 rounded-full bg-current opacity-70" />
-                        {showDeprecated ? 'Hide deprecated' : 'Show deprecated'}
-                    </button>
-                )}
+                        {hasDeprecated && (
+                            <button
+                                type="button"
+                                onClick={() => setActiveFilter('deprecated')}
+                                className={[
+                                    'px-3 py-1 text-xs font-semibold rounded-sm transition-colors whitespace-nowrap',
+                                    activeFilter === 'deprecated'
+                                        ? 'bg-amber-100 text-amber-900 shadow-sm dark:bg-amber-900/30 dark:text-amber-300'
+                                        : 'text-fd-muted-foreground hover:text-amber-600 dark:hover:text-amber-400',
+                                ].join(' ')}
+                            >
+                                Deprecated ({deprecatedCount})
+                            </button>
+                        )}
 
-                {/* removed toggle */}
-                {hasRemoved && (
-                    <button
-                        type="button"
-                        onClick={() => setShowRemoved((v) => !v)}
-                        className={[
-                            'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors shrink-0',
-                            showRemoved
-                                ? 'border-red-400/60 bg-red-50/60 text-red-700 dark:bg-red-900/20 dark:text-red-300'
-                                : 'border-fd-border bg-fd-card text-fd-muted-foreground hover:text-fd-foreground',
-                        ].join(' ')}
-                    >
-                        <span className="size-1.5 rounded-full bg-current opacity-70" />
-                        {showRemoved ? 'Hide removed' : 'Show removed'}
-                    </button>
+                        {hasRemoved && (
+                            <button
+                                type="button"
+                                onClick={() => setActiveFilter('removed')}
+                                className={[
+                                    'px-3 py-1 text-xs font-semibold rounded-sm transition-colors whitespace-nowrap',
+                                    activeFilter === 'removed'
+                                        ? 'bg-red-100 text-red-900 shadow-sm dark:bg-red-900/30 dark:text-red-300'
+                                        : 'text-fd-muted-foreground hover:text-red-600 dark:hover:text-red-400',
+                                ].join(' ')}
+                            >
+                                Removed ({removedCount})
+                            </button>
+                        )}
+                    </div>
                 )}
             </div>
 
             {/* ── Param list ──────────────────────────────────────────── */}
             {visible.length === 0 ? (
-                <p className="text-sm text-fd-muted-foreground italic py-3 text-center">
-                    {search.trim()
-                        ? `No parameters match "${search.trim()}".`
-                        : 'No parameters available for this version.'}
-                </p>
+                <div className="rounded-lg border border-fd-border bg-fd-card/50 py-12 px-4 text-center">
+                    <p className="text-sm text-fd-muted-foreground">
+                        {search.trim()
+                            ? `No '${activeFilter}' parameters match "${search.trim()}".`
+                            : `No parameters found for filter: ${activeFilter}.`}
+                    </p>
+                </div>
             ) : (
-                <div className="flex flex-col divide-y divide-fd-border/60 rounded-lg border border-fd-border overflow-hidden">
+                <div className="flex flex-col divide-y divide-fd-border/50 rounded-lg border border-fd-border overflow-hidden bg-fd-card">
                     {visible.map((e) => (
                         <div
                             key={e.key}
                             className={[
-                                'transition-opacity',
+                                'transition-opacity duration-200',
                                 e.param.removed
-                                    ? 'opacity-40'
+                                    ? 'opacity-50 grayscale-[50%]'
                                     : e.param.deprecated
-                                      ? 'opacity-70'
+                                      ? 'bg-amber-50/20 dark:bg-amber-900/5'
                                       : '',
                             ].join(' ')}
                         >
