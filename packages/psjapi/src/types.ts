@@ -253,6 +253,8 @@ export interface ResolvedParam {
     deprecated?: boolean;
     deprecated_in?: string;
     removed_in?: string;
+    /** true when removed_in <= current viewed version (set by resolveItem) */
+    removed?: boolean;
     inferred?: boolean;
     /** group id this param came from, if any */
     _fromGroup?: string;

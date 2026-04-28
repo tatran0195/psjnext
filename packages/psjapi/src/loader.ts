@@ -28,7 +28,7 @@ import type {
     VersionDelta,
 } from './types';
 
-type ParamWithGroup = Param & { _fromGroup?: string }
+type ParamWithGroup = Param & { _fromGroup?: string };
 
 // ─── Internal cache ───────────────────────────────────────────────────────────
 
@@ -183,10 +183,14 @@ function expandParams(
         // insert_after + insert
         if (entry.insert_after && entry.insert && entry.insert.length > 0) {
             const idx = groupParams.findIndex((p) => p.name === entry.insert_after);
+            const inserted = entry.insert.map((p) => ({
+                ...p,
+                _fromGroup: entry.$group,
+            }));
             if (idx !== -1) {
-                groupParams.splice(idx + 1, 0, ...entry.insert);
+                groupParams.splice(idx + 1, 0, ...inserted);
             } else {
-                groupParams.push(...entry.insert);
+                groupParams.push(...inserted);
             }
         }
 
@@ -399,7 +403,7 @@ export function resolveItem(
 
         // Translate params that came from groups
         const groupIds = new Set(
-            params.map((p) => (p as ParamWithGroup)._fromGroup).filter((p) => p !== undefined),
+            params.map((p) => (p as ParamWithGroup)._fromGroup).filter(p=>p!==undefined),
         );
         for (const groupId of groupIds) {
             const groupSidecarKey = `${groupId}.${locale}`;
@@ -445,6 +449,29 @@ export function resolveItem(
         } as ResolvedParam;
     });
 
+    // 6. Apply version-aware deprecated_in / removed_in
+    //    Build a version-order index: lower index = older version.
+    const versionOrder = new Map<string, number>(
+        manifest.versions.map((v, i) => [v.id, i] as [string, number]),
+    );
+    const targetIdx = versionOrder.get(version) ?? manifest.versions.length - 1;
+
+    const versionedParams = resolvedParams.map((p) => {
+        let result = { ...p };
+        // deprecated_in overrides the static deprecated flag:
+        // mark as deprecated ONLY at or past deprecated_in version, clear it before.
+        if (result.deprecated_in) {
+            const depIdx = versionOrder.get(result.deprecated_in) ?? Infinity;
+            result = { ...result, deprecated: depIdx <= targetIdx };
+        }
+        // Similarly for removed_in
+        if (result.removed_in) {
+            const remIdx = versionOrder.get(result.removed_in) ?? Infinity;
+            result = { ...result, removed: remIdx <= targetIdx };
+        }
+        return result;
+    });
+
     return {
         id: item.id,
         title: item.title,
@@ -458,7 +485,7 @@ export function resolveItem(
         command_link: item.command_link,
         syntax: item.syntax,
         callouts,
-        params: resolvedParams,
+        params: versionedParams,
         returns,
         examples,
         see_also: item.see_also ?? [],

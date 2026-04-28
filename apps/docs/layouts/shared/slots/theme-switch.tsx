@@ -1,9 +1,9 @@
 'use client';
 import { type ComponentProps, useEffect, useState } from 'react';
 
+import { useTheme } from '@teispace/next-themes';
 import { cva } from 'class-variance-authority';
 import { Airplay, Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
 
 import { cn } from '@/lib/cn';
 

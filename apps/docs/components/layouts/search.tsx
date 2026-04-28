@@ -17,7 +17,6 @@ import {
     type SharedProps,
 } from 'fumadocs-ui/components/dialog/search';
 import { useI18n } from 'fumadocs-ui/contexts/i18n';
-import { useTreeContext } from 'fumadocs-ui/contexts/tree';
 import { ArrowRight } from 'lucide-react';
 
 import { ListMenu } from '@/components/ui/list-menu';
@@ -67,7 +66,7 @@ export default function CustomSearchDialog(props: SharedProps) {
         tag,
         locale,
     });
-    const { full } = useTreeContext();
+    // const { full } = useTreeContext();
     const router = useRouter();
     const throttledSearch = useThrottledValue(search, 100);
 
@@ -83,9 +82,9 @@ export default function CustomSearchDialog(props: SharedProps) {
             }
         }
 
-        for (const item of full.children) onNode(item);
+        // for (const item of full.children) onNode(item);
         return map;
-    }, [full]);
+    }, []);
 
     const pageTreeAction = useMemo<SearchItemType | undefined>(() => {
         if (search.length === 0) return;

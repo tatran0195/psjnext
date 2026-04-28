@@ -4,7 +4,7 @@
 @import 'fumadocs-twoslash/twoslash.css';
 @import 'fumadocs-openapi/css/preset.css';
 @plugin 'tailwindcss-animate';
-@import 'psjapi/css/preset.css';
+@source "../../packages/psjapi/src";
 
 @import './fumadocs.css';
 

@@ -6,62 +6,62 @@ group: ADVC
 namespace: Analysis.ADVC.MakeProcess
 ribbon: Analysis > ADVC > Make Process > Dynamic
 description: >
-    Create an ADVC Structure Dynamic process. Extends the static process
-    configuration with dynamic time-integration parameters. Use this for
-    transient structural analyses where inertial effects matter.
-version_introduced: '5.0.0'
+  Create an ADVC Structure Dynamic process. Extends the static process
+  configuration with dynamic time-integration parameters. Use this for
+  transient structural analyses where inertial effects matter.
+version_introduced: '5.0.1'
 macro_link: AdvcDynamicProcess
 
 params:
-    - $group: advc-process-struct
-      insert_after: advcAutoIncrement
-      insert:
-          - name: bDynamic
-            type: Boolean
-            required: false
-            default: 'False'
-            description: Enable dynamic parameter settings.
-          - name: advcDynamic
-            type: '$ref:data-type/JPT_ADVC_DYNAMIC'
-            required: false
-            default: 'JPT_ADVC_DYNAMIC()'
-            description: Dynamic parameters. Active when bDynamic=True.
+  - $group: advc-process-struct
+    insert_after: advcAutoIncrement
+    insert:
+      - name: bDynamic
+        type: Boolean
+        required: false
+        default: 'False'
+        description: Enable dynamic parameter settings.
+      - name: advcDynamic
+        type: '$ref:data-type/JPT_ADVC_DYNAMIC'
+        required: false
+        default: 'JPT_ADVC_DYNAMIC()'
+        description: Dynamic parameters. Active when bDynamic=True.
 
 returns:
-    kind: typed
-    type: Cursor
-    description: Cursor pointing to the created or modified ADVC Dynamic process.
+  kind: typed
+  type: Cursor
+  description: Cursor pointing to the created or modified ADVC Dynamic process.
 
 examples:
-    - title: Create a dynamic process with default settings
-      language: python
-      code: |
-          cursor = Analysis.ADVC.MakeProcess.Dynamic(
-              strName="DynamicAnalysis_01",
-          )
+  - title: Create a dynamic process with default settings
+    language: python
+    code: |
+      cursor = Analysis.ADVC.MakeProcess.Dynamic(
+          strName="DynamicAnalysis_01",
+      )
 
-    - title: Enable dynamic integration parameters
-      language: python
-      code: |
-          from jupiter import JPT_ADVC_DYNAMIC, JPT_ADVC_STRUCT_TIME_STEP
+  - title: Enable dynamic integration parameters
+    language: python
+    code: |
+      from jupiter import JPT_ADVC_DYNAMIC, JPT_ADVC_STRUCT_TIME_STEP
 
-          time_step = JPT_ADVC_STRUCT_TIME_STEP()
-          time_step.fixed_or_auto = 1   # Fixed
-          time_step.num_of_inc    = 100
-          time_step.max_time      = 10.0
+      time_step = JPT_ADVC_STRUCT_TIME_STEP()
+      time_step.fixed_or_auto = 1   # Fixed
+      time_step.num_of_inc    = 100
+      time_step.max_time      = 10.0
 
-          dyn = JPT_ADVC_DYNAMIC()
-          dyn.method = 1   # Newmark-beta
+      dyn = JPT_ADVC_DYNAMIC()
+      dyn.method = 1   # Newmark-beta
 
-          cursor = Analysis.ADVC.MakeProcess.Dynamic(
-              strName="DynamicAnalysis_01",
-              advcStructTimeStep=time_step,
-              bDynamic=True,
-              advcDynamic=dyn,
-          )
+      cursor = Analysis.ADVC.MakeProcess.Dynamic(
+          strName="DynamicAnalysis_01",
+          advcStructTimeStep=time_step,
+          bDynamic=True,
+          advcDynamic=dyn,
+      )
 
 see_also:
-    - $ref: psj-command/Analysis-ADVC-MakeProcess-Static
-      label: Analysis.ADVC.MakeProcess.Static()
-    - $ref: macro/AdvcStaticProcess
-      label: AdvcStaticProcess() macro
+  - $ref: psj-command/Analysis-ADVC-MakeProcess-Static
+    label: Analysis.ADVC.MakeProcess.Static()
+  - $ref: macro/AdvcStaticProcess
+    label: AdvcStaticProcess() macro

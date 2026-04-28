@@ -3,35 +3,35 @@ locale: ja
 id: advc-process-struct
 
 params:
-    iGeomNonlinear:
-        description: 幾何非線形オプション。
-        enum_values:
-            0: なし
-            1: トータルラグランジュ法
-            2: 更新ラグランジュ法
-            3: 線形
-            4: 非線形
+  iGeomNonlinear:
+    description: 幾何非線形オプション。
+    enum_values:
+      0: なし
+      1: トータルラグランジュ法
+      2: 更新ラグランジュ法
+      3: 線形
+      4: 非線形
 
-    advcStructTimeStep:
-        description: タイムステップおよび出力タイミング定義の設定。
+  advcStructTimeStep:
+    description: タイムステップおよび出力タイミング定義の設定。
 
-    bConvergence:
-        description: 収束パラメータ設定の有効/無効。
+  bConvergence:
+    description: 収束パラメータ設定の有効/無効。
 
-    advcConvergence:
-        description: 収束パラメータの設定。bConvergence=Trueの場合に有効。
+  advcConvergence:
+    description: 収束パラメータの設定。bConvergence=Trueの場合に有効。
 
-    bContact:
-        description: コンタクトイテレータパラメータ設定の有効/無効。
+  bContact:
+    description: コンタクトイテレータパラメータ設定の有効/無効。
 
-    advcContactIter:
-        description: コンタクトイテレータパラメータの設定。bContact=Trueの場合に有効。
+  advcContactIter:
+    description: コンタクトイテレータパラメータの設定。bContact=Trueの場合に有効。
 
-    bAutoIncrement:
-        description: 自動インクリメントパラメータ設定の有効/無効。
+  bAutoIncrement:
+    description: 自動インクリメントパラメータ設定の有効/無効。
 
-    advcAutoIncrement:
-        description: 自動インクリメントパラメータの設定。bAutoIncrement=Trueの場合に有効。
+  advcAutoIncrement:
+    description: 自動インクリメントパラメータの設定。bAutoIncrement=Trueの場合に有効。
 
-    dStabilizationFactor:
-        description: 安定化係数。
+  dStabilizationFactor:
+    description: 安定化係数。

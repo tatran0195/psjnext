@@ -44,14 +44,13 @@ export const revalidate = false;
 // Always allow dynamic params so all routes resolve on-demand.
 export const dynamicParams = true;
 
-// In dev, skip pre-rendering all pages — compile on demand for speed.
-// In production, statically generate all pages as normal.
-const IS_PROD = process.env.NODE_ENV === 'production';
-
-export default async function Page(props: { params: Promise<{ slug?: string[]; lang: string }> }) {
+export default async function Page(props: {
+    params: Promise<{ slug?: string[]; lang: string }>;
+    searchParams: Promise<{ v?: string }>;
+}) {
     const params = await props.params;
     const page = source.getPage(params.slug, params.lang);
-
+   
     if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
 
     const { body: Mdx, toc, lastModified } = await page.data.load();
@@ -175,6 +174,5 @@ export async function generateMetadata(props: {
 }
 
 export function generateStaticParams() {
-    if (!IS_PROD) return [];
-    return source.generateParams('slug', 'locale');
+    return source.generateParams('slug', 'lang');
 }

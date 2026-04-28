@@ -3,19 +3,19 @@ locale: ja
 id: Analysis-ADVC-MakeProcess-Static
 
 description: >
-    ADVC構造スタティックプロセスを作成します。非線形静的構造解析ジョブを設定し、
-    モデルツリーに追加します。crEditで既存プロセスを変更することも可能です。
+  ADVC構造スタティックプロセスを作成します。非線形静的構造解析ジョブを設定し、
+  モデルツリーに追加します。crEditで既存プロセスを変更することも可能です。
 
 callouts:
-    - level: info
-      text: >
-          advc-process-structグループのすべてのパラメータが継承されます。
-          advc-process-baseの基本プロセスパラメータも含まれます。
+  - level: info
+    text: >
+      advc-process-structグループのすべてのパラメータが継承されます。
+      advc-process-baseの基本プロセスパラメータも含まれます。
 
 returns:
-    description: 作成または変更されたADVCスタティックプロセスのカーソル。
+  description: 作成または変更されたADVCスタティックプロセスのカーソル。
 
 examples:
-    - title: 基本的なスタティックプロセスの作成
-    - title: 非線形ジオメトリと収束パラメータの設定
-    - title: 既存プロセスの変更
+  - title: 基本的なスタティックプロセスの作成
+  - title: 非線形ジオメトリと収束パラメータの設定
+  - title: 既存プロセスの変更

@@ -2,63 +2,63 @@ psjapi: '1.0'
 kind: param_group
 id: advc-process-base
 description: >
-    Core parameters shared by all ADVC process commands.
+  Core parameters shared by all ADVC process commands.
 
 params:
-    - name: strName
-      type: String
-      required: true
-      description: Process name.
+  - name: strName
+    type: String
+    required: true
+    description: Process name.
 
-    - name: crEdit
-      type: Cursor
-      required: false
-      default: 'None'
-      description: Existing process to modify. None creates a new process.
+  - name: crEdit
+    type: Cursor
+    required: false
+    default: 'None'
+    description: Existing process to modify. None creates a new process.
 
-    - name: listLoadNode
-      type: 'List[$ref:data-type/JPT_ADVC_LOAD_NODE]'
-      required: false
-      default: '[]'
-      description: Nodes with assigned loads.
+  - name: listLoadNode
+    type: 'List[$ref:data-type/JPT_ADVC_LOAD_NODE]'
+    required: false
+    default: '[]'
+    description: Nodes with assigned loads.
 
-    - name: listLoadCaseNode
-      type: 'List[$ref:data-type/JPT_ADVC_LOAD_NODE]'
-      required: false
-      default: '[]'
-      description: Nodes with assigned load cases.
+  - name: listLoadCaseNode
+    type: 'List[$ref:data-type/JPT_ADVC_LOAD_NODE]'
+    required: false
+    default: '[]'
+    description: Nodes with assigned load cases.
 
-    - name: listLoadNodeContact
-      type: 'List[$ref:data-type/JPT_ADVC_LOAD_NODE]'
-      required: false
-      default: '[]'
-      description: Nodes with assigned contacts.
+  - name: listLoadNodeContact
+    type: 'List[$ref:data-type/JPT_ADVC_LOAD_NODE]'
+    required: false
+    default: '[]'
+    description: Nodes with assigned contacts.
 
-    - name: ilOutputParamList
-      type: List[Integer]
-      required: false
-      default: '[]'
-      description: Output request list (Displacement, Stress, Strain, …).
+  - name: ilOutputParamList
+    type: List[Integer]
+    required: false
+    default: '[]'
+    description: Output request list (Displacement, Stress, Strain, …).
 
-    - name: iRefType
-      type: Integer
-      required: false
-      default: '0'
-      description: Reference result type.
-      enum_values:
-          - id: 0
-            label: Temperature Load
-          - id: 1
-            label: Stress
+  - name: iRefType
+    type: Integer
+    required: false
+    default: '0'
+    description: Reference result type.
+    enum_values:
+      - id: 0
+        label: Temperature Load
+      - id: 1
+        label: Stress
 
-    - name: strRefPath
-      type: String
-      required: false
-      default: '""'
-      description: Path of reference result.
+  - name: strRefPath
+    type: String
+    required: false
+    default: '""'
+    description: Path of reference result.
 
-    - name: listAdvcRefStressResult
-      type: 'List[$ref:data-type/JPT_ADVC_REF_STRESS_RESULT]'
-      required: false
-      default: '[]'
-      description: Reference result data list.
+  - name: listAdvcRefStressResult
+    type: 'List[$ref:data-type/JPT_ADVC_REF_STRESS_RESULT]'
+    required: false
+    default: '[]'
+    description: Reference result data list.

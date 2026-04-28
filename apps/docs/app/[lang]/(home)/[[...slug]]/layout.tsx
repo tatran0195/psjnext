@@ -1,3 +1,5 @@
+import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
+
 import { TechnoStarLogo } from '@/components/icons/logo';
 import { LinkSidebar, LinkSidebarProvider } from '@/components/mdx/link-sidebar';
 import { DocsLayout } from '@/layouts/docs';
@@ -8,15 +10,17 @@ export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) 
     const tree = source.getPageTree(params.lang);
 
     return (
-        <LinkSidebarProvider>
-            <DocsLayout
-                tree={tree}
-                tabMode="navbar"
-                nav={{ mode: 'top', title: <TechnoStarLogo variant="inline" height={34} /> }}
-            >
-                {props.children}
-            </DocsLayout>
-            <LinkSidebar />
-        </LinkSidebarProvider>
+        <TreeContextProvider tree={tree}>
+            <LinkSidebarProvider>
+                <DocsLayout
+                    tree={tree}
+                    tabMode="navbar"
+                    nav={{ mode: 'top', title: <TechnoStarLogo variant="inline" height={34} /> }}
+                >
+                    {props.children}
+                </DocsLayout>
+                <LinkSidebar />
+            </LinkSidebarProvider>
+        </TreeContextProvider>
     );
 }

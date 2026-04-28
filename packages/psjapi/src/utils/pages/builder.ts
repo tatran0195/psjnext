@@ -69,8 +69,26 @@ function slugify(str: string): string {
         .replace(/^-|-$/g, '');
 }
 
+/**
+ * Convert an item id to a URL-safe kebab-case path segment.
+ *
+ * Handles three common id styles:
+ *   PascalCase      AdvcStaticProcess          → advc-static-process
+ *   Dot-delimited   Analysis.ADVC.MakeProcess  → analysis-advc-make-process
+ *   Hyphen-delimited Analysis-ADVC-MakeProcess → analysis-advc-make-process
+ */
+function idToSlug(id: string): string {
+    return id
+        .replace(/([a-z])([A-Z])/g, '$1-$2')   // camelCase → kebab
+        .replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2') // consecutive caps: ADVCStatic → ADVC-Static
+        .replace(/[._]+/g, '-')                 // dots / underscores → hyphen
+        .toLowerCase()
+        .replace(/--+/g, '-')
+        .replace(/^-|-$/g, '');
+}
+
 function defaultItemPath(item: ItemFile): string {
-    return `${item.domain}/${item.id.replace(/\./g, '-')}`;
+    return `${item.domain}/${idToSlug(item.id)}`;
 }
 
 // ─── fromSdk ──────────────────────────────────────────────────────────────────
@@ -114,7 +132,7 @@ export function fromSdk(
                     for (const item of items) {
                         const filePath = nameFn
                             ? nameFn(item)
-                            : `${domain}/${item.id.replace(/\./g, '-')}`;
+                            : `${domain}/${idToSlug(item.id)}`;
                         domainEntries.push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
                     }
                 }
@@ -140,7 +158,7 @@ export function fromSdk(
                 const groupEntries: OutputEntry[] = items.map((item) => {
                     const filePath = nameFn
                         ? nameFn(item)
-                        : `${slugify(group === '__ungrouped__' ? 'misc' : group)}/${item.id.replace(/\./g, '-')}`;
+                        : `${slugify(group === '__ungrouped__' ? 'misc' : group)}/${idToSlug(item.id)}`;
                     return makeItemOutput(schemaId, item, `${filePath}.mdx`);
                 });
                 const groupLabel = group === '__ungrouped__' ? 'Miscellaneous' : group;

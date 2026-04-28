@@ -1,7 +1,6 @@
+import { psjServer } from '@/lib/psj-server';
 import { createPSJAPIPage } from 'psjapi/ui';
 
-import { psjapi } from '@/lib/psjapi';
-
-export const APIPage = createPSJAPIPage(psjapi, {
-    shikiOptions: { themes: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' } },
+export const APIPage = createPSJAPIPage(psjServer, {
+    resolveRef: (ref, locale) => `/${locale}/sdk/${ref.toLowerCase().replace(/\./g, '-')}`,
 });

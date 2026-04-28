@@ -48,6 +48,8 @@ params:
             label: Total Lagrange
           - id: 2
             label: Updated Lagrange
+      deprecated: true
+      deprecated_in: "5.0.1"
 
     - position: 3
       name: fixed_or_auto
@@ -59,6 +61,7 @@ params:
             label: Auto
           - id: 1
             label: Fixed
+      removed_in: "5.1.0"
 
     - position: 4
       name: num_of_inc

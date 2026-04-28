@@ -1,6 +1,0 @@
-# Title:   Properties.ElemRelatedInfo.Bar()
-# Desc:    Set Bar Parameter
-# Version: 5.0.1
-# Docs:    /docs/cli/5.0.1/psj-command/properties/Properties.ElemRelatedInfo.Bar
-# ---
-Properties.ElemRelatedInfo.Bar(listEribeamEndProp=[], listEribeamOriVecProp=[], listEribeamOriNodeidProp=[], listEribeamOffsetVecA=[], listEribeamOffsetVecB=[], listEribeamPinAProp=[], listEribeamPinBProp=[], listEribeamWarpProp=[])
