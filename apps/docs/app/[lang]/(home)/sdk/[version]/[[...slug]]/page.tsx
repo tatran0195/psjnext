@@ -18,10 +18,10 @@
  */
 
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 
 import { createPSJAPIPage } from 'psjapi/ui';
 
+import { NotFound } from '@/components/layouts/not-found';
 import { psjServer } from '@/lib/psj-server';
 import { psjDocs } from '@/lib/psj-source';
 
@@ -82,11 +82,11 @@ export default async function DocsPage({
     const fullSlug = [version, ...(slug ?? [])];
 
     const page = psjDocs.getPage(fullSlug, lang);
-    if (!page) notFound();
+    if (!page) return <NotFound getSuggestions={async () => []} />;
 
     // Version and locale are baked into this page's getItem() — call with no args
     const item = await page.data.getItem();
-    if (!item) notFound();
+    if (!item) return <NotFound getSuggestions={async () => []} />;
 
     return (
         <div className="container py-12 lg:py-16">
