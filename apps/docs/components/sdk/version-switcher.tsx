@@ -4,17 +4,25 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
 import { Check, ChevronsUpDown } from 'lucide-react';
-import { switchVersion } from 'psjapi/versions';
+import { type SdkVersion } from 'psjapi';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/cn';
-
-import type { SdkVersion } from 'psjapi';
 
 export interface VersionSwitcherProps {
     versions: SdkVersion[];
     /** Extra class applied to the trigger button. */
     className?: string;
+}
+
+function switchVersion(currentPath: string | null | undefined, newVersionId: string): string {
+    if (!currentPath) return '';
+    const parts = currentPath.split('/');
+    if (parts.length >= 4 && parts[2] === 'sdk') {
+        parts[3] = newVersionId;
+        return parts.join('/');
+    }
+    return currentPath;
 }
 
 export function VersionSwitcher({ versions, className }: VersionSwitcherProps) {

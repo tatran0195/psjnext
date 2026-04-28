@@ -33,16 +33,6 @@ export interface SdkVersions {
     ids: string[];
     /** Find a version by id. Returns `undefined` if not found. */
     find(id: string): SdkVersion | undefined;
-    /**
-     * Rewrite the version segment in a URL path.
-     *
-     * Expects path shape: `/[lang]/sdk/[version]/[...slug]`
-     *
-     * @example
-     * versions.switch('/en/sdk/5.0.1/macro/foo', '5.1.0')
-     * // → '/en/sdk/5.1.0/macro/foo'
-     */
-    switch(currentPath: string, newVersionId: string): string;
 }
 
 // ─── Root manifest ───────────────────────────────────────────────────────────

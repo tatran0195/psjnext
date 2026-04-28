@@ -21,29 +21,5 @@ export function buildSdkVersions(manifest: SdkManifest): SdkVersions {
         current,
         ids,
         find: (id) => all.find((v) => v.id === id),
-        switch: (currentPath, newVersionId) => switchVersion(currentPath, newVersionId),
     };
-}
-
-// ─── Standalone URL helper ────────────────────────────────────────────────────
-
-/**
- * Rewrite the version segment inside a path of the shape:
- *   /[lang]/sdk/[version]/[...slug]
- *
- * Also available as `versions.switch(path, newId)` on a {@link SdkVersions}
- * object, which avoids importing this directly.
- *
- * @example
- * switchVersion('/en/sdk/5.0.1/macro/foo', '5.1.0')
- *   // → '/en/sdk/5.1.0/macro/foo'
- */
-export function switchVersion(currentPath: string, newVersionId: string): string {
-    const parts = currentPath.split('/');
-    // ['', lang, 'sdk', version, ...slug]
-    if (parts.length >= 4 && parts[2] === 'sdk') {
-        parts[3] = newVersionId;
-        return parts.join('/');
-    }
-    return currentPath;
 }
