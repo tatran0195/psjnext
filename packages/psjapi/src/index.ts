@@ -31,7 +31,7 @@ export type {
     SdkManifest,
     SeeAlsoRef,
     VersionDelta,
-    VersionEntry
+    VersionEntry,
 } from './types';
 
 // Server factory
@@ -53,7 +53,7 @@ export type {
     ItemRef,
     OutputEntry,
     PageOutput,
-    PsjPagesBuilderConfig
+    PsjPagesBuilderConfig,
 } from './utils/pages/builder';
 
 // MDX text generation
@@ -66,5 +66,3 @@ export type { PsjAPITranslations } from './i18n';
 
 // Version utilities — SdkVersions value object, URL helper, server convenience
 export type { SdkVersion, SdkVersions } from './types';
-export { switchVersion } from './versions';
-
