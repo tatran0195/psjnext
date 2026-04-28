@@ -26,6 +26,7 @@
         "./i18n": "./dist/i18n.js",
         "./server": "./dist/server/index.js",
         "./ui": "./dist/ui/index.js",
+        "./versions": "./dist/versions.js",
         "./package.json": "./package.json",
         "./css/*": "./css/*"
     },

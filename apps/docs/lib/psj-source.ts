@@ -15,3 +15,6 @@ export const psjDocs = loader({
     baseUrl: '/sdk',
     i18n,
 });
+
+/** Fetch SDK versions from the server singleton — no manifest wrangling needed. */
+export const getSdkVersions = () => psjServer.getVersions();

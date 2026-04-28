@@ -79,9 +79,9 @@ function slugify(str: string): string {
  */
 function idToSlug(id: string): string {
     return id
-        .replace(/([a-z])([A-Z])/g, '$1-$2')   // camelCase → kebab
+        .replace(/([a-z])([A-Z])/g, '$1-$2') // camelCase → kebab
         .replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2') // consecutive caps: ADVCStatic → ADVC-Static
-        .replace(/[._]+/g, '-')                 // dots / underscores → hyphen
+        .replace(/[._]+/g, '-') // dots / underscores → hyphen
         .toLowerCase()
         .replace(/--+/g, '-')
         .replace(/^-|-$/g, '');
@@ -130,9 +130,7 @@ export function fromSdk(
                 const domainEntries: OutputEntry[] = [];
                 for (const [, items] of groupMap) {
                     for (const item of items) {
-                        const filePath = nameFn
-                            ? nameFn(item)
-                            : `${domain}/${idToSlug(item.id)}`;
+                        const filePath = nameFn ? nameFn(item) : `${domain}/${idToSlug(item.id)}`;
                         domainEntries.push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
                     }
                 }

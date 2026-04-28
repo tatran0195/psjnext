@@ -50,7 +50,7 @@ export default async function Page(props: {
 }) {
     const params = await props.params;
     const page = source.getPage(params.slug, params.lang);
-   
+
     if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
 
     const { body: Mdx, toc, lastModified } = await page.data.load();

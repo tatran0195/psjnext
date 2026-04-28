@@ -3,9 +3,9 @@
 import dynamic from 'next/dynamic';
 import type { ReactNode } from 'react';
 
-import { RootProvider } from '@/components/provider/next';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 
+import { RootProvider } from '@/components/provider/next';
 import { i18nUI } from '@/lib/i18n';
 
 const SearchDialog = dynamic(() => import('@/components/layouts/search'), {

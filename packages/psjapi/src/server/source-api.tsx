@@ -12,7 +12,13 @@ import type {
 import { fromServer } from '../utils/pages/builder';
 
 import type { StructuredData } from 'fumadocs-core/mdx-plugins';
-import type { LoaderPlugin, MetaData, PageData, StaticSource, VirtualFile } from 'fumadocs-core/source';
+import type {
+    LoaderPlugin,
+    MetaData,
+    PageData,
+    StaticSource,
+    VirtualFile,
+} from 'fumadocs-core/source';
 import type { TOCItemType } from 'fumadocs-core/toc';
 
 // ─── Augment PageData ─────────────────────────────────────────────────────────

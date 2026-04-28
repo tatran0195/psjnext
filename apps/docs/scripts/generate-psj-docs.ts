@@ -1,6 +1,7 @@
+import { generateFiles } from 'psjapi';
+
 // scripts/generate-psj-docs.ts
 import { psjServer } from '@/lib/psj-server';
-import { generateFiles } from 'psjapi';
 
 await generateFiles({
     input: psjServer,

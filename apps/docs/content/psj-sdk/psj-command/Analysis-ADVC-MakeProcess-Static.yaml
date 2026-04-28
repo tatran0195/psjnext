@@ -6,72 +6,72 @@ group: ADVC
 namespace: Analysis.ADVC.MakeProcess
 ribbon: Analysis > ADVC > Make Process > Static
 description: >
-  Create an ADVC Structure Static process. This command configures a
-  nonlinear static structural analysis job and adds it to the model tree.
-  It can create a new process or modify an existing one via crEdit.
+    Create an ADVC Structure Static process. This command configures a
+    nonlinear static structural analysis job and adds it to the model tree.
+    It can create a new process or modify an existing one via crEdit.
 version_introduced: '5.0.1'
 macro_link: AdvcStaticProcess
 
 callouts:
-  - level: info
-    text: >
-      All parameters from the advc-process-struct group are inherited,
-      including base process parameters from advc-process-base.
+    - level: info
+      text: >
+          All parameters from the advc-process-struct group are inherited,
+          including base process parameters from advc-process-base.
 
 params:
-  - $group: advc-process-struct
+    - $group: advc-process-struct
 
 returns:
-  kind: typed
-  type: Cursor
-  description: Cursor pointing to the created or modified ADVC Static process.
+    kind: typed
+    type: Cursor
+    description: Cursor pointing to the created or modified ADVC Static process.
 
 examples:
-  - title: Create a basic static process
-    language: python
-    code: |
-      # Create a new ADVC Static process with default settings
-      cursor = Analysis.ADVC.MakeProcess.Static(
-          strName="StaticAnalysis_01",
-      )
-      print(f"Created process: {cursor}")
+    - title: Create a basic static process
+      language: python
+      code: |
+          # Create a new ADVC Static process with default settings
+          cursor = Analysis.ADVC.MakeProcess.Static(
+              strName="StaticAnalysis_01",
+          )
+          print(f"Created process: {cursor}")
 
-  - title: Create with nonlinear geometry and convergence
-    language: python
-    code: |
-      from jupiter import JPT_ADVC_CONVERGENCE, JPT_ADVC_STRUCT_TIME_STEP
+    - title: Create with nonlinear geometry and convergence
+      language: python
+      code: |
+          from jupiter import JPT_ADVC_CONVERGENCE, JPT_ADVC_STRUCT_TIME_STEP
 
-      time_step = JPT_ADVC_STRUCT_TIME_STEP()
-      time_step.fixed_or_auto = 0   # Auto
-      time_step.num_of_inc    = 10
-      time_step.max_time      = 1.0
+          time_step = JPT_ADVC_STRUCT_TIME_STEP()
+          time_step.fixed_or_auto = 0   # Auto
+          time_step.num_of_inc    = 10
+          time_step.max_time      = 1.0
 
-      convergence = JPT_ADVC_CONVERGENCE()
-      convergence.disp_tol = 0.001
-      convergence.force_tol = 0.001
+          convergence = JPT_ADVC_CONVERGENCE()
+          convergence.disp_tol = 0.001
+          convergence.force_tol = 0.001
 
-      cursor = Analysis.ADVC.MakeProcess.Static(
-          strName="StaticNonlinear_01",
-          iGeomNonlinear=1,           # Total Lagrange
-          advcStructTimeStep=time_step,
-          bConvergence=True,
-          advcConvergence=convergence,
-      )
+          cursor = Analysis.ADVC.MakeProcess.Static(
+              strName="StaticNonlinear_01",
+              iGeomNonlinear=1,           # Total Lagrange
+              advcStructTimeStep=time_step,
+              bConvergence=True,
+              advcConvergence=convergence,
+          )
 
-  - title: Modify an existing process
-    language: python
-    code: |
-      # Fetch an existing process cursor from the model tree
-      existing = JPT.GetCursor("model://Processes/StaticAnalysis_01")
+    - title: Modify an existing process
+      language: python
+      code: |
+          # Fetch an existing process cursor from the model tree
+          existing = JPT.GetCursor("model://Processes/StaticAnalysis_01")
 
-      cursor = Analysis.ADVC.MakeProcess.Static(
-          strName="StaticAnalysis_01",
-          iGeomNonlinear=2,           # Updated Lagrange
-          crEdit=existing,
-      )
+          cursor = Analysis.ADVC.MakeProcess.Static(
+              strName="StaticAnalysis_01",
+              iGeomNonlinear=2,           # Updated Lagrange
+              crEdit=existing,
+          )
 
 see_also:
-  - $ref: macro/AdvcStaticProcess
-    label: AdvcStaticProcess() macro
-  - $ref: psj-command/Analysis-ADVC-MakeProcess-Dynamic
-    label: Analysis.ADVC.MakeProcess.Dynamic()
+    - $ref: macro/AdvcStaticProcess
+      label: AdvcStaticProcess() macro
+    - $ref: psj-command/Analysis-ADVC-MakeProcess-Dynamic
+      label: Analysis.ADVC.MakeProcess.Dynamic()

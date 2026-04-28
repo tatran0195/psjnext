@@ -6,6 +6,45 @@ export type ReturnKind = 'typed' | 'macro_code' | 'void';
 export type CalloutLevel = 'warn' | 'info' | 'danger';
 export type ExampleLanguage = 'psj' | 'python';
 
+// ─── SDK Version ────────────────────────────────────────────────────────────
+
+/** A single SDK version entry with a display label. */
+export interface SdkVersion {
+    /** Version identifier, e.g. '5.1.0' */
+    id: string;
+    /** Human-readable label, e.g. '5.1.0 (latest)' */
+    label: string;
+    /** True for the manifest's `current_version`. */
+    isCurrent: boolean;
+}
+
+/**
+ * Rich value object returned by {@link PSJAPIServer.getVersions}.
+ *
+ * Prefer this over the raw manifest when you need version info in
+ * components or route handlers — no manifest passing required.
+ */
+export interface SdkVersions {
+    /** Full ordered list (newest-first by manifest convention). */
+    all: SdkVersion[];
+    /** The version flagged as `current_version` in the manifest. */
+    current: SdkVersion;
+    /** Convenience shortcut — just the id strings. */
+    ids: string[];
+    /** Find a version by id. Returns `undefined` if not found. */
+    find(id: string): SdkVersion | undefined;
+    /**
+     * Rewrite the version segment in a URL path.
+     *
+     * Expects path shape: `/[lang]/sdk/[version]/[...slug]`
+     *
+     * @example
+     * versions.switch('/en/sdk/5.0.1/macro/foo', '5.1.0')
+     * // → '/en/sdk/5.1.0/macro/foo'
+     */
+    switch(currentPath: string, newVersionId: string): string;
+}
+
 // ─── Root manifest ───────────────────────────────────────────────────────────
 
 export interface SdkManifest {
@@ -309,6 +348,20 @@ export interface PSJAPIServer {
         version?: string,
         locale?: string,
     ) => Promise<ResolvedItem | undefined>;
+    /**
+     * Return a {@link SdkVersions} value object derived from the manifest.
+     *
+     * No need to fetch or pass the manifest yourself — the server reads it
+     * internally and exposes a rich API for version-related operations.
+     *
+     * @example
+     * const versions = await psjServer.getVersions();
+     * versions.all          // SdkVersion[]
+     * versions.current      // SdkVersion
+     * versions.find('5.0.1') // SdkVersion | undefined
+     * versions.switch(pathname, '5.1.0') // rewritten URL
+     */
+    getVersions(): Promise<SdkVersions>;
     readonly options: PSJAPIOptions;
 }
 

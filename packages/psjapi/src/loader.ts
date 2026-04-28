@@ -28,6 +28,8 @@ import type {
     VersionDelta,
 } from './types';
 
+import { buildSdkVersions } from './versions';
+
 type ParamWithGroup = Param & { _fromGroup?: string };
 
 // ─── Internal cache ───────────────────────────────────────────────────────────
@@ -403,7 +405,7 @@ export function resolveItem(
 
         // Translate params that came from groups
         const groupIds = new Set(
-            params.map((p) => (p as ParamWithGroup)._fromGroup).filter(p=>p!==undefined),
+            params.map((p) => (p as ParamWithGroup)._fromGroup).filter((p) => p !== undefined),
         );
         for (const groupId of groupIds) {
             const groupSidecarKey = `${groupId}.${locale}`;
@@ -531,6 +533,11 @@ export function createPSJAPI(options: PSJAPIOptions): PSJAPIServer {
             const resolvedLocale = locale ?? defaultLocale;
 
             return resolveItem(item, sdk, resolvedVersion, resolvedLocale);
+        },
+
+        async getVersions() {
+            const sdk = await getLoadedSdk();
+            return buildSdkVersions(sdk.manifest);
         },
     };
 }
