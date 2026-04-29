@@ -479,28 +479,29 @@ function ExamplesPanel({
     }
 
     return (
-        <div className="rounded-xl border border-fd-border bg-fd-card shadow-sm">
-            <CodeBlockTabs groupId="psjapi_examples" defaultValue="0">
-                <div className="border-b border-fd-border bg-fd-secondary/30 px-3 pt-2">
-                    <CodeBlockTabsList className="gap-0 bg-transparent p-0">
-                        {examples.map((ex, i) => (
-                            <CodeBlockTabsTrigger
-                                key={i}
-                                value={String(i)}
-                                className="rounded-t-md rounded-b-none border-0 border-b-2 border-transparent px-3 py-2 text-xs font-semibold text-fd-muted-foreground transition-colors data-[state=active]:border-fd-primary data-[state=active]:bg-transparent data-[state=active]:text-fd-foreground hover:text-fd-foreground"
-                            >
-                                {ex.title ?? `Example ${i + 1}`}
-                            </CodeBlockTabsTrigger>
-                        ))}
-                    </CodeBlockTabsList>
-                </div>
-                {examples.map((_ex, i) => (
-                    <CodeBlockTab key={i} value={String(i)} className="p-1">
-                        {renderedNodes[i]}
-                    </CodeBlockTab>
+        <CodeBlockTabs groupId="psjapi_examples" defaultValue="0">
+            <CodeBlockTabsList className="w-full">
+                {examples.map((ex, i) => (
+                    <CodeBlockTabsTrigger key={i} value={String(i)}>
+                        {ex.title ?? `Example ${i + 1}`}
+                    </CodeBlockTabsTrigger>
                 ))}
-            </CodeBlockTabs>
-        </div>
+
+                <div className="sticky right-0 z-10 ml-auto flex shrink-0 items-center bg-gradient-to-l from-fd-card via-fd-card/90 to-transparent pl-0 pr-0 py-1.5 self-stretch">
+                    <button className="flex items-center gap-1.5 rounded-full bg-fd-primary px-3 py-1.5 text-[11px] font-medium text-fd-primary-foreground shadow-lg transition-all hover:bg-fd-primary/90 active:scale-95 cursor-pointer">
+                        <svg className="size-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                        Try it
+                    </button>
+                </div>
+            </CodeBlockTabsList>
+            {examples.map((_ex, i) => (
+                <CodeBlockTab key={i} value={String(i)}>
+                    {renderedNodes[i]}
+                </CodeBlockTab>
+            ))}
+        </CodeBlockTabs>
     );
 }
 
@@ -508,7 +509,7 @@ function ExamplesPanel({
 
 function DefaultItemLayout({ slots }: { slots: ItemLayoutSlots }) {
     return (
-        <div className="flex flex-col gap-x-8 gap-y-6 lg:flex-row lg:items-start">
+        <div className="container mx-auto flex flex-col gap-x-8 gap-y-6 lg:flex-row lg:items-start py-12">
             {/* ── LEFT: documentation content ── */}
             <div className="min-w-0 flex-1 flex flex-col gap-6">
                 {/* Header Sequence */}
@@ -551,7 +552,7 @@ function DefaultItemLayout({ slots }: { slots: ItemLayoutSlots }) {
             </div>
 
             {/* ── RIGHT: sticky examples panel ── */}
-            <div className="lg:sticky lg:top-[calc(var(--fd-docs-row-1,2rem)+4rem)] lg:w-[420px] xl:w-[480px] lg:shrink-0 pt-2 lg:pt-0">
+            <div className="lg:sticky lg:top-[calc(var(--fd-docs-row-1,2rem)+3rem)] lg:w-[420px] xl:w-[480px] lg:shrink-0 pt-2 lg:pt-0">
                 {slots.examplesPanel}
             </div>
         </div>
@@ -636,7 +637,7 @@ export async function PSJAPIItemRenderer({
     };
 
     function generateSyntax(item: ResolvedItem): string {
-        if (item.syntax) return item.syntax;
+        if (item.syntax) return item.syntax.trim();
 
         const title = item.title.replace('()', '');
 

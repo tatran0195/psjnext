@@ -12,6 +12,7 @@
 @source inline("a");
 @source inline("absolute");
 @source inline("active");
+@source inline("active:scale-95");
 @source inline("activeFilter");
 @source inline("activeLocale");
 @source inline("activeVersion");
@@ -53,22 +54,21 @@
 @source inline("bg-fd-card");
 @source inline("bg-fd-card/50");
 @source inline("bg-fd-muted");
+@source inline("bg-fd-primary");
 @source inline("bg-fd-secondary");
 @source inline("bg-fd-secondary/30");
 @source inline("bg-fd-secondary/50");
 @source inline("bg-fd-secondary/60");
+@source inline("bg-gradient-to-l");
 @source inline("bg-orange-500/10");
 @source inline("bg-purple-500/10");
 @source inline("bg-red-100");
 @source inline("bg-red-50/50");
 @source inline("bg-red-50/60");
-@source inline("bg-transparent");
 @source inline("block");
 @source inline("boolean");
 @source inline("border");
-@source inline("border-0");
 @source inline("border-b");
-@source inline("border-b-2");
 @source inline("border-blue-400/40");
 @source inline("border-current");
 @source inline("border-emerald-400/40");
@@ -82,7 +82,6 @@
 @source inline("border-purple-400/40");
 @source inline("border-red-400/50");
 @source inline("border-t");
-@source inline("border-transparent");
 @source inline("boxes");
 @source inline("break-all");
 @source inline("builds");
@@ -113,6 +112,7 @@
 @source inline("component");
 @source inline("components");
 @source inline("const");
+@source inline("container");
 @source inline("containing");
 @source inline("content");
 @source inline("contents");
@@ -127,6 +127,7 @@
 @source inline("ctx");
 @source inline("currentColor");
 @source inline("current_version");
+@source inline("cursor-pointer");
 @source inline("custom");
 @source inline("cx");
 @source inline("cy");
@@ -151,9 +152,6 @@
 @source inline("dark:text-red-300");
 @source inline("dark:text-red-400");
 @source inline("data");
-@source inline("data-[state=active]:bg-transparent");
-@source inline("data-[state=active]:border-fd-primary");
-@source inline("data-[state=active]:text-fd-foreground");
 @source inline("declare");
 @source inline("default");
 @source inline("defaultColor");
@@ -229,6 +227,7 @@
 @source inline("folder");
 @source inline("folderStyle");
 @source inline("font-bold");
+@source inline("font-medium");
 @source inline("font-mono");
 @source inline("font-normal");
 @source inline("font-semibold");
@@ -236,6 +235,7 @@
 @source inline("format");
 @source inline("found");
 @source inline("from");
+@source inline("from-fd-card");
 @source inline("fromServer");
 @source inline("fumadocs-core/mdx-plugins");
 @source inline("fumadocs-core/source");
@@ -244,7 +244,6 @@
 @source inline("fumadocs-ui/mdx");
 @source inline("fumadocs:psjapi");
 @source inline("function");
-@source inline("gap-0");
 @source inline("gap-1");
 @source inline("gap-1.5");
 @source inline("gap-2");
@@ -287,6 +286,7 @@
 @source inline("here!");
 @source inline("highlightHast");
 @source inline("hover:bg-fd-muted");
+@source inline("hover:bg-fd-primary/90");
 @source inline("hover:border-fd-primary/50");
 @source inline("hover:text-amber-600");
 @source inline("hover:text-fd-accent-foreground");
@@ -316,6 +316,7 @@
 @source inline("isDeprecated");
 @source inline("isMacro");
 @source inline("isRemoved");
+@source inline("it");
 @source inline("italic");
 @source inline("item");
 @source inline("itemKey");
@@ -353,7 +354,7 @@
 @source inline("lg:shrink-0");
 @source inline("lg:sticky");
 @source inline("lg:text-base");
-@source inline("lg:top-[calc(var(--fd-docs-row-1,2rem)+4rem)]");
+@source inline("lg:top-[calc(var(--fd-docs-row-1,2rem)+3rem)]");
 @source inline("lg:w-[420px]");
 @source inline("light");
 @source inline("line-through");
@@ -391,6 +392,7 @@
 @source inline("min-w-0");
 @source inline("min-w-[200px]");
 @source inline("ml-1");
+@source inline("ml-auto");
 @source inline("module");
 @source inline("ms-0.5");
 @source inline("ms-auto");
@@ -399,6 +401,7 @@
 @source inline("mt-2");
 @source inline("mt-2.5");
 @source inline("multi-item");
+@source inline("mx-auto");
 @source inline("my-0");
 @source inline("my-3");
 @source inline("name");
@@ -442,7 +445,6 @@
 @source inline("overrideLocale");
 @source inline("overrideVersion");
 @source inline("own");
-@source inline("p-0");
 @source inline("p-1");
 @source inline("p-4");
 @source inline("page");
@@ -465,11 +467,13 @@
 @source inline("per");
 @source inline("per-locale");
 @source inline("pills");
+@source inline("pl-0");
 @source inline("pl-9");
 @source inline("placeholder");
 @source inline("placeholder:text-fd-muted-foreground");
 @source inline("pointer-events-none");
 @source inline("position");
+@source inline("pr-0");
 @source inline("pr-3");
 @source inline("pre");
 @source inline("prefix");
@@ -499,6 +503,7 @@
 @source inline("px-4");
 @source inline("py-0.5");
 @source inline("py-1");
+@source inline("py-1.5");
 @source inline("py-12");
 @source inline("py-2");
 @source inline("py-2.5");
@@ -542,14 +547,13 @@
 @source inline("ribbon");
 @source inline("ribbon/namespace");
 @source inline("right");
+@source inline("right-0");
 @source inline("round");
 @source inline("rounded");
-@source inline("rounded-b-none");
 @source inline("rounded-full");
 @source inline("rounded-lg");
 @source inline("rounded-md");
 @source inline("rounded-sm");
-@source inline("rounded-t-md");
 @source inline("rounded-xl");
 @source inline("route");
 @source inline("row");
@@ -565,11 +569,13 @@
 @source inline("seeAlso");
 @source inline("seeAlsoSlot");
 @source inline("see_also");
+@source inline("self-stretch");
 @source inline("separator");
 @source inline("server");
 @source inline("set");
 @source inline("setActiveFilter");
 @source inline("setSearch");
+@source inline("shadow-lg");
 @source inline("shadow-sm");
 @source inline("shiki");
 @source inline("shikiOptions");
@@ -580,6 +586,7 @@
 @source inline("side");
 @source inline("single");
 @source inline("singleton");
+@source inline("size-3");
 @source inline("size-3.5");
 @source inline("size-4");
 @source inline("skip");
@@ -612,6 +619,7 @@
 @source inline("text-[0.65rem]");
 @source inline("text-[0.75rem]");
 @source inline("text-[0.8rem]");
+@source inline("text-[11px]");
 @source inline("text-amber-700");
 @source inline("text-amber-900");
 @source inline("text-base");
@@ -627,6 +635,7 @@
 @source inline("text-fd-muted-foreground/50");
 @source inline("text-fd-muted-foreground/90");
 @source inline("text-fd-primary");
+@source inline("text-fd-primary-foreground");
 @source inline("text-nowrap");
 @source inline("text-orange-700");
 @source inline("text-purple-700");
@@ -645,12 +654,14 @@
 @source inline("this");
 @source inline("title");
 @source inline("to");
+@source inline("to-transparent");
 @source inline("toJsxRuntime");
 @source inline("toc");
 @source inline("top-1/2");
 @source inline("tracking-wide");
 @source inline("tracking-wider");
 @source inline("transformPageTree");
+@source inline("transition-all");
 @source inline("transition-colors");
 @source inline("transition-opacity");
 @source inline("transition-transform");
@@ -690,6 +701,7 @@
 @source inline("versioned");
 @source inline("versions");
 @source inline("vfile");
+@source inline("via-fd-card/90");
 @source inline("viewBox");
 @source inline("virtual");
 @source inline("visible");
@@ -710,3 +722,4 @@
 @source inline("yet");
 @source inline("you");
 @source inline("your");
+@source inline("z-10");

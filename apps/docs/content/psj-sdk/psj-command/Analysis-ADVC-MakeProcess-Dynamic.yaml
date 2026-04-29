@@ -4,6 +4,7 @@ title: Analysis.ADVC.MakeProcess.Dynamic()
 domain: psj-command
 group: ADVC
 namespace: Analysis.ADVC.MakeProcess
+syntax: Analysis.ADVC.MakeProcess.Dynamic()
 ribbon: Analysis > ADVC > Make Process > Dynamic
 description: >
     Create an ADVC Structure Dynamic process. Extends the static process

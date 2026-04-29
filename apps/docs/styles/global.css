@@ -174,3 +174,32 @@
 .framework {
     --color-fd-primary: var(--framework-color);
 }
+
+/* Custom scrollbar for better UI */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, var(--muted-foreground) 20%, transparent);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklch, var(--muted-foreground) 40%, transparent);
+}
+
+@layer utilities {
+    .scrollbar-hide {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
+    }
+}

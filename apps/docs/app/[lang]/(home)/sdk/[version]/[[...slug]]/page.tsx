@@ -89,13 +89,11 @@ export default async function DocsPage({
     if (!item) return <NotFound getSuggestions={async () => []} />;
 
     return (
-        <div className="container py-12 lg:py-16">
-            <PSJAPIItem
-                schemaId={psjServer.options.root}
-                itemKey={`${item.domain}/${item.id}`}
-                version={page.data.sdkVersion}
-                locale={page.data.sdkLocale}
-            />
-        </div>
+        <PSJAPIItem
+            schemaId={psjServer.options.root}
+            itemKey={`${item.domain}/${item.id}`}
+            version={page.data.sdkVersion}
+            locale={page.data.sdkLocale}
+        />
     );
 }
