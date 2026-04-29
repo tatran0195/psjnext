@@ -230,7 +230,9 @@ export async function psjSource(
                     }
 
                     if (options.baseUrl) {
-                        const base = options.baseUrl.startsWith('/') ? options.baseUrl.slice(1) : options.baseUrl;
+                        const base = options.baseUrl.startsWith('/')
+                            ? options.baseUrl.slice(1)
+                            : options.baseUrl;
                         filePath = `${base}/${filePath}`;
                     }
 

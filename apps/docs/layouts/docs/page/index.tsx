@@ -10,7 +10,8 @@ import {
 } from 'react';
 
 import { I18nLabel, useI18n } from 'fumadocs-ui/contexts/i18n';
-import { Edit } from 'lucide-react';
+import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
+import { Check, Copy, Edit } from 'lucide-react';
 
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/cn';
@@ -210,12 +211,32 @@ export function DocsDescription({ children, className, ...props }: ComponentProp
 }
 
 export function DocsTitle({ children, className, ...props }: ComponentProps<'h1'>) {
+    const [checked, onClick] = useCopyButton(() => {
+        if (typeof children === 'string') {
+            navigator.clipboard.writeText(children);
+        } else {
+            const text = document.getElementById(props.id ?? '')?.innerText ?? '';
+            if (text) navigator.clipboard.writeText(text);
+        }
+    });
+
     return (
         <h1
             {...props}
-            className={cn('text-[1.75em] font-semibold wrap-break-word min-w-0', className)}
+            className={cn(
+                'group flex items-center gap-2 text-[1.75em] font-semibold wrap-break-word min-w-0',
+                className,
+            )}
         >
-            {children}
+            <span className="flex-1 min-w-0">{children}</span>
+            <button
+                type="button"
+                className="opacity-0 group-hover:opacity-100 transition-opacity p-2 rounded-md hover:bg-fd-muted text-fd-muted-foreground hover:text-fd-foreground shrink-0"
+                onClick={onClick}
+                aria-label="Copy title"
+            >
+                {checked ? <Check className="size-4" /> : <Copy className="size-4" />}
+            </button>
         </h1>
     );
 }
@@ -242,4 +263,3 @@ export function PageLastUpdate({
 export { MarkdownCopyButton, ViewOptionsPopover } from '@/layouts/shared/page-actions';
 export { Breadcrumb as PageBreadcrumb, type BreadcrumbProps } from './slots/breadcrumb';
 export { Footer as PageFooter, type FooterProps } from './slots/footer';
-

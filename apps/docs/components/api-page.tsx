@@ -17,10 +17,10 @@
  *   - page.data.getItem() uses the baked-in version — no extraction needed.
  */
 
+import { ResolvedItem } from 'psjapi';
 import { createPSJAPIPage } from 'psjapi/ui';
 
 import { psjServer } from '@/lib/psj-server';
-import { ResolvedItem } from 'psjapi';
 
 const PSJAPIItem = createPSJAPIPage(psjServer, {
     // Resolve $ref and see_also links to versioned URLs

@@ -39,7 +39,7 @@ export const source = loader(
             pageTreeCodeTitlesPlugin(),
             pageTreeFoldersPlugin(),
             pageTreeTagsPlugin(TAG_STYLES),
-            psjPlugin()
+            psjPlugin(),
         ],
     },
 );

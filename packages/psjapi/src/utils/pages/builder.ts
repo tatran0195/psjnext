@@ -134,13 +134,21 @@ export function fromSdk(
                 for (const [group, items] of groupMap) {
                     for (const item of items) {
                         if (group === '__ungrouped__') {
-                            const filePath = nameFn ? nameFn(item) : `${domain}/${idToSlug(item.id)}`;
-                            ungroupedEntries.push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
+                            const filePath = nameFn
+                                ? nameFn(item)
+                                : `${domain}/${idToSlug(item.id)}`;
+                            ungroupedEntries.push(
+                                makeItemOutput(schemaId, item, `${filePath}.mdx`),
+                            );
                         } else {
                             const groupSlug = slugify(group);
                             if (!namedGroupEntries.has(group)) namedGroupEntries.set(group, []);
-                            const filePath = nameFn ? nameFn(item) : `${domain}/${groupSlug}/${idToSlug(item.id)}`;
-                            namedGroupEntries.get(group)!.push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
+                            const filePath = nameFn
+                                ? nameFn(item)
+                                : `${domain}/${groupSlug}/${idToSlug(item.id)}`;
+                            namedGroupEntries
+                                .get(group)!
+                                .push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
                         }
                     }
                 }

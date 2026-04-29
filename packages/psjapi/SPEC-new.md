@@ -55,101 +55,101 @@ The base file (`.yaml`) is always English and is the source of truth for both st
 ## Table of Contents
 
 - [psj — Jupiter CAE Desktop SDK Documentation Format](#psj--jupiter-cae-desktop-sdk-documentation-format)
-  - [Overview](#overview)
-    - [Design goals](#design-goals)
-  - [Repository layout](#repository-layout)
-  - [Table of Contents](#table-of-contents)
-  - [1. Root manifest — `sdk.psj.yaml`](#1-root-manifest--sdkpsjyaml)
-  - [2. Data-type files — `data-type/<id>.yaml`](#2-data-type-files--data-typeidyaml)
-  - [3. Param group files — `_groups/<id>.yaml`](#3-param-group-files--_groupsidyaml)
-    - [Group locale sidecar — `_groups/<id>.<locale>.yaml`](#group-locale-sidecar--_groupsidlocaleyaml)
-  - [4. Item files — `<domain>/<id>.yaml`](#4-item-files--domainidyaml)
-    - [4a. Minimal item — pure group reference](#4a-minimal-item--pure-group-reference)
-    - [4b. Group reference with exclusions, overrides, and inline additions](#4b-group-reference-with-exclusions-overrides-and-inline-additions)
-    - [4c. Group with mid-list insertion](#4c-group-with-mid-list-insertion)
-    - [4d. Macro — positional params](#4d-macro--positional-params)
-    - [4e. Utility — with callout](#4e-utility--with-callout)
-    - [4f. PSJ-GUI method](#4f-psj-gui-method)
-  - [5. Delta versioning](#5-delta-versioning)
-    - [5a. Removing params across a version](#5a-removing-params-across-a-version)
-    - [5b. Full delta operation vocabulary](#5b-full-delta-operation-vocabulary)
-  - [6. Locale sidecar files](#6-locale-sidecar-files)
-    - [6a. Localizable vs. structural fields](#6a-localizable-vs-structural-fields)
-    - [6b. Item locale sidecar](#6b-item-locale-sidecar)
-    - [6c. Macro locale sidecar — positional params keyed by position](#6c-macro-locale-sidecar--positional-params-keyed-by-position)
-  - [7. Locale resolution algorithm](#7-locale-resolution-algorithm)
-  - [8. Renderer decisions driven by `domain`](#8-renderer-decisions-driven-by-domain)
-  - [9. Complete field reference](#9-complete-field-reference)
-    - [Item file](#item-file)
-    - [Param](#param)
-    - [GroupRef](#groupref)
-    - [Returns](#returns)
-    - [Code](#code)
-    - [Callout](#callout)
-    - [Example](#example)
-    - [VersionDelta](#versiondelta)
-    - [ParamPatch](#parampatch)
-    - [EnumValue](#enumvalue)
-    - [Ref](#ref)
-    - [ParamGroup file](#paramgroup-file)
-    - [Locale sidecar (item or group)](#locale-sidecar-item-or-group)
-  - [10. Type system](#10-type-system)
-  - [11. Validation rules (summary)](#11-validation-rules-summary)
-  - [12. Tooling \& Integration](#12-tooling--integration)
-    - [Fumadocs \& `meta.json` Generation](#fumadocs--metajson-generation)
+    - [Overview](#overview)
+        - [Design goals](#design-goals)
+    - [Repository layout](#repository-layout)
+    - [Table of Contents](#table-of-contents)
+    - [1. Root manifest — `sdk.psj.yaml`](#1-root-manifest--sdkpsjyaml)
+    - [2. Data-type files — `data-type/<id>.yaml`](#2-data-type-files--data-typeidyaml)
+    - [3. Param group files — `_groups/<id>.yaml`](#3-param-group-files--_groupsidyaml)
+        - [Group locale sidecar — `_groups/<id>.<locale>.yaml`](#group-locale-sidecar--_groupsidlocaleyaml)
+    - [4. Item files — `<domain>/<id>.yaml`](#4-item-files--domainidyaml)
+        - [4a. Minimal item — pure group reference](#4a-minimal-item--pure-group-reference)
+        - [4b. Group reference with exclusions, overrides, and inline additions](#4b-group-reference-with-exclusions-overrides-and-inline-additions)
+        - [4c. Group with mid-list insertion](#4c-group-with-mid-list-insertion)
+        - [4d. Macro — positional params](#4d-macro--positional-params)
+        - [4e. Utility — with callout](#4e-utility--with-callout)
+        - [4f. PSJ-GUI method](#4f-psj-gui-method)
+    - [5. Delta versioning](#5-delta-versioning)
+        - [5a. Removing params across a version](#5a-removing-params-across-a-version)
+        - [5b. Full delta operation vocabulary](#5b-full-delta-operation-vocabulary)
+    - [6. Locale sidecar files](#6-locale-sidecar-files)
+        - [6a. Localizable vs. structural fields](#6a-localizable-vs-structural-fields)
+        - [6b. Item locale sidecar](#6b-item-locale-sidecar)
+        - [6c. Macro locale sidecar — positional params keyed by position](#6c-macro-locale-sidecar--positional-params-keyed-by-position)
+    - [7. Locale resolution algorithm](#7-locale-resolution-algorithm)
+    - [8. Renderer decisions driven by `domain`](#8-renderer-decisions-driven-by-domain)
+    - [9. Complete field reference](#9-complete-field-reference)
+        - [Item file](#item-file)
+        - [Param](#param)
+        - [GroupRef](#groupref)
+        - [Returns](#returns)
+        - [Code](#code)
+        - [Callout](#callout)
+        - [Example](#example)
+        - [VersionDelta](#versiondelta)
+        - [ParamPatch](#parampatch)
+        - [EnumValue](#enumvalue)
+        - [Ref](#ref)
+        - [ParamGroup file](#paramgroup-file)
+        - [Locale sidecar (item or group)](#locale-sidecar-item-or-group)
+    - [10. Type system](#10-type-system)
+    - [11. Validation rules (summary)](#11-validation-rules-summary)
+    - [12. Tooling \& Integration](#12-tooling--integration)
+        - [Fumadocs \& `meta.json` Generation](#fumadocs--metajson-generation)
 
 ---
 
 ## 1. Root manifest — `sdk.psj.yaml`
 
 ```yaml
-psj: '2.0'                       # required; must match spec version being used
+psj: '2.0' # required; must match spec version being used
 
 sdk:
-  name: 'Jupiter CAE Desktop Platform SDK'   # required; human-readable product name
-  vendor: 'TechnoStar Co., Ltd.'             # required
-  vendor_url: 'https://www.e-technostar.com/' # optional; must be a valid URL if present
+    name: 'Jupiter CAE Desktop Platform SDK' # required; human-readable product name
+    vendor: 'TechnoStar Co., Ltd.' # required
+    vendor_url: 'https://www.e-technostar.com/' # optional; must be a valid URL if present
 
 # Ordered oldest → newest. Adding an entry here is all that is needed to unlock
 # the delta system for items that changed in that release.
-versions:                           # required; at least one entry
-  - id: '5.0.0'                     # required; semver string
-    notes: ~                        # optional; string; release notes summary
-  - id: '5.0.1'
-    notes: 'Removed iEJobType and iHeatConvection from Analysis.ADVC.Structure'
-  - id: '5.1.0'
-    notes: 'Current release'
+versions: # required; at least one entry
+    - id: '5.0.0' # required; semver string
+      notes: ~ # optional; string; release notes summary
+    - id: '5.0.1'
+      notes: 'Removed iEJobType and iHeatConvection from Analysis.ADVC.Structure'
+    - id: '5.1.0'
+      notes: 'Current release'
 
-current_version: '5.1.0'           # required; must match one of versions[].id
+current_version: '5.1.0' # required; must match one of versions[].id
 
-locales:                            # required; at least one entry with default: true
-  - id: en                          # BCP-47 language tag
-    label: English
-    default: true                   # exactly one locale must be default: true
-  - id: ja
-    label: 日本語
+locales: # required; at least one entry with default: true
+    - id: en # BCP-47 language tag
+      label: English
+      default: true # exactly one locale must be default: true
+    - id: ja
+      label: 日本語
 
 # Domain declarations control renderer behaviour. The four built-in domains
 # are listed below. Custom domains may be added but require a renderer plugin.
-domains:                            # required
-  - id: macro                       # required; must be a valid identifier
-    title: Macros                   # required; display label
-    param_style: positional         # required; positional | named
-  - id: psj-command
-    title: PSJ Commands
-    param_style: named
-  - id: psj-utility
-    title: PSJ Utilities
-    param_style: named
-  - id: psj-gui
-    title: PSJ GUI
-    param_style: named
+domains: # required
+    - id: macro # required; must be a valid identifier
+      title: Macros # required; display label
+      param_style: positional # required; positional | named
+    - id: psj-command
+      title: PSJ Commands
+      param_style: named
+    - id: psj-utility
+      title: PSJ Utilities
+      param_style: named
+    - id: psj-gui
+      title: PSJ GUI
+      param_style: named
 
 # Optional list of maintainers. Replaces per-item author / author_url.
 maintainers:
-  - name: 'SDK Documentation Team'
-    email: 'sdk-docs@example.com'   # optional
-    url: 'https://example.com'      # optional
+    - name: 'SDK Documentation Team'
+      email: 'sdk-docs@example.com' # optional
+      url: 'https://example.com' # optional
 ```
 
 **Validation rules**:
@@ -168,24 +168,23 @@ Data-type files document the structured types referenced via `$ref:data-type/<id
 ```yaml
 # data-type/JPT_NASTRAN_ANALYSIS.yaml
 psj: '2.0'
-kind: data_type                     # required; must be data_type
-id: JPT_NASTRAN_ANALYSIS            # required; unique across all data-type files
-title: 'JPT_NASTRAN_ANALYSIS'       # required; display title (often same as id)
+kind: data_type # required; must be data_type
+id: JPT_NASTRAN_ANALYSIS # required; unique across all data-type files
+title: 'JPT_NASTRAN_ANALYSIS' # required; display title (often same as id)
 description: >
-  Input parameter block for Nastran analysis configuration.
-version_introduced: '5.0.0'        # required
-
-fields:                             # ordered list of fields on this type
-  - name: iSolverType
-    type: Integer
-    required: false
-    default: '0'
-    description: Nastran solver variant.
-    enum_values:
-      - id: 0
-        label: Default
-      - id: 1
-        label: SMP
+    Input parameter block for Nastran analysis configuration.
+version_introduced: '5.0.0' # required
+fields: # ordered list of fields on this type
+    - name: iSolverType
+      type: Integer
+      required: false
+      default: '0'
+      description: Nastran solver variant.
+      enum_values:
+          - id: 0
+            label: Default
+          - id: 1
+            label: SMP
 ```
 
 Data-type locale sidecars (`data-type/<id>.<locale>.yaml`) follow the same sidecar rules as item sidecars.
@@ -201,81 +200,80 @@ It is purely a mechanism to reduce repeated parameter definitions across multipl
 ```yaml
 # _groups/nastran-base.yaml
 psj: '2.0'
-kind: param_group                   # required; must be param_group
-id: nastran-base                    # required; unique across all group files
+kind: param_group # required; must be param_group
+id: nastran-base # required; unique across all group files
 description: >
-  Parameters shared by all Nastran analysis export commands.
-extends: ~                          # optional; id of parent group (single inheritance)
-
+    Parameters shared by all Nastran analysis export commands.
+extends: ~ # optional; id of parent group (single inheritance)
 params:
-  - name: strName
-    type: String
-    required: false
-    default: '"Job_1"'
-    description: Job name for the Nastran analysis.
+    - name: strName
+      type: String
+      required: false
+      default: '"Job_1"'
+      description: Job name for the Nastran analysis.
 
-  - name: strDescription
-    type: String
-    required: false
-    default: '""'
-    description: Description of the Nastran analysis job.
+    - name: strDescription
+      type: String
+      required: false
+      default: '""'
+      description: Description of the Nastran analysis job.
 
-  - name: crlTargets
-    type: 'List[Cursor]'
-    required: false
-    default: '[]'
-    description: List of target parts.
+    - name: crlTargets
+      type: 'List[Cursor]'
+      required: false
+      default: '[]'
+      description: List of target parts.
 
-  - name: nastranAnalysis
-    type: '$ref:data-type/JPT_NASTRAN_ANALYSIS'
-    required: false
-    default: 'JPT_NASTRAN_ANALYSIS()'
-    description: Nastran analysis input parameters.
+    - name: nastranAnalysis
+      type: '$ref:data-type/JPT_NASTRAN_ANALYSIS'
+      required: false
+      default: 'JPT_NASTRAN_ANALYSIS()'
+      description: Nastran analysis input parameters.
 
-  - name: bDummyPropAutoAssign
-    type: Boolean
-    required: false
-    default: 'False'
-    description: Auto-create dummy properties for unassigned parts.
+    - name: bDummyPropAutoAssign
+      type: Boolean
+      required: false
+      default: 'False'
+      description: Auto-create dummy properties for unassigned parts.
 
-  - name: iDummyPropMaterialID
-    type: Integer
-    required: false
-    default: '0'
-    description: Material ID for dummy property assignment.
+    - name: iDummyPropMaterialID
+      type: Integer
+      required: false
+      default: '0'
+      description: Material ID for dummy property assignment.
 
-  - name: crEdit
-    type: Cursor
-    required: false
-    default: 'None'
-    description: Existing Nastran job to modify. `None` creates a new job.
+    - name: crEdit
+      type: Cursor
+      required: false
+      default: 'None'
+      description: Existing Nastran job to modify. `None` creates a new job.
 
-  - name: strPath
-    type: String
-    required: true
-    description: Export path for the BDF file.
+    - name: strPath
+      type: String
+      required: true
+      description: Export path for the BDF file.
 
-  - name: iModelCheckAnswer
-    type: Integer
-    required: false
-    default: '0'
-    description: Model checking for dummy properties.
-    enum_values:
-      - id: 0
-        label: 'Off'
-      - id: 1
-        label: 'On'
+    - name: iModelCheckAnswer
+      type: Integer
+      required: false
+      default: '0'
+      description: Model checking for dummy properties.
+      enum_values:
+          - id: 0
+            label: 'Off'
+          - id: 1
+            label: 'On'
 
-  - name: iDeleteSlaveNodesAnswer
-    type: Integer
-    required: false
-    default: '0'
-    description: Delete slave nodes checking.
-    enum_values:
-      - id: 0
-        label: 'Off'
-      - id: 1
-        label: 'On'
+    - name: iDeleteSlaveNodesAnswer
+      type: Integer
+      required: false
+      default: '0'
+      description: Delete slave nodes checking.
+      enum_values:
+          - id: 0
+            label: 'Off'
+          - id: 1
+            label: 'On'
 ```
 
 ### Group locale sidecar — `_groups/<id>.<locale>.yaml`
@@ -285,42 +283,42 @@ The group sidecar translates params that belong to the group. Items referencing 
 ```yaml
 # _groups/nastran-base.ja.yaml
 psj: '2.0'
-kind: param_group                   # required; must match base file kind
-locale: ja                          # required; BCP-47 tag matching a manifest locale id
-id: nastran-base                    # required; must match base file id
+kind: param_group # required; must match base file kind
+locale: ja # required; BCP-47 tag matching a manifest locale id
+id: nastran-base # required; must match base file id
 
 description: >
-  すべてのNastran解析エクスポートコマンドで共有されるパラメータ。
+    すべてのNastran解析エクスポートコマンドで共有されるパラメータ。
 
 params:
-  strName:
-    display_name: ジョブ名
-    description: Nastran解析のジョブ名。
-  strDescription:
-    description: Nastran解析ジョブの説明。
-  crlTargets:
-    description: 対象パーツのリスト。
-  nastranAnalysis:
-    description: Nastran解析入力パラメータ。
-  bDummyPropAutoAssign:
-    description: 未割り当てパーツへのダミープロパティの自動生成。
-  iDummyPropMaterialID:
-    description: ダミープロパティ割り当てに使用する材料ID。
-  crEdit:
-    description: 変更対象の既存Nastranジョブ。Noneの場合は新規作成。
-  strPath:
-    display_name: エクスポートパス
-    description: BDFファイルのエクスポート先パス。
-  iModelCheckAnswer:
-    description: ダミープロパティのモデルチェック。
-    enum_values:
-      0: '無効'
-      1: '有効'
-  iDeleteSlaveNodesAnswer:
-    description: スレーブノード削除チェック。
-    enum_values:
-      0: '無効'
-      1: '有効'
+    strName:
+        display_name: ジョブ名
+        description: Nastran解析のジョブ名。
+    strDescription:
+        description: Nastran解析ジョブの説明。
+    crlTargets:
+        description: 対象パーツのリスト。
+    nastranAnalysis:
+        description: Nastran解析入力パラメータ。
+    bDummyPropAutoAssign:
+        description: 未割り当てパーツへのダミープロパティの自動生成。
+    iDummyPropMaterialID:
+        description: ダミープロパティ割り当てに使用する材料ID。
+    crEdit:
+        description: 変更対象の既存Nastranジョブ。Noneの場合は新規作成。
+    strPath:
+        display_name: エクスポートパス
+        description: BDFファイルのエクスポート先パス。
+    iModelCheckAnswer:
+        description: ダミープロパティのモデルチェック。
+        enum_values:
+            0: '無効'
+            1: '有効'
+    iDeleteSlaveNodesAnswer:
+        description: スレーブノード削除チェック。
+        enum_values:
+            0: '無効'
+            1: '有効'
 ```
 
 ---
@@ -332,25 +330,25 @@ params:
 ```yaml
 # psj-command/Analysis-Nastran-LinearStatic.yaml
 psj: '2.0'
-id: Analysis-Nastran-LinearStatic   # required; slug unique within domain
-title: 'Analysis.Nastran.LinearStatic()'  # required; verbatim call signature
-domain: psj-command                 # required; must match a manifest domain id
-group: Nastran                      # optional; nav grouping label
-namespace: Analysis.Nastran         # optional (omit for macros); dotted call prefix
-ribbon: 'Analysis > Nastran > LinearStatic'  # optional; psj-command only
+id: Analysis-Nastran-LinearStatic # required; slug unique within domain
+title: 'Analysis.Nastran.LinearStatic()' # required; verbatim call signature
+domain: psj-command # required; must match a manifest domain id
+group: Nastran # optional; nav grouping label
+namespace: Analysis.Nastran # optional (omit for macros); dotted call prefix
+ribbon: 'Analysis > Nastran > LinearStatic' # optional; psj-command only
 description: >
-  Export the Nastran BDF input file for Structure Linear Static analysis (SOL 101).
-version_introduced: '5.0.0'        # required; must match a manifest version id
-stability: stable                   # optional; stable | experimental | deprecated
-macro_link: NastranJob              # optional; id of the macro this command wraps (psj-command only)
+    Export the Nastran BDF input file for Structure Linear Static analysis (SOL 101).
+version_introduced: '5.0.0' # required; must match a manifest version id
+stability: stable # optional; stable | experimental | deprecated
+macro_link: NastranJob # optional; id of the macro this command wraps (psj-command only)
 
 params:
-  - $group: nastran-base            # inline all params from the group
+    - $group: nastran-base # inline all params from the group
 
 returns:
-  kind: typed                       # required; typed | macro_code | void
-  type: Cursor                      # required when kind=typed
-  description: The created Nastran job.
+    kind: typed # required; typed | macro_code | void
+    type: Cursor # required when kind=typed
+    description: The created Nastran job.
 ```
 
 ### 4b. Group reference with exclusions, overrides, and inline additions
@@ -370,91 +368,91 @@ stability: stable
 macro_link: NastranJob
 
 params:
-  - $group: nastran-base
-    exclude:                        # drop named params from the inlined group
-      - bDummyPropAutoAssign
-      - iDummyPropMaterialID
-      - crEdit
-    override:                       # NEW in v2: patch individual group params
-      strPath:
-        description: Export path for the frequency response BDF file.
+    - $group: nastran-base
+      exclude: # drop named params from the inlined group
+          - bDummyPropAutoAssign
+          - iDummyPropMaterialID
+          - crEdit
+      override: # NEW in v2: patch individual group params
+          strPath:
+              description: Export path for the frequency response BDF file.
 
-  - name: bOutputXYPlots
-    type: Boolean
-    required: false
-    default: 'False'
-    description: Enable XY plot output.
+    - name: bOutputXYPlots
+      type: Boolean
+      required: false
+      default: 'False'
+      description: Enable XY plot output.
 
-  - name: iOutputValueSet
-    type: Integer
-    required: false
-    default: '0'
-    description: Output value set selector.
+    - name: iOutputValueSet
+      type: Integer
+      required: false
+      default: '0'
+      description: Output value set selector.
 
-  - name: iOutputDOFType
-    type: Integer
-    required: false
-    default: '0'
-    description: Output degree-of-freedom type.
+    - name: iOutputDOFType
+      type: Integer
+      required: false
+      default: '0'
+      description: Output degree-of-freedom type.
 
-  - name: iXYPlotDisplacementType
-    type: Integer
-    required: false
-    default: '0'
-    description: XY plot displacement type.
+    - name: iXYPlotDisplacementType
+      type: Integer
+      required: false
+      default: '0'
+      description: XY plot displacement type.
 
-  - name: iXYPlotVelocityType
-    type: Integer
-    required: false
-    default: '0'
-    description: XY plot velocity type.
+    - name: iXYPlotVelocityType
+      type: Integer
+      required: false
+      default: '0'
+      description: XY plot velocity type.
 
-  - name: iXYPlotAccelerationType
-    type: Integer
-    required: false
-    default: '0'
-    description: XY plot acceleration type.
+    - name: iXYPlotAccelerationType
+      type: Integer
+      required: false
+      default: '0'
+      description: XY plot acceleration type.
 
-  - name: strXTitle
-    type: String
-    required: false
-    default: '""'
-    description: X-axis title for XY plots.
+    - name: strXTitle
+      type: String
+      required: false
+      default: '""'
+      description: X-axis title for XY plots.
 
-  - name: strYTitle
-    type: String
-    required: false
-    default: '""'
-    description: Y-axis title for XY plots.
+    - name: strYTitle
+      type: String
+      required: false
+      default: '""'
+      description: Y-axis title for XY plots.
 
-  - name: bOutputGeomIDofDummyProp
-    type: Boolean
-    required: false
-    default: 'False'
-    description: Output geometry ID of dummy properties.
+    - name: bOutputGeomIDofDummyProp
+      type: Boolean
+      required: false
+      default: 'False'
+      description: Output geometry ID of dummy properties.
 
-  - name: bDummyPropAutoAssign
-    type: Boolean
-    required: false
-    default: 'False'
-    description: Auto-create dummy properties.
+    - name: bDummyPropAutoAssign
+      type: Boolean
+      required: false
+      default: 'False'
+      description: Auto-create dummy properties.
 
-  - name: iDummyPropMaterialID
-    type: Integer
-    required: false
-    default: '0'
-    description: Material ID for dummy property assignment.
+    - name: iDummyPropMaterialID
+      type: Integer
+      required: false
+      default: '0'
+      description: Material ID for dummy property assignment.
 
-  - name: crEdit
-    type: Cursor
-    required: false
-    default: 'None'
-    description: Existing job to modify.
+    - name: crEdit
+      type: Cursor
+      required: false
+      default: 'None'
+      description: Existing job to modify.
 
 returns:
-  kind: typed
-  type: Cursor
-  description: The created Nastran job.
+    kind: typed
+    type: Cursor
+    description: The created Nastran job.
 ```
 
 ### 4c. Group with mid-list insertion
@@ -474,24 +472,24 @@ stability: stable
 macro_link: AdvcDynamicProcess
 
 params:
-  - $group: advc-process-struct
-    insert_after: advcAutoIncrement  # splice `insert` params after this param name
-    insert:
-      - name: bDynamic
-        type: Boolean
-        required: false
-        default: 'False'
-        description: Enable dynamic parameter settings.
-      - name: advcDynamic
-        type: '$ref:data-type/JPT_ADVC_DYNAMIC'
-        required: false
-        default: 'JPT_ADVC_DYNAMIC()'
-        description: Dynamic parameters. Active when bDynamic=True.
+    - $group: advc-process-struct
+      insert_after: advcAutoIncrement # splice `insert` params after this param name
+      insert:
+          - name: bDynamic
+            type: Boolean
+            required: false
+            default: 'False'
+            description: Enable dynamic parameter settings.
+          - name: advcDynamic
+            type: '$ref:data-type/JPT_ADVC_DYNAMIC'
+            required: false
+            default: 'JPT_ADVC_DYNAMIC()'
+            description: Dynamic parameters. Active when bDynamic=True.
 
 returns:
-  kind: typed
-  type: Cursor
-  description: The created or modified ADVC Dynamic process.
+    kind: typed
+    type: Cursor
+    description: The created or modified ADVC Dynamic process.
 ```
 
 ### 4d. Macro — positional params
@@ -506,82 +504,82 @@ group: analysis
 description: Create ADVC static process.
 version_introduced: '5.0.0'
 stability: stable
-command_link: Analysis-ADVC-MakeProcess-Static  # id of the command wrapping this macro
+command_link: Analysis-ADVC-MakeProcess-Static # id of the command wrapping this macro
 
 syntax: >
-  AdvcStaticProcess(string m_strName, int m_iGeomNonlinear, int fixed_or_auto,
-    int num_of_inc, double max_time, double max_dt, double min_dt, int load_type, ...)
+    AdvcStaticProcess(string m_strName, int m_iGeomNonlinear, int fixed_or_auto,
+      int num_of_inc, double max_time, double max_dt, double min_dt, int load_type, ...)
 
 params:
-  - position: 1
-    name: m_strName
-    type: String
-    required: true
-    description: Name of ADVC static process.
+    - position: 1
+      name: m_strName
+      type: String
+      required: true
+      description: Name of ADVC static process.
 
-  - position: 2
-    name: m_iGeomNonlinear
-    type: Integer
-    required: true
-    description: Geometry nonlinearity mode.
-    enum_values:
-      - id: 0
-        label: '(blank)'
-      - id: 1
-        label: Total Lagrange
-      - id: 2
-        label: Updated Lagrange
+    - position: 2
+      name: m_iGeomNonlinear
+      type: Integer
+      required: true
+      description: Geometry nonlinearity mode.
+      enum_values:
+          - id: 0
+            label: '(blank)'
+          - id: 1
+            label: Total Lagrange
+          - id: 2
+            label: Updated Lagrange
 
-  - position: 3
-    name: fixed_or_auto
-    type: Integer
-    required: true
-    description: Time step control.
-    enum_values:
-      - id: 0
-        label: Auto
-      - id: 1
-        label: Fixed
+    - position: 3
+      name: fixed_or_auto
+      type: Integer
+      required: true
+      description: Time step control.
+      enum_values:
+          - id: 0
+            label: Auto
+          - id: 1
+            label: Fixed
 
-  - position: 8
-    name: load_type
-    type: Integer
-    required: true
-    description: Load type.
-    enum_values:
-      - id: -1
-        label: Default
-      - id: 0
-        label: Step
-      - id: 1
-        label: Ramp
+    - position: 8
+      name: load_type
+      type: Integer
+      required: true
+      description: Load type.
+      enum_values:
+          - id: -1
+            label: Default
+          - id: 0
+            label: Step
+          - id: 1
+            label: Ramp
 
-  - position: 15
-    name: m_bConvergence
-    type: Boolean
-    required: true
-    description: Whether convergence parameters are defined.
+    - position: 15
+      name: m_bConvergence
+      type: Boolean
+      required: true
+      description: Whether convergence parameters are defined.
 
-  - position: 64
-    name: m_crEdit
-    type: Cursor
-    required: false
-    description: Edit cursor for existing process. Omit to create new.
+    - position: 64
+      name: m_crEdit
+      type: Cursor
+      required: false
+      description: Edit cursor for existing process. Omit to create new.
 
 returns:
-  kind: macro_code
-  codes:
-    - value: '"1"'
-      meaning: The function can be executed.
-    - value: '"0"'
-      meaning: The function cannot be executed.
+    kind: macro_code
+    codes:
+        - value: '"1"'
+          meaning: The function can be executed.
+        - value: '"0"'
+          meaning: The function cannot be executed.
 
 examples:
-  - id: default-process             # NEW in v2: stable id for sidecar matching
-    title: Create process with default settings
-    language: psj
-    code: |
-      JPT.Exec('AdvcStaticProcess("ADVC_DEFAULT_PROCESS", 0, 0, 1, 1, 1, 1e-05, -1, ...)')
+    - id: default-process # NEW in v2: stable id for sidecar matching
+      title: Create process with default settings
+      language: psj
+      code: |
+          JPT.Exec('AdvcStaticProcess("ADVC_DEFAULT_PROCESS", 0, 0, 1, 1, 1, 1e-05, -1, ...)')
 ```
 
 ### 4e. Utility — with callout
@@ -595,31 +593,31 @@ domain: psj-utility
 group: performance
 namespace: JPT
 description: >
-  Disable screen animation, screen update, and status bar updates to improve
-  Jupiter's performance during batch operations.
+    Disable screen animation, screen update, and status bar updates to improve
+    Jupiter's performance during batch operations.
 version_introduced: '5.0.0'
 stability: stable
 syntax: 'JPT.BeginDatabaseTransaction("transactionName")'
 
 callouts:
-  - id: must-end-transaction        # NEW in v2: stable id replaces positional index
-    level: warn                     # warn | info | danger
-    text: >
-      JPT.EndDatabaseTransaction() must be called at the end of the process
-      to return Jupiter to the normal state.
+    - id: must-end-transaction # NEW in v2: stable id replaces positional index
+      level: warn # warn | info | danger
+      text: >
+          JPT.EndDatabaseTransaction() must be called at the end of the process
+          to return Jupiter to the normal state.
 
 params:
-  - name: transactionName
-    type: String
-    required: true
-    description: Transaction name displayed in the Undo/Redo menu.
+    - name: transactionName
+      type: String
+      required: true
+      description: Transaction name displayed in the Undo/Redo menu.
 
 returns:
-  kind: void
+    kind: void
 
 see_also:
-  - $ref: 'psj-utility/JPT-EndDatabaseTransaction'
-    label: JPT.EndDatabaseTransaction()   # now localizable via sidecar
+    - $ref: 'psj-utility/JPT-EndDatabaseTransaction'
+      label: JPT.EndDatabaseTransaction() # now localizable via sidecar
 ```
 
 ### 4f. PSJ-GUI method
@@ -633,21 +631,21 @@ domain: psj-gui
 group: dlg-methods
 namespace: dlg
 description: >
-  Add a 1D element selector to the dialog, enabling the user to select
-  1D elements and store the selection.
+    Add a 1D element selector to the dialog, enabling the user to select
+    1D elements and store the selection.
 version_introduced: '5.0.0'
 stability: stable
 syntax: 'dlg.add_1delement_selector(...)'
 
 params:
-  - name: text
-    type: String
-    required: false
-    default: '"1D element"'
-    description: Title label for the selector widget.
+    - name: text
+      type: String
+      required: false
+      default: '"1D element"'
+      description: Title label for the selector widget.
 
 returns:
-  kind: void
+    kind: void
 ```
 
 ---
@@ -668,84 +666,84 @@ version_introduced: '5.0.0'
 macro_link: ADVC_Structure
 
 params:
-  - $group: advc-structure-base
+    - $group: advc-structure-base
 
-  # These params existed in 5.0.0 but were removed in 5.0.1.
-  # They remain in the file so the 5.0.0 documentation can still render them.
-  - name: iEJobType
-    type: Integer
-    required: false
-    default: '0'
-    description: Job type.
-    enum_values:
-      - id: 0
-        label: Structure
+    # These params existed in 5.0.0 but were removed in 5.0.1.
+    # They remain in the file so the 5.0.0 documentation can still render them.
+    - name: iEJobType
+      type: Integer
+      required: false
+      default: '0'
+      description: Job type.
+      enum_values:
+          - id: 0
+            label: Structure
 
-  - name: iHeatConvection
-    type: Integer
-    required: false
-    default: '1'
-    description: Heat convection mode.
+    - name: iHeatConvection
+      type: Integer
+      required: false
+      default: '1'
+      description: Heat convection mode.
 
 returns:
-  kind: typed
-  type: Cursor
-  description: The created ADVC analysis job.
+    kind: typed
+    type: Cursor
+    description: The created ADVC analysis job.
 
 changes:
-  - version: '5.0.1'
-    notes: iEJobType and iHeatConvection are no longer available in v5.0.1 or higher.
-    params:
-      remove:
-        - iEJobType
-        - iHeatConvection
+    - version: '5.0.1'
+      notes: iEJobType and iHeatConvection are no longer available in v5.0.1 or higher.
+      params:
+          remove:
+              - iEJobType
+              - iHeatConvection
 ```
 
 ### 5b. Full delta operation vocabulary
 
 ```yaml
 changes:
-  - version: 'X.Y.Z'               # required; must match a manifest version id
+    - version: 'X.Y.Z' # required; must match a manifest version id
 
-    notes: 'Human-readable summary of what changed in this version.'  # optional
+      notes: 'Human-readable summary of what changed in this version.' # optional
 
-    # Optional: top-level item fields that changed in this version.
-    item:
-      description: 'Revised item description.'
-      ribbon: 'New > Ribbon > Path'
-      stability: deprecated         # NEW in v2: replaces boolean `deprecated` flag
+      # Optional: top-level item fields that changed in this version.
+      item:
+          description: 'Revised item description.'
+          ribbon: 'New > Ribbon > Path'
+          stability: deprecated # NEW in v2: replaces boolean `deprecated` flag
 
-    params:
-      # Add new params. `after` names the existing param they follow.
-      # Omit `after` to append at the end.
-      add:
-        - name: bNewFeature
-          type: Boolean
-          required: false
-          default: 'False'
-          description: New capability added in X.Y.Z.
-          after: strPath
-          inferred: true            # set when the converter inferred this, not from source
+      params:
+          # Add new params. `after` names the existing param they follow.
+          # Omit `after` to append at the end.
+          add:
+              - name: bNewFeature
+                type: Boolean
+                required: false
+                default: 'False'
+                description: New capability added in X.Y.Z.
+                after: strPath
+                inferred: true # set when the converter inferred this, not from source
 
-      # Remove params by name.
-      remove:
-        - iRemovedParam
+          # Remove params by name.
+          remove:
+              - iRemovedParam
 
-      # Patch specific fields on existing params.
-      modify:
-        - name: strName
-          changes:
-            description: 'Revised description for X.Y.Z.'
-            default: '"NewDefault"'
-            required: true
-            deprecated: true
-            deprecated_reason: 'Use strJobName instead.'  # NEW in v2
-            enum_values:
-              add:
-                - id: 5
-                  label: New option
-              remove:
-                - 2                 # enum value id to remove
+          # Patch specific fields on existing params.
+          modify:
+              - name: strName
+                changes:
+                    description: 'Revised description for X.Y.Z.'
+                    default: '"NewDefault"'
+                    required: true
+                    deprecated: true
+                    deprecated_reason: 'Use strJobName instead.' # NEW in v2
+                    enum_values:
+                        add:
+                            - id: 5
+                              label: New option
+                        remove:
+                            - 2 # enum value id to remove
 ```
 
 **Resolution rules**:
@@ -788,39 +786,39 @@ Sidecars contain **only natural-language fields**. Structural fields are never t
 ```yaml
 # psj-command/Analysis-ADVC-MakeProcess-Dynamic.ja.yaml
 psj: '2.0'
-kind: locale_sidecar               # required; must be locale_sidecar
-locale: ja                         # required; BCP-47 tag
-id: Analysis-ADVC-MakeProcess-Dynamic  # required; must match base file id
+kind: locale_sidecar # required; must be locale_sidecar
+locale: ja # required; BCP-47 tag
+id: Analysis-ADVC-MakeProcess-Dynamic # required; must match base file id
 
 description: >
-  ADVC構造ダイナミックプロセスを作成します。
+    ADVC構造ダイナミックプロセスを作成します。
 
 # Only params that are NOT from a group are translated here.
 # Group params are translated in the respective group sidecar.
 params:
-  bDynamic:
-    description: ダイナミックパラメータ設定の有効/無効。
-  advcDynamic:
-    description: ダイナミックパラメータの設定。bDynamic=Trueの場合に有効。
+    bDynamic:
+        description: ダイナミックパラメータ設定の有効/無効。
+    advcDynamic:
+        description: ダイナミックパラメータの設定。bDynamic=Trueの場合に有効。
 
 returns:
-  description: 作成または変更されたADVCダイナミックプロセスのカーソル。
+    description: 作成または変更されたADVCダイナミックプロセスのカーソル。
 
 # Callouts matched by id (v2), not by position index.
 callouts:
-  must-end-transaction:
-    text: >
-      処理の終了時にJPT.EndDatabaseTransaction()を呼び出して
-      Jupiterを通常の状態に戻す必要があります。
+    must-end-transaction:
+        text: >
+            処理の終了時にJPT.EndDatabaseTransaction()を呼び出して
+            Jupiterを通常の状態に戻す必要があります。
 
 # Examples matched by id (v2), not by position index.
 examples:
-  default-process:
-    title: デフォルト設定でのプロセス作成
+    default-process:
+        title: デフォルト設定でのプロセス作成
 
 see_also:
-  psj-utility/JPT-EndDatabaseTransaction:
-    label: JPT.EndDatabaseTransaction()
+    psj-utility/JPT-EndDatabaseTransaction:
+        label: JPT.EndDatabaseTransaction()
 ```
 
 ### 6c. Macro locale sidecar — positional params keyed by position
@@ -836,34 +834,34 @@ description: ADVCスタティックプロセスを作成します。
 
 # Positional params are keyed by position integer.
 params:
-  1:
-    description: ADVCスタティックプロセスの名前。
-  2:
-    description: 幾何非線形オプション。
-    enum_values:
-      0: (空白)
-      1: トータルラグランジュ法
-      2: 更新ラグランジュ法
-  3:
-    description: タイムステップ制御。
-    enum_values:
-      0: 自動
-      1: 固定
-  8:
-    description: 荷重タイプ。
-    enum_values:
-      -1: デフォルト
-      0: ステップ
-      1: ランプ
+    1:
+        description: ADVCスタティックプロセスの名前。
+    2:
+        description: 幾何非線形オプション。
+        enum_values:
+            0: (空白)
+            1: トータルラグランジュ法
+            2: 更新ラグランジュ法
+    3:
+        description: タイムステップ制御。
+        enum_values:
+            0: 自動
+            1: 固定
+    8:
+        description: 荷重タイプ。
+        enum_values:
+            -1: デフォルト
+            0: ステップ
+            1: ランプ
 
 returns:
-  codes:
-    '"1"': 関数を実行できます。
-    '"0"': 関数を実行できません。
+    codes:
+        '"1"': 関数を実行できます。
+        '"0"': 関数を実行できません。
 
 examples:
-  default-process:
-    title: デフォルト設定でのプロセス作成
+    default-process:
+        title: デフォルト設定でのプロセス作成
 ```
 
 ---
@@ -897,7 +895,7 @@ Fallback is silent. Partial translations are valid and expected — an item wher
 ## 8. Renderer decisions driven by `domain`
 
 | Behaviour                           | `macro`           | `psj-command`   | `psj-utility` | `psj-gui`   |
-| ----------------------------------- | ----------------- | --------------  | ------------- | ----------- |
+| ----------------------------------- | ----------------- | --------------- | ------------- | ----------- |
 | Show Position column in param table | ✅                | —               | —             | —           |
 | Show namespace prefix in title      | —                 | ✅              | ✅            | ✅          |
 | Show Ribbon path                    | —                 | ✅ if present   | —             | —           |
@@ -976,25 +974,25 @@ codes: [Code]?             # required when kind=macro_code
 ### Code
 
 ```yaml
-value: string              # required; e.g. '"1"'; NOT localizable
-meaning: string            # required; localizable
+value: string # required; e.g. '"1"'; NOT localizable
+meaning: string # required; localizable
 ```
 
 ### Callout
 
 ```yaml
-id: string                 # required; stable identifier for sidecar matching
-level: string              # required; warn | info | danger
-text: string               # required; localizable
+id: string # required; stable identifier for sidecar matching
+level: string # required; warn | info | danger
+text: string # required; localizable
 ```
 
 ### Example
 
 ```yaml
-id: string                 # required; stable identifier for sidecar matching
-title: string?             # optional; localizable
-language: string           # required; psj | python
-code: string               # required; NOT localizable; always inline, never a file path
+id: string # required; stable identifier for sidecar matching
+title: string? # optional; localizable
+language: string # required; psj | python
+code: string # required; NOT localizable; always inline, never a file path
 ```
 
 ### VersionDelta
@@ -1021,7 +1019,7 @@ changes:                   # required; at least one field must be present
   default: string?
   required: boolean?
   deprecated: boolean?
-  deprecated_reason: string?   
+  deprecated_reason: string?
   enum_values:
     add: [EnumValue]?
     remove: [integer | string]? # enum value ids to remove
@@ -1030,71 +1028,71 @@ changes:                   # required; at least one field must be present
 ### EnumValue
 
 ```yaml
-id: integer | string       # required; NOT localizable; stable across versions
-label: string              # required; localizable
-description: string?       # optional; localizable
+id: integer | string # required; NOT localizable; stable across versions
+label: string # required; localizable
+description: string? # optional; localizable
 ```
 
 ### Ref
 
 ```yaml
-$ref: string               # required; "<domain>/<id>"
-label: string?             # optional; localizable (NEW in v2); display text for the link
-inferred: boolean?         # optional; true = added by converter, not from source
+$ref: string # required; "<domain>/<id>"
+label: string? # optional; localizable (NEW in v2); display text for the link
+inferred: boolean? # optional; true = added by converter, not from source
 ```
 
 ### ParamGroup file
 
 ```yaml
-psj: '2.0'              # required
-kind: param_group          # required; must be param_group
-id: string                 # required; unique across all group files
-description: string?       # optional; localizable
-extends: string?           # optional; id of parent group (single inheritance)
-params: [Param]            # required; ordered list
+psj: '2.0' # required
+kind: param_group # required; must be param_group
+id: string # required; unique across all group files
+description: string? # optional; localizable
+extends: string? # optional; id of parent group (single inheritance)
+params: [Param] # required; ordered list
 ```
 
 ### Locale sidecar (item or group)
 
 ```yaml
-psj: '2.0'              # required
-kind: locale_sidecar       # required; must be locale_sidecar
-locale: string             # required; BCP-47 tag matching a manifest locale id
-id: string                 # required; ties to base file id
+psj: '2.0' # required
+kind: locale_sidecar # required; must be locale_sidecar
+locale: string # required; BCP-47 tag matching a manifest locale id
+id: string # required; ties to base file id
 
 description: string?
 
-callouts:                  # keyed by callout id
-  <callout_id>:
-    text: string
+callouts: # keyed by callout id
+    <callout_id>:
+        text: string
 
 params:
-  # For named params (psj-command / psj-utility / psj-gui / group):
-  <param_name>:
-    display_name: string?
-    description: string?
-    deprecated_reason: string?
-    enum_values:
-      <id>: string         # just the label; use enum value id as key
+    # For named params (psj-command / psj-utility / psj-gui / group):
+    <param_name>:
+        display_name: string?
+        description: string?
+        deprecated_reason: string?
+        enum_values:
+            <id>: string # just the label; use enum value id as key
 
-  # For positional params (macro):
-  <position_integer>:
-    description: string?
-    enum_values:
-      <id>: string
+    # For positional params (macro):
+    <position_integer>:
+        description: string?
+        enum_values:
+            <id>: string
 
 returns:
-  description: string?
-  codes:
-    <value>: string        # meaning; use the value string as key e.g. '"1"': ...
+    description: string?
+    codes:
+        <value>: string # meaning; use the value string as key e.g. '"1"': ...
 
-examples:                  # keyed by example id (NEW in v2)
-  <example_id>:
-    title: string?
+examples: # keyed by example id (NEW in v2)
+    <example_id>:
+        title: string?
 
-see_also:                  # keyed by $ref value (NEW in v2)
-  <domain/id>:
-    label: string?
+see_also: # keyed by $ref value (NEW in v2)
+    <domain/id>:
+        label: string?
 ```
 
 ---
