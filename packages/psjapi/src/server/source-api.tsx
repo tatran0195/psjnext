@@ -73,6 +73,7 @@ export interface PSJPageData extends PageData {
     };
     /** Keys for multi-item pages (per: 'group' | 'domain') */
     itemKeys?: string[];
+    index?: boolean;
     structuredData: StructuredData;
     toc: TOCItemType[];
 }
@@ -315,12 +316,64 @@ export async function psjSource(
             for (const locale of emitLocales) {
                 const localeId = locale.id;
                 for (const versionId of versions) {
-                    let metaPath = path.join(parent?.path ?? '', 'meta.json');
-                    if (versionInUrl && versionId) {
-                        metaPath = path.join(versionId, metaPath);
-                    }
-                    if (i18nParser === 'dir' && localeId) {
-                        metaPath = path.join(localeId, metaPath);
+                    const getVirtualPath = (fileName: string) => {
+                        let vp = path.join(parent?.path ?? '', fileName);
+                        if (versionInUrl && versionId) {
+                            vp = path.join(versionId, vp);
+                        }
+                        if (options.baseUrl) {
+                            const base = options.baseUrl.startsWith('/')
+                                ? options.baseUrl.slice(1)
+                                : options.baseUrl;
+                            vp = path.join(base, vp);
+                        }
+                        if (i18nParser === 'dir' && localeId) {
+                            vp = path.join(localeId, vp);
+                        }
+                        return vp;
+                    };
+
+                    const metaPath = getVirtualPath('meta.json');
+
+                    if (parent) {
+                        const indexPath = getVirtualPath('index.mdx');
+
+                        files.push({
+                            type: 'page',
+                            path: indexPath,
+                            data: {
+                                title: parent.info.title,
+                                description: parent.info.description,
+                                index: true,
+                                _psjapi:
+                                    parent.type === 'group'
+                                        ? {
+                                              domain: (parent as unknown as Record<string, unknown>)
+                                                  .domain as string | undefined,
+                                              group: parent.info.title,
+                                          }
+                                        : {},
+                                getAPIPageProps() {
+                                    return {
+                                        itemKey: '',
+                                        version: versionId || undefined,
+                                        locale: localeId || undefined,
+                                    };
+                                },
+                                structuredData: {
+                                    headings: [],
+                                    contents: [
+                                        {
+                                            content:
+                                                parent.info.description ??
+                                                parent.info.title,
+                                            heading: parent.info.title,
+                                        },
+                                    ],
+                                },
+                                toc: [],
+                            } satisfies PSJPageData,
+                        });
                     }
 
                     files.push({

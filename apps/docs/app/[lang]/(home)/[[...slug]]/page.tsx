@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ComponentProps, FC } from 'react';
 
 import Link from 'fumadocs-core/link';
+import * as PageTree from 'fumadocs-core/page-tree';
 import { findNeighbour } from 'fumadocs-core/page-tree';
 import { PathUtils } from 'fumadocs-core/source';
 import * as Twoslash from 'fumadocs-twoslash/ui';
@@ -17,6 +18,7 @@ import { LinkPreview } from '@/components/mdx/link-preview';
 import { Mermaid } from '@/components/mdx/mermaid';
 import { RibbonPath } from '@/components/mdx/ribbon-path';
 import { SymbolLink } from '@/components/mdx/symbol-link';
+import { FolderIndex } from '@/components/sdk/folder-index';
 import {
     DocsBody,
     DocsDescription,
@@ -33,9 +35,32 @@ export default async function Page(props: {
     searchParams: Promise<{ v?: string }>;
 }) {
     const params = await props.params;
-    const page = source.getPage(params.slug, params.lang);
+    const { slug = [], lang } = params;
 
-    if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
+    const page = source.getPage(slug, lang);
+
+    if (!page) {
+        return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
+    }
+
+    // Resolve folder for index pages (SDK domains/groups)
+    let indexFolder: PageTree.Folder | undefined;
+    if (page.data.index) {
+        const tree = source.getPageTree(lang);
+        let current: PageTree.Node[] = tree.children;
+        for (const segment of slug) {
+            const next = current.find(
+                (n): n is PageTree.Folder =>
+                    n.type === 'folder' && n.name === segment,
+            );
+            if (!next) {
+                indexFolder = undefined;
+                break;
+            }
+            indexFolder = next;
+            current = next.children;
+        }
+    }
 
     if (page.type === 'sdk') {
         return <APIPage {...page.data.getAPIPageProps()} />;
@@ -85,7 +110,7 @@ export default async function Page(props: {
                 <Mdx
                     components={getMDXComponents({
                         ...Twoslash,
-                        a({ href, ...props }) {
+                        a({ href, ...props }: ComponentProps<'a'>) {
                             if (!href) return <a {...props} />;
 
                             const found = source.getPageByHref(href, {
@@ -110,15 +135,19 @@ export default async function Page(props: {
                         SymbolLink,
                         LinkPreview,
                         blockquote: Callout as unknown as FC<ComponentProps<'blockquote'>>,
-                        DocsCategory: ({ url }) => {
-                            return <DocsCategory url={url ?? page.url} lang={params.lang} />;
+                        DocsCategory: ({ url }: { url?: string }) => {
+                            return <DocsCategory url={url ?? page.url} lang={lang} />;
                         },
-                        DocsSectionOverview: ({ url }) => {
-                            return <DocsSectionOverview url={url ?? page.url} lang={params.lang} />;
+                        DocsSectionOverview: ({ url }: { url?: string }) => {
+                            return <DocsSectionOverview url={url ?? page.url} lang={lang} />;
                         },
                     })}
                 />
-                {page.data.index ? <DocsCategory url={page.url} lang={params.lang} /> : null}
+                {indexFolder ? (
+                    <FolderIndex folder={indexFolder} />
+                ) : page.data.index ? (
+                    <DocsCategory url={page.url} lang={lang} />
+                ) : null}
             </DocsBody>
             {lastModified && <PageLastUpdate date={lastModified} />}
         </DocsPage>

@@ -207,6 +207,7 @@
 @source inline("fall");
 @source inline("false");
 @source inline("file");
+@source inline("fileName");
 @source inline("filePath");
 @source inline("files");
 @source inline("fill");
@@ -252,6 +253,7 @@
 @source inline("gap-y-6");
 @source inline("generated");
 @source inline("getAPIPageProps");
+@source inline("getVirtualPath");
 @source inline("github-dark");
 @source inline("github-light");
 @source inline("github-slugger");
@@ -299,6 +301,7 @@
 @source inline("in");
 @source inline("includes");
 @source inline("index");
+@source inline("indexPath");
 @source inline("info");
 @source inline("inline");
 @source inline("inline-flex");
@@ -693,6 +696,7 @@
 @source inline("virtual");
 @source inline("visible");
 @source inline("void");
+@source inline("vp");
 @source inline("vs");
 @source inline("w-fit");
 @source inline("w-full");

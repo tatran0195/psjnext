@@ -7,6 +7,7 @@ import defaultMdxComponents from 'fumadocs-ui/mdx';
 
 import { RibbonPath } from '@/components/mdx/ribbon-path';
 import { SymbolLink } from '@/components/mdx/symbol-link';
+import { SdkIndex } from '@/components/sdk/sdk-index';
 
 import type { MDXComponents } from 'mdx/types';
 
@@ -20,6 +21,7 @@ export function getMDXComponents(components?: MDXComponents) {
         Accordions,
         SymbolLink,
         RibbonPath,
+        SdkIndex,
         // oxlint-disable-next-line typescript/no-explicit-any
         img: (props: any) => {
             const isGif =

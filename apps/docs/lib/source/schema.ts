@@ -37,4 +37,5 @@ export const docsSchema = pageSchema.extend({
 
 export const metaSchemaWithGroup = metaSchema.extend({
     group: z.boolean().optional(),
+    groupLevel: z.number().optional(),
 });

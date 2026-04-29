@@ -1,6 +1,6 @@
-# psj — Jupiter CAE Desktop SDK Documentation Format
+# PSJ SDK Documentation Format — Specification v3.3
 
-**Specification version:** `2.0`
+**Specification version:** `3.3`
 **Format identifier:** `psj`
 **File extension:** `.yaml`
 
@@ -12,124 +12,208 @@ psj is the authoritative documentation format for the Jupiter CAE Desktop Platfo
 
 ### Design goals
 
-| Goal                                          | Mechanism                                                                   |
-| --------------------------------------------- | --------------------------------------------------------------------------- |
-| One format for all four callable domains      | `domain` field drives all renderer decisions                                |
-| No repeated param definitions across siblings | Param groups (`_groups/`) referenced by `$group`                            |
-| No full-file copies across SDK versions       | Delta blocks (`changes`) record only what changed                           |
-| Translations without polluting structure      | Sidecar locale files (`<id>.<locale>.yaml`)                                 |
-| Examples always co-located with their item    | Inline `examples` block, never file links                                   |
-| Partial translations are valid                | Silent fallback to `en` when a locale key is absent                         |
-| Unambiguous schema validation                 | Every field has an explicit type, constraints, and required/optional status |
-| Safe cross-file references                    | `$ref` and `$group` resolve at load time; broken refs are build errors      |
+| Goal | Mechanism |
+| --- | --- |
+| One format for all four callable domains | `domain` field drives all renderer decisions |
+| No repeated param definitions across siblings | Param groups (`_groups/`) referenced by `$group` |
+| No full-file copies across SDK versions | Delta blocks (`changes`) record only what changed |
+| Translations without polluting structure | Sidecar locale files (`<id>.<locale>.yaml`) |
+| Examples always co-located with their item | Inline `examples` block, never file links |
+| Partial translations are valid | Silent fallback to `en` when a locale key is absent |
+| Unambiguous schema validation | Every field has an explicit type, constraints, and required/optional status |
+| Safe cross-file references | `$ref` and `$group` resolve at load time; broken refs are build errors |
+| Navigable at scale | Folder hierarchy replaces flat `group` field; `meta.yaml` per folder |
+| Group metadata is localizable | `meta.<locale>.yaml` sidecars carry translated folder titles |
+| Data-types organised by semantic scope | `built-in/`, `pre/`, `post/`, `gui/` — not by domain name |
+| Data-types renderable in Fumadocs | Data-type pages are first-class Fumadocs pages under `psjapi/data-type/` |
 
 ---
 
 ## Repository layout
 
 ```text
-sdk.psj.yaml                  ← root manifest
+sdk.psj.yaml
+
 _groups/
-  <group-id>.yaml                ← reusable param group definition
-  <group-id>.<locale>.yaml       ← locale translations for that group
-macro/
-  <id>.yaml
-  <id>.<locale>.yaml
-psj-command/
-  <id>.yaml
-  <id>.<locale>.yaml
-psj-utility/
-  <id>.yaml
-  <id>.<locale>.yaml
-psj-gui/
-  <id>.yaml
-  <id>.<locale>.yaml
+  <group-id>.yaml
+  <group-id>.<locale>.yaml
+
 data-type/
-  <id>.yaml                      ← structured data-type definitions (NEW in v2)
+  built-in/                         ← scalar types shared by all domains
+    meta.yaml
+    python-built-in-types.yaml
+    jupiter-built-in-types.yaml
+    <id>.<locale>.yaml
+
+  pre/                              ← types used in pre-processing
+    meta.yaml
+    built-in/
+      meta.yaml
+      BodyVector.yaml
+      ConnectVector.yaml
+      VersionInfo.yaml
+      <id>.<locale>.yaml
+    enum/
+      meta.yaml
+      DItemType.yaml
+      ElemType.yaml
+      ElemKind.yaml
+      MaterialPropertyType.yaml
+      MaterialUnitType.yaml         ← index; see_also to per-unit files
+      LengthUnit.yaml
+      TimeUnit.yaml
+      MassUnit.yaml
+      ForceUnit.yaml
+      PressureUnit.yaml
+      AssociateType.yaml
+      PathType.yaml
+      DTableType.yaml
+      BoolType.yaml
+      MessageBoxType.yaml
+      SelectMethodType.yaml
+      <id>.<locale>.yaml
+    class/
+      meta.yaml
+      JPT_NASTRAN_ANALYSIS.yaml
+      JPT_ABAQUS_LBC_STEP_INFO.yaml
+      JPT_ABAQUS_OUTPUT_REQUEST.yaml
+      JPT_ADVC_DYNAMIC.yaml
+      <id>.<locale>.yaml
+
+  post/                             ← types used in post-processing
+    meta.yaml
+    built-in/
+      meta.yaml
+      DPostAnalysis.yaml
+      DPostElem.yaml
+      DPostTimeStep.yaml
+      <id>.<locale>.yaml
+    enum/
+      meta.yaml
+      PostJobType.yaml
+      PostAnalysisType.yaml
+      PostDataRangeType.yaml
+      PostDataLocationType.yaml
+      PostDataConversionType.yaml
+      PostDataContinuousType.yaml
+      PostDataCoordinateType.yaml
+      PostData1DType.yaml
+      PostData2DType.yaml
+      PostResultDataAmtType.yaml
+      <id>.<locale>.yaml
+
+  gui/                              ← types used in GUI
+    meta.yaml
+    built-in/
+      meta.yaml
+      PSJFont.yaml
+      TableCellID.yaml
+      TableCellRange.yaml
+      <id>.<locale>.yaml
+    class/
+      meta.yaml
+      PSJMessageBox.yaml
+      <id>.<locale>.yaml
+
+macro/
+  meta.yaml
+  <SubFolder>/
+    meta.yaml
+    meta.<locale>.yaml
+    <id>.yaml
+    <id>.<locale>.yaml
+
+psj-command/
+  meta.yaml
+  <SubFolder>/
+    meta.yaml
+    meta.<locale>.yaml
+    <id>.yaml
+    <id>.<locale>.yaml
+
+psj-utility/
+  meta.yaml
+  <SubFolder>/
+    meta.yaml
+    meta.<locale>.yaml
+    <id>.yaml
+    <id>.<locale>.yaml
+
+psj-gui/
+  meta.yaml
+  msgbox/
+    meta.yaml
+    add_button.yaml
+    show.yaml
+    set_caption.yaml
+    set_header.yaml
+    set_icon.yaml
+    set_message.yaml
+    enable_checkbox.yaml
+    set_buttons.yaml
+    <id>.<locale>.yaml
+  <SubFolder>/
+    meta.yaml
+    meta.<locale>.yaml
+    <id>.yaml
+    <id>.<locale>.yaml
 ```
 
-The base file (`.yaml`) is always English and is the source of truth for both structure and English text. A locale sidecar contains only the natural-language fields for that locale. Structural fields (`id`, `type`, `default`, `syntax`, `code`, …) never appear in sidecars.
+**Key layout rules:**
+
+- The base file (`.yaml`) is always English and is the source of truth for both structure and English text.
+- A locale sidecar contains only natural-language fields. Structural fields never appear in sidecars.
+- Each subfolder MUST contain a `meta.yaml`. The domain root MAY contain a `meta.yaml`.
+- An item `id` MUST equal its path relative to the domain root using `/` separators without file extension.
+- A data-type `id` MUST equal its path relative to `data-type/` using `/` separators without file extension (e.g. `pre/enum/DItemType`).
+- `$ref:data-type/<id>` MUST use the full semantic-scope path (e.g. `$ref:data-type/pre/class/JPT_NASTRAN_ANALYSIS`).
+- `data-type` is a **reference library**, not a domain. It has no manifest entry, no `param_style`, and no renderer domain row.
 
 ---
 
 ## Table of Contents
 
-- [psj — Jupiter CAE Desktop SDK Documentation Format](#psj--jupiter-cae-desktop-sdk-documentation-format)
-    - [Overview](#overview)
-        - [Design goals](#design-goals)
-    - [Repository layout](#repository-layout)
-    - [Table of Contents](#table-of-contents)
-    - [1. Root manifest — `sdk.psj.yaml`](#1-root-manifest--sdkpsjyaml)
-    - [2. Data-type files — `data-type/<id>.yaml`](#2-data-type-files--data-typeidyaml)
-    - [3. Param group files — `_groups/<id>.yaml`](#3-param-group-files--_groupsidyaml)
-        - [Group locale sidecar — `_groups/<id>.<locale>.yaml`](#group-locale-sidecar--_groupsidlocaleyaml)
-    - [4. Item files — `<domain>/<id>.yaml`](#4-item-files--domainidyaml)
-        - [4a. Minimal item — pure group reference](#4a-minimal-item--pure-group-reference)
-        - [4b. Group reference with exclusions, overrides, and inline additions](#4b-group-reference-with-exclusions-overrides-and-inline-additions)
-        - [4c. Group with mid-list insertion](#4c-group-with-mid-list-insertion)
-        - [4d. Macro — positional params](#4d-macro--positional-params)
-        - [4e. Utility — with callout](#4e-utility--with-callout)
-        - [4f. PSJ-GUI method](#4f-psj-gui-method)
-    - [5. Delta versioning](#5-delta-versioning)
-        - [5a. Removing params across a version](#5a-removing-params-across-a-version)
-        - [5b. Full delta operation vocabulary](#5b-full-delta-operation-vocabulary)
-    - [6. Locale sidecar files](#6-locale-sidecar-files)
-        - [6a. Localizable vs. structural fields](#6a-localizable-vs-structural-fields)
-        - [6b. Item locale sidecar](#6b-item-locale-sidecar)
-        - [6c. Macro locale sidecar — positional params keyed by position](#6c-macro-locale-sidecar--positional-params-keyed-by-position)
-    - [7. Locale resolution algorithm](#7-locale-resolution-algorithm)
-    - [8. Renderer decisions driven by `domain`](#8-renderer-decisions-driven-by-domain)
-    - [9. Complete field reference](#9-complete-field-reference)
-        - [Item file](#item-file)
-        - [Param](#param)
-        - [GroupRef](#groupref)
-        - [Returns](#returns)
-        - [Code](#code)
-        - [Callout](#callout)
-        - [Example](#example)
-        - [VersionDelta](#versiondelta)
-        - [ParamPatch](#parampatch)
-        - [EnumValue](#enumvalue)
-        - [Ref](#ref)
-        - [ParamGroup file](#paramgroup-file)
-        - [Locale sidecar (item or group)](#locale-sidecar-item-or-group)
-    - [10. Type system](#10-type-system)
-    - [11. Validation rules (summary)](#11-validation-rules-summary)
-    - [12. Tooling \& Integration](#12-tooling--integration)
-        - [Fumadocs \& `meta.json` Generation](#fumadocs--metajson-generation)
+- [1. Root manifest](#1-root-manifest--sdkpsjyaml)
+- [2. Group meta files](#2-group-meta-files--metayaml)
+- [3. Data-type files](#3-data-type-files--data-typescopecategoryidyaml)
+- [4. Param group files](#4-param-group-files--_groupsidyaml)
+- [5. Item files](#5-item-files--domainsubfolderidyaml)
+- [6. Delta versioning](#6-delta-versioning)
+- [7. Locale sidecar files](#7-locale-sidecar-files)
+- [8. Locale resolution algorithm](#8-locale-resolution-algorithm)
+- [9. Renderer decisions driven by `domain`](#9-renderer-decisions-driven-by-domain)
+- [10. Data-type renderer](#10-data-type-renderer)
+- [11. Complete field reference](#11-complete-field-reference)
+- [12. Type system](#12-type-system)
+- [13. Validation rules](#13-validation-rules)
+- [14. Tooling & Integration](#14-tooling--integration)
 
 ---
 
 ## 1. Root manifest — `sdk.psj.yaml`
 
 ```yaml
-psj: '2.0' # required; must match spec version being used
+psj: '3.3'
 
-# Ordered oldest → newest. Adding an entry here is all that is needed to unlock
-# the delta system for items that changed in that release.
-versions: # required; at least one entry
-    - id: '5.0.0' # required; semver string
-      notes: ~ # optional; string; release notes summary
+versions:
+    - id: '5.0.0'
     - id: '5.0.1'
-      notes: 'Removed iEJobType and iHeatConvection from Analysis.ADVC.Structure'
     - id: '5.1.0'
-      notes: 'Current release'
 
-current_version: '5.1.0' # required; must match one of versions[].id
+current_version: '5.1.0'
 
-locales: # required; at least one entry with default: true
-    - id: en # BCP-47 language tag
+locales:
+    - id: en
       label: English
-      default: true # exactly one locale must be default: true
+      default: true
     - id: ja
       label: 日本語
 
-# Domain declarations control renderer behaviour. The four built-in domains
-# are listed below. Custom domains may be added but require a renderer plugin.
-domains: # required
-    - id: macro # required; must be a valid identifier
-      title: Macros # required; display label
-      param_style: positional # required; positional | named
+# The four callable domains. data-type is NOT listed here.
+domains:
+    - id: macro
+      title: Macros
+      param_style: positional
     - id: psj-command
       title: PSJ Commands
       param_style: named
@@ -139,37 +223,230 @@ domains: # required
     - id: psj-gui
       title: PSJ GUI
       param_style: named
-
-# Optional list of maintainers. Replaces per-item author / author_url.
-maintainers:
-    - name: 'SDK Documentation Team'
-      email: 'sdk-docs@example.com' # optional
-      url: 'https://example.com' # optional
 ```
 
-**Validation rules**:
+**Validation rules:**
 
 - `current_version` MUST equal one of the `versions[].id` values.
 - `versions` MUST be ordered oldest → newest (strict semver ascending).
 - Exactly one locale MUST carry `default: true`.
 - Each `domain.id` MUST be unique within the list.
+- `data-type` MUST NOT appear as a `domain.id`.
 
 ---
 
-## 2. Data-type files — `data-type/<id>.yaml`
+## 2. Group meta files — `meta.yaml`
 
-Data-type files document the structured types referenced via `$ref:data-type/<id>` in param and return declarations. They are documentation artifacts, not code-generation schemas.
+Every subfolder within a domain and within `data-type/` MUST contain a `meta.yaml`.
 
 ```yaml
-# data-type/JPT_NASTRAN_ANALYSIS.yaml
-psj: '2.0'
-kind: data_type # required; must be data_type
-id: JPT_NASTRAN_ANALYSIS # required; unique across all data-type files
-title: 'JPT_NASTRAN_ANALYSIS' # required; display title (often same as id)
+# data-type/pre/enum/meta.yaml
+psj: '3.3'
+kind: group_meta
+title: 'Pre-Processing Enumeration Types'
+description: >
+    Enumeration types used in pre-processing commands and utilities.
+order:
+    - DItemType
+    - ElemType
+    - ElemKind
+    - MaterialPropertyType
+    - MaterialUnitType
+    - AssociateType
+    - PathType
+    - DTableType
+    - BoolType
+    - MessageBoxType
+    - SelectMethodType
+icon: enum
+```
+
+### Group meta locale sidecar — `meta.<locale>.yaml`
+
+```yaml
+# data-type/pre/enum/meta.ja.yaml
+psj: '3.3'
+kind: group_meta
+locale: ja
+title: '前処理 列挙型'
+description: >
+    前処理コマンドおよびユーティリティで使用される列挙型。
+```
+
+**Validation rules:**
+
+- `meta.yaml` MUST exist in every subfolder under a domain root and under `data-type/`.
+- `kind` MUST be `group_meta`.
+- If `order` is present, ALL direct children MUST be listed — partial ordering is not allowed.
+- `order` entries MUST each resolve to an existing child file stem or subfolder name.
+- `meta.<locale>.yaml` locale tag MUST match a locale declared in the manifest.
+
+---
+
+## 3. Data-type files — `data-type/<scope>/<category>/<id>.yaml`
+
+Data-type files document all types referenced via `$ref:data-type/<id>` in param and return declarations. They are **first-class documentation pages** rendered under `psjapi/data-type/` in Fumadocs, not hidden reference artifacts.
+
+### Scope folders
+
+| Scope | Path | Contains |
+| --- | --- | --- |
+| Global built-ins | `data-type/built-in/` | Scalar primitives and Jupiter core types shared by all domains |
+| Pre-processing | `data-type/pre/` | Types used by `psj-command` and pre-processing `psj-utility` items |
+| Post-processing | `data-type/post/` | Types used by post-processing `psj-utility` items |
+| GUI | `data-type/gui/` | Types used by `psj-gui` items |
+
+### Category subfolders
+
+| Folder | `category` value | Rule |
+| --- | --- | --- |
+| `built-in/` | `built-in` | Primitive scalars and advanced Jupiter core types |
+| `enum/` | `enumeration` | Integer or string enumeration tables |
+| `class/` | `class` | Constructor + fields types |
+
+Data-type files placed at the scope root (e.g. `data-type/pre/`) are index or overview pages with no category subfolder requirement.
+
+### 3a. Built-in types
+
+```yaml
+# data-type/built-in/python-built-in-types.yaml
+psj: '3.3'
+kind: data_type
+id: built-in/python-built-in-types
+title: 'Python Built-in Types'
+category: built-in
+description: >
+    Standard Python scalar types available as parameter and return
+    types across all PSJ domains.
+version_introduced: '5.0.0'
+
+values:
+    - id: String
+      label: String
+      description: UTF-8 text value. Written as str in Python.
+    - id: Integer
+      label: Integer
+      description: 32-bit signed integer. Written as int in Python.
+    - id: Boolean
+      label: Boolean
+      description: True or False. Written as bool in Python.
+    - id: Double
+      label: Double
+      description: 64-bit floating point. Written as float in Python.
+```
+
+```yaml
+# data-type/built-in/jupiter-built-in-types.yaml
+psj: '3.3'
+kind: data_type
+id: built-in/jupiter-built-in-types
+title: 'Jupiter Built-in Types'
+category: built-in
+description: >
+    Advanced built-in types specific to the Jupiter CAE platform.
+version_introduced: '5.0.0'
+
+values:
+    - id: Cursor
+      label: Cursor
+      description: >
+          Points to any SDK object in the Jupiter database.
+          Passed by reference; resolved at call time.
+    - id: List
+      label: List
+      description: Ordered collection. Element type specified as List[T].
+    - id: Vector
+      label: Vector
+      description: Fixed-length numeric tuple. Size is not encoded in the type string.
+```
+
+### 3b. Enumeration types
+
+```yaml
+# data-type/pre/enum/DItemType.yaml
+psj: '3.3'
+kind: data_type
+id: pre/enum/DItemType
+title: 'DItemType'
+category: enumeration
+namespace: 'JPT.DItemType'
+description: >
+    Enumeration representing the type of a DItem in Jupiter.
+    Use JPT.DItemType.<NAME> in code, or the integer ID where noted.
+version_introduced: '5.0.0'
+
+values:
+    - id: 2
+      name: INST
+      label: Sub Assembly
+      description: Sub assembly node for tree display.
+    - id: 3
+      name: BODY
+      label: Parts
+    - id: 10
+      name: NODE
+      label: Node
+```
+
+```yaml
+# data-type/pre/enum/MaterialUnitType.yaml  ← index file
+psj: '3.3'
+kind: data_type
+id: pre/enum/MaterialUnitType
+title: 'Material Unit Types'
+category: enumeration
+description: >
+    Index of all physical unit enumerations available via JPT.UnitType.
+    Each unit group is documented in its own file.
+version_introduced: '5.0.0'
+
+see_also:
+    - $ref: 'data-type/pre/enum/LengthUnit'
+    - $ref: 'data-type/pre/enum/TimeUnit'
+    - $ref: 'data-type/pre/enum/MassUnit'
+    - $ref: 'data-type/pre/enum/ForceUnit'
+    - $ref: 'data-type/pre/enum/PressureUnit'
+```
+
+```yaml
+# data-type/pre/enum/LengthUnit.yaml  ← one file per unit group
+psj: '3.3'
+kind: data_type
+id: pre/enum/LengthUnit
+title: 'LengthUnit'
+category: enumeration
+namespace: 'JPT.UnitType'
+description: Enumeration of length unit variants.
+version_introduced: '5.0.0'
+
+values:
+    - id: 0
+      name: Length_mm
+      label: Millimetre (mm)
+    - id: 1
+      name: Length_m
+      label: Metre (m)
+    - id: 2
+      name: Length_in
+      label: Inch (in)
+```
+
+### 3c. Class types — constructor + fields
+
+```yaml
+# data-type/pre/class/JPT_NASTRAN_ANALYSIS.yaml
+psj: '3.3'
+kind: data_type
+id: pre/class/JPT_NASTRAN_ANALYSIS
+title: 'JPT_NASTRAN_ANALYSIS'
+category: class
 description: >
     Input parameter block for Nastran analysis configuration.
-version_introduced: '5.0.0' # required
-fields: # ordered list of fields on this type
+version_introduced: '5.0.0'
+
+constructor_syntax: 'JPT_NASTRAN_ANALYSIS(iSolverType=0)'
+
+fields:
     - name: iSolverType
       type: Integer
       required: false
@@ -182,24 +459,100 @@ fields: # ordered list of fields on this type
             label: SMP
 ```
 
-Data-type locale sidecars (`data-type/<id>.<locale>.yaml`) follow the same sidecar rules as item sidecars.
+### 3d. Composite class with methods
+
+```yaml
+# data-type/gui/class/PSJMessageBox.yaml
+psj: '3.3'
+kind: data_type
+id: gui/class/PSJMessageBox
+title: 'PSJMessageBox'
+category: class
+description: >
+    Message box dialog class. Construct and configure the dialog,
+    then call show() to display it and retrieve the user's response.
+version_introduced: '5.0.0'
+
+constructor_syntax: 'PSJMessageBox()'
+
+# Methods are full item files in the psj-gui domain.
+# $ref paths include the domain prefix and resolve across any domain.
+methods:
+    - $ref: 'psj-gui/msgbox/set_caption'
+    - $ref: 'psj-gui/msgbox/set_header'
+    - $ref: 'psj-gui/msgbox/set_icon'
+    - $ref: 'psj-gui/msgbox/set_message'
+    - $ref: 'psj-gui/msgbox/enable_checkbox'
+    - $ref: 'psj-gui/msgbox/set_buttons'
+    - $ref: 'psj-gui/msgbox/add_button'
+    - $ref: 'psj-gui/msgbox/show'
+
+examples:
+    - id: basic-usage
+      title: Create and show a message box
+      language: python
+      code: |
+          msgbox = PSJMessageBox()
+          msgbox.set_caption(text="PSJ Message Box")
+          msgbox.set_message(text="This is an error message box")
+          msgbox.set_buttons(button_type=msgbox_buttons.yes_no_cancel)
+          print("clicked:" + msgbox.show())
+```
+
+### 3e. Data-type locale sidecar — enumeration
+
+```yaml
+# data-type/pre/enum/DItemType.ja.yaml
+psj: '3.3'
+kind: locale_sidecar
+locale: ja
+id: pre/enum/DItemType
+
+description: >
+    Jupiter の DItem の種類を表す列挙型。
+
+values:
+    2:
+        label: サブアセンブリ
+        description: ツリー表示用サブアセンブリノード。
+    3:
+        label: パーツ
+    10:
+        label: ノード
+```
+
+### 3f. Data-type locale sidecar — class
+
+```yaml
+# data-type/pre/class/JPT_NASTRAN_ANALYSIS.ja.yaml
+psj: '3.3'
+kind: locale_sidecar
+locale: ja
+id: pre/class/JPT_NASTRAN_ANALYSIS
+
+description: >
+    Nastran解析設定の入力パラメータブロック。
+
+fields:
+    iSolverType:
+        description: Nastranソルバーのバリアント。
+        enum_values:
+            0: デフォルト
+            1: SMP
+```
 
 ---
 
-## 3. Param group files — `_groups/<id>.yaml`
-
-A param group is a named, ordered list of param definitions with no domain, syntax, or return value of its own. Any item file includes it by reference. Groups can extend other groups.
-
-It is purely a mechanism to reduce repeated parameter definitions across multiple files; it has no semantic meaning in the final rendered documentation.
+## 4. Param group files — `_groups/<id>.yaml`
 
 ```yaml
 # _groups/nastran-base.yaml
-psj: '2.0'
-kind: param_group # required; must be param_group
-id: nastran-base # required; unique across all group files
+psj: '3.3'
+kind: param_group
+id: nastran-base
 description: >
     Parameters shared by all Nastran analysis export commands.
-extends: ~ # optional; id of parent group (single inheritance)
+extends: ~
 params:
     - name: strName
       type: String
@@ -207,41 +560,11 @@ params:
       default: '"Job_1"'
       description: Job name for the Nastran analysis.
 
-    - name: strDescription
-      type: String
-      required: false
-      default: '""'
-      description: Description of the Nastran analysis job.
-
-    - name: crlTargets
-      type: 'List[Cursor]'
-      required: false
-      default: '[]'
-      description: List of target parts.
-
     - name: nastranAnalysis
-      type: '$ref:data-type/JPT_NASTRAN_ANALYSIS'
+      type: '$ref:data-type/pre/class/JPT_NASTRAN_ANALYSIS'
       required: false
       default: 'JPT_NASTRAN_ANALYSIS()'
       description: Nastran analysis input parameters.
-
-    - name: bDummyPropAutoAssign
-      type: Boolean
-      required: false
-      default: 'False'
-      description: Auto-create dummy properties for unassigned parts.
-
-    - name: iDummyPropMaterialID
-      type: Integer
-      required: false
-      default: '0'
-      description: Material ID for dummy property assignment.
-
-    - name: crEdit
-      type: Cursor
-      required: false
-      default: 'None'
-      description: Existing Nastran job to modify. `None` creates a new job.
 
     - name: strPath
       type: String
@@ -258,29 +581,16 @@ params:
             label: 'Off'
           - id: 1
             label: 'On'
-
-    - name: iDeleteSlaveNodesAnswer
-      type: Integer
-      required: false
-      default: '0'
-      description: Delete slave nodes checking.
-      enum_values:
-          - id: 0
-            label: 'Off'
-          - id: 1
-            label: 'On'
 ```
 
-### Group locale sidecar — `_groups/<id>.<locale>.yaml`
-
-The group sidecar translates params that belong to the group. Items referencing the group pick up these translations automatically — they are never duplicated into item-level sidecars.
+### Group locale sidecar
 
 ```yaml
 # _groups/nastran-base.ja.yaml
-psj: '2.0'
-kind: param_group # required; must match base file kind
-locale: ja # required; BCP-47 tag matching a manifest locale id
-id: nastran-base # required; must match base file id
+psj: '3.3'
+kind: param_group
+locale: ja
+id: nastran-base
 
 description: >
     すべてのNastran解析エクスポートコマンドで共有されるパラメータ。
@@ -289,18 +599,8 @@ params:
     strName:
         display_name: ジョブ名
         description: Nastran解析のジョブ名。
-    strDescription:
-        description: Nastran解析ジョブの説明。
-    crlTargets:
-        description: 対象パーツのリスト。
     nastranAnalysis:
         description: Nastran解析入力パラメータ。
-    bDummyPropAutoAssign:
-        description: 未割り当てパーツへのダミープロパティの自動生成。
-    iDummyPropMaterialID:
-        description: ダミープロパティ割り当てに使用する材料ID。
-    crEdit:
-        description: 変更対象の既存Nastranジョブ。Noneの場合は新規作成。
     strPath:
         display_name: エクスポートパス
         description: BDFファイルのエクスポート先パス。
@@ -309,66 +609,62 @@ params:
         enum_values:
             0: '無効'
             1: '有効'
-    iDeleteSlaveNodesAnswer:
-        description: スレーブノード削除チェック。
-        enum_values:
-            0: '無効'
-            1: '有効'
 ```
 
 ---
 
-## 4. Item files — `<domain>/<id>.yaml`
+## 5. Item files — `<domain>/<SubFolder>/<id>.yaml`
 
-### 4a. Minimal item — pure group reference
-
-```yaml
-# psj-command/Analysis-Nastran-LinearStatic.yaml
-psj: '2.0'
-id: Analysis-Nastran-LinearStatic # required; slug unique within domain
-title: 'Analysis.Nastran.LinearStatic()' # required; verbatim call signature
-domain: psj-command # required; must match a manifest domain id
-group: Nastran # optional; nav grouping label
-namespace: Analysis.Nastran # optional (omit for macros); dotted call prefix
-ribbon: 'Analysis > Nastran > LinearStatic' # optional; psj-command only
-description: >
-    Export the Nastran BDF input file for Structure Linear Static analysis (SOL 101).
-version_introduced: '5.0.0' # required; must match a manifest version id
-stability: stable # optional; stable | experimental | deprecated
-macro_link: NastranJob # optional; id of the macro this command wraps (psj-command only)
-
-params:
-    - $group: nastran-base # inline all params from the group
-
-returns:
-    kind: typed # required; typed | macro_code | void
-    type: Cursor # required when kind=typed
-    description: The created Nastran job.
-```
-
-### 4b. Group reference with exclusions, overrides, and inline additions
+### 5a. PSJ Command — pure group reference
 
 ```yaml
-# psj-command/Analysis-Nastran-DirectFrequencyResponse.yaml
-psj: '2.0'
-id: Analysis-Nastran-DirectFrequencyResponse
-title: 'Analysis.Nastran.DirectFrequencyResponse()'
+# psj-command/Nastran/LinearStatic.yaml
+psj: '3.3'
+id: Nastran/LinearStatic
+title: 'Analysis.Nastran.LinearStatic()'
 domain: psj-command
-group: Nastran
 namespace: Analysis.Nastran
-ribbon: 'Analysis > Nastran > DirectFrequencyResponse'
-description: Export the Nastran BDF for Direct Frequency Response analysis (SOL 108).
+ribbon: 'Analysis > Nastran > LinearStatic'
+description: >
+    Export the Nastran BDF input file for Structure Linear Static
+    analysis (SOL 101).
 version_introduced: '5.0.0'
 stability: stable
-macro_link: NastranJob
+macro_link: Analysis/NastranJob
+syntax: 'Analysis.Nastran.LinearStatic(...)'
 
 params:
     - $group: nastran-base
-      exclude: # drop named params from the inlined group
+
+returns:
+    kind: typed
+    type: Cursor
+    description: The created Nastran job.
+```
+
+### 5b. PSJ Command — group with exclusions, overrides, and additions
+
+```yaml
+# psj-command/Nastran/DirectFrequencyResponse.yaml
+psj: '3.3'
+id: Nastran/DirectFrequencyResponse
+title: 'Analysis.Nastran.DirectFrequencyResponse()'
+domain: psj-command
+namespace: Analysis.Nastran
+ribbon: 'Analysis > Nastran > DirectFrequencyResponse'
+description: >
+    Export the Nastran BDF for Direct Frequency Response analysis (SOL 108).
+version_introduced: '5.0.0'
+stability: stable
+macro_link: Analysis/NastranJob
+syntax: 'Analysis.Nastran.DirectFrequencyResponse(...)'
+
+params:
+    - $group: nastran-base
+      exclude:
           - bDummyPropAutoAssign
           - iDummyPropMaterialID
-          - crEdit
-      override: # NEW in v2: patch individual group params
+      override:
           strPath:
               description: Export path for the frequency response BDF file.
 
@@ -377,66 +673,6 @@ params:
       required: false
       default: 'False'
       description: Enable XY plot output.
-
-    - name: iOutputValueSet
-      type: Integer
-      required: false
-      default: '0'
-      description: Output value set selector.
-
-    - name: iOutputDOFType
-      type: Integer
-      required: false
-      default: '0'
-      description: Output degree-of-freedom type.
-
-    - name: iXYPlotDisplacementType
-      type: Integer
-      required: false
-      default: '0'
-      description: XY plot displacement type.
-
-    - name: iXYPlotVelocityType
-      type: Integer
-      required: false
-      default: '0'
-      description: XY plot velocity type.
-
-    - name: iXYPlotAccelerationType
-      type: Integer
-      required: false
-      default: '0'
-      description: XY plot acceleration type.
-
-    - name: strXTitle
-      type: String
-      required: false
-      default: '""'
-      description: X-axis title for XY plots.
-
-    - name: strYTitle
-      type: String
-      required: false
-      default: '""'
-      description: Y-axis title for XY plots.
-
-    - name: bOutputGeomIDofDummyProp
-      type: Boolean
-      required: false
-      default: 'False'
-      description: Output geometry ID of dummy properties.
-
-    - name: bDummyPropAutoAssign
-      type: Boolean
-      required: false
-      default: 'False'
-      description: Auto-create dummy properties.
-
-    - name: iDummyPropMaterialID
-      type: Integer
-      required: false
-      default: '0'
-      description: Material ID for dummy property assignment.
 
     - name: crEdit
       type: Cursor
@@ -450,25 +686,25 @@ returns:
     description: The created Nastran job.
 ```
 
-### 4c. Group with mid-list insertion
+### 5c. PSJ Command — group with mid-list insertion
 
 ```yaml
-# psj-command/Analysis-ADVC-MakeProcess-Dynamic.yaml
-psj: '2.0'
-id: Analysis-ADVC-MakeProcess-Dynamic
+# psj-command/ADVC/MakeProcess/Dynamic.yaml
+psj: '3.3'
+id: ADVC/MakeProcess/Dynamic
 title: 'Analysis.ADVC.MakeProcess.Dynamic()'
 domain: psj-command
-group: ADVC
 namespace: Analysis.ADVC.MakeProcess
 ribbon: 'Analysis > ADVC > Make Process > Dynamic'
 description: Create an ADVC Structure Dynamic process.
 version_introduced: '5.0.0'
 stability: stable
-macro_link: AdvcDynamicProcess
+macro_link: Analysis/AdvcDynamicProcess
+syntax: 'Analysis.ADVC.MakeProcess.Dynamic(...)'
 
 params:
     - $group: advc-process-struct
-      insert_after: advcAutoIncrement # splice `insert` params after this param name
+      insert_after: advcAutoIncrement
       insert:
           - name: bDynamic
             type: Boolean
@@ -476,7 +712,7 @@ params:
             default: 'False'
             description: Enable dynamic parameter settings.
           - name: advcDynamic
-            type: '$ref:data-type/JPT_ADVC_DYNAMIC'
+            type: '$ref:data-type/pre/class/JPT_ADVC_DYNAMIC'
             required: false
             default: 'JPT_ADVC_DYNAMIC()'
             description: Dynamic parameters. Active when bDynamic=True.
@@ -487,23 +723,22 @@ returns:
     description: The created or modified ADVC Dynamic process.
 ```
 
-### 4d. Macro — positional params
+### 5d. Macro — positional params
 
 ```yaml
-# macro/AdvcStaticProcess.yaml
-psj: '2.0'
-id: AdvcStaticProcess
+# macro/Analysis/AdvcStaticProcess.yaml
+psj: '3.3'
+id: Analysis/AdvcStaticProcess
 title: 'AdvcStaticProcess()'
 domain: macro
-group: analysis
 description: Create ADVC static process.
 version_introduced: '5.0.0'
 stability: stable
-command_link: Analysis-ADVC-MakeProcess-Static # id of the command wrapping this macro
-
+command_link: ADVC/MakeProcess/Static
 syntax: >
-    AdvcStaticProcess(string m_strName, int m_iGeomNonlinear, int fixed_or_auto,
-      int num_of_inc, double max_time, double max_dt, double min_dt, int load_type, ...)
+    AdvcStaticProcess(string m_strName, int m_iGeomNonlinear,
+      int fixed_or_auto, int num_of_inc, double max_time,
+      double max_dt, double min_dt, int load_type, ...)
 
 params:
     - position: 1
@@ -536,25 +771,6 @@ params:
           - id: 1
             label: Fixed
 
-    - position: 8
-      name: load_type
-      type: Integer
-      required: true
-      description: Load type.
-      enum_values:
-          - id: -1
-            label: Default
-          - id: 0
-            label: Step
-          - id: 1
-            label: Ramp
-
-    - position: 15
-      name: m_bConvergence
-      type: Boolean
-      required: true
-      description: Whether convergence parameters are defined.
-
     - position: 64
       name: m_crEdit
       type: Cursor
@@ -570,36 +786,35 @@ returns:
           meaning: The function cannot be executed.
 
 examples:
-    - id: default-process # NEW in v2: stable id for sidecar matching
+    - id: default-process
       title: Create process with default settings
       language: psj
       code: |
           JPT.Exec('AdvcStaticProcess("ADVC_DEFAULT_PROCESS", 0, 0, 1, 1, 1, 1e-05, -1, ...)')
 ```
 
-### 4e. Utility — with callout
+### 5e. PSJ Utility — with callout
 
 ```yaml
-# psj-utility/JPT-BeginDatabaseTransaction.yaml
-psj: '2.0'
-id: JPT-BeginDatabaseTransaction
+# psj-utility/JPT/BeginDatabaseTransaction.yaml
+psj: '3.3'
+id: JPT/BeginDatabaseTransaction
 title: 'JPT.BeginDatabaseTransaction()'
 domain: psj-utility
-group: performance
 namespace: JPT
 description: >
-    Disable screen animation, screen update, and status bar updates to improve
-    Jupiter's performance during batch operations.
+    Disable screen animation, screen update, and status bar updates
+    to improve Jupiter's performance during batch operations.
 version_introduced: '5.0.0'
 stability: stable
 syntax: 'JPT.BeginDatabaseTransaction("transactionName")'
 
 callouts:
-    - id: must-end-transaction # NEW in v2: stable id replaces positional index
-      level: warn # warn | info | danger
+    - id: must-end-transaction
+      level: warn
       text: >
-          JPT.EndDatabaseTransaction() must be called at the end of the process
-          to return Jupiter to the normal state.
+          JPT.EndDatabaseTransaction() must be called at the end of
+          the process to return Jupiter to the normal state.
 
 params:
     - name: transactionName
@@ -611,23 +826,56 @@ returns:
     kind: void
 
 see_also:
-    - $ref: 'psj-utility/JPT-EndDatabaseTransaction'
-      label: JPT.EndDatabaseTransaction() # now localizable via sidecar
+    - $ref: 'psj-utility/JPT/EndDatabaseTransaction'
 ```
 
-### 4f. PSJ-GUI method
+### 5f. PSJ-GUI — class method
+
+Methods on composite class types live as full item files in the `psj-gui` domain. `class_ref` points back to the owning data-type and MUST NOT appear outside `psj-gui`.
 
 ```yaml
-# psj-gui/dlg-add_1delement_selector.yaml
-psj: '2.0'
-id: dlg-add_1delement_selector
+# psj-gui/msgbox/add_button.yaml
+psj: '3.3'
+id: msgbox/add_button
+title: 'PSJMessageBox.add_button()'
+domain: psj-gui
+namespace: PSJMessageBox
+description: Add a custom button to the message box.
+version_introduced: '5.0.0'
+stability: stable
+syntax: 'msgbox.add_button(text, id)'
+class_ref: 'data-type/gui/class/PSJMessageBox'
+
+params:
+    - name: text
+      type: String
+      required: true
+      description: Label displayed on the button.
+
+    - name: id
+      type: String
+      required: true
+      description: Identifier returned by show() when this button is clicked.
+
+returns:
+    kind: void
+
+see_also:
+    - $ref: 'psj-gui/msgbox/show'
+```
+
+### 5g. PSJ-GUI — standard dialog method
+
+```yaml
+# psj-gui/dlg/add_1delement_selector.yaml
+psj: '3.3'
+id: dlg/add_1delement_selector
 title: 'dlg.add_1delement_selector()'
 domain: psj-gui
-group: dlg-methods
 namespace: dlg
 description: >
-    Add a 1D element selector to the dialog, enabling the user to select
-    1D elements and store the selection.
+    Add a 1D element selector to the dialog, enabling the user to
+    select 1D elements and store the selection.
 version_introduced: '5.0.0'
 stability: stable
 syntax: 'dlg.add_1delement_selector(...)'
@@ -645,26 +893,23 @@ returns:
 
 ---
 
-## 5. Delta versioning
+## 6. Delta versioning
 
-Item files carry a `changes` block describing only what differs between versions. Items with no `changes` block are identical across all versions since `version_introduced`. Most items in a backward-compatible SDK will have no `changes` block at all.
-
-### 5a. Removing params across a version
+### 6a. Item delta — removing params
 
 ```yaml
-# psj-command/Analysis-ADVC-Structure.yaml  (versioning excerpt)
-psj: '2.0'
-id: Analysis-ADVC-Structure
+# psj-command/ADVC/Structure.yaml
+psj: '3.3'
+id: ADVC/Structure
 title: 'Analysis.ADVC.Structure()'
 domain: psj-command
 version_introduced: '5.0.0'
-macro_link: ADVC_Structure
+macro_link: Analysis/ADVC_Structure
+syntax: 'Analysis.ADVC.Structure(...)'
 
 params:
     - $group: advc-structure-base
 
-    # These params existed in 5.0.0 but were removed in 5.0.1.
-    # They remain in the file so the 5.0.0 documentation can still render them.
     - name: iEJobType
       type: Integer
       required: false
@@ -687,109 +932,141 @@ returns:
 
 changes:
     - version: '5.0.1'
-      notes: iEJobType and iHeatConvection are no longer available in v5.0.1 or higher.
+      notes: iEJobType and iHeatConvection removed.
       params:
           remove:
               - iEJobType
               - iHeatConvection
 ```
 
-### 5b. Full delta operation vocabulary
+### 6b. Full delta operation vocabulary
 
 ```yaml
 changes:
-    - version: 'X.Y.Z' # required; must match a manifest version id
+    - version: 'X.Y.Z'
+      notes: 'Summary.'
 
-      notes: 'Human-readable summary of what changed in this version.' # optional
-
-      # Optional: top-level item fields that changed in this version.
+      # Patch top-level fields.
       item:
-          description: 'Revised item description.'
-          ribbon: 'New > Ribbon > Path'
-          stability: deprecated # NEW in v2: replaces boolean `deprecated` flag
+          description: 'Revised.'
+          ribbon: 'New > Path'
+          stability: deprecated
 
+      # Item files — param-level changes.
       params:
-          # Add new params. `after` names the existing param they follow.
-          # Omit `after` to append at the end.
           add:
               - name: bNewFeature
                 type: Boolean
                 required: false
                 default: 'False'
-                description: New capability added in X.Y.Z.
+                description: New capability.
                 after: strPath
-                inferred: true # set when the converter inferred this, not from source
-
-          # Remove params by name.
           remove:
               - iRemovedParam
-
-          # Patch specific fields on existing params.
           modify:
               - name: strName
                 changes:
-                    description: 'Revised description for X.Y.Z.'
+                    description: 'Revised.'
                     default: '"NewDefault"'
                     required: true
-                    deprecated: true
-                    deprecated_reason: 'Use strJobName instead.' # NEW in v2
+                    deprecated: 'Use strJobName instead.'
                     enum_values:
                         add:
                             - id: 5
                               label: New option
                         remove:
-                            - 2 # enum value id to remove
+                            - 2
+
+      # built-in / enumeration data-type files — value-level changes.
+      values:
+          add:
+              - id: 99
+                name: NEW_VARIANT
+                label: New Variant
+                after: 10
+          remove:
+              - 3
+          modify:
+              - id: 2
+                changes:
+                    label: 'Updated Label'
+                    deprecated: true
+
+      # class data-type files — field-level changes.
+      fields:
+          add:
+              - name: bNewField
+                type: Boolean
+                required: false
+                default: 'False'
+                description: New field.
+          remove:
+              - crObsoleteField
+          modify:
+              - name: iCurflag
+                changes:
+                    description: 'Revised.'
+                    default: '1'
 ```
 
-**Resolution rules**:
+**Resolution rules:**
 
-- The base `params` list represents the item as of `version_introduced`.
+- The base `params` / `values` / `fields` list represents the file as of `version_introduced`.
 - `changes` entries are applied in version order up to the requested version.
-- `remove` deletes a param from the resolved list. The definition stays in the file above `changes` so older-version renders still have it.
+- `remove` deletes an entry from the resolved list; the definition stays in the file for older-version renders.
 - `add` inserts at the named position; omit `after` to append.
 - `modify` patches only the named fields; all other fields are unchanged.
-- `item` patches top-level fields. Any field not listed is unchanged.
+- `item` patches top-level fields; any field not listed is unchanged.
+- `params` delta MUST NOT appear on data-type files.
+- `values` delta MUST NOT appear on item files or `category: class` data-type files.
+- `fields` delta MUST NOT appear on item files or `category: built-in` / `category: enumeration` data-type files.
 
 ---
 
-## 6. Locale sidecar files
+## 7. Locale sidecar files
 
-### 6a. Localizable vs. structural fields
+### 7a. Localizable vs. structural fields
 
-Sidecars contain **only natural-language fields**. Structural fields are never translated and never appear in sidecars.
+| Field | Localizable? |
+| --- | --- |
+| `description` (any file) | ✅ |
+| `params[].description` | ✅ |
+| `params[].display_name` | ✅ |
+| `params[].deprecated` | ✅ reason string |
+| `enum_values[].label` | ✅ |
+| `enum_values[].description` | ✅ |
+| `fields[].description` | ✅ |
+| `fields[].remarks` | ✅ |
+| `fields[].enum_values[].label` | ✅ |
+| `values[].label` | ✅ |
+| `values[].description` | ✅ |
+| `returns.description` | ✅ |
+| `returns.codes[].meaning` | ✅ |
+| `callouts[].text` | ✅ |
+| `examples[].title` | ✅ |
+| `meta.yaml` → `title` | ✅ via `meta.<locale>.yaml` |
+| `meta.yaml` → `description` | ✅ via `meta.<locale>.yaml` |
+| `id`, `title`, `syntax`, `code` | ❌ code symbols |
+| `type`, `default`, `required` | ❌ structural |
+| `namespace`, `ribbon`, `domain` | ❌ structural |
+| `version_introduced`, `macro_link` | ❌ structural |
+| `stability`, `category` | ❌ structural |
+| `constructor_syntax` | ❌ code symbol |
+| `values[].id`, `values[].name` | ❌ structural |
+| `fields[].name`, `fields[].type` | ❌ structural |
 
-| Field                                    | Localizable?      |
-| ---------------------------------------- | ----------------- |
-| `description` (item or group)            | ✅                |
-| `params[].description`                   | ✅                |
-| `params[].display_name`                  | ✅                |
-| `enum_values[].label`                    | ✅                |
-| `enum_values[].description`              | ✅                |
-| `returns.description`                    | ✅                |
-| `returns.codes[].meaning`                | ✅                |
-| `callouts[].text`                        | ✅                |
-| `examples[].title`                       | ✅                |
-| `see_also[].label`                       | ✅                |
-| `id`, `title`, `syntax`, `code`          | ❌ — code symbols |
-| `type`, `default`, `required`            | ❌ — structural   |
-| `namespace`, `ribbon`, `domain`, `group` | ❌ — structural   |
-| `version_introduced`, `macro_link`       | ❌ — structural   |
-| `stability`                              | ❌ — structural   |
-
-### 6b. Item locale sidecar
+### 7b. Item locale sidecar
 
 ```yaml
-# psj-command/Analysis-ADVC-MakeProcess-Dynamic.ja.yaml
-psj: '2.0'
-kind: locale_sidecar # required; must be locale_sidecar
-locale: ja # required; BCP-47 tag
-id: Analysis-ADVC-MakeProcess-Dynamic # required; must match base file id
+# psj-command/ADVC/MakeProcess/Dynamic.ja.yaml
+psj: '3.3'
+kind: locale_sidecar
+locale: ja
+id: ADVC/MakeProcess/Dynamic
 
 description: >
     ADVC構造ダイナミックプロセスを作成します。
 
-# Only params that are NOT from a group are translated here.
-# Group params are translated in the respective group sidecar.
 params:
     bDynamic:
         description: ダイナミックパラメータ設定の有効/無効。
@@ -799,35 +1076,28 @@ params:
 returns:
     description: 作成または変更されたADVCダイナミックプロセスのカーソル。
 
-# Callouts matched by id (v2), not by position index.
 callouts:
     must-end-transaction:
         text: >
             処理の終了時にJPT.EndDatabaseTransaction()を呼び出して
             Jupiterを通常の状態に戻す必要があります。
 
-# Examples matched by id (v2), not by position index.
 examples:
     default-process:
         title: デフォルト設定でのプロセス作成
-
-see_also:
-    psj-utility/JPT-EndDatabaseTransaction:
-        label: JPT.EndDatabaseTransaction()
 ```
 
-### 6c. Macro locale sidecar — positional params keyed by position
+### 7c. Macro locale sidecar
 
 ```yaml
-# macro/AdvcStaticProcess.ja.yaml
-psj: '2.0'
+# macro/Analysis/AdvcStaticProcess.ja.yaml
+psj: '3.3'
 kind: locale_sidecar
 locale: ja
-id: AdvcStaticProcess
+id: Analysis/AdvcStaticProcess
 
 description: ADVCスタティックプロセスを作成します。
 
-# Positional params are keyed by position integer.
 params:
     1:
         description: ADVCスタティックプロセスの名前。
@@ -842,12 +1112,6 @@ params:
         enum_values:
             0: 自動
             1: 固定
-    8:
-        description: 荷重タイプ。
-        enum_values:
-            -1: デフォルト
-            0: ステップ
-            1: ランプ
 
 returns:
     codes:
@@ -859,17 +1123,59 @@ examples:
         title: デフォルト設定でのプロセス作成
 ```
 
+### 7d. Data-type locale sidecar — enumeration
+
+```yaml
+# data-type/pre/enum/DItemType.ja.yaml
+psj: '3.3'
+kind: locale_sidecar
+locale: ja
+id: pre/enum/DItemType
+
+description: >
+    Jupiter の DItem の種類を表す列挙型。
+
+values:
+    2:
+        label: サブアセンブリ
+        description: ツリー表示用サブアセンブリノード。
+    3:
+        label: パーツ
+    10:
+        label: ノード
+```
+
+### 7e. Data-type locale sidecar — class
+
+```yaml
+# data-type/pre/class/JPT_NASTRAN_ANALYSIS.ja.yaml
+psj: '3.3'
+kind: locale_sidecar
+locale: ja
+id: pre/class/JPT_NASTRAN_ANALYSIS
+
+description: >
+    Nastran解析設定の入力パラメータブロック。
+
+fields:
+    iSolverType:
+        description: Nastranソルバーのバリアント。
+        enum_values:
+            0: デフォルト
+            1: SMP
+```
+
 ---
 
-## 7. Locale resolution algorithm
+## 8. Locale resolution algorithm
 
 ```python
-function resolve(item_id, field_path, locale):
+function resolve(file_id, field_path, locale):
 
   1. If locale == default_locale (en):
        return base_file[field_path]
 
-  2. Load item sidecar: <domain>/<item_id>.<locale>.yaml
+  2. Load sidecar: <file_path>.<locale>.yaml
      If sidecar exists AND sidecar[field_path] exists:
        return sidecar[field_path]
 
@@ -880,77 +1186,229 @@ function resolve(item_id, field_path, locale):
        If group has `extends`:
          recurse into parent group sidecar (depth-first, parent last)
 
-  4. Fallback: return base_file[field_path]   # en text, no error logged
+  4. Fallback: return base_file[field_path]   # en text; no error logged
 ```
 
-Fallback is silent. Partial translations are valid and expected — an item where only some params are translated shows the translated text for those params and English for the rest. No build failure, no missing-key warnings.
+Fallback is silent. Partial translations are valid and expected.
 
 ---
 
-## 8. Renderer decisions driven by `domain`
+## 9. Renderer decisions driven by `domain`
 
-| Behaviour                           | `macro`           | `psj-command`   | `psj-utility` | `psj-gui`   |
-| ----------------------------------- | ----------------- | --------------- | ------------- | ----------- |
-| Show Position column in param table | ✅                | —               | —             | —           |
-| Show namespace prefix in title      | —                 | ✅              | ✅            | ✅          |
-| Show Ribbon path                    | —                 | ✅ if present   | —             | —           |
-| Show macro linkage card             | ✅ `command_link` | ✅ `macro_link` | —             | —           |
-| Syntax highlight style              | `psj-macro`       | Python          | Python        | Python      |
-| Return renders as                   | Code table        | Type link       | "No output"   | "No output" |
-| Stability badge                     | ✅                | ✅              | ✅            | ✅          |
+Applies to the four callable item domains only. `data-type` is not a domain and has its own renderer (Section 10).
+
+| Behaviour | `macro` | `psj-command` | `psj-utility` | `psj-gui` |
+| --- | --- | --- | --- | --- |
+| Show Position column in param table | ✅ | — | — | — |
+| Show namespace prefix in title | — | ✅ | ✅ | ✅ |
+| Show Ribbon path | — | ✅ if present | — | — |
+| Show macro linkage card | ✅ `command_link` | ✅ `macro_link` | — | — |
+| Show class back-reference card | — | — | — | ✅ if `class_ref` |
+| Syntax highlight style | `psj-macro` | Python | Python | Python |
+| Return renders as | Code table | Type link | "No output" | "No output" |
+| Stability badge | ✅ | ✅ | ✅ | ✅ |
 
 ---
 
-## 9. Complete field reference
+## 10. Data-type renderer
+
+Data-type pages are rendered as first-class pages under `psjapi/data-type/` in Fumadocs. They are navigable, linkable, and expandable by users checking type definitions while reading item documentation.
+
+### 10a. Output URL structure
+
+```text
+psjapi/
+  data-type/
+    built-in/
+      python-built-in-types
+      jupiter-built-in-types
+    pre/
+      built-in/
+        BodyVector
+        ConnectVector
+        VersionInfo
+      enum/
+        DItemType
+        ElemType
+        ElemKind
+        MaterialPropertyType
+        MaterialUnitType
+        LengthUnit
+        TimeUnit
+        ...
+      class/
+        JPT_NASTRAN_ANALYSIS
+        JPT_ABAQUS_LBC_STEP_INFO
+        ...
+    post/
+      built-in/
+        DPostAnalysis
+        DPostElem
+        DPostTimeStep
+      enum/
+        PostAnalysisType
+        ...
+    gui/
+      built-in/
+        PSJFont
+        TableCellID
+        TableCellRange
+      class/
+        PSJMessageBox
+```
+
+### 10b. Renderer behaviour by category
+
+| Behaviour | `built-in` | `enumeration` | `class` |
+| --- | --- | --- | --- |
+| Show `namespace` accessor badge | ✅ if present | ✅ if present | — |
+| Show `constructor_syntax` block | — | — | ✅ if present |
+| Show values table | ✅ | ✅ | — |
+| Values table has Name column | — | ✅ if any `name` set | — |
+| Show fields table | — | — | ✅ if `fields` present |
+| Show methods list | — | — | ✅ if `methods` present |
+| Methods link to item pages | — | — | ✅ |
+| Show examples block | ✅ if present | ✅ if present | ✅ if present |
+| Show see_also block | ✅ if present | ✅ if present | ✅ if present |
+| Show version badge | ✅ | ✅ | ✅ |
+| Show stability badge | ✅ | ✅ | ✅ |
+| Show `deprecated` warning | ✅ per value | ✅ per value | ✅ per field |
+
+### 10c. Inline type links in item pages
+
+When a param or return `type` contains a `$ref:data-type/<id>`, the renderer MUST emit an inline hyperlink to the corresponding data-type page. The link text is the type's `title`.
+
+```text
+# Rendered param row example:
+nastranAnalysis  |  JPT_NASTRAN_ANALYSIS ↗  |  No  |  JPT_NASTRAN_ANALYSIS()
+                        ↑ links to psjapi/data-type/pre/class/JPT_NASTRAN_ANALYSIS
+```
+
+### 10d. Fumadocs sidebar integration
+
+The `data-type/` tree is included in the Fumadocs sidebar under a top-level `Data Types` section, separate from the four domain sections. Each scope folder (`built-in/`, `pre/`, `post/`, `gui/`) becomes a collapsible sidebar group driven by its `meta.yaml`.
+
+```text
+Sidebar:
+  ├── Macros
+  ├── PSJ Commands
+  ├── PSJ Utilities
+  ├── PSJ GUI
+  └── Data Types              ← top-level collapsible
+        ├── Built-in Types
+        ├── Pre-Processing
+        │     ├── Built-in
+        │     ├── Enumerations
+        │     └── Classes
+        ├── Post-Processing
+        │     ├── Built-in
+        │     └── Enumerations
+        └── GUI
+              ├── Built-in
+              └── Classes
+```
+
+---
+
+## 11. Complete field reference
 
 ### Item file
 
 ```yaml
-psj: '2.0'              # required; string; must match spec version
-id: string                 # required; unique within domain; slug format recommended
-title: string              # required; verbatim call signature e.g. "Analysis.Nastran.LinearStatic()"
-domain: string             # required; must match a manifest domain id
-group: string?             # optional; nav grouping label; localizable
-namespace: string?         # optional; dotted call prefix; omit for macros
-ribbon: string?            # optional; UI ribbon path; psj-command only
-description: string        # required; localizable
-version_introduced: string # required; must match a manifest version id
-stability: string?         # optional; stable | experimental | deprecated; default: stable
-macro_link: string?        # optional; id of the macro this command wraps; psj-command only
-command_link: string?      # optional; id of the command that wraps this macro; macro only
-syntax: string?            # optional; verbatim signature (auto-generated from id and params if omitted); NOT localizable
-callouts: [Callout]?       # optional; warning/info boxes; text IS localizable
-params: [Param | GroupRef] # required; ordered list; defines params as of version_introduced
-returns: Returns           # required
-examples: [Example]?       # optional; always inline; never file links
-see_also: [Ref]?           # optional
-changes: [VersionDelta]?   # optional; absent = item unchanged across all versions
+psj: '3.3'
+id: string                  # required; path relative to domain root
+title: string               # required; verbatim call signature
+domain: string              # required; must match a manifest domain id
+namespace: string?          # optional; dotted call prefix; omit for macros
+ribbon: string?             # optional; psj-command only
+description: string         # required; localizable
+version_introduced: string  # required; must match a manifest version id
+stability: string?          # optional; stable | experimental | deprecated; default: stable
+macro_link: string?         # optional; path-based id; psj-command only
+command_link: string?       # optional; path-based id; macro only
+class_ref: string?          # optional; data-type path-based id; psj-gui only
+syntax: string              # required
+callouts: [Callout]?        # optional
+params: [Param | GroupRef]  # required
+returns: Returns            # required
+examples: [Example]?        # optional; always inline
+see_also: [Ref]?            # optional
+changes: [VersionDelta]?    # optional
+```
+
+### Data-type file
+
+```yaml
+psj: '3.3'
+kind: data_type             # required; must be data_type
+id: string                  # required; path relative to data-type/
+                            # e.g. pre/enum/DItemType, gui/class/PSJMessageBox
+title: string               # required; display title
+category: string            # required; built-in | enumeration | class
+namespace: string?          # optional; Python accessor prefix e.g. JPT.DItemType
+description: string         # required; localizable
+version_introduced: string  # required; must match a manifest version id
+stability: string?          # optional; stable | experimental | deprecated; default: stable
+
+# category: built-in or enumeration
+values: [DataTypeValue]?    # required for built-in and enumeration
+
+# category: class
+constructor_syntax: string? # optional; NOT localizable
+fields: [Field]?            # optional
+methods: [Ref]?             # optional; $ref to item files; any domain allowed
+
+# shared
+examples: [Example]?
+see_also: [Ref]?
+changes: [VersionDelta]?
+```
+
+### DataTypeValue
+
+```yaml
+id: integer | string        # required; NOT localizable; stable across versions
+name: string?               # optional; constant accessor e.g. JPT.DItemType.BODY
+label: string               # required; localizable
+description: string?        # optional; localizable
+deprecated: boolean?        # optional
+```
+
+### Field (class data-types)
+
+```yaml
+name: string                # required; NOT localizable
+type: string                # required; see Type system
+required: boolean           # required
+default: string?            # optional
+description: string         # required; localizable
+enum_values: [EnumValue]?   # optional
+remarks: string?            # optional; localizable
+deprecated: string?         # optional; presence implies deprecated; value is reason
 ```
 
 ### Param
 
 ```yaml
-position: integer?         # optional; 1-based; macro positional args only
-name: string?              # required for named params; source identifier
-display_name: string?      # optional; clean UI label when name is cryptic; localizable
-type: string               # required; see Type system below
-required: boolean          # required
-default: string?           # optional; exact default as string; null if undocumented
-description: string        # required; localizable
-enum_values: [EnumValue]?  # optional
-deprecated: boolean?       # optional; true = deprecated (version tracking is handled via delta blocks)
-deprecated_reason: string? # optional; human-readable reason; localizable
-inferred: boolean?         # optional; true = added by converter, not stated in source
+position: integer?          # optional; 1-based; macro only
+name: string                # required for named params
+display_name: string?       # optional; localizable
+type: string                # required; see Type system
+required: boolean           # required
+default: string?            # optional
+description: string         # required; localizable
+enum_values: [EnumValue]?   # optional
+deprecated: string?         # optional; presence implies deprecated; value is reason
 ```
 
 ### GroupRef
 
 ```yaml
-$group: string             # required; id of a _groups/<id>.yaml file
-exclude: [string]?         # optional; param names to drop from the inlined group
-insert_after: string?      # optional; param name after which to splice `insert`
-insert: [Param]?           # optional; params spliced at insert_after position
-override:                  # optional; map of param name → Param fields to patch
+$group: string              # required; id of a _groups/<id>.yaml
+exclude: [string]?          # optional; param names to drop
+insert_after: string?       # optional; param name after which to splice insert
+insert: [Param]?            # optional
+override:                   # optional; param name → fields to patch
   <param_name>:
     description: string?
     default: string?
@@ -960,117 +1418,162 @@ override:                  # optional; map of param name → Param fields to pat
 ### Returns
 
 ```yaml
-kind: string               # required; typed | macro_code | void
-type: string?              # required when kind=typed; see Type system
-description: string?       # optional; localizable
-codes: [Code]?             # required when kind=macro_code
+kind: string                # required; typed | macro_code | void
+type: string?               # required when kind=typed; MUST NOT appear otherwise
+description: string?        # optional; localizable; MUST NOT appear when kind=void
+codes: [Code]?              # required when kind=macro_code
 ```
 
 ### Code
 
 ```yaml
-value: string # required; e.g. '"1"'; NOT localizable
-meaning: string # required; localizable
+value: string               # required; NOT localizable
+meaning: string             # required; localizable
 ```
 
 ### Callout
 
 ```yaml
-id: string # required; stable identifier for sidecar matching
-level: string # required; warn | info | danger
-text: string # required; localizable
+id: string                  # required; stable identifier for sidecar matching
+level: string               # required; warn | info | danger
+text: string                # required; localizable
 ```
 
 ### Example
 
 ```yaml
-id: string # required; stable identifier for sidecar matching
-title: string? # optional; localizable
-language: string # required; psj | python
-code: string # required; NOT localizable; always inline, never a file path
+id: string                  # required; stable identifier for sidecar matching
+title: string?              # optional; localizable
+language: string            # required; psj | python
+code: string                # required; NOT localizable; always inline
 ```
 
 ### VersionDelta
 
 ```yaml
-version: string            # required; must match a manifest version id
-notes: string?             # optional; human-readable summary
-item:                      # optional; top-level fields to patch
+version: string             # required; must match a manifest version id
+notes: string?              # optional
+
+item:                       # optional; top-level fields to patch
   description: string?
   ribbon: string?
-  stability: string?       # stable | experimental | deprecated
-params:                    # optional
-  add: [Param]?            # each may carry `after: paramName`
-  remove: [string]?        # param names to drop
-  modify: [ParamPatch]?    # field-level patches on existing params
+  stability: string?
+
+params:                     # optional; item files only
+  add: [Param]?
+  remove: [string]?
+  modify: [ParamPatch]?
+
+values:                     # optional; built-in and enumeration data-type files only
+  add: [DataTypeValue]?     # each may carry `after: <value_id>`
+  remove: [integer|string]?
+  modify: [ValuePatch]?
+
+fields:                     # optional; class data-type files only
+  add: [Field]?             # each may carry `after: <field_name>`
+  remove: [string]?
+  modify: [FieldPatch]?
 ```
 
 ### ParamPatch
 
 ```yaml
-name: string               # required; name of the param to patch
-changes:                   # required; at least one field must be present
+name: string
+changes:
   description: string?
   default: string?
   required: boolean?
-  deprecated: boolean?
-  deprecated_reason: string?
+  deprecated: string?
   enum_values:
     add: [EnumValue]?
-    remove: [integer | string]? # enum value ids to remove
+    remove: [integer | string]?
+```
+
+### ValuePatch
+
+```yaml
+id: integer | string
+changes:
+  label: string?
+  description: string?
+  deprecated: boolean?
+```
+
+### FieldPatch
+
+```yaml
+name: string
+changes:
+  description: string?
+  default: string?
+  required: boolean?
+  remarks: string?
+  deprecated: string?
+  enum_values:
+    add: [EnumValue]?
+    remove: [integer | string]?
 ```
 
 ### EnumValue
 
 ```yaml
-id: integer | string # required; NOT localizable; stable across versions
-label: string # required; localizable
-description: string? # optional; localizable
+id: integer | string        # required; NOT localizable; stable across versions
+label: string               # required; localizable
+description: string?        # optional; localizable
 ```
 
 ### Ref
 
 ```yaml
-$ref: string # required; "<domain>/<id>"
-label: string? # optional; localizable (NEW in v2); display text for the link
-inferred: boolean? # optional; true = added by converter, not from source
+$ref: string                # required; "<domain>/<id>" or "data-type/<id>"
+```
+
+### Group meta file
+
+```yaml
+psj: '3.3'
+kind: group_meta            # required
+title: string               # required; display label
+description: string?        # optional; localizable
+order: [string]?            # optional; if present ALL children must be listed
+icon: string?               # optional; icon hint for renderer
 ```
 
 ### ParamGroup file
 
 ```yaml
-psj: '2.0' # required
-kind: param_group # required; must be param_group
-id: string # required; unique across all group files
-description: string? # optional; localizable
-extends: string? # optional; id of parent group (single inheritance)
-params: [Param] # required; ordered list
+psj: '3.3'
+kind: param_group           # required
+id: string                  # required; unique across all group files
+description: string?        # optional; localizable
+extends: string?            # optional; id of parent group
+params: [Param]             # required
 ```
 
-### Locale sidecar (item or group)
+### Locale sidecar (item or param group)
 
 ```yaml
-psj: '2.0' # required
-kind: locale_sidecar # required; must be locale_sidecar
-locale: string # required; BCP-47 tag matching a manifest locale id
-id: string # required; ties to base file id
+psj: '3.3'
+kind: locale_sidecar
+locale: string
+id: string
 
 description: string?
 
-callouts: # keyed by callout id
+callouts:
     <callout_id>:
         text: string
 
 params:
-    # For named params (psj-command / psj-utility / psj-gui / group):
+    # Named params:
     <param_name>:
         display_name: string?
         description: string?
-        deprecated_reason: string?
+        deprecated: string?
         enum_values:
-            <id>: string # just the label; use enum value id as key
+            <id>: string
 
-    # For positional params (macro):
+    # Positional params (macro):
     <position_integer>:
         description: string?
         enum_values:
@@ -1079,71 +1582,169 @@ params:
 returns:
     description: string?
     codes:
-        <value>: string # meaning; use the value string as key e.g. '"1"': ...
+        <value>: string
 
-examples: # keyed by example id (NEW in v2)
+examples:
     <example_id>:
         title: string?
+```
 
-see_also: # keyed by $ref value (NEW in v2)
-    <domain/id>:
+### Locale sidecar (data-type)
+
+```yaml
+psj: '3.3'
+kind: locale_sidecar
+locale: string
+id: string                  # path-based data-type id e.g. pre/enum/DItemType
+
+description: string?
+
+# built-in or enumeration data-types — keyed by value id:
+values:
+    <value_id>:
         label: string?
+        description: string?
+
+# class data-types — keyed by field name:
+fields:
+    <field_name>:
+        description: string?
+        remarks: string?
+        deprecated: string?
+        enum_values:
+            <id>: string
+
+examples:
+    <example_id>:
+        title: string?
 ```
 
 ---
 
-## 10. Type system
+## 12. Type system
 
-The `type` field on `Param` and `Returns` accepts the following forms:
+| Form | Example | Notes |
+| --- | --- | --- |
+| Primitive | `String`, `Integer`, `Boolean`, `Double` | Case-sensitive |
+| SDK cursor | `Cursor` | Points to any SDK object |
+| Generic list | `List[Cursor]`, `List[Integer]` | Single type argument |
+| Data-type ref | `$ref:data-type/pre/class/JPT_NASTRAN_ANALYSIS` | Full semantic-scope path required |
+| List of ref | `List[$ref:data-type/pre/class/JPT_ADVC_LOAD_NODE]` | Combines list and ref |
+| Untyped list | `List` | Only when element type is undocumented |
+| Vector | `Vector` | Fixed-length numeric tuple |
 
-| Form          | Example                                   | Notes                                                       |
-| ------------- | ----------------------------------------- | ----------------------------------------------------------- |
-| Primitive     | `String`, `Integer`, `Boolean`, `Double`  | Case-sensitive                                              |
-| SDK cursor    | `Cursor`                                  | Points to any SDK object                                    |
-| Generic list  | `List[Cursor]`, `List[Integer]`           | Single type argument                                        |
-| Data-type ref | `$ref:data-type/JPT_NASTRAN_ANALYSIS`     | Must resolve to a `data-type/` file                         |
-| List of ref   | `List[$ref:data-type/JPT_ADVC_LOAD_NODE]` | Combines list and ref forms                                 |
-| Untyped list  | `List`                                    | Use only for macro params with undocumented element type    |
-| Vector        | `Vector`                                  | Fixed-length numeric tuple; size not encoded in type string |
+Renderer MUST emit an inline hyperlink to `psjapi/data-type/<id>` for every `$ref:data-type/<id>` occurrence in a param or return `type` field.
 
 ---
 
-## 11. Validation rules (summary)
+## 13. Validation rules
 
-Tooling SHOULD enforce these rules at build time and report them as errors (not warnings):
+Tooling MUST enforce these rules at build time and report them as errors.
+
+**Manifest**:
 
 1. `psj` version in every file MUST match the manifest `psj` version.
-2. Every `$group` reference MUST resolve to an existing `_groups/<id>.yaml`.
-3. Every `$ref:data-type/<id>` MUST resolve to an existing `data-type/<id>.yaml`.
-4. Every `$ref: <domain>/<id>` in `see_also` MUST resolve to an existing item file.
-5. Every `version_introduced` and `changes[].version` MUST match a manifest `versions[].id`.
-6. `current_version` MUST match a manifest `versions[].id`.
-7. `macro_link` and `command_link` targets MUST resolve to existing item files.
-8. `GroupRef.insert_after` MUST name a param that exists in the resolved group (after `exclude`).
-9. `GroupRef.exclude` names MUST all exist in the referenced group.
-10. `GroupRef.override` keys MUST all exist in the referenced group (after `exclude`).
-11. `VersionDelta.params.remove` names MUST exist in the item's effective param list at that version.
-12. `VersionDelta.params.modify[].name` MUST exist in the item's effective param list at that version.
-13. Within a sidecar, `callouts` keys MUST match `id` values in the base file.
-14. Within a sidecar, `examples` keys MUST match `id` values in the base file.
-15. Positional param `position` values MUST be unique within an item.
-16. Named param `name` values MUST be unique within the resolved param list of an item.
-17. Each `EnumValue.id` MUST be unique within its `enum_values` list.
-18. `stability` MUST be one of `stable`, `experimental`, `deprecated`.
-19. `Callout.level` MUST be one of `warn`, `info`, `danger`.
-20. `Returns.kind` MUST be one of `typed`, `macro_code`, `void`.
-21. `kind: typed` MUST include a `type` field; `kind: void` MUST NOT.
-22. `kind: macro_code` MUST include a non-empty `codes` list.
+2. `current_version` MUST equal one of the `versions[].id` values.
+3. `versions` MUST be ordered oldest → newest (strict semver ascending).
+4. Exactly one locale MUST carry `default: true`.
+5. Each `domain.id` MUST be unique within the manifest domains list.
+6. `data-type` MUST NOT appear as a `domain.id`.
+
+**Identity & references**
+7. Each item `id` MUST equal its path relative to the domain root using `/` separators without file extension.
+8. Each data-type `id` MUST equal its path relative to `data-type/` using `/` separators without file extension.
+9. The first path segment of a data-type `id` MUST be one of `built-in`, `pre`, `post`, `gui`.
+10. Every `$group` reference MUST resolve to an existing `_groups/<id>.yaml`.
+11. Every `$ref:data-type/<id>` MUST resolve to an existing data-type file whose `category` is consistent with the usage context.
+12. Every `$ref: <domain>/<id>` in `see_also` or `methods` MUST resolve to an existing item file.
+13. `macro_link` and `command_link` targets MUST resolve to existing item files.
+14. `class_ref` MUST resolve to a data-type file with `category: class`.
+15. Every `version_introduced` and `changes[].version` MUST match a manifest `versions[].id`.
+
+**Folder & meta**
+16. Every subfolder within a domain root and within `data-type/` MUST contain a `meta.yaml` with `kind: group_meta`.
+17. If `order` is present in `meta.yaml`, ALL direct children MUST be listed — partial ordering is not allowed.
+18. `order` entries MUST each resolve to an existing child file stem or subfolder name.
+19. `meta.<locale>.yaml` locale tag MUST match a locale declared in the manifest.
+20. The `group` field MUST NOT appear in any item or data-type file.
+
+**Data-type category placement**
+21. `category: built-in` files MUST reside in a `built-in/` subfolder.
+22. `category: enumeration` files MUST reside in an `enum/` subfolder.
+23. `category: class` files MUST reside in a `class/` subfolder.
+
+**Data-type field constraints**
+24. `category: built-in` or `category: enumeration` MUST include `values` and MUST NOT include `fields`, `constructor_syntax`, or `methods`.
+25. `category: class` MUST NOT include `values`. MAY include `fields`, `constructor_syntax`, and `methods`.
+26. `domain_scope` MUST NOT appear in any data-type file.
+
+**Item field constraints**
+27. `class_ref` MUST NOT appear on items whose `domain` is not `psj-gui`.
+28. `macro_link` MUST NOT appear on items whose `domain` is not `psj-command`.
+29. `command_link` MUST NOT appear on items whose `domain` is not `macro`.
+30. `ribbon` MUST NOT appear on items whose `domain` is not `psj-command`.
+
+**Group references**
+31. `GroupRef.insert_after` MUST name a param that exists in the resolved group after `exclude` is applied.
+32. `GroupRef.exclude` names MUST all exist in the referenced group.
+33. `GroupRef.override` keys MUST all exist in the referenced group after `exclude` is applied.
+
+**Delta versioning**
+34. `VersionDelta.params` MUST NOT appear on data-type files.
+35. `VersionDelta.values` MUST NOT appear on item files or `category: class` data-type files.
+36. `VersionDelta.fields` MUST NOT appear on item files, `category: built-in`, or `category: enumeration` data-type files.
+37. `VersionDelta.params.remove` names MUST exist in the effective param list at that version.
+38. `VersionDelta.params.modify[].name` MUST exist in the effective param list at that version.
+39. `VersionDelta.values.remove` ids MUST exist in the effective values list at that version.
+40. `VersionDelta.values.modify[].id` MUST exist in the effective values list at that version.
+41. `VersionDelta.fields.remove` names MUST exist in the effective fields list at that version.
+42. `VersionDelta.fields.modify[].name` MUST exist in the effective fields list at that version.
+
+**Sidecars**
+43. Within a sidecar, `callouts` keys MUST match `id` values in the base file.
+44. Within a sidecar, `examples` keys MUST match `id` values in the base file.
+45. Within a sidecar, `values` keys MUST match `id` values in the base file `values` list.
+46. Within a sidecar, `fields` keys MUST match `name` values in the base file `fields` list.
+47. Sidecar `locale` MUST match a locale declared in the manifest.
+
+**Params and values**
+48. Positional param `position` values MUST be unique within an item.
+49. Named param `name` values MUST be unique within the resolved param list of an item.
+50. Each `EnumValue.id` MUST be unique within its `enum_values` list.
+51. Each `DataTypeValue.id` MUST be unique within its `values` list.
+52. Each `Field.name` MUST be unique within its `fields` list.
+
+**Field values**
+53. `stability` MUST be one of `stable`, `experimental`, `deprecated`. If absent, treat as `stable`.
+54. `Callout.level` MUST be one of `warn`, `info`, `danger`.
+55. `Returns.kind` MUST be one of `typed`, `macro_code`, `void`.
+56. `kind: typed` MUST include `type`. `kind: void` MUST NOT include `type` or `description`. `kind: macro_code` MUST NOT include `type` and MUST include a non-empty `codes` list.
+57. `category` MUST be one of `built-in`, `enumeration`, `class`.
+58. `methods` entries MUST use full `$ref` paths including domain prefix.
 
 ---
 
-## 12. Tooling & Integration
+## 14. Tooling & Integration
 
 ### Fumadocs & `meta.json` Generation
 
-The `psj` format is designed to integrate cleanly with documentation frameworks like Fumadocs. When building the documentation output, the `psjapi/server` converter can automatically emit `meta.json` files alongside the page endpoints, controlling sidebar folder grouping and internal ordering.
+- Each `meta.yaml` maps to a Fumadocs `meta.json` in the corresponding output folder.
+- The `order` field drives the `pages` array in the emitted `meta.json`.
+- The `title` field resolved via `meta.<locale>.yaml` drives the folder display label.
+- The `folderStyle` configuration determines output shape:
+  - **`folder`**: Emits actual nested sub-directories.
+  - **`separator`**: Emits flattened logical groups using Fumadocs text separators.
 
-This behaviour is driven by the `group` field in each item declaration, which determines the logical folder. The `folderStyle` configuration within the converter determines the shape of the `meta.json` pages list:
+### Data-type page generation
 
-- **`folder`**: Emits actual nested sub-directories (`[ "group-slug" ]`).
-- **`separator`**: Emits flattened logical groups within a single sidebar using Fumadocs text separators (`[ "---Group Name---", "...group-slug" ]`).
+The `psjapi/server` converter generates a Fumadocs page for every data-type file. Pages are placed under `psjapi/data-type/<scope>/` mirroring the source tree. The converter:
+
+1. Reads each `data-type/<scope>/<category>/<id>.yaml`.
+2. Resolves locale via the sidecar algorithm.
+3. Emits an MDX page at `psjapi/data-type/<scope>/<category>/<id>.mdx`.
+4. Emits a `meta.json` for each folder driven by the corresponding `meta.yaml`.
+5. Registers each data-type page in the top-level sidebar under **Data Types**.
+
+### Inline type link resolution
+
+For every param or return `type` containing `$ref:data-type/<id>`, the converter emits a hyperlink component pointing to `psjapi/data-type/<id>`. Broken `$ref` paths are build errors (Rule 11).

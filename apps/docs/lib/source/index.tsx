@@ -20,7 +20,6 @@ const TAG_STYLES: Record<string, string> = {
 
 export const source = loader(
     {
-        docs: docs.toFumadocsSource(),
         sdk: await psjSource(psjServer, {
             per: 'item',
             meta: true,
@@ -28,6 +27,7 @@ export const source = loader(
             versionInUrl: true,
             baseUrl: 'sdk',
         }),
+        docs: docs.toFumadocsSource(),
     },
     {
         i18n,
@@ -42,6 +42,10 @@ export const source = loader(
         ],
     },
 );
+
+export async function getSdk() {
+    return psjServer.getProcessedSdk();
+}
 
 export type Page = InferPageType<typeof source>;
 export type Meta = InferMetaType<typeof source>;
