@@ -26,8 +26,6 @@ import type { VFile } from 'vfile';
 // ─── Server-side page factory ─────────────────────────────────────────────────
 
 export interface PSJAPIItemProps {
-    /** Root id passed from MDX — identifies which server to use */
-    schemaId: string;
     /** "<domain>/<id>" */
     itemKey: string;
     /** SDK version (falls back to current_version) */

@@ -1,10 +1,5 @@
 psjapi: '1.0'
 
-sdk:
-    name: 'Jupiter CAE Desktop Platform SDK'
-    vendor: 'TechnoStar Co., Ltd.'
-    vendor_url: 'https://www.e-technostar.com/'
-
 versions:
     - id: '5.0.0'
     - id: '5.0.1'

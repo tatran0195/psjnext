@@ -22,7 +22,6 @@ export const source = loader(
     {
         docs: docs.toFumadocsSource(),
         sdk: await psjSource(psjServer, {
-            groupBy: 'domain',
             per: 'item',
             meta: true,
             i18nParser: 'dir',

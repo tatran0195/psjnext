@@ -4,7 +4,6 @@ import type { Domain, ItemFile, ProcessedSdk, PSJAPIServer } from '../../types';
 
 interface BaseEntry {
     path: string;
-    schemaId: string;
     info: {
         title: string;
         description?: string;
@@ -37,17 +36,7 @@ export interface ItemRef {
 
 // ─── Builder config ───────────────────────────────────────────────────────────
 
-export type GroupBy = 'domain' | 'group' | 'none';
-
 export interface PsjPagesBuilderConfig {
-    /**
-     * How to group items in the output:
-     * - 'domain' — one folder per domain (macro, psj-command, …)
-     * - 'group'  — one folder per `group:` field value; ungrouped items at root
-     * - 'none'   — flat list, one page per item (default)
-     */
-    groupBy?: GroupBy;
-
     /**
      * Produce one page per item (default) or one page per group.
      */
@@ -87,10 +76,6 @@ function idToSlug(id: string): string {
         .replace(/^-|-$/g, '');
 }
 
-function defaultItemPath(item: ItemFile): string {
-    return `${item.domain}/${idToSlug(item.id)}`;
-}
-
 // ─── fromSdk ──────────────────────────────────────────────────────────────────
 
 /**
@@ -98,12 +83,8 @@ function defaultItemPath(item: ItemFile): string {
  *
  * Called once per schema (analogous to `fromSchema` in openapi/builder.ts).
  */
-export function fromSdk(
-    schemaId: string,
-    sdk: ProcessedSdk,
-    config: PsjPagesBuilderConfig = {},
-): OutputEntry[] {
-    const { groupBy = 'none', per = 'item', name: nameFn } = config;
+export function fromSdk(sdk: ProcessedSdk, config: PsjPagesBuilderConfig = {}): OutputEntry[] {
+    const { per = 'item', name: nameFn } = config;
     const entries: OutputEntry[] = [];
 
     // Collect all items into a map keyed by domain→group→items
@@ -119,87 +100,43 @@ export function fromSdk(
     }
 
     if (per === 'item') {
-        if (groupBy === 'none') {
-            // Flat list, one OutputEntry per item
-            for (const [_, item] of sdk.items) {
-                const filePath = nameFn ? nameFn(item) : defaultItemPath(item);
-                entries.push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
-            }
-        } else if (groupBy === 'domain') {
-            for (const [domain, groupMap] of byDomain) {
-                // Separate ungrouped items from grouped items
-                const ungroupedEntries: OutputEntry[] = [];
-                const namedGroupEntries = new Map<string, OutputEntry[]>();
+        for (const [domain, groupMap] of byDomain) {
+            // Separate ungrouped items from grouped items
+            const ungroupedEntries: OutputEntry[] = [];
+            const namedGroupEntries = new Map<string, OutputEntry[]>();
 
-                for (const [group, items] of groupMap) {
-                    for (const item of items) {
-                        if (group === '__ungrouped__') {
-                            const filePath = nameFn
-                                ? nameFn(item)
-                                : `${domain}/${idToSlug(item.id)}`;
-                            ungroupedEntries.push(
-                                makeItemOutput(schemaId, item, `${filePath}.mdx`),
-                            );
-                        } else {
-                            const groupSlug = slugify(group);
-                            if (!namedGroupEntries.has(group)) namedGroupEntries.set(group, []);
-                            const filePath = nameFn
-                                ? nameFn(item)
-                                : `${domain}/${groupSlug}/${idToSlug(item.id)}`;
-                            namedGroupEntries
-                                .get(group)!
-                                .push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
-                        }
+            for (const [group, items] of groupMap) {
+                for (const item of items) {
+                    const filePath = nameFn ? nameFn(item) : `${domain}/${idToSlug(item.id)}`;
+                    const output = makeItemOutput(item, `${filePath}.mdx`);
+
+                    if (group === '__ungrouped__') {
+                        ungroupedEntries.push(output);
+                    } else {
+                        if (!namedGroupEntries.has(group)) namedGroupEntries.set(group, []);
+                        namedGroupEntries.get(group)!.push(output);
                     }
                 }
+            }
 
-                // Build domain-level entries: ungrouped items first, then named sub-groups
-                const domainEntries: OutputEntry[] = [...ungroupedEntries];
-                for (const [group, groupItems] of namedGroupEntries) {
-                    const groupSlug = slugify(group);
-                    domainEntries.push({
-                        type: 'group',
-                        path: `${domain}/${groupSlug}`,
-                        schemaId,
-                        info: { title: group },
-                        entries: groupItems,
-                    });
-                }
+            // Build domain-level entries: ungrouped items first, then named sub-groups
+            const domainEntries: OutputEntry[] = [...ungroupedEntries];
+            for (const [group, groupItems] of namedGroupEntries) {
+                const groupSlug = slugify(group);
+                domainEntries.push({
+                    type: 'group',
+                    path: `${domain}/${groupSlug}`,
+                    info: { title: group },
+                    entries: groupItems,
+                });
+            }
 
-                entries.push({
-                    type: 'group',
-                    path: domain,
-                    schemaId,
-                    info: { title: domainTitle(sdk, domain as Domain) },
-                    entries: domainEntries,
-                });
-            }
-        } else {
-            // groupBy === 'group'
-            // Collect all groups across domains
-            const byGroup = new Map<string, ItemFile[]>();
-            for (const [, groupMap] of byDomain) {
-                for (const [group, items] of groupMap) {
-                    if (!byGroup.has(group)) byGroup.set(group, []);
-                    byGroup.get(group)!.push(...items);
-                }
-            }
-            for (const [group, items] of byGroup) {
-                const groupEntries: OutputEntry[] = items.map((item) => {
-                    const filePath = nameFn
-                        ? nameFn(item)
-                        : `${slugify(group === '__ungrouped__' ? 'misc' : group)}/${idToSlug(item.id)}`;
-                    return makeItemOutput(schemaId, item, `${filePath}.mdx`);
-                });
-                const groupLabel = group === '__ungrouped__' ? 'Miscellaneous' : group;
-                entries.push({
-                    type: 'group',
-                    path: slugify(groupLabel),
-                    schemaId,
-                    info: { title: groupLabel },
-                    entries: groupEntries,
-                });
-            }
+            entries.push({
+                type: 'group',
+                path: domain,
+                info: { title: domainTitle(sdk, domain as Domain) },
+                entries: domainEntries,
+            });
         }
     } else if (per === 'group') {
         // One page per group; list items on that page
@@ -216,7 +153,6 @@ export function fromSdk(
             entries.push({
                 type: 'page',
                 path: `${filePath}.mdx`,
-                schemaId,
                 info: { title: groupLabel },
                 items: items.map((item) => ({
                     key: `${item.domain}/${item.id}`,
@@ -233,7 +169,6 @@ export function fromSdk(
             entries.push({
                 type: 'page',
                 path: `${domain}.mdx`,
-                schemaId,
                 info: { title: domainTitle(sdk, domain as Domain) },
                 items: allItems.map((item) => ({
                     key: `${item.domain}/${item.id}`,
@@ -247,11 +182,10 @@ export function fromSdk(
     return entries;
 }
 
-function makeItemOutput(schemaId: string, item: ItemFile, filePath: string): ItemOutput {
+function makeItemOutput(item: ItemFile, filePath: string): ItemOutput {
     return {
         type: 'item',
         path: filePath,
-        schemaId,
         info: {
             title: item.title,
             description: item.description,
@@ -276,6 +210,5 @@ export async function fromServer(
     config: PsjPagesBuilderConfig = {},
 ): Promise<Record<string, OutputEntry[]>> {
     const sdk = await server.getProcessedSdk();
-    const schemaId = server.options.root;
-    return { [schemaId]: fromSdk(schemaId, sdk, config) };
+    return { sdk: fromSdk(sdk, config) };
 }

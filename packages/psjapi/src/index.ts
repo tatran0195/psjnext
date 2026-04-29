@@ -26,7 +26,6 @@ export type {
     ReturnCode,
     ReturnKind,
     Returns,
-    SdkInfo,
     // Spec types
     SdkManifest,
     SeeAlsoRef,

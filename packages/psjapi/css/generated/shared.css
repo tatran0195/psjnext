@@ -25,7 +25,6 @@
 @source inline("also");
 @source inline("always");
 @source inline("and");
-@source inline("and/or");
 @source inline("applies");
 @source inline("are");
 @source inline("args");
@@ -42,7 +41,6 @@
 @source inline("badge");
 @source inline("badges");
 @source inline("baked");
-@source inline("baked-in");
 @source inline("base");
 @source inline("baseUrl");
 @source inline("being");
@@ -89,7 +87,6 @@
 @source inline("built-in");
 @source inline("button");
 @source inline("by");
-@source inline("call");
 @source inline("callout");
 @source inline("calloutNodes");
 @source inline("callouts");
@@ -182,7 +179,6 @@
 @source inline("downstream");
 @source inline("duration-200");
 @source inline("each");
-@source inline("either");
 @source inline("elevated!");
 @source inline("else");
 @source inline("emit");
@@ -205,7 +201,6 @@
 @source inline("examplesPanel");
 @source inline("examplesPanelSlot");
 @source inline("except");
-@source inline("explicitly");
 @source inline("export");
 @source inline("extends");
 @source inline("factory");
@@ -256,7 +251,7 @@
 @source inline("gap-y-1");
 @source inline("gap-y-6");
 @source inline("generated");
-@source inline("getItem");
+@source inline("getAPIPageProps");
 @source inline("github-dark");
 @source inline("github-light");
 @source inline("github-slugger");
@@ -299,7 +294,6 @@
 @source inline("i18n");
 @source inline("i18nParser");
 @source inline("id");
-@source inline("identifies");
 @source inline("if");
 @source inline("import");
 @source inline("in");
@@ -327,7 +321,6 @@
 @source inline("items-center");
 @source inline("items-start");
 @source inline("its");
-@source inline("ja");
 @source inline("js");
 @source inline("json");
 @source inline("just");
@@ -435,6 +428,7 @@
 @source inline("opacity-0");
 @source inline("opacity-40");
 @source inline("opacity-50");
+@source inline("operator");
 @source inline("options");
 @source inline("or");
 @source inline("out");
@@ -442,9 +436,6 @@
 @source inline("overall");
 @source inline("overflow-hidden");
 @source inline("overflow-x-auto");
-@source inline("override");
-@source inline("overrideLocale");
-@source inline("overrideVersion");
 @source inline("own");
 @source inline("p-1");
 @source inline("p-4");
@@ -464,7 +455,6 @@
 @source inline("parts");
 @source inline("pass");
 @source inline("passed");
-@source inline("passing");
 @source inline("path");
 @source inline("per");
 @source inline("per-locale");
@@ -539,9 +529,7 @@
 @source inline("required");
 @source inline("resolveRef");
 @source inline("resolved");
-@source inline("resolvedLocale");
 @source inline("resolvedOptions");
-@source inline("resolvedVersion");
 @source inline("result");
 @source inline("return");
 @source inline("returns");
@@ -563,8 +551,6 @@
 @source inline("satisfies");
 @source inline("schemaId");
 @source inline("sdk");
-@source inline("sdkLocale");
-@source inline("sdkVersion");
 @source inline("search");
 @source inline("section");
 @source inline("see-also");
@@ -574,7 +560,6 @@
 @source inline("self-stretch");
 @source inline("separator");
 @source inline("server");
-@source inline("set");
 @source inline("setActiveFilter");
 @source inline("setSearch");
 @source inline("shadow-lg");
@@ -601,6 +586,7 @@
 @source inline("sm:items-center");
 @source inline("so");
 @source inline("split-panel");
+@source inline("spread");
 @source inline("sticky");
 @source inline("string");
 @source inline("strings");
@@ -690,7 +676,6 @@
 @source inline("uppercase");
 @source inline("use");
 @source inline("useState");
-@source inline("uses");
 @source inline("valid");
 @source inline("value");
 @source inline("values");
@@ -715,7 +700,6 @@
 @source inline("warn");
 @source inline("we");
 @source inline("when");
-@source inline("which");
 @source inline("whitespace-nowrap");
 @source inline("with");
 @source inline("withoutExt");

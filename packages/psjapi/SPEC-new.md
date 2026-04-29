@@ -105,11 +105,6 @@ The base file (`.yaml`) is always English and is the source of truth for both st
 ```yaml
 psj: '2.0' # required; must match spec version being used
 
-sdk:
-    name: 'Jupiter CAE Desktop Platform SDK' # required; human-readable product name
-    vendor: 'TechnoStar Co., Ltd.' # required
-    vendor_url: 'https://www.e-technostar.com/' # optional; must be a valid URL if present
-
 # Ordered oldest → newest. Adding an entry here is all that is needed to unlock
 # the delta system for items that changed in that release.
 versions: # required; at least one entry

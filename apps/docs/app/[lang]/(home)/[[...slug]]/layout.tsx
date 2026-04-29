@@ -9,8 +9,6 @@ export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) 
     const params = await props.params;
     const tree = source.getPageTree(params.lang);
 
-    console.log(source.getPages());
-
     return (
         <TreeContextProvider tree={tree}>
             <LinkSidebarProvider>

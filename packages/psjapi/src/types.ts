@@ -39,17 +39,10 @@ export interface SdkVersions {
 
 export interface SdkManifest {
     psjapi: '1.0';
-    sdk: SdkInfo;
     versions: VersionEntry[];
     current_version: string;
     locales: LocaleEntry[];
     domains: DomainEntry[];
-}
-
-export interface SdkInfo {
-    name: string;
-    vendor: string;
-    vendor_url: string;
 }
 
 export interface VersionEntry {

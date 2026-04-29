@@ -9,7 +9,7 @@ import { Banner } from 'fumadocs-ui/components/banner';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 
-import ApiPage from '@/components/api-page';
+import { APIPage } from '@/components/api-page';
 import { NotFound } from '@/components/layouts/not-found';
 import { getMDXComponents } from '@/components/mdx';
 import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-category';
@@ -38,10 +38,7 @@ export default async function Page(props: {
     if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
 
     if (page.type === 'sdk') {
-        const item = await page.data.getItem();
-        if (!item) return <NotFound getSuggestions={async () => []} />;
-
-        return <ApiPage item={item} version={page.data.sdkVersion} lang={page.data.sdkLocale} />;
+        return <APIPage {...page.data.getAPIPageProps()} />;
     }
 
     const { body: Mdx, toc, lastModified } = await page.data.load();

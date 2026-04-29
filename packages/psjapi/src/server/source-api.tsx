@@ -1,7 +1,7 @@
 import { PathUtils } from 'fumadocs-core/source';
 import * as path from 'node:path';
 
-import type { LocaleEntry, PSJAPIServer, ResolvedItem } from '../types';
+import type { LocaleEntry, PSJAPIServer } from '../types';
 import type {
     ItemOutput,
     OutputEntry,
@@ -63,21 +63,14 @@ export function psjPlugin(): LoaderPlugin {
 
 export interface PSJPageData extends PageData {
     /**
-     * Resolve the item for this page.
-     *
-     * Version and locale are baked in from the virtual file path when
-     * `i18nParser` and/or `versionInUrl` are set — call with no args.
-     *
-     * Override either by passing explicitly:
-     *   page.data.getItem()                  // uses baked-in version + locale
-     *   page.data.getItem('5.0.1')           // override version
-     *   page.data.getItem(undefined, 'ja')   // override locale
+     * Get props for the APIPage component.
+     * Use spread operator to pass them: <APIPage {...page.data.getAPIPageProps()} />
      */
-    getItem: (version?: string, locale?: string) => Promise<ResolvedItem | undefined>;
-    /** SDK version baked into this virtual file (when versionInUrl: true) */
-    sdkVersion?: string;
-    /** Locale baked into this virtual file (when i18nParser is set) */
-    sdkLocale?: string;
+    getAPIPageProps: () => {
+        itemKey: string;
+        version?: string;
+        locale?: string;
+    };
     /** Keys for multi-item pages (per: 'group' | 'domain') */
     itemKeys?: string[];
     structuredData: StructuredData;
@@ -247,29 +240,13 @@ export async function psjSource(
                             title: entry.info.title,
                             description: entry.info.description,
                             _psjapi: psjMeta,
-                            sdkVersion: versionId || undefined,
-                            sdkLocale: localeId || undefined,
-
-                            // Both version and locale are baked in — call with no args
-                            async getItem(overrideVersion?: string, overrideLocale?: string) {
-                                const resolvedVersion = overrideVersion ?? (versionId || undefined);
-                                const resolvedLocale = overrideLocale ?? (localeId || undefined);
-
-                                if (entry.type === 'item') {
-                                    return server.resolveItem(
-                                        entry.item.key,
-                                        resolvedVersion,
-                                        resolvedLocale,
-                                    );
-                                }
-                                if (entry.type === 'page' && entry.items.length > 0) {
-                                    return server.resolveItem(
-                                        entry.items[0].key,
-                                        resolvedVersion,
-                                        resolvedLocale,
-                                    );
-                                }
-                                return undefined;
+                            getAPIPageProps() {
+                                return {
+                                    itemKey:
+                                        entry.type === 'item' ? entry.item.key : entry.items[0].key,
+                                    version: versionId || undefined,
+                                    locale: localeId || undefined,
+                                };
                             },
 
                             itemKeys:
