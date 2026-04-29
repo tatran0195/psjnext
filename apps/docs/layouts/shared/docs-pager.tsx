@@ -2,8 +2,9 @@
 
 import Link from 'next/link';
 
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, FoldHorizontal, UnfoldHorizontal } from 'lucide-react';
 
+import { useDocsPage } from '@/layouts/docs/page';
 import { MarkdownCopyButton } from '@/layouts/shared/page-actions';
 
 type PagerItem = {
@@ -17,6 +18,10 @@ type DocsPagerProps = {
 };
 
 export function DocsPager({ previous, next, markdownUrl }: DocsPagerProps) {
+    const {
+        props: { full, setFull },
+    } = useDocsPage();
+
     const buttonClass =
         'flex size-7 items-center justify-center rounded-md bg-muted/50 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:size-8';
     const disabledClass =
@@ -24,6 +29,14 @@ export function DocsPager({ previous, next, markdownUrl }: DocsPagerProps) {
 
     return (
         <div className="flex items-center gap-1">
+            <button
+                type="button"
+                className={buttonClass}
+                onClick={() => setFull(!full)}
+                title={full ? 'Collapse' : 'Expand'}
+            >
+                {full ? <FoldHorizontal className="size-4" /> : <UnfoldHorizontal className="size-4" />}
+            </button>
             {previous ? (
                 <Link href={previous.url} className={buttonClass}>
                     <ChevronLeft className="size-4" />
@@ -42,7 +55,7 @@ export function DocsPager({ previous, next, markdownUrl }: DocsPagerProps) {
                     <ChevronRight className="size-4" />
                 </div>
             )}
-            {markdownUrl && <MarkdownCopyButton markdownUrl={markdownUrl} />}
+            {markdownUrl && <MarkdownCopyButton markdownUrl={markdownUrl} title="Copy markdown" />}
         </div>
     );
 }

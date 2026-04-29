@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { ComponentProps, FC, ReactNode } from 'react';
+import type { ComponentProps, FC } from 'react';
 
 import Link from 'fumadocs-core/link';
 import { findNeighbour } from 'fumadocs-core/page-tree';
@@ -17,10 +17,6 @@ import { LinkPreview } from '@/components/mdx/link-preview';
 import { Mermaid } from '@/components/mdx/mermaid';
 import { RibbonPath } from '@/components/mdx/ribbon-path';
 import { SymbolLink } from '@/components/mdx/symbol-link';
-import * as Preview from '@/components/preview';
-import { Customisation } from '@/components/preview/customisation';
-import { Installation } from '@/components/preview/installation';
-import { Wrapper } from '@/components/preview/wrapper';
 import {
     DocsBody,
     DocsDescription,
@@ -31,19 +27,6 @@ import {
 import { DocsPager } from '@/layouts/shared/docs-pager';
 import { createMetadata, getPageImage } from '@/lib/metadata';
 import { source } from '@/lib/source';
-
-function PreviewRenderer({ preview }: { preview: string }): ReactNode {
-    if (preview && preview in Preview) {
-        const Comp = Preview[preview as keyof typeof Preview];
-        return <Comp />;
-    }
-
-    return null;
-}
-
-export const revalidate = false;
-// Always allow dynamic params so all routes resolve on-demand.
-export const dynamicParams = true;
 
 export default async function Page(props: {
     params: Promise<{ slug?: string[]; lang: string; version?: string }>;
@@ -58,9 +41,7 @@ export default async function Page(props: {
         const item = await page.data.getItem();
         if (!item) return <NotFound getSuggestions={async () => []} />;
 
-        return (
-            <ApiPage item={item} version={page.data.sdkVersion} lang={page.data.sdkLocale} />
-        );
+        return <ApiPage item={item} version={page.data.sdkVersion} lang={page.data.sdkLocale} />;
     }
 
     const { body: Mdx, toc, lastModified } = await page.data.load();
@@ -104,7 +85,6 @@ export default async function Page(props: {
                 )}
             </div>
             <DocsBody>
-                {page.data.preview && <PreviewRenderer preview={page.data.preview} />}
                 <Mdx
                     components={getMDXComponents({
                         ...Twoslash,
@@ -130,7 +110,6 @@ export default async function Page(props: {
                         Banner,
                         Mermaid,
                         TypeTable,
-                        Wrapper,
                         SymbolLink,
                         LinkPreview,
                         blockquote: Callout as unknown as FC<ComponentProps<'blockquote'>>,
@@ -140,8 +119,6 @@ export default async function Page(props: {
                         DocsSectionOverview: ({ url }) => {
                             return <DocsSectionOverview url={url ?? page.url} lang={params.lang} />;
                         },
-                        Installation,
-                        Customisation,
                     })}
                 />
                 {page.data.index ? <DocsCategory url={page.url} lang={params.lang} /> : null}

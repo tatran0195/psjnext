@@ -88,7 +88,10 @@ interface DocsPageSlots {
     breadcrumb: FC<BreadcrumbProps>;
 }
 
-type PageSlotsProps = Pick<DocsPageProps, 'full'>;
+type PageSlotsProps = {
+    full: boolean;
+    setFull: (full: boolean) => void;
+};
 
 const PageContext = createContext<{
     props: PageSlotsProps;
@@ -115,7 +118,13 @@ export function DocsPage({
     children,
     ...containerProps
 }: DocsPageProps) {
-    tocEnabled ??= Boolean(!full && (toc.length > 0 || tocProps.footer || tocProps.header));
+    const [isFull, setIsFull] = useState(full);
+
+    useEffect(() => {
+        setIsFull(full);
+    }, [full]);
+
+    tocEnabled ??= Boolean(!isFull && (toc.length > 0 || tocProps.footer || tocProps.header));
     tocPopoverEnabled ??= Boolean(
         toc.length > 0 || tocPopoverProps.header || tocPopoverProps.footer,
     );
@@ -134,7 +143,7 @@ export function DocsPage({
     return (
         <PageContext
             value={{
-                props: { full },
+                props: { full: isFull, setFull: setIsFull },
                 slots,
             }}
         >
@@ -202,7 +211,10 @@ export function DocsDescription({ children, className, ...props }: ComponentProp
 
 export function DocsTitle({ children, className, ...props }: ComponentProps<'h1'>) {
     return (
-        <h1 {...props} className={cn('text-[1.75em] font-semibold break-words min-w-0', className)}>
+        <h1
+            {...props}
+            className={cn('text-[1.75em] font-semibold wrap-break-word min-w-0', className)}
+        >
             {children}
         </h1>
     );
