@@ -127,18 +127,42 @@ export function fromSdk(
             }
         } else if (groupBy === 'domain') {
             for (const [domain, groupMap] of byDomain) {
-                const domainEntries: OutputEntry[] = [];
-                for (const [, items] of groupMap) {
+                // Separate ungrouped items from grouped items
+                const ungroupedEntries: OutputEntry[] = [];
+                const namedGroupEntries = new Map<string, OutputEntry[]>();
+
+                for (const [group, items] of groupMap) {
                     for (const item of items) {
-                        const filePath = nameFn ? nameFn(item) : `${domain}/${idToSlug(item.id)}`;
-                        domainEntries.push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
+                        if (group === '__ungrouped__') {
+                            const filePath = nameFn ? nameFn(item) : `${domain}/${idToSlug(item.id)}`;
+                            ungroupedEntries.push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
+                        } else {
+                            const groupSlug = slugify(group);
+                            if (!namedGroupEntries.has(group)) namedGroupEntries.set(group, []);
+                            const filePath = nameFn ? nameFn(item) : `${domain}/${groupSlug}/${idToSlug(item.id)}`;
+                            namedGroupEntries.get(group)!.push(makeItemOutput(schemaId, item, `${filePath}.mdx`));
+                        }
                     }
                 }
+
+                // Build domain-level entries: ungrouped items first, then named sub-groups
+                const domainEntries: OutputEntry[] = [...ungroupedEntries];
+                for (const [group, groupItems] of namedGroupEntries) {
+                    const groupSlug = slugify(group);
+                    domainEntries.push({
+                        type: 'group',
+                        path: `${domain}/${groupSlug}`,
+                        schemaId,
+                        info: { title: group },
+                        entries: groupItems,
+                    });
+                }
+
                 entries.push({
                     type: 'group',
                     path: domain,
                     schemaId,
-                    info: { title: domainTitle(domain as Domain) },
+                    info: { title: domainTitle(sdk, domain as Domain) },
                     entries: domainEntries,
                 });
             }
@@ -202,7 +226,7 @@ export function fromSdk(
                 type: 'page',
                 path: `${domain}.mdx`,
                 schemaId,
-                info: { title: domainTitle(domain as Domain) },
+                info: { title: domainTitle(sdk, domain as Domain) },
                 items: allItems.map((item) => ({
                     key: `${item.domain}/${item.id}`,
                     domain: item.domain,
@@ -232,14 +256,9 @@ function makeItemOutput(schemaId: string, item: ItemFile, filePath: string): Ite
     };
 }
 
-function domainTitle(domain: Domain): string {
-    const map: Record<Domain, string> = {
-        macro: 'Macros',
-        'psj-command': 'PSJ Commands',
-        'psj-utility': 'PSJ Utilities',
-        'psj-gui': 'PSJ GUI',
-    };
-    return map[domain] ?? domain;
+function domainTitle(sdk: ProcessedSdk, domain: Domain): string {
+    const entry = sdk.manifest.domains.find((d) => d.id === domain);
+    return entry?.title ?? domain;
 }
 
 // ─── fromServer ───────────────────────────────────────────────────────────────

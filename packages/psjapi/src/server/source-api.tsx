@@ -50,33 +50,13 @@ export function psjPlugin(): LoaderPlugin {
                 if (!meta || typeof meta !== 'object') return node;
 
                 if (meta.domain) {
-                    const label = domainBadge(meta.domain);
-                    if (label) {
-                        node.name = (
-                            <>
-                                {node.name}{' '}
-                                <span className="ms-auto border border-current px-1 rounded-lg text-xs text-nowrap font-mono">
-                                    {label}
-                                </span>
-                            </>
-                        );
-                    }
+                    node.name = <span className="font-mono text-xs">{node.name}</span>;
                 }
 
                 return node;
             },
         },
     };
-}
-
-function domainBadge(domain: string): string | null {
-    const map: Record<string, string> = {
-        macro: 'macro',
-        'psj-command': 'cmd',
-        'psj-utility': 'util',
-        'psj-gui': 'gui',
-    };
-    return map[domain] ?? null;
 }
 
 // ─── Page data ────────────────────────────────────────────────────────────────
@@ -218,12 +198,12 @@ export async function psjSource(
     }
 
     for (const [, list] of Object.entries(allEntries)) {
-        function onEntry(entry: ItemOutput | PageOutput) {
+        function onEntry(entry: ItemOutput | PageOutput, parentGroup?: string) {
             const psjMeta: InternalPsjMeta =
                 entry.type === 'item'
-                    ? { domain: entry.item.domain }
+                    ? { domain: entry.item.domain, group: parentGroup }
                     : entry.type === 'page' && entry.items.length > 0
-                      ? { domain: entry.items[0].domain }
+                      ? { domain: entry.items[0].domain, group: parentGroup }
                       : {};
 
             for (const locale of emitLocales) {
@@ -300,13 +280,16 @@ export async function psjSource(
             }
         }
 
-        function onEntries(entries: OutputEntry[], parent?: OutputEntry) {
+        function onEntries(entries: OutputEntry[], parent?: OutputEntry, groupLabel?: string) {
             if (!meta) {
                 for (const entry of entries) {
                     if (entry.type === 'group') {
-                        onEntries(entry.entries, entry);
+                        // Pass group label down — only propagate if it's a sub-group of a domain
+                        const nextGroupLabel =
+                            parent && parent.type === 'group' ? entry.info.title : undefined;
+                        onEntries(entry.entries, entry, nextGroupLabel);
                     } else {
-                        onEntry(entry as ItemOutput | PageOutput);
+                        onEntry(entry as ItemOutput | PageOutput, groupLabel);
                     }
                 }
                 return;
@@ -321,14 +304,17 @@ export async function psjSource(
                 );
 
                 if (entry.type === 'group') {
-                    onEntries(entry.entries, entry);
+                    // Determine if this is a group sub-folder (parent is also a group)
+                    const nextGroupLabel =
+                        parent && parent.type === 'group' ? entry.info.title : undefined;
+                    onEntries(entry.entries, entry, nextGroupLabel);
                     if (folderStyle === 'folder') {
                         pages.push(relativePath);
                     } else {
                         pages.push(`---${entry.info.title}---`, `...${relativePath}`);
                     }
                 } else {
-                    onEntry(entry as ItemOutput | PageOutput);
+                    onEntry(entry as ItemOutput | PageOutput, groupLabel);
                     pages.push(stripExt(relativePath));
                 }
             }

@@ -8,6 +8,7 @@ export const psjDocs = loader({
     source: await psjSource(psjServer, {
         groupBy: 'domain',
         per: 'item',
+        meta: true,
         i18nParser: 'dir',
         versionInUrl: true,
     }),

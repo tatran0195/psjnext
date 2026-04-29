@@ -22,6 +22,7 @@
 @source inline("all");
 @source inline("allCount");
 @source inline("allEntries");
+@source inline("also");
 @source inline("always");
 @source inline("and");
 @source inline("and/or");
@@ -70,7 +71,6 @@
 @source inline("border");
 @source inline("border-b");
 @source inline("border-blue-400/40");
-@source inline("border-current");
 @source inline("border-emerald-400/40");
 @source inline("border-fd-border");
 @source inline("border-fd-border/60");
@@ -101,7 +101,6 @@
 @source inline("clean");
 @source inline("client");
 @source inline("closure");
-@source inline("cmd");
 @source inline("cn");
 @source inline("code");
 @source inline("codes");
@@ -178,6 +177,7 @@
 @source inline("domain");
 @source inline("domain/id");
 @source inline("dot");
+@source inline("down");
 @source inline("downstream");
 @source inline("duration-200");
 @source inline("each");
@@ -267,7 +267,6 @@
 @source inline("group-hover:text-fd-primary");
 @source inline("group-hover:translate-x-0");
 @source inline("groupId");
-@source inline("gui");
 @source inline("h-9");
 @source inline("h1");
 @source inline("handles");
@@ -371,7 +370,6 @@
 @source inline("macro_link");
 @source inline("make");
 @source inline("manually");
-@source inline("map");
 @source inline("markdown");
 @source inline("match");
 @source inline("max-w-full");
@@ -411,6 +409,7 @@
 @source inline("naturally");
 @source inline("need");
 @source inline("new");
+@source inline("nextGroupLabel");
 @source inline("no");
 @source inline("node");
 @source inline("node:path");
@@ -420,7 +419,6 @@
 @source inline("not");
 @source inline("not-prose");
 @source inline("now");
-@source inline("null");
 @source inline("number");
 @source inline("object");
 @source inline("of");
@@ -431,6 +429,7 @@
 @source inline("onClick");
 @source inline("once");
 @source inline("one");
+@source inline("only");
 @source inline("opacity-0");
 @source inline("opacity-40");
 @source inline("opacity-50");
@@ -458,6 +457,7 @@
 @source inline("params");
 @source inline("paramsSlot");
 @source inline("parent");
+@source inline("parentGroup");
 @source inline("parser");
 @source inline("parts");
 @source inline("pass");
@@ -480,6 +480,7 @@
 @source inline("processor");
 @source inline("produces");
 @source inline("prominently");
+@source inline("propagate");
 @source inline("property");
 @source inline("props");
 @source inline("prose-no-margin");
@@ -495,7 +496,6 @@
 @source inline("psjapi_examples");
 @source inline("pt-1.5");
 @source inline("pt-2");
-@source inline("px-1");
 @source inline("px-1.5");
 @source inline("px-2");
 @source inline("px-2.5");
@@ -607,6 +607,8 @@
 @source inline("strokeLinejoin");
 @source inline("strokeWidth");
 @source inline("structuredData");
+@source inline("sub-folder");
+@source inline("sub-group");
 @source inline("suffix");
 @source inline("syntax");
 @source inline("syntaxCodeNode");
@@ -636,7 +638,6 @@
 @source inline("text-fd-muted-foreground/90");
 @source inline("text-fd-primary");
 @source inline("text-fd-primary-foreground");
-@source inline("text-nowrap");
 @source inline("text-orange-700");
 @source inline("text-purple-700");
 @source inline("text-red-500");
@@ -688,7 +689,6 @@
 @source inline("use");
 @source inline("useState");
 @source inline("uses");
-@source inline("util");
 @source inline("valid");
 @source inline("value");
 @source inline("values");
