@@ -9,6 +9,7 @@ import { Banner } from 'fumadocs-ui/components/banner';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 
+import ApiPage from '@/components/api-page';
 import { NotFound } from '@/components/layouts/not-found';
 import { getMDXComponents } from '@/components/mdx';
 import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-category';
@@ -45,13 +46,22 @@ export const revalidate = false;
 export const dynamicParams = true;
 
 export default async function Page(props: {
-    params: Promise<{ slug?: string[]; lang: string }>;
+    params: Promise<{ slug?: string[]; lang: string; version?: string }>;
     searchParams: Promise<{ v?: string }>;
 }) {
     const params = await props.params;
     const page = source.getPage(params.slug, params.lang);
 
     if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
+
+    if (page.type === 'sdk') {
+        const item = await page.data.getItem();
+        if (!item) return <NotFound getSuggestions={async () => []} />;
+
+        return (
+            <ApiPage item={item} version={page.data.sdkVersion} lang={page.data.sdkLocale} />
+        );
+    }
 
     const { body: Mdx, toc, lastModified } = await page.data.load();
     const { ribbon } = page.data;
@@ -69,7 +79,7 @@ export default async function Page(props: {
         <DocsPage toc={toc}>
             <div>
                 {/* Title row — clean, no competition */}
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex flex-wrap items-start justify-between gap-4">
                     <DocsTitle className="mb-0">{page.data.title}</DocsTitle>
                     {/* <div className="flex items-center gap-2 not-prose shrink-0">
                         <MarkdownCopyButton markdownUrl={markdownUrl} /> */}

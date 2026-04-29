@@ -21,10 +21,10 @@ import { Footer, type FooterProps } from './slots/footer';
 import {
     TOC,
     TOCPopover,
-    TOCProvider,
-    type TOCProviderProps,
     type TOCPopoverProps,
     type TOCProps,
+    TOCProvider,
+    type TOCProviderProps,
 } from './slots/toc';
 
 import type { TOCItemType } from 'fumadocs-core/toc';
@@ -202,7 +202,7 @@ export function DocsDescription({ children, className, ...props }: ComponentProp
 
 export function DocsTitle({ children, className, ...props }: ComponentProps<'h1'>) {
     return (
-        <h1 {...props} className={cn('text-[1.75em] font-semibold', className)}>
+        <h1 {...props} className={cn('text-[1.75em] font-semibold break-words min-w-0', className)}>
             {children}
         </h1>
     );
@@ -227,6 +227,7 @@ export function PageLastUpdate({
     );
 }
 
-export { type BreadcrumbProps, Breadcrumb as PageBreadcrumb } from './slots/breadcrumb';
-export { type FooterProps, Footer as PageFooter } from './slots/footer';
 export { MarkdownCopyButton, ViewOptionsPopover } from '@/layouts/shared/page-actions';
+export { Breadcrumb as PageBreadcrumb, type BreadcrumbProps } from './slots/breadcrumb';
+export { Footer as PageFooter, type FooterProps } from './slots/footer';
+

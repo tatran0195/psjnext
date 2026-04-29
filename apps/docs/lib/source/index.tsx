@@ -1,6 +1,9 @@
 import { docs } from 'collections/server';
 import { type InferMetaType, type InferPageType, loader } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
+import { psjPlugin, psjSource } from 'psjapi/server';
+
+import { psjServer } from '@/lib/psj-server';
 
 import { i18n } from '../i18n';
 import { customIconsPlugin } from './plugins/custom-icons-plugin';
@@ -15,18 +18,31 @@ const TAG_STYLES: Record<string, string> = {
     Deprecated: 'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300',
 };
 
-export const source = loader({
-    source: docs.toFumadocsSource(),
-    i18n,
-    baseUrl: '/',
-    plugins: [
-        lucideIconsPlugin(),
-        customIconsPlugin(),
-        pageTreeCodeTitlesPlugin(),
-        pageTreeFoldersPlugin(),
-        pageTreeTagsPlugin(TAG_STYLES),
-    ],
-});
+export const source = loader(
+    {
+        docs: docs.toFumadocsSource(),
+        sdk: await psjSource(psjServer, {
+            groupBy: 'domain',
+            per: 'item',
+            meta: true,
+            i18nParser: 'dir',
+            versionInUrl: true,
+            baseUrl: 'sdk',
+        }),
+    },
+    {
+        i18n,
+        baseUrl: '/',
+        plugins: [
+            lucideIconsPlugin(),
+            customIconsPlugin(),
+            pageTreeCodeTitlesPlugin(),
+            pageTreeFoldersPlugin(),
+            pageTreeTagsPlugin(TAG_STYLES),
+            psjPlugin()
+        ],
+    },
+);
 
 export type Page = InferPageType<typeof source>;
 export type Meta = InferMetaType<typeof source>;

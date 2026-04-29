@@ -43,6 +43,7 @@
 @source inline("badges");
 @source inline("baked");
 @source inline("baked-in");
+@source inline("base");
 @source inline("baseUrl");
 @source inline("being");
 @source inline("bg-amber-100");
@@ -254,6 +255,7 @@
 @source inline("gap-x-8");
 @source inline("gap-y-1");
 @source inline("gap-y-6");
+@source inline("generated");
 @source inline("getItem");
 @source inline("github-dark");
 @source inline("github-light");

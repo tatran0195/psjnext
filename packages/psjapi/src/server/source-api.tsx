@@ -122,6 +122,12 @@ export type PsjSourceOptions = PsjPagesBuilderConfig & {
      * @default false
      */
     versionInUrl?: boolean;
+
+    /**
+     * Base URL prefix for generated routes.
+     * e.g. '/sdk' or 'sdk'
+     */
+    baseUrl?: string;
 };
 
 // ─── Path helpers ─────────────────────────────────────────────────────────────
@@ -221,6 +227,11 @@ export async function psjSource(
 
                     if (versionInUrl && versionId) {
                         filePath = `${versionId}/${filePath}`;
+                    }
+
+                    if (options.baseUrl) {
+                        const base = options.baseUrl.startsWith('/') ? options.baseUrl.slice(1) : options.baseUrl;
+                        filePath = `${base}/${filePath}`;
                     }
 
                     if (i18nParser && localeId) {
