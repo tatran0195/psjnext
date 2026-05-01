@@ -1,6 +1,7 @@
-psj: '1.0'
+psj: '3.3'
+kind: locale_sidecar
 locale: ja
-id: AdvcStaticProcess
+id: Analysis/AdvcStaticProcess
 
 description: >
     ADVC静的構造解析プロセスを作成または変更するローレベルマクロ。

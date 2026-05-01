@@ -1,6 +1,7 @@
-psj: '1.0'
+psj: '3.3'
+kind: locale_sidecar
 locale: ja
-id: Analysis-ADVC-MakeProcess-Static
+id: ADVC/MakeProcess/Static
 
 description: >
     ADVC構造スタティックプロセスを作成します。非線形静的構造解析ジョブを設定し、

@@ -77,6 +77,7 @@ export interface PSJPageData extends PageData {
     index?: boolean;
     structuredData: StructuredData;
     toc: TOCItemType[];
+    load: () => Promise<PSJPageData>;
 }
 
 // ─── Options ──────────────────────────────────────────────────────────────────
@@ -266,6 +267,9 @@ export async function psjSource(
                                 ],
                             },
                             toc: [],
+                            async load() {
+                                return this as unknown as PSJPageData;
+                            },
                         } satisfies PSJPageData,
                     });
                 }
@@ -371,6 +375,9 @@ export async function psjSource(
                                     ],
                                 },
                                 toc: [],
+                                async load() {
+                                    return this as unknown as PSJPageData;
+                                },
                             } satisfies PSJPageData,
                         });
                     }

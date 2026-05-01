@@ -359,6 +359,7 @@
 @source inline("link");
 @source inline("links");
 @source inline("list");
+@source inline("load");
 @source inline("locale");
 @source inline("localeId");
 @source inline("locales");

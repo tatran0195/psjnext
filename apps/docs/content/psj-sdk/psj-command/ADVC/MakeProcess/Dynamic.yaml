@@ -1,8 +1,7 @@
-psj: '1.0'
-id: Analysis-ADVC-MakeProcess-Dynamic
+psj: '3.3'
+id: ADVC/MakeProcess/Dynamic
 title: Analysis.ADVC.MakeProcess.Dynamic()
 domain: psj-command
-group: ADVC
 namespace: Analysis.ADVC.MakeProcess
 syntax: Analysis.ADVC.MakeProcess.Dynamic()
 ribbon: Analysis > ADVC > Make Process > Dynamic
@@ -23,7 +22,7 @@ params:
             default: 'False'
             description: Enable dynamic parameter settings.
           - name: advcDynamic
-            type: '$ref:data-type/JPT_ADVC_DYNAMIC'
+            type: '$ref:data-type/pre/class/JPT_ADVC_DYNAMIC'
             required: false
             default: 'JPT_ADVC_DYNAMIC()'
             description: Dynamic parameters. Active when bDynamic=True.
@@ -62,7 +61,7 @@ examples:
           )
 
 see_also:
-    - $ref: psj-command/Analysis-ADVC-MakeProcess-Static
+    - $ref: psj-command/ADVC/MakeProcess/Static
       label: Analysis.ADVC.MakeProcess.Static()
-    - $ref: macro/AdvcStaticProcess
+    - $ref: macro/Analysis/AdvcStaticProcess
       label: AdvcStaticProcess() macro

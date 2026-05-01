@@ -1,14 +1,13 @@
-psj: '1.0'
-id: AdvcStaticProcess
+psj: '3.3'
+id: Analysis/AdvcStaticProcess
 title: AdvcStaticProcess()
 domain: macro
-group: analysis
 description: >
     Low-level macro to create or modify an ADVC static structural analysis process.
     Called internally by Analysis.ADVC.MakeProcess.Static(). Can be used directly
     via JPT.Exec() for scripting at the macro level.
 version_introduced: '5.0.0'
-command_link: Analysis-ADVC-MakeProcess-Static
+command_link: ADVC/MakeProcess/Static
 
 syntax: >
     AdvcStaticProcess(string m_strName, int m_iGeomNonlinear, int fixed_or_auto,
@@ -210,5 +209,5 @@ examples:
               print("Failed to create process.")
 
 see_also:
-    - $ref: psj-command/Analysis-ADVC-MakeProcess-Static
+    - $ref: psj-command/ADVC/MakeProcess/Static
       label: Analysis.ADVC.MakeProcess.Static()

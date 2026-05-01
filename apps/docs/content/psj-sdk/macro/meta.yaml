@@ -1,0 +1,8 @@
+psj: '3.3'
+kind: group_meta
+title: 'Macros'
+description: >
+    Low-level macro reference.
+order:
+    - Analysis
+icon: terminal

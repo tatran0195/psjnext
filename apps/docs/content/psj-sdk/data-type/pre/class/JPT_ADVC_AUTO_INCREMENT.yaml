@@ -1,0 +1,9 @@
+﻿psj: '3.3'
+kind: data_type
+id: pre/class/JPT_ADVC_AUTO_INCREMENT
+title: 'JPT_ADVC_AUTO_INCREMENT'
+category: class
+description: Placeholder for JPT_ADVC_AUTO_INCREMENT type.
+version_introduced: '5.0.0'
+constructor_syntax: 'JPT_ADVC_AUTO_INCREMENT()'
+fields: []

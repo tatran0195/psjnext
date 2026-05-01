@@ -1,4 +1,4 @@
-psj: '1.0'
+psj: '3.3'
 kind: param_group
 id: advc-process-struct
 extends: advc-process-base
@@ -22,7 +22,7 @@ params:
             label: NonLinear
 
     - name: advcStructTimeStep
-      type: '$ref:data-type/JPT_ADVC_STRUCT_TIME_STEP'
+      type: '$ref:data-type/pre/class/JPT_ADVC_STRUCT_TIME_STEP'
       required: false
       default: 'JPT_ADVC_STRUCT_TIME_STEP()'
       description: Time step and output timing settings.
@@ -34,7 +34,7 @@ params:
       description: Enable convergence parameter settings.
 
     - name: advcConvergence
-      type: '$ref:data-type/JPT_ADVC_CONVERGENCE'
+      type: '$ref:data-type/pre/class/JPT_ADVC_CONVERGENCE'
       required: false
       default: 'JPT_ADVC_CONVERGENCE()'
       description: Convergence parameters. Active when bConvergence=True.
@@ -46,7 +46,7 @@ params:
       description: Enable contact iterator parameter settings.
 
     - name: advcContactIter
-      type: '$ref:data-type/JPT_ADVC_CONTACT_ITER'
+      type: '$ref:data-type/pre/class/JPT_ADVC_CONTACT_ITER'
       required: false
       default: 'JPT_ADVC_CONTACT_ITER()'
       description: Contact iterator parameters. Active when bContact=True.
@@ -58,7 +58,7 @@ params:
       description: Enable auto increment parameter settings.
 
     - name: advcAutoIncrement
-      type: '$ref:data-type/JPT_ADVC_AUTO_INCREMENT'
+      type: '$ref:data-type/pre/class/JPT_ADVC_AUTO_INCREMENT'
       required: false
       default: 'JPT_ADVC_AUTO_INCREMENT()'
       description: Auto increment parameters. Active when bAutoIncrement=True.

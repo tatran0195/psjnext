@@ -1,8 +1,7 @@
-psj: '1.0'
-id: Analysis-ADVC-MakeProcess-Static
+psj: '3.3'
+id: ADVC/MakeProcess/Static
 title: Analysis.ADVC.MakeProcess.Static()
 domain: psj-command
-group: ADVC
 namespace: Analysis.ADVC.MakeProcess
 ribbon: Analysis > ADVC > Make Process > Static
 description: >
@@ -71,7 +70,7 @@ examples:
           )
 
 see_also:
-    - $ref: macro/AdvcStaticProcess
+    - $ref: macro/Analysis/AdvcStaticProcess
       label: AdvcStaticProcess() macro
-    - $ref: psj-command/Analysis-ADVC-MakeProcess-Dynamic
+    - $ref: psj-command/ADVC/MakeProcess/Dynamic
       label: Analysis.ADVC.MakeProcess.Dynamic()

@@ -1,0 +1,22 @@
+psj: '3.3'
+kind: data_type
+id: built-in/python-built-in-types
+title: 'Python Built-in Types'
+category: built-in
+description: >
+    Standard Python scalar types available as parameter and return
+    types across all PSJ domains.
+version_introduced: '5.0.0'
+values:
+    - id: String
+      label: String
+      description: UTF-8 text value. Written as str in Python.
+    - id: Integer
+      label: Integer
+      description: 32-bit signed integer. Written as int in Python.
+    - id: Boolean
+      label: Boolean
+      description: True or False. Written as bool in Python.
+    - id: Double
+      label: Double
+      description: 64-bit floating point. Written as float in Python.

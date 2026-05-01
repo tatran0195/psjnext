@@ -1,4 +1,5 @@
-psj: '1.0'
+psj: '3.3'
+kind: param_group
 locale: ja
 id: advc-process-struct
 

@@ -1,0 +1,9 @@
+psj: '3.3'
+kind: group_meta
+title: 'Pre-Processing Types'
+description: >
+    Types used in pre-processing operations.
+order:
+    - enum
+    - class
+icon: folder

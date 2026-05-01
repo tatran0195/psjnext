@@ -1,16 +1,21 @@
-import { readdir, readFile } from 'node:fs/promises';
+import { readdir, readFile, stat } from 'node:fs/promises';
 import * as path from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
 import type {
     Callout,
     CalloutTranslation,
+    DataTypeFile,
+    DataTypeLocaleSidecar,
     Domain,
     EnumValue,
     EnumValuePatch,
     EnumValueTranslations,
     Example,
+    ExampleTranslation,
+    Field,
     GroupLocaleSidecar,
+    GroupMetaFile,
     GroupRef,
     ItemFile,
     ItemLocaleSidecar,
@@ -21,6 +26,8 @@ import type {
     ProcessedSdk,
     PSJAPIOptions,
     PSJAPIServer,
+    ResolvedDataType,
+    ResolvedField,
     ResolvedItem,
     ResolvedParam,
     Returns,
@@ -39,6 +46,38 @@ interface LoadedSdk extends ProcessedSdk {
     itemSidecars: Map<string, ItemLocaleSidecar>;
     /** Group sidecars keyed by "<group-id>.<locale>" */
     groupSidecars: Map<string, GroupLocaleSidecar>;
+    /** DataType locale sidecars keyed by "<id>.<locale>" */
+    dataTypeSidecars: Map<string, DataTypeLocaleSidecar>;
+    /** Group meta locale sidecars keyed by "<path>.<locale>" */
+    groupMetaSidecars: Map<string, GroupMetaSidecar>;
+}
+
+/** Locale sidecar for group meta files (only localizable fields) */
+interface GroupMetaSidecar {
+    psj?: '3.3';
+    kind?: 'group_meta';
+    locale?: string;
+    title?: string;
+    description?: string;
+}
+
+async function walk(dir: string): Promise<string[]> {
+    let results: string[] = [];
+    try {
+        const list = await readdir(dir);
+        for (const file of list) {
+            const filePath = path.join(dir, file);
+            const statResult = await stat(filePath);
+            if (statResult.isDirectory()) {
+                results = results.concat(await walk(filePath));
+            } else {
+                results.push(filePath);
+            }
+        }
+    } catch {
+        // ignore
+    }
+    return results;
 }
 
 // ─── Guard helpers ────────────────────────────────────────────────────────────
@@ -67,8 +106,12 @@ async function loadSdk(rootDir: string): Promise<LoadedSdk> {
 
     const items = new Map<string, ItemFile>();
     const groups = new Map<string, ParamGroupFile>();
+    const dataTypes = new Map<string, DataTypeFile>();
+    const groupMetas = new Map<string, GroupMetaFile>();
     const itemSidecars = new Map<string, ItemLocaleSidecar>();
     const groupSidecars = new Map<string, GroupLocaleSidecar>();
+    const dataTypeSidecars = new Map<string, DataTypeLocaleSidecar>();
+    const groupMetaSidecars = new Map<string, GroupMetaSidecar>();
 
     const DOMAIN_DIRS: Domain[] = ['macro', 'psj-command', 'psj-utility', 'psj-gui'];
 
@@ -103,38 +146,105 @@ async function loadSdk(rootDir: string): Promise<LoadedSdk> {
         }
     }
 
-    // Load items from domain directories
-    for (const domain of DOMAIN_DIRS) {
-        const domainDir = path.join(rootDir, domain);
-        let domainFiles: string[] = [];
-        try {
-            domainFiles = await readdir(domainDir);
-        } catch {
-            continue;
-        }
+    // Load data-types
+    const dataTypeDir = path.join(rootDir, 'data-type');
+    const dtFiles = await walk(dataTypeDir);
+    for (const filePath of dtFiles) {
+        if (!filePath.endsWith('.yaml')) continue;
+        const relativePath = path.relative(dataTypeDir, filePath).replace(/\\/g, '/');
+        const dirName = path.dirname(relativePath);
+        const basename = path.basename(relativePath, '.yaml');
 
-        for (const file of domainFiles) {
-            if (!file.endsWith('.yaml')) continue;
-            const filePath = path.join(domainDir, file);
-            const basename = file.slice(0, -5);
-
+        if (basename === 'meta') {
+            const meta = await safeReadYaml<GroupMetaFile>(filePath);
+            if (meta && meta.kind === 'group_meta') {
+                groupMetas.set(`data-type/${dirName === '.' ? '' : dirName}`, meta);
+            }
+        } else if (basename.startsWith('meta.')) {
+            const locale = basename.slice(5); // remove meta.
+            const sidecar = await safeReadYaml<GroupMetaSidecar>(filePath);
+            if (sidecar)
+                groupMetaSidecars.set(
+                    `data-type/${dirName === '.' ? '' : dirName}.${locale}`,
+                    sidecar,
+                );
+        } else {
             const localeMatch = basename.match(/^(.+)\.([a-z]{2})$/);
             if (localeMatch) {
-                const [, itemId, locale] = localeMatch;
-                const sidecar = await safeReadYaml<ItemLocaleSidecar>(filePath);
-                if (sidecar) {
-                    itemSidecars.set(`${domain}/${itemId}.${locale}`, sidecar);
-                }
+                const [, , locale] = localeMatch;
+                const itemId = relativePath.slice(0, -(locale.length + 6));
+                const sidecar = await safeReadYaml<DataTypeLocaleSidecar>(filePath);
+                if (sidecar) dataTypeSidecars.set(`${itemId}.${locale}`, sidecar);
             } else {
-                const item = await safeReadYaml<ItemFile>(filePath);
-                if (item && item.psj) {
-                    items.set(`${domain}/${item.id}`, item);
+                const dt = await safeReadYaml<DataTypeFile>(filePath);
+                if (dt && dt.kind === 'data_type') {
+                    const itemId = relativePath.slice(0, -5);
+                    dataTypes.set(itemId, dt);
                 }
             }
         }
     }
 
-    return { manifest, items, groups, itemSidecars, groupSidecars };
+    // Load items from domain directories
+    for (const domain of DOMAIN_DIRS) {
+        const domainDir = path.join(rootDir, domain);
+        const domainFiles = await walk(domainDir);
+
+        for (const filePath of domainFiles) {
+            if (!filePath.endsWith('.yaml')) continue;
+            const relativePath = path.relative(domainDir, filePath).replace(/\\/g, '/');
+            const dirName = path.dirname(relativePath);
+            const basename = path.basename(relativePath, '.yaml');
+
+            if (basename === 'meta') {
+                const meta = await safeReadYaml<GroupMetaFile>(filePath);
+                if (meta && meta.kind === 'group_meta') {
+                    // key includes domain to avoid collision, e.g. macro/SubFolder
+                    groupMetas.set(
+                        `${domain}/${dirName === '.' ? '' : dirName}`.replace(/\/$/, ''),
+                        meta,
+                    );
+                }
+            } else if (basename.startsWith('meta.')) {
+                const locale = basename.slice(5); // remove meta.
+                const sidecar = await safeReadYaml<GroupMetaSidecar>(filePath);
+                if (sidecar)
+                    groupMetaSidecars.set(
+                        `${domain}/${dirName === '.' ? '' : dirName}`.replace(/\/$/, '') +
+                            `.${locale}`,
+                        sidecar,
+                    );
+            } else {
+                const localeMatch = basename.match(/^(.+)\.([a-z]{2})$/);
+                if (localeMatch) {
+                    const [, , locale] = localeMatch;
+                    const itemId = relativePath.slice(0, -(locale.length + 6));
+                    const sidecar = await safeReadYaml<ItemLocaleSidecar>(filePath);
+                    if (sidecar) {
+                        itemSidecars.set(`${domain}/${itemId}.${locale}`, sidecar);
+                    }
+                } else {
+                    const item = await safeReadYaml<ItemFile>(filePath);
+                    if (item && item.psj) {
+                        const itemId = relativePath.slice(0, -5);
+                        items.set(`${domain}/${itemId}`, item);
+                    }
+                }
+            }
+        }
+    }
+
+    return {
+        manifest,
+        items,
+        groups,
+        dataTypes,
+        groupMetas,
+        itemSidecars,
+        groupSidecars,
+        dataTypeSidecars,
+        groupMetaSidecars,
+    };
 }
 
 // ─── Group expansion ──────────────────────────────────────────────────────────
@@ -194,6 +304,20 @@ function expandParams(
             } else {
                 groupParams.push(...inserted);
             }
+        }
+
+        // override — patch specific param fields without excluding
+        if (entry.override) {
+            groupParams = groupParams.map((p) => {
+                const patch = entry.override![p.name ?? ''];
+                if (!patch) return p;
+                return {
+                    ...p,
+                    ...(patch.description !== undefined && { description: patch.description }),
+                    ...(patch.default !== undefined && { default: patch.default }),
+                    ...(patch.required !== undefined && { required: patch.required }),
+                };
+            });
         }
 
         result.push(...groupParams);
@@ -284,13 +408,112 @@ function applyDeltasToParams(
     return result;
 }
 
+function applyDeltasToFields(
+    fields: Field[],
+    deltas: VersionDelta[],
+    targetVersions: string[],
+): Field[] {
+    let result: Field[] = [...fields];
+
+    for (const delta of deltas) {
+        if (!targetVersions.includes(delta.version)) continue;
+        const { fields: fieldDelta } = delta;
+        if (!fieldDelta) continue;
+
+        if (fieldDelta.remove) {
+            const removeSet = new Set(fieldDelta.remove);
+            result = result.filter((f) => !removeSet.has(f.name));
+        }
+
+        if (fieldDelta.add) {
+            for (const newField of fieldDelta.add) {
+                const { after, ...field } = newField as Field & { after?: string };
+                if (after) {
+                    const idx = result.findIndex((f) => f.name === after);
+                    if (idx !== -1) result.splice(idx + 1, 0, field as Field);
+                    else result.push(field as Field);
+                } else {
+                    result.push(field as Field);
+                }
+            }
+        }
+
+        if (fieldDelta.modify) {
+            for (const patch of fieldDelta.modify) {
+                const idx = result.findIndex((f) => f.name === patch.name);
+                if (idx === -1) continue;
+                const existing = { ...result[idx] };
+                const { changes } = patch;
+                if (changes.description !== undefined) existing.description = changes.description;
+                if (changes.default !== undefined) existing.default = changes.default;
+                if (changes.required !== undefined) existing.required = changes.required;
+                if (changes.remarks !== undefined) existing.remarks = changes.remarks;
+                if (changes.deprecated !== undefined) existing.deprecated = changes.deprecated;
+                if (changes.enum_values) {
+                    existing.enum_values = applyEnumPatch(
+                        existing.enum_values,
+                        changes.enum_values,
+                    );
+                }
+                result[idx] = existing;
+            }
+        }
+    }
+    return result;
+}
+
+function applyDeltasToValues(
+    values: EnumValue[],
+    deltas: VersionDelta[],
+    targetVersions: string[],
+): EnumValue[] {
+    let result: EnumValue[] = [...values];
+    for (const delta of deltas) {
+        if (!targetVersions.includes(delta.version)) continue;
+        const { values: valueDelta } = delta;
+        if (!valueDelta) continue;
+
+        if (valueDelta.remove) {
+            const removeSet = new Set(valueDelta.remove.map(String));
+            result = result.filter((v) => !removeSet.has(String(v.id)));
+        }
+
+        if (valueDelta.add) {
+            for (const newVal of valueDelta.add) {
+                const { after, ...val } = newVal as EnumValue & { after?: number | string };
+                if (after !== undefined) {
+                    const idx = result.findIndex((v) => String(v.id) === String(after));
+                    if (idx !== -1) result.splice(idx + 1, 0, val as EnumValue);
+                    else result.push(val as EnumValue);
+                } else {
+                    result.push(val as EnumValue);
+                }
+            }
+        }
+
+        if (valueDelta.modify) {
+            for (const patch of valueDelta.modify) {
+                const idx = result.findIndex((v) => String(v.id) === String(patch.id));
+                if (idx === -1) continue;
+                const existing = { ...result[idx] };
+                const { changes } = patch;
+                if (changes.label !== undefined) existing.label = changes.label;
+                if (changes.description !== undefined) existing.description = changes.description;
+                if (changes.deprecated !== undefined) existing.deprecated = changes.deprecated;
+                result[idx] = existing;
+            }
+        }
+    }
+    return result;
+}
+
 // ─── Locale resolution ────────────────────────────────────────────────────────
 
-function translateParam(
-    param: Param,
+function translateParam<T extends Param>(
+    param: T,
     key: string,
     translation: ParamTranslation | undefined,
-): Param {
+): T {
     if (!translation) return param;
     const result = { ...param };
     if (translation.display_name) result.display_name = translation.display_name;
@@ -306,11 +529,11 @@ function translateParam(
 
 function translateCallouts(
     callouts: Callout[],
-    translations: CalloutTranslation[] | undefined,
+    translations: Record<string, CalloutTranslation> | undefined,
 ): Callout[] {
     if (!translations) return callouts;
-    return callouts.map((c, i) => {
-        const t = translations[i];
+    return callouts.map((c) => {
+        const t = translations[c.id];
         return t ? { ...c, text: t.text } : c;
     });
 }
@@ -330,11 +553,11 @@ function translateReturns(returns: Returns, translation: ItemLocaleSidecar['retu
 
 function translateExamples(
     examples: Example[],
-    translations: ItemLocaleSidecar['examples'],
+    translations: Record<string, ExampleTranslation> | undefined,
 ): Example[] {
     if (!translations) return examples;
-    return examples.map((ex, i) => {
-        const t = translations[i];
+    return examples.map((ex) => {
+        const t = translations[ex.id];
         return t?.title ? { ...ex, title: t.title } : ex;
     });
 }
@@ -365,7 +588,7 @@ export function resolveItem(
     // 3. Determine top-level item fields including delta item patches
     let description = item.description;
     let ribbon = item.ribbon;
-    let deprecated = false;
+    let stability: import('./types').Stability = item.stability ?? 'stable';
 
     if (item.changes) {
         const targetVersions = versionsUpTo(manifest, version);
@@ -373,9 +596,10 @@ export function resolveItem(
             if (!targetVersions.includes(delta.version)) continue;
             if (delta.item?.description) description = delta.item.description;
             if (delta.item?.ribbon) ribbon = delta.item.ribbon;
-            if (delta.item?.deprecated) deprecated = true;
+            if (delta.item?.stability) stability = delta.item.stability;
         }
     }
+    const deprecated = stability === 'deprecated';
 
     // 4. Merge locale translations (en = no sidecar needed)
     let callouts = item.callouts ?? [];
@@ -464,7 +688,11 @@ export function resolveItem(
         // mark as deprecated ONLY at or past deprecated_in version, clear it before.
         if (result.deprecated_in) {
             const depIdx = versionOrder.get(result.deprecated_in) ?? Infinity;
-            result = { ...result, deprecated: depIdx <= targetIdx };
+            if (depIdx <= targetIdx && !result.deprecated) {
+                result.deprecated = true;
+            } else if (depIdx > targetIdx) {
+                delete result.deprecated;
+            }
         }
         // Similarly for removed_in
         if (result.removed_in) {
@@ -478,19 +706,134 @@ export function resolveItem(
         id: item.id,
         title: item.title,
         domain: item.domain,
-        group: item.group,
         namespace: item.namespace,
         ribbon,
+        stability,
         description,
         version_introduced: item.version_introduced,
         macro_link: item.macro_link,
         command_link: item.command_link,
+        class_ref: item.class_ref,
         syntax: item.syntax,
         callouts,
         params: versionedParams,
         returns,
         examples,
         see_also: item.see_also ?? [],
+        deprecated,
+    };
+}
+
+export function resolveDataType(
+    dt: DataTypeFile,
+    sdk: LoadedSdk,
+    version: string,
+    locale: string,
+): ResolvedDataType {
+    const { manifest, dataTypeSidecars } = sdk;
+
+    let values = dt.values ? [...dt.values] : undefined;
+    let fields = dt.fields ? [...dt.fields] : undefined;
+
+    if (dt.changes && dt.changes.length > 0) {
+        const targetVersions = versionsUpTo(manifest, version);
+        if (values) values = applyDeltasToValues(values, dt.changes, targetVersions);
+        if (fields) fields = applyDeltasToFields(fields, dt.changes, targetVersions);
+    }
+
+    let description = dt.description;
+    let stability = dt.stability ?? 'stable';
+
+    if (dt.changes) {
+        const targetVersions = versionsUpTo(manifest, version);
+        for (const delta of dt.changes) {
+            if (!targetVersions.includes(delta.version)) continue;
+            if (delta.item?.description) description = delta.item.description;
+            if (delta.item?.stability) stability = delta.item.stability;
+        }
+    }
+    const deprecated = stability === 'deprecated';
+
+    let examples = dt.examples ?? [];
+
+    if (locale !== 'en') {
+        const sidecarKey = `${dt.id}.${locale}`;
+        const sidecar = dataTypeSidecars.get(sidecarKey);
+
+        if (sidecar) {
+            if (sidecar.description) description = sidecar.description;
+            examples = translateExamples(examples, sidecar.examples);
+
+            if (values && sidecar.values) {
+                values = values.map((v) => {
+                    const t = sidecar.values![v.id];
+                    if (!t) return v;
+                    return {
+                        ...v,
+                        ...(t.label && { label: t.label }),
+                        ...(t.description && { description: t.description }),
+                    };
+                });
+            }
+
+            if (fields && sidecar.fields) {
+                fields = fields.map((f) => {
+                    const t = sidecar.fields![f.name];
+                    if (!t) return f;
+                    const res = { ...f };
+                    if (t.description) res.description = t.description;
+                    if (t.remarks) res.remarks = t.remarks;
+                    if (t.enum_values && res.enum_values) {
+                        res.enum_values = res.enum_values.map((ev) => {
+                            const lbl = t.enum_values![ev.id];
+                            return lbl ? { ...ev, label: lbl } : ev;
+                        });
+                    }
+                    return res;
+                });
+            }
+        }
+    }
+
+    const versionOrder = new Map<string, number>(
+        manifest.versions.map((v, i) => [v.id, i] as [string, number]),
+    );
+    const targetIdx = versionOrder.get(version) ?? manifest.versions.length - 1;
+
+    let resolvedFields: ResolvedField[] | undefined;
+    if (fields) {
+        resolvedFields = fields.map((f) => {
+            const res: ResolvedField = { ...f };
+            if (res.deprecated_in) {
+                const depIdx = versionOrder.get(res.deprecated_in) ?? Infinity;
+                if (depIdx <= targetIdx && !res.deprecated) {
+                    res.deprecated = true;
+                } else if (depIdx > targetIdx) {
+                    delete res.deprecated;
+                }
+            }
+            if (res.removed_in) {
+                const remIdx = versionOrder.get(res.removed_in) ?? Infinity;
+                res.removed = remIdx <= targetIdx;
+            }
+            return res as ResolvedField;
+        });
+    }
+
+    return {
+        id: dt.id,
+        title: dt.title,
+        category: dt.category,
+        namespace: dt.namespace,
+        description,
+        version_introduced: dt.version_introduced,
+        stability,
+        values,
+        constructor_syntax: dt.constructor_syntax,
+        fields: resolvedFields,
+        methods: dt.methods,
+        examples,
+        see_also: dt.see_also ?? [],
         deprecated,
     };
 }
@@ -516,7 +859,13 @@ export function createPSJAPI(options: PSJAPIOptions): PSJAPIServer {
 
         async getProcessedSdk(): Promise<ProcessedSdk> {
             const sdk = await getLoadedSdk();
-            return { manifest: sdk.manifest, items: sdk.items, groups: sdk.groups };
+            return {
+                manifest: sdk.manifest,
+                items: sdk.items,
+                groups: sdk.groups,
+                dataTypes: sdk.dataTypes,
+                groupMetas: sdk.groupMetas,
+            };
         },
 
         async resolveItem(
@@ -533,6 +882,22 @@ export function createPSJAPI(options: PSJAPIOptions): PSJAPIServer {
             const resolvedLocale = locale ?? defaultLocale;
 
             return resolveItem(item, sdk, resolvedVersion, resolvedLocale);
+        },
+
+        async resolveDataType(
+            id: string,
+            version?: string,
+            locale?: string,
+        ): Promise<ResolvedDataType | undefined> {
+            const sdk = await getLoadedSdk();
+            const dt = sdk.dataTypes.get(id);
+            if (!dt) return undefined;
+
+            const resolvedVersion =
+                version ?? sdk.manifest.current_version ?? sdk.manifest.versions.at(-1)?.id ?? '0';
+            const resolvedLocale = locale ?? defaultLocale;
+
+            return resolveDataType(dt, sdk, resolvedVersion, resolvedLocale);
         },
 
         async getVersions() {

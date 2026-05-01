@@ -1,4 +1,4 @@
-import type { Domain, ItemFile, ProcessedSdk, PSJAPIServer } from '../../types';
+import type { DataTypeFile, Domain, ItemFile, ProcessedSdk, PSJAPIServer } from '../../types';
 
 // ─── Output entry types ───────────────────────────────────────────────────────
 
@@ -30,7 +30,7 @@ export type OutputEntry = ItemOutput | GroupOutput | PageOutput;
 export interface ItemRef {
     /** "<domain>/<id>" */
     key: string;
-    domain: Domain;
+    domain: Domain | 'data-type';
     id: string;
 }
 
@@ -99,6 +99,18 @@ export function fromSdk(sdk: ProcessedSdk, config: PsjPagesBuilderConfig = {}): 
         domainMap.get(g)!.push(item);
     }
 
+    // Collect data-types into categories/groups
+    const dtMap = new Map<string, DataTypeFile[]>();
+    if (sdk.dataTypes && sdk.dataTypes.size > 0) {
+        for (const [_, dt] of sdk.dataTypes) {
+            const groupName = dt.id.includes('/')
+                ? dt.id.slice(0, dt.id.lastIndexOf('/'))
+                : '__ungrouped__';
+            if (!dtMap.has(groupName)) dtMap.set(groupName, []);
+            dtMap.get(groupName)!.push(dt);
+        }
+    }
+
     if (per === 'item') {
         for (const [domain, groupMap] of byDomain) {
             // Separate ungrouped items from grouped items
@@ -138,6 +150,49 @@ export function fromSdk(sdk: ProcessedSdk, config: PsjPagesBuilderConfig = {}): 
                 entries: domainEntries,
             });
         }
+
+        if (dtMap.size > 0) {
+            const dtDomainEntries: OutputEntry[] = [];
+            const ungroupedDtEntries: OutputEntry[] = [];
+            const namedDtGroupEntries = new Map<string, OutputEntry[]>();
+
+            for (const [group, dts] of dtMap) {
+                for (const dt of dts) {
+                    const filePath = `data-type/${idToSlug(dt.id)}`;
+                    const output: ItemOutput = {
+                        type: 'item',
+                        path: `${filePath}.mdx`,
+                        info: { title: dt.title, description: dt.description },
+                        item: { key: `data-type/${dt.id}`, domain: 'data-type', id: dt.id },
+                    };
+
+                    if (group === '__ungrouped__') {
+                        ungroupedDtEntries.push(output);
+                    } else {
+                        if (!namedDtGroupEntries.has(group)) namedDtGroupEntries.set(group, []);
+                        namedDtGroupEntries.get(group)!.push(output);
+                    }
+                }
+            }
+
+            dtDomainEntries.push(...ungroupedDtEntries);
+            for (const [group, groupItems] of namedDtGroupEntries) {
+                const meta = sdk.groupMetas?.get(`data-type/${group}`);
+                dtDomainEntries.push({
+                    type: 'group',
+                    path: `data-type/${group}`, // Group is already relative path like pre/enum
+                    info: { title: meta?.title ?? group },
+                    entries: groupItems,
+                });
+            }
+
+            entries.push({
+                type: 'group',
+                path: 'data-type',
+                info: { title: 'Data Types' },
+                entries: dtDomainEntries,
+            });
+        }
     } else if (per === 'group') {
         // One page per group; list items on that page
         const byGroup = new Map<string, ItemFile[]>();
@@ -161,6 +216,22 @@ export function fromSdk(sdk: ProcessedSdk, config: PsjPagesBuilderConfig = {}): 
                 })),
             });
         }
+
+        for (const [group, dts] of dtMap) {
+            const meta = sdk.groupMetas?.get(`data-type/${group}`);
+            const groupLabel = group === '__ungrouped__' ? 'Data Types' : (meta?.title ?? group);
+            const filePath = `data-type-${slugify(groupLabel)}`;
+            entries.push({
+                type: 'page',
+                path: `${filePath}.mdx`,
+                info: { title: groupLabel },
+                items: dts.map((dt) => ({
+                    key: `data-type/${dt.id}`,
+                    domain: 'data-type',
+                    id: dt.id,
+                })),
+            });
+        }
     } else {
         // per === 'domain' — one page per domain
         for (const [domain, groupMap] of byDomain) {
@@ -174,6 +245,21 @@ export function fromSdk(sdk: ProcessedSdk, config: PsjPagesBuilderConfig = {}): 
                     key: `${item.domain}/${item.id}`,
                     domain: item.domain,
                     id: item.id,
+                })),
+            });
+        }
+
+        if (dtMap.size > 0) {
+            const allDts: DataTypeFile[] = [];
+            for (const dts of dtMap.values()) allDts.push(...dts);
+            entries.push({
+                type: 'page',
+                path: `data-type.mdx`,
+                info: { title: 'Data Types' },
+                items: allDts.map((dt) => ({
+                    key: `data-type/${dt.id}`,
+                    domain: 'data-type',
+                    id: dt.id,
                 })),
             });
         }

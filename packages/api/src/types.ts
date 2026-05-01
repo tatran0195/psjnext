@@ -5,6 +5,7 @@ export type ParamStyle = 'positional' | 'named';
 export type ReturnKind = 'typed' | 'macro_code' | 'void';
 export type CalloutLevel = 'warn' | 'info' | 'danger';
 export type ExampleLanguage = 'psj' | 'python';
+export type Stability = 'stable' | 'experimental' | 'deprecated';
 
 // ─── SDK Version ────────────────────────────────────────────────────────────
 
@@ -38,7 +39,7 @@ export interface SdkVersions {
 // ─── Root manifest ───────────────────────────────────────────────────────────
 
 export interface SdkManifest {
-    psj: '1.0';
+    psj: '3.3';
     versions: VersionEntry[];
     current_version: string;
     locales: LocaleEntry[];
@@ -66,8 +67,10 @@ export interface DomainEntry {
 
 export interface EnumValue {
     id: number | string;
+    name?: string;
     label: string;
     description?: string;
+    deprecated?: boolean;
 }
 
 // ─── Param ───────────────────────────────────────────────────────────────────
@@ -84,11 +87,25 @@ export interface Param {
     default?: string;
     description: string;
     enum_values?: EnumValue[];
-    deprecated?: boolean;
+    /** Reason string when deprecated; presence implies deprecated */
+    deprecated?: string;
     deprecated_in?: string;
     removed_in?: string;
     /** true = added by converter, not stated in source */
     inferred?: boolean;
+}
+
+/** Field used in class data-types — like Param but with remarks */
+export interface Field {
+    name: string;
+    type: string;
+    required: boolean;
+    default?: string;
+    description: string;
+    enum_values?: EnumValue[];
+    remarks?: string;
+    /** Reason string when deprecated; presence implies deprecated */
+    deprecated?: string;
 }
 
 // ─── Group reference in item params list ─────────────────────────────────────
@@ -98,6 +115,8 @@ export interface GroupRef {
     exclude?: string[];
     insert_after?: string;
     insert?: Param[];
+    /** Patch specific params from the group without excluding them */
+    override?: Record<string, { description?: string; default?: string; required?: boolean }>;
 }
 
 export type ParamOrGroupRef = Param | GroupRef;
@@ -119,6 +138,8 @@ export interface Returns {
 // ─── Callout ─────────────────────────────────────────────────────────────────
 
 export interface Callout {
+    /** Stable identifier for sidecar matching */
+    id: string;
     level: CalloutLevel;
     text: string;
 }
@@ -126,6 +147,8 @@ export interface Callout {
 // ─── Example ─────────────────────────────────────────────────────────────────
 
 export interface Example {
+    /** Stable identifier for sidecar matching */
+    id: string;
     title?: string;
     language: ExampleLanguage;
     code: string;
@@ -152,7 +175,28 @@ export interface ParamPatch {
         description?: string;
         default?: string;
         required?: boolean;
+        deprecated?: string;
+        enum_values?: EnumValuePatch;
+    };
+}
+
+export interface ValuePatch {
+    id: number | string;
+    changes: {
+        label?: string;
+        description?: string;
         deprecated?: boolean;
+    };
+}
+
+export interface FieldPatch {
+    name: string;
+    changes: {
+        description?: string;
+        default?: string;
+        required?: boolean;
+        remarks?: string;
+        deprecated?: string;
         enum_values?: EnumValuePatch;
     };
 }
@@ -163,33 +207,46 @@ export interface VersionDelta {
     item?: {
         description?: string;
         ribbon?: string;
-        deprecated?: boolean;
+        stability?: Stability;
     };
+    /** Item files only */
     params?: {
         add?: (Param & { after?: string })[];
         remove?: string[];
         modify?: ParamPatch[];
+    };
+    /** built-in and enumeration data-type files only */
+    values?: {
+        add?: (EnumValue & { after?: number | string })[];
+        remove?: (number | string)[];
+        modify?: ValuePatch[];
+    };
+    /** class data-type files only */
+    fields?: {
+        add?: (Field & { after?: string })[];
+        remove?: string[];
+        modify?: FieldPatch[];
     };
 }
 
 // ─── Item file ───────────────────────────────────────────────────────────────
 
 export interface ItemFile {
-    psj: '1.0';
+    psj: '3.3';
     id: string;
     title: string;
     domain: Domain;
-    group?: string;
     namespace?: string;
     ribbon?: string;
-    author?: string;
-    author_url?: string;
+    stability?: Stability;
     description: string;
     version_introduced: string;
     /** id of the macro this command wraps (psj-command only) */
     macro_link?: string;
     /** id of the command that wraps this macro (macro only) */
     command_link?: string;
+    /** data-type path id; psj-gui only */
+    class_ref?: string;
     syntax?: string;
     callouts?: Callout[];
     params: ParamOrGroupRef[];
@@ -202,12 +259,48 @@ export interface ItemFile {
 // ─── Param group file ─────────────────────────────────────────────────────────
 
 export interface ParamGroupFile {
-    psj: '1.0';
+    psj: '3.3';
     kind: 'param_group';
     id: string;
     description?: string;
     extends?: string;
     params: Param[];
+}
+
+// ─── Data-Type and Group Meta ────────────────────────────────────────────────
+
+export interface DataTypeFile {
+    psj: '3.3';
+    kind: 'data_type';
+    id: string;
+    title: string;
+    category: 'built-in' | 'enumeration' | 'class';
+    namespace?: string;
+    description: string;
+    version_introduced: string;
+    stability?: Stability;
+
+    // category: built-in or enumeration
+    values?: EnumValue[];
+
+    // category: class
+    constructor_syntax?: string;
+    fields?: Field[];
+    /** $ref entries pointing to item files (any domain) */
+    methods?: SeeAlsoRef[];
+
+    examples?: Example[];
+    see_also?: SeeAlsoRef[];
+    changes?: VersionDelta[];
+}
+
+export interface GroupMetaFile {
+    psj: '3.3';
+    kind: 'group_meta';
+    title: string;
+    description?: string;
+    order?: string[];
+    icon?: string;
 }
 
 // ─── Locale sidecars ─────────────────────────────────────────────────────────
@@ -231,28 +324,45 @@ export interface ExampleTranslation {
 }
 
 export interface CalloutTranslation {
-    level: CalloutLevel;
     text: string;
 }
 
 /** Item locale sidecar — named params keyed by name */
 export interface ItemLocaleSidecar {
-    psj: '1.0';
+    psj: '3.3';
+    kind?: 'locale_sidecar';
     locale: string;
     id: string;
     description?: string;
-    callouts?: CalloutTranslation[];
+    /** keyed by callout id */
+    callouts?: Record<string, CalloutTranslation>;
     /** For named-param items: keyed by param name; for macros: keyed by position number */
     params?: Record<string, ParamTranslation>;
     returns?: {
         description?: string;
         codes?: ReturnCodeTranslations;
     };
-    examples?: ExampleTranslation[];
+    /** keyed by example id */
+    examples?: Record<string, ExampleTranslation>;
 }
 
 /** Group locale sidecar — same shape as item sidecar but without per-item fields */
 export type GroupLocaleSidecar = ItemLocaleSidecar;
+
+/** DataType locale sidecar */
+export interface DataTypeLocaleSidecar {
+    psj: '3.3';
+    kind: 'locale_sidecar';
+    locale: string;
+    id: string;
+    description?: string;
+    /** keyed by value id; built-in or enumeration */
+    values?: Record<string | number, { label?: string; description?: string }>;
+    /** keyed by field name; class */
+    fields?: Record<string, { description?: string; remarks?: string; deprecated?: string; enum_values?: Record<string | number, string> }>;
+    /** keyed by example id */
+    examples?: Record<string, ExampleTranslation>;
+}
 
 // ─── Resolved / fully-materialised item ───────────────────────────────────────
 //
@@ -272,7 +382,7 @@ export interface ResolvedParam {
     default?: string;
     description: string;
     enum_values?: EnumValue[];
-    deprecated?: boolean;
+    deprecated?: string | boolean;
     deprecated_in?: string;
     removed_in?: string;
     /** true when removed_in <= current viewed version (set by resolveItem) */
@@ -286,17 +396,44 @@ export interface ResolvedItem {
     id: string;
     title: string;
     domain: Domain;
-    group?: string;
     namespace?: string;
     ribbon?: string;
+    stability: Stability;
     description: string;
     version_introduced: string;
     macro_link?: string;
     command_link?: string;
+    class_ref?: string;
     syntax?: string;
     callouts: Callout[];
     params: ResolvedParam[];
     returns: Returns;
+    examples: Example[];
+    see_also: SeeAlsoRef[];
+    deprecated?: boolean;
+}
+
+export interface ResolvedField extends ResolvedParam {
+    remarks?: string;
+}
+
+export interface ResolvedDataType {
+    id: string;
+    title: string;
+    category: 'built-in' | 'enumeration' | 'class';
+    namespace?: string;
+    description: string;
+    version_introduced: string;
+    stability: Stability;
+
+    // category: built-in or enumeration
+    values?: EnumValue[];
+
+    // category: class
+    constructor_syntax?: string;
+    fields?: ResolvedField[];
+    methods?: SeeAlsoRef[];
+
     examples: Example[];
     see_also: SeeAlsoRef[];
     deprecated?: boolean;
@@ -316,6 +453,16 @@ export interface ProcessedSdk {
      * Param group definitions keyed by group id.
      */
     groups: Map<string, ParamGroupFile>;
+
+    /**
+     * Data types definitions.
+     */
+    dataTypes: Map<string, DataTypeFile>;
+
+    /**
+     * Directory metadata.
+     */
+    groupMetas: Map<string, GroupMetaFile>;
 }
 
 // ─── PSJAPIServer public interface ───────────────────────────────────────────
@@ -331,6 +478,15 @@ export interface PSJAPIServer {
         version?: string,
         locale?: string,
     ) => Promise<ResolvedItem | undefined>;
+    /**
+     * Resolve a single data-type for a given version and locale.
+     * Deltas applied, translations merged.
+     */
+    resolveDataType: (
+        id: string,
+        version?: string,
+        locale?: string,
+    ) => Promise<ResolvedDataType | undefined>;
     /**
      * Return a {@link SdkVersions} value object derived from the manifest.
      *

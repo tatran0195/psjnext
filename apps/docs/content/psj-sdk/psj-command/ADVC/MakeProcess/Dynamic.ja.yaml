@@ -1,6 +1,7 @@
-psj: '1.0'
+psj: '3.3'
+kind: locale_sidecar
 locale: ja
-id: Analysis-ADVC-MakeProcess-Dynamic
+id: ADVC/MakeProcess/Dynamic
 
 description: >
     ADVC構造ダイナミックプロセスを作成します。慣性効果が重要な

@@ -34,7 +34,7 @@ export const { GET } = createFromSource(source, {
         const version = match ? match : null;
 
         return {
-            title: page.data.title,
+            title: page.data.title ?? '',
             description: page.data.description,
             url: page.url,
             id: page.url,

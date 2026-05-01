@@ -1,0 +1,14 @@
+psj: '3.3'
+kind: group_meta
+title: 'Classes'
+description: >
+    Structure and class types.
+order:
+    - JPT_ADVC_STRUCT_TIME_STEP
+    - JPT_ADVC_CONVERGENCE
+    - JPT_ADVC_CONTACT_ITER
+    - JPT_ADVC_AUTO_INCREMENT
+    - JPT_ADVC_LOAD_NODE
+    - JPT_ADVC_REF_STRESS_RESULT
+    - JPT_ADVC_DYNAMIC
+icon: box

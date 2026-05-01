@@ -1,4 +1,4 @@
-psj: '1.0'
+psj: '3.3'
 kind: param_group
 id: advc-process-base
 description: >
@@ -17,19 +17,19 @@ params:
       description: Existing process to modify. None creates a new process.
 
     - name: listLoadNode
-      type: 'List[$ref:data-type/JPT_ADVC_LOAD_NODE]'
+      type: 'List[$ref:data-type/pre/class/JPT_ADVC_LOAD_NODE]'
       required: false
       default: '[]'
       description: Nodes with assigned loads.
 
     - name: listLoadCaseNode
-      type: 'List[$ref:data-type/JPT_ADVC_LOAD_NODE]'
+      type: 'List[$ref:data-type/pre/class/JPT_ADVC_LOAD_NODE]'
       required: false
       default: '[]'
       description: Nodes with assigned load cases.
 
     - name: listLoadNodeContact
-      type: 'List[$ref:data-type/JPT_ADVC_LOAD_NODE]'
+      type: 'List[$ref:data-type/pre/class/JPT_ADVC_LOAD_NODE]'
       required: false
       default: '[]'
       description: Nodes with assigned contacts.
@@ -58,7 +58,7 @@ params:
       description: Path of reference result.
 
     - name: listAdvcRefStressResult
-      type: 'List[$ref:data-type/JPT_ADVC_REF_STRESS_RESULT]'
+      type: 'List[$ref:data-type/pre/class/JPT_ADVC_REF_STRESS_RESULT]'
       required: false
       default: '[]'
       description: Reference result data list.
