@@ -6,7 +6,7 @@ import { DomainSwitcher } from '@/components/sdk/domain-switcher';
 import { VersionSwitcher } from '@/components/sdk/version-switcher';
 import { DocsLayout } from '@/layouts/docs';
 import { getLayoutTabs } from '@/layouts/shared';
-import { getSdk, source } from '@/lib/source';
+import { IS_MULTI_VERSION, getSdk, source } from '@/lib/source';
 
 import type * as PageTree from 'fumadocs-core/page-tree';
 
@@ -16,24 +16,26 @@ export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) 
     const isSdk = slug[0] === 'sdk';
 
     const { manifest } = await getSdk();
-    const effectiveVersionId = isSdk ? slug[1] || manifest.current_version : undefined;
-    const activeDomainId = isSdk ? slug[2] : undefined;
+    const effectiveVersionId =
+        isSdk && IS_MULTI_VERSION ? slug[1] || manifest.current_version : undefined;
+    const activeDomainId = isSdk ? (IS_MULTI_VERSION ? slug[2] : slug[1]) : undefined;
 
     const fullTree = source.getPageTree(lang);
     let tree = fullTree;
 
-    if (isSdk && effectiveVersionId) {
+    if (isSdk) {
         tree = filterTree(fullTree, effectiveVersionId, activeDomainId);
     }
 
-    const domainItems =
-        isSdk && effectiveVersionId
-            ? manifest.domains.map((d) => ({
-                  id: d.id,
-                  title: d.title,
-                  url: `/${lang}/sdk/${effectiveVersionId}/${d.id}`,
-              }))
-            : [];
+    const domainItems = isSdk
+        ? manifest.domains.map((d) => ({
+              id: d.id,
+              title: d.title,
+              url: IS_MULTI_VERSION
+                  ? `/${lang}/sdk/${effectiveVersionId}/${d.id}`
+                  : `/${lang}/sdk/${d.id}`,
+          }))
+        : [];
 
     return (
         <TreeContextProvider tree={tree}>
@@ -44,9 +46,9 @@ export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) 
                     tabMode="navbar"
                     nav={{ mode: 'top', title: <TechnoStarLogo variant="inline" height={34} /> }}
                     sidebar={{
-                        banner:
-                            isSdk && effectiveVersionId ? (
-                                <div className="flex flex-col gap-2 px-3 py-2 -mx-2">
+                        banner: isSdk ? (
+                            <div className="flex flex-col gap-2 px-3 py-2 -mx-2">
+                                {IS_MULTI_VERSION && effectiveVersionId && (
                                     <VersionSwitcher
                                         activeId={effectiveVersionId}
                                         versions={manifest.versions.map((v) => ({
@@ -55,9 +57,10 @@ export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) 
                                             isCurrent: v.id === manifest.current_version,
                                         }))}
                                     />
-                                    <DomainSwitcher domains={domainItems} />
-                                </div>
-                            ) : undefined,
+                                )}
+                                <DomainSwitcher domains={domainItems} />
+                            </div>
+                        ) : undefined,
                     }}
                 >
                     {props.children}
@@ -68,7 +71,7 @@ export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) 
     );
 }
 
-function filterTree(tree: PageTree.Root, versionId: string, domainId?: string): PageTree.Root {
+function filterTree(tree: PageTree.Root, versionId?: string, domainId?: string): PageTree.Root {
     // Find the SDK root folder accurately.
     const findSdk = (nodes: PageTree.Node[]): PageTree.Folder | undefined => {
         // First pass: try to find by title/name directly in roots
@@ -111,29 +114,33 @@ function filterTree(tree: PageTree.Root, versionId: string, domainId?: string): 
     const sdkFolder = findSdk(tree.children);
     if (!sdkFolder) return tree;
 
-    const versionFolder = sdkFolder.children.find(
-        (child): child is PageTree.Folder => child.type === 'folder' && child.name === versionId,
-    );
+    let activeBaseFolder = sdkFolder;
 
-    if (versionFolder) {
-        if (domainId) {
-            const domainFolder = versionFolder.children.find(
-                (child): child is PageTree.Folder =>
-                    child.type === 'folder' && child.name === domainId,
-            );
-            if (domainFolder) {
-                return {
-                    ...tree,
-                    children: domainFolder.children,
-                };
-            }
-        }
-
-        return {
-            ...tree,
-            children: versionFolder.children,
-        };
+    if (IS_MULTI_VERSION && versionId) {
+        const versionFolder = sdkFolder.children.find(
+            (child): child is PageTree.Folder =>
+                child.type === 'folder' && child.name === versionId,
+        );
+        if (!versionFolder) return tree;
+        activeBaseFolder = versionFolder;
     }
+
+    if (domainId) {
+        const domainFolder = activeBaseFolder.children.find(
+            (child): child is PageTree.Folder => child.type === 'folder' && child.name === domainId,
+        );
+        if (domainFolder) {
+            return {
+                ...tree,
+                children: domainFolder.children,
+            };
+        }
+    }
+
+    return {
+        ...tree,
+        children: activeBaseFolder.children,
+    };
 
     return tree;
 }

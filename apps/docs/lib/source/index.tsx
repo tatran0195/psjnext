@@ -19,13 +19,15 @@ const TAG_STYLES: Record<string, string> = {
     Deprecated: 'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300',
 };
 
+export const IS_MULTI_VERSION = true;
+
 export const source = loader(
     {
         sdk: await psjSource(psjServer, {
             per: 'item',
             meta: true,
             i18nParser: i18n.parser as 'dir' | 'dot',
-            multiVersion: true,
+            multiVersion: IS_MULTI_VERSION,
             baseUrl: 'sdk',
         }),
         docs: docs.toFumadocsSource(),
