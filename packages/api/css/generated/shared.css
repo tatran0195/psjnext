@@ -235,6 +235,7 @@
 @source inline("from");
 @source inline("from-fd-card");
 @source inline("fromServer");
+@source inline("fumadocs-core/i18n");
 @source inline("fumadocs-core/mdx-plugins");
 @source inline("fumadocs-core/source");
 @source inline("fumadocs-core/toc");
@@ -397,6 +398,7 @@
 @source inline("mt-2");
 @source inline("mt-2.5");
 @source inline("multi-item");
+@source inline("multiVersion");
 @source inline("mx-auto");
 @source inline("my-0");
 @source inline("my-3");
@@ -683,7 +685,6 @@
 @source inline("version");
 @source inline("version-order");
 @source inline("versionId");
-@source inline("versionInUrl");
 @source inline("versionOrder");
 @source inline("version_introduced");
 @source inline("versioned");

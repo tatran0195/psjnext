@@ -151,7 +151,8 @@
                 "no-with": "off",
                 "prefer-const": "error",
                 "prefer-rest-params": "error",
-                "prefer-spread": "error"
+                "prefer-spread": "error",
+                "react/no-unknown-property": "off"
             }
         }
     ]

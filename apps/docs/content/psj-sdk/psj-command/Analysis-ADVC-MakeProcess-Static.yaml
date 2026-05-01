@@ -1,4 +1,4 @@
-@psj/api: '1.0'
+psj: '1.0'
 id: Analysis-ADVC-MakeProcess-Static
 title: Analysis.ADVC.MakeProcess.Static()
 domain: psj-command

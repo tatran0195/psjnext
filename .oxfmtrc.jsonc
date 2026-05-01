@@ -60,4 +60,12 @@
             "unknown",
         ],
     },
+    "overrides": [
+        {
+            "files": ["*.tsx"],
+            "rules": {
+                "react/no-unknown-property": "off",
+            },
+        },
+    ],
 }

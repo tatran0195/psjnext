@@ -50,8 +50,7 @@ export default async function Page(props: {
         let current: PageTree.Node[] = tree.children;
         for (const segment of slug) {
             const next = current.find(
-                (n): n is PageTree.Folder =>
-                    n.type === 'folder' && n.name === segment,
+                (n): n is PageTree.Folder => n.type === 'folder' && n.name === segment,
             );
             if (!next) {
                 indexFolder = undefined;

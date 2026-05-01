@@ -81,9 +81,9 @@ function filterTree(tree: PageTree.Root, versionId: string, domainId?: string): 
             if (title === 'API Reference' || node.name === 'api') continue;
             if (typeof url === 'string' && (url === '/api' || url.startsWith('/api/'))) continue;
 
-            const isSdk = 
-                title === 'SDK' || 
-                node.name === 'sdk' || 
+            const isSdk =
+                title === 'SDK' ||
+                node.name === 'sdk' ||
                 (typeof url === 'string' && (url === '/sdk' || url.startsWith('/sdk/')));
 
             if (isSdk) return node;
@@ -92,12 +92,16 @@ function filterTree(tree: PageTree.Root, versionId: string, domainId?: string): 
         // Second pass: deep search
         for (const node of nodes) {
             if (node.type !== 'folder') continue;
-            const sub = node.children.find(c => {
+            const sub = node.children.find((c) => {
                 if (c.type !== 'folder') return false;
                 const cTitle = (c as unknown as Record<string, unknown>).title || c.name;
                 const cUrl = (c as unknown as Record<string, unknown>).url || c.index?.url;
                 if (cTitle === 'API Reference' || c.name === 'api') return false;
-                return cTitle === 'SDK' || c.name === 'sdk' || (typeof cUrl === 'string' && (cUrl === '/sdk' || cUrl.startsWith('/sdk/')));
+                return (
+                    cTitle === 'SDK' ||
+                    c.name === 'sdk' ||
+                    (typeof cUrl === 'string' && (cUrl === '/sdk' || cUrl.startsWith('/sdk/')))
+                );
             });
             if (sub) return sub as PageTree.Folder;
         }
@@ -114,7 +118,8 @@ function filterTree(tree: PageTree.Root, versionId: string, domainId?: string): 
     if (versionFolder) {
         if (domainId) {
             const domainFolder = versionFolder.children.find(
-                (child): child is PageTree.Folder => child.type === 'folder' && child.name === domainId,
+                (child): child is PageTree.Folder =>
+                    child.type === 'folder' && child.name === domainId,
             );
             if (domainFolder) {
                 return {

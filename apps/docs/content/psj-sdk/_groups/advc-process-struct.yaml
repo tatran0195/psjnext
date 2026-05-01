@@ -1,4 +1,4 @@
-@psj/api: '1.0'
+psj: '1.0'
 kind: param_group
 id: advc-process-struct
 extends: advc-process-base

@@ -1,8 +1,10 @@
-import type { Folder, Node } from 'fumadocs-core/page-tree';
-import { type LoaderPlugin } from 'fumadocs-core/source';
 import React from 'react';
 
+import { type LoaderPlugin } from 'fumadocs-core/source';
+
 import { getSection } from '@/lib/source/navigation';
+
+import type { Folder, Node } from 'fumadocs-core/page-tree';
 
 type FolderWithGroup = Folder & { group?: boolean; groupLevel?: number };
 
@@ -110,7 +112,9 @@ function applyFolderStyles(node: Folder, metaFile: string | undefined) {
 
     if (!pathForColor && typeof folderUrl === 'string') {
         const segments = folderUrl.split('/').filter(Boolean);
-        const section = segments.find((s: string) => ['api', 'guides', 'data-type', 'sdk'].includes(s));
+        const section = segments.find((s: string) =>
+            ['api', 'guides', 'data-type', 'sdk'].includes(s),
+        );
         if (section) pathForColor = section;
     }
 

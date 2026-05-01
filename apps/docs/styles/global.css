@@ -56,6 +56,14 @@
         }
     }
     --animate-shimmer: shimmer-sweep var(--shimmer-duration, 1000ms) linear infinite both;
+
+    /* Brand Colors - Purple/Indigo Theme */
+    --color-brand-primary: #818cf8;
+    --color-brand-secondary: #a78bfa;
+    --color-brand-accent: #c084fc;
+    --color-brand-pink: #f472b6;
+    --color-brand-cyan: #22d3ee;
+    --color-brand-emerald: #34d399;
 }
 
 :root {

@@ -24,8 +24,8 @@ export const source = loader(
         sdk: await psjSource(psjServer, {
             per: 'item',
             meta: true,
-            i18nParser: 'dir',
-            versionInUrl: true,
+            i18nParser: i18n.parser as 'dir' | 'dot',
+            multiVersion: true,
             baseUrl: 'sdk',
         }),
         docs: docs.toFumadocsSource(),

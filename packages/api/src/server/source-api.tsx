@@ -11,6 +11,7 @@ import type {
 
 import { fromServer } from '../utils/pages/builder';
 
+import type { I18nConfig } from 'fumadocs-core/i18n';
 import type { StructuredData } from 'fumadocs-core/mdx-plugins';
 import type {
     LoaderPlugin,
@@ -80,7 +81,7 @@ export interface PSJPageData extends PageData {
 
 // ─── Options ──────────────────────────────────────────────────────────────────
 
-export type I18nParser = 'dir' | 'dot';
+export type I18nParser = I18nConfig['parser'];
 
 export type PsjSourceOptions = PsjPagesBuilderConfig & {
     /** Generate meta.json files */
@@ -115,7 +116,7 @@ export type PsjSourceOptions = PsjPagesBuilderConfig & {
      *
      * @default false
      */
-    versionInUrl?: boolean;
+    multiVersion?: boolean;
 
     /**
      * Base URL prefix for generated routes.
@@ -150,7 +151,7 @@ export async function psjSource(
         pageData: PSJPageData;
     }>
 > {
-    const { meta = false, i18nParser, versionInUrl = false } = options;
+    const { meta = false, i18nParser, multiVersion = false } = options;
 
     const files: VirtualFile<{
         pageData: PSJPageData;
@@ -164,7 +165,7 @@ export async function psjSource(
     const emitLocales = locales.length > 0 ? locales : [{ id: '', label: '' }];
 
     // Versions to emit — empty string means no version prefix
-    const versions = versionInUrl ? sdk.manifest.versions.map((v) => v.id) : [''];
+    const versions = multiVersion ? sdk.manifest.versions.map((v) => v.id) : [''];
 
     const allEntries = await fromServer(server, options);
 
@@ -175,7 +176,7 @@ export async function psjSource(
     );
 
     function isAvailableInVersion(entry: ItemOutput | PageOutput, versionId: string): boolean {
-        // No version filtering when versionInUrl is off
+        // No version filtering when multiVersion is off
         if (!versionId) return true;
         const targetIdx = versionOrder.get(versionId) ?? 0;
 
@@ -211,7 +212,7 @@ export async function psjSource(
 
                 for (const versionId of versions) {
                     // Skip items not yet introduced in this version
-                    if (versionInUrl && versionId && !isAvailableInVersion(entry, versionId)) {
+                    if (multiVersion && versionId && !isAvailableInVersion(entry, versionId)) {
                         continue;
                     }
 
@@ -219,7 +220,7 @@ export async function psjSource(
                     // e.g. en/5.1.0/psj-command/Foo.mdx  or just  psj-command/Foo.mdx
                     let filePath = entry.path;
 
-                    if (versionInUrl && versionId) {
+                    if (multiVersion && versionId) {
                         filePath = `${versionId}/${filePath}`;
                     }
 
@@ -318,7 +319,7 @@ export async function psjSource(
                 for (const versionId of versions) {
                     const getVirtualPath = (fileName: string) => {
                         let vp = path.join(parent?.path ?? '', fileName);
-                        if (versionInUrl && versionId) {
+                        if (multiVersion && versionId) {
                             vp = path.join(versionId, vp);
                         }
                         if (options.baseUrl) {
