@@ -59,10 +59,10 @@ async function safeReadYaml<T>(filePath: string): Promise<T | undefined> {
 }
 
 async function loadSdk(rootDir: string): Promise<LoadedSdk> {
-    const manifestPath = path.join(rootDir, 'sdk.psjapi.yaml');
+    const manifestPath = path.join(rootDir, 'sdk.psj.yaml');
     const manifest = (await safeReadYaml<SdkManifest>(manifestPath)) as SdkManifest;
     if (!manifest) {
-        throw new Error(`[psjapi] Could not read manifest at: ${manifestPath}`);
+        throw new Error(`[@psj/api] Could not read manifest at: ${manifestPath}`);
     }
 
     const items = new Map<string, ItemFile>();
@@ -127,7 +127,7 @@ async function loadSdk(rootDir: string): Promise<LoadedSdk> {
                 }
             } else {
                 const item = await safeReadYaml<ItemFile>(filePath);
-                if (item && item.psjapi) {
+                if (item && item.psj) {
                     items.set(`${domain}/${item.id}`, item);
                 }
             }
@@ -143,7 +143,7 @@ async function loadSdk(rootDir: string): Promise<LoadedSdk> {
 function expandGroup(groupId: string, groups: Map<string, ParamGroupFile>): ParamWithGroup[] {
     const group = groups.get(groupId);
     if (!group) {
-        console.warn(`[psjapi] Unknown group: ${groupId}`);
+        console.warn(`[@psj/api] Unknown group: ${groupId}`);
         return [];
     }
 

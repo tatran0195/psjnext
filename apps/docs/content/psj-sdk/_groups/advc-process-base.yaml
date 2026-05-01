@@ -1,4 +1,4 @@
-psjapi: '1.0'
+@psj/api: '1.0'
 kind: param_group
 id: advc-process-base
 description: >

@@ -1,4 +1,4 @@
-import { createPSJAPIPage } from 'psjapi/ui';
+import { createPSJAPIPage } from '@psj/api/ui';
 
 import { psjServer } from '@/lib/psj-server';
 

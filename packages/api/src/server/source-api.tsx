@@ -25,7 +25,7 @@ import type { TOCItemType } from 'fumadocs-core/toc';
 
 declare module 'fumadocs-core/source' {
     interface PageData {
-        _psjapi?: InternalPsjMeta;
+        _psj?: InternalPsjMeta;
     }
 }
 
@@ -38,7 +38,7 @@ export interface InternalPsjMeta {
 
 export function psjPlugin(): LoaderPlugin {
     return {
-        name: 'fumadocs:psjapi',
+        name: 'fumadocs:@psj/api',
         enforce: 'pre',
         transformPageTree: {
             file(node, filePath) {
@@ -46,7 +46,7 @@ export function psjPlugin(): LoaderPlugin {
                 const file = this.storage.read(filePath);
                 if (!file || file.format !== 'page') return node;
 
-                const meta = file.data._psjapi;
+                const meta = file.data._psj;
                 if (!meta || typeof meta !== 'object') return node;
 
                 if (meta.domain) {
@@ -92,7 +92,7 @@ export type PsjSourceOptions = PsjPagesBuilderConfig & {
      * - 'dot' → one file per locale with a language suffix  (.en.mdx, .ja.mdx)
      * - unset → single file, no locale in path (no i18n)
      *
-     * When set, psjSource reads the locales from sdk.psjapi.yaml and emits
+     * When set, psjSource reads the locales from sdk.psj.yaml and emits
      * one virtual file per locale so Fumadocs builds a per-locale page tree.
      */
     i18nParser?: I18nParser;
@@ -240,7 +240,7 @@ export async function psjSource(
                         data: {
                             title: entry.info.title,
                             description: entry.info.description,
-                            _psjapi: psjMeta,
+                            _psj: psjMeta,
                             getAPIPageProps() {
                                 return {
                                     itemKey:
@@ -345,7 +345,7 @@ export async function psjSource(
                                 title: parent.info.title,
                                 description: parent.info.description,
                                 index: true,
-                                _psjapi:
+                                _psj:
                                     parent.type === 'group'
                                         ? {
                                               domain: (parent as unknown as Record<string, unknown>)
@@ -364,9 +364,7 @@ export async function psjSource(
                                     headings: [],
                                     contents: [
                                         {
-                                            content:
-                                                parent.info.description ??
-                                                parent.info.title,
+                                            content: parent.info.description ?? parent.info.title,
                                             heading: parent.info.title,
                                         },
                                     ],

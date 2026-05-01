@@ -8,6 +8,7 @@
 @source inline("-translate-y-1/2");
 @source inline("@default");
 @source inline("@defaultValue");
+@source inline("@psj/api_examples");
 @source inline("@ts-expect-error");
 @source inline("a");
 @source inline("absolute");
@@ -237,9 +238,8 @@
 @source inline("fumadocs-core/mdx-plugins");
 @source inline("fumadocs-core/source");
 @source inline("fumadocs-core/toc");
-@source inline("fumadocs-psjapi/ui");
 @source inline("fumadocs-ui/mdx");
-@source inline("fumadocs:psjapi");
+@source inline("fumadocs:@psj/api");
 @source inline("function");
 @source inline("gap-1");
 @source inline("gap-1.5");
@@ -487,8 +487,6 @@
 @source inline("psjLanguage");
 @source inline("psjMeta");
 @source inline("psjSource");
-@source inline("psjapi");
-@source inline("psjapi_examples");
 @source inline("pt-1.5");
 @source inline("pt-2");
 @source inline("px-1.5");

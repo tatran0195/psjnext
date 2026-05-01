@@ -51,7 +51,7 @@ export async function generateFiles(options: GenerateFilesConfig): Promise<void>
             ? path.dirname(options.input.options.root)
             : options.input.options.root;
 
-        console.log(`[fumadocs-psjapi] watching ${rootDir}`);
+        console.log(`[@psj/api] watching ${rootDir}`);
         watch(rootDir, { ignoreInitial: true, ignored: '**/*.mdx' }).on('all', () =>
             generateFiles(subOptions),
         );
@@ -65,7 +65,7 @@ export async function generateFiles(options: GenerateFilesConfig): Promise<void>
             const filePath = path.join(options.output, file.path);
             await mkdir(path.dirname(filePath), { recursive: true });
             await writeFile(filePath, file.content, 'utf-8');
-            console.log(`[fumadocs-psjapi] generated: ${filePath}`);
+            console.log(`[@psj/api] generated: ${filePath}`);
         }),
     );
 }

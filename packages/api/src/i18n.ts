@@ -107,8 +107,8 @@ function deepmerge<A extends object, B extends Partial<A>>(base: A, override: B)
 }
 
 /**
- * Wraps a fumadocs-ui I18nUIConfig and injects psjapi translations into each
- * locale's `translations.psjapi` key.
+ * Wraps a fumadocs-ui I18nUIConfig and injects @psj/api translations into each
+ * locale's `translations.psj` key.
  *
  * Built-in translations for 'en' and 'ja' are provided; pass `overrides` to
  * customise any key for any language.
@@ -128,7 +128,7 @@ export function defineI18nPsjAPI<Languages extends string>(
             const merged = deepmerge(deepmerge(defaultTranslations, builtIn), callerOverride);
 
             out.translations ??= {};
-            (out.translations as Record<string, unknown>).psjapi = merged;
+            (out.translations as Record<string, unknown>).psj = merged;
 
             return out;
         },

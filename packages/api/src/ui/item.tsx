@@ -479,7 +479,7 @@ function ExamplesPanel({
     }
 
     return (
-        <CodeBlockTabs groupId="psjapi_examples" defaultValue="0">
+        <CodeBlockTabs groupId="@psj/api_examples" defaultValue="0">
             <CodeBlockTabsList className="w-full">
                 {examples.map((ex, i) => (
                     <CodeBlockTabsTrigger key={i} value={String(i)}>

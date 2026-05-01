@@ -1,4 +1,4 @@
-psjapi: '1.0'
+psj: '1.0'
 
 versions:
     - id: '5.0.0'

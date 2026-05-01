@@ -8,8 +8,9 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { baseUrl, createMetadata } from '@/lib/metadata';
 import { source } from '@/lib/source';
 import '@/styles/global.css';
-import { Body } from '../layout.client';
-import { Provider } from '../provider';
+
+import { Body } from './layout.client';
+import { Provider } from './provider';
 
 export const metadata: Metadata = createMetadata({
     title: {

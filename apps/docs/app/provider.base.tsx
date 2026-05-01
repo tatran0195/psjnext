@@ -45,7 +45,7 @@ export interface RootProviderProps {
 
 const DefaultSearchDialog = lazy(() => import('fumadocs-ui/components/dialog/search-default'));
 
-export function RootProvider({ children, theme = {}, search, i18n }: RootProviderProps) {
+export function BaseProvider({ children, theme = {}, search, i18n }: RootProviderProps) {
     let body = children;
 
     if (search?.enabled !== false)

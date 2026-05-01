@@ -40,7 +40,7 @@ export interface PSJAPIItemProps {
  *
  * Usage in app/docs/[[...slug]]/page.tsx:
  * ```tsx
- * import { createPSJAPIPage } from 'fumadocs-psjapi/ui';
+ * import { createPSJAPIPage } from '@psj/api/ui';
  * import { server } from '@/lib/psj-server';
  *
  * const PSJAPIItem = createPSJAPIPage(server, {

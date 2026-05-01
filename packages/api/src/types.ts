@@ -38,7 +38,7 @@ export interface SdkVersions {
 // ─── Root manifest ───────────────────────────────────────────────────────────
 
 export interface SdkManifest {
-    psjapi: '1.0';
+    psj: '1.0';
     versions: VersionEntry[];
     current_version: string;
     locales: LocaleEntry[];
@@ -175,7 +175,7 @@ export interface VersionDelta {
 // ─── Item file ───────────────────────────────────────────────────────────────
 
 export interface ItemFile {
-    psjapi: '1.0';
+    psj: '1.0';
     id: string;
     title: string;
     domain: Domain;
@@ -202,7 +202,7 @@ export interface ItemFile {
 // ─── Param group file ─────────────────────────────────────────────────────────
 
 export interface ParamGroupFile {
-    psjapi: '1.0';
+    psj: '1.0';
     kind: 'param_group';
     id: string;
     description?: string;
@@ -237,7 +237,7 @@ export interface CalloutTranslation {
 
 /** Item locale sidecar — named params keyed by name */
 export interface ItemLocaleSidecar {
-    psjapi: '1.0';
+    psj: '1.0';
     locale: string;
     id: string;
     description?: string;
@@ -350,7 +350,7 @@ export interface PSJAPIServer {
 
 export interface PSJAPIOptions {
     /**
-     * Path to the root `sdk.psjapi.yaml` manifest, or a directory that
+     * Path to the root `sdk.psj.yaml` manifest, or a directory that
      * contains one.
      */
     root: string;

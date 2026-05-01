@@ -1,7 +1,7 @@
+import { psjPlugin, psjSource } from '@psj/api/server';
 import { docs } from 'collections/server';
 import { type InferMetaType, type InferPageType, loader } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
-import { psjPlugin, psjSource } from 'psjapi/server';
 
 import { psjServer } from '@/lib/psj-server';
 
@@ -10,6 +10,7 @@ import { customIconsPlugin } from './plugins/custom-icons-plugin';
 import { pageTreeCodeTitlesPlugin } from './plugins/page-tree-code-titles-plugin';
 import { pageTreeFoldersPlugin } from './plugins/page-tree-folders-plugin';
 import { pageTreeTagsPlugin } from './plugins/page-tree-tags-plugin';
+
 const TAG_STYLES: Record<string, string> = {
     New: 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300',
     Alpha: 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300',

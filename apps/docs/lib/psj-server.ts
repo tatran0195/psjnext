@@ -1,10 +1,10 @@
+import { createPSJAPI } from '@psj/api';
 import path from 'node:path';
-import { createPSJAPI } from 'psjapi';
 
 /**
  * PSJAPIServer singleton.
  *
- * `root` points to the directory containing sdk.psjapi.yaml.
+ * `root` points to the directory containing sdk.psj.yaml.
  * In development, disable caching so YAML edits hot-reload without restart.
  */
 export const psjServer = createPSJAPI({

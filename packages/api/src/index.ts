@@ -59,7 +59,7 @@ export type {
 export { generateDocument, toText } from './utils/pages/to-text';
 export type { PsjToTextOptions } from './utils/pages/to-text';
 
-// i18n — UI translations (re-exported for convenience; primary export is fumadocs-psjapi/i18n)
+// i18n — UI translations (re-exported for convenience; primary export is @psj/api/i18n)
 export { defaultTranslations, defineI18nPsjAPI } from './i18n';
 export type { PsjAPITranslations } from './i18n';
 

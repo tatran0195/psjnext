@@ -35,7 +35,7 @@ export default defineConfig({
         enabled: true,
         customExports(v) {
             // Expose css/ directory so consumers can import:
-            //   import 'fumadocs-psjapi/css/preset.css'
+            //   import '@psj/api/css/preset.css'
             v['./css/*'] = './css/*';
             return v;
         },

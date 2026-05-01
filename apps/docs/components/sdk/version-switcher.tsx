@@ -3,8 +3,8 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
+import { type SdkVersion } from '@psj/api';
 import { Check, ChevronsUpDown, Tag } from 'lucide-react';
-import { type SdkVersion } from 'psjapi';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/cn';
@@ -27,7 +27,11 @@ function switchVersion(currentPath: string | null | undefined, newVersionId: str
     return currentPath;
 }
 
-export function VersionSwitcher({ versions, className, activeId: propsActiveId }: VersionSwitcherProps) {
+export function VersionSwitcher({
+    versions,
+    className,
+    activeId: propsActiveId,
+}: VersionSwitcherProps) {
     const pathname = usePathname();
     const router = useRouter();
 
@@ -88,7 +92,8 @@ export function VersionSwitcher({ versions, className, activeId: propsActiveId }
                             className={cn(
                                 'flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm text-start w-full transition-colors',
                                 'hover:bg-fd-accent hover:text-fd-accent-foreground',
-                                isActive && 'bg-fd-accent/60 text-fd-accent-foreground font-semibold',
+                                isActive &&
+                                    'bg-fd-accent/60 text-fd-accent-foreground font-semibold',
                             )}
                         >
                             <div
