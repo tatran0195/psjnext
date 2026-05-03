@@ -1,0 +1,37 @@
+---
+title: "Geometry.DeleteEntity.Edge()"
+description: "Delete the selected edge entities"
+version_introduced: "5.0.1"
+available_versions: "all"
+ribbon: "Geometry > Delete Entity > Edge"
+---
+
+## Description
+
+Delete the selected edge entities.
+
+## Syntax
+
+```psj
+Geometry.DeleteEntity.Edge(...)
+```
+
+## Inputs
+
+### `crlEdges` @type(List\[Cursor]) @required
+
+- Edges to be deleted.
+
+## Return Code
+
+True if success, or False if fail.
+
+## Sample Code
+
+```psj {3}
+Geometry.Part.Cube()
+
+flag = Geometry.DeleteEntity.Edge(crlEdges=[Edge(15, 18, 19)])
+
+JPT.Debugger(flag)
+```

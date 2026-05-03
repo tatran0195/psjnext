@@ -1,0 +1,55 @@
+---
+title: "Home.RectangularCapture()"
+description: "Save the specified range of Jupiter's display window to the clipboard"
+version_introduced: "5.0.1"
+available_versions: "all"
+ribbon: "Home > RectangularCapture"
+---
+
+## Description
+
+Save the specified range of Jupiter's display window to the clipboard.
+
+## Syntax
+
+```psj
+Home.RectangularCapture(...)
+```
+
+## Inputs
+
+### `iLeft` @type(Integer) @default(0)
+
+- The left position. This is the position of the starting point in horizontal axis of the`screen coordinate`. The`screen coordinate`is a coordinate whose origin is at the top left corner of the view window. Its horizontal axis expands rightward and the vertical axis expands downward.
+
+### `iTop` @type(Integer) @default(0)
+
+- The top position. This is the position of the starting point in vertical axis of the`screen coordinate`.
+
+### `iRight` @type(Integer) @default(0)
+
+- The right position. This is the position of the ending point in horizontal axis of the`screen coordinate`.
+
+### `iBottom` @type(Integer) @default(0)
+
+- The bottom position. This is the position of the ending point in vertical axis of the`screen coordinate`.
+
+## Return Code
+
+A _Boolean_ specifying the status of the process:
+
+- _True_: The specified range of display window of Jupiter is saved to clipboard.
+- _False_: The specified range of display window cannot be saved to clipboard.
+
+## Sample Code
+
+```psj {3,4,5,6}
+Geometry.Part.Cube()
+
+copy = Home.RectangularCapture(iLeft=477,
+                               iTop=159,
+                               iRight=900,
+                               iBottom=562)
+
+JPT.Debugger(copy)
+```
