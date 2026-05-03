@@ -1,9 +1,41 @@
 import { ChevronRight, MousePointerClick, Option } from 'lucide-react';
+import { z } from 'zod';
 
-import type { Ribbon } from '@/lib/source/schema';
+const ribbonItemSchema = z.object({
+    label: z.string(), // Display label of the item
+    icon: z.string().optional(), // Icon name (lucide, custom SVG key, etc.)
+    shortcut: z.string().optional(), // Keyboard shortcut e.g. "Alt+M, N"
+    tooltip: z.string().optional(), // Tooltip text shown on hover
+});
 
-export function RibbonPath({ ribbon }: { ribbon: Ribbon }) {
-    const { tab, panel } = ribbon;
+const ribbonFlyoutSchema = ribbonItemSchema.extend({
+    flyout: z.array(ribbonItemSchema).optional(), // Nested flyout/dropdown items
+});
+
+const ribbonGroupSchema = z.object({
+    label: z.string(), // Panel/Group label e.g. "Geometry Tools"
+    item: ribbonFlyoutSchema, // The button inside the group
+});
+
+const ribbonSchema = z.object({
+    tab: z.string(), // Top-level tab e.g. "Mesh", "Analysis"
+    panel: ribbonGroupSchema, // Panel and its item
+    note: z.string().optional(), // Any extra navigation note
+});
+
+export type Ribbon = z.infer<typeof ribbonSchema>;
+export type RibbonItem = z.infer<typeof ribbonItemSchema>;
+export type RibbonFlyout = z.infer<typeof ribbonFlyoutSchema>;
+
+export function RibbonPath({ ribbon }: { ribbon: string }) {
+    const parsed = ribbonSchema.safeParse(ribbon);
+    if (!parsed.success) {
+        // If parsing fails, render the original string as a fallback
+        return <>{ribbon}</>;
+    }
+
+    const ribbonData = parsed.data;
+    const { tab, panel } = ribbonData;
     const { item } = panel;
     const hasFlyout = item.flyout && item.flyout.length > 0;
 
