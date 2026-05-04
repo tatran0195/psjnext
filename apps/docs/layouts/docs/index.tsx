@@ -1,11 +1,11 @@
 import { type HTMLAttributes, useMemo } from 'react';
 
 import {
+    type BaseLayoutProps,
+    getLayoutTabs,
     type GetLayoutTabsOptions,
     type LayoutTab,
     type NavOptions,
-    type BaseLayoutProps,
-    getLayoutTabs,
 } from '@/layouts/shared';
 
 import type { SidebarProps, SidebarProviderProps } from './slots/sidebar';
@@ -28,19 +28,14 @@ interface Nav extends NavOptions {
     mode?: 'top' | 'auto';
 }
 
-interface SidebarOptions extends SidebarProps, SidebarProviderProps {
-    /**
-     * @deprecated use layout-level `tabs` option instead.
-     */
-    tabs?: LayoutTab[] | GetLayoutTabsOptions | false;
-}
+type SidebarOptions = SidebarProps & SidebarProviderProps;
 
 export function DocsLayout({
     tree,
     tabMode = 'sidebar',
-    sidebar: { tabs: defaultTabs, ...sidebarProps } = {},
+    sidebar: { ...sidebarProps } = {},
     children,
-    tabs = defaultTabs,
+    tabs,
     ...props
 }: DocsLayoutProps) {
     const resolvedTabs = useMemo(() => {

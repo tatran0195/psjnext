@@ -1,102 +1,118 @@
-import { ChevronRight, MousePointerClick, Option } from 'lucide-react';
-import { z } from 'zod';
+import { ChevronRight, MousePointerClick } from 'lucide-react';
 
-const ribbonItemSchema = z.object({
-    label: z.string(), // Display label of the item
-    icon: z.string().optional(), // Icon name (lucide, custom SVG key, etc.)
-    shortcut: z.string().optional(), // Keyboard shortcut e.g. "Alt+M, N"
-    tooltip: z.string().optional(), // Tooltip text shown on hover
-});
+interface RibbonPathProps {
+    ribbon: string;
+    shortcut?: string;
+    variant?: 'inline' | 'ghost';
+    className?: string;
+}
 
-const ribbonFlyoutSchema = ribbonItemSchema.extend({
-    flyout: z.array(ribbonItemSchema).optional(), // Nested flyout/dropdown items
-});
-
-const ribbonGroupSchema = z.object({
-    label: z.string(), // Panel/Group label e.g. "Geometry Tools"
-    item: ribbonFlyoutSchema, // The button inside the group
-});
-
-const ribbonSchema = z.object({
-    tab: z.string(), // Top-level tab e.g. "Mesh", "Analysis"
-    panel: ribbonGroupSchema, // Panel and its item
-    note: z.string().optional(), // Any extra navigation note
-});
-
-export type Ribbon = z.infer<typeof ribbonSchema>;
-export type RibbonItem = z.infer<typeof ribbonItemSchema>;
-export type RibbonFlyout = z.infer<typeof ribbonFlyoutSchema>;
-
-export function RibbonPath({ ribbon }: { ribbon: string }) {
-    const parsed = ribbonSchema.safeParse(ribbon);
-    if (!parsed.success) {
-        // If parsing fails, render the original string as a fallback
-        return <>{ribbon}</>;
-    }
-
-    const ribbonData = parsed.data;
-    const { tab, panel } = ribbonData;
-    const { item } = panel;
-    const hasFlyout = item.flyout && item.flyout.length > 0;
-
-    // Build flat segment list
-    const segments: { label: string; shortcut?: string }[] = [
-        { label: tab },
-        { label: panel.label },
-        {
-            label: item.label,
-            shortcut: !hasFlyout ? item.shortcut : undefined,
-        },
-        ...(item.flyout?.map((f) => ({
-            label: f.label,
-            shortcut: f.shortcut,
-        })) ?? []),
-    ];
-
+export function RibbonPath({
+    ribbon,
+    shortcut,
+    variant = 'inline',
+    className = '',
+}: RibbonPathProps) {
+    const segments = ribbon.split('>').map((s) => s.trim());
     const lastIndex = segments.length - 1;
 
-    return (
-        <div className="not-prose mt-2 mb-1 flex items-center gap-1 flex-wrap">
-            {/* Icon label */}
-            <span className="flex items-center gap-1 text-xs text-muted-foreground mr-1">
-                <MousePointerClick className="h-3 w-3" />
-                <span className="uppercase tracking-wider font-semibold text-[10px]">Ribbon</span>
-            </span>
+    if (variant === 'ghost')
+        return (
+            <GhostVariant
+                segments={segments}
+                shortcut={shortcut}
+                className={className}
+                lastIndex={lastIndex}
+            />
+        );
 
+    return (
+        <InlineVariant
+            segments={segments}
+            shortcut={shortcut}
+            className={className}
+            lastIndex={lastIndex}
+        />
+    );
+}
+
+function InlineVariant({
+    segments,
+    shortcut,
+    lastIndex,
+    className,
+}: {
+    segments: string[];
+    lastIndex: number;
+    shortcut?: string;
+    className?: string;
+}) {
+    return (
+        <div className={`not-prose flex items-center gap-1 flex-wrap ${className}`}>
+            <MousePointerClick className="h-3 w-3 text-muted-foreground shrink-0" />
             {segments.map((seg, i) => {
                 const isFinal = i === lastIndex;
                 return (
                     <span key={i} className="flex items-center gap-1">
                         {i > 0 && (
-                            <ChevronRight className="h-3 w-3 text-muted-foreground shrink-0" />
+                            <ChevronRight className="h-3 w-3 text-muted-foreground/40 shrink-0" />
                         )}
-                        {/* Segment pill */}
                         <span
-                            className={`
-                                inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-medium
-                                ${
-                                    isFinal
-                                        ? 'bg-(--color-fd-primary)/10 text-(--color-fd-primary) ring-1 ring-inset ring-(--color-fd-primary)/25'
-                                        : 'text-muted-foreground'
-                                }
-                            `}
+                            className={`text-xs font-medium ${
+                                isFinal ? 'text-primary' : 'text-muted-foreground'
+                            }`}
                         >
-                            {seg.label}
+                            {seg}
                         </span>
-                        {/* Shortcut badge — only on final segment */}
-                        {isFinal && seg.shortcut && (
-                            <span
-                                className="inline-flex items-center gap-0.5 rounded bg-muted 
-                               px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground
-                               ring-1 ring-inset ring-border"
-                            >
-                                <Option className="h-2.5 w-2.5" />
-                                {seg.shortcut}
-                            </span>
-                        )}
                     </span>
                 );
             })}
+            {shortcut && (
+                <kbd
+                    className="ml-1 inline-flex items-center gap-0.5 rounded border 
+                        border-border bg-muted px-1.5 py-0.5 
+                        font-mono text-[10px] text-muted-foreground"
+                >
+                    {shortcut}
+                </kbd>
+            )}
         </div>
+    );
+}
+
+function GhostVariant({
+    segments,
+    shortcut,
+    lastIndex,
+    className,
+}: {
+    segments: string[];
+    shortcut?: string;
+    lastIndex: number;
+    className?: string;
+}) {
+    return (
+        <p
+            className={`not-prose flex items-center gap-1 text-xs 
+                   text-muted-foreground flex-wrap ${className}`}
+        >
+            <MousePointerClick className="h-3 w-3 shrink-0" />
+            {segments.map((seg, i) => (
+                <span key={i} className="flex items-center gap-1">
+                    {i > 0 && <span className="opacity-30">/</span>}
+                    <span className={i === lastIndex ? 'text-foreground font-medium' : ''}>
+                        {seg}
+                    </span>
+                </span>
+            ))}
+            {shortcut && (
+                <kbd
+                    className="ml-1 rounded border border-border bg-muted 
+                        px-1.5 py-0.5 font-mono text-[10px]"
+                >
+                    {shortcut}
+                </kbd>
+            )}
+        </p>
     );
 }

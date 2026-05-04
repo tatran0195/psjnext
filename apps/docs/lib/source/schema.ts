@@ -4,6 +4,7 @@ import { z } from 'zod';
 export const docsSchema = pageSchema.extend({
     index: z.boolean().default(false),
     ribbon: z.string().optional(),
+    shortcut: z.string().optional(),
 });
 
 export const metaSchemaWithGroup = metaSchema.extend({
