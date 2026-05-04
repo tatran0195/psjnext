@@ -66,7 +66,7 @@ export default async function Page(props: {
                     />
                 </div>
 
-                {ribbon && <RibbonPath ribbon={ribbon} shortcut={shortcut} variant='inline' />}
+                {ribbon && <RibbonPath ribbon={ribbon} shortcut={shortcut} variant="inline" />}
 
                 {page.data.description && (
                     <DocsDescription className="mt-3">{page.data.description}</DocsDescription>

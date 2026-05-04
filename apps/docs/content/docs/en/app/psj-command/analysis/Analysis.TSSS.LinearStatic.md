@@ -1,11 +1,12 @@
 ---
-title: "Analysis.TSSS.LinearStatic()"
-description: "Export the Input Deck for TechnoStar SunShine Linear Static analysis (SOL 101)"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > SunShine > Linear Static(SOL 101)"
-macro_link: "[TSSS_LinearStatic]"
+title: 'Analysis.TSSS.LinearStatic()'
+description: 'Export the Input Deck for TechnoStar SunShine Linear Static analysis (SOL 101)'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > SunShine > Linear Static(SOL 101)'
+macro_link: '[TSSS_LinearStatic]'
 ---
+
 <!-- REVIEW FLAGS — requires human review
    [body_divergence] Body content differs across 2 of 2 versions — using latest
 -->
@@ -22,7 +23,7 @@ Analysis.TSSS.LinearStatic(...)
 
 ## Inputs
 
-### `strName` @type(String) @default("Job\_1")
+### `strName` @type(String) @default("Job_1")
 
 - The job name of TechnoStar SunShine solver. Output set by this name will be saved in the Assembly tree.
 
@@ -34,7 +35,7 @@ Analysis.TSSS.LinearStatic(...)
 
 - The list of target part.
 
-### `nastranAnalysis` @type(NASTRAN\_ANALYSIS) @default(NASTRAN\_ANALYSIS)
+### `nastranAnalysis` @type(NASTRAN_ANALYSIS) @default(NASTRAN_ANALYSIS)
 
 - The TechnoStar Sunshine solver input parameter.
 
@@ -65,8 +66,8 @@ Analysis.TSSS.LinearStatic(...)
 ### `iMethod` @type(Integer) @since(5.1.0)
 
 - Method.
-  - 0 : Default
-  - 1 : ORIGINAL
+    - 0 : Default
+    - 1 : ORIGINAL
 
 ### `bDomainWithDSize_b` @type(Boolean) @since(5.1.0)
 

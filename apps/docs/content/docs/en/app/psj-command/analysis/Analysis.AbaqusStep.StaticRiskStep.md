@@ -1,9 +1,9 @@
 ---
-title: "Analysis.AbaqusStep.StaticRiskStep()"
-description: "Abaqus Static Risk Step"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > AbaqusStep > StaticRiskStep"
+title: 'Analysis.AbaqusStep.StaticRiskStep()'
+description: 'Abaqus Static Risk Step'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > AbaqusStep > StaticRiskStep'
 ---
 
 ## Description
@@ -66,11 +66,11 @@ Analysis.AbaqusStep.StaticRiskStep(...)
 
 - The enable maximum displacement.
 
-### `dMaxDisp` @type(Double) @default(DFLT\_DBL)
+### `dMaxDisp` @type(Double) @default(DFLT_DBL)
 
 - The maximum displacement.
 
-### `iEnableMaxDispDof` @type(Integer) @default(DFLT\_INT)
+### `iEnableMaxDispDof` @type(Integer) @default(DFLT_INT)
 
 - The enable maximum displacement dof.
 

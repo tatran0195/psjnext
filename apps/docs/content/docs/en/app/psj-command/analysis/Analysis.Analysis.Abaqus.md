@@ -1,10 +1,10 @@
 ---
-title: "Analysis.Analysis.Abaqus()"
-description: "Unknown Description"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > Analysis > Abaqus"
-macro_link: "[CreateAbaqusJob](../../macro/analysis/CreateAbaqusJob)"
+title: 'Analysis.Analysis.Abaqus()'
+description: 'Unknown Description'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > Analysis > Abaqus'
+macro_link: '[CreateAbaqusJob](../../macro/analysis/CreateAbaqusJob)'
 ---
 
 ## Description
@@ -14,9 +14,9 @@ Unknown Description
 ## Syntax
 
 ```psj
-Analysis.Abaqus(strName, bRBE2toMPC, bRenameProcess, iCodeType, 
-    iSurfDefType, iUnit, iWriteType, strDescription, crlStepSequence, 
-    crEdit, strlUserText, bExptNdEleGroups, bDeleteFloatingNodes, 
+Analysis.Abaqus(strName, bRBE2toMPC, bRenameProcess, iCodeType,
+    iSurfDefType, iUnit, iWriteType, strDescription, crlStepSequence,
+    crEdit, strlUserText, bExptNdEleGroups, bDeleteFloatingNodes,
     bExptFaceElemGroups2Surface, bLoadCase, bAutoAssignDummyProperty, crDummyMat)
 ```
 

@@ -1,9 +1,9 @@
 ---
-title: "ACModeling.Cut()"
-description: "cut for ACModeling"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "ACModeling > Cut"
+title: 'ACModeling.Cut()'
+description: 'cut for ACModeling'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'ACModeling > Cut'
 ---
 
 ## Description

@@ -1,9 +1,9 @@
 ---
-title: "Analysis.ModifyLbcToStep()"
-description: "Add/Modify Loads, Boundary Conditions, etc. of an Abaqus step"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > ModifyLbcToStep"
+title: 'Analysis.ModifyLbcToStep()'
+description: 'Add/Modify Loads, Boundary Conditions, etc. of an Abaqus step'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > ModifyLbcToStep'
 ---
 
 ## Description
@@ -18,7 +18,7 @@ Analysis.ModifyLbcToStep(...)
 
 ## Inputs
 
-### `listAbaqusLbcStepInfo` @type(ABAQUS\_LBC\_STEP\_INFO) @default(\[])
+### `listAbaqusLbcStepInfo` @type(ABAQUS_LBC_STEP_INFO) @default(\[])
 
 - &#xNAN;_&#x6C;is&#x74;_&#x73;pecifying the list of Abaqus steps from load boundary condition information.
 

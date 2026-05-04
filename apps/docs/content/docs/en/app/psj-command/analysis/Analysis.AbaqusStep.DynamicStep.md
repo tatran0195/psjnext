@@ -1,9 +1,9 @@
 ---
-title: "Analysis.AbaqusStep.DynamicStep()"
-description: "Create Abaqus step for Dynamic analysis"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > AbaqusStep > DynamicStep"
+title: 'Analysis.AbaqusStep.DynamicStep()'
+description: 'Create Abaqus step for Dynamic analysis'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > AbaqusStep > DynamicStep'
 ---
 
 ## Description
@@ -50,7 +50,7 @@ Analysis.AbaqusStep.DyanmicStep(...)
 
 - Whether or not suppress the calculation of the half-increment residual tolerance.
 
-### `dHalfStepResTol` @type(Double) @default(DFLT\_DBL)
+### `dHalfStepResTol` @type(Double) @default(DFLT_DBL)
 
 - The half-increment residual tolerance value.
 
@@ -114,15 +114,15 @@ Analysis.AbaqusStep.DyanmicStep(...)
 
 - Whether or not to accept the solution after reaching maximum number of iterations.
 
-### `listAbaqusOutputRequest` @type(ABAQUS\_OUTPUT\_REQUEST) @default(ABAQUS\_OUTPUT\_REQUEST)
+### `listAbaqusOutputRequest` @type(ABAQUS_OUTPUT_REQUEST) @default(ABAQUS_OUTPUT_REQUEST)
 
 - List specifying the list of Abaqus output request.
 
 ### `crEdit` @type(Cursor) @default(None)
 
 - An existing Abaqus step.
-  - If this parameter is used, the specified step will be modified.
-  - If it is lef&#x74;_&#x4E;one_, a new step will be created.
+    - If this parameter is used, the specified step will be modified.
+    - If it is lef&#x74;_&#x4E;one_, a new step will be created.
 
 ## Return Code
 
@@ -136,33 +136,33 @@ import re
 
 Geometry.Part.Cube(iPartColor=5619133)
 Meshing.SolidMeshing(crlParts=[Part(1)],
-                     bTet10=True, 
-                     dGradingFactor=1.05, 
-                     dStretchLimit=0.1, 
-                     iSpeedVsQual=1, 
-                     iRegion=1, 
-                     bSafeMode=False, 
-                     iParallel=12, 
-                     bInternalMeshOnly=False, 
+                     bTet10=True,
+                     dGradingFactor=1.05,
+                     dStretchLimit=0.1,
+                     iSpeedVsQual=1,
+                     iRegion=1,
+                     bSafeMode=False,
+                     iParallel=12,
+                     bInternalMeshOnly=False,
                      iPartColor=65280)
-                     
-Properties.Material.Add("Concrete", 
-                        [Density([(DENSITY, 2.3e-09)]), 
-                        Elastic([(YOUNGS_MODULUS, 30000.0), 
+
+Properties.Material.Add("Concrete",
+                        [Density([(DENSITY, 2.3e-09)]),
+                        Elastic([(YOUNGS_MODULUS, 30000.0),
                                  (POISSONS_RATIO, 0.18)])])
 
-Properties.Solid(crlTargets=[Part(1)], 
-                 strName="Solid Property 1", 
-                 iPropertyColor=12275404, 
-                 crMaterial=Material(1), 
-                 iCordM=-2, 
+Properties.Solid(crlTargets=[Part(1)],
+                 strName="Solid Property 1",
+                 iPropertyColor=12275404,
+                 crMaterial=Material(1),
+                 iCordM=-2,
                  dDynaRemeshVal1=DFLT_DBL,
-                 dDynaRemeshVal2=DFLT_DBL, 
-                 dDispHG=DFLT_DBL, 
+                 dDynaRemeshVal2=DFLT_DBL,
+                 dDispHG=DFLT_DBL,
                  iFLG=-1)
 
-creating_status = Analysis.AbaqusStep.DynamicStep("Step1", 
-                                                  iAutomatic=1, 
+creating_status = Analysis.AbaqusStep.DynamicStep("Step1",
+                                                  iAutomatic=1,
                                                   listOutput=[])
 
 JPT.Debugger(creating_status)

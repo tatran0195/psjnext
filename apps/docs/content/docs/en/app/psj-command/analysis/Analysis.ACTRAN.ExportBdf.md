@@ -1,9 +1,9 @@
 ---
-title: "Analysis.ACTRAN.ExportBdf()"
-description: "Export Analysis Model Nastran BDF Files"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > ACTRAN > ExportBdf"
+title: 'Analysis.ACTRAN.ExportBdf()'
+description: 'Export Analysis Model Nastran BDF Files'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > ACTRAN > ExportBdf'
 ---
 
 ## Description

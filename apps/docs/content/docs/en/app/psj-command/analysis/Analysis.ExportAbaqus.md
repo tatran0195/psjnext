@@ -1,10 +1,10 @@
 ---
-title: "Analysis.ExportAbaqus()"
-description: "Export Abaqus (*.inp) file"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > ExportAbaqus"
-macro_link: "[ExportAbaqusInp](../../macro/analysis/ExportAbaqusInp)"
+title: 'Analysis.ExportAbaqus()'
+description: 'Export Abaqus (*.inp) file'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > ExportAbaqus'
+macro_link: '[ExportAbaqusInp](../../macro/analysis/ExportAbaqusInp)'
 ---
 
 ## Description

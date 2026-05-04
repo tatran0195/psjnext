@@ -1,9 +1,9 @@
 ---
-title: "Analysis.ExportLsdyna()"
-description: "Export LS-Dyna Analysis Job"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > ExportLsdyna"
+title: 'Analysis.ExportLsdyna()'
+description: 'Export LS-Dyna Analysis Job'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > ExportLsdyna'
 ---
 
 ## Description

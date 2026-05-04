@@ -359,7 +359,15 @@ export interface DataTypeLocaleSidecar {
     /** keyed by value id; built-in or enumeration */
     values?: Record<string | number, { label?: string; description?: string }>;
     /** keyed by field name; class */
-    fields?: Record<string, { description?: string; remarks?: string; deprecated?: string; enum_values?: Record<string | number, string> }>;
+    fields?: Record<
+        string,
+        {
+            description?: string;
+            remarks?: string;
+            deprecated?: string;
+            enum_values?: Record<string | number, string>;
+        }
+    >;
     /** keyed by example id */
     examples?: Record<string, ExampleTranslation>;
 }

@@ -1,10 +1,10 @@
 ---
-title: "Analysis.ADVC.MakeProcess.DynamicExplicit()"
-description: "Create an ADVC Dynamic Explicit process. This process could be created in one time or multiple times"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > ADVC > MakeProcess > DynamicExplicit"
-macro_link: "[AdvcDynamicExplicitProcess](../../macro/analysis/AdvcDynamicExplicitProcess)"
+title: 'Analysis.ADVC.MakeProcess.DynamicExplicit()'
+description: 'Create an ADVC Dynamic Explicit process. This process could be created in one time or multiple times'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > ADVC > MakeProcess > DynamicExplicit'
+macro_link: '[AdvcDynamicExplicitProcess](../../macro/analysis/AdvcDynamicExplicitProcess)'
 ---
 
 ## Description
@@ -27,13 +27,13 @@ Analysis.ADVC.MakeProcess.DynamicExplicit(...)
 ### `iGeomNonlinear` @type(Integer) @default(0)
 
 - The geometric nonlinearity type:
-  - I&#x66;_&#x69;GeomNonlinear=0_, do not define the geometric nonlinearity type.
-  - I&#x66;_&#x69;GeomNonlinear=1_, a Linear geometric nonlinearity is specified.
-  - I&#x66;_&#x69;GeomNonlinear=2_, a Nonlinear geometric nonlinearity is specified.
-  - I&#x66;_&#x69;GeomNonlinear=3_, a Total Lagrange geometric nonlinearity is specified.
-  - I&#x66;_&#x69;GeomNonlinear=4_, a Updated Lagrange geometric nonlinearity is specified.
+    - I&#x66;_&#x69;GeomNonlinear=0_, do not define the geometric nonlinearity type.
+    - I&#x66;_&#x69;GeomNonlinear=1_, a Linear geometric nonlinearity is specified.
+    - I&#x66;_&#x69;GeomNonlinear=2_, a Nonlinear geometric nonlinearity is specified.
+    - I&#x66;_&#x69;GeomNonlinear=3_, a Total Lagrange geometric nonlinearity is specified.
+    - I&#x66;_&#x69;GeomNonlinear=4_, a Updated Lagrange geometric nonlinearity is specified.
 
-### `advcStructTimeStep` @type(ADVC\_STRUCT\_TIME\_STEP) @default(ADVC\_STRUCT\_TIME\_STEP)
+### `advcStructTimeStep` @type(ADVC_STRUCT_TIME_STEP) @default(ADVC_STRUCT_TIME_STEP)
 
 - The time step settings for ADVC solver.
 
@@ -41,7 +41,7 @@ Analysis.ADVC.MakeProcess.DynamicExplicit(...)
 
 - Whether to apply the convergence parameters.
 
-### `advcConvergence` @type(ADVC\_CONVERGENCE) @default(ADVC\_CONVERGENCE)
+### `advcConvergence` @type(ADVC_CONVERGENCE) @default(ADVC_CONVERGENCE)
 
 - The convergence settings for ADVC solver. This argument must be specified whe&#x6E;_&#x62;Convergence=True_.
 
@@ -49,7 +49,7 @@ Analysis.ADVC.MakeProcess.DynamicExplicit(...)
 
 - Whether to apply the contact parameters.
 
-### `advcContactIter` @type(ADVC\_CONTACT\_ITER) @default(ADVC\_CONTACT\_ITER)
+### `advcContactIter` @type(ADVC_CONTACT_ITER) @default(ADVC_CONTACT_ITER)
 
 - The contact iterator settings for ADVC solver. This argument must be specified whe&#x6E;_&#x62;Contact=True_.
 
@@ -57,11 +57,11 @@ Analysis.ADVC.MakeProcess.DynamicExplicit(...)
 
 - Whether to apply the auto increment parameters.
 
-### `advcAutoIncrement` @type(ADVC\_AUTO\_INCREMENT) @default(ADVC\_AUTO\_INCREMENT)
+### `advcAutoIncrement` @type(ADVC_AUTO_INCREMENT) @default(ADVC_AUTO_INCREMENT)
 
 - The auto increment settings for ADVC solver. This argument must be specified whe&#x6E;_&#x62;AutoIncrement=True_.
 
-### `iLogMessageInterval` @type(Integer) @default(DFLT\_INT)
+### `iLogMessageInterval` @type(Integer) @default(DFLT_INT)
 
 - The log message interval.
 
@@ -69,27 +69,27 @@ Analysis.ADVC.MakeProcess.DynamicExplicit(...)
 
 - The linear approximation.
 
-### `dBulkViscosityCoef1` @type(Double) @default(DFLT\_DBL)
+### `dBulkViscosityCoef1` @type(Double) @default(DFLT_DBL)
 
 - The first bulk viscosity coefficient.
 
-### `dBulkViscosityCoef2` @type(Double) @default(DFLT\_DBL)
+### `dBulkViscosityCoef2` @type(Double) @default(DFLT_DBL)
 
 - The second bulk viscosity coefficient.
 
-### `dMassScalingdt` @type(Double) @default(DFLT\_DBL)
+### `dMassScalingdt` @type(Double) @default(DFLT_DBL)
 
 - The mass scaling of the dt time.
 
-### `dDtScaleFactor` @type(Double) @default(DFLT\_DBL)
+### `dDtScaleFactor` @type(Double) @default(DFLT_DBL)
 
 - The scale factor of the dt time.
 
-### `dPenaltyScaleFactor` @type(Double) @default(DFLT\_DBL)
+### `dPenaltyScaleFactor` @type(Double) @default(DFLT_DBL)
 
 - The penalty scale factor.
 
-### `iContactSearchInterval` @type(Integer) @default(DFLT\_INT)
+### `iContactSearchInterval` @type(Integer) @default(DFLT_INT)
 
 - The contact search interval.
 
@@ -97,20 +97,20 @@ Analysis.ADVC.MakeProcess.DynamicExplicit(...)
 
 - The existing process to be modified. If the default value is specified, a new process will be created, otherwise, the specified process will modified.
 
-### `listLoadNode` @type(List\[ADVC\_LOAD\_NODE]) @default(\[])
+### `listLoadNode` @type(List\[ADVC_LOAD_NODE]) @default(\[])
 
 - The load node.
 - If this argument is specified, the`listLoadCaseNode`will be empty.
 
-### `listLoadCaseNode` @type(List\[ADVC\_LOAD\_NODE]) @default(\[])
+### `listLoadCaseNode` @type(List\[ADVC_LOAD_NODE]) @default(\[])
 
 - The loadcase node.
 - If this argument is specified, the`listLoadNode`will be empty.
 
-### `listLoadNodeContact` @type(List\[ADVC\_LOAD\_NODE]) @default(\[])
+### `listLoadNodeContact` @type(List\[ADVC_LOAD_NODE]) @default(\[])
 
 - The load node contact.
-- This argument uses the instance of[ADVC\_LOAD\_NODE](./../../data-type/psj-command/parameter-types/ADVC_LOAD_NODE)and won't be duplicated with`listLoadNode`or`listLoadCaseNode`
+- This argument uses the instance of[ADVC_LOAD_NODE](./../../data-type/psj-command/parameter-types/ADVC_LOAD_NODE)and won't be duplicated with`listLoadNode`or`listLoadCaseNode`
 
 ### `ilOutputParamList` @type(List\[Integer]) @default(\[])
 
@@ -135,12 +135,12 @@ A _Cursor_ specifying the created or the modified ADVC Dynamic Explicit process.
 ## Sample Code
 
 ```psj {1,2,3,4,5,6,7}
-step = Analysis.ADVC.MakeProcess.DynamicExplicit(strName="Process_0", 
+step = Analysis.ADVC.MakeProcess.DynamicExplicit(strName="Process_0",
                                                  iGeomNonlinear=3,
-                                                 advcStructTimeStep=ADVC_STRUCT_TIME_STEP(iNumOfInc=10), 
-                                                 listLoadNode=[], 
+                                                 advcStructTimeStep=ADVC_STRUCT_TIME_STEP(iNumOfInc=10),
+                                                 listLoadNode=[],
                                                  listLoadCaseNode=[],
-                                                 listLoadNodeContact=[], 
+                                                 listLoadNodeContact=[],
                                                  listAdvcRefStressResult=[])
 
 JPT.Debugger(step)

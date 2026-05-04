@@ -1,10 +1,11 @@
 ---
-title: "Analysis.TSSS.LinearBuckling()"
-description: "Export the Input Deck for TechnoStar SunShine Linear Buckling analysis (SOL 105)"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > SunShine > Linear Buckling(SOL 105)"
+title: 'Analysis.TSSS.LinearBuckling()'
+description: 'Export the Input Deck for TechnoStar SunShine Linear Buckling analysis (SOL 105)'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > SunShine > Linear Buckling(SOL 105)'
 ---
+
 <!-- REVIEW FLAGS — requires human review
    [body_divergence] Body content differs across 2 of 2 versions — using latest
 -->
@@ -21,7 +22,7 @@ Analysis.TSSS.LinearBuckling(...)
 
 ## Inputs
 
-### `strName` @type(String) @default("Job\_1")
+### `strName` @type(String) @default("Job_1")
 
 - The job name of TechnoStar SunShine solver. Output set by this name will be saved in the Assembly tree.
 
@@ -33,7 +34,7 @@ Analysis.TSSS.LinearBuckling(...)
 
 - The list of target part.
 
-### `nastranAnalysis` @type(NASTRAN\_ANALYSIS) @default(NASTRAN\_ANALYSIS)
+### `nastranAnalysis` @type(NASTRAN_ANALYSIS) @default(NASTRAN_ANALYSIS)
 
 - The TechnoStar Sunshine solver input parameter.
 

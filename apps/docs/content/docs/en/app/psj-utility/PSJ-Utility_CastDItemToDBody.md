@@ -1,8 +1,8 @@
 ---
-title: "JPT.CastDItemToDBody()"
-description: "Convert DItem object to DBody object"
-version_introduced: "5.0.1"
-available_versions: "all"
+title: 'JPT.CastDItemToDBody()'
+description: 'Convert DItem object to DBody object'
+version_introduced: '5.0.1'
+available_versions: 'all'
 ---
 
 ## Description

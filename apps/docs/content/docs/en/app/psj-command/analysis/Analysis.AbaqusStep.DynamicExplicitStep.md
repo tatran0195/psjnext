@@ -1,10 +1,11 @@
 ---
-title: "Analysis.AbaqusStep.DynamicExplicitStep()"
-description: "Create Abaqus Step - Dynamic Explicit Type"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > Abaqus"
+title: 'Analysis.AbaqusStep.DynamicExplicitStep()'
+description: 'Create Abaqus Step - Dynamic Explicit Type'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > Abaqus'
 ---
+
 <!-- REVIEW FLAGS — requires human review
    [body_divergence] Body content differs across 2 of 2 versions — using latest
 -->
@@ -36,10 +37,10 @@ Analysis.AbaqusStep.DynamicExplicitStep(...)
 ### `iIncrmtEstimator` @type(Integer) @default(0)
 
 - The use of the stable increment estimator.
-  - 0: Global
-  - 1: Element by element
+    - 0: Global
+    - 1: Element by element
 
-### `abaqusPair1` @type(ABAQUS\_PAIR) @default(ABAQUS\_PAIR)
+### `abaqusPair1` @type(ABAQUS_PAIR) @default(ABAQUS_PAIR)
 
 - The maximum time increment value.
 
@@ -47,15 +48,15 @@ Analysis.AbaqusStep.DynamicExplicitStep(...)
 
 - The time scaling factor.
 
-### `abaqusPair2` @type(ABAQUS\_PAIR) @default(ABAQUS\_PAIR)
+### `abaqusPair2` @type(ABAQUS_PAIR) @default(ABAQUS_PAIR)
 
 - The user-defined time increment.
 
 ### `iEnableNlgeom` @type(Integer) @default(1)
 
 - Whether or not to consider geometric nonlinear (large deformation) analysis.
-  - 0: Not consider
-  - 1: Consider
+    - 0: Not consider
+    - 1: Consider
 
 ### `dTimePeriod` @type(Double) @default(1.0)
 
@@ -73,15 +74,15 @@ Analysis.AbaqusStep.DynamicExplicitStep(...)
 
 - The quadratic bulk viscosity parameter.
 
-### `listAbaqusOutputRequest` @type(ABAQUS\_OUTPUT\_REQUEST) @default(ABAQUS\_OUTPUT\_REQUEST)
+### `listAbaqusOutputRequest` @type(ABAQUS_OUTPUT_REQUEST) @default(ABAQUS_OUTPUT_REQUEST)
 
 - List specifying the list of Abaqus output request.
 
 ### `crEdit` @type(Cursor) @default(None)
 
 - An existing Abaqus step.
-  - If this parameter is used, the specified step will be modified.
-  - If it is lef&#x74;_&#x4E;one_, a new step will be created.
+    - If this parameter is used, the specified step will be modified.
+    - If it is lef&#x74;_&#x4E;one_, a new step will be created.
 
 ## Return Code
 

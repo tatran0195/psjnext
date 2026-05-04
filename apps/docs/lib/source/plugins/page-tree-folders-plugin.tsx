@@ -6,43 +6,32 @@ import { getSection } from '@/lib/source/navigation';
 
 import type { Folder, Node } from 'fumadocs-core/page-tree';
 
-type FolderWithGroup = Folder & { group?: boolean; groupLevel?: number };
+type FolderWithGroup = Folder & { group?: boolean };
 
 export function pageTreeFoldersPlugin(): LoaderPlugin {
     return {
         transformPageTree: {
             folder(node, _dir, metaFile) {
-                let groupLevel: number | undefined;
                 let isRoot = false;
+                let isGroup = (node as FolderWithGroup).group === true;
 
                 if (metaFile) {
                     const meta = this.storage.read(metaFile);
                     const data = meta?.data as {
                         group?: boolean;
-                        groupLevel?: number;
                         root?: boolean;
                     };
-                    if (data?.groupLevel !== undefined) groupLevel = data.groupLevel;
-                    else if (data?.group === true) groupLevel = 0;
 
                     if (data?.root === true) isRoot = true;
-                }
-
-                if ((node as FolderWithGroup).groupLevel !== undefined) {
-                    groupLevel = (node as FolderWithGroup).groupLevel;
-                } else if ((node as FolderWithGroup).group === true) {
-                    groupLevel = 0;
+                    if (data?.group === true) {
+                        isGroup = true;
+                        (node as FolderWithGroup).group = true;
+                    }
                 }
 
                 if ((node as unknown as Record<string, unknown>).root === true) isRoot = true;
 
-                const isGroup = (node as FolderWithGroup).group === true;
-
-                if (groupLevel !== undefined || isRoot || isGroup) {
-                    if (groupLevel !== undefined) {
-                        node.children = applyGroupLevel(node.children, groupLevel);
-                    }
-
+                if (isRoot || isGroup) {
                     // Apply styles
                     applyFolderStyles(node, metaFile);
                 }
@@ -51,51 +40,6 @@ export function pageTreeFoldersPlugin(): LoaderPlugin {
             },
         },
     };
-}
-
-function applyGroupLevel(nodes: Node[], level: number): Node[] {
-    if (level < 0) return nodes;
-
-    if (level === 0) {
-        // This folder itself should be a group (handled by the caller setting group: true)
-        return nodes;
-    }
-
-    if (level === 1) {
-        const result: Node[] = [];
-        const flatItems: Node[] = [];
-
-        for (const child of nodes) {
-            if (child.type === 'folder') {
-                (child as FolderWithGroup).group = true;
-                result.push(child);
-            } else {
-                flatItems.push(child);
-            }
-        }
-
-        if (flatItems.length > 0) {
-            result.push({
-                type: 'folder',
-                name: 'Other',
-                children: flatItems,
-                group: true,
-            } as FolderWithGroup);
-        }
-
-        return result;
-    }
-
-    // level > 1: Recurse down
-    return nodes.map((node) => {
-        if (node.type === 'folder') {
-            return {
-                ...node,
-                children: applyGroupLevel(node.children, level - 1),
-            };
-        }
-        return node;
-    });
 }
 
 function applyFolderStyles(node: Folder, metaFile: string | undefined) {

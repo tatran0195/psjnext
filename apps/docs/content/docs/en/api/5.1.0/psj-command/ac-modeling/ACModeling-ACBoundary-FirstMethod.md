@@ -4,7 +4,7 @@ title: ACModeling.ACBoundary.FirstMethod()
 author: TechnoStar Co., Ltd.
 authorURL: https://www.e-technostar.com/
 description: Unknown Description
-ribbon: "ACModeling > ACBoundary > FirstMethod"
+ribbon: 'ACModeling > ACBoundary > FirstMethod'
 ---
 
 ## Description

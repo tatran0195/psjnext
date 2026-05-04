@@ -6,7 +6,15 @@ import { Card, Cards } from 'fumadocs-ui/components/card';
 
 import { source } from '@/lib/source';
 
-export function DocsCategory({ url, lang, resolveUrl = (u) => u }: { url: string; lang: string; resolveUrl?: (url: string) => string }) {
+export function DocsCategory({
+    url,
+    lang,
+    resolveUrl = (u) => u,
+}: {
+    url: string;
+    lang: string;
+    resolveUrl?: (url: string) => string;
+}) {
     return (
         <Cards>
             {findSiblings(source.getPageTree(lang), url).map((item) => {
@@ -24,7 +32,15 @@ export function DocsCategory({ url, lang, resolveUrl = (u) => u }: { url: string
     );
 }
 
-export function DocsSectionOverview({ url, lang, resolveUrl = (u) => u }: { url: string; lang: string; resolveUrl?: (url: string) => string }) {
+export function DocsSectionOverview({
+    url,
+    lang,
+    resolveUrl = (u) => u,
+}: {
+    url: string;
+    lang: string;
+    resolveUrl?: (url: string) => string;
+}) {
     function folderContainsPath(node: PageTree.Folder, path: string): boolean {
         if (node.index?.url === path) return true;
         return node.children.some((child) => {

@@ -1,9 +1,9 @@
 ---
-title: "Analysis.Ansys.NormalModes()"
-description: "Export the Ansys Normal Modes Structural solver file"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > Ansys > NormalModes"
+title: 'Analysis.Ansys.NormalModes()'
+description: 'Export the Ansys Normal Modes Structural solver file'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > Ansys > NormalModes'
 ---
 
 ## Description
@@ -38,11 +38,11 @@ Analysis.Ansys.NormalModes(...)
 
 - Enable/disalbe the option that write result database.
 
-### `dEndFreq` @type(Double) @default(DFLT\_DBL)
+### `dEndFreq` @type(Double) @default(DFLT_DBL)
 
 - The end frequency number.
 
-### `dStartFreq` @type(Double) @default(DFLT\_DBL)
+### `dStartFreq` @type(Double) @default(DFLT_DBL)
 
 - The start frequency number.
 

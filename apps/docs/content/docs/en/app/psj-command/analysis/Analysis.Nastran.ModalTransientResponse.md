@@ -1,10 +1,11 @@
 ---
-title: "Analysis.Nastran.ModalTransientResponse()"
-description: "Export the input file for Nastran Modal Transient Response Analysis (SOL 112)"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > Nastran > Modal Transient Response(SOL 112)"
+title: 'Analysis.Nastran.ModalTransientResponse()'
+description: 'Export the input file for Nastran Modal Transient Response Analysis (SOL 112)'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > Nastran > Modal Transient Response(SOL 112)'
 ---
+
 <!-- REVIEW FLAGS — requires human review
    [body_divergence] Body content differs across 2 of 2 versions — using latest
 -->
@@ -21,7 +22,7 @@ Analysis.Nastran.ModalTransientResponse(...)
 
 ## Inputs
 
-### `strName` @type(String) @default("Job\_1")
+### `strName` @type(String) @default("Job_1")
 
 - The job name of Nastran analysis.
 
@@ -33,7 +34,7 @@ Analysis.Nastran.ModalTransientResponse(...)
 
 - The list of target parts.
 
-### `nastranAnalysis` @type(NASTRAN\_ANALYSIS) @default(NASTRAN\_ANALYSIS)
+### `nastranAnalysis` @type(NASTRAN_ANALYSIS) @default(NASTRAN_ANALYSIS)
 
 - The Nastran analysis input parameter.
 
@@ -48,8 +49,8 @@ Analysis.Nastran.ModalTransientResponse(...)
 ### `crEdit` @type(Cursor) @default(None)
 
 - An existing Nastran job.
-  - If this parameter is used, the specified job will be modified.
-  - If it is lef&#x74;_&#x4E;one_, a new job will be created.
+    - If this parameter is used, the specified job will be modified.
+    - If it is lef&#x74;_&#x4E;one_, a new job will be created.
 
 ### `strPath` @type(String) @default("")
 
@@ -58,14 +59,14 @@ Analysis.Nastran.ModalTransientResponse(...)
 ### `iModelCheckAnswer` @type(Integer) @default(0)
 
 - The model checking option.
-  - 0: disable model checking option used for seeking dummy property.
-  - 1: enable model checking option used for seeking dummy property.
+    - 0: disable model checking option used for seeking dummy property.
+    - 1: enable model checking option used for seeking dummy property.
 
 ### `iDeleteSlaveNodesAnswer` @type(Integer) @default(0)
 
 - The deleting slave nodes option.
-  - 0: disable the deleting slave nodes checking option.
-  - 1: enable the deleting slave nodes checking option.
+    - 0: disable the deleting slave nodes checking option.
+    - 1: enable the deleting slave nodes checking option.
 
 ## Return Code
 

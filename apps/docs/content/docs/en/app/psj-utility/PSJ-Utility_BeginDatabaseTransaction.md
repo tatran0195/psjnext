@@ -1,9 +1,10 @@
 ---
-title: "JPT.BeginDatabaseTransaction()"
+title: 'JPT.BeginDatabaseTransaction()'
 description: "Get all the information of all the existing groups under the specified group's name"
-version_introduced: "5.0.1"
-available_versions: "all"
+version_introduced: '5.0.1'
+available_versions: 'all'
 ---
+
 <!-- REVIEW FLAGS — requires human review
    [body_divergence] Body content differs across 2 of 2 versions — using latest
 -->

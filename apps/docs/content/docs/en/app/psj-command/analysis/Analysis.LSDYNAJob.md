@@ -1,9 +1,9 @@
 ---
-title: "Analysis.LSDYNAJob()"
-description: "Create LS-Dyna Analysis Job"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > LSDYNAJob"
+title: 'Analysis.LSDYNAJob()'
+description: 'Create LS-Dyna Analysis Job'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > LSDYNAJob'
 ---
 
 ## Description

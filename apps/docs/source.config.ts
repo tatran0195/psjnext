@@ -5,12 +5,13 @@ import { applyMdxPreset, defineConfig, defineDocs } from 'fumadocs-mdx/config';
 import jsonSchema from 'fumadocs-mdx/plugins/json-schema';
 import lastModified from 'fumadocs-mdx/plugins/last-modified';
 
+import remarkParamDecorator from '@/lib/mdx-plugins/remark-param-decorator';
+
 import { remarkElementIds } from './lib/mdx-plugins/remark-element-ids';
 import { remarkLinkPreview } from './lib/mdx-plugins/remark-link-preview';
 import { defaultShikiOptions } from './lib/shiki';
 import { docsSchema, metaSchemaWithGroup } from './lib/source/schema';
 
-import remarkParamDecorator from '@/lib/mdx-plugins/remark-param-decorator';
 import type { ElementContent } from 'hast';
 import type { ShikiTransformer } from 'shiki';
 const { rehypeCodeDefaultOptions } = await import('fumadocs-core/mdx-plugins/rehype-code');
@@ -63,19 +64,10 @@ export const docs = defineDocs({
                               transformerEscape(),
                           ],
                           lazy: false,
-                          langs: [
-                              'js',
-                              'jsx',
-                              'ts',
-                              'tsx',
-                              'py',
-                              'shell',
-                              'bat',
-                              'python',
-                          ],
-                          langAlias:{
-                            psj: "py"
-                          }
+                          langs: ['js', 'jsx', 'ts', 'tsx', 'py', 'shell', 'bat', 'python'],
+                          langAlias: {
+                              psj: 'py',
+                          },
                       } satisfies RehypeCodeOptions),
                 remarkCodeTabOptions: {
                     parseMdx: true,

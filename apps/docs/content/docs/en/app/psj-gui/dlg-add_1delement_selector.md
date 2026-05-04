@@ -1,9 +1,10 @@
 ---
-title: "dlg.add_1delement_selector()"
-description: "Add \"1D element\" to the selection list, allowing user to select 1D elements and store the selected 1D elements to the selection list"
-version_introduced: "5.0.1"
-available_versions: "all"
+title: 'dlg.add_1delement_selector()'
+description: 'Add "1D element" to the selection list, allowing user to select 1D elements and store the selected 1D elements to the selection list'
+version_introduced: '5.0.1'
+available_versions: 'all'
 ---
+
 <!-- REVIEW FLAGS — requires human review
    [body_divergence] Body content differs across 2 of 2 versions — using latest
 -->
@@ -51,7 +52,7 @@ def main():
     dlg.add_space(orientation="horizontal",layout="footer")
     dlg.add_1delement_selector(text="1D Element 1")
     dlg.generate_window()
-    
+
 if __name__=='__main__':
     main()
 ```

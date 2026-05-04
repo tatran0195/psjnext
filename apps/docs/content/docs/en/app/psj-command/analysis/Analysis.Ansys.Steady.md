@@ -1,9 +1,9 @@
 ---
-title: "Analysis.Ansys.Steady()"
-description: "Export the Ansys Steady Static Heat Transfer solver file"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > Ansys > Steady"
+title: 'Analysis.Ansys.Steady()'
+description: 'Export the Ansys Steady Static Heat Transfer solver file'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > Ansys > Steady'
 ---
 
 ## Description
@@ -46,7 +46,7 @@ Analysis.Ansys.Steady(...)
 
 - The load case identify number .
 
-### `ansysAnalysisSteadyStatic` @type(STEADY\_STATIC) @default(STEADY\_STATIC)
+### `ansysAnalysisSteadyStatic` @type(STEADY_STATIC) @default(STEADY_STATIC)
 
 - The Ansys Analysis - Steady Static Heat Transfer input parameter.
 

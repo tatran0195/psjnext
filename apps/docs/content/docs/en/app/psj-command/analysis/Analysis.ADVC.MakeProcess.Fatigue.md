@@ -1,10 +1,10 @@
 ---
-title: "Analysis.ADVC.MakeProcess.Fatigue()"
-description: "Create ADVC fatigue process"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > ADVC > MakeProcess > Fatigue"
-macro_link: "[AdvcFatigueProcess](../../macro/analysis/AdvcFatigueProcess)"
+title: 'Analysis.ADVC.MakeProcess.Fatigue()'
+description: 'Create ADVC fatigue process'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > ADVC > MakeProcess > Fatigue'
+macro_link: '[AdvcFatigueProcess](../../macro/analysis/AdvcFatigueProcess)'
 ---
 
 ## Description
@@ -39,11 +39,11 @@ Analysis.ADVC.MakeProcess.Fatigue(...)
 
 - The safety type.
 
-### `dSearchResolution` @type(Double) @default(DFLT\_DBL)
+### `dSearchResolution` @type(Double) @default(DFLT_DBL)
 
 - The search resolution.
 
-### `dSafetyMax` @type(Double) @default(DFLT\_DBL)
+### `dSafetyMax` @type(Double) @default(DFLT_DBL)
 
 - The safety maximum.
 
@@ -51,15 +51,15 @@ Analysis.ADVC.MakeProcess.Fatigue(...)
 
 - The edit.
 
-### `listLoadNode` @type(LOAD\_NODE List) @default(\[])
+### `listLoadNode` @type(LOAD_NODE List) @default(\[])
 
 - The load node.
 
-### `listLoadCaseNode` @type(LOAD\_CASE\_NODE List) @default(\[])
+### `listLoadCaseNode` @type(LOAD_CASE_NODE List) @default(\[])
 
 - The load case node.
 
-### `listLoadNodeContact` @type(LOAD\_NODE\_CONTACT List) @default(\[])
+### `listLoadNodeContact` @type(LOAD_NODE_CONTACT List) @default(\[])
 
 - The load node contact.
 
@@ -75,7 +75,7 @@ Analysis.ADVC.MakeProcess.Fatigue(...)
 
 - The reference path.
 
-### `listAdvcRefStressResult` @type(ADVC\_REF\_STRESS\_RESULT List) @default(\[])
+### `listAdvcRefStressResult` @type(ADVC_REF_STRESS_RESULT List) @default(\[])
 
 - The advc reference stress result.
 

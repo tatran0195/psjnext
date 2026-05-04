@@ -1,10 +1,11 @@
 ---
-title: "Analysis.ACTRAN.CreateEdat()"
-description: "Export edat file."
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > ACTRAN > CreateEdat"
+title: 'Analysis.ACTRAN.CreateEdat()'
+description: 'Export edat file.'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > ACTRAN > CreateEdat'
 ---
+
 <!-- REVIEW FLAGS — requires human review
    [frontmatter_conflict] description changed across versions
      context: {"values":["Unknown Description","Export edat file."]}
@@ -23,7 +24,7 @@ Analysis.ACTRAN.CreateEdat(...)
 
 ## Inputs
 
-### `actranAnalysis` @type(ACTRAN\_ANALYSIS) @default(ACTRAN\_ANALYSIS)
+### `actranAnalysis` @type(ACTRAN_ANALYSIS) @default(ACTRAN_ANALYSIS)
 
 - The Actran analysis data structure.
 

@@ -1,10 +1,11 @@
 ---
-title: "Analysis.ACTRAN.Run()"
-description: "Run Actran analysis"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > ACTRAN > Run"
+title: 'Analysis.ACTRAN.Run()'
+description: 'Run Actran analysis'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > ACTRAN > Run'
 ---
+
 <!-- REVIEW FLAGS — requires human review
    [frontmatter_conflict] description changed across versions
      context: {"values":["Unknown Description","Run Actran analysis"]}
@@ -23,7 +24,7 @@ Analysis.ACTRAN.Run(...)
 
 ## Inputs
 
-### `actranAnalysis` @type(ACTRAN\_ANALYSIS) @default(ACTRAN\_ANALYSIS)
+### `actranAnalysis` @type(ACTRAN_ANALYSIS) @default(ACTRAN_ANALYSIS)
 
 - The Actran analysis data structure.
 

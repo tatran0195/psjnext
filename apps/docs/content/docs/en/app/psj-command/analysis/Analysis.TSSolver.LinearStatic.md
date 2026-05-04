@@ -1,9 +1,9 @@
 ---
-title: "Analysis.TSSolver.LinearStatic()"
-description: "Export the Input Deck for TechnoStar solver Linear Static analysis (SOL 101)"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > TS-Solver > Linear Static(SOL 101)"
+title: 'Analysis.TSSolver.LinearStatic()'
+description: 'Export the Input Deck for TechnoStar solver Linear Static analysis (SOL 101)'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > TS-Solver > Linear Static(SOL 101)'
 ---
 
 ## Description
@@ -18,7 +18,7 @@ Analysis.TSSolver.LinearStatic(...)
 
 ## Inputs
 
-### `strName` @type(String) @default("Job\_1")
+### `strName` @type(String) @default("Job_1")
 
 - The job name of TechnoStar solver. Output set by this name will be saved in the Assembly tree.
 
@@ -30,7 +30,7 @@ Analysis.TSSolver.LinearStatic(...)
 
 - The list of target part.
 
-### `nastranAnalysis` @type(NASTRAN\_ANALYSIS) @default(NASTRAN\_ANALYSIS)
+### `nastranAnalysis` @type(NASTRAN_ANALYSIS) @default(NASTRAN_ANALYSIS)
 
 - The TechnoStar solver input parameter.
 
@@ -53,54 +53,54 @@ from os import environ
 import re
 
 Geometry.Part.Cube()
-Meshing.SolidMeshing(crlParts=[Part(1)], 
-                     bTet10=True, 
-                     dGradingFactor=1.05, 
-                     dStretchLimit=0.1, 
-                     iSpeedVsQual=1, 
-                     iRegion=1, 
-                     bSafeMode=False, 
-                     iParallel=12, 
-                     bInternalMeshOnly=False, 
+Meshing.SolidMeshing(crlParts=[Part(1)],
+                     bTet10=True,
+                     dGradingFactor=1.05,
+                     dStretchLimit=0.1,
+                     iSpeedVsQual=1,
+                     iRegion=1,
+                     bSafeMode=False,
+                     iParallel=12,
+                     bInternalMeshOnly=False,
                      iPartColor=65280)
 
-Properties.Material.Add("Concrete", 
-                        [Density([(DENSITY, 2.3e-09)]), 
-                        Elastic([(YOUNGS_MODULUS, 30000.0), 
+Properties.Material.Add("Concrete",
+                        [Density([(DENSITY, 2.3e-09)]),
+                        Elastic([(YOUNGS_MODULUS, 30000.0),
                                  (POISSONS_RATIO, 0.18)])])
 
-Properties.Solid(crlTargets=[Part(1)], 
-                 strName="Solid Property 1", 
-                 iPropertyColor=16131973, 
-                 crMaterial=Material(1), 
-                 iCordM=-2, 
-                 dDynaRemeshVal1=DFLT_DBL, 
-                 dDynaRemeshVal2=DFLT_DBL, 
-                 dDispHG=DFLT_DBL, 
+Properties.Solid(crlTargets=[Part(1)],
+                 strName="Solid Property 1",
+                 iPropertyColor=16131973,
+                 crMaterial=Material(1),
+                 iCordM=-2,
+                 dDynaRemeshVal1=DFLT_DBL,
+                 dDynaRemeshVal2=DFLT_DBL,
+                 dDispHG=DFLT_DBL,
                  iFLG=-1)
 
 BoundaryConditions.FixedConstraint(crlTargets=[Face(24)])
-BoundaryConditions.Pressure.General(dPressure=1000000.0, 
-                                    crlTargets=[Face(21, 
+BoundaryConditions.Pressure.General(dPressure=1000000.0,
+                                    crlTargets=[Face(21,
                                                      23)])
 
-input_param = NASTRAN_ANALYSIS(iSolverType=3, 
-                               iGridFormatType=1, 
-                               bUseCASI=True, 
+input_param = NASTRAN_ANALYSIS(iSolverType=3,
+                               iGridFormatType=1,
+                               bUseCASI=True,
                                dEpsilon=DFLT_DBL,
-                               iMaxNumOfIter=DFLT_INT, 
-                               iMemory=1024, 
+                               iMaxNumOfIter=DFLT_INT,
+                               iMemory=1024,
                                iSolNo=101,
-                               nastranFreqTimestep=NASTRAN_FREQ_TIMESTEP(iDampingType=2, 
+                               nastranFreqTimestep=NASTRAN_FREQ_TIMESTEP(iDampingType=2,
                                                                          iModalDampingTableId=0),
                                nastranOutputRequest=NASTRAN_OUTPUT_REQUEST(iTypeStrain=0),
-                               nastranNonlinear=NASTRAN_NONLINEAR(iKMETHOD=3, 
-                                                                  iMAXITER=DFLT_INT, 
-                                                                  bUseEPSW=True, 
+                               nastranNonlinear=NASTRAN_NONLINEAR(iKMETHOD=3,
+                                                                  iMAXITER=DFLT_INT,
+                                                                  bUseEPSW=True,
                                                                   dEPSU=DFLT_DBL,
                                                                   dEPSP=DFLT_DBL))
 
-export_status = Analysis.TSSolver.LinearStatic(nastranAnalysis = input_param, 
+export_status = Analysis.TSSolver.LinearStatic(nastranAnalysis = input_param,
                                                strPath = re.sub(re.escape("\\"), "/", environ["Temp"]) + \
                                                          "/TechnoStar/Test.bdf")
 

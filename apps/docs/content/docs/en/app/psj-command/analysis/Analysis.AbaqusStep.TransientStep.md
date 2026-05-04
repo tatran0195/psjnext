@@ -1,10 +1,11 @@
 ---
-title: "Analysis.AbaqusStep.TransientStep()"
-description: "Create Abaqus Step - Transient Type"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > Abaqus"
+title: 'Analysis.AbaqusStep.TransientStep()'
+description: 'Create Abaqus Step - Transient Type'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > Abaqus'
 ---
+
 <!-- REVIEW FLAGS — requires human review
    [body_divergence] Body content differs across 2 of 2 versions — using latest
 -->
@@ -37,19 +38,19 @@ Analysis.AbaqusStep.TransientStep(...)
 
 - The maximum number of increment.
 
-### `dInitSize` @type(Double) @default(DFLT\_DBL)
+### `dInitSize` @type(Double) @default(DFLT_DBL)
 
 - The initial increment value.
 
-### `dMinSize` @type(Double) @default(DFLT\_DBL)
+### `dMinSize` @type(Double) @default(DFLT_DBL)
 
 - The minimum increment value.
 
-### `dMaxSize` @type(Double) @default(DFLT\_DBL)
+### `dMaxSize` @type(Double) @default(DFLT_DBL)
 
 - The maximum increment value.
 
-### `dMaxAllowTChange` @type(Double) @default(DFLT\_DBL)
+### `dMaxAllowTChange` @type(Double) @default(DFLT_DBL)
 
 - The maximum allowable change.
 
@@ -61,35 +62,35 @@ Analysis.AbaqusStep.TransientStep(...)
 
 - The end step value list.
 
-### `dMaxAllowEmissivityChange` @type(Double) @default(DFLT\_DBL)
+### `dMaxAllowEmissivityChange` @type(Double) @default(DFLT_DBL)
 
 - The maximum allowable emissivity change per increment.
 
 ### `iMethod` @type(Integer) @default(0)
 
 - The solver.
-  - 0: Direct
-  - 1: Iterative
+    - 0: Direct
+    - 1: Iterative
 
 ### `iMatrixStorage` @type(Integer) @default(0)
 
 - The matrix storage setting.
-  - 0: Default
-  - 1: Unsymmetric
-  - 2: Symmetric
+    - 0: Default
+    - 1: Unsymmetric
+    - 2: Symmetric
 
 ### `iSolutionTech` @type(Integer) @default(0)
 
 - The solution technique.
-  - 0: Full Newton
-  - 1: Quasi-Newton
-  - 2: Contact iterations
+    - 0: Full Newton
+    - 1: Quasi-Newton
+    - 2: Contact iterations
 
 ### `iAllowedIters` @type(Integer) @default(0)
 
 - The number of iterations allowed before the kernel matrix is reformed.
 
-### `dAdjustFactor` @type(Integer) @default(DFLT\_DBL)
+### `dAdjustFactor` @type(Integer) @default(DFLT_DBL)
 
 - The adjustment factor for the number of solutions in each iteration.
 
@@ -101,7 +102,7 @@ Analysis.AbaqusStep.TransientStep(...)
 
 - Whether or not to consider geometric nonlinear (large deformation) analysis.
 
-### `dTimePeriod` @type(Double) @default(DFLT\_DBL)
+### `dTimePeriod` @type(Double) @default(DFLT_DBL)
 
 - The analysis time.
 
@@ -117,15 +118,15 @@ Analysis.AbaqusStep.TransientStep(...)
 
 - The Extrapolate previous state at start of each increment.
 
-### `listAbaqusOutputRequest` @type(ABAQUS\_OUTPUT\_REQUEST) @default(ABAQUS\_OUTPUT\_REQUEST)
+### `listAbaqusOutputRequest` @type(ABAQUS_OUTPUT_REQUEST) @default(ABAQUS_OUTPUT_REQUEST)
 
 - List specifying the list of Abaqus output request.
 
 ### `crEdit` @type(Cursor) @default(None)
 
 - An existing Abaqus step.
-  - If this parameter is used, the specified step will be modified.
-  - If it is lef&#x74;_&#x4E;one_, a new step will be created.
+    - If this parameter is used, the specified step will be modified.
+    - If it is lef&#x74;_&#x4E;one_, a new step will be created.
 
 ## Return Code
 

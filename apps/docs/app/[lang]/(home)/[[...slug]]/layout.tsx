@@ -6,7 +6,6 @@ import { DocsLayout } from '@/layouts/docs';
 import { getLayoutTabs } from '@/layouts/shared';
 import { source } from '@/lib/source';
 
-
 export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) {
     const params = await props.params;
     const { lang } = params;

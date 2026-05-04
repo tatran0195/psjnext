@@ -1,10 +1,10 @@
 ---
-title: "Analysis.ADVC.MakeProcess.ResponseSpectrum()"
-description: "Create advc response spectrum process"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > ADVC > MakeProcess > ResponseSpectrum"
-macro_link: "[AdvcSpectrumProcess](../../macro/analysis/AdvcSpectrumProcess)"
+title: 'Analysis.ADVC.MakeProcess.ResponseSpectrum()'
+description: 'Create advc response spectrum process'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > ADVC > MakeProcess > ResponseSpectrum'
+macro_link: '[AdvcSpectrumProcess](../../macro/analysis/AdvcSpectrumProcess)'
 ---
 
 ## Description
@@ -27,11 +27,11 @@ Analysis.ADVC.MakeProcess.ResponseSpectrum(...)
 
 - The reference eigen direction.
 
-### `dRefLowFreq` @type(Double) @default(DFLT\_DBL)
+### `dRefLowFreq` @type(Double) @default(DFLT_DBL)
 
 - The reference low frequence.
 
-### `dRefHighFreq` @type(Double) @default(DFLT\_DBL)
+### `dRefHighFreq` @type(Double) @default(DFLT_DBL)
 
 - The reference high frequence.
 
@@ -43,7 +43,7 @@ Analysis.ADVC.MakeProcess.ResponseSpectrum(...)
 
 - The spectrum type.
 
-### `dSptFactor0` @type(Double) @default(DFLT\_DBL)
+### `dSptFactor0` @type(Double) @default(DFLT_DBL)
 
 - The spectrum factor0.
 
@@ -51,7 +51,7 @@ Analysis.ADVC.MakeProcess.ResponseSpectrum(...)
 
 - The spt0.
 
-### `dSptFactor1` @type(Double) @default(DFLT\_DBL)
+### `dSptFactor1` @type(Double) @default(DFLT_DBL)
 
 - The spectrum factor1.
 
@@ -59,7 +59,7 @@ Analysis.ADVC.MakeProcess.ResponseSpectrum(...)
 
 - The spectrum 1.
 
-### `dSptFactor2` @type(Double) @default(DFLT\_DBL)
+### `dSptFactor2` @type(Double) @default(DFLT_DBL)
 
 - The spectrum factor2.
 
@@ -71,15 +71,15 @@ Analysis.ADVC.MakeProcess.ResponseSpectrum(...)
 
 - The edit.
 
-### `listLoadNode` @type(LOAD\_NODE List) @default(\[])
+### `listLoadNode` @type(LOAD_NODE List) @default(\[])
 
 - The load node.
 
-### `listLoadCaseNode` @type(LOAD\_CASE\_NODE List) @default(\[])
+### `listLoadCaseNode` @type(LOAD_CASE_NODE List) @default(\[])
 
 - The load case node.
 
-### `listLoadNodeContact` @type(LOAD\_NODE\_CONTACT List) @default(\[])
+### `listLoadNodeContact` @type(LOAD_NODE_CONTACT List) @default(\[])
 
 - The load node contact.
 
@@ -95,7 +95,7 @@ Analysis.ADVC.MakeProcess.ResponseSpectrum(...)
 
 - The reference path.
 
-### `listAdvcRefStressResult` @type(ADVC\_REF\_STRESS\_RESULT List) @default(\[])
+### `listAdvcRefStressResult` @type(ADVC_REF_STRESS_RESULT List) @default(\[])
 
 - The advc reference stress result.
 

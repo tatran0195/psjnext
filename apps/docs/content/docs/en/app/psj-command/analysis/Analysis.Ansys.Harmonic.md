@@ -1,9 +1,9 @@
 ---
-title: "Analysis.Ansys.Harmonic()"
-description: "Export the Ansys Harmonic Structural solver file"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > Ansys > Harmonic"
+title: 'Analysis.Ansys.Harmonic()'
+description: 'Export the Ansys Harmonic Structural solver file'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > Ansys > Harmonic'
 ---
 
 ## Description
@@ -38,11 +38,11 @@ Analysis.Ansys.Harmonic(...)
 
 - Enable/disalbe the option that write result database.
 
-### `dAnsysAnalysisEndFreq` @type(Double) @default(DFLT\_DBL)
+### `dAnsysAnalysisEndFreq` @type(Double) @default(DFLT_DBL)
 
 - The end frequency number.
 
-### `dAnsysAnalysisStartFreq` @type(Double) @default(DFLT\_DBL)
+### `dAnsysAnalysisStartFreq` @type(Double) @default(DFLT_DBL)
 
 - The start frequency number.
 

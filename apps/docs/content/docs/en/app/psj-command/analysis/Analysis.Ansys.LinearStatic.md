@@ -1,10 +1,11 @@
 ---
-title: "Analysis.Ansys.LinearStatic()"
-description: "Export the Ansys Linear Static Structural solver file"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > Ansys > LinearStatic"
+title: 'Analysis.Ansys.LinearStatic()'
+description: 'Export the Ansys Linear Static Structural solver file'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > Ansys > LinearStatic'
 ---
+
 <!-- REVIEW FLAGS — requires human review
    [body_divergence] Body content differs across 2 of 2 versions — using latest
 -->

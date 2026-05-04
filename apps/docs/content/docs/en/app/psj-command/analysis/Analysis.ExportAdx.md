@@ -1,10 +1,10 @@
 ---
-title: "Analysis.ExportAdx()"
+title: 'Analysis.ExportAdx()'
 description: "Export the ADVENTURECluster solver file in adx format with the existing Job in Assembly Tree. By pointing out the desired ADVC Job in Assembly Tree, exporting could be done multiple times with user's setting"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > Export Adx"
-macro_link: "[ExportAdx](../../macro/analysis/ExportAdx)"
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > Export Adx'
+macro_link: '[ExportAdx](../../macro/analysis/ExportAdx)'
 ---
 
 ## Description
@@ -30,9 +30,9 @@ Analysis.ExportAdx(...)
 ### `iNumType` @type(Integer) @default(0)
 
 - The numeric format type. This argument would allow numeric setting type of adx file.
-  - I&#x66;_&#x69;NumType=0_: Real Type - The numerical values in real number format (123.456).
-  - I&#x66;_&#x69;NumType=1_: Power Type - The numerical values in exponential/scientific format (1.234E-005).
-  - I&#x66;_&#x69;NumType=2_: Auto Type - The numerical values would show in both above types depending on value of model
+    - I&#x66;_&#x69;NumType=0_: Real Type - The numerical values in real number format (123.456).
+    - I&#x66;_&#x69;NumType=1_: Power Type - The numerical values in exponential/scientific format (1.234E-005).
+    - I&#x66;_&#x69;NumType=2_: Auto Type - The numerical values would show in both above types depending on value of model
 
 ### `iUiWidth` @type(Integer) @default(10)
 
@@ -45,8 +45,8 @@ Analysis.ExportAdx(...)
 ## Return Code
 
 - An _Boolean_ specifying the status of the exporting process:
-  - _True_: The ADVC (\*.adx) file has been exported successfully.
-  - _False_: The ADVC (\*.adx) file cannot be exported.
+    - _True_: The ADVC (\*.adx) file has been exported successfully.
+    - _False_: The ADVC (\*.adx) file cannot be exported.
 
 ## Sample Code
 

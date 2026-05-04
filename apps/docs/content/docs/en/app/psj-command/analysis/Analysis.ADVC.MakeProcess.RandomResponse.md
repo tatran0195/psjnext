@@ -1,10 +1,10 @@
 ---
-title: "Analysis.ADVC.MakeProcess.RandomResponse()"
-description: "Create ADVC random response process"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > ADVC > MakeProcess > RandomResponse"
-macro_link: "[AdvcRandomProcess](../../macro/analysis/AdvcRandomProcess)"
+title: 'Analysis.ADVC.MakeProcess.RandomResponse()'
+description: 'Create ADVC random response process'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > ADVC > MakeProcess > RandomResponse'
+macro_link: '[AdvcRandomProcess](../../macro/analysis/AdvcRandomProcess)'
 ---
 
 ## Description
@@ -27,11 +27,11 @@ Analysis.ADVC.MakeProcess.RandomResponse(...)
 
 - The reference eigen direction.
 
-### `dRefLowFreq` @type(Double) @default(DFLT\_DBL)
+### `dRefLowFreq` @type(Double) @default(DFLT_DBL)
 
 - The reference low frequence.
 
-### `dRefHighFreq` @type(Double) @default(DFLT\_DBL)
+### `dRefHighFreq` @type(Double) @default(DFLT_DBL)
 
 - The reference high frequence.
 
@@ -47,19 +47,19 @@ Analysis.ADVC.MakeProcess.RandomResponse(...)
 
 - The auto frequence interval.
 
-### `dMaxFreq` @type(Double) @default(DFLT\_DBL)
+### `dMaxFreq` @type(Double) @default(DFLT_DBL)
 
 - The maximum frequence.
 
-### `dMinFreq` @type(Double) @default(DFLT\_DBL)
+### `dMinFreq` @type(Double) @default(DFLT_DBL)
 
 - The minimum frequence.
 
-### `iNumFreqPoint` @type(Integer) @default(DFLT\_INT)
+### `iNumFreqPoint` @type(Integer) @default(DFLT_INT)
 
 - The number frequence point.
 
-### `dBiasParam` @type(Double) @default(DFLT\_DBL)
+### `dBiasParam` @type(Double) @default(DFLT_DBL)
 
 - The bias param.
 
@@ -79,11 +79,11 @@ Analysis.ADVC.MakeProcess.RandomResponse(...)
 
 - The PSD load.
 
-### `dPSDFactor` @type(Double) @default(DFLT\_DBL)
+### `dPSDFactor` @type(Double) @default(DFLT_DBL)
 
 - The PSD factor.
 
-### `dGravityAccel` @type(Double) @default(DFLT\_DBL)
+### `dGravityAccel` @type(Double) @default(DFLT_DBL)
 
 - The gravity accel.
 
@@ -95,15 +95,15 @@ Analysis.ADVC.MakeProcess.RandomResponse(...)
 
 - The edit.
 
-### `listLoadNode` @type(LOAD\_NODE List) @default(\[])
+### `listLoadNode` @type(LOAD_NODE List) @default(\[])
 
 - The load node.
 
-### `listLoadCaseNode` @type(LOAD\_CASE\_NODE List) @default(\[])
+### `listLoadCaseNode` @type(LOAD_CASE_NODE List) @default(\[])
 
 - The load case node.
 
-### `listLoadNodeContact` @type(LOAD\_NODE\_CONTACT List) @default(\[])
+### `listLoadNodeContact` @type(LOAD_NODE_CONTACT List) @default(\[])
 
 - The load node contact.
 
@@ -119,7 +119,7 @@ Analysis.ADVC.MakeProcess.RandomResponse(...)
 
 - The reference path.
 
-### `listAdvcRefStressResult` @type(ADVC\_REF\_STRESS\_RESULT List) @default(\[])
+### `listAdvcRefStressResult` @type(ADVC_REF_STRESS_RESULT List) @default(\[])
 
 - The advc reference stress result.
 

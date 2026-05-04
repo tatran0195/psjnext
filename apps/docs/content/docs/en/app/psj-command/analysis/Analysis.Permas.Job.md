@@ -1,9 +1,9 @@
 ---
-title: "Analysis.Permas.Job()"
-description: "Create a Permas Analysis Job"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > Permas > Job"
+title: 'Analysis.Permas.Job()'
+description: 'Create a Permas Analysis Job'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > Permas > Job'
 ---
 
 ## Description

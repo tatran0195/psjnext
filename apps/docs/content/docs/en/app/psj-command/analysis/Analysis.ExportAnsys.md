@@ -1,11 +1,12 @@
 ---
-title: "Analysis.ExportAnsys()"
-description: "Export Ansys Analysis Job"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > ExportAnsys"
-macro_link: "[ExportAnsys](../../macro/analysis/ExportAnsys)"
+title: 'Analysis.ExportAnsys()'
+description: 'Export Ansys Analysis Job'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > ExportAnsys'
+macro_link: '[ExportAnsys](../../macro/analysis/ExportAnsys)'
 ---
+
 <!-- REVIEW FLAGS — requires human review
    [body_divergence] Body content differs across 2 of 2 versions — using latest
 -->

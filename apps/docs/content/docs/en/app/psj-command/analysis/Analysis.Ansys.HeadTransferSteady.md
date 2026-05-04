@@ -1,10 +1,10 @@
 ---
-title: "Analysis.Ansys.HeadTransferSteady()"
-description: "Export the Ansys Heat Transfer solver file"
-version_introduced: "5.0.1"
-available_versions: "all"
-ribbon: "Analysis > Ansys > HeadTransferSteady"
-macro_link: "[CreateAnsysJob](../../macro/analysis/CreateAnsysJob)"
+title: 'Analysis.Ansys.HeadTransferSteady()'
+description: 'Export the Ansys Heat Transfer solver file'
+version_introduced: '5.0.1'
+available_versions: 'all'
+ribbon: 'Analysis > Ansys > HeadTransferSteady'
+macro_link: '[CreateAnsysJob](../../macro/analysis/CreateAnsysJob)'
 ---
 
 ## Description
@@ -123,11 +123,11 @@ Analysis.Ansys.HeadTransferSteady(...)
 
 - The write result d .
 
-### `dFEndFreq` @type(Double) @default(DFLT\_DBL)
+### `dFEndFreq` @type(Double) @default(DFLT_DBL)
 
 - The end frequence.
 
-### `dFStartFreq` @type(Double) @default(DFLT\_DBL)
+### `dFStartFreq` @type(Double) @default(DFLT_DBL)
 
 - The start frequence.
 

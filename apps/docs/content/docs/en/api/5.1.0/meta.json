@@ -1,5 +1,6 @@
 {
     "title": "5.1.0",
     "description": "Latest version",
-    "icon": "Tag"
+    "icon": "Tag",
+    "group": true
 }
