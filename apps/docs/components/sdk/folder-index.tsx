@@ -11,7 +11,7 @@ interface SdkFolderNode extends PageTree.Folder {
     icon?: React.ReactNode;
 }
 
-export function FolderIndex({ folder }: { folder: PageTree.Folder }) {
+export function FolderIndex({ folder, resolveUrl = (u) => u }: { folder: PageTree.Folder; resolveUrl?: (url: string) => string }) {
     const parentFolder = folder as SdkFolderNode;
 
     return (
@@ -40,7 +40,7 @@ export function FolderIndex({ folder }: { folder: PageTree.Folder }) {
                                 description ||
                                 (child.type === 'folder' ? `Browse ${title} items` : undefined)
                             }
-                            href={url}
+                            href={resolveUrl(url)}
                             icon={
                                 <div className="p-2 rounded-lg bg-fd-primary/10 text-fd-primary">
                                     {icon}

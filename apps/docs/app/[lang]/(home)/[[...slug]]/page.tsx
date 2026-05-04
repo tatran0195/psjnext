@@ -10,9 +10,9 @@ import { Banner } from 'fumadocs-ui/components/banner';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 
-import { APIPage } from '@/components/api-page';
 import { NotFound } from '@/components/layouts/not-found';
 import { getMDXComponents } from '@/components/mdx';
+import { compareSemver } from '@/lib/semver';
 import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-category';
 import { LinkPreview } from '@/components/mdx/link-preview';
 import { Mermaid } from '@/components/mdx/mermaid';
@@ -28,7 +28,7 @@ import {
 } from '@/layouts/docs/page';
 import { DocsPager } from '@/layouts/shared/docs-pager';
 import { createMetadata, getPageImage } from '@/lib/metadata';
-import { source } from '@/lib/source';
+import { APP_VERSIONS, source } from '@/lib/source';
 
 export default async function Page(props: {
     params: Promise<{ slug?: string[]; lang: string; version?: string }>;
@@ -37,20 +37,83 @@ export default async function Page(props: {
     const params = await props.params;
     const { slug = [], lang } = params;
 
-    const page = source.getPage(slug, lang);
+    let querySlug = slug;
+    let isAppVersion = false;
+    let activeVersion: string | undefined;
+
+    if (slug[0] === 'app' && APP_VERSIONS.includes(slug[1])) {
+        isAppVersion = true;
+        activeVersion = slug[1];
+        querySlug = ['app', ...slug.slice(2)];
+    }
+
+    let page = source.getPage(querySlug, lang);
+    let indexFolder: PageTree.Folder | undefined;
+
+    if (!page) {
+        // Try to find if it's a folder to show a category index
+        const tree = source.getPageTree(lang);
+        let current: PageTree.Node[] = tree.children;
+        let foundFolder: PageTree.Folder | undefined;
+
+        for (const segment of querySlug) {
+            const node = current.find(
+                (n): n is PageTree.Folder =>
+                    n.type === 'folder' && n.name.toLowerCase() === segment.toLowerCase(),
+            );
+
+            if (node) {
+                foundFolder = node;
+                current = node.children;
+            } else {
+                foundFolder = undefined;
+                break;
+            }
+        }
+
+        if (foundFolder) {
+            indexFolder = foundFolder;
+            // Create a virtual page for the folder
+            page = {
+                slugs: querySlug,
+                url: `/${lang}/${querySlug.join('/')}`,
+                data: {
+                    title: foundFolder.name,
+                    description: '',
+                    index: true,
+                    // Folders are always considered compatible with all versions for routing purposes
+                    // (They just show the compatible children)
+                    load: async () => ({
+                        body: (() => null) as any,
+                        toc: [],
+                        lastModified: undefined,
+                    }),
+                },
+            } as any;
+        }
+    }
 
     if (!page) {
         return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
     }
 
-    // Resolve folder for index pages (SDK domains/groups)
-    let indexFolder: PageTree.Folder | undefined;
-    if (page.data.index) {
+    if (isAppVersion && activeVersion) {
+        const introduced = page.data.version_introduced;
+        if (typeof introduced === 'string') {
+            if (compareSemver(activeVersion, introduced) < 0) {
+                return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
+            }
+        }
+    }
+
+    // Resolve folder for index pages if not already found
+    if (page.data.index && !indexFolder) {
         const tree = source.getPageTree(lang);
         let current: PageTree.Node[] = tree.children;
-        for (const segment of slug) {
+        for (const segment of querySlug) {
             const next = current.find(
-                (n): n is PageTree.Folder => n.type === 'folder' && n.name === segment,
+                (n): n is PageTree.Folder =>
+                    n.type === 'folder' && n.name.toLowerCase() === segment.toLowerCase(),
             );
             if (!next) {
                 indexFolder = undefined;
@@ -61,19 +124,20 @@ export default async function Page(props: {
         }
     }
 
-    if (page.type === 'sdk') {
-        return <APIPage {...page.data.getAPIPageProps()} />;
-    }
-
     const { body: Mdx, toc, lastModified } = await page.data.load();
     const { ribbon } = page.data;
 
-    const neighbours = findNeighbour(source.getPageTree(), page.url);
+    const neighbours = findNeighbour(source.getPageTree(lang), page.url);
+    const resolveUrl = (url: string) => {
+        if (!isAppVersion || !activeVersion) return url;
+        return url.replace(/\/app(\/|$)/, `/app/${activeVersion}$1`);
+    };
+
     const footerPrevious = neighbours.previous
-        ? { name: neighbours.previous.name, url: neighbours.previous.url }
+        ? { name: neighbours.previous.name, url: resolveUrl(neighbours.previous.url) }
         : undefined;
     const footerNext = neighbours.next
-        ? { name: neighbours.next.name, url: neighbours.next.url }
+        ? { name: neighbours.next.name, url: resolveUrl(neighbours.next.url) }
         : undefined;
     const markdownUrl = `${page.url}.mdx`;
 
@@ -116,11 +180,11 @@ export default async function Page(props: {
                                 dir: PathUtils.dirname(page.path),
                             });
 
-                            if (!found) return <Link href={href} {...props} />;
+                            if (!found) return <Link href={resolveUrl(href)} {...props} />;
 
                             return (
                                 <LinkPreview
-                                    href={found.page.url}
+                                    href={resolveUrl(found.page.url)}
                                     title={found.page.data.title}
                                     description={found.page.data.description}
                                 >
@@ -135,17 +199,17 @@ export default async function Page(props: {
                         LinkPreview,
                         blockquote: Callout as unknown as FC<ComponentProps<'blockquote'>>,
                         DocsCategory: ({ url }: { url?: string }) => {
-                            return <DocsCategory url={url ?? page.url} lang={lang} />;
+                            return <DocsCategory url={url ?? page.url} lang={lang} resolveUrl={resolveUrl} />;
                         },
                         DocsSectionOverview: ({ url }: { url?: string }) => {
-                            return <DocsSectionOverview url={url ?? page.url} lang={lang} />;
+                            return <DocsSectionOverview url={url ?? page.url} lang={lang} resolveUrl={resolveUrl} />;
                         },
                     })}
                 />
                 {indexFolder ? (
-                    <FolderIndex folder={indexFolder} />
+                    <FolderIndex folder={indexFolder} resolveUrl={resolveUrl} />
                 ) : page.data.index ? (
-                    <DocsCategory url={page.url} lang={lang} />
+                    <DocsCategory url={page.url} lang={lang} resolveUrl={resolveUrl} />
                 ) : null}
             </DocsBody>
             {lastModified && <PageLastUpdate date={lastModified} />}
@@ -158,11 +222,30 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
     const params = await props.params;
     const { slug = [], lang } = params;
-    const page = source.getPage(slug, lang);
-    if (!page)
+
+    let querySlug = slug;
+    if (slug[0] === 'app' && APP_VERSIONS.includes(slug[1])) {
+        querySlug = ['app', ...slug.slice(2)];
+    }
+
+    const page = source.getPage(querySlug, lang);
+    if (!page) {
         return createMetadata({
             title: 'Not Found',
         });
+    }
+
+    if (slug[0] === 'app' && APP_VERSIONS.includes(slug[1])) {
+        const activeVersion = slug[1];
+        const introduced = page.data.version_introduced;
+        if (typeof introduced === 'string') {
+            if (compareSemver(activeVersion, introduced) < 0) {
+                return createMetadata({
+                    title: 'Not Found',
+                });
+            }
+        }
+    }
 
     const description = page.data.description ?? 'The library for building documentation sites';
 
@@ -186,5 +269,31 @@ export async function generateMetadata(props: {
 }
 
 export function generateStaticParams() {
-    return source.generateParams('slug', 'lang');
+    const params = source.generateParams('slug', 'lang');
+    const fannedParams: unknown[] = [];
+    for (const param of params) {
+        if (param.slug && param.slug[0] === 'app') {
+            const page = source.getPage(param.slug as string[], param.lang as string);
+            for (const version of APP_VERSIONS) {
+                let skip = false;
+                if (page) {
+                    const introduced = page.data.version_introduced;
+                    if (typeof introduced === 'string') {
+                        if (compareSemver(version, introduced) < 0) {
+                            skip = true;
+                        }
+                    }
+                }
+                if (!skip) {
+                    fannedParams.push({
+                        ...param,
+                        slug: ['app', version, ...param.slug.slice(1)],
+                    });
+                }
+            }
+        } else {
+            fannedParams.push(param);
+        }
+    }
+    return fannedParams;
 }

@@ -4,14 +4,7 @@ title: ACModeling.ACBoundary.FirstMethod()
 author: TechnoStar Co., Ltd.
 authorURL: https://www.e-technostar.com/
 description: Unknown Description
-ribbon:
-    tab: ACModeling
-    panel:
-        label: ACBoundary
-        item:
-            label: First Method
-            icon: Tag
-            shortcut: 'Alt+M, N'
+ribbon: "ACModeling > ACBoundary > FirstMethod"
 ---
 
 ## Description

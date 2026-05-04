@@ -6,7 +6,7 @@ import { Card, Cards } from 'fumadocs-ui/components/card';
 
 import { source } from '@/lib/source';
 
-export function DocsCategory({ url, lang }: { url: string; lang: string }) {
+export function DocsCategory({ url, lang, resolveUrl = (u) => u }: { url: string; lang: string; resolveUrl?: (url: string) => string }) {
     return (
         <Cards>
             {findSiblings(source.getPageTree(lang), url).map((item) => {
@@ -15,7 +15,7 @@ export function DocsCategory({ url, lang }: { url: string; lang: string }) {
                 if (!node || node.type !== 'page') return null;
 
                 return (
-                    <Card key={node.url} title={node.name} href={node.url}>
+                    <Card key={node.url} title={node.name} href={resolveUrl(node.url)}>
                         {node.description}
                     </Card>
                 );
@@ -24,7 +24,7 @@ export function DocsCategory({ url, lang }: { url: string; lang: string }) {
     );
 }
 
-export function DocsSectionOverview({ url, lang }: { url: string; lang: string }) {
+export function DocsSectionOverview({ url, lang, resolveUrl = (u) => u }: { url: string; lang: string; resolveUrl?: (url: string) => string }) {
     function folderContainsPath(node: PageTree.Folder, path: string): boolean {
         if (node.index?.url === path) return true;
         return node.children.some((child) => {
@@ -71,7 +71,7 @@ export function DocsSectionOverview({ url, lang }: { url: string; lang: string }
                     <Card
                         key={i}
                         title={title.replace('PSJ ', '')}
-                        href={href}
+                        href={resolveUrl(href)}
                         description={description}
                     />
                 );

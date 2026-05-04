@@ -39,21 +39,22 @@ export const viewport: Viewport = {
 
 export default async function RootLayout(props: {
     children: ReactNode;
-    params: Promise<{ lang: string }>;
+    params: Promise<{ lang?: string }>;
 }) {
     const params = await props.params;
 
+    const lang = params.lang ?? 'en';
     return (
         <html
-            lang={params.lang}
+            lang={lang}
             className={`${geist.variable} ${mono.variable}`}
             suppressHydrationWarning
             data-scroll-behavior="smooth"
         >
             <Body>
                 <NextProvider>
-                    <TreeContextProvider tree={source.getPageTree(params.lang)}>
-                        <Provider lang={params.lang}>{props.children}</Provider>
+                    <TreeContextProvider tree={source.getPageTree(lang)}>
+                        <Provider lang={lang}>{props.children}</Provider>
                     </TreeContextProvider>
                 </NextProvider>
             </Body>

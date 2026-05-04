@@ -20,7 +20,7 @@ export interface VersionSwitcherProps {
 function switchVersion(currentPath: string | null | undefined, newVersionId: string): string {
     if (!currentPath) return '';
     const parts = currentPath.split('/');
-    if (parts.length >= 4 && parts[2] === 'sdk') {
+    if (parts.length >= 4 && (parts[2] === 'sdk' || parts[2] === 'app')) {
         parts[3] = newVersionId;
         return parts.join('/');
     }

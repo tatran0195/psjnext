@@ -1,7 +1,7 @@
 ---
 title: "ACModeling.ACBoundary.FirstMethod()"
 description: "Unknown Description"
-version_introduced: "5.0.1"
+version_introduced: "5.1.0"
 available_versions: "all"
 ribbon: "ACModeling > ACBoundary > FirstMethod"
 ---

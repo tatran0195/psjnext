@@ -2,63 +2,64 @@ import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
 
 import { TechnoStarLogo } from '@/components/icons/logo';
 import { LinkSidebar, LinkSidebarProvider } from '@/components/mdx/link-sidebar';
-import { DomainSwitcher } from '@/components/sdk/domain-switcher';
-import { VersionSwitcher } from '@/components/sdk/version-switcher';
 import { DocsLayout } from '@/layouts/docs';
 import { getLayoutTabs } from '@/layouts/shared';
-import { IS_MULTI_VERSION, getSdk, source } from '@/lib/source';
+import { APP_VERSIONS, source } from '@/lib/source';
+import { VersionSwitcher } from '@/components/sdk/version-switcher';
+import { compareSemver } from '@/lib/semver';
 
 import type * as PageTree from 'fumadocs-core/page-tree';
 
 export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) {
     const params = await props.params;
     const { slug = [], lang } = params;
-    const isSdk = slug[0] === 'sdk';
-
-    const { manifest } = await getSdk();
-    const effectiveVersionId =
-        isSdk && IS_MULTI_VERSION ? slug[1] || manifest.current_version : undefined;
-    const activeDomainId = isSdk ? (IS_MULTI_VERSION ? slug[2] : slug[1]) : undefined;
 
     const fullTree = source.getPageTree(lang);
     let tree = fullTree;
+    let navTree = fullTree;
 
-    if (isSdk) {
-        tree = filterTree(fullTree, effectiveVersionId, activeDomainId);
+    const isApp = slug[0] === 'app' && APP_VERSIONS.includes(slug[1]);
+    const activeVersionId = isApp ? slug[1] : undefined;
+
+    if (isApp && activeVersionId) {
+        navTree = filterAppTree(fullTree, activeVersionId, lang);
+
+        // Find the "app" folder in the already filtered tree
+        const appFolder = navTree.children.find(
+            (child) =>
+                child.type === 'folder' &&
+                (child.name === 'Application Programming Guide' ||
+                    (child.index && child.index.url.includes('/app')) ||
+                    child.children.some((c) => 'url' in c && c.url.includes('/app'))),
+        ) as PageTree.Folder;
+
+        if (appFolder) {
+            tree = {
+                ...navTree,
+                children: appFolder.children,
+            };
+        }
     }
-
-    const domainItems = isSdk
-        ? manifest.domains.map((d) => ({
-              id: d.id,
-              title: d.title,
-              url: IS_MULTI_VERSION
-                  ? `/${lang}/sdk/${effectiveVersionId}/${d.id}`
-                  : `/${lang}/sdk/${d.id}`,
-          }))
-        : [];
 
     return (
         <TreeContextProvider tree={tree}>
             <LinkSidebarProvider>
                 <DocsLayout
                     tree={tree}
-                    tabs={getLayoutTabs(fullTree)}
+                    tabs={getLayoutTabs(navTree)}
                     tabMode="navbar"
                     nav={{ mode: 'top', title: <TechnoStarLogo variant="inline" height={34} /> }}
                     sidebar={{
-                        banner: isSdk ? (
+                        banner: isApp && activeVersionId ? (
                             <div className="flex flex-col gap-2 px-3 py-2 -mx-2">
-                                {IS_MULTI_VERSION && effectiveVersionId && (
-                                    <VersionSwitcher
-                                        activeId={effectiveVersionId}
-                                        versions={manifest.versions.map((v) => ({
-                                            ...v,
-                                            label: v.id,
-                                            isCurrent: v.id === manifest.current_version,
-                                        }))}
-                                    />
-                                )}
-                                <DomainSwitcher domains={domainItems} />
+                                <VersionSwitcher
+                                    activeId={activeVersionId}
+                                    versions={APP_VERSIONS.map((v, i) => ({
+                                        id: v,
+                                        label: v,
+                                        isCurrent: i === 0,
+                                    }))}
+                                />
                             </div>
                         ) : undefined,
                     }}
@@ -71,76 +72,43 @@ export default async function Layout(props: LayoutProps<'/[lang]/[[...slug]]'>) 
     );
 }
 
-function filterTree(tree: PageTree.Root, versionId?: string, domainId?: string): PageTree.Root {
-    // Find the SDK root folder accurately.
-    const findSdk = (nodes: PageTree.Node[]): PageTree.Folder | undefined => {
-        // First pass: try to find by title/name directly in roots
-        for (const node of nodes) {
-            if (node.type !== 'folder') continue;
-            const title = (node as unknown as Record<string, unknown>).title || node.name;
-            const url = (node as unknown as Record<string, unknown>).url || node.index?.url;
-
-            // Strict exclusion of API Reference
-            if (title === 'API Reference' || node.name === 'api') continue;
-            if (typeof url === 'string' && (url === '/api' || url.startsWith('/api/'))) continue;
-
-            const isSdk =
-                title === 'SDK' ||
-                node.name === 'sdk' ||
-                (typeof url === 'string' && (url === '/sdk' || url.startsWith('/sdk/')));
-
-            if (isSdk) return node;
+function filterAppTree(tree: PageTree.Root, versionId: string, lang: string): PageTree.Root {
+    function walkNode<T extends PageTree.Node>(node: T): T | null {
+        if (node.type === 'page' && typeof node.url === 'string') {
+            // Robust slug extraction: remove lang prefix if exists
+            const urlParts = node.url.split('/').filter(Boolean);
+            if (urlParts[0] && urlParts[0].length === 2) {
+                urlParts.shift();
+            }
+            const slugs = urlParts;
+            const page = source.getPage(slugs, lang);
+            if (page) {
+                const introduced = page.data.version_introduced;
+                if (typeof introduced === 'string') {
+                    if (compareSemver(versionId, introduced) < 0) {
+                        return null; // Not introduced yet
+                    }
+                }
+            }
         }
 
-        // Second pass: deep search
-        for (const node of nodes) {
-            if (node.type !== 'folder') continue;
-            const sub = node.children.find((c) => {
-                if (c.type !== 'folder') return false;
-                const cTitle = (c as unknown as Record<string, unknown>).title || c.name;
-                const cUrl = (c as unknown as Record<string, unknown>).url || c.index?.url;
-                if (cTitle === 'API Reference' || c.name === 'api') return false;
-                return (
-                    cTitle === 'SDK' ||
-                    c.name === 'sdk' ||
-                    (typeof cUrl === 'string' && (cUrl === '/sdk' || cUrl.startsWith('/sdk/')))
-                );
-            });
-            if (sub) return sub as PageTree.Folder;
+        const newNode = { ...node };
+        if ('url' in newNode && typeof newNode.url === 'string') {
+            newNode.url = newNode.url.replace(/\/app(\/|$)/, `/app/${versionId}$1`);
         }
-        return undefined;
-    };
-
-    const sdkFolder = findSdk(tree.children);
-    if (!sdkFolder) return tree;
-
-    let activeBaseFolder = sdkFolder;
-
-    if (IS_MULTI_VERSION && versionId) {
-        const versionFolder = sdkFolder.children.find(
-            (child): child is PageTree.Folder =>
-                child.type === 'folder' && child.name === versionId,
-        );
-        if (!versionFolder) return tree;
-        activeBaseFolder = versionFolder;
-    }
-
-    if (domainId) {
-        const domainFolder = activeBaseFolder.children.find(
-            (child): child is PageTree.Folder => child.type === 'folder' && child.name === domainId,
-        );
-        if (domainFolder) {
-            return {
-                ...tree,
-                children: domainFolder.children,
-            };
+        if ('index' in newNode && newNode.index) {
+            newNode.index = walkNode(newNode.index as unknown as PageTree.Item) as any;
         }
+        if ('children' in newNode) {
+            (newNode as any).children = (newNode as any).children
+                .map(walkNode)
+                .filter(Boolean);
+        }
+        return newNode;
     }
 
     return {
         ...tree,
-        children: activeBaseFolder.children,
+        children: tree.children.map(walkNode).filter(Boolean) as PageTree.Node[],
     };
-
-    return tree;
 }
