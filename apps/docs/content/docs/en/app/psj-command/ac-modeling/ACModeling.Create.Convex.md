@@ -1,8 +1,8 @@
 ---
 title: 'ACModeling.Create.Convex()'
 description: 'Create Convex In Boundary'
-version_introduced: '5.0.1'
-available_versions: 'all'
+introduced: '5.0.1'
+deprecated: '5.1.0'
 ribbon: 'ACModeling > Create > Convex'
 ---
 

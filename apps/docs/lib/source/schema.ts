@@ -5,6 +5,9 @@ export const docsSchema = pageSchema.extend({
     index: z.boolean().default(false),
     ribbon: z.string().optional(),
     shortcut: z.string().optional(),
+    introduced: z.string().optional(),
+    deprecated: z.string().optional(),
+    removed: z.string().optional(),
 });
 
 export const metaSchemaWithGroup = metaSchema.extend({

@@ -6,6 +6,7 @@ import { i18n } from '../i18n';
 import { customIconsPlugin } from './plugins/custom-icons-plugin';
 import { pageTreeCodeTitlesPlugin } from './plugins/page-tree-code-titles-plugin';
 import { pageTreeFoldersPlugin } from './plugins/page-tree-folders-plugin';
+import { versionPlugin } from './plugins/version-plugin';
 
 export const APP_VERSIONS = ['5.0.1', '5.1.0'];
 
@@ -18,7 +19,8 @@ export const source = loader({
         customIconsPlugin(),
         pageTreeCodeTitlesPlugin(),
         pageTreeFoldersPlugin(),
-    ],
+       versionPlugin(),
+ ],
 });
 
 export type Page = InferPageType<typeof source>;

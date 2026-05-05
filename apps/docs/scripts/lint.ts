@@ -8,7 +8,7 @@ type AnySource = typeof source;
 async function checkLinks() {
     const scanned = await scanURLs({
         populate: {
-            'docs/[[...slug]]': await Promise.all(
+            '[[...slug]]': await Promise.all(
                 source.getPages().map(async (page) => {
                     return {
                         value: {

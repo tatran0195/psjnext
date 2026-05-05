@@ -1,8 +1,8 @@
 ---
 title: 'ACModeling.CloseHoleAuto()'
 description: 'ACModeling CloseHoleAuto'
-version_introduced: '5.0.1'
-available_versions: 'all'
+introduced: '5.0.1'
+removed: '5.2.0'
 ribbon: 'ACModeling > CloseHoleAuto'
 ---
 

@@ -4,7 +4,15 @@ import { createFromSource } from 'fumadocs-core/search/server';
 
 import { source } from '@/lib/source';
 
-export const { GET } = createFromSource(source, {
+const filteredSource = {
+    ...source,
+    getPages: () =>
+        source
+            .getPages()
+            .filter((page) => (page.data as { _status?: string })._status !== 'removed'),
+};
+/* eslint-disable @typescript-eslint/no-explicit-any -- createFromSource expects a specific loader type */
+export const { GET } = createFromSource(filteredSource as any, {
     localeMap: {
         ja: {
             tokenizer: createTokenizer({

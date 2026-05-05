@@ -23,6 +23,7 @@ import { ListMenu } from '@/components/ui/list-menu';
 import { useThrottledValue } from '@/hooks/use-throttle';
 import { compareSemver, matchesSearch } from '@/lib/search';
 
+import { API_VERSIONS } from '@/lib/api-versions';
 import type { Item, Node } from 'fumadocs-core/page-tree';
 import type { SortedResult } from 'fumadocs-core/search';
 
@@ -32,16 +33,11 @@ const TAGS = [
         description: 'All results',
         value: undefined,
     },
-    {
-        name: '5.0.1',
-        description: 'Only results about 5.0.1',
-        value: '5.0.1',
-    },
-    {
-        name: '5.1.0',
-        description: 'Only results about 5.1.0',
-        value: '5.1.0',
-    },
+   ...(API_VERSIONS.map((version) => ({
+    name: version,
+    description: `Only results about ${version}`,
+    value: version,
+   })))
 ];
 
 const BEHAVIORS = [

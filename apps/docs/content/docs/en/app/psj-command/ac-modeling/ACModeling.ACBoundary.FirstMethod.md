@@ -1,5 +1,5 @@
 ---
-title: 'ACModeling.ACBoundary.FirstMethod()'
+title: 'ACModeling.ACBoundary.FirstMethod() '
 description: 'Unknown Description'
 version_introduced: '5.1.0'
 available_versions: 'all'
@@ -18,15 +18,18 @@ ACModeling.ACBoundary.FirstMethod(...)
 
 ## Inputs
 
-### `crlParts` @type(List\[Cursor]) @required
+<!-- @type:List[Cursor] @required @since:5.0.1 @deprecated:5.1.0 -->
+### `crlParts`
 
 - The part.
 
-### `bIsMergePart` @type(Boolean) @required
+<!-- @type:Boolean @required @since:5.0.1 @removed:5.2.0 -->
+### `bIsMergePart`
 
 - The is merge part.
 
-### `bIsRenumber` @type(Boolean) @required
+<!-- @type:Boolean @required -->
+### `bIsRenumber`
 
 - The is renumber.
 
