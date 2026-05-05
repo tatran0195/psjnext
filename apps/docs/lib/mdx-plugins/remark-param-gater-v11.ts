@@ -1,121 +1,212 @@
-import { getVersionStatus } from './utils';
+import { flattenNode, getVersionStatus } from './utils';
 
-import type { Content, Heading, Root } from 'mdast';
+import type { Content, Heading, Root, RootContent } from 'mdast';
 import type { Plugin, Transformer } from 'unified';
 
+// ─── Public API ──────────────────────────────────────────────────────────────
+
 export interface VersionFilterOptions {
+    /** Active API version, e.g. "5.2.0".  Falls back to file path / file.data._version if omitted. */
     version?: string;
+    /** Minimum heading depth that starts a param section.  Default: 3. */
     minHeadingDepth?: number;
 }
 
-type Meta = {
+export interface ParamMetaExport {
+    name: string;
+    since?: string;
+    removed?: string;
+}
+
+// ─── Internal types ───────────────────────────────────────────────────────────
+
+type ParamKind = 'param' | 'input';
+
+interface ParamMeta {
+    kind: ParamKind;
     since?: string;
     deprecated?: string;
     removed?: string;
     type?: string;
     required?: boolean;
-};
+}
+
+// ─── Defaults ────────────────────────────────────────────────────────────────
 
 const DEFAULTS = {
     minHeadingDepth: 3,
-};
+} satisfies Partial<VersionFilterOptions>;
 
-function isHeading(node: any): node is Heading {
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+function isHeading(node: Content): node is Heading {
     return node.type === 'heading';
 }
 
-function parseCommentMeta(value: string): Meta | null {
-    const meta: Meta = {};
-
-    const find = (key: string) => {
-        const regex = new RegExp(`@${key}:([^\\s;>]+)`, 'i');
-        const match = value.match(regex);
-        if (!match) return undefined;
-        let val = match[1].trim();
-        val = val.replace(/-+$/, '');
-        return val;
-    };
-
-    meta.since = find('since');
-    meta.deprecated = find('deprecated');
-    meta.removed = find('removed');
-    meta.type = find('type');
-    meta.required = /@required/i.test(value);
-
-    return Object.keys(meta).length > 0 ? meta : null;
+/**
+ * Extract a version annotation like `@since:5.1.0` or `@removed:5.3.0` from
+ * a raw comment / html string.  Trailing punctuation (hyphens, > characters)
+ * is stripped to handle patterns like `@since:5.1.0-->`.
+ */
+function extractAnnotation(value: string, key: string, isVersionUrl = true): string | undefined {
+    const pattern = isVersionUrl ? '([\\d.]+)' : '([^\\s;>]+)';
+    const regex = new RegExp(`@${key}[:\\s]+${pattern}`, 'i');
+    const match = value.match(regex);
+    if (!match) return undefined;
+    return match[1].replace(/[->;]+$/, '').trim();
 }
 
-function isVisible(meta: Meta, version: string): boolean {
+/**
+ * Detect the `kind` of the annotation block:
+ * - `@input` / `@inputs`  → 'input'
+ * - anything else with `@`  → 'param'
+ * Returns `null` when the value does not look like a meta comment at all.
+ */
+function parseParamMeta(value: string): ParamMeta | null {
+    if (typeof value !== 'string' || !value.includes('@')) return null;
+
+    const hasVersionAnnotation =
+        /@since/i.test(value) ||
+        /@removed/i.test(value) ||
+        /@deprecated/i.test(value) ||
+        /@type/i.test(value) ||
+        /@required/i.test(value) ||
+        /@inputs?/i.test(value);
+
+    if (!hasVersionAnnotation) return null;
+
+    const kind: ParamKind = /@inputs?/i.test(value) ? 'input' : 'param';
+
+    const meta: ParamMeta = {
+        kind,
+        since: extractAnnotation(value, 'since'),
+        deprecated: extractAnnotation(value, 'deprecated'),
+        removed: extractAnnotation(value, 'removed'),
+        type: extractAnnotation(value, 'type', false),
+        required: /@required/i.test(value),
+    };
+
+    return meta;
+}
+
+/**
+ * Given a ParamMeta and an active version string, decide whether the param
+ * block should be included in the rendered output.
+ *
+ * Rules:
+ *  - `removed`     → hide for current version ≥ removed version
+ *  - `unavailable` → hide for current version < since version
+ *  - `available` / `deprecated` → show (deprecated still renders, just styled)
+ */
+function isParamVisible(meta: ParamMeta, version: string): boolean {
     const status = getVersionStatus(version, meta.since, meta.deprecated, meta.removed);
     return status !== 'removed' && status !== 'unavailable';
 }
 
-export const remarkParamGaterV11: Plugin<[VersionFilterOptions], Root> = (options) => {
+/**
+ * Skip whitespace-only text nodes and html nodes that are blank.
+ * Used to bridge the gap between a meta comment and its following heading.
+ */
+function skipBlankNodes(nodes: Content[], start: number): number {
+    let j = start;
+    while (j < nodes.length) {
+        const n = nodes[j];
+        // Allow blank html and empty text through; stop on meaningful content
+        const val = (n as { value?: string }).value ?? '';
+        const isBlankHtml = n.type === 'html' && val.trim() === '';
+        const isEmptyText = n.type === 'text' && val.trim() === '';
+        if (!isBlankHtml && !isEmptyText) break;
+        j++;
+    }
+    return j;
+}
+
+// ─── Plugin ───────────────────────────────────────────────────────────────────
+
+/**
+ * `remarkParamGaterV11`
+ *
+ * Scans the MDX AST for inline comment nodes that carry version annotations
+ * (`@since`, `@removed`, `@deprecated`, `@type`, `@required`, `@input`).
+ * Each such comment is expected to immediately precede a heading (of depth ≥
+ * `minHeadingDepth`) that starts a parameter section.
+ *
+ * When a `version` is active:
+ *  - Parameters not yet introduced (`@since`) are removed from the AST.
+ *  - Parameters that have been removed (`@removed`) are removed from the AST.
+ *  - Deprecated parameters are kept but the `deprecated` prop is passed to the
+ *    wrapping `<PSJParamSection>` element.
+ *
+ * Input params (`@input` / `@inputs`) follow the same rules and are wrapped in
+ * `<PSJParamSection kind="input" …>` for downstream styling.
+ *
+ * When no `version` is provided (e.g. during static generation without a
+ * version context), all blocks are preserved so that nothing is accidentally
+ * hidden.
+ */
+export const remarkParamGaterV11: Plugin<[VersionFilterOptions?], Root> = (options) => {
     const opts = { ...DEFAULTS, ...options };
 
     const transformer: Transformer<Root> = (tree, file) => {
+        // ── Resolve version ───────────────────────────────────────────────────
         let version =
-            opts.version || ((file.data as Record<string, unknown>)._version as string | undefined);
+            opts.version ||
+            ((file.data as Record<string, unknown>)._version as string | undefined);
 
         if (!version && typeof file.path === 'string') {
-            const matches = file.path.match(/[/\\](\d+\.\d+\.\d+)([/\\]|$)/);
-            if (matches) version = matches[1];
+            const m = file.path.match(/[/\\](\d+\.\d+\.\d+)([/\\]|$)/);
+            if (m) version = m[1];
         }
 
+        // ── Walk nodes ────────────────────────────────────────────────────────
         const nodes = tree.children;
-
-        if (file.path?.includes('ACModeling.ACBoundary.FirstMethod')) {
-            console.error(`[PARAM-GATER-V11] Processing ${file.path}, version: ${version}`);
-            nodes.forEach((n, idx) => {
-                const val = (n as any).value || (n as any).name || '';
-                console.error(`  [${idx}] ${n.type}: ${val.substring(0, 30)}...`);
-            });
-        }
-
         const out: Content[] = [];
         let i = 0;
 
         while (i < nodes.length) {
             const node = nodes[i];
-
-            // Match ANY node that looks like our metadata comment
-            const val = (node as any).value || '';
-            const meta =
-                typeof val === 'string' && val.includes('@') ? parseCommentMeta(val) : null;
+            const rawValue = (node as { value?: string }).value ?? '';
+            const meta = parseParamMeta(rawValue);
 
             if (meta) {
-                let j = i + 1;
-                while (
-                    j < nodes.length &&
-                    (nodes[j].type === 'text' ||
-                        nodes[j].type === 'break' ||
-                        nodes[j].type === 'html')
-                ) {
-                    const textVal = (nodes[j] as any).value || '';
-                    if (textVal.trim() !== '' && nodes[j].type !== 'html') break;
-                    j++;
-                }
+                // Skip any blank separators between the comment and the heading
+                const headingIdx = skipBlankNodes(nodes, i + 1);
+                const headingNode = nodes[headingIdx];
 
-                const next = nodes[j];
-                if (next && isHeading(next) && next.depth >= opts.minHeadingDepth) {
-                    const depth = next.depth;
-                    const block: Content[] = [next];
-                    let k = j + 1;
+                if (
+                    headingNode &&
+                    isHeading(headingNode) &&
+                    headingNode.depth >= opts.minHeadingDepth
+                ) {
+                    const depth = headingNode.depth;
+
+                    // Collect the whole block: heading + everything until the
+                    // next sibling heading at the same (or shallower) depth.
+                    const block: Content[] = [headingNode];
+                    let k = headingIdx + 1;
                     while (k < nodes.length) {
                         const n = nodes[k];
                         if (isHeading(n) && n.depth <= depth) break;
+                        
+                        // Break if we hit another param comment to avoid swallowing it into this block
+                        const nValue = (n as { value?: string }).value ?? '';
+                        if (parseParamMeta(nValue)) break;
+
                         block.push(n);
                         k++;
                     }
 
-                    if (!version || isVisible(meta, version)) {
+                    // If we have a version context, apply visibility filtering.
+                    // Without a version, we keep everything (safe default).
+                    const keep = !version || isParamVisible(meta, version);
+
+                    if (keep) {
                         const attributes = [
-                            {
+                            meta.kind === 'input' && {
                                 type: 'mdxJsxAttribute',
-                                name: 'debugId',
-                                value: 'BINGO-V11-ULTRA-3',
+                                name: 'kind',
+                                value: 'input',
                             },
-                            { type: 'mdxJsxAttribute', name: 'name', value: '' },
                             meta.since && {
                                 type: 'mdxJsxAttribute',
                                 name: 'since',
@@ -141,21 +232,33 @@ export const remarkParamGaterV11: Plugin<[VersionFilterOptions], Root> = (option
                                 name: 'required',
                                 value: 'true',
                             },
-                        ].filter(Boolean) as any[];
+                        ].filter(Boolean);
 
                         out.push({
                             type: 'mdxJsxFlowElement',
                             name: 'PSJParamSection',
                             attributes,
                             children: block,
-                        } as any);
-                    }
+                        } as unknown as Content);
 
+                        // Export param metadata for search indexing
+                        const docData = file.data as { paramMeta?: ParamMetaExport[] };
+                        const exportedMeta = docData.paramMeta || [];
+                        const headingText = flattenNode(headingNode as unknown as RootContent);
+                        exportedMeta.push({
+                            name: headingText.trim(),
+                            since: meta.since,
+                            removed: meta.removed
+                        });
+                        docData.paramMeta = exportedMeta;
+                    }
+                    // Whether kept or filtered, advance past the entire block.
                     i = k;
                     continue;
                 }
             }
 
+            // Default: pass node through unchanged.
             out.push(node);
             i++;
         }

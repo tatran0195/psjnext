@@ -33,7 +33,7 @@ export const docs = defineDocs({
         postprocess: {
             includeProcessedMarkdown: true,
             extractLinkReferences: true,
-            valueToExport: ['elementIds'],
+            valueToExport: ['elementIds', 'paramMeta'],
         },
         async: true,
         async mdxOptions(environment) {

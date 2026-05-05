@@ -48,7 +48,7 @@ export function PSJParamHeader({
     // If no meta context, just render standard h3
     if (!meta) return <h3 {...rest}>{_children}</h3>;
 
-    const { since, removed, deprecated, type, required } = meta;
+    const { since, deprecated, type, required } = meta;
 
     const isDeprecatedHere = deprecated ? semverGte(currentVersion, deprecated) : false;
 
@@ -71,7 +71,6 @@ export function PSJParamSection({
     type,
     required,
     currentVersion,
-    debugId,
 }: {
     children: React.ReactNode;
     since?: string;
@@ -79,13 +78,11 @@ export function PSJParamSection({
     deprecated?: string;
     type?: string;
     required?: string;
+    /** 'input' for input-typed params emitted by the remark plugin */
+    kind?: 'input' | 'param';
     currentVersion: ApiVersion;
-    debugId?: string;
 }) {
-    console.log(
-        `[DEBUG-CLIENT] ParamSection: version=${currentVersion}, since=${since}, removed=${removed}, debugId=${debugId}`,
-    );
-    // Visibility gating
+    // Version visibility gating
     if (since && !semverGte(currentVersion, since)) return null;
     if (removed && semverGte(currentVersion, removed)) return null;
 
