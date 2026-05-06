@@ -18,7 +18,7 @@ ACModeling.CloseHoleAuto(...)
 
 ## Inputs
 
-### `crlClosedHoleParts` @type(List\[Cursor]) @required
+### `crlClosedHoleParts` @required @since:5.0.1 @removed:5.2.0
 
 - The closed hole parts.
 

@@ -1,4 +1,3 @@
- 
 import type { RemarkAutoTypeTableOptions } from 'fumadocs-typescript';
 
 import { RehypeCodeOptions, remarkMdxMermaid } from 'fumadocs-core/mdx-plugins';
@@ -6,13 +5,13 @@ import { applyMdxPreset, defineConfig, defineDocs } from 'fumadocs-mdx/config';
 import jsonSchema from 'fumadocs-mdx/plugins/json-schema';
 import lastModified from 'fumadocs-mdx/plugins/last-modified';
 
+import { remarkParamGater } from '@/lib/mdx-plugins/remark-param-gater';
 
 import { remarkElementIds } from './lib/mdx-plugins/remark-element-ids';
 import { remarkLinkPreview } from './lib/mdx-plugins/remark-link-preview';
 import { defaultShikiOptions } from './lib/shiki';
 import { docsSchema, metaSchemaWithGroup } from './lib/source/schema';
 
-import { remarkParamGaterV11 } from '@/lib/mdx-plugins/remark-param-gater-v11';
 import type { ElementContent } from 'hast';
 import type { ShikiTransformer } from 'shiki';
 const { rehypeCodeDefaultOptions } = await import('fumadocs-core/mdx-plugins/rehype-code');
@@ -103,7 +102,7 @@ export const docs = defineDocs({
                 remarkPlugins: isLint
                     ? [remarkElementIds]
                     : [
-                          remarkParamGaterV11,
+                          remarkParamGater,
                           remarkSteps,
                           remarkMath,
                           remarkMdxMermaid,

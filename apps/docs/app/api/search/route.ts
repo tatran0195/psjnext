@@ -1,117 +1,91 @@
 import { stopwords as japaneseStopwords } from '@orama/stopwords/japanese';
 import { createTokenizer } from '@orama/tokenizers/japanese';
+import { StructuredData } from 'fumadocs-core/mdx-plugins';
+import { findPath } from 'fumadocs-core/page-tree';
 import { createFromSource } from 'fumadocs-core/search/server';
+import { LoaderConfig, LoaderOutput, PageData } from 'fumadocs-core/source';
+import { basename, extname } from 'node:path';
 
 import { source } from '@/lib/source';
 
-const filteredSource = {
-    ...source,
-    getPages: () =>
-        source
-            .getPages()
-            .filter((page) => (page.data as { _status?: string })._status !== 'removed'),
-};
-/* eslint-disable @typescript-eslint/no-explicit-any -- createFromSource expects a specific loader type */
-export const { GET } = createFromSource(filteredSource as any, {
+export const { GET } = createFromSource(source, {
     localeMap: {
         ja: {
-            tokenizer: createTokenizer({
-                language: 'japanese',
-                stopWords: japaneseStopwords,
-            }),
-            search: {
-                similarity: 0.1,
-                exact: false,
-                threshold: 2,
-                tolerance: 1,
-            },
+            tokenizer: createTokenizer({ language: 'japanese', stopWords: japaneseStopwords }),
+            search: { similarity: 0.1, exact: false, threshold: 2, tolerance: 1 },
         },
         en: {
-            search: {
-                similarity: 0.1,
-                exact: false,
-                tolerance: 2,
-                threshold: 1,
-            },
+            search: { similarity: 0.1, exact: false, tolerance: 2, threshold: 1 },
         },
     },
     async buildIndex(page) {
-        const data = await page.data.load();
-        const versionRegex = /(\d+\.\d+\.\d+)/;
-        const match = page.slugs.find((slug) => slug.match(versionRegex));
-        const version = match ? match : null;
+        if (!page) throw new Error('Cannot find page');
 
-        let structuredData = data.structuredData;
-        const paramMeta = (data.paramMeta as { name: string; since?: string; removed?: string }[]) || [];
-
-        if (version && paramMeta.length > 0) {
-            const getVersionStatus = (
-                current: string,
-                introduced?: string,
-                deprecated?: string,
-                removed?: string,
-            ) => {
-                const parseSemver = (v: string): [number, number, number] => {
-                    const [a = 0, b = 0, c = 0] = v.split('.').map(Number);
-                    return [a, b, c];
-                };
-                const semverGte = (a: string, b: string): boolean => {
-                    const pa = parseSemver(a);
-                    const pb = parseSemver(b);
-                    for (let i = 0; i < 3; i++) {
-                        if (pa[i] > pb[i]) return true;
-                        if (pa[i] < pb[i]) return false;
-                    }
-                    return true;
-                };
-
-                if (removed && semverGte(current, removed)) return 'removed';
-                if (introduced && !semverGte(current, introduced)) return 'unavailable';
-                return 'available';
-            };
-
-            const hiddenParamNames = new Set(
-                paramMeta
-                    .filter((pm) => {
-                        const status = getVersionStatus(version, pm.since, undefined, pm.removed);
-                        return status === 'removed' || status === 'unavailable';
-                    })
-                    .map((pm) => pm.name),
-            );
-
-            if (hiddenParamNames.size > 0 && structuredData) {
-                // Remove hidden headings
-                const validHeadings = structuredData.headings.filter(
-                    (h: any) => !hiddenParamNames.has(h.content),
-                );
-                
-                // Track IDs of hidden headings
-                const hiddenHeadingIds = new Set(
-                    structuredData.headings
-                        .filter((h: any) => hiddenParamNames.has(h.content))
-                        .map((h: any) => h.id),
-                );
-
-                // Remove contents that belong to hidden headings
-                const validContents = structuredData.contents.filter(
-                    (c: any) => !c.heading || !hiddenHeadingIds.has(c.heading),
-                );
-
-                structuredData = {
-                    headings: validHeadings,
-                    contents: validContents,
-                };
-            }
+        let pageData;
+        if ('load' in page.data && typeof page.data.load === 'function') {
+            pageData = await page.data.load();
+        } else {
+            pageData = page.data as PageData & { lastModified?: Date };
         }
 
+        console.log(pageData);
+
+        const versionRegex = /^\d+\.\d+\.\d+$/;
+        const version = page.data._version ?? page.slugs.find((s) => versionRegex.test(s)) ?? null;
+
+        let structuredData: StructuredData | undefined;
+        if ('structuredData' in page.data) {
+            structuredData =
+                typeof page.data.structuredData === 'function'
+                    ? await page.data.structuredData()
+                    : page.data.structuredData;
+        } else if ('load' in page.data) {
+            structuredData = (await page.data.load()).structuredData;
+        }
+
+        if (!structuredData) throw new Error('Cannot find structured data for ' + page.path);
+
+        const breadcrumbs = buildBreadcrumbs(source, page);
+
         return {
-            title: page.data.title ?? '',
+            title: page.data.title ?? basename(page.path, extname(page.path)),
             description: page.data.description,
             url: page.url,
             id: page.url,
             structuredData,
-            breadcrumbs: page.slugs,
+            breadcrumbs,
             tag: version || '',
         };
     },
 });
+
+function isBreadcrumbItem(item: unknown): item is string {
+    return typeof item === 'string' && item.length > 0;
+}
+
+function buildBreadcrumbs<C extends LoaderConfig>(
+    source: LoaderOutput<C>,
+    page: C['page'],
+): string[] | undefined {
+    const pageTree = source.getPageTree(page.locale);
+    const path = findPath(
+        pageTree.children,
+        (node) => node.type === 'page' && node.url === page.url,
+    );
+
+    if (path) {
+        const breadcrumbs: string[] = [];
+        path.pop();
+
+        if (isBreadcrumbItem(pageTree.name)) {
+            breadcrumbs.push(pageTree.name);
+        }
+
+        for (const segment of path) {
+            if (!isBreadcrumbItem(segment.name)) continue;
+            breadcrumbs.push(segment.name);
+        }
+
+        return breadcrumbs;
+    }
+}

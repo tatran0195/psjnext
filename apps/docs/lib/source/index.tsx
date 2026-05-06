@@ -15,12 +15,12 @@ export const source = loader({
     i18n,
     baseUrl: '/',
     plugins: [
+        versionPlugin(),
         lucideIconsPlugin(),
         customIconsPlugin(),
         pageTreeCodeTitlesPlugin(),
         pageTreeFoldersPlugin(),
-       versionPlugin(),
- ],
+    ],
 });
 
 export type Page = InferPageType<typeof source>;

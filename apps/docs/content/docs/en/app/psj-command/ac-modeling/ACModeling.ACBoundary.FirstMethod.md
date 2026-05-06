@@ -18,17 +18,17 @@ ACModeling.ACBoundary.FirstMethod(...)
 
 ## Inputs
 
-<!-- @type:List[Cursor] @required @since:5.0.1 @deprecated:5.1.0 -->
+<!-- @since:5.0.1 @required @deprecated:5.1.0 -->
 ### `crlParts`
 
 - The part.
 
-<!-- @type:Boolean @required @since:5.0.1 @removed:5.2.0 -->
+<!-- @since:5.0.1 @required @removed:5.2.0 -->
 ### `bIsMergePart`
 
 - The is merge part.
 
-<!-- @type:Boolean @required -->
+<!-- @since:5.1.0 @required -->
 ### `bIsRenumber`
 
 - The is renumber.

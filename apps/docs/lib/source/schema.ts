@@ -8,6 +8,8 @@ export const docsSchema = pageSchema.extend({
     introduced: z.string().optional(),
     deprecated: z.string().optional(),
     removed: z.string().optional(),
+    _version: z.string().optional(),
+    _status: z.string().optional(),
 });
 
 export const metaSchemaWithGroup = metaSchema.extend({
