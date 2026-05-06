@@ -151,7 +151,8 @@ export function versionPlugin(): LoaderPlugin {
                             ...filtered,
                             name: child.name,
                             defaultOpen: false,
-                        } satisfies PageTree.Folder;
+                            group: true,
+                        } satisfies PageTree.Folder & { group: boolean };
                     });
 
                 const newApiFolder: PageTree.Folder & { root: true; group: true } = {
