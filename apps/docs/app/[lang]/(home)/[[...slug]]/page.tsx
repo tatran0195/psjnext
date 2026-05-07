@@ -9,11 +9,14 @@ import { Banner } from 'fumadocs-ui/components/banner';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 
+import type { ApiVersion } from '@/lib/api-versions';
+
 import { NotFound } from '@/components/layouts/not-found';
 import { getMDXComponents } from '@/components/mdx';
 import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-category';
 import { LinkPreview } from '@/components/mdx/link-preview';
 import { Mermaid } from '@/components/mdx/mermaid';
+import { ParamHeader, ParamSection } from '@/components/mdx/param-badge';
 import { RibbonPath } from '@/components/mdx/ribbon-path';
 import { SymbolLink } from '@/components/mdx/symbol-link';
 import {
@@ -24,23 +27,56 @@ import {
     PageLastUpdate,
 } from '@/layouts/docs/page';
 import { DocsPager } from '@/layouts/shared/docs-pager';
+import { API_VERSIONS } from '@/lib/api-versions';
 import { createMetadata, getPageImage } from '@/lib/metadata';
-import { APP_VERSIONS, source } from '@/lib/source';
+import { source } from '@/lib/source';
+
+/**
+ * Resolve [version, ...pageSlug] from catch-all segments after stripping the
+ * route prefix ('api').
+ *
+ * /api/5.1.0/getting-started → { version: '5.1.0', pageSlug: ['getting-started'] }
+ * /api/getting-started       → { version: '5.1.0', pageSlug: ['getting-started'] }
+ * /api                       → { version: '5.1.0', pageSlug: [] }
+ */
+function resolveVersion(slug: string[]): { version: string; pageSlug: string[] } {
+    const [maybeVersion, ...rest] = slug;
+    const isVersionSegment = (API_VERSIONS as readonly string[]).includes(maybeVersion);
+    return isVersionSegment
+        ? { version: maybeVersion, pageSlug: rest }
+        : { version: API_VERSIONS[0], pageSlug: slug };
+}
 
 export default async function Page(props: {
-    params: Promise<{ slug?: string[]; lang: string; version?: string }>;
+    params: Promise<{ slug?: string[]; lang: string }>;
     searchParams: Promise<{ v?: string }>;
 }) {
     const params = await props.params;
     const { slug = [], lang } = params;
-    const page = source.getPage(slug, lang);
-    if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
+
+    // Resolve page + optional API-specific MDX component overrides.
+    let page: ReturnType<typeof source.getPage>;
+    let apiMdxComponents: Partial<Parameters<typeof getMDXComponents>[0]> | undefined;
+
+    if (slug[0] === 'api') {
+        const { version, pageSlug } = resolveVersion(slug.slice(1));
+        page = source.getPage(['api', ...pageSlug]);
+        if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
+        apiMdxComponents = {
+            h3: (props: ComponentProps<'h3'>) => <ParamHeader {...props} />,
+            ParamSection: (props: Omit<ComponentProps<typeof ParamSection>, 'currentVersion'>) => (
+                <ParamSection {...props} currentVersion={version as ApiVersion} />
+            ),
+        };
+    } else {
+        page = source.getPage(slug, lang);
+        if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
+    }
 
     const { body: Mdx, toc, lastModified } = await page.data.load();
     const { ribbon, shortcut } = page.data;
 
     const neighbours = findNeighbour(source.getPageTree(lang), page.url);
-
     const footerPrevious = neighbours.previous
         ? { name: neighbours.previous.name, url: neighbours.previous.url }
         : undefined;
@@ -52,16 +88,11 @@ export default async function Page(props: {
     return (
         <DocsPage toc={toc}>
             <div>
-                {/* Title row — clean, no competition */}
                 <div className="flex flex-wrap items-start justify-between gap-4">
                     <DocsTitle className="mb-0">{page.data.title}</DocsTitle>
                     <DocsPager
-                        {...(footerPrevious && {
-                            previous: { url: footerPrevious.url },
-                        })}
-                        {...(footerNext && {
-                            next: { url: footerNext.url },
-                        })}
+                        {...(footerPrevious && { previous: { url: footerPrevious.url } })}
+                        {...(footerNext && { next: { url: footerNext.url } })}
                         markdownUrl={markdownUrl}
                     />
                 </div>
@@ -78,13 +109,10 @@ export default async function Page(props: {
                         ...Twoslash,
                         a({ href, ...props }: ComponentProps<'a'>) {
                             if (!href) return <a {...props} />;
-
                             const found = source.getPageByHref(href, {
                                 dir: PathUtils.dirname(page.path),
                             });
-
                             if (!found) return <Link href={href} {...props} />;
-
                             return (
                                 <LinkPreview
                                     href={found.page.url}
@@ -101,12 +129,13 @@ export default async function Page(props: {
                         SymbolLink,
                         LinkPreview,
                         blockquote: Callout as unknown as FC<ComponentProps<'blockquote'>>,
-                        DocsCategory: ({ url }: { url?: string }) => {
-                            return <DocsCategory url={url ?? page.url} lang={lang} />;
-                        },
-                        DocsSectionOverview: ({ url }: { url?: string }) => {
-                            return <DocsSectionOverview url={url ?? page.url} lang={lang} />;
-                        },
+                        DocsCategory: ({ url }: { url?: string }) => (
+                            <DocsCategory url={url ?? page.url} lang={lang} />
+                        ),
+                        DocsSectionOverview: ({ url }: { url?: string }) => (
+                            <DocsSectionOverview url={url ?? page.url} lang={lang} />
+                        ),
+                        ...apiMdxComponents,
                     })}
                 />
                 {page.data.index ? <DocsCategory url={page.url} lang={lang} /> : null}
@@ -123,19 +152,17 @@ export async function generateMetadata(props: {
     const { slug = [], lang } = params;
 
     let querySlug = slug;
-    if (slug[0] === 'app' && APP_VERSIONS.includes(slug[1])) {
-        querySlug = ['app', ...slug.slice(2)];
+    if (slug[0] === 'api' && (API_VERSIONS as readonly string[]).includes(slug[1])) {
+        // Strip the version segment so source.getPage can resolve the canonical page.
+        querySlug = ['api', ...slug.slice(2)];
     }
 
     const page = source.getPage(querySlug, lang);
     if (!page) {
-        return createMetadata({
-            title: 'Not Found',
-        });
+        return createMetadata({ title: 'Not Found' });
     }
 
     const description = page.data.description ?? 'The library for building documentation sites';
-
     const image = {
         url: getPageImage(page).url,
         width: 1200,
@@ -156,6 +183,21 @@ export async function generateMetadata(props: {
 }
 
 export function generateStaticParams() {
-    const params = source.generateParams('slug', 'lang');
-    return params;
+    // Standard docs params (all non-api pages, emitted with lang).
+    const docsParams = source.generateParams('slug', 'lang');
+
+    // API pages require versioned canonical paths: /api/[version]/[...pageSlug].
+    // Versionless /api/... URLs are handled at runtime — must NOT be pre-rendered
+    // since the target version changes when a new version is released.
+    const apiParams = source
+        .getPages()
+        .filter((p) => p.slugs[0] === 'api' && p.slugs[1] !== undefined)
+        .flatMap((p) =>
+            API_VERSIONS.map((version) => ({
+                slug: ['api', version, ...p.slugs.slice(1)],
+                lang: 'en',
+            })),
+        );
+
+    return [...docsParams, ...apiParams];
 }

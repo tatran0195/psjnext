@@ -84,7 +84,7 @@ export const docs = defineDocs({
                                         case 'Callout':
                                         case 'Card':
                                         case 'Custom':
-                                        case 'PSJParamSection':
+                                        case 'ParamSection':
                                             return true;
                                     }
                                     return 'children-only';

@@ -26,8 +26,8 @@ const EMPTY_STRUCTURED_DATA: StructuredData = { headings: [], contents: [] };
 /**
  * Extract the raw storage path from a node's $id.
  * generateId() produces "[locale:]storagePath" — strip the locale prefix if present.
- * nodeStoragePath({ $id: 'en:app/v1' }) // 'app/v1'
- * nodeStoragePath({ $id: 'app/v1' }) // 'app/v1'
+ * nodeStoragePath({ $id: 'en:api/v1' }) // 'api/v1'
+ * nodeStoragePath({ $id: 'api/v1' }) // 'api/v1'
  */
 function nodeStoragePath(node: { $id?: string }): string {
     const id = node.$id ?? '';
@@ -130,7 +130,7 @@ export function versionPlugin(): LoaderPlugin {
         enforce: 'pre',
 
         transformStorage({ storage }) {
-            const apiFiles = storage.getFiles().filter((f) => f.startsWith('app/'));
+            const apiFiles = storage.getFiles().filter((f) => f.startsWith('api/'));
 
             // ── Single-version path ──────────────────────────────────────────────
             // No file fan-out, no deletions, no new storage keys. We only install
@@ -162,10 +162,10 @@ export function versionPlugin(): LoaderPlugin {
                 // ── Meta files (meta.json / meta.yaml) ──────────────────────────
                 if (file.format === 'meta') {
                     const segments = filePath.split('/');
-                    if (segments.length !== 3) continue; // only app/<dir>/meta.json
+                    if (segments.length !== 3) continue; // only api/<dir>/meta.json
 
                     for (const version of API_VERSIONS) {
-                        const versionedKey = `app/${version}/${segments[1]}/meta.json`;
+                        const versionedKey = `api/${version}/${segments[1]}/meta.json`;
                         storage.write(versionedKey, {
                             ...file,
                             path: file.path,
@@ -202,7 +202,7 @@ export function versionPlugin(): LoaderPlugin {
 
                     if (!isPageVisible(status)) continue;
 
-                    const storageKey = `app/${version}/${filePath.replace(/^app\//, '')}`;
+                    const storageKey = `api/${version}/${filePath.replace(/^api\//, '')}`;
                     const slugs = storageKey.replace(/\.mdx?$/, '').split('/');
 
                     storage.write(storageKey, {
@@ -226,7 +226,7 @@ export function versionPlugin(): LoaderPlugin {
 
                 const apiFolderIdx = node.children.findIndex(
                     (n): n is PageTree.Folder =>
-                        n.type === 'folder' && nodeStoragePath(n).toLowerCase() === 'app',
+                        n.type === 'folder' && nodeStoragePath(n).toLowerCase() === 'api',
                 );
                 if (apiFolderIdx === -1) return node;
 

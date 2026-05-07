@@ -187,7 +187,7 @@ function buildEsmExport(name: string, value: unknown): MdxjsEsm {
     } as MdxjsEsm;
 }
 
-// ─── PSJParamSection wrapper ──────────────────────────────────────────────────
+// ─── ParamSection wrapper ──────────────────────────────────────────────────
 
 // Add to internal types
 export interface ResolvedParam {
@@ -230,7 +230,7 @@ function wrapInParamSection(block: RootContent[], meta: ParamMeta): RootContent 
 
     return {
         type: 'mdxJsxFlowElement',
-        name: 'PSJParamSection',
+        name: 'ParamSection',
         attributes: [
             {
                 type: 'mdxJsxAttribute',
