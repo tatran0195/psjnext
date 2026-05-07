@@ -131,19 +131,20 @@ export function useFolderDepth() {
     return use(FolderContext)?.depth ?? 0;
 }
 
-export function SidebarContent({
-    mode: allowedMode = 'full',
-    children,
-}: {
+interface SidebarContentActionProps {
+    ref: RefObject<HTMLElement | null>;
+    collapsed: boolean;
+    hovered: boolean;
+    onPointerEnter: (event: PointerEvent) => void;
+    onPointerLeave: (event: PointerEvent) => void;
+}
+
+type SidebarContentProps = {
     mode?: Mode | true;
-    children: (state: {
-        ref: RefObject<HTMLElement | null>;
-        collapsed: boolean;
-        hovered: boolean;
-        onPointerEnter: (event: PointerEvent) => void;
-        onPointerLeave: (event: PointerEvent) => void;
-    }) => ReactNode;
-}) {
+    action: (state: SidebarContentActionProps) => ReactNode;
+};
+
+export function SidebarContent({ mode: allowedMode = 'full', action }: SidebarContentProps) {
     const { collapsed, mode } = useSidebar();
     const [hover, setHover] = useState(false);
     const ref = useRef<HTMLElement>(null);
@@ -162,7 +163,7 @@ export function SidebarContent({
         return !collapsed || e.pointerType === 'touch' || element.getAnimations().length > 0;
     }
 
-    return children({
+    return action({
         ref,
         collapsed,
         hovered: hover,
