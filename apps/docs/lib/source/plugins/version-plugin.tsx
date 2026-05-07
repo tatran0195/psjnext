@@ -33,10 +33,44 @@ function nodeStoragePath(node: { $id?: string }): string {
     return colonIdx !== -1 ? id.slice(colonIdx + 1) : id;
 }
 
+import { ReactNode } from 'react';
+
+import { Archive, Tag } from 'lucide-react';
+
+/**
+ * Return the sidebar icon name for a given version.
+ */
+function resolveVersionMeta(idx: number): { icon: ReactNode | string; description: string } {
+    return idx === API_VERSIONS.length - 1
+        ? {
+              icon: (
+                  <Box color="#007bff">
+                      <Tag />
+                  </Box>
+              ),
+              description: 'Latest',
+          }
+        : {
+              icon: (
+                  <Box color="#6c757d">
+                      <Archive />
+                  </Box>
+              ),
+              description: `Version ${API_VERSIONS[idx]?.split('.').slice(0, 2).join('.')}`,
+          };
+}
+const Box = ({ children, color }: { children: React.ReactNode; color: string }) => (
+    <div
+        className="flex items-center justify-center [&_svg]:size-[18px] rounded-lg size-8 shrink-0 text-(--tab-color) bg-(--tab-color)/10 border border-(--tab-color)/20 p-1.5"
+        style={{ '--tab-color': color } as object}
+    >
+        {children}
+    </div>
+);
 export function versionPlugin(): LoaderPlugin {
     return {
         name: 'fumadocs:api-versions',
-
+        enforce: 'pre',
         transformStorage({ storage }) {
             const apiFiles = storage.getFiles().filter((f) => f.startsWith('app/'));
 
@@ -146,10 +180,11 @@ export function versionPlugin(): LoaderPlugin {
                         const segment = storagePath.split('/').pop() ?? '';
                         return (API_VERSIONS as readonly string[]).includes(segment);
                     })
-                    .map((child) => ({
+                    .map((child, idx) => ({
                         ...child,
                         defaultOpen: false,
                         group: true,
+                        ...resolveVersionMeta(idx),
                     }));
 
                 const newApiFolder: PageTree.Folder & { root: true; group: true } = {

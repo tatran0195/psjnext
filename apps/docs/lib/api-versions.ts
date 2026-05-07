@@ -1,4 +1,6 @@
-export const API_VERSIONS = ['5.0.1', '5.1.0', '5.2.0', '5.3.0'] as const;
+export const API_VERSIONS = import.meta.env.VERSIONS
+    ? import.meta.env.VERSIONS.split(',')
+    : ['5.3.0', '5.2.0', '5.1.0', '5.0.1'];
 export type ApiVersion = (typeof API_VERSIONS)[number];
 
 export type VersionStatus = 'available' | 'deprecated' | 'removed' | 'unavailable';
