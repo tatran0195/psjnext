@@ -21,7 +21,7 @@ export function matchesSearch(
     }
 
     if (exactMatch) {
-        return item.content.includes(searchString);
+        return item.content.toLowerCase().includes(searchString.toLowerCase());
     }
 
     const searchTerms = searchString
@@ -33,5 +33,5 @@ export function matchesSearch(
         return true;
     }
 
-    return searchTerms.some((term) => item.content.includes(term));
+    return searchTerms.some((term) => item.content.toLowerCase().includes(term));
 }

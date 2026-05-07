@@ -5,7 +5,7 @@ import { applyMdxPreset, defineConfig, defineDocs } from 'fumadocs-mdx/config';
 import jsonSchema from 'fumadocs-mdx/plugins/json-schema';
 import lastModified from 'fumadocs-mdx/plugins/last-modified';
 
-import { remarkParamGater } from '@/lib/mdx-plugins/remark-param-gater';
+import { remarkVersionGateParams } from '@/lib/mdx-plugins/remark-param-gate-params';
 
 import { remarkElementIds } from './lib/mdx-plugins/remark-element-ids';
 import { remarkLinkPreview } from './lib/mdx-plugins/remark-link-preview';
@@ -102,7 +102,7 @@ export const docs = defineDocs({
                 remarkPlugins: isLint
                     ? [remarkElementIds]
                     : [
-                          remarkParamGater,
+                          remarkVersionGateParams,
                           remarkSteps,
                           remarkMath,
                           remarkMdxMermaid,

@@ -70,29 +70,16 @@ export default async function ApiVersionPage({ params }: Props) {
             <VersionDropdown
                 currentVersion={version as ApiVersion}
                 baseSlug={slug}
-                versionMeta={versionMeta as unknown as { version: string; status: string }[]}
-                status={status as unknown as ApiVersion}
+                versionMeta={versionMeta}
+                status={status}
             />
             <DocsBody>
                 <Mdx
                     components={getMDXComponents({
-                        h3: (props) => (
-                            <PSJParamHeader
-                                currentVersion={version as ApiVersion}
-                                {...(props as any)}
-                            />
-                        ),
-                        PSJParamHeader: (props) => (
-                            <PSJParamHeader
-                                currentVersion={version as ApiVersion}
-                                {...(props as any)}
-                            />
-                        ),
+                        h3: (props) => <PSJParamHeader {...props} />,
+                        PSJParamHeader: (props) => <PSJParamHeader {...props} />,
                         PSJParamSection: (props) => (
-                            <PSJParamSection
-                                currentVersion={version as ApiVersion}
-                                {...(props as any)}
-                            />
+                            <PSJParamSection currentVersion={version as ApiVersion} {...props} />
                         ),
                     })}
                 />

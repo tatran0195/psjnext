@@ -17,13 +17,14 @@ import {
     type SharedProps,
 } from 'fumadocs-ui/components/dialog/search';
 import { useI18n } from 'fumadocs-ui/contexts/i18n';
+import { useTreeContext } from 'fumadocs-ui/contexts/tree';
 import { ArrowRight } from 'lucide-react';
 
 import { ListMenu } from '@/components/ui/list-menu';
 import { useThrottledValue } from '@/hooks/use-throttle';
+import { API_VERSIONS } from '@/lib/api-versions';
 import { compareSemver, matchesSearch } from '@/lib/search';
 
-import { API_VERSIONS } from '@/lib/api-versions';
 import type { Item, Node } from 'fumadocs-core/page-tree';
 import type { SortedResult } from 'fumadocs-core/search';
 
@@ -33,11 +34,11 @@ const TAGS = [
         description: 'All results',
         value: undefined,
     },
-   ...(API_VERSIONS.map((version) => ({
-    name: version,
-    description: `Only results about ${version}`,
-    value: version,
-   })))
+    ...API_VERSIONS.map((version) => ({
+        name: version,
+        description: `Only results about ${version}`,
+        value: version,
+    })),
 ];
 
 const BEHAVIORS = [
@@ -62,7 +63,7 @@ export default function CustomSearchDialog(props: SharedProps) {
         tag,
         locale,
     });
-    // const { full } = useTreeContext();
+    const { full } = useTreeContext();
     const router = useRouter();
     const throttledSearch = useThrottledValue(search, 100);
 
@@ -78,9 +79,9 @@ export default function CustomSearchDialog(props: SharedProps) {
             }
         }
 
-        // for (const item of full.children) onNode(item);
+        for (const item of full.children) onNode(item);
         return map;
-    }, []);
+    }, [full]);
 
     const pageTreeAction = useMemo<SearchItemType | undefined>(() => {
         if (search.length === 0) return;
@@ -116,9 +117,12 @@ export default function CustomSearchDialog(props: SharedProps) {
                               matchesSearch(item, throttledSearch, behavior === 'exact'),
                           )
                           .sort((a, b) => {
-                              const aVersion = a.id.split('/')[3];
-                              const bVersion = b.id.split('/')[3];
-                              return compareSemver(bVersion, aVersion);
+                              const versionRegex = /^\d+\.\d+\.\d+$/;
+                              const aVersion = versionRegex.exec(a.id);
+                              const bVersion = versionRegex.exec(b.id);
+                              if (!aVersion || !bVersion) return 0;
+
+                              return compareSemver(bVersion[0], aVersion[0]);
                           })
                     : []),
             ];

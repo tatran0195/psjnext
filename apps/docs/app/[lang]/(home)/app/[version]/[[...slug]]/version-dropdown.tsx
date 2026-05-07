@@ -1,18 +1,18 @@
 'use client';
+import { ApiVersion, VersionStatus } from '@/lib/api-versions';
 import { useRouter } from 'next/navigation';
 
-import type { ApiVersion } from '@/lib/source/plugins/version-plugin';
 
 interface VersionMeta {
-    version: string;
-    status: 'available' | 'deprecated' | 'removed';
+    version: ApiVersion;
+    status: VersionStatus;
 }
 
 interface Props {
     currentVersion: ApiVersion;
     baseSlug: string[];
     versionMeta: VersionMeta[];
-    status: 'available' | 'deprecated' | 'removed';
+    status: VersionStatus;
 }
 
 const statusLabel: Record<string, string> = {

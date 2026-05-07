@@ -1,6 +1,7 @@
 {
-    "title": "app",
+    "title": "Application",
     "description": "Application Programming Guide",
     "root": true,
-    "group": true
+    "group": true,
+    "icon": "Terminal"
 }

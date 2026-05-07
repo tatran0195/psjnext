@@ -3,7 +3,7 @@ import { createTokenizer } from '@orama/tokenizers/japanese';
 import { StructuredData } from 'fumadocs-core/mdx-plugins';
 import { findPath } from 'fumadocs-core/page-tree';
 import { createFromSource } from 'fumadocs-core/search/server';
-import { LoaderConfig, LoaderOutput, PageData } from 'fumadocs-core/source';
+import { LoaderConfig, LoaderOutput } from 'fumadocs-core/source';
 import { basename, extname } from 'node:path';
 
 import { source } from '@/lib/source';
@@ -20,15 +20,6 @@ export const { GET } = createFromSource(source, {
     },
     async buildIndex(page) {
         if (!page) throw new Error('Cannot find page');
-
-        let pageData;
-        if ('load' in page.data && typeof page.data.load === 'function') {
-            pageData = await page.data.load();
-        } else {
-            pageData = page.data as PageData & { lastModified?: Date };
-        }
-
-        console.log(pageData);
 
         const versionRegex = /^\d+\.\d+\.\d+$/;
         const version = page.data._version ?? page.slugs.find((s) => versionRegex.test(s)) ?? null;
