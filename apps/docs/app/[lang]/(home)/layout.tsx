@@ -12,8 +12,6 @@ export default async function Layout(props: LayoutProps<'/[lang]'>) {
 
     const tree = source.getPageTree(lang);
 
-    console.log(tree)
-
     return (
         <TreeContextProvider tree={tree}>
             <LinkSidebarProvider>
