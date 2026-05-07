@@ -31,6 +31,8 @@ import { API_VERSIONS } from '@/lib/api-versions';
 import { createMetadata, getPageImage } from '@/lib/metadata';
 import { source } from '@/lib/source';
 
+import { getSuggestions } from './suggestions';
+
 /**
  * Resolve [version, ...pageSlug] from catch-all segments after stripping the
  * route prefix ('api').
@@ -55,22 +57,25 @@ export default async function Page(props: {
     const { slug = [], lang } = params;
 
     // Resolve page + optional API-specific MDX component overrides.
-    let page: ReturnType<typeof source.getPage>;
+    // let page: ReturnType<typeof source.getPage>;
     let apiMdxComponents: Partial<Parameters<typeof getMDXComponents>[0]> | undefined;
-
+    const page = source.getPage(slug, lang);
+    if (!page)
+        return (
+            <NotFound
+                getSuggestions={async () =>
+                    params.slug ? getSuggestions(params.slug.join(' ')) : []
+                }
+            />
+        );
     if (slug[0] === 'api') {
-        const { version, pageSlug } = resolveVersion(slug.slice(1));
-        page = source.getPage(['api', ...pageSlug]);
-        if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
+        const { version } = resolveVersion(slug.slice(1));
         apiMdxComponents = {
             h3: (props: ComponentProps<'h3'>) => <ParamHeader {...props} />,
             ParamSection: (props: Omit<ComponentProps<typeof ParamSection>, 'currentVersion'>) => (
                 <ParamSection {...props} currentVersion={version as ApiVersion} />
             ),
         };
-    } else {
-        page = source.getPage(slug, lang);
-        if (!page) return <NotFound getSuggestions={async () => (params.slug ? [] : [])} />;
     }
 
     const { body: Mdx, toc, lastModified } = await page.data.load();

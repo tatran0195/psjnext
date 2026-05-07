@@ -1,4 +1,4 @@
-import { type ReactNode, Suspense } from 'react';
+import { Suspense } from 'react';
 
 import Link from 'fumadocs-core/link';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
@@ -8,7 +8,7 @@ import { cn } from '@/lib/cn';
 export interface Suggestion {
     id: string;
     href: string;
-    title: ReactNode;
+    title: string;
 }
 
 export interface NotFoundProps {
@@ -17,12 +17,23 @@ export interface NotFoundProps {
 
 export function NotFound(props: NotFoundProps) {
     return (
-        <div className="flex flex-col items-center justify-center text-center gap-4 p-8 [grid-area:main]">
-            <h1 className="text-4xl font-bold font-mono">Not Found</h1>
-            <div className="w-full border border-fd-foreground/50 border-dashed p-4 max-w-[600px]">
+        <div className="mx-auto flex w-full max-w-3xl flex-col items-center px-6 py-20 [grid-area:main]">
+            <div className="space-y-2 text-center">
+                <h1 className="text-3xl font-semibold tracking-tight">Page not found</h1>
+
+                <p className="text-sm text-fd-muted-foreground">
+                    We found some similar pages that might help.
+                </p>
+            </div>
+
+            <div className="mt-8 w-full">
                 <Suspense
                     fallback={
-                        <p className="text-sm text-fd-muted-foreground">Finding Alternatives...</p>
+                        <div className="overflow-hidden rounded-2xl border bg-fd-card shadow-sm">
+                            <div className="px-5 py-4 text-sm text-fd-muted-foreground">
+                                Finding alternatives...
+                            </div>
+                        </div>
                     }
                 >
                     <Alternative {...props} />
@@ -37,31 +48,61 @@ async function Alternative({ getSuggestions }: NotFoundProps) {
 
     if (suggestions.length === 0) {
         return (
-            <div>
-                <p className="text-sm text-fd-muted-foreground mb-2">No Alternative Found</p>
+            <div className="rounded-2xl border bg-fd-card p-8 text-center shadow-sm">
+                <p className="mb-4 text-sm text-fd-muted-foreground">No similar pages found.</p>
+
                 <Link href="/" className={cn(buttonVariants({ variant: 'secondary' }))}>
-                    Return to Home
+                    Return home
                 </Link>
             </div>
         );
     }
 
     return (
-        <div>
-            <h2 className="text-sm text-fd-muted-foreground mb-2">Maybe you are looking for</h2>
+        <div className="overflow-hidden rounded-2xl border bg-fd-card shadow-sm">
+            {suggestions.map((doc, index) => (
+                <Link
+                    key={doc.id}
+                    href={doc.href}
+                    className={cn(
+                        'group relative flex items-start gap-4 px-5 py-4 transition-all duration-200',
+                        'hover:bg-fd-accent/40 hover:shadow-sm',
+                        index !== suggestions.length - 1 && 'border-b',
+                    )}
+                >
+                    <div className="min-w-0 flex-1 text-left">
+                        <p
+                            className={cn(
+                                'text-sm font-medium leading-5 text-fd-foreground',
+                                '[&_mark]:rounded-md',
+                                '[&_mark]:bg-fd-primary/15',
+                                '[&_mark]:px-1',
+                                '[&_mark]:py-0.5',
+                                '[&_mark]:font-semibold',
+                                '[&_mark]:text-fd-foreground',
+                            )}
+                            dangerouslySetInnerHTML={{
+                                __html: doc.title,
+                            }}
+                        />
 
-            <div className="flex flex-col rounded-lg border bg-fd-card text-fd-card-foreground shadow-md overflow-hidden divide-y divide-fd-border">
-                {suggestions.map((doc) => (
-                    <Link
-                        key={doc.id}
-                        href={doc.href}
-                        className="inline-flex items-center justify-between gap-4 text-sm px-3 py-2 hover:bg-fd-accent hover:text-fd-accent-foreground"
+                        <code className="mt-1.5 block break-all text-[11px] leading-relaxed text-fd-muted-foreground">
+                            {doc.href}
+                        </code>
+                    </div>
+
+                    <div
+                        className={cn(
+                            'mt-0.5 shrink-0 text-fd-muted-foreground/60',
+                            'transition-all duration-200',
+                            'group-hover:translate-x-0.5',
+                            'group-hover:text-fd-foreground',
+                        )}
                     >
-                        <p className="font-medium text-nowrap">{doc.title}</p>
-                        <code className="text-fd-muted-foreground truncate">{doc.href}</code>
-                    </Link>
-                ))}
-            </div>
+                        →
+                    </div>
+                </Link>
+            ))}
         </div>
     );
 }
