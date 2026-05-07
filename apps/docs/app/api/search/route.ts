@@ -6,6 +6,7 @@ import { createFromSource } from 'fumadocs-core/search/server';
 import { LoaderConfig, LoaderOutput } from 'fumadocs-core/source';
 import { basename, extname } from 'node:path';
 
+import { API_VERSIONS } from '@/lib/api-versions';
 import { source } from '@/lib/source';
 
 export const { GET } = createFromSource(source, {
@@ -22,7 +23,10 @@ export const { GET } = createFromSource(source, {
         if (!page) throw new Error('Cannot find page');
 
         const versionRegex = /^\d+\.\d+\.\d+$/;
-        const version = page.data._version ?? page.slugs.find((s) => versionRegex.test(s)) ?? null;
+        const version: string =
+            (page.data._version as string | undefined) ??
+            page.slugs.find((s) => versionRegex.test(s)) ??
+            API_VERSIONS[0];
 
         let structuredData: StructuredData | undefined;
         if ('structuredData' in page.data) {

@@ -8,6 +8,10 @@ const withAnalyzer = createBundleAnalyzer({
 });
 
 const config: NextConfig = {
+    env: {
+        VERSIONS: process.env.VERSIONS,
+        BASE_URL: process.env.BASE_URL,
+    },
     reactStrictMode: true,
 
     logging: {

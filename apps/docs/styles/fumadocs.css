@@ -13,6 +13,6 @@
     background: var(--color-fd-primary);
 }
 
-#nd-page .prose {
+/* #nd-page .prose {
     @apply text-sm;
-}
+} */
