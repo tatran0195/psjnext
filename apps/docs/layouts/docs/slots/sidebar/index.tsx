@@ -8,7 +8,7 @@ import { useTreeContext } from 'fumadocs-ui/contexts/tree';
 import { Languages, Search, SidebarIcon, X } from 'lucide-react';
 
 import { buttonVariants } from '@/components/ui/button';
-import { AsidePosts } from '@/layouts/docs/slots/sidebar/tabs/api-post';
+import { DockRail } from '@/layouts/docs/slots/sidebar/dock-rail';
 import { SidebarTabsDropdown } from '@/layouts/docs/slots/sidebar/tabs/dropdown';
 import { getFirstUrl, LayoutTab, LinkItem } from '@/layouts/shared';
 import { cn } from '@/lib/cn';
@@ -203,18 +203,16 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                 filterQuery={filterQuery}
                                 setFilterQuery={setFilterQuery}
                             />
-                            <AsidePosts
+                            <DockRail
                                 items={nestedTabs[1].tabs.map((i) => ({
                                     href: i.url,
                                     text: i.title?.toString() || '',
                                     icon: i.icon,
                                 }))}
-                                collapsedCount={2}
-                                activeHref={nestedTabs[1].tabs[0].url}
+                                collapsedCount={3}
+                                activeHref={nestedTabs[1].tabs[1].url}
                             />
-                            <AsidePosts
-                                collapsedCount={4}
-                             />
+                            <DockRail collapsedCount={4} />
 
                             {nestedTabs.map((level, i) => (
                                 <SidebarTabsDropdown
