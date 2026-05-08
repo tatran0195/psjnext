@@ -1,10 +1,12 @@
+import { ReactNode } from 'react';
+
+import { Archive, Tag } from 'lucide-react';
+
 import { API_VERSIONS, getVersionStatus } from '@/lib/api-versions';
 
 import type { StructuredData } from 'fumadocs-core/mdx-plugins';
 import type * as PageTree from 'fumadocs-core/page-tree';
 import type { LoaderPlugin } from 'fumadocs-core/source';
-import { Archive, Tag } from 'lucide-react';
-import { ReactNode } from 'react';
 
 export interface VersionedPageFrontmatter {
     title: string;
@@ -35,14 +37,14 @@ function nodeStoragePath(node: { $id?: string }): string {
     return colonIdx !== -1 ? id.slice(colonIdx + 1) : id;
 }
 
-const Box = ({ children, color }: { children: React.ReactNode; color: string }) => (
-    <div
-        className="flex items-center justify-center [&_svg]:size-[18px] rounded-lg size-8 shrink-0 text-(--tab-color) bg-(--tab-color)/10 border border-(--tab-color)/20 p-1.5"
-        style={{ '--tab-color': color } as object}
-    >
-        {children}
-    </div>
-);
+// const Box = ({ children, color }: { children: React.ReactNode; color: string }) => (
+//     <div
+//         className="flex items-center justify-center [&_svg]:size-[18px] rounded-lg size-8 shrink-0 text-(--tab-color) bg-(--tab-color)/10 border border-(--tab-color)/20 p-1.5"
+//         style={{ '--tab-color': color } as object}
+//     >
+//         {children}
+//     </div>
+// );
 
 /**
  * Resolve sidebar icon and label for a version by its position in API_VERSIONS.
@@ -52,19 +54,11 @@ const Box = ({ children, color }: { children: React.ReactNode; color: string }) 
 function resolveVersionMeta(idx: number): { icon: ReactNode | string; description: string } {
     return idx === 0
         ? {
-              icon: (
-                  <Box color="#007bff">
-                      <Tag />
-                  </Box>
-              ),
+              icon: <Tag />,
               description: 'Latest',
           }
         : {
-              icon: (
-                  <Box color="#6c757d">
-                      <Archive />
-                  </Box>
-              ),
+              icon: <Archive />,
               description: `Version ${API_VERSIONS[idx]?.split('.').slice(0, 2).join('.')}`,
           };
 }
@@ -105,9 +99,8 @@ function installStructuredDataGetter(
                     return EMPTY_STRUCTURED_DATA;
                 }
                 const exports = mod._exports as Record<string, unknown> | undefined;
-                const versionedMap = (
-                    exports?.versionedStructuredData ?? mod.versionedStructuredData
-                ) as Record<string, StructuredData> | undefined;
+                const versionedMap = (exports?.versionedStructuredData ??
+                    mod.versionedStructuredData) as Record<string, StructuredData> | undefined;
                 // Fall back to the plain structuredData export for pages that
                 // have no @since/@removed annotations and no versionedStructuredData.
                 return (
@@ -243,6 +236,7 @@ export function versionPlugin(): LoaderPlugin {
                         ...child,
                         defaultOpen: false,
                         group: true,
+                        type: 'folder',
                         ...resolveVersionMeta(idx),
                     }));
 

@@ -4,13 +4,13 @@ import { usePathname } from 'next/navigation';
 import { type ComponentProps, createElement, FC, type ReactNode, useMemo, useState } from 'react';
 
 import { searchPath } from 'fumadocs-core/breadcrumb';
-import Link from 'fumadocs-core/link';
 import { useTreeContext } from 'fumadocs-ui/contexts/tree';
-import { Check, ChevronsUpDown, Languages, Search, SidebarIcon, X } from 'lucide-react';
+import { Languages, Search, SidebarIcon, X } from 'lucide-react';
 
 import { buttonVariants } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { getFirstUrl, isLayoutTabActive, LayoutTab, LinkItem } from '@/layouts/shared';
+import { AsidePosts } from '@/layouts/docs/slots/sidebar/tabs/api-post';
+import { SidebarTabsDropdown } from '@/layouts/docs/slots/sidebar/tabs/dropdown';
+import { getFirstUrl, LayoutTab, LinkItem } from '@/layouts/shared';
 import { cn } from '@/lib/cn';
 import { sidebarMatch } from '@/lib/tree-filter';
 
@@ -26,7 +26,6 @@ import {
     SidebarTrigger,
     SidebarViewport,
 } from './components';
-import { useSidebar } from './provider';
 
 import type * as PageTree from 'fumadocs-core/page-tree';
 
@@ -200,10 +199,22 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                 />
                             )}
 
-                            <SearchInput
+                            <SearchComposition
                                 filterQuery={filterQuery}
                                 setFilterQuery={setFilterQuery}
                             />
+                            <AsidePosts
+                                items={nestedTabs[1].tabs.map((i) => ({
+                                    href: i.url,
+                                    text: i.title?.toString() || '',
+                                    icon: i.icon,
+                                }))}
+                                collapsedCount={2}
+                                activeHref={nestedTabs[1].tabs[0].url}
+                            />
+                            <AsidePosts
+                                collapsedCount={4}
+                             />
 
                             {nestedTabs.map((level, i) => (
                                 <SidebarTabsDropdown
@@ -256,10 +267,6 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                 <X />
                             </SidebarTrigger>
                             {tabs.length > 0 && <SidebarTabsDropdown options={tabs} />}
-                            <SearchInput
-                                filterQuery={filterQuery}
-                                setFilterQuery={setFilterQuery}
-                            />
                             {nestedTabs.map((level, i) => (
                                 <SidebarTabsDropdown
                                     key={i}
@@ -267,6 +274,10 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                     activeItem={level.active}
                                 />
                             ))}
+                            <SearchComposition
+                                filterQuery={filterQuery}
+                                setFilterQuery={setFilterQuery}
+                            />
                         </>
                     ),
                 })}
@@ -310,7 +321,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
     );
 }
 
-function SearchInput({
+function SearchComposition({
     filterQuery,
     setFilterQuery,
 }: {
@@ -331,92 +342,6 @@ function SearchInput({
     );
 }
 
-function SidebarTabsDropdown({
-    options,
-    placeholder,
-    activeItem,
-    ...props
-}: {
-    placeholder?: ReactNode;
-    options: LayoutTab[];
-    activeItem?: LayoutTab;
-} & ComponentProps<'button'>) {
-    const { closeOnRedirect } = useSidebar();
-    const pathname = usePathname();
-
-    const selected = useMemo(() => {
-        return activeItem ?? options.findLast((item) => isLayoutTabActive(item, pathname));
-    }, [activeItem, options, pathname]);
-
-    const onClick = () => {
-        closeOnRedirect.current = false;
-    };
-
-    const item = selected ? (
-        <>
-            {selected.icon}
-            <div>
-                <p className="text-sm font-medium leading-5">{selected.title}</p>
-                <p className="text-xs text-fd-muted-foreground leading-4 empty:hidden">
-                    {selected.description !== selected.title ? selected.description : null}
-                </p>
-            </div>
-        </>
-    ) : (
-        placeholder
-    );
-
-    return (
-        <Popover>
-            {item && (
-                <PopoverTrigger
-                    {...props}
-                    className={cn(
-                        'flex items-center gap-2 rounded-lg p-2 text-start text-fd-secondary-foreground transition-colors hover:bg-fd-accent/15 data-[state=open]:bg-fd-accent/15 data-[state=open]:text-fd-accent-foreground',
-                        props.className,
-                    )}
-                >
-                    {item}
-                    <ChevronsUpDown className="shrink-0 ms-auto size-4 text-fd-muted-foreground" />
-                </PopoverTrigger>
-            )}
-            <PopoverContent className="flex flex-col gap-1 w-(--radix-popover-trigger-width) p-1 fd-scroll-container">
-                {options.map((item) => {
-                    const active = isLayoutTabActive(item, pathname);
-                    if (!active && item.unlisted) return;
-
-                    return (
-                        <Link
-                            key={item.url}
-                            href={item.url}
-                            onClick={onClick}
-                            {...item.props}
-                            className={cn(
-                                'flex items-center gap-2 rounded-lg p-1.5 hover:bg-fd-accent/15 hover:text-fd-accent-foreground',
-                                active && 'bg-fd-accent/15 text-fd-accent-foreground',
-                            )}
-                        >
-                            {item.icon}
-                            <div>
-                                <p className="text-sm font-medium leading-5">{item.title}</p>
-                                <p className="text-[0.8125rem] text-fd-muted-foreground leading-4 empty:hidden">
-                                    {item.description !== item.title ? item.description : null}
-                                </p>
-                            </div>
-
-                            <Check
-                                className={cn(
-                                    'shrink-0 ms-auto size-3.5 text-fd-primary',
-                                    !active && 'invisible',
-                                )}
-                            />
-                        </Link>
-                    );
-                })}
-            </PopoverContent>
-        </Popover>
-    );
-}
-
 export * from './components';
 export * from './provider';
+

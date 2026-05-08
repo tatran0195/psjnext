@@ -1,5 +1,5 @@
 'use client';
-import { type ComponentProps, type ReactNode, useMemo, useState } from 'react';
+import { type ComponentProps, type ReactNode, useMemo } from 'react';
 
 import { usePathname } from 'fumadocs-core/framework';
 import Link from 'fumadocs-core/link';
@@ -11,54 +11,61 @@ import { cn } from '@/lib/cn';
 
 import { useSidebar } from '..';
 
-export type SidebarTabWithProps = LayoutTab;
+const IconBox = ({ children, className, ...props }: ComponentProps<'div'>) => (
+    <div
+        className={cn(
+            'flex items-center justify-center [&_svg]:size-[18px] rounded-lg size-8 shrink-0 text-(--tab-color) bg-(--tab-color)/10 border border-(--tab-color)/20 p-1.5',
+            className,
+        )}
+        style={{ '--tab-color': 'var(--color-fd-primary, var(--color-fd-foreground))' } as object}
+        {...props}
+    >
+        {children}
+    </div>
+);
 
 export function SidebarTabsDropdown({
     options,
     placeholder,
+    activeItem,
     ...props
 }: {
     placeholder?: ReactNode;
     options: LayoutTab[];
+    activeItem?: LayoutTab;
 } & ComponentProps<'button'>) {
-    const [open, setOpen] = useState(false);
     const { closeOnRedirect } = useSidebar();
     const pathname = usePathname();
 
     const selected = useMemo(() => {
-        return options.findLast((item) => isLayoutTabActive(item, pathname));
-    }, [options, pathname]);
+        return activeItem ?? options.findLast((item) => isLayoutTabActive(item, pathname));
+    }, [activeItem, options, pathname]);
 
     const onClick = () => {
         closeOnRedirect.current = false;
-        setOpen(false);
     };
 
     const item = selected ? (
-        <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center rounded-md border text-fd-primary bg-fd-primary/10 border-fd-primary/20 p-1 shadow-sm size-8 shrink-0 empty:hidden">
-                {selected.icon}
+        <>
+            <IconBox>{selected.icon}</IconBox>
+            <div>
+                <p className="text-sm font-medium leading-5">{selected.title}</p>
+                <p className="text-xs text-fd-muted-foreground leading-4 empty:hidden">
+                    {selected.description !== selected.title ? selected.description : null}
+                </p>
             </div>
-            <div className="flex flex-col text-left">
-                <p className="text-sm font-medium text-fd-foreground">{selected.title}</p>
-                {selected.description && (
-                    <p className="text-[13px] font-normal text-fd-muted-foreground hidden md:block">
-                        {selected.description}
-                    </p>
-                )}
-            </div>
-        </div>
+        </>
     ) : (
         placeholder
     );
 
     return (
-        <Popover open={open} onOpenChange={setOpen}>
+        <Popover>
             {item && (
                 <PopoverTrigger
                     {...props}
                     className={cn(
-                        'flex items-center gap-2 rounded-xl p-2.5 border bg-fd-background text-start text-fd-secondary-foreground transition-all hover:bg-fd-accent hover:shadow-sm data-[state=open]:bg-fd-accent data-[state=open]:shadow-sm outline-none ring-fd-ring focus-visible:ring-2',
+                        'flex items-center gap-2 rounded-lg p-2 text-start text-fd-secondary-foreground transition-colors hover:bg-fd-accent/15 data-[state=open]:bg-fd-accent/15 data-[state=open]:text-fd-accent-foreground',
                         props.className,
                     )}
                 >
@@ -66,10 +73,10 @@ export function SidebarTabsDropdown({
                     <ChevronsUpDown className="shrink-0 ms-auto size-4 text-fd-muted-foreground" />
                 </PopoverTrigger>
             )}
-            <PopoverContent className="flex flex-col gap-1 w-(--radix-popover-trigger-width) p-1.5 rounded-xl shadow-md border bg-fd-popover fd-scroll-container">
+            <PopoverContent className="flex flex-col gap-1 w-(--radix-popover-trigger-width) p-1 fd-scroll-container">
                 {options.map((item) => {
-                    const isActive = selected && item.url === selected.url;
-                    if (!isActive && item.unlisted) return;
+                    const active = isLayoutTabActive(item, pathname);
+                    if (!active && item.unlisted) return;
 
                     return (
                         <Link
@@ -78,42 +85,22 @@ export function SidebarTabsDropdown({
                             onClick={onClick}
                             {...item.props}
                             className={cn(
-                                'flex items-center gap-3 rounded-lg p-2 transition-all hover:bg-fd-accent hover:text-fd-accent-foreground',
-                                item.props?.className,
+                                'flex items-center gap-2 rounded-lg p-1.5 hover:bg-fd-accent/15 hover:text-fd-accent-foreground',
+                                active && 'bg-fd-accent/15 text-fd-accent-foreground',
                             )}
                         >
-                            <div
-                                className={cn(
-                                    'flex items-center justify-center rounded-md border p-1 shadow-[0_1px_2px_rgba(0,0,0,0.05)] size-8 shrink-0 empty:hidden',
-                                    isActive
-                                        ? 'bg-fd-primary/10 border-fd-primary/20 text-fd-primary'
-                                        : 'bg-fd-background border-fd-border text-fd-muted-foreground',
-                                )}
-                            >
-                                {item.icon}
-                            </div>
-                            <div className="flex flex-col text-left min-w-0">
-                                <p
-                                    className={cn(
-                                        'text-sm font-medium leading-tight truncate',
-                                        isActive
-                                            ? 'text-fd-foreground'
-                                            : 'text-fd-muted-foreground',
-                                    )}
-                                >
-                                    {item.title}
+                            <IconBox>{item.icon}</IconBox>
+                            <div>
+                                <p className="text-sm font-medium leading-5">{item.title}</p>
+                                <p className="text-[0.8125rem] text-fd-muted-foreground leading-4 empty:hidden">
+                                    {item.description !== item.title ? item.description : null}
                                 </p>
-                                {item.description && (
-                                    <p className="text-[13px] font-normal text-fd-muted-foreground truncate">
-                                        {item.description}
-                                    </p>
-                                )}
                             </div>
 
                             <Check
                                 className={cn(
-                                    'shrink-0 ms-auto size-4',
-                                    isActive ? 'text-emerald-500' : 'invisible',
+                                    'shrink-0 ms-auto size-3.5 text-fd-primary',
+                                    !active && 'invisible',
                                 )}
                             />
                         </Link>
