@@ -1,12 +1,19 @@
 import type { RemarkAutoTypeTableOptions } from 'fumadocs-typescript';
 
-import { RehypeCodeOptions, remarkMdxMermaid } from 'fumadocs-core/mdx-plugins';
-import { applyMdxPreset, defineConfig, defineDocs } from 'fumadocs-mdx/config';
+import {
+    RehypeCodeOptions,
+    remarkDirectiveAdmonition,
+    remarkMdxMermaid,
+} from 'fumadocs-core/mdx-plugins';
+import { applyMdxPreset, defineCollections, defineConfig, defineDocs } from 'fumadocs-mdx/config';
 import jsonSchema from 'fumadocs-mdx/plugins/json-schema';
 import lastModified from 'fumadocs-mdx/plugins/last-modified';
+import rehypePrettyCode from 'rehype-pretty-code';
+import { z } from 'zod';
 
-import { remarkVersionGateParams } from '@/lib/mdx-plugins/remark-param-gate-params';
+import { remarkVersionGateParams } from '@/lib/mdx-plugins/remark-version-gate-params';
 
+import { transformers } from './lib/highlight-code';
 import { remarkElementIds } from './lib/mdx-plugins/remark-element-ids';
 import { remarkLinkPreview } from './lib/mdx-plugins/remark-link-preview';
 import { defaultShikiOptions } from './lib/shiki';
@@ -107,10 +114,24 @@ export const docs = defineDocs({
                           remarkMath,
                           remarkMdxMermaid,
                           remarkLinkPreview,
+                          remarkDirectiveAdmonition,
                           [remarkAutoTypeTable, typeTableOptions],
                           remarkTypeScriptToJavaScript,
                       ],
-                rehypePlugins: (v) => [rehypeKatex, ...v],
+                rehypePlugins: (v) => [
+                    rehypeKatex,
+                    [
+                        rehypePrettyCode,
+                        {
+                            theme: {
+                                dark: 'github-dark',
+                                light: 'github-light-default',
+                            },
+                            transformers,
+                        },
+                    ],
+                    ...v,
+                ],
             })(environment);
         },
     },
@@ -138,6 +159,25 @@ function transformerEscape(): ShikiTransformer {
         },
     };
 }
+
+export const changelog = defineCollections({
+    type: 'doc',
+    dir: './content/changelog',
+    schema: z.object({
+        id: z.string(),
+        slug: z.string(),
+        date: z.string(),
+        title: z.string(),
+        summary: z.string(),
+        draft: z.boolean().optional(),
+        image: z.object({
+            src: z.string(),
+            alt: z.string(),
+            width: z.number(),
+            height: z.number(),
+        }),
+    }),
+});
 
 export default defineConfig({
     plugins: [

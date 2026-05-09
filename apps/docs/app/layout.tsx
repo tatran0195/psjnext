@@ -5,7 +5,8 @@ import { NextProvider } from 'fumadocs-core/framework/next';
 import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
 import { Geist, Geist_Mono } from 'next/font/google';
 
-import { baseUrl, createMetadata } from '@/lib/metadata';
+import { createMetadata } from '@/lib/metadata';
+import { getSiteUrl } from '@/lib/site-url';
 import { source } from '@/lib/source';
 import '@/styles/global.css';
 import { Body } from './layout.client';
@@ -17,7 +18,7 @@ export const metadata: Metadata = createMetadata({
         default: 'PSJ Docs',
     },
     description: 'PSJ Command Documentation',
-    metadataBase: baseUrl,
+    metadataBase: getSiteUrl(),
 });
 
 const geist = Geist({

@@ -9,11 +9,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   THEME — shadcn/radix tokens (inline) + landing page design tokens
+   ───────────────────────────────────────────────────────────────────────────── */
 @theme inline {
+    /* Radius scale */
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
     --radius-xl: calc(var(--radius) + 4px);
+
+    /* shadcn semantic color bridge */
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
@@ -46,6 +52,47 @@
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
 
+    /* Fumadocs brand palette */
+    --color-brand-primary: #818cf8;
+    --color-brand-secondary: #a78bfa;
+    --color-brand-accent: #c084fc;
+    --color-brand-pink: #f472b6;
+    --color-brand-cyan: #22d3ee;
+    --color-brand-emerald: #34d399;
+
+    /* ── Landing page surface tokens ── */
+    --color-bg: #000000;
+    --color-bg-elevated: #0a0a0a;
+    --color-bg-card: #111111;
+    --color-bg-card-hover: #1a1a1a;
+    --color-bg-subtle: #0d0d0d;
+
+    /* Landing border tokens — note: --color-border is already claimed above
+       by var(--border). These are separate landing-specific aliases.        */
+    --color-landing-border: #1a1a1a;
+    --color-landing-border-hover: #333333;
+    --color-landing-border-accent: #0066ff33;
+
+    /* Landing accent palette */
+    --color-blue: #0066ff;
+    --color-blue-bright: #3388ff;
+    --color-blue-glow: #0066ff40;
+    --color-cyan: #00ccff;
+    --color-cyan-glow: #00ccff30;
+    --color-purple: #7c3aed;
+    --color-orange: #ff6b2c;
+
+    /* Landing text scale */
+    --color-text: #ededed;
+    --color-text-secondary: #888888;
+    --color-text-muted: #555555;
+    --color-text-dim: #333333;
+
+    /* Glass surfaces */
+    --color-surface-glass: rgba(255, 255, 255, 0.03);
+    --color-surface-glass-hover: rgba(255, 255, 255, 0.06);
+
+    /* ── Keyframes ── */
     @keyframes shimmer-sweep {
         from {
             background-position: 150% 0;
@@ -56,17 +103,74 @@
     }
     --animate-shimmer: shimmer-sweep var(--shimmer-duration, 1000ms) linear infinite both;
 
-    /* Brand Colors - Purple/Indigo Theme */
-    --color-brand-primary: #818cf8;
-    --color-brand-secondary: #a78bfa;
-    --color-brand-accent: #c084fc;
-    --color-brand-pink: #f472b6;
-    --color-brand-cyan: #22d3ee;
-    --color-brand-emerald: #34d399;
+    @keyframes float1 {
+        0%,
+        100% {
+            transform: translate(0, 0) scale(1);
+        }
+        33% {
+            transform: translate(30px, -30px) scale(1.05);
+        }
+        66% {
+            transform: translate(-20px, 20px) scale(0.95);
+        }
+    }
+    @keyframes float2 {
+        0%,
+        100% {
+            transform: translate(0, 0) scale(1);
+        }
+        33% {
+            transform: translate(-40px, 20px) scale(1.1);
+        }
+        66% {
+            transform: translate(20px, -40px) scale(0.9);
+        }
+    }
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+    @keyframes shine {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(100%);
+        }
+    }
+    @keyframes pulseRing {
+        0% {
+            transform: scale(0.8);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(2.2);
+            opacity: 0;
+        }
+    }
+    @keyframes borderGlow {
+        0%,
+        100% {
+            opacity: 0.3;
+        }
+        50% {
+            opacity: 0.8;
+        }
+    }
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   CSS CUSTOM PROPERTIES — light / dark
+   ───────────────────────────────────────────────────────────────────────────── */
 :root {
     --radius: 0.625rem;
+
+    /* shadcn/radix light tokens */
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
@@ -99,10 +203,11 @@
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
 
+    /* Fumadocs section-primary overrides */
     --api-color: hsl(250, 80%, 54%);
     --guides-color: hsl(41, 100%, 40%);
     --data-type-color: hsl(217, 100%, 58%);
-    --framework-color: hsl(217 91% 60%);
+    --framework-color: hsl(217, 91%, 60%);
 }
 
 .dark {
@@ -138,12 +243,15 @@
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
 
-    --api-color: hsl(250 100% 80%);
+    --api-color: hsl(250, 100%, 80%);
     --guides-color: hsl(41, 100%, 40%);
     --data-type-color: hsl(199, 96%, 45%);
-    --framework-color: hsl(217 91% 60%);
+    --framework-color: hsl(217, 91%, 60%);
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   BASE LAYER
+   ───────────────────────────────────────────────────────────────────────────── */
 @layer base {
     * {
         @apply border-border outline-ring/50;
@@ -166,47 +274,111 @@
     box-shadow: none;
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   FUMADOCS SECTION PRIMARY OVERRIDES
+   ───────────────────────────────────────────────────────────────────────────── */
 .api {
     --color-fd-primary: var(--api-color);
 }
-
 .guides {
     --color-fd-primary: var(--guides-color);
 }
-
 .dataType {
-    --color-fd-primary: var(--dataType-color);
+    --color-fd-primary: var(--data-type-color);
 }
-
 .framework {
     --color-fd-primary: var(--framework-color);
 }
 
-/* Custom scrollbar for better UI */
+/* ─────────────────────────────────────────────────────────────────────────────
+   SCROLLBAR
+   ───────────────────────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
 }
-
 ::-webkit-scrollbar-track {
     background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
     background: color-mix(in oklch, var(--muted-foreground) 20%, transparent);
     border-radius: 8px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
     background: color-mix(in oklch, var(--muted-foreground) 40%, transparent);
 }
 
+/* Landing page sections use a solid dark scrollbar override */
+.landing ::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 0;
+}
+.landing ::-webkit-scrollbar-thumb:hover {
+    background: #0066ff;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   UTILITY LAYER — landing page helpers + scrollbar hide
+   ───────────────────────────────────────────────────────────────────────────── */
 @layer utilities {
+    /* Scrollbar suppression */
     .scrollbar-hide {
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
     .scrollbar-hide::-webkit-scrollbar {
-        display: none; /* Chrome, Safari and Opera */
+        display: none;
+    }
+
+    /* Gradient text */
+    .gradient-text-blue {
+        background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .gradient-text-white {
+        background: linear-gradient(180deg, #ffffff 0%, #888888 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Background patterns */
+    .bg-grid {
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 60px 60px;
+    }
+    .bg-grid-dense {
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 32px 32px;
+    }
+    .bg-dots {
+        background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+        background-size: 24px 24px;
+    }
+
+    /* Monospace font */
+    .code-font {
+        font-family:
+            'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    }
+
+    /* Animation helpers */
+    .orb-1 {
+        animation: float1 12s ease-in-out infinite;
+    }
+    .orb-2 {
+        animation: float2 15s ease-in-out infinite;
+    }
+    .animate-marquee {
+        animation: marquee 40s linear infinite;
+    }
+    .pulse-ring {
+        animation: pulseRing 2s ease-out infinite;
     }
 }

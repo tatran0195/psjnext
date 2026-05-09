@@ -1,6 +1,7 @@
-import { docs } from 'collections/server';
+import { changelog as changelogPosts, docs } from 'collections/server';
 import { type InferMetaType, type InferPageType, loader } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
+import { toFumadocsSource } from 'fumadocs-mdx/runtime/server';
 
 import { i18n } from '../i18n';
 import { customIconsPlugin } from './plugins/custom-icons-plugin';
@@ -24,3 +25,8 @@ export const source = loader({
 
 export type Page = InferPageType<typeof source>;
 export type Meta = InferMetaType<typeof source>;
+
+export const changelog = loader({
+    source: toFumadocsSource(changelogPosts, []),
+    baseUrl: '/changelog',
+});

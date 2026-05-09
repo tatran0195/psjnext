@@ -2,6 +2,8 @@ import type { Metadata } from 'next/types';
 
 import type { Page } from './source';
 
+import { toAbsoluteUrl } from './site-url';
+
 export function createMetadata(override: Metadata): Metadata {
     return {
         ...override,
@@ -37,7 +39,20 @@ export function getPageImage(page: Page) {
     };
 }
 
-export const baseUrl =
-    process.env.NODE_ENV === 'development' || !process.env.PRODUCTION_URL
-        ? new URL('http://localhost:3000')
-        : new URL(`https://${process.env.PRODUCTION_URL}`);
+export function buildCollectionPageJsonLd({
+    title,
+    description,
+    path,
+}: {
+    title: string;
+    description: string;
+    path: string;
+}) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: title,
+        description,
+        url: toAbsoluteUrl(path),
+    };
+}

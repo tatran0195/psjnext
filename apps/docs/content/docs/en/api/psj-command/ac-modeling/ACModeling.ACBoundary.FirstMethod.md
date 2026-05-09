@@ -18,12 +18,18 @@ ACModeling.ACBoundary.FirstMethod(...)
 
 ## Inputs
 
-<!-- @since:5.0.1 @required @deprecated:5.1.0 -->
+<!-- @since:5.0.1 @required -->
+<!-- 
+@since:5.1.0 
+@deprecated:'Use ACModeling.ACBoundary.CreateBoundary instead.
+This is a multi-line deprecation message.
+It uses whitespace-pre-wrap to maintain line breaks.' 
+-->
 ### `crlParts`
 
 - The part.
 
-<!-- @since:5.0.1 @required @removed:5.2.0 -->
+<!-- @removed:5.2.0 -->
 ### `bIsMergePart`
 
 - The is merge part.

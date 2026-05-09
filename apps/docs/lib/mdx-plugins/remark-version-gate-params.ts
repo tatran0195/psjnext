@@ -4,7 +4,7 @@ import { API_VERSIONS, semverGte } from '@/lib/api-versions';
 
 import { flattenNode, getVersionStatus } from './utils';
 
-import type { Heading, Root, RootContent } from 'mdast';
+import type { Heading, PhrasingContent, Root, RootContent } from 'mdast';
 import type { MdxjsEsm } from 'mdast-util-mdx';
 import type { Plugin, Transformer } from 'unified';
 
@@ -20,8 +20,10 @@ export interface VersionGateOptions {
 export interface VersionRange {
     since?: string;
     deprecated?: string;
+    deprecatedMessage?: string;
     removed?: string;
     required?: boolean;
+    note?: string;
 }
 
 export interface ParamMetaExport {
@@ -66,7 +68,7 @@ const DEFAULTS = {
     exportParamMeta: true,
 } satisfies Required<VersionGateOptions>;
 
-const ANNOTATION_RE = /@(?:since|removed|deprecated|type|required|optional|inputs?)/i;
+const ANNOTATION_RE = /@(?:since|removed|deprecated|type|required|optional|inputs?|note)/i;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -84,16 +86,37 @@ function isAnnotationComment(node: RootContent): boolean {
 }
 
 function extractAnnotation(value: string, key: string, isVersion = true): string | undefined {
+    // 1. Try to match a quoted string first (single or double quotes)
+    const quotedMatch = value.match(new RegExp(`@${key}[:\\s]+(['"])([\\s\\S]*?)\\1`, 'i'));
+    if (quotedMatch) {
+        return quotedMatch[2].trim();
+    }
+
+    // 2. Fallback to unquoted pattern
     const pattern = isVersion ? '([\\d.]+)' : '([^\\s;>]+)';
     const match = value.match(new RegExp(`@${key}[:\\s]+${pattern}`, 'i'));
     return match?.[1].replace(/[->;]+$/, '').trim();
 }
 
 function parseRange(value: string): VersionRange {
+    const deprecatedRaw = extractAnnotation(value, 'deprecated', false);
+    let deprecated: string | undefined;
+    let deprecatedMessage: string | undefined;
+
+    if (deprecatedRaw) {
+        if (/^[\d.]+$/.test(deprecatedRaw)) {
+            deprecated = deprecatedRaw;
+        } else {
+            deprecatedMessage = deprecatedRaw;
+        }
+    }
+
     const range: VersionRange = {
         since: extractAnnotation(value, 'since'),
-        deprecated: extractAnnotation(value, 'deprecated'),
+        deprecated,
+        deprecatedMessage,
         removed: extractAnnotation(value, 'removed'),
+        note: extractAnnotation(value, 'note', false),
         required: /@required/i.test(value) ? true : undefined,
     };
     // strip undefined keys for a clean serialisation
@@ -194,8 +217,10 @@ export interface ResolvedParam {
     visible: boolean;
     since?: string;
     deprecated?: string;
+    deprecatedMessage?: string;
     required?: boolean;
     type?: string;
+    note?: string;
 }
 
 // Replace resolveActiveRange (was only in the React component before)
@@ -221,7 +246,11 @@ function wrapInParamSection(block: RootContent[], meta: ParamMeta): RootContent 
                     visible: true,
                     ...(active?.since && { since: active.since }),
                     ...(active?.deprecated && { deprecated: active.deprecated }),
+                    ...(active?.deprecatedMessage && {
+                        deprecatedMessage: active.deprecatedMessage,
+                    }),
                     ...(active?.required && { required: true }),
+                    ...(active?.note && { note: active.note }),
                     ...(meta.type && { type: meta.type }),
                 } satisfies ResolvedParam,
             ];
@@ -284,6 +313,40 @@ export const remarkVersionGateParams: Plugin<[VersionGateOptions?], Root> = (opt
                     const hId =
                         (headingNode.data as { hProperties?: { id?: string } })?.hProperties?.id ??
                         '';
+
+                    // If required, transform the inlineCode to an mdxJsxTextElement `<code>`
+                    // so we can insert a red asterisk INSIDE it (which also puts it in the TOC).
+                    const isRequired = meta.ranges.some((r) => r.required);
+                    if (isRequired) {
+                        const codeIndex = headingNode.children.findIndex(
+                            (n) => n.type === 'inlineCode',
+                        );
+                        if (codeIndex !== -1) {
+                            const codeNode = headingNode.children[codeIndex];
+                            const textValue = 'value' in codeNode ? codeNode.value : '';
+                            headingNode.children[codeIndex] = {
+                                type: 'mdxJsxTextElement',
+                                name: 'code',
+                                attributes: [],
+                                children: [
+                                    { type: 'text', value: textValue },
+                                    {
+                                        type: 'mdxJsxTextElement',
+                                        name: 'span',
+                                        attributes: [
+                                            {
+                                                type: 'mdxJsxAttribute',
+                                                name: 'className',
+                                                value: 'text-red-500 ml-0.5',
+                                            },
+                                        ],
+                                        children: [{ type: 'text', value: '*' }],
+                                    },
+                                ],
+                            } as unknown as PhrasingContent;
+                        }
+                    }
+
                     const hContent = flattenNode(headingNode as unknown as RootContent).trim();
 
                     const bodyContents: string[] = block

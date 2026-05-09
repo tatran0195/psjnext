@@ -203,7 +203,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                 filterQuery={filterQuery}
                                 setFilterQuery={setFilterQuery}
                             />
-                            <DockRail
+                            {/* <DockRail
                                 items={nestedTabs[1].tabs.map((i) => ({
                                     href: i.url,
                                     text: i.title?.toString() || '',
@@ -211,7 +211,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                 }))}
                                 collapsedCount={3}
                                 activeHref={nestedTabs[1].tabs[1].url}
-                            />
+                            /> */}
                             <DockRail collapsedCount={4} />
 
                             {nestedTabs.map((level, i) => (
@@ -342,4 +342,3 @@ function SearchComposition({
 
 export * from './components';
 export * from './provider';
-
