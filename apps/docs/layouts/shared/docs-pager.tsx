@@ -59,7 +59,13 @@ export function DocsPager({ previous, next, markdownUrl }: DocsPagerProps) {
                     <ChevronRight className="size-4" />
                 </div>
             )}
-            {markdownUrl && <MarkdownCopyButton markdownUrl={markdownUrl} title="Copy markdown" />}
+            {markdownUrl && (
+                <MarkdownCopyButton
+                    markdownUrl={markdownUrl}
+                    title="Copy markdown"
+                    className={buttonClass}
+                />
+            )}
         </div>
     );
 }
