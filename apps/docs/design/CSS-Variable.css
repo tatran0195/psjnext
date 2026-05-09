@@ -1,0 +1,52 @@
+:root {
+  /* Colors */
+  --color-color-1: #111111;
+  --color-color-2: #ffffff;
+  --color-color-3: #004ea2;
+  --color-color-4: #797979;
+  --color-color-5: #000000;
+  --color-color-6: #f1f2f6;
+  --color-color-7: #002853;
+  --color-color-8: #004084;
+  --color-color-9: #e8e8e8;
+  --color-color-10: #dddddd;
+
+  /* Typography */
+  --font-type-1-family: Noto Sans JP;
+  --font-type-1-size: 16px;
+  --font-type-1-weight: 400;
+  --font-type-1-line-height: 28px;
+  --font-type-1-letter-spacing: 1.6px;
+  --font-type-2-family: Noto Sans JP;
+  --font-type-2-size: 12px;
+  --font-type-2-weight: 500;
+  --font-type-2-line-height: 18px;
+  --font-type-2-letter-spacing: 1.2px;
+  --font-type-3-family: Noto Sans JP;
+  --font-type-3-size: 14px;
+  --font-type-3-weight: 700;
+  --font-type-3-line-height: 30px;
+  --font-type-4-family: Noto Sans JP;
+  --font-type-4-size: 18px;
+  --font-type-4-weight: 700;
+  --font-type-4-line-height: 27px;
+  --font-type-4-letter-spacing: 1.8px;
+  --font-type-5-family: Noto Sans JP;
+  --font-type-5-size: 12px;
+  --font-type-5-weight: 700;
+  --font-type-5-line-height: 18px;
+  --font-type-5-letter-spacing: 1.2px;
+
+  /* Spacing */
+  --spacing-space-1: 24px;
+  --spacing-space-2: 22px;
+  --spacing-space-3: 20px;
+  --spacing-space-4: 12px;
+  --spacing-space-5: 30px;
+  --spacing-space-6: 16px;
+  --spacing-space-7: 4px;
+  --spacing-space-8: 8px;
+  --spacing-space-9: 45px;
+  --spacing-space-10: 70px;
+
+}

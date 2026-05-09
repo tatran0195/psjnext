@@ -10,6 +10,36 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ─────────────────────────────────────────────────────────────────────────────
+   PSJ DESIGN TOKENS — from design/TailwindCSS-V4.css
+   Brand palette: PSJ navy/blue (#004ea2) + near-black surfaces
+   ───────────────────────────────────────────────────────────────────────────── */
+@theme {
+    /* PSJ Brand Colors */
+    --color-psj-1: #111111;
+    --color-psj-2: #ffffff;
+    --color-psj-3: #004ea2;
+    --color-psj-4: #797979;
+    --color-psj-5: #000000;
+    --color-psj-6: #f1f2f6;
+    --color-psj-7: #002853;
+    --color-psj-8: #004084;
+    --color-psj-9: #e8e8e8;
+    --color-psj-10: #dddddd;
+
+    /* PSJ Spacing scale */
+    --spacing-psj-1: 24px;
+    --spacing-psj-2: 22px;
+    --spacing-psj-3: 20px;
+    --spacing-psj-4: 12px;
+    --spacing-psj-5: 30px;
+    --spacing-psj-6: 16px;
+    --spacing-psj-7: 4px;
+    --spacing-psj-8: 8px;
+    --spacing-psj-9: 45px;
+    --spacing-psj-10: 70px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
    THEME — shadcn/radix tokens (inline) + landing page design tokens
    ───────────────────────────────────────────────────────────────────────────── */
 @theme inline {
@@ -18,6 +48,39 @@
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
     --radius-xl: calc(var(--radius) + 4px);
+
+    /* ── Typography system — Inter Variable + Noto Sans JP (CJK) ── */
+    /* Inter is the primary font; Noto activates via unicode-range for CJK only */
+    --font-sans: var(--font-inter, 'Inter', ui-sans-serif, system-ui, sans-serif);
+    --font-jp:   var(--font-noto-jp, 'Noto Sans JP', sans-serif);
+    --font-mono: var(--font-mono, 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace);
+
+    /* Semantic font size scale (rem-based, relative to 16px root) */
+    --text-xs:   0.6875rem;  /* 11px — badges, micro labels      */
+    --text-sm:   0.8125rem;  /* 13px — sidebar items, captions   */
+    --text-base: 0.9375rem;  /* 15px — body copy                 */
+    --text-md:   1rem;       /* 16px — emphasis body, lead       */
+    --text-lg:   1.125rem;   /* 18px — h4, card titles           */
+    --text-xl:   1.375rem;   /* 22px — h3                        */
+    --text-2xl:  1.75rem;    /* 28px — h2                        */
+    --text-3xl:  2.25rem;    /* 36px — h1 inner                  */
+    --text-4xl:  2.875rem;   /* 46px — hero display              */
+
+    /* Semantic letter-spacing (optical best-practice per Inter design spec) */
+    --tracking-tighter: -0.04em;  /* H1 large display              */
+    --tracking-tight:   -0.025em; /* H2 / H3 section headings      */
+    --tracking-snug:    -0.012em; /* H4, lead body, UI emphasis    */
+    --tracking-normal:  -0.011em; /* Body — Inter's optical sweet spot */
+    --tracking-wide:     0.02em;  /* Badges, labels, uppercased UI */
+    --tracking-wider:    0.05em;  /* ALL-CAPS micro labels         */
+
+    /* Semantic line-height scale (unitless — scales with font-size) */
+    --leading-none:    1;
+    --leading-tight:   1.2;   /* Display headings, H1           */
+    --leading-snug:    1.3;   /* H2 / H3                        */
+    --leading-normal:  1.6;   /* Body copy — comfortable reading */
+    --leading-relaxed: 1.75;  /* Long-form prose                */
+    --leading-loose:   2;     /* Spaced UI labels, lists        */
 
     /* shadcn semantic color bridge */
     --color-background: var(--background);
@@ -52,45 +115,48 @@
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
 
-    /* Fumadocs brand palette */
-    --color-brand-primary: #818cf8;
-    --color-brand-secondary: #a78bfa;
-    --color-brand-accent: #c084fc;
-    --color-brand-pink: #f472b6;
-    --color-brand-cyan: #22d3ee;
-    --color-brand-emerald: #34d399;
+    /* PSJ / Fumadocs brand palette — PSJ blue family */
+    --color-brand-primary: #004ea2;
+    --color-brand-secondary: #004084;
+    --color-brand-accent: #002853;
+    --color-brand-light: #3388cc;
+    --color-brand-muted: #797979;
+    --color-brand-surface: #f1f2f6;
 
-    /* ── Landing page surface tokens ── */
-    --color-bg: #000000;
-    --color-bg-elevated: #0a0a0a;
+    /* ── Landing page surface tokens (PSJ dark) ── */
+    --color-bg: #111111;
+    --color-bg-elevated: #0d0d0d;
     --color-bg-card: #111111;
     --color-bg-card-hover: #1a1a1a;
-    --color-bg-subtle: #0d0d0d;
+    --color-bg-subtle: #0a0a0a;
 
     /* Landing border tokens — note: --color-border is already claimed above
        by var(--border). These are separate landing-specific aliases.        */
-    --color-landing-border: #1a1a1a;
-    --color-landing-border-hover: #333333;
-    --color-landing-border-accent: #0066ff33;
+    --color-landing-border: #e8e8e8;
+    --color-landing-border-hover: #dddddd;
+    --color-landing-border-accent: #004ea233;
 
-    /* Landing accent palette */
-    --color-blue: #0066ff;
-    --color-blue-bright: #3388ff;
-    --color-blue-glow: #0066ff40;
-    --color-cyan: #00ccff;
-    --color-cyan-glow: #00ccff30;
-    --color-purple: #7c3aed;
-    --color-orange: #ff6b2c;
+    /* PSJ accent palette */
+    --color-blue: #004ea2;
+    --color-blue-bright: #3388cc;
+    --color-blue-glow: #004ea240;
+    --color-cyan: #004084;
+    --color-cyan-glow: #00408430;
+    --color-navy: #002853;
+    --color-grey: #797979;
+    /* Backward-compat aliases for landing page utilities */
+    --color-purple: #002853;   /* remapped from violet → PSJ deep navy */
+    --color-orange: #e65c00;   /* kept for semantic contrast in landing page */
 
     /* Landing text scale */
-    --color-text: #ededed;
-    --color-text-secondary: #888888;
-    --color-text-muted: #555555;
-    --color-text-dim: #333333;
+    --color-text: #111111;
+    --color-text-secondary: #797979;
+    --color-text-muted: #aaaaaa;
+    --color-text-dim: #dddddd;
 
     /* Glass surfaces */
-    --color-surface-glass: rgba(255, 255, 255, 0.03);
-    --color-surface-glass-hover: rgba(255, 255, 255, 0.06);
+    --color-surface-glass: rgba(0, 78, 162, 0.03);
+    --color-surface-glass-hover: rgba(0, 78, 162, 0.06);
 
     /* ── Keyframes ── */
     @keyframes shimmer-sweep {
@@ -168,85 +234,146 @@
    CSS CUSTOM PROPERTIES — light / dark
    ───────────────────────────────────────────────────────────────────────────── */
 :root {
-    --radius: 0.625rem;
+    --radius: 0rem; /* PSJ design: sharp corners — no rounding */
 
-    /* shadcn/radix light tokens */
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
+    /* PSJ Design Token CSS Variables (from design/CSS-Variable.css) */
+    --color-color-1: #111111;
+    --color-color-2: #ffffff;
+    --color-color-3: #004ea2;
+    --color-color-4: #797979;
+    --color-color-5: #000000;
+    --color-color-6: #f1f2f6;
+    --color-color-7: #002853;
+    --color-color-8: #004084;
+    --color-color-9: #e8e8e8;
+    --color-color-10: #dddddd;
+
+    /* ── Typography — Inter-based semantic scale ──────────────────────────────
+       Mapped from original PSJ design tokens → upgraded for screen readability
+       ─────────────────────────────────────────────────────────────────────── */
+
+    /* Legacy type-N aliases (mapped to new semantic scale) */
+    --font-type-1-family: Inter, ui-sans-serif, sans-serif;
+    --font-type-1-size: var(--text-base);          /* 15px body          */
+    --font-type-1-weight: 400;
+    --font-type-1-line-height: var(--leading-normal);  /* 1.6             */
+    --font-type-1-letter-spacing: var(--tracking-normal);  /* -0.011em    */
+
+    --font-type-2-family: Inter, ui-sans-serif, sans-serif;
+    --font-type-2-size: var(--text-xs);            /* 11px badges/labels */
+    --font-type-2-weight: 500;
+    --font-type-2-line-height: var(--leading-normal);
+    --font-type-2-letter-spacing: var(--tracking-wide);   /* 0.02em labels */
+
+    --font-type-3-family: Inter, ui-sans-serif, sans-serif;
+    --font-type-3-size: var(--text-sm);            /* 13px sidebar/captions */
+    --font-type-3-weight: 600;
+    --font-type-3-line-height: var(--leading-snug);
+    --font-type-3-letter-spacing: var(--tracking-snug);
+
+    --font-type-4-family: Inter, ui-sans-serif, sans-serif;
+    --font-type-4-size: var(--text-lg);            /* 18px card titles / h4 */
+    --font-type-4-weight: 600;
+    --font-type-4-line-height: var(--leading-snug);
+    --font-type-4-letter-spacing: var(--tracking-snug);   /* -0.012em     */
+
+    --font-type-5-family: Inter, ui-sans-serif, sans-serif;
+    --font-type-5-size: var(--text-xs);            /* 11px bold caps labels */
+    --font-type-5-weight: 700;
+    --font-type-5-line-height: var(--leading-normal);
+    --font-type-5-letter-spacing: var(--tracking-wider);  /* 0.05em caps  */
+
+    /* PSJ Spacing */
+    --spacing-space-1: 24px;
+    --spacing-space-2: 22px;
+    --spacing-space-3: 20px;
+    --spacing-space-4: 12px;
+    --spacing-space-5: 30px;
+    --spacing-space-6: 16px;
+    --spacing-space-7: 4px;
+    --spacing-space-8: 8px;
+    --spacing-space-9: 45px;
+    --spacing-space-10: 70px;
+
+    /* shadcn/radix light tokens — PSJ-tuned */
+    --background: oklch(1 0 0);           /* #ffffff */
+    --foreground: oklch(0.13 0 0);        /* close to #111111 */
     --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
+    --card-foreground: oklch(0.13 0 0);
     --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.13 0 0);
+    --primary: #004ea2;                   /* PSJ primary blue */
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.96 0 0);         /* close to #f1f2f6 */
+    --secondary-foreground: oklch(0.13 0 0);
+    --muted: oklch(0.96 0 0);
+    --muted-foreground: oklch(0.48 0 0);  /* close to #797979 */
+    --accent: #004ea2;
+    --accent-foreground: oklch(1 0 0);
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+    --border: oklch(0.91 0 0);            /* close to #e8e8e8 */
+    --input: oklch(0.91 0 0);
+    --ring: #004ea2;
     --chart-1: oklch(0.646 0.222 41.116);
     --chart-2: oklch(0.6 0.118 184.704);
     --chart-3: oklch(0.398 0.07 227.392);
     --chart-4: oklch(0.828 0.189 84.429);
     --chart-5: oklch(0.769 0.188 70.08);
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --sidebar: oklch(0.97 0 0);           /* close to #f1f2f6 */
+    --sidebar-foreground: oklch(0.13 0 0);
+    --sidebar-primary: #004ea2;
+    --sidebar-primary-foreground: oklch(1 0 0);
+    --sidebar-accent: oklch(0.96 0 0);
+    --sidebar-accent-foreground: oklch(0.13 0 0);
+    --sidebar-border: oklch(0.91 0 0);
+    --sidebar-ring: #004ea2;
 
-    /* Fumadocs section-primary overrides */
-    --api-color: hsl(250, 80%, 54%);
-    --guides-color: hsl(41, 100%, 40%);
-    --data-type-color: hsl(217, 100%, 58%);
-    --framework-color: hsl(217, 91%, 60%);
+    /* Fumadocs section-primary overrides — PSJ blue tones */
+    --api-color: hsl(214, 100%, 32%);     /* #004ea2 */
+    --guides-color: hsl(208, 100%, 26%);  /* #004084 */
+    --data-type-color: hsl(214, 100%, 32%);
+    --framework-color: hsl(208, 100%, 26%);
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
+    /* PSJ dark: near-black surface (#111111), PSJ blue accent (#004ea2) */
+    --background: oklch(0.13 0 0);         /* #111111 */
+    --foreground: oklch(1 0 0);            /* #ffffff */
+    --card: oklch(0.13 0 0);
+    --card-foreground: oklch(1 0 0);
+    --popover: oklch(0.13 0 0);
+    --popover-foreground: oklch(1 0 0);
+    --primary: #3388cc;                    /* lighter PSJ blue for dark mode readability */
+    --primary-foreground: oklch(0.13 0 0);
+    --secondary: oklch(0.18 0 0);          /* slightly elevated surface */
+    --secondary-foreground: oklch(1 0 0);
+    --muted: oklch(0.18 0 0);
+    --muted-foreground: oklch(0.48 0 0);   /* #797979 */
+    --accent: #004ea2;
+    --accent-foreground: oklch(1 0 0);
     --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
+    --border: oklch(1 0 0 / 12%);          /* subtle border on dark */
     --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
+    --ring: #3388cc;
     --chart-1: oklch(0.488 0.243 264.376);
     --chart-2: oklch(0.696 0.17 162.48);
     --chart-3: oklch(0.769 0.188 70.08);
     --chart-4: oklch(0.627 0.265 303.9);
     --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar: oklch(0.13 0 0);
+    --sidebar-foreground: oklch(1 0 0);
+    --sidebar-primary: #3388cc;
+    --sidebar-primary-foreground: oklch(0.13 0 0);
+    --sidebar-accent: oklch(0.18 0 0);
+    --sidebar-accent-foreground: oklch(1 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --sidebar-ring: #3388cc;
 
-    --api-color: hsl(250, 100%, 80%);
-    --guides-color: hsl(41, 100%, 40%);
-    --data-type-color: hsl(199, 96%, 45%);
-    --framework-color: hsl(217, 91%, 60%);
+    /* Fumadocs section-primary overrides — PSJ blue (lighter for dark mode) */
+    --api-color: hsl(214, 80%, 60%);
+    --guides-color: hsl(208, 70%, 55%);
+    --data-type-color: hsl(214, 80%, 60%);
+    --framework-color: hsl(208, 70%, 55%);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -260,6 +387,8 @@
         @apply overscroll-none scroll-smooth;
         scrollbar-gutter: stable;
         scroll-padding-top: calc(var(--docs-header-height, 48px) + 2rem);
+        /* Inter optical size: tell the browser to optimise for body text sizes */
+        font-optical-sizing: auto;
     }
     html > body[data-scroll-locked] {
         margin-right: 0px !important;
@@ -267,7 +396,31 @@
     }
     body {
         @apply bg-background text-foreground;
+        /* Inter Variable — primary body font */
+        font-family: var(--font-sans);
+        font-size: var(--text-base);         /* 15px — ideal for docs */
+        font-weight: 400;
+        line-height: var(--leading-normal);  /* 1.6 unitless */
+        letter-spacing: var(--tracking-normal); /* -0.011em — Inter optical */
+        font-feature-settings: 'liga' 1, 'kern' 1, 'calt' 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
     }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CJK UNICODE-RANGE — Noto Sans JP activates for Japanese chars only
+   Latin/Latin-ext/numbers/punctuation always use Inter (faster, sharper)
+   ─────────────────────────────────────────────────────────────────────────────
+   Note: next/font generates the actual @font-face with unicode-range.
+   This rule ensures the font-family stack correctly falls back for CJK.
+   ───────────────────────────────────────────────────────────────────────────── */
+body,
+#nd-page,
+#nd-page .prose {
+    /* font-family stack: Inter first (Latin), Noto Sans JP for CJK fallback */
+    font-family: var(--font-sans), var(--font-jp), ui-sans-serif, sans-serif;
 }
 
 :focus-visible {
@@ -308,13 +461,13 @@
     background: color-mix(in oklch, var(--muted-foreground) 40%, transparent);
 }
 
-/* Landing page sections use a solid dark scrollbar override */
+/* Landing page sections use a solid PSJ scrollbar override */
 .landing ::-webkit-scrollbar-thumb {
-    background: #222;
+    background: #004ea2;
     border-radius: 0;
 }
 .landing ::-webkit-scrollbar-thumb:hover {
-    background: #0066ff;
+    background: #3388cc;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -330,15 +483,15 @@
         display: none;
     }
 
-    /* Gradient text */
+    /* Gradient text — PSJ blue palette */
     .gradient-text-blue {
-        background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);
+        background: linear-gradient(135deg, #002853 0%, #004ea2 50%, #3388cc 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
     }
     .gradient-text-white {
-        background: linear-gradient(180deg, #ffffff 0%, #888888 100%);
+        background: linear-gradient(180deg, #ffffff 0%, #797979 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;

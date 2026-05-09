@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 import { NextProvider } from 'fumadocs-core/framework/next';
 import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist_Mono, Inter, Noto_Sans_JP } from 'next/font/google';
 
 import { createMetadata } from '@/lib/metadata';
 import { getSiteUrl } from '@/lib/site-url';
@@ -21,11 +21,35 @@ export const metadata: Metadata = createMetadata({
     metadataBase: getSiteUrl(),
 });
 
-const geist = Geist({
-    variable: '--font-sans',
-    subsets: ['latin'],
+/**
+ * Inter Variable — primary UI/body font
+ * Industry standard for technical documentation (Stripe, Vercel, Linear, Figma)
+ * Superior Latin/numeric rendering at all sizes. Variable weight = single file.
+ */
+const inter = Inter({
+    variable: '--font-inter',
+    subsets: ['latin', 'latin-ext'],
+    display: 'swap',
+    axes: ['opsz'], // optical sizing axis — sharpens small text
 });
 
+/**
+ * Noto Sans JP — Japanese CJK fallback only
+ * Loaded via unicode-range in CSS so it only activates for Japanese characters.
+ * Latin text always uses Inter; Japanese glyphs use Noto Sans JP.
+ */
+const notoSansJP = Noto_Sans_JP({
+    variable: '--font-noto-jp',
+    subsets: ['latin'],
+    weight: ['400', '500', '700'],
+    display: 'swap',
+    preload: false, // deferred — only needed when CJK chars appear
+});
+
+/**
+ * Geist Mono — code blocks and inline code
+ * Clean, modern monospace with great developer tooling aesthetics.
+ */
 const mono = Geist_Mono({
     variable: '--font-mono',
     subsets: ['latin'],
@@ -48,7 +72,7 @@ export default async function RootLayout(props: {
     return (
         <html
             lang={lang}
-            className={`${geist.variable} ${mono.variable}`}
+            className={`${inter.variable} ${notoSansJP.variable} ${mono.variable}`}
             suppressHydrationWarning
             data-scroll-behavior="smooth"
         >

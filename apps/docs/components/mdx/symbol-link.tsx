@@ -22,8 +22,8 @@ const CATEGORY_STYLES: Record<
     { link: string; badge: string; label: string }
 > = {
     'parameter-type': {
-        link: 'text-violet-600 dark:text-violet-400',
-        badge: 'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300',
+        link: 'text-blue-700 dark:text-blue-400',
+        badge: 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300',
         label: 'param type',
     },
     class: {
@@ -57,8 +57,8 @@ const CATEGORY_STYLES: Record<
         label: 'unit',
     },
     enum: {
-        link: 'text-purple-600 dark:text-purple-400',
-        badge: 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300',
+        link: 'text-sky-700 dark:text-sky-400',
+        badge: 'bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300',
         label: 'enum',
     },
 };
