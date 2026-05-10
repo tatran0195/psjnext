@@ -9,6 +9,7 @@ import { createMetadata } from '@/lib/metadata';
 import { getSiteUrl } from '@/lib/site-url';
 import { source } from '@/lib/source';
 import { TopBar } from '@/components/layout/top-bar';
+import { GlobalFooter } from '@/components/layout/global-footer';
 import '@/styles/global.css';
 import { Body } from './layout.client';
 import { Provider } from './provider';
@@ -84,6 +85,7 @@ export default async function RootLayout(props: {
                         <Provider lang={lang}>{props.children}</Provider>
                     </TreeContextProvider>
                 </NextProvider>
+                <GlobalFooter />
             </Body>
         </html>
     );

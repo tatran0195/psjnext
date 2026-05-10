@@ -1,12 +1,12 @@
 import type { MetadataRoute } from 'next';
 
-import { baseUrl } from '@/lib/metadata';
+import { getSiteUrl } from '@/lib/site-url';
 import { source } from '@/lib/source';
 
 export const revalidate = false;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const url = (path: string): string => new URL(path, baseUrl).toString();
+    const url = (path: string): string => new URL(path, getSiteUrl()).toString();
     const items = await Promise.all(
         source.getPages().map(async (page) => {
             // if (page.data.type === 'openapi') return;

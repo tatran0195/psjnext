@@ -16,7 +16,7 @@ export function Header(props: ComponentProps<'header'>) {
         <GlobalHeader
             transparent={isNavTransparent && !open}
             className={cn(
-                'sticky [grid-area:header] top-(--fd-docs-row-1) layout:[--fd-header-height:--spacing(16)]',
+                'sticky [grid-area:header] top-(--fd-docs-row-1) layout:[--fd-header-height:104px]',
                 props.className
             )}
             sidebarTrigger={

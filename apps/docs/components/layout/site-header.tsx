@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react';
 
 import { useTheme } from '@teispace/next-themes';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, Menu, Moon, Sun, X } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 
-import { PsjLogo } from '@/components/icons/psj-logo';
+import { TechnoStarLogo } from '@/components/icons/logo';
+import { FullSearchTrigger, SearchTrigger } from '@/layouts/shared/slots/search-trigger';
 import { navLinks } from '@/lib/nav-links';
 
 interface SiteHeaderProps {
@@ -36,10 +37,19 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
 
     const isActive = (href: string) => {
         if (href === '/landing') {
-            return pathname.endsWith('/landing') || pathname === '/' || pathname === '/en' || pathname === '/ja';
+            return (
+                pathname.endsWith('/landing') ||
+                pathname === '/' ||
+                pathname === '/en' ||
+                pathname === '/ja'
+            );
         }
         if (href === '/docs') {
-            return pathname.includes('/docs') && !pathname.includes('/docs/tutorials') && !pathname.includes('/docs/api');
+            return (
+                pathname.includes('/docs') &&
+                !pathname.includes('/docs/tutorials') &&
+                !pathname.includes('/docs/api')
+            );
         }
         return pathname.includes(href);
     };
@@ -49,9 +59,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             {/* ── Main Header ── */}
             <header
                 style={{
-                    position: 'sticky',
-                    top: 0,
-                    zIndex: 50,
+                    position: 'relative',
                     height: '64px',
                     display: 'flex',
                     alignItems: 'center',
@@ -68,8 +76,8 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             >
                 <div className="w-full max-w-[1280px] mx-auto px-6 lg:px-10 flex items-center justify-between">
                     {/* Logo */}
-                    <Link href="/landing" aria-label="PSJ Home">
-                        <PsjLogo />
+                    <Link href="/landing" aria-label="e-TechnoStar Home">
+                        <TechnoStarLogo variant="inline" className="h-6 sm:h-7 w-auto" />
                     </Link>
 
                     {/* Desktop Nav */}
@@ -117,6 +125,10 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
 
                     {/* Actions */}
                     <div className="flex items-center gap-2">
+                        {/* Search Triggers */}
+                        <FullSearchTrigger className="hidden sm:inline-flex h-9 w-48 bg-transparent hover:bg-psj-surface-1 border-psj-border text-psj-text-2 hover:text-psj-text-1 transition-colors" />
+                        <SearchTrigger className="sm:hidden" color="ghost" />
+
                         {/* Theme toggle */}
                         <button
                             onClick={() => setTheme(isDark ? 'light' : 'dark')}
@@ -130,6 +142,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                 border: '1px solid var(--psj-border)',
                                 background: 'transparent',
                                 color: 'var(--psj-text-2)',
+                                borderRadius: '6px',
                                 cursor: 'pointer',
                                 transition: 'border-color 0.15s, background 0.15s',
                             }}
@@ -148,18 +161,9 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                             {isDark ? (
                                 <Sun size={15} style={{ color: '#FBC94A' }} />
                             ) : (
-                                <Moon size={15} style={{ color: 'var(--psj-blue)' }} />
+                                <Moon size={15} style={{ color: 'var(--psj-text-1)' }} />
                             )}
                         </button>
-
-                        {/* Get Started CTA */}
-                        <Link
-                            href="/docs"
-                            className="hidden sm:inline-flex items-center gap-1.5 psj-btn-primary"
-                            style={{ padding: '0 1.25rem', height: '36px', fontSize: '0.8125rem' }}
-                        >
-                            Get Started <ArrowRight size={14} />
-                        </Link>
 
                         {/* Mobile hamburger */}
                         <button
@@ -211,7 +215,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                 className="flex items-center justify-between px-6 h-16 border-b"
                                 style={{ borderColor: 'var(--psj-border)' }}
                             >
-                                <PsjLogo />
+                                <TechnoStarLogo variant="inline" className="h-6 w-auto" />
                                 <button
                                     onClick={() => setMobileOpen(false)}
                                     style={{ color: 'var(--psj-text-2)' }}
@@ -249,12 +253,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                 className="px-4 pb-8 pt-4 border-t"
                                 style={{ borderColor: 'var(--psj-border)' }}
                             >
-                                <Link
-                                    href="/docs"
-                                    className="psj-btn-primary w-full justify-center"
-                                >
-                                    Get Started <ArrowRight size={14} />
-                                </Link>
+                                <FullSearchTrigger className="w-full bg-transparent" />
                             </div>
                         </motion.nav>
                     </>

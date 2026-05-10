@@ -63,7 +63,7 @@ export function GlobalHeader({ transparent = false, sidebarTrigger, className }:
     }, [path, root, pathname]);
 
     return (
-        <header className={cn('flex flex-col z-10 transition-colors', className)}>
+        <header className={cn('flex flex-col z-50 transition-colors sticky top-0', className)}>
             {/* ── Shared top nav ── */}
             <SiteHeader transparent={transparent} />
 
