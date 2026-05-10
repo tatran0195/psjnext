@@ -1,8 +1,8 @@
 import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
 
 import { PsjLogo } from '@/components/icons/psj-logo';
-import { LinkSidebar, LinkSidebarProvider } from '@/components/mdx/link-sidebar';
 import { ClientDocsLayout } from '@/components/layout/client-docs-layout';
+import { LinkSidebar, LinkSidebarProvider } from '@/components/mdx/link-sidebar';
 import { navLinks } from '@/lib/nav-links';
 import { source } from '@/lib/source';
 
@@ -17,6 +17,7 @@ export default async function Layout(props: LayoutProps<'/[lang]'>) {
             <LinkSidebarProvider>
                 <ClientDocsLayout
                     tree={tree}
+                    tabs={[]}
                     links={navLinks}
                     nav={{ mode: 'top', title: <PsjLogo /> }}
                 >

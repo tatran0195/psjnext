@@ -36,22 +36,44 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
     }, [pathname]);
 
     const isActive = (href: string) => {
+        // Normalize pathname and href by removing locale prefix (e.g., /en, /ja)
+        // This ensures the active state logic is locale-agnostic.
+        const normalizedPath = pathname.replace(/^\/(en|ja)/, '') || '/';
+        const normalizedHref = href.replace(/^\/(en|ja)/, '');
+
+        // 1. Home / Landing Section
+        // Matches root, /en, /ja, or /landing
         if (href === '/landing') {
+            return normalizedPath === '/' || normalizedPath === '/landing';
+        }
+
+        // 2. Fundamentals Section
+        // Matches /docs, but excludes tutorials and api reference
+        if (href === '/docs' || href === '') {
             return (
-                pathname.endsWith('/landing') ||
-                pathname === '/' ||
-                pathname === '/en' ||
-                pathname === '/ja'
+                normalizedPath.startsWith('/docs') &&
+                !normalizedPath.includes('/docs/tutorials') &&
+                !normalizedPath.includes('/docs/api')
             );
         }
-        if (href === '/docs') {
+
+        // 3. Tutorials Section
+        // Matches anything under tutorials or docs/tutorials
+        if (href.includes('/tutorials')) {
             return (
-                pathname.includes('/docs') &&
-                !pathname.includes('/docs/tutorials') &&
-                !pathname.includes('/docs/api')
+                normalizedPath.startsWith('/tutorials') || normalizedPath.includes('/docs/tutorials')
             );
         }
-        return pathname.includes(href);
+
+        // 4. API Reference Section
+        // Matches anything under api or docs/api
+        if (href.includes('/api')) {
+            return normalizedPath.startsWith('/api') || normalizedPath.includes('/docs/api');
+        }
+
+        // 5. Default: Nested URL matching
+        // Ensures /changelog matches /changelog/v1 but not unrelated paths
+        return normalizedHref !== '' && normalizedPath.startsWith(normalizedHref);
     };
 
     return (

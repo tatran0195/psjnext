@@ -87,7 +87,7 @@ export function SidebarContent({
         <div
             data-sidebar-placeholder=""
             className={cn(
-                'sticky z-20 [grid-area:sidebar] pointer-events-none *:pointer-events-auto md:layout:[--fd-sidebar-width:268px] max-md:hidden',
+                'sticky z-20 [grid-area:sidebar] pointer-events-none *:pointer-events-auto md:layout:[--fd-sidebar-width:300px] max-md:hidden',
                 navMode === 'auto'
                     ? 'top-(--fd-docs-row-1) h-[calc(var(--fd-docs-height)-var(--fd-docs-row-1))]'
                     : 'top-(--fd-docs-row-2) h-[calc(var(--fd-docs-height)-var(--fd-docs-row-2))]',
@@ -254,11 +254,15 @@ export function SidebarItem({
             ref={ref}
             data-active={active}
             prefetch={prefetch}
-            className={cn(itemVariants({ variant: 'link', highlight: depth >= 1 }), className)}
+            className={cn(
+                itemVariants({ variant: 'link', highlight: /*depth >= 1*/ false }),
+                className,
+            )}
             style={{
                 paddingInlineStart: getItemOffset(depth),
                 ...style,
             }}
+            title={children?.toString()}
             {...props}
         >
             {icon ?? (props.external ? <ExternalLink /> : null)}
@@ -402,7 +406,8 @@ export function SidebarFolderContent({ children, ...props }: CollapsibleContentP
             className={cn(
                 'relative',
                 depth === 1 &&
-                    "before:content-[''] before:absolute before:w-px before:inset-y-1 before:bg-fd-border before:inset-s-2.5",
+                    "before:content-[''] before:absolute before:w-0 before:inset-y-1 before:bg-fd-border before:inset-s-2.5",
+                // "before:content-[''] before:absolute before:w-px before:inset-y-1 before:bg-fd-border before:inset-s-2.5",
             )}
             {...props}
         >
