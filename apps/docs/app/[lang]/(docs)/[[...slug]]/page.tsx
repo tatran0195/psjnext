@@ -91,7 +91,7 @@ export default async function Page(props: {
     const markdownUrl = `${page.url}.mdx`;
 
     return (
-        <DocsPage toc={toc}>
+        <DocsPage toc={toc} breadcrumb={{ enabled: false }}>
             <div>
                 <div className="flex flex-wrap items-start justify-between gap-4">
                     <DocsTitle className="mb-0">{page.data.title}</DocsTitle>

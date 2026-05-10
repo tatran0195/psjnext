@@ -8,6 +8,7 @@ import { Geist_Mono, Inter, Noto_Sans_JP } from 'next/font/google';
 import { createMetadata } from '@/lib/metadata';
 import { getSiteUrl } from '@/lib/site-url';
 import { source } from '@/lib/source';
+import { TopBar } from '@/components/layout/top-bar';
 import '@/styles/global.css';
 import { Body } from './layout.client';
 import { Provider } from './provider';
@@ -77,6 +78,7 @@ export default async function RootLayout(props: {
             data-scroll-behavior="smooth"
         >
             <Body>
+                <TopBar />
                 <NextProvider>
                     <TreeContextProvider tree={source.getPageTree(lang)}>
                         <Provider lang={lang}>{props.children}</Provider>

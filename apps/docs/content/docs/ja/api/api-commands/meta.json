@@ -1,0 +1,6 @@
+{
+  "$schema": "..\\..\\..\\..\\..\\.source\\json-schema\\docs.meta.json",
+  "title": "API Commands",
+  "description": "API Commands",
+  "icon": "Code2"
+}

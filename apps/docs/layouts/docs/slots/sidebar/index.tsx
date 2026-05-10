@@ -11,6 +11,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { DockRail } from '@/layouts/docs/slots/sidebar/dock-rail';
 import { SidebarTabsDropdown } from '@/layouts/docs/slots/sidebar/tabs/dropdown';
 import { getFirstUrl, LayoutTab, LinkItem } from '@/layouts/shared';
+import { VersionSwitcher } from '@/layouts/shared/slots/version-switch';
 import { cn } from '@/lib/cn';
 import { sidebarMatch } from '@/lib/tree-filter';
 
@@ -129,7 +130,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
         return (
             <div
                 {...props}
-                className={cn('flex flex-col gap-2 p-4 pb-0 empty:hidden', props.className)}
+                className={cn('flex flex-col gap-2 p-0 pt-2 pb-0 empty:hidden', props.className)}
             >
                 {props.children}
                 {banner}
@@ -213,15 +214,16 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                 activeHref={nestedTabs[1].tabs[1].url}
                             /> */}
                             <DockRail collapsedCount={4} />
+                            <VersionSwitcher />
 
-                            {nestedTabs.map((level, i) => (
+                            {/* {nestedTabs.map((level, i) => (
                                 <SidebarTabsDropdown
                                     key={i}
                                     options={level.tabs}
                                     activeItem={level.active}
                                     className={i < nestedTabs.length - 1 ? '-mb-1' : ''}
                                 />
-                            ))}
+                            ))} */}
                         </>
                     ),
                 })}
@@ -282,7 +284,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                 {viewport}
                 {renderFooter({
                     className: cn(
-                        'hidden flex-row text-fd-muted-foreground items-center border-t p-4 pt-2 justify-end',
+                        'hidden flex-row text-fd-muted-foreground items-center border-t p-0 pt-2 justify-end',
                         (slots.languageSelect || slots.themeSwitch) && 'flex',
                         iconLinks.length > 0 && 'max-lg:flex',
                     ),

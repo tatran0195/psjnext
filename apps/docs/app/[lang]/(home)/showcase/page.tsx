@@ -1,752 +1,1097 @@
-// oxlint-disable typescript/no-explicit-any
 'use client';
+import { useMemo, useState } from 'react';
 
-import { useRef, useState, type ReactNode } from 'react';
-
-import { AnimatePresence, motion, useInView as useFramerInView } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
     Activity,
     ArrowRight,
-    ArrowUpRight,
+    Atom,
+    Award,
     Box,
-    Brain,
-    ChevronDown,
+    Briefcase,
+    Building2,
+    Car,
+    CheckCircle2,
+    Clock,
+    Cog,
     Cpu,
+    Download,
     ExternalLink,
+    Factory,
     FileText,
-    Filter,
-    Globe,
     Layers,
-    LayoutGrid,
-    Monitor,
-    Moon,
-    Play,
+    Phone,
+    Plane,
     Search,
     Settings,
-    Sparkles,
-    Sun,
+    Ship,
+    TrendingUp,
+    Users,
+    X,
     Zap,
 } from 'lucide-react';
 
-/* ── Reveal Animation ── */
-function Reveal({
-    children,
-    delay = 0,
-    className = '',
-}: {
-    children: ReactNode;
-    delay?: number;
-    className?: string;
-}) {
-    const ref = useRef<HTMLDivElement>(null);
-    const inView = useFramerInView(ref, { once: true, margin: '-60px' });
+interface Solution {
+    id: string;
+    code: string;
+    category: 'Fatigue' | 'AI' | 'Automation' | 'Reporting' | 'CFD' | 'Optimization';
+    industry: string[];
+    title: string;
+    shortDesc: string;
+    fullDesc: string;
+    image: string;
+    capabilities: string[];
+    deliverables: string[];
+    software: string[];
+    duration: string;
+    complexity: 'Standard' | 'Advanced' | 'Enterprise';
+}
+
+const solutions: Solution[] = [
+    {
+        id: '01',
+        code: 'PSJ-FAT-001',
+        category: 'Fatigue',
+        industry: ['Automotive', 'Heavy Machinery'],
+        title: 'Shaft Fatigue Modeling Service',
+        shortDesc: 'Excel-driven shaft parameter automation with full fatigue analysis pipeline.',
+        fullDesc:
+            'Custom Excel-based input system that automatically collects shaft geometry parameters and operating conditions. The system integrates with Jupiter and SunShine solvers to perform comprehensive fatigue lifecycle analysis with automated reporting.',
+        image: '/showcase/fatigue.jpg',
+        capabilities: [
+            'Parametric geometry generation',
+            'Multi-axial fatigue analysis',
+            'S-N curve evaluation',
+            'Damage accumulation',
+        ],
+        deliverables: [
+            'Excel workbook',
+            'Python automation scripts',
+            'PDF/PPT reports',
+            'Training materials',
+        ],
+        software: ['Jupiter', 'SunShine', 'MS Excel'],
+        duration: '4-6 weeks',
+        complexity: 'Standard',
+    },
+    {
+        id: '02',
+        code: 'PSJ-MBD-002',
+        category: 'Fatigue',
+        industry: ['Automotive'],
+        title: 'Exhaust System MBD Automation',
+        shortDesc: 'End-to-end multi-body dynamics fatigue analysis for exhaust systems.',
+        fullDesc:
+            'Complete automation pipeline from thermal stress analysis through modal decomposition and RFI (Random Frequency Input) analysis for exhaust system durability assessment.',
+        image: '/images/workflow-dark.jpg',
+        capabilities: [
+            'Thermal stress mapping',
+            'Modal analysis',
+            'RFI evaluation',
+            'Lifecycle prediction',
+        ],
+        deliverables: ['Automation framework', 'Analysis templates', 'Validation reports'],
+        software: ['Jupiter', 'PSJ', 'SunShine'],
+        duration: '6-8 weeks',
+        complexity: 'Advanced',
+    },
+    {
+        id: '03',
+        code: 'PSJ-RPT-003',
+        category: 'Reporting',
+        industry: ['All Industries'],
+        title: 'Automated PowerPoint Reporting',
+        shortDesc: 'One-click export of analysis results to professional PowerPoint reports.',
+        fullDesc:
+            'Custom reporting system that automatically generates branded PowerPoint presentations including 3D visualizations, stress contour plots, animations, and quantitative result tables.',
+        image: '/images/product-ui.jpg',
+        capabilities: [
+            'Template-driven reports',
+            '3D visualization export',
+            'Chart generation',
+            'Multi-language support',
+        ],
+        deliverables: ['PPT templates', 'Python report engine', 'Documentation'],
+        software: ['PSJ', 'MS PowerPoint'],
+        duration: '3-4 weeks',
+        complexity: 'Standard',
+    },
+    {
+        id: '04',
+        code: 'PSJ-AI-004',
+        category: 'AI',
+        industry: ['Marine', 'Aerospace'],
+        title: 'AI-Powered Smart Dialog System',
+        shortDesc: 'Machine learning system that predicts and pre-fills analysis parameters.',
+        fullDesc:
+            'Intelligent dialog system that learns from user operations and automatically populates parameters based on historical workflows. Reduces operation time by up to 60% for repetitive analysis tasks.',
+        image: '/images/gui-builder.jpg',
+        capabilities: [
+            'Pattern recognition',
+            'Parameter prediction',
+            'User behavior learning',
+            'Adaptive UI',
+        ],
+        deliverables: ['ML model', 'Integration plugin', 'Training dataset'],
+        software: ['PSJ', 'Python ML stack'],
+        duration: '8-12 weeks',
+        complexity: 'Enterprise',
+    },
+    {
+        id: '05',
+        code: 'PSJ-AI-005',
+        category: 'AI',
+        industry: ['Marine'],
+        title: 'Generative Ship Hull Design',
+        shortDesc: 'Parametric morphing engine for AI training dataset generation.',
+        fullDesc:
+            'Automated ship hull variant generator that produces thousands of geometric variations for training neural networks in hydrodynamic prediction and design optimization.',
+        image: '/showcase/ai-ship.jpg',
+        capabilities: [
+            'Parametric morphing',
+            'Batch generation',
+            'Quality validation',
+            'Dataset curation',
+        ],
+        deliverables: ['Generation pipeline', 'Validated dataset', 'Quality metrics'],
+        software: ['PSJ', 'Jupiter'],
+        duration: '6-10 weeks',
+        complexity: 'Advanced',
+    },
+    {
+        id: '06',
+        code: 'PSJ-AUT-006',
+        category: 'Automation',
+        industry: ['Materials', 'Research'],
+        title: 'Voronoi Microstructure Generation',
+        shortDesc: 'Automated polycrystalline microstructure modeling for metal analysis.',
+        fullDesc:
+            'Production-grade Voronoi tessellation engine for generating realistic metal microstructures. Used for crystal plasticity simulations and grain-level material behavior studies.',
+        image: '/images/cae-model.jpg',
+        capabilities: [
+            'Voronoi tessellation',
+            'Grain boundary modeling',
+            'Crystal orientation',
+            'Multi-scale coupling',
+        ],
+        deliverables: ['Generation tools', 'Mesh templates', 'Validation cases'],
+        software: ['PSJ', 'Jupiter'],
+        duration: '5-7 weeks',
+        complexity: 'Advanced',
+    },
+    {
+        id: '07',
+        code: 'PSJ-CFD-007',
+        category: 'CFD',
+        industry: ['Energy', 'Manufacturing'],
+        title: 'SunShine + OpenFOAM Coupling',
+        shortDesc: 'Multi-physics coupling between thermal solver and CFD analysis.',
+        fullDesc:
+            'Bidirectional coupling system between OpenFOAM CFD solver and SunShine for iterative heat-flow and structural analysis until convergence. Enables true multi-physics simulations.',
+        image: '/images/cae-analysis.jpg',
+        capabilities: [
+            'Solver coupling',
+            'Iterative convergence',
+            'Data interpolation',
+            'Convergence monitoring',
+        ],
+        deliverables: ['Coupling interface', 'Workflow templates', 'Convergence tools'],
+        software: ['OpenFOAM', 'SunShine', 'PSJ'],
+        duration: '10-14 weeks',
+        complexity: 'Enterprise',
+    },
+    {
+        id: '08',
+        code: 'PSJ-CFD-008',
+        category: 'CFD',
+        industry: ['Energy'],
+        title: 'OpenFOAM Block Mesh Generation',
+        shortDesc: 'Specialized structured mesh generation for high-fidelity CFD.',
+        fullDesc:
+            'Custom block mesh generator using OpenFOAM utilities for creating high-quality structured meshes optimized for specific CFD analysis requirements.',
+        image: '/images/hero-mesh.jpg',
+        capabilities: [
+            'Structured meshing',
+            'Quality control',
+            'Boundary layer refinement',
+            'Domain decomposition',
+        ],
+        deliverables: ['Mesh generation scripts', 'Quality reports'],
+        software: ['OpenFOAM', 'PSJ'],
+        duration: '4-6 weeks',
+        complexity: 'Standard',
+    },
+    {
+        id: '09',
+        code: 'PSJ-AUT-009',
+        category: 'Automation',
+        industry: ['All Industries'],
+        title: 'Automatic FE Model Generation',
+        shortDesc: 'End-to-end FE model setup including mesh, BC, and materials.',
+        fullDesc:
+            'Complete automation of finite element model preparation including geometry meshing, boundary condition application, material assignment, and load case definition.',
+        image: '/images/psj-workspace.jpg',
+        capabilities: ['Auto-meshing', 'BC application', 'Material library', 'Quality validation'],
+        deliverables: ['Automation scripts', 'Material library', 'Templates'],
+        software: ['PSJ', 'Jupiter'],
+        duration: '6-8 weeks',
+        complexity: 'Advanced',
+    },
+];
+
+const categoryConfig = {
+    All: { color: '#0047AB', icon: Layers },
+    Fatigue: { color: '#D4570D', icon: Activity },
+    AI: { color: '#5B3BB8', icon: Cpu },
+    Automation: { color: '#0047AB', icon: Cog },
+    Reporting: { color: '#00875A', icon: FileText },
+    CFD: { color: '#0099CC', icon: Zap },
+    Optimization: { color: '#B86E00', icon: TrendingUp },
+};
+
+const industries = [
+    'All Industries',
+    'Automotive',
+    'Aerospace',
+    'Marine',
+    'Energy',
+    'Materials',
+    'Heavy Machinery',
+    'Manufacturing',
+    'Research',
+];
+
+export default function CAEServices() {
+    const [activeCategory, setActiveCategory] = useState<keyof typeof categoryConfig>('All');
+    const [activeIndustry, setActiveIndustry] = useState('All Industries');
+    const [search, setSearch] = useState('');
+    const [selectedSolution, setSelectedSolution] = useState<Solution | null>(null);
+    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+    const filtered = useMemo(() => {
+        return solutions.filter((s) => {
+            const matchCat = activeCategory === 'All' || s.category === activeCategory;
+            const matchInd =
+                activeIndustry === 'All Industries' ||
+                s.industry.includes(activeIndustry) ||
+                s.industry.includes('All Industries');
+            const matchSearch =
+                !search ||
+                s.title.toLowerCase().includes(search.toLowerCase()) ||
+                s.shortDesc.toLowerCase().includes(search.toLowerCase()) ||
+                s.code.toLowerCase().includes(search.toLowerCase());
+            return matchCat && matchInd && matchSearch;
+        });
+    }, [activeCategory, activeIndustry, search]);
+
     return (
-        <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: delay * 0.001, ease: [0.22, 1, 0.36, 1] }}
-            className={className}
+        <div
+            style={{
+                background: 'var(--psj-surface-0)',
+                color: 'var(--psj-text-1)',
+                minHeight: '100vh',
+            }}
         >
-            {children}
-        </motion.div>
-    );
-}
-
-/* ── Application Card ── */
-function AppCard({ app, index }: { app: any; index: number }) {
-    const Icon = app.icon;
-    const [hovered, setHovered] = useState(false);
-
-    return (
-        <Reveal delay={index * 60}>
-            <div
-                className="group relative bg-[var(--card)] border border-[var(--border)] overflow-hidden transition-all duration-500 hover:border-accent/40 hover:shadow-2xl hover:shadow-accent/5"
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-            >
-                {/* Image Area */}
-                <div className="relative h-52 bg-[var(--bg)] overflow-hidden border-b border-[var(--border)]">
-                    <div
-                        className={`absolute inset-0 bg-gradient-to-br ${app.gradient} opacity-10`}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center p-6">
-                        <div
-                            className={`w-full h-full rounded-none flex items-center justify-center transition-transform duration-700 ${hovered ? 'scale-105' : 'scale-100'}`}
-                        >
-                            {app.imageContent}
-                        </div>
-                    </div>
-                    {/* Category badge */}
-                    <div className="absolute top-4 left-4">
-                        <span className="inline-flex items-center gap-1.5 bg-[var(--bg)]/90 backdrop-blur px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-accent border border-[var(--border)]">
-                            <Icon size={12} />
-                            {app.category}
-                        </span>
-                    </div>
-                    {/* Hover overlay */}
-                    <AnimatePresence>
-                        {hovered && (
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="absolute inset-0 bg-accent/10 backdrop-blur-[2px] flex items-center justify-center"
+            {/* layout provides header */}
+            <section style={{ borderBottom: '1px solid var(--psj-border)' }}>
+                <div className="psj-container py-12 lg:py-16">
+                    <div className="grid lg:grid-cols-12 gap-8 items-end">
+                        <div className="lg:col-span-8">
+                            <div className="psj-label mb-3">Engineering Services Catalog</div>
+                            <h1 className="psj-h1 mb-5" style={{ color: 'var(--psj-text-1)' }}>
+                                CAE Solutions &<br />
+                                Engineering Services
+                            </h1>
+                            <p
+                                className="text-base leading-relaxed max-w-2xl"
+                                style={{ color: 'var(--psj-text-2)' }}
                             >
-                                <button className="bg-accent text-white px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] flex items-center gap-2 hover:bg-accent/90 transition-colors">
-                                    <Play size={14} /> Watch Demo
-                                </button>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                    <h4 className="text-lg font-bold text-text tracking-tight mb-3 group-hover:text-accent transition-colors">
-                        {app.title}
-                    </h4>
-                    <p className="text-sm text-muted leading-relaxed mb-5">{app.description}</p>
-                    <div className="flex items-center justify-between pt-4 border-t border-[var(--border)]">
-                        <span className="text-[10px] font-bold text-muted uppercase tracking-[0.15em]">
-                            {app.tech}
-                        </span>
-                        <button className="text-xs font-bold text-accent flex items-center gap-1 group-hover:gap-2 transition-all">
-                            Details <ArrowUpRight size={12} />
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </Reveal>
-    );
-}
-
-/* ═══════════════════════════════════════════════════════════
-   APPLICATIONS DATA
-   ═══════════════════════════════════════════════════════════ */
-const APPLICATIONS = [
-    // FATIGUE
-    {
-        id: 'fatigue-shaft',
-        category: 'Fatigue',
-        icon: Activity,
-        title: 'Shaft Under Fatigue Modelling',
-        description:
-            'From user inputs in MS Excel, shaft parameters are collected. This geometry and working conditions are modelled and analyzed by Jupiter and SunShine solver.',
-        tech: 'Excel + Jupiter + SunShine',
-        gradient: 'from-blue-600 to-cyan-500',
-        imageContent: (
-            <div className="flex items-center justify-center w-full h-full">
-                <div className="relative">
-                    <div className="w-32 h-32 border-2 border-blue-600/30 flex items-center justify-center">
-                        <div className="w-24 h-24 bg-gradient-to-br from-blue-600/20 to-cyan-500/20 flex items-center justify-center">
-                            <div className="text-4xl font-black text-blue-600/60">⚙</div>
-                        </div>
-                    </div>
-                    <div className="absolute -bottom-3 -right-3 bg-blue-600 text-white text-[10px] font-bold px-3 py-1">
-                        FEM
-                    </div>
-                </div>
-            </div>
-        ),
-    },
-    {
-        id: 'fatigue-exhaust',
-        category: 'Fatigue',
-        icon: Activity,
-        title: 'MBD Automation for Exhaust System',
-        description:
-            'Automate the MBD fatigue analysis process for exhaust systems: from thermal stress to modal and RFI analysis with a single script.',
-        tech: 'MBD + Thermal + Modal',
-        gradient: 'from-orange-500 to-red-500',
-        imageContent: (
-            <div className="flex items-center gap-4">
-                <div className="w-20 h-20 border-2 border-orange-500/30 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center">
-                        <span className="text-2xl font-black text-orange-500/60">M</span>
-                    </div>
-                </div>
-                <ArrowRight size={24} className="text-orange-500/40" />
-                <div className="w-20 h-20 border-2 border-red-500/30 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-red-500/20 to-orange-500/20 flex items-center justify-center">
-                        <span className="text-2xl font-black text-red-500/60">F</span>
-                    </div>
-                </div>
-            </div>
-        ),
-    },
-    {
-        id: 'fatigue-post',
-        category: 'Fatigue',
-        icon: Activity,
-        title: 'Post-Processing for Fatigue Analysis',
-        description:
-            'After analysis results, users can export pictures, graphs, and animations directly to MS PowerPoint with just one click.',
-        tech: 'PowerPoint + Automation',
-        gradient: 'from-purple-500 to-pink-500',
-        imageContent: (
-            <div className="flex items-center gap-3">
-                <div className="w-16 h-16 border-2 border-purple-500/30 flex items-center justify-center">
-                    <FileText size={28} className="text-purple-500/60" />
-                </div>
-                <ArrowRight size={20} className="text-purple-500/40" />
-                <div className="w-16 h-16 border-2 border-pink-500/30 flex items-center justify-center">
-                    <Monitor size={28} className="text-pink-500/60" />
-                </div>
-            </div>
-        ),
-    },
-    // AI
-    {
-        id: 'ai-smart-dialog',
-        category: 'AI',
-        icon: Brain,
-        title: 'Smart Dialog',
-        description:
-            'After parameters are trained by user operations, dialog parameters are filled in automatically instead of default values, reducing operation time.',
-        tech: 'ML Training + UI',
-        gradient: 'from-emerald-500 to-teal-500',
-        imageContent: (
-            <div className="flex items-center justify-center">
-                <div className="relative">
-                    <Brain size={64} className="text-emerald-500/40" />
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-emerald-500/80 flex items-center justify-center">
-                        <Sparkles size={14} className="text-white" />
-                    </div>
-                </div>
-            </div>
-        ),
-    },
-    {
-        id: 'ai-ship-shapes',
-        category: 'AI',
-        icon: Brain,
-        title: 'Generate Ship Shapes for AI Training',
-        description:
-            'Automatically generate variants of ship hull shapes for AI training purposes, enabling rapid dataset creation for neural networks.',
-        tech: 'Generative + Hull Design',
-        gradient: 'from-cyan-500 to-blue-500',
-        imageContent: (
-            <div className="flex items-center gap-2">
-                <div className="w-14 h-14 border-2 border-cyan-500/30 flex items-center justify-center">
-                    <span className="text-xs font-bold text-cyan-500/60">V1</span>
-                </div>
-                <div className="w-14 h-14 border-2 border-blue-500/30 flex items-center justify-center">
-                    <span className="text-xs font-bold text-blue-500/60">V2</span>
-                </div>
-                <div className="w-14 h-14 border-2 border-teal-500/30 flex items-center justify-center">
-                    <span className="text-xs font-bold text-teal-500/60">V3</span>
-                </div>
-            </div>
-        ),
-    },
-    // AUTOMATION
-    {
-        id: 'auto-voronoi',
-        category: 'Automation',
-        icon: LayoutGrid,
-        title: 'Voronoi Tessellation Modelling',
-        description:
-            'Generate a Voronoi-shaped assembly for metal microscale modeling, enabling advanced material structure simulations.',
-        tech: 'Geometry + Meshing',
-        gradient: 'from-violet-500 to-purple-500',
-        imageContent: (
-            <div className="grid grid-cols-3 gap-1 w-32 h-32">
-                {Array.from({ length: 9 }).map((_, i) => (
-                    <div
-                        key={i}
-                        className="bg-violet-500/10 border border-violet-500/20"
-                        style={{
-                            clipPath: 'polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)',
-                        }}
-                    />
-                ))}
-            </div>
-        ),
-    },
-    {
-        id: 'auto-openfoam-coupling',
-        category: 'Automation',
-        icon: Zap,
-        title: 'Coupling SunShine and OpenFOAM',
-        description:
-            'OpenFOAM solves heat-flow analysis, then transfers results to SunShine for continuous thermal analysis. Repeated iteratively until convergence.',
-        tech: 'OpenFOAM + SunShine',
-        gradient: 'from-amber-500 to-orange-500',
-        imageContent: (
-            <div className="flex items-center gap-4">
-                <div className="text-center">
-                    <div className="w-16 h-16 bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mb-2">
-                        <Zap size={24} className="text-amber-500/60" />
-                    </div>
-                    <span className="text-[10px] font-bold text-amber-500/60">Heat</span>
-                </div>
-                <div className="flex flex-col gap-1">
-                    <ArrowRight size={16} className="text-amber-500/40" />
-                    <ArrowRight size={16} className="text-orange-500/40" />
-                </div>
-                <div className="text-center">
-                    <div className="w-16 h-16 bg-orange-500/10 border border-orange-500/30 flex items-center justify-center mb-2">
-                        <Activity size={24} className="text-orange-500/60" />
-                    </div>
-                    <span className="text-[10px] font-bold text-orange-500/60">Thermal</span>
-                </div>
-            </div>
-        ),
-    },
-    {
-        id: 'auto-openfoam-mesh',
-        category: 'Automation',
-        icon: Box,
-        title: 'Block Mesh by OpenFOAM',
-        description:
-            'Use OpenFOAM to generate specialized block meshes for complex geometries with precise control over element distribution.',
-        tech: 'OpenFOAM + Meshing',
-        gradient: 'from-sky-500 to-blue-500',
-        imageContent: (
-            <div className="relative w-28 h-28">
-                <div className="absolute inset-0 border-2 border-sky-500/30" />
-                <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 border border-sky-500/20" />
-                <div className="absolute top-1/3 left-1/3 w-1/3 h-1/3 bg-sky-500/10" />
-                <div className="absolute -bottom-2 -right-2 bg-sky-500/20 px-2 py-1">
-                    <span className="text-[10px] font-bold text-sky-500/60">BLOCK</span>
-                </div>
-            </div>
-        ),
-    },
-    {
-        id: 'auto-mesh-settings',
-        category: 'Automation',
-        icon: Settings,
-        title: 'Auto Generate Mesh Settings',
-        description:
-            'Set mesh size automatically based on geometric location and curvature, eliminating manual element sizing across complex assemblies.',
-        tech: 'Auto-Mesh + Geometry',
-        gradient: 'from-indigo-500 to-violet-500',
-        imageContent: (
-            <div className="flex items-center gap-3">
-                <Settings
-                    size={48}
-                    className="text-indigo-500/40 animate-spin"
-                    style={{ animationDuration: '8s' }}
-                />
-                <div className="flex flex-col gap-1">
-                    <div className="w-16 h-2 bg-indigo-500/20" />
-                    <div className="w-12 h-2 bg-indigo-500/20" />
-                    <div className="w-14 h-2 bg-indigo-500/20" />
-                </div>
-            </div>
-        ),
-    },
-    {
-        id: 'auto-fe-model',
-        category: 'Automation',
-        icon: Cpu,
-        title: 'Auto Generate FE Model',
-        description:
-            'Generate solid mesh, setup boundary conditions and materials automatically from high-level parameters — full model in seconds.',
-        tech: 'Full Pipeline',
-        gradient: 'from-rose-500 to-pink-500',
-        imageContent: (
-            <div className="grid grid-cols-2 gap-2 w-28">
-                <div className="h-12 bg-rose-500/10 border border-rose-500/20 flex items-center justify-center">
-                    <span className="text-[10px] font-bold text-rose-500/60">MESH</span>
-                </div>
-                <div className="h-12 bg-pink-500/10 border border-pink-500/20 flex items-center justify-center">
-                    <span className="text-[10px] font-bold text-pink-500/60">BCs</span>
-                </div>
-                <div className="h-12 bg-rose-500/10 border border-rose-500/20 flex items-center justify-center">
-                    <span className="text-[10px] font-bold text-rose-500/60">MAT</span>
-                </div>
-                <div className="h-12 bg-pink-500/10 border border-pink-500/20 flex items-center justify-center">
-                    <span className="text-[10px] font-bold text-pink-500/60">SOLVE</span>
-                </div>
-            </div>
-        ),
-    },
-    {
-        id: 'auto-html-report',
-        category: 'Automation',
-        icon: FileText,
-        title: 'Generate HTML Model Report',
-        description:
-            'Generate a customized HTML website report by Python and JavaScript: show/hide columns, zoom in/out pictures, smart filters, and more.',
-        tech: 'Python + JavaScript',
-        gradient: 'from-teal-500 to-emerald-500',
-        imageContent: (
-            <div className="w-28 h-28 bg-teal-500/5 border border-teal-500/20 p-2">
-                <div className="w-full h-3 bg-teal-500/20 mb-2" />
-                <div className="w-2/3 h-2 bg-teal-500/15 mb-2" />
-                <div className="w-1/2 h-2 bg-teal-500/15 mb-2" />
-                <div className="grid grid-cols-3 gap-1 mt-2">
-                    <div className="h-8 bg-teal-500/10" />
-                    <div className="h-8 bg-teal-500/10" />
-                    <div className="h-8 bg-teal-500/10" />
-                </div>
-            </div>
-        ),
-    },
-    {
-        id: 'auto-excel-model',
-        category: 'Automation',
-        icon: Layers,
-        title: 'Change Model Information by Excel',
-        description:
-            'Run Jupiter in background or foreground mode from MS Excel to renumber IDs and change model colors in batch operations.',
-        tech: 'Excel + Batch Processing',
-        gradient: 'from-green-500 to-emerald-500',
-        imageContent: (
-            <div className="flex items-center gap-3">
-                <div className="w-14 h-14 bg-green-500/10 border border-green-500/30 flex items-center justify-center">
-                    <span className="text-xs font-bold text-green-500/60">XLS</span>
-                </div>
-                <ArrowRight size={16} className="text-green-500/40" />
-                <div className="w-14 h-14 bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-                    <span className="text-xs font-bold text-emerald-500/60">JDB</span>
-                </div>
-            </div>
-        ),
-    },
-    {
-        id: 'auto-excel-analyses',
-        category: 'Automation',
-        icon: Globe,
-        title: 'Run Several Analyses from Excel',
-        description:
-            'Run multiple static and vibration analyses for Design of Experiments (DoE). Based on results, users can decide design changes for optimization.',
-        tech: 'DoE + Optimization',
-        gradient: 'from-blue-600 to-indigo-600',
-        imageContent: (
-            <div className="flex items-end gap-1 h-24">
-                {[40, 65, 45, 80, 55, 90, 70].map((h, i) => (
-                    <div
-                        key={i}
-                        className="w-4 bg-blue-600/20 border border-blue-600/30"
-                        style={{ height: `${h}%` }}
-                    />
-                ))}
-            </div>
-        ),
-    },
-];
-
-const CATEGORIES = [
-    { label: 'All', value: 'all', icon: LayoutGrid },
-    { label: 'Fatigue', value: 'Fatigue', icon: Activity },
-    { label: 'AI', value: 'AI', icon: Brain },
-    { label: 'Automation', value: 'Automation', icon: Zap },
-];
-
-/* ═══════════════════════════════════════════════════════════
-   MAIN COMPONENT
-   ═══════════════════════════════════════════════════════════ */
-export default function Showcase() {
-    const [isDark, setIsDark] = useState(true);
-    const [activeFilter, setActiveFilter] = useState('all');
-    const [searchQuery, setSearchQuery] = useState('');
-
-    const filteredApps = APPLICATIONS.filter((app) => {
-        const matchesCategory = activeFilter === 'all' || app.category === activeFilter;
-        const matchesSearch =
-            !searchQuery ||
-            app.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            app.description.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesCategory && matchesSearch;
-    });
-
-    return (
-        <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] transition-colors duration-300">
-            {/* ── NAVBAR ── */}
-            <nav className="fixed top-0 w-full z-50 border-b border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur-xl">
-                <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                    <div className="flex items-center gap-8">
-                        <a href="/" className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-blue-600 flex items-center justify-center">
-                                <span className="text-white font-black text-xs">P</span>
+                                A comprehensive catalog of production-grade CAE automation services
+                                delivered to leading manufacturers worldwide. Each solution is
+                                engineered, validated, and supported by our team.
+                            </p>
+                            <div className="mt-8 flex flex-wrap gap-3">
+                                <a href="#catalog" className="psj-btn-primary">
+                                    Browse Catalog <ArrowRight size={14} />
+                                </a>
+                                <a href="#" className="psj-btn-secondary">
+                                    <Download size={14} /> Download Brochure
+                                </a>
                             </div>
-                            <span className="text-lg font-bold tracking-tight text-text">
-                                PSJ Showcase
-                            </span>
-                        </a>
-                        <div className="hidden md:flex items-center gap-1 text-sm">
-                            <a
-                                href="/"
-                                className="px-4 py-2 text-muted hover:text-text transition-colors"
-                            >
-                                Home
-                            </a>
-                            <a href="#" className="px-4 py-2 text-accent font-bold bg-accent/5">
-                                Showcase
-                            </a>
-                            <a
-                                href="#"
-                                className="px-4 py-2 text-muted hover:text-text transition-colors"
-                            >
-                                Docs
-                            </a>
                         </div>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                        <button
-                            onClick={() => setIsDark(!isDark)}
-                            className="w-9 h-9 flex items-center justify-center border border-[var(--border)] hover:border-accent/40 transition-colors"
-                        >
-                            {isDark ? <Sun size={16} /> : <Moon size={16} />}
-                        </button>
-                        <button className="hidden sm:block bg-blue-600 text-white px-5 py-2 text-xs font-bold uppercase tracking-[0.15em] hover:bg-blue-700 transition-colors">
-                            Contact Us
-                        </button>
+                        <div className="lg:col-span-4">
+                            <div
+                                className="grid grid-cols-2"
+                                style={{ border: '1px solid var(--psj-border)' }}
+                            >
+                                <Stat
+                                    icon={<Briefcase size={14} />}
+                                    label="Solutions"
+                                    value={String(solutions.length)}
+                                />
+                                <Stat icon={<Building2 size={14} />} label="Clients" value="120+" />
+                                <Stat icon={<Award size={14} />} label="Years" value="15+" />
+                                <Stat icon={<Users size={14} />} label="Engineers" value="40+" />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </nav>
+            </section>
 
-            {/* ── HERO ── */}
-            <section className="relative pt-28 pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
-                <div className="absolute inset-0 bg-grid pointer-events-none" />
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
-
-                <div className="relative max-w-7xl mx-auto px-6 text-center">
-                    <Reveal>
-                        <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-600/20 px-4 py-2 mb-8">
-                            <Sparkles size={14} className="text-blue-600" />
-                            <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.3em]">
-                                PSJ v5 — Production Ready
-                            </span>
-                        </div>
-                    </Reveal>
-
-                    <Reveal delay={100}>
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-text uppercase tracking-tighter leading-[0.85] mb-6">
-                            Applications
-                            <br />
-                            <span className="text-accent">Built with PSJ</span>
-                        </h1>
-                    </Reveal>
-
-                    <Reveal delay={200}>
-                        <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto leading-relaxed mb-10">
-                            Explore real-world engineering automation solutions — from fatigue
-                            analysis and AI-driven design to full OpenFOAM coupling workflows.
-                        </p>
-                    </Reveal>
-
-                    <Reveal delay={300}>
-                        <div className="flex flex-wrap justify-center gap-4">
-                            <a
-                                href="#apps"
-                                className="bg-blue-600 text-white px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] hover:bg-blue-700 transition-all flex items-center gap-2"
-                            >
-                                Browse Applications <ChevronDown size={16} />
-                            </a>
-                            <a
-                                href="#"
-                                className="border border-[var(--border)] text-text px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] hover:border-accent/40 transition-all flex items-center gap-2"
-                            >
-                                <ExternalLink size={14} /> View Documentation
-                            </a>
-                        </div>
-                    </Reveal>
-
-                    {/* Stats */}
-                    <Reveal delay={400}>
-                        <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto mt-16 pt-10 border-t border-[var(--border)]">
+            {/* ─────── INDUSTRY BAR ─────── */}
+            <section
+                style={{
+                    background: 'var(--psj-surface-1)',
+                    borderBottom: '1px solid var(--psj-border)',
+                }}
+            >
+                <div className="psj-container py-4">
+                    <div className="flex items-center gap-8">
+                        <span
+                            className="text-[10px] uppercase tracking-widest font-bold whitespace-nowrap"
+                            style={{ color: 'var(--psj-text-3)' }}
+                        >
+                            Trusted by
+                        </span>
+                        <div className="flex items-center gap-8 flex-wrap">
                             {[
-                                { value: '13', label: 'Applications' },
-                                { value: '3', label: 'Categories' },
-                                { value: 'v5', label: 'Platform' },
-                            ].map((s) => (
-                                <div key={s.label} className="text-center">
-                                    <div className="text-2xl md:text-3xl font-black text-text">
-                                        {s.value}
-                                    </div>
-                                    <div className="text-[10px] font-bold text-muted uppercase tracking-[0.2em] mt-1">
-                                        {s.label}
-                                    </div>
+                                { icon: Car, name: 'Automotive' },
+                                { icon: Plane, name: 'Aerospace' },
+                                { icon: Ship, name: 'Marine' },
+                                { icon: Factory, name: 'Manufacturing' },
+                                { icon: Atom, name: 'Energy' },
+                            ].map((I) => (
+                                <div
+                                    key={I.name}
+                                    className="flex items-center gap-2"
+                                    style={{ color: 'var(--psj-text-3)' }}
+                                >
+                                    <I.icon size={16} />
+                                    <span className="text-sm font-medium">{I.name}</span>
                                 </div>
                             ))}
                         </div>
-                    </Reveal>
+                    </div>
                 </div>
             </section>
 
-            {/* ── FILTERS ── */}
-            <section
-                id="apps"
-                className="py-8 border-y border-[var(--border)] bg-[var(--card)]/50 sticky top-16 z-40 backdrop-blur-xl"
-            >
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                        {/* Category filters */}
-                        <div className="flex flex-wrap gap-1 bg-[var(--bg)] border border-[var(--border)] p-1">
-                            {CATEGORIES.map((cat) => {
-                                const Icon = cat.icon;
-                                const isActive = activeFilter === cat.value;
-                                return (
+            {/* ─────── MAIN LAYOUT ─────── */}
+            <main id="catalog" className="psj-container py-10">
+                <div className="grid lg:grid-cols-12 gap-10">
+                    {/* ── SIDEBAR ── */}
+                    <aside
+                        className="hidden lg:block lg:col-span-3 sticky self-start space-y-7"
+                        style={{ top: '80px' }}
+                    >
+                        {/* Search */}
+                        <div>
+                            <label
+                                className="text-[10px] uppercase tracking-widest font-bold mb-2 block"
+                                style={{ color: 'var(--psj-text-3)' }}
+                            >
+                                Search
+                            </label>
+                            <div
+                                className="flex items-center gap-2 px-3 py-2.5"
+                                style={{
+                                    border: '1px solid var(--psj-border)',
+                                    background: 'var(--psj-surface-1)',
+                                }}
+                            >
+                                <Search size={13} style={{ color: 'var(--psj-text-3)' }} />
+                                <input
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                    placeholder="Solution code, name..."
+                                    className="bg-transparent text-sm outline-none flex-1"
+                                    style={{ color: 'var(--psj-text-1)' }}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Categories */}
+                        <div>
+                            <label
+                                className="text-[10px] uppercase tracking-widest font-bold mb-2 block"
+                                style={{ color: 'var(--psj-text-3)' }}
+                            >
+                                Service Category
+                            </label>
+                            <div className="space-y-0.5">
+                                {(
+                                    Object.keys(categoryConfig) as Array<
+                                        keyof typeof categoryConfig
+                                    >
+                                ).map((cat) => {
+                                    const config = categoryConfig[cat];
+                                    const Icon = config.icon;
+                                    const count =
+                                        cat === 'All'
+                                            ? solutions.length
+                                            : solutions.filter((s) => s.category === cat).length;
+                                    const active = activeCategory === cat;
+                                    return (
+                                        <button
+                                            key={cat}
+                                            onClick={() => setActiveCategory(cat)}
+                                            className="w-full flex items-center justify-between px-3 py-2.5 text-sm transition-colors"
+                                            style={{
+                                                background: active
+                                                    ? 'var(--psj-blue-subtle)'
+                                                    : 'transparent',
+                                                borderLeft: `2px solid ${active ? 'var(--psj-blue)' : 'transparent'}`,
+                                                color: active
+                                                    ? 'var(--psj-blue)'
+                                                    : 'var(--psj-text-2)',
+                                                fontWeight: active ? 600 : 400,
+                                            }}
+                                        >
+                                            <span className="flex items-center gap-2.5">
+                                                <Icon
+                                                    size={13}
+                                                    style={{
+                                                        color: active
+                                                            ? config.color
+                                                            : 'var(--psj-text-3)',
+                                                    }}
+                                                />
+                                                {cat}
+                                            </span>
+                                            <span
+                                                className="text-xs num-marker"
+                                                style={{ color: 'var(--psj-text-3)' }}
+                                            >
+                                                {count}
+                                            </span>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        {/* Industries */}
+                        <div>
+                            <label
+                                className="text-[10px] uppercase tracking-widest font-bold mb-2 block"
+                                style={{ color: 'var(--psj-text-3)' }}
+                            >
+                                Industry
+                            </label>
+                            <select
+                                value={activeIndustry}
+                                onChange={(e) => setActiveIndustry(e.target.value)}
+                                className="w-full px-3 py-2.5 text-sm outline-none"
+                                style={{
+                                    border: '1px solid var(--psj-border)',
+                                    background: 'var(--psj-surface-1)',
+                                    color: 'var(--psj-text-1)',
+                                }}
+                            >
+                                {industries.map((i) => (
+                                    <option key={i}>{i}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* Help box */}
+                        <div
+                            className="p-5"
+                            style={{
+                                border: '1px solid var(--psj-border)',
+                                background: 'var(--psj-surface-1)',
+                            }}
+                        >
+                            <div className="psj-label mb-2">Need Help?</div>
+                            <h4
+                                className="text-sm font-bold mb-2"
+                                style={{ color: 'var(--psj-text-1)' }}
+                            >
+                                Speak with a CAE specialist
+                            </h4>
+                            <p
+                                className="text-xs leading-relaxed mb-4"
+                                style={{ color: 'var(--psj-text-2)' }}
+                            >
+                                Our engineers can help you select the right solution.
+                            </p>
+                            <a
+                                href="#"
+                                className="text-xs font-bold flex items-center gap-1"
+                                style={{ color: 'var(--psj-blue)' }}
+                            >
+                                Schedule a call <ArrowRight size={11} />
+                            </a>
+                        </div>
+                        {/* Resources */}
+                        <div>
+                            <label
+                                className="text-[10px] uppercase tracking-widest font-bold mb-2 block"
+                                style={{ color: 'var(--psj-text-3)' }}
+                            >
+                                Resources
+                            </label>
+                            <div className="space-y-2">
+                                {[
+                                    { icon: FileText, label: 'Capability statement' },
+                                    { icon: Download, label: 'Service catalog (PDF)' },
+                                    { icon: ExternalLink, label: 'Case studies' },
+                                ].map((r) => (
+                                    <a
+                                        key={r.label}
+                                        href="#"
+                                        className="flex items-center gap-2 text-xs transition-colors"
+                                        style={{ color: 'var(--psj-text-2)' }}
+                                    >
+                                        <r.icon size={12} /> {r.label}
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    </aside>
+
+                    {/* ── MAIN CONTENT ── */}
+                    <div className="lg:col-span-9">
+                        {/* Toolbar */}
+                        <div
+                            className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-5"
+                            style={{ borderBottom: '1px solid var(--psj-border)' }}
+                        >
+                            <div className="text-sm">
+                                <span
+                                    className="font-bold num-marker"
+                                    style={{ color: 'var(--psj-text-1)' }}
+                                >
+                                    {filtered.length}
+                                </span>
+                                <span style={{ color: 'var(--psj-text-2)' }}>
+                                    {' '}
+                                    of {solutions.length} solutions
+                                </span>
+                                {activeCategory !== 'All' && (
+                                    <span style={{ color: 'var(--psj-text-3)' }}>
+                                        {' '}
+                                        · {activeCategory}
+                                    </span>
+                                )}
+                                {activeIndustry !== 'All Industries' && (
+                                    <span style={{ color: 'var(--psj-text-3)' }}>
+                                        {' '}
+                                        · {activeIndustry}
+                                    </span>
+                                )}
+                            </div>
+                            <select
+                                className="px-3 py-1.5 text-xs outline-none"
+                                style={{
+                                    border: '1px solid var(--psj-border)',
+                                    background: 'var(--psj-surface-1)',
+                                    color: 'var(--psj-text-1)',
+                                }}
+                            >
+                                <option>Most relevant</option>
+                                <option>Latest released</option>
+                                <option>Solution code</option>
+                            </select>
+                        </div>
+
+                        {/* Solutions list */}
+                        <AnimatePresence mode="popLayout">
+                            {filtered.length === 0 ? (
+                                <motion.div
+                                    key="empty"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="py-32 text-center"
+                                    style={{ border: '1px dashed var(--psj-border)' }}
+                                >
+                                    <Search
+                                        size={28}
+                                        className="mx-auto mb-4"
+                                        style={{ color: 'var(--psj-text-3)' }}
+                                    />
+                                    <p className="text-sm" style={{ color: 'var(--psj-text-2)' }}>
+                                        No solutions match your criteria
+                                    </p>
                                     <button
-                                        key={cat.value}
-                                        onClick={() => setActiveFilter(cat.value)}
-                                        className={`flex items-center gap-2 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.1em] transition-all ${
-                                            isActive
-                                                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
-                                                : 'text-muted hover:text-text'
+                                        onClick={() => {
+                                            setActiveCategory('All');
+                                            setActiveIndustry('All Industries');
+                                            setSearch('');
+                                        }}
+                                        className="mt-4 text-sm font-bold"
+                                        style={{ color: 'var(--psj-blue)' }}
+                                    >
+                                        Reset filters
+                                    </button>
+                                </motion.div>
+                            ) : (
+                                <div className="space-y-3">
+                                    {filtered.map((sol, i) => (
+                                        <motion.div
+                                            key={sol.id}
+                                            layout
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0 }}
+                                            transition={{ duration: 0.3, delay: i * 0.04 }}
+                                        >
+                                            <SolutionCard
+                                                sol={sol}
+                                                onSelect={setSelectedSolution}
+                                            />
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                </div>
+            </main>
+
+            {/* ─────── BOTTOM CTA ─────── */}
+            <section
+                style={{ background: 'var(--psj-blue)', borderTop: '1px solid var(--psj-border)' }}
+            >
+                <div className="psj-container py-16">
+                    <div className="grid md:grid-cols-2 gap-10 items-center">
+                        <div>
+                            <div
+                                className="text-[10px] uppercase tracking-[0.25em] font-bold mb-3"
+                                style={{ color: 'rgba(255,255,255,0.6)' }}
+                            >
+                                Custom Engineering
+                            </div>
+                            <h2 className="psj-h2 text-white mb-4 text-balance">
+                                Don&apos;t see what you need?
+                            </h2>
+                            <p
+                                className="leading-relaxed"
+                                style={{ color: 'rgba(255,255,255,0.7)' }}
+                            >
+                                Our team specializes in custom CAE automation pipelines tailored to
+                                your specific engineering challenges.
+                            </p>
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-3 md:justify-end">
+                            <a
+                                href="#"
+                                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold"
+                                style={{ background: '#FFFFFF', color: 'var(--psj-blue)' }}
+                            >
+                                Request a quote <ArrowRight size={14} />
+                            </a>
+                            <a
+                                href="#"
+                                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold text-white"
+                                style={{ border: '1px solid rgba(255,255,255,0.35)' }}
+                            >
+                                <Phone size={14} /> Schedule a call
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Layout provides footer */}
+
+            {/* ─────── DETAIL MODAL ─────── */}
+            <AnimatePresence>
+                {selectedSolution && (
+                    <DetailModal sol={selectedSolution} onClose={() => setSelectedSolution(null)} />
+                )}
+            </AnimatePresence>
+
+            {/* ─────── MOBILE FILTERS DRAWER ─────── */}
+            <AnimatePresence>
+                {mobileFiltersOpen && (
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="lg:hidden fixed inset-0 bg-black/50 z-50"
+                            onClick={() => setMobileFiltersOpen(false)}
+                        />
+                        <motion.div
+                            initial={{ x: '100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '100%' }}
+                            transition={{ type: 'spring', damping: 30 }}
+                            className="lg:hidden fixed top-0 right-0 h-full w-80 bg-bg z-50 overflow-y-auto"
+                        >
+                            <div className="p-6">
+                                <button
+                                    onClick={() => setMobileFiltersOpen(false)}
+                                    className="mb-6"
+                                >
+                                    <X size={20} />
+                                </button>
+                                <h3 className="text-lg font-bold mb-4">Filter Solutions</h3>
+                                {(
+                                    Object.keys(categoryConfig) as Array<
+                                        keyof typeof categoryConfig
+                                    >
+                                ).map((cat) => (
+                                    <button
+                                        key={cat}
+                                        onClick={() => {
+                                            setActiveCategory(cat);
+                                            setMobileFiltersOpen(false);
+                                        }}
+                                        className={`w-full text-left px-3 py-2.5 text-sm ${
+                                            activeCategory === cat
+                                                ? 'bg-bg-elevated text-blue font-bold'
+                                                : 'text-text-secondary'
                                         }`}
                                     >
-                                        <Icon size={14} />
-                                        {cat.label}
-                                        {isActive && (
-                                            <span className="ml-1 w-5 h-5 bg-white/20 flex items-center justify-center text-[10px]">
-                                                {
-                                                    APPLICATIONS.filter(
-                                                        (a) =>
-                                                            cat.value === 'all' ||
-                                                            a.category === cat.value,
-                                                    ).length
-                                                }
-                                            </span>
-                                        )}
+                                        {cat}
                                     </button>
-                                );
-                            })}
-                        </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+}
 
-                        {/* Search */}
-                        <div className="relative w-full sm:w-64">
-                            <Search
-                                size={14}
-                                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Search applications..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-10 pr-4 py-2.5 bg-[var(--bg)] border border-[var(--border)] text-sm text-text placeholder:text-muted/50 focus:border-blue-600/40 focus:outline-none transition-colors"
-                            />
-                        </div>
+/* ─── Stat tile ─── */
+function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+    return (
+        <div
+            className="p-5"
+            style={{
+                background: 'var(--psj-surface-0)',
+                borderRight: '1px solid var(--psj-border)',
+                borderBottom: '1px solid var(--psj-border)',
+            }}
+        >
+            <div className="flex items-center gap-2 mb-2" style={{ color: 'var(--psj-text-3)' }}>
+                {icon}
+                <span className="text-[10px] uppercase tracking-widest font-bold">{label}</span>
+            </div>
+            <div
+                className="text-2xl font-extrabold num-marker tracking-tighter"
+                style={{ color: 'var(--psj-text-1)' }}
+            >
+                {value}
+            </div>
+        </div>
+    );
+}
+
+/* ─── Solution Card (horizontal row) ─── */
+function SolutionCard({ sol, onSelect }: { sol: Solution; onSelect: (s: Solution) => void }) {
+    const config = categoryConfig[sol.category];
+    return (
+        <article className="psj-card group" style={{ borderLeft: `3px solid ${config.color}` }}>
+            <div className="grid md:grid-cols-12">
+                {/* Image */}
+                <div
+                    className="md:col-span-3 overflow-hidden"
+                    style={{
+                        background: 'var(--psj-surface-2)',
+                        borderRight: '1px solid var(--psj-border)',
+                    }}
+                >
+                    <div className="aspect-[4/3] md:aspect-auto md:h-full overflow-hidden">
+                        <img
+                            src={sol.image}
+                            alt={sol.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
                     </div>
                 </div>
-            </section>
-
-            {/* ── APPLICATIONS GRID ── */}
-            <section className="py-16 lg:py-24 relative">
-                <div className="max-w-7xl mx-auto px-6">
-                    {/* Results count */}
-                    <div className="flex items-center justify-between mb-10">
-                        <p className="text-sm text-muted">
-                            Showing{' '}
-                            <span className="text-text font-bold">{filteredApps.length}</span> of{' '}
-                            {APPLICATIONS.length} applications
-                        </p>
-                        <button className="text-xs text-muted hover:text-text flex items-center gap-1 transition-colors">
-                            <Filter size={12} /> Sort
+                {/* Content */}
+                <div
+                    className="md:col-span-7 p-6 lg:p-7"
+                    style={{ borderRight: '1px solid var(--psj-border)' }}
+                >
+                    <div className="flex items-center gap-3 mb-3">
+                        <span
+                            className="text-[10px] uppercase tracking-widest font-bold px-2 py-1 num-marker"
+                            style={{ color: config.color, background: `${config.color}12` }}
+                        >
+                            {sol.code}
+                        </span>
+                        <span
+                            className="text-[10px] uppercase tracking-widest font-medium flex items-center gap-1"
+                            style={{ color: 'var(--psj-text-3)' }}
+                        >
+                            <config.icon size={11} /> {sol.category}
+                        </span>
+                        <span
+                            className="text-[10px] uppercase tracking-widest border px-1.5 py-0.5 font-medium"
+                            style={{ borderColor: 'var(--psj-border)', color: 'var(--psj-text-2)' }}
+                        >
+                            {sol.complexity}
+                        </span>
+                    </div>
+                    <h3
+                        className="text-lg font-bold leading-tight mb-2 transition-colors"
+                        style={{ color: 'var(--psj-text-1)' }}
+                    >
+                        {sol.title}
+                    </h3>
+                    <p
+                        className="text-sm leading-relaxed mb-4"
+                        style={{ color: 'var(--psj-text-2)' }}
+                    >
+                        {sol.shortDesc}
+                    </p>
+                    <div className="grid grid-cols-2 gap-1.5 mb-4">
+                        {sol.capabilities.slice(0, 4).map((c) => (
+                            <div
+                                key={c}
+                                className="flex items-center gap-1.5 text-xs"
+                                style={{ color: 'var(--psj-text-2)' }}
+                            >
+                                <CheckCircle2
+                                    size={11}
+                                    style={{ color: 'var(--psj-blue)', flexShrink: 0 }}
+                                />
+                                <span className="truncate">{c}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <div
+                        className="flex flex-wrap items-center gap-1.5 pt-3"
+                        style={{ borderTop: '1px solid var(--psj-border)' }}
+                    >
+                        <span
+                            className="text-[10px] uppercase tracking-widest font-bold mr-1"
+                            style={{ color: 'var(--psj-text-3)' }}
+                        >
+                            Software:
+                        </span>
+                        {sol.software.map((s) => (
+                            <span
+                                key={s}
+                                className="text-[10px] px-2 py-0.5 font-medium"
+                                style={{
+                                    background: 'var(--psj-surface-2)',
+                                    color: 'var(--psj-text-2)',
+                                }}
+                            >
+                                {s}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+                {/* Meta */}
+                <div
+                    className="md:col-span-2 p-5 flex flex-col justify-between"
+                    style={{ background: 'var(--psj-surface-1)' }}
+                >
+                    <div className="space-y-4">
+                        <div>
+                            <div
+                                className="text-[10px] uppercase tracking-widest font-bold mb-1"
+                                style={{ color: 'var(--psj-text-3)' }}
+                            >
+                                Duration
+                            </div>
+                            <div
+                                className="text-sm font-bold flex items-center gap-1.5"
+                                style={{ color: 'var(--psj-text-1)' }}
+                            >
+                                <Clock size={12} style={{ color: 'var(--psj-blue)' }} />{' '}
+                                {sol.duration}
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                className="text-[10px] uppercase tracking-widest font-bold mb-1"
+                                style={{ color: 'var(--psj-text-3)' }}
+                            >
+                                Industry
+                            </div>
+                            {sol.industry.slice(0, 2).map((i) => (
+                                <div
+                                    key={i}
+                                    className="text-xs flex items-center gap-1"
+                                    style={{ color: 'var(--psj-text-2)' }}
+                                >
+                                    <Building2 size={10} /> {i}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="space-y-2 mt-4">
+                        <button
+                            onClick={() => onSelect(sol)}
+                            className="psj-btn-primary w-full justify-center"
+                            style={{ padding: '0.5rem' }}
+                        >
+                            Details <ArrowRight size={12} />
+                        </button>
+                        <button
+                            className="psj-btn-secondary w-full justify-center"
+                            style={{ padding: '0.5rem' }}
+                        >
+                            <FileText size={11} /> Datasheet
                         </button>
                     </div>
+                </div>
+            </div>
+        </article>
+    );
+}
 
-                    {/* Grid */}
-                    <AnimatePresence mode="wait">
-                        {filteredApps.length > 0 ? (
-                            <motion.div
-                                key={activeFilter + searchQuery}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-                            >
-                                {filteredApps.map((app, i) => (
-                                    <AppCard key={app.id} app={app} index={i} />
-                                ))}
-                            </motion.div>
-                        ) : (
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                className="text-center py-24"
-                            >
-                                <div className="w-16 h-16 border-2 border-[var(--border)] flex items-center justify-center mx-auto mb-6">
-                                    <Search size={24} className="text-muted" />
-                                </div>
-                                <h3 className="text-xl font-bold text-text mb-2">
-                                    No applications found
-                                </h3>
-                                <p className="text-muted text-sm">
-                                    Try adjusting your search or filter criteria.
-                                </p>
-                                <button
-                                    onClick={() => {
-                                        setActiveFilter('all');
-                                        setSearchQuery('');
-                                    }}
-                                    className="mt-6 text-sm text-blue-600 font-bold hover:underline"
+/* ─── Detail Modal ─── */
+function DetailModal({ sol, onClose }: { sol: Solution; onClose: () => void }) {
+    const config = categoryConfig[sol.category];
+    return (
+        <>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[60]"
+                style={{ background: 'rgba(0,0,0,0.65)' }}
+                onClick={onClose}
+            />
+            <motion.div
+                initial={{ opacity: 0, scale: 0.97, y: 16 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.97, y: 16 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 z-[70] flex items-center justify-center p-4 lg:p-10 pointer-events-none"
+            >
+                <div
+                    className="max-w-5xl w-full max-h-[90vh] overflow-y-auto pointer-events-auto"
+                    style={{
+                        background: 'var(--psj-surface-0)',
+                        border: '1px solid var(--psj-border)',
+                    }}
+                >
+                    <div className="grid md:grid-cols-2">
+                        <div style={{ background: 'var(--psj-surface-2)', minHeight: '240px' }}>
+                            <img
+                                src={sol.image}
+                                alt={sol.title}
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div className="p-8">
+                            <div className="flex items-center gap-2 mb-5">
+                                <span
+                                    className="text-[10px] uppercase tracking-widest font-bold px-2 py-1 num-marker"
+                                    style={{ color: config.color, background: `${config.color}12` }}
                                 >
-                                    Clear all filters
+                                    {sol.code}
+                                </span>
+                                <button
+                                    onClick={onClose}
+                                    className="ml-auto"
+                                    style={{ color: 'var(--psj-text-3)' }}
+                                >
+                                    <X size={18} />
                                 </button>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
-            </section>
-
-            {/* ── CTA ── */}
-            <section className="py-24 bg-blue-600 relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 blur-[100px] rounded-full pointer-events-none" />
-
-                <div className="relative max-w-4xl mx-auto px-6 text-center">
-                    <Reveal>
-                        <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-[0.85] mb-6">
-                            Need a custom
-                            <br />
-                            automation solution?
-                        </h2>
-                    </Reveal>
-                    <Reveal delay={100}>
-                        <p className="text-lg text-white/70 max-w-xl mx-auto mb-10 leading-relaxed">
-                            Our team can build bespoke PSJ scripts and GUI tools tailored to your
-                            specific engineering workflows.
-                        </p>
-                    </Reveal>
-                    <Reveal delay={200}>
-                        <div className="flex flex-wrap justify-center gap-4">
-                            <button className="bg-white text-blue-600 px-10 py-4 text-sm font-black uppercase tracking-[0.2em] hover:bg-white/90 transition-all flex items-center gap-2">
-                                Contact Us <ArrowRight size={16} />
-                            </button>
-                            <button className="border border-white/30 text-white px-10 py-4 text-sm font-black uppercase tracking-[0.2em] hover:bg-white/5 transition-all">
-                                Request Demo
-                            </button>
+                            </div>
+                            <h2 className="psj-h3 mb-3" style={{ color: 'var(--psj-text-1)' }}>
+                                {sol.title}
+                            </h2>
+                            <p
+                                className="leading-relaxed mb-6"
+                                style={{ color: 'var(--psj-text-2)' }}
+                            >
+                                {sol.fullDesc}
+                            </p>
+                            <div className="space-y-5">
+                                <div>
+                                    <h4
+                                        className="text-[10px] uppercase tracking-widest font-bold mb-2 flex items-center gap-1.5"
+                                        style={{ color: 'var(--psj-text-3)' }}
+                                    >
+                                        <Settings size={12} /> Capabilities
+                                    </h4>
+                                    <ul className="space-y-1.5">
+                                        {sol.capabilities.map((c) => (
+                                            <li
+                                                key={c}
+                                                className="flex items-start gap-2 text-sm"
+                                                style={{ color: 'var(--psj-text-2)' }}
+                                            >
+                                                <CheckCircle2
+                                                    size={13}
+                                                    style={{
+                                                        color: 'var(--psj-blue)',
+                                                        marginTop: '2px',
+                                                        flexShrink: 0,
+                                                    }}
+                                                />{' '}
+                                                {c}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4
+                                        className="text-[10px] uppercase tracking-widest font-bold mb-2 flex items-center gap-1.5"
+                                        style={{ color: 'var(--psj-text-3)' }}
+                                    >
+                                        <Box size={12} /> Deliverables
+                                    </h4>
+                                    <div className="flex flex-wrap gap-1.5">
+                                        {sol.deliverables.map((d) => (
+                                            <span
+                                                key={d}
+                                                className="text-xs px-2.5 py-1"
+                                                style={{
+                                                    border: '1px solid var(--psj-border)',
+                                                    background: 'var(--psj-surface-1)',
+                                                    color: 'var(--psj-text-2)',
+                                                }}
+                                            >
+                                                {d}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div
+                                    className="grid grid-cols-2 gap-4 pt-4"
+                                    style={{ borderTop: '1px solid var(--psj-border)' }}
+                                >
+                                    <div>
+                                        <div
+                                            className="text-[10px] uppercase tracking-widest font-bold mb-1"
+                                            style={{ color: 'var(--psj-text-3)' }}
+                                        >
+                                            Duration
+                                        </div>
+                                        <div
+                                            className="font-bold"
+                                            style={{ color: 'var(--psj-text-1)' }}
+                                        >
+                                            {sol.duration}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div
+                                            className="text-[10px] uppercase tracking-widest font-bold mb-1"
+                                            style={{ color: 'var(--psj-text-3)' }}
+                                        >
+                                            Complexity
+                                        </div>
+                                        <div
+                                            className="font-bold"
+                                            style={{ color: 'var(--psj-text-1)' }}
+                                        >
+                                            {sol.complexity}
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" className="psj-btn-primary w-full justify-center">
+                                    Request Consultation
+                                </a>
+                            </div>
                         </div>
-                    </Reveal>
-                </div>
-            </section>
-
-            {/* ── FOOTER ── */}
-            <footer className="py-12 border-t border-[var(--border)] bg-[var(--card)]/30">
-                <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div className="flex items-center gap-3">
-                        <div className="w-7 h-7 bg-blue-600 flex items-center justify-center">
-                            <span className="text-white font-black text-[10px]">P</span>
-                        </div>
-                        <span className="text-sm font-bold text-text">PSJ by TechnoStar</span>
                     </div>
-                    <div className="flex items-center gap-8 text-xs text-muted">
-                        <a href="#" className="hover:text-text transition-colors">
-                            Documentation
-                        </a>
-                        <a href="#" className="hover:text-text transition-colors">
-                            Support
-                        </a>
-                        <a
-                            href="https://www.e-technostar.com"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="hover:text-text transition-colors flex items-center gap-1"
-                        >
-                            e-TechnoStar <ExternalLink size={10} />
-                        </a>
-                    </div>
-                    <p className="text-xs text-muted">© 2026 TechnoStar Co., Ltd.</p>
                 </div>
-            </footer>
-        </div>
+            </motion.div>
+        </>
     );
 }

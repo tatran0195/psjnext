@@ -1,5 +1,0 @@
-{
-    "title": "Basic",
-    "defaultOpen": false,
-    "pages": ["database", "performance", "display", "external-files", "gui", "advanced"]
-}

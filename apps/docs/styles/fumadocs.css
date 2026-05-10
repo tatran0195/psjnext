@@ -1,200 +1,168 @@
-/* ─────────────────────────────────────────────────────────────────────────────
-   FUMADOCS — PSJ Design System enhancements
-   Primary: #004ea2 | Dark mode accent: #3388cc
-   Design rule: no shadows — depth through border contrast only
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════════
+   FUMADOCS — PSJ Design System overrides
+   All values reference PSJ Design System tokens from global.css
+   Rule: sharp corners (radius 0) | No hardcoded hex values
+   ═══════════════════════════════════════════════════════════════════════════════ */
 
-/* H2 left accent bar — uses section-primary (PSJ blue by default) */
-#nd-page .prose h2 > a {
-    @apply relative pl-2.5;
-}
+/* ── H2 accent bar ─────────────────────────────────────────────────────────── */
+#nd-page .prose h2 > a { @apply relative pl-3; }
 
 #nd-page .prose h2 > a::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0.2em;
-    height: 0.85em;
+    top: 0.18em;
+    height: 0.88em;
     width: 3px;
-    border-radius: 0; /* PSJ: sharp corners */
-    background: var(--color-fd-primary);
+    background: var(--color-fd-primary, var(--psj-blue));
+    border-radius: 0;
 }
 
-/* PSJ typography in prose — Inherits Inter + Noto Sans JP (CJK) from base layer */
-#nd-page .prose {
-    /* Inherits font-family, letter-spacing, and line-height from body */
-}
-
-/* ── Code Blocks & Inline Code ───────────────────────────────────────────── */
-
-/* Inline code — subtle background, sharp corners, distinct from prose */
+/* ── Inline code ────────────────────────────────────────────────────────────── */
 #nd-page :not(pre) > code {
-    @apply px-1.5 py-0.5 border border-muted bg-muted/30 text-foreground;
+    background: var(--psj-surface-2);
+    border: 1px solid var(--psj-border);
+    color: var(--psj-text-1);
+    padding: 0.15em 0.45em;
     border-radius: 0 !important;
     font-size: 0.875em;
     font-family: var(--font-mono);
     letter-spacing: -0.01em;
 }
 
-/* Code block container (pre) — PSJ blue tint border, optimized density */
+/* ── Code blocks ────────────────────────────────────────────────────────────── */
 #nd-page pre {
-    border: 1px solid rgba(0, 78, 162, 0.25) !important;
-    border-radius: 0 !important; /* PSJ: sharp corners */
-    font-size: 0.875rem !important; /* 14px for better horizontal density */
-    line-height: 1.5 !important;
+    border: 1px solid var(--psj-border) !important;
+    border-radius: 0 !important;
+    font-size: 0.875rem !important;
+    line-height: 1.6 !important;
+    background: var(--psj-surface-3) !important;
 }
 .dark #nd-page pre {
-    border: 1px solid rgba(51, 136, 204, 0.2) !important;
+    border-color: var(--psj-border) !important;
+    background: var(--psj-surface-3) !important;
 }
 
-/* ── Cards ───────────────────────────────────────────────────────────────── */
-
-/* Card base & hover — border lift + physical translation (no shadow per PSJ) */
+/* ── Cards ──────────────────────────────────────────────────────────────────── */
 .fd-card {
-    transition:
-        border-color 0.2s ease,
-        background-color 0.2s ease,
-        transform 0.2s cubic-bezier(0.2, 0, 0, 1);
-    border-radius: 0 !important; /* PSJ: no rounding */
-    @apply border-border bg-card text-card-foreground;
+    border-radius: 0 !important;
+    border-color: var(--psj-border);
+    background: var(--psj-surface-1);
+    transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .fd-card:hover {
-    border-color: #004ea2;
-    transform: translateY(-2px); /* Physical feedback since we lack shadows */
-}
-.dark .fd-card:hover {
-    border-color: #3388cc;
+    border-color: var(--psj-blue);
+    transform: translateY(-2px);
 }
 
-/* Accordion open state — PSJ blue tint */
-.dark [data-state="open"] > button {
-    background: linear-gradient(135deg, rgba(0, 78, 162, 0.1), rgba(0, 64, 132, 0.1));
-}
-
-/* ── Links & Callouts ────────────────────────────────────────────────────── */
-
-/* Inline link underline — PSJ blue */
+/* ── Links ──────────────────────────────────────────────────────────────────── */
 #nd-page article a:not([class]) {
-    text-decoration-color: rgba(0, 78, 162, 0.4);
+    color: var(--psj-blue);
+    text-decoration-color: color-mix(in oklch, var(--psj-blue) 40%, transparent);
     text-underline-offset: 3px;
-    transition: all 0.2s ease;
+    transition: text-decoration-color 0.2s ease;
 }
 #nd-page article a:not([class]):hover {
-    text-decoration-color: #004ea2;
-    background-color: rgba(0, 78, 162, 0.05);
-}
-.dark #nd-page article a:not([class]) {
-    text-decoration-color: rgba(51, 136, 204, 0.4);
-}
-.dark #nd-page article a:not([class]):hover {
-    text-decoration-color: #3388cc;
-    background-color: rgba(51, 136, 204, 0.1);
+    text-decoration-color: var(--psj-blue);
 }
 
-/* Fumadocs callout/note — PSJ blue left border */
+/* ── Blockquote / Callout ───────────────────────────────────────────────────── */
 #nd-page .prose blockquote {
-    border-left-color: #004ea2;
-    background: rgba(0, 78, 162, 0.03);
-    padding-right: 1rem;
+    border-left: 3px solid var(--color-fd-primary, var(--psj-blue));
+    background: var(--psj-blue-subtle);
+    padding: 1rem 1.25rem;
     border-radius: 0;
-}
-.dark #nd-page .prose blockquote {
-    border-left-color: #3388cc;
-    background: rgba(51, 136, 204, 0.05);
+    margin-left: 0;
+    margin-right: 0;
 }
 
-/* ── Prose Typography Rhythm ─────────────────────────────────────────────── */
-
-#nd-page .prose h1, 
-#nd-page .prose h2, 
-#nd-page .prose h3, 
+/* ── Prose headings ─────────────────────────────────────────────────────────── */
+#nd-page .prose h1,
+#nd-page .prose h2,
+#nd-page .prose h3,
 #nd-page .prose h4 {
-    color: var(--color-foreground);
-    font-weight: 600;
+    color: var(--psj-text-1);
+    font-weight: 700;
+    letter-spacing: var(--tracking-snug);
 }
 
-/* Improve scannability with tighter top margins on subheadings following paragraphs */
-#nd-page .prose p + h2,
-#nd-page .prose ul + h2 {
-    margin-top: 2.5em;
-}
-
-#nd-page .prose p + h3,
-#nd-page .prose ul + h3 {
-    margin-top: 2em;
-}
-
-/* Relaxed list spacing for technical documentation */
-#nd-page .prose ul, 
-#nd-page .prose ol {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    padding-left: 1.5em;
-}
-
-#nd-page .prose li {
-    margin-top: 0.5em;
-}
-
-/* ── Tables ──────────────────────────────────────────────────────────────── */
-
-/* Optimize tables for technical data (parameters, options) */
+/* ── Tables ─────────────────────────────────────────────────────────────────── */
 #nd-page .prose table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
-    font-size: 0.875rem; /* Smaller font for dense data */
+    font-size: 0.875rem;
+    border: 1px solid var(--psj-border);
 }
-
 #nd-page .prose th {
     text-align: left;
-    font-weight: 600;
-    padding: 0.75rem 1rem;
-    border-bottom: 2px solid var(--color-border);
-    background: rgba(0, 78, 162, 0.03);
-    color: var(--color-foreground);
+    font-weight: 700;
+    padding: 0.65rem 1rem;
+    border-bottom: 2px solid var(--psj-border);
+    background: var(--psj-surface-2);
+    color: var(--psj-text-1);
+    letter-spacing: var(--tracking-snug);
 }
-.dark #nd-page .prose th {
-    background: rgba(51, 136, 204, 0.05);
-}
-
 #nd-page .prose td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--color-border);
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--psj-border);
     vertical-align: top;
+    color: var(--psj-text-2);
 }
+#nd-page .prose tr { transition: background-color 0.15s ease; }
+#nd-page .prose tr:hover td { background: var(--psj-blue-subtle); }
+#nd-page .prose tr:last-child td { border-bottom: none; }
 
-#nd-page .prose tr:last-child td {
-    border-bottom: none;
-}
-
-/* ── Twoslash Tooltips ───────────────────────────────────────────────────── */
-
-/* Style twoslash hover popovers to match PSJ sharp corners and dark surface */
+/* ── Twoslash ───────────────────────────────────────────────────────────────── */
 .twoslash-hover {
-    border-bottom: 1px dotted var(--color-brand-light);
+    border-bottom: 1px dotted var(--psj-blue);
     cursor: help;
 }
-
 .twoslash-popup-info {
-    border-radius: 0 !important; /* PSJ: sharp corners */
-    border: 1px solid var(--color-border) !important;
-    background-color: var(--color-card) !important;
-    box-shadow: none !important; /* PSJ: no shadow */
-    font-family: var(--font-mono) !important;
-    font-size: 0.8125rem !important; /* 13px */
-}
-
-.twoslash-popup-info:hover {
-    border-color: #004ea2 !important;
-}
-.dark .twoslash-popup-info:hover {
-    border-color: #3388cc !important;
-}
-
-/* ── Search Dialog ───────────────────────────────────────────────────────── */
-#nd-searchbox {
     border-radius: 0 !important;
+    border: 1px solid var(--psj-border) !important;
+    background: var(--psj-surface-1) !important;
+    box-shadow: none !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.8125rem !important;
+}
+.twoslash-popup-info:hover { border-color: var(--psj-blue) !important; }
+
+/* ── Search dialog ──────────────────────────────────────────────────────────── */
+#nd-searchbox { border-radius: 0 !important; }
+
+/* ── Header ─────────────────────────────────────────────────────────────────── */
+/* Ensure the Fumadocs docs header border uses the PSJ token */
+#nd-subnav [data-header-body] { border-bottom-color: var(--psj-border); }
+
+/* ── Sidebar ────────────────────────────────────────────────────────────────── */
+/* Active item: left accent + blue gradient */
+#nd-sidebar [data-active='true'],
+#nd-sidebar-mobile [data-active='true'] {
+    border-inline-start: 2px solid var(--color-fd-primary, var(--psj-blue));
+    padding-inline-start: calc(var(--_ps, 0.5rem) - 2px);
+    background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--color-fd-primary, var(--psj-blue)) 10%, transparent) 0%,
+        transparent 100%
+    );
+    font-weight: 600;
+    color: var(--color-fd-primary, var(--psj-blue));
 }
 
+/* ── Accordion ──────────────────────────────────────────────────────────────── */
+[data-state='open'] > button {
+    background: var(--psj-blue-subtle);
+}
+
+/* ── List spacing ───────────────────────────────────────────────────────────── */
+#nd-page .prose ul,
+#nd-page .prose ol { margin: 1em 0; padding-left: 1.5em; }
+#nd-page .prose li { margin-top: 0.5em; }
+
+/* ── Prose paragraph spacing ────────────────────────────────────────────────── */
+#nd-page .prose p + h2,
+#nd-page .prose ul + h2 { margin-top: 2.5em; }
+#nd-page .prose p + h3,
+#nd-page .prose ul + h3 { margin-top: 2em; }

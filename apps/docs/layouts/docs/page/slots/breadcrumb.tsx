@@ -33,28 +33,33 @@ export function Breadcrumb({
         <div
             {...props}
             className={cn(
-                'flex items-center gap-1.5 text-sm text-fd-muted-foreground',
+                'flex items-center gap-2 text-xs',
                 props.className,
             )}
+            style={{ color: 'var(--psj-text-3)', ...props.style }}
         >
             {items.map((item, i) => {
+                const isLast = i === items.length - 1;
                 const className = cn(
                     'truncate',
-                    i === items.length - 1 && 'text-fd-primary font-medium',
+                    isLast && 'font-medium',
                 );
 
                 return (
                     <Fragment key={i}>
-                        {i !== 0 && <ChevronRight className="size-3.5 shrink-0" />}
+                        {i !== 0 && <ChevronRight size={11} className="shrink-0" />}
                         {item.url ? (
                             <Link
                                 href={item.url}
-                                className={cn(className, 'transition-opacity hover:opacity-80')}
+                                className={cn(className, 'transition-colors hover:opacity-80')}
+                                style={{ color: isLast ? 'var(--psj-text-1)' : 'var(--psj-text-3)' }}
                             >
                                 {item.name}
                             </Link>
                         ) : (
-                            <span className={className}>{item.name}</span>
+                            <span className={className} style={{ color: isLast ? 'var(--psj-text-1)' : 'var(--psj-text-3)' }}>
+                                {item.name}
+                            </span>
                         )}
                     </Fragment>
                 );
