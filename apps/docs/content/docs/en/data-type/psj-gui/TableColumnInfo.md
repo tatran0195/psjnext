@@ -30,8 +30,8 @@ To create a TableColumnInfo object, defines a variable with TableColumnInfo(...)
 ### `filter`
 
 - A _Boolean_ specifying the state of filter mode of column of table.
-    - _True_: filter mode will be shown.
-    - _False_: filter mode will be hidden.
+  - _True_: filter mode will be shown.
+  - _False_: filter mode will be hidden.
 - The default value is _False_.
 
 ## Attributes
@@ -54,15 +54,16 @@ Get attributes of TableColumnInfo.
 ### `column_filter`
 
 - An _Integer_ specifying the state of filter mode of column of table.
-    - 1: filter mode is using.
-    - 0: filter mode is not using.
+  - 1: filter mode is using.
+  - 0: filter mode is not using.
 - The default value is 0.
 
 ## Remarks
 
 Based on the specifying data type of _type_, all cells of that column accept only that type.  
-If _precision_ is specified to the column which is "String" or "Integer" type, the data type of that column and value of cells will not change.
-To use _filter_ option, user can set _True_ state to shows filter mode; set _False_ state or ignore this option in script - the both ways will trigger the same action that hides filter mode.
+If _precision_ is specified to the column which is "String" or "Integer" type, the data type of that column and value of
+cells will not change. To use _filter_ option, user can set _True_ state to shows filter mode; set _False_ state or
+ignore this option in script - the both ways will trigger the same action that hides filter mode.
 
 ## Sample Code
 

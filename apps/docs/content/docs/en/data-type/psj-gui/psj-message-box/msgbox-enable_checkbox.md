@@ -23,8 +23,8 @@ msgbox.enable_checkbox(...)
 ### `checked`
 
 - A _Boolean_ specifying the default state of this component:
-    - _True_: the default state of this component is checked.
-    - _False_: the default state of this component is unchecked.
+  - _True_: the default state of this component is checked.
+  - _False_: the default state of this component is unchecked.
 - The default value is _False_.
 
 ## Return Code

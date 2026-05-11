@@ -21,18 +21,14 @@ export function NotFound(props: NotFoundProps) {
             <div className="space-y-2 text-center">
                 <h1 className="text-3xl font-semibold tracking-tight">Page not found</h1>
 
-                <p className="text-sm text-fd-muted-foreground">
-                    We found some similar pages that might help.
-                </p>
+                <p className="text-sm text-fd-muted-foreground">We found some similar pages that might help.</p>
             </div>
 
             <div className="mt-8 w-full">
                 <Suspense
                     fallback={
                         <div className="overflow-hidden rounded-none border bg-fd-card shadow-sm">
-                            <div className="px-5 py-4 text-sm text-fd-muted-foreground">
-                                Finding alternatives...
-                            </div>
+                            <div className="px-5 py-4 text-sm text-fd-muted-foreground">Finding alternatives...</div>
                         </div>
                     }
                 >

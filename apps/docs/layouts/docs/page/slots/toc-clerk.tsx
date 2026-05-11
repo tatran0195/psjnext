@@ -1,13 +1,5 @@
 'use client';
-import {
-    type ComponentProps,
-    type ReactNode,
-    useEffect,
-    useEffectEvent,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+import { type ComponentProps, type ReactNode, useEffect, useEffectEvent, useMemo, useRef, useState } from 'react';
 
 import * as Primitive from 'fumadocs-core/toc';
 import { useI18n } from 'fumadocs-ui/contexts/i18n';
@@ -40,16 +32,13 @@ export function TOCItems({ ref, className, ...props }: ComponentProps<'div'>) {
 
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
-            const element: HTMLElement | null = container.querySelector(
-                `a[href="#${item.url.slice(1)}"]`,
-            );
+            const element: HTMLElement | null = container.querySelector(`a[href="#${item.url.slice(1)}"]`);
             if (!element) continue;
 
             const styles = getComputedStyle(element);
             const x = getLineOffset(item.depth) + 0.5,
                 top = element.offsetTop + parseFloat(styles.paddingTop),
-                bottom =
-                    element.offsetTop + element.clientHeight - parseFloat(styles.paddingBottom);
+                bottom = element.offsetTop + element.clientHeight - parseFloat(styles.paddingBottom);
 
             w = Math.max(x + 8, w);
             h = Math.max(h, bottom);
@@ -62,13 +51,7 @@ export function TOCItems({ ref, className, ...props }: ComponentProps<'div'>) {
 
             if (item._step !== undefined) {
                 output.push(
-                    <circle
-                        key={`${i}-circle`}
-                        cx={x}
-                        cy={(top + bottom) / 2}
-                        r="8"
-                        className="fill-fd-primary"
-                    />,
+                    <circle key={`${i}-circle`} cx={x} cy={(top + bottom) / 2} r="8" className="fill-fd-primary" />,
                     <text
                         key={`${i}-text`}
                         x={x}
@@ -87,9 +70,7 @@ export function TOCItems({ ref, className, ...props }: ComponentProps<'div'>) {
             upperBottom = bottom;
         }
 
-        output.unshift(
-            <path key="path" d={d} className="stroke-fd-primary" strokeWidth="1" fill="none" />,
-        );
+        output.unshift(<path key="path" d={d} className="stroke-fd-primary" strokeWidth="1" fill="none" />);
         setSvg({
             content: output,
             width: w,
@@ -134,11 +115,7 @@ export function TOCItems({ ref, className, ...props }: ComponentProps<'div'>) {
                     <ThumbBox />
                 </TocThumb>
             )}
-            <div
-                ref={mergeRefs(containerRef, ref)}
-                className={cn('flex flex-col', className)}
-                {...props}
-            />
+            <div ref={mergeRefs(containerRef, ref)} className={cn('flex flex-col', className)} {...props} />
         </>
     );
 }
@@ -147,9 +124,7 @@ export function TOCEmpty() {
     const { text } = useI18n();
 
     return (
-        <div className="rounded-none border bg-fd-card p-3 text-xs text-fd-muted-foreground">
-            {text.tocNoHeadings}
-        </div>
+        <div className="rounded-none border bg-fd-card p-3 text-xs text-fd-muted-foreground">{text.tocNoHeadings}</div>
     );
 }
 
@@ -205,10 +180,7 @@ function getLineOffset(depth: number): number {
     return 16 + a;
 }
 
-export function TOCItem({
-    item,
-    ...props
-}: Primitive.TOCItemProps & { item: Primitive.TOCItemType }) {
+export function TOCItem({ item, ...props }: Primitive.TOCItemProps & { item: Primitive.TOCItemType }) {
     const items = useTOCItems();
     const { lowerOffset, offset, upperOffset } = useMemo(() => {
         const index = items.indexOf(item);

@@ -23,7 +23,8 @@ A data type uses to control parameters of Renumber Item
 
 ### `iTargetType`
 
-- An _Integer_ specifying the target type to be renumbered. The target type can be Node, 3D Element, 2D Element, 1D Element, Edge, or Face.
+- An _Integer_ specifying the target type to be renumbered. The target type can be Node, 3D Element, 2D Element, 1D
+  Element, Edge, or Face.
 - The default value is 0.
 -
 

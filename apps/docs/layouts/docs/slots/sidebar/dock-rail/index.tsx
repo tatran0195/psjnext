@@ -24,21 +24,14 @@ export function DockRail({
         () =>
             items.map((item) => ({
                 ...item,
-                active:
-                    activeHref !== undefined ? item.href === activeHref : (item.active ?? false),
+                active: activeHref !== undefined ? item.href === activeHref : (item.active ?? false),
             })),
         [items, activeHref],
     );
 
-    const activeItem = useMemo(
-        () => resolvedItems.find((item) => item.active) ?? null,
-        [resolvedItems],
-    );
+    const activeItem = useMemo(() => resolvedItems.find((item) => item.active) ?? null, [resolvedItems]);
 
-    const metas = useMemo(
-        () => buildMetas(resolvedItems, collapsedCount),
-        [resolvedItems, collapsedCount],
-    );
+    const metas = useMemo(() => buildMetas(resolvedItems, collapsedCount), [resolvedItems, collapsedCount]);
 
     const overlayText: string | null =
         activeItem?.text ?? (collapsedLabel !== false ? (collapsedLabel as string) : null);

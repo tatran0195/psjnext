@@ -5,8 +5,8 @@ id: NASTRAN_PSD_DATA
 
 ## Description
 
-A data type uses to Defines load set power spectral density factors for use in random analysis having the frequency dependent form.
-$$S_{jk} = (X + iY)G(F)$$
+A data type uses to Defines load set power spectral density factors for use in random analysis having the frequency
+dependent form. $$S_{jk} = (X + iY)G(F)$$
 
 ## Attributes
 

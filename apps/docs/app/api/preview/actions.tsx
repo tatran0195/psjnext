@@ -56,9 +56,7 @@ export async function getPreviewData(url: string): Promise<PreviewData | null> {
                 components: getMDXComponents({
                     LinkPreview,
                     DocsCategory: ({ url }) => <DocsCategory url={url ?? page.url} lang={lang} />,
-                    DocsSectionOverview: ({ url }) => (
-                        <DocsSectionOverview url={url ?? page.url} lang={lang} />
-                    ),
+                    DocsSectionOverview: ({ url }) => <DocsSectionOverview url={url ?? page.url} lang={lang} />,
                 }),
             }),
         };

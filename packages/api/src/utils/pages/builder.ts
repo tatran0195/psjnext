@@ -103,9 +103,7 @@ export function fromSdk(sdk: ProcessedSdk, config: PsjPagesBuilderConfig = {}): 
     const dtMap = new Map<string, DataTypeFile[]>();
     if (sdk.dataTypes && sdk.dataTypes.size > 0) {
         for (const [_, dt] of sdk.dataTypes) {
-            const groupName = dt.id.includes('/')
-                ? dt.id.slice(0, dt.id.lastIndexOf('/'))
-                : '__ungrouped__';
+            const groupName = dt.id.includes('/') ? dt.id.slice(0, dt.id.lastIndexOf('/')) : '__ungrouped__';
             if (!dtMap.has(groupName)) dtMap.set(groupName, []);
             dtMap.get(groupName)!.push(dt);
         }

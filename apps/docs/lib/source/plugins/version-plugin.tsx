@@ -99,8 +99,9 @@ function installStructuredDataGetter(
                     return EMPTY_STRUCTURED_DATA;
                 }
                 const exports = mod._exports as Record<string, unknown> | undefined;
-                const versionedMap = (exports?.versionedStructuredData ??
-                    mod.versionedStructuredData) as Record<string, StructuredData> | undefined;
+                const versionedMap = (exports?.versionedStructuredData ?? mod.versionedStructuredData) as
+                    | Record<string, StructuredData>
+                    | undefined;
                 // Fall back to the plain structuredData export for pages that
                 // have no @since/@removed annotations and no versionedStructuredData.
                 return (
@@ -177,21 +178,14 @@ export function versionPlugin(): LoaderPlugin {
                 if (originalData._version) continue;
 
                 const fm = file.data as VersionedPageFrontmatter;
-                const loadFn = originalData.load as
-                    | (() => Promise<Record<string, unknown>>)
-                    | undefined;
+                const loadFn = originalData.load as (() => Promise<Record<string, unknown>>) | undefined;
 
                 // No fixedVersion — getter reads this._version from the shell
                 // at call time, giving each version its own structured data slice.
                 installStructuredDataGetter(originalData, loadFn);
 
                 for (const version of API_VERSIONS) {
-                    const status = getVersionStatus(
-                        version,
-                        fm.introduced,
-                        fm.deprecated,
-                        fm.removed,
-                    );
+                    const status = getVersionStatus(version, fm.introduced, fm.deprecated, fm.removed);
 
                     if (!isPageVisible(status)) continue;
 
@@ -218,8 +212,7 @@ export function versionPlugin(): LoaderPlugin {
                 if (!isMultiVersion) return node;
 
                 const apiFolderIdx = node.children.findIndex(
-                    (n): n is PageTree.Folder =>
-                        n.type === 'folder' && nodeStoragePath(n).toLowerCase() === 'api',
+                    (n): n is PageTree.Folder => n.type === 'folder' && nodeStoragePath(n).toLowerCase() === 'api',
                 );
                 if (apiFolderIdx === -1) return node;
 

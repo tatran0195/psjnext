@@ -43,9 +43,7 @@ function extractDetailBlocks(source: string): { raw: string; title: string; body
                     const title = summaryMatch
                         ? summaryMatch[1].replace(/\*\*/g, '').replace(/`/g, '').trim()
                         : 'Details';
-                    const body = summaryMatch
-                        ? inner.replace(summaryMatch[0], '').trim()
-                        : inner.trim();
+                    const body = summaryMatch ? inner.replace(summaryMatch[0], '').trim() : inner.trim();
 
                     blocks.push({ raw, title, body });
                     i = closeEnd;
@@ -88,12 +86,7 @@ function convertSource(source: string): string {
     if (!result.includes(IMPORT_LINE)) {
         const fmMatch = result.match(/^---[\s\S]*?---\n/);
         if (fmMatch) {
-            result =
-                result.slice(0, fmMatch[0].length) +
-                '\n' +
-                IMPORT_LINE +
-                '\n' +
-                result.slice(fmMatch[0].length);
+            result = result.slice(0, fmMatch[0].length) + '\n' + IMPORT_LINE + '\n' + result.slice(fmMatch[0].length);
         } else {
             result = IMPORT_LINE + '\n\n' + result;
         }

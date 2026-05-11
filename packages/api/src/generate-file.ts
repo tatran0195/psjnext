@@ -2,12 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import * as path from 'node:path';
 
 import type { PSJAPIServer } from './types';
-import type {
-    ItemOutput,
-    OutputEntry,
-    PageOutput,
-    PsjPagesBuilderConfig,
-} from './utils/pages/builder';
+import type { ItemOutput, OutputEntry, PageOutput, PsjPagesBuilderConfig } from './utils/pages/builder';
 
 import { fromServer } from './utils/pages/builder';
 import { toText, type PsjToTextOptions } from './utils/pages/to-text';
@@ -52,9 +47,7 @@ export async function generateFiles(options: GenerateFilesConfig): Promise<void>
             : options.input.options.root;
 
         console.log(`[@psj/api] watching ${rootDir}`);
-        watch(rootDir, { ignoreInitial: true, ignored: '**/*.mdx' }).on('all', () =>
-            generateFiles(subOptions),
-        );
+        watch(rootDir, { ignoreInitial: true, ignored: '**/*.mdx' }).on('all', () => generateFiles(subOptions));
         return;
     }
 
@@ -70,9 +63,7 @@ export async function generateFiles(options: GenerateFilesConfig): Promise<void>
     );
 }
 
-export async function generateFilesOnly(
-    options: Omit<GenerateFilesConfig, 'output'>,
-): Promise<OutputFile[]> {
+export async function generateFilesOnly(options: Omit<GenerateFilesConfig, 'output'>): Promise<OutputFile[]> {
     const allEntries = await fromServer(options.input, options);
     const files: OutputFile[] = [];
 
@@ -113,9 +104,7 @@ function generateMetaFiles(
     const pages: string[] = [];
 
     for (const entry of entries) {
-        const relativePath = parent
-            ? path.relative(parent.path, entry.path).replace(/\\/g, '/')
-            : entry.path;
+        const relativePath = parent ? path.relative(parent.path, entry.path).replace(/\\/g, '/') : entry.path;
 
         if (entry.type === 'group') {
             generateMetaFiles(entry.entries, options, out, entry);

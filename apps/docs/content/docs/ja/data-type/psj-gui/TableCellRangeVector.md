@@ -5,7 +5,8 @@ id: TableCellRangeVector
 
 ## Description
 
-An instance of a TableCellRangeVector class or _List of [TableCellRange](TableCellRange)_ specifying the methods of cell ranges.
+An instance of a TableCellRangeVector class or _List of [TableCellRange](TableCellRange)_ specifying the methods of cell
+ranges.
 
 ## Input
 

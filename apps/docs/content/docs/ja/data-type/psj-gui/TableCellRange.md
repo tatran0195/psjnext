@@ -63,7 +63,8 @@ Get attributes of TableCellRange.
 
 ## Remarks
 
-Index number of _left_, _top_, _right_ and _bottom_ of TableCellRange can not be out of range of the existing table when creating object.
+Index number of _left_, _top_, _right_ and _bottom_ of TableCellRange can not be out of range of the existing table when
+creating object.
 
 ## Sample Code
 

@@ -58,15 +58,9 @@ function isBreadcrumbItem(item: unknown): item is string {
     return typeof item === 'string' && item.length > 0;
 }
 
-function buildBreadcrumbs<C extends LoaderConfig>(
-    source: LoaderOutput<C>,
-    page: C['page'],
-): string[] | undefined {
+function buildBreadcrumbs<C extends LoaderConfig>(source: LoaderOutput<C>, page: C['page']): string[] | undefined {
     const pageTree = source.getPageTree(page.locale);
-    const path = findPath(
-        pageTree.children,
-        (node) => node.type === 'page' && node.url === page.url,
-    );
+    const path = findPath(pageTree.children, (node) => node.type === 'page' && node.url === page.url);
 
     if (path) {
         const breadcrumbs: string[] = [];

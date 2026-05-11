@@ -15,9 +15,8 @@ export const remarkLinkPreview: Plugin<[RemarkLinkPreviewOptions?], Root> = (opt
     return (tree) => {
         visit(tree, 'link', (node: Link, index, parent: Parent | null) => {
             const isInternal =
-                internalPrefix.some(
-                    (prefix) => node.url === prefix || node.url.startsWith(prefix),
-                ) || node.url.startsWith('/');
+                internalPrefix.some((prefix) => node.url === prefix || node.url.startsWith(prefix)) ||
+                node.url.startsWith('/');
             const isNotPreview = node.url.endsWith('.zip') || node.url.endsWith('.step');
             if (!isInternal || isNotPreview) return;
             if (parent === null || index === undefined) return;

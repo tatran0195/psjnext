@@ -45,13 +45,7 @@ const ArrowRightIcon = () => (
 
 // ─── Single item ──────────────────────────────────────────────────────────────
 
-function AccordionNavItem({
-    href,
-    label,
-    icon,
-    external,
-    isActive,
-}: AccordionNavOption & { isActive: boolean }) {
+function AccordionNavItem({ href, label, icon, external, isActive }: AccordionNavOption & { isActive: boolean }) {
     return (
         <Link
             href={href}
@@ -130,9 +124,7 @@ export function AccordionNav({
 
     // Label starts right after the last icon
     const labelLeftPx =
-        visibleOptions.length > 0
-            ? iconLeftPx(visibleOptions.length - 1) + ICON_SIZE + 8
-            : collapsedIconStartX;
+        visibleOptions.length > 0 ? iconLeftPx(visibleOptions.length - 1) + ICON_SIZE + 8 : collapsedIconStartX;
 
     return (
         <>
@@ -146,11 +138,7 @@ export function AccordionNav({
                 className="accordion-nav group/nav relative mb-1 flex w-full flex-col gap-px overflow-hidden rounded-sm min-h-10"
             >
                 {options.map((option) => (
-                    <AccordionNavItem
-                        key={option.id}
-                        {...option}
-                        isActive={option.id === activeId}
-                    />
+                    <AccordionNavItem key={option.id} {...option} isActive={option.id === activeId} />
                 ))}
 
                 {/* Collapsed peek overlay */}

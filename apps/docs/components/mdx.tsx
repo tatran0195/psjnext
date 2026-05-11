@@ -1,6 +1,7 @@
 import * as Twoslash from 'fumadocs-twoslash/ui';
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { Banner } from 'fumadocs-ui/components/banner';
+import * as CalloutComponents from 'fumadocs-ui/components/callout';
 import * as FilesComponents from 'fumadocs-ui/components/files';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 import * as TabsComponents from 'fumadocs-ui/components/tabs';
@@ -19,6 +20,7 @@ export function getMDXComponents(components?: MDXComponents) {
     return {
         ...defaultMdxComponents,
         ...TabsComponents,
+        ...CalloutComponents,
         ...FilesComponents,
         ...Twoslash,
         Accordion,

@@ -3,13 +3,16 @@ title: Unit Types
 id: unit-types
 ---
 
-This is an enumeration type represents units used in Jupiter.
-Functions used for unit conversion:
+This is an enumeration type represents units used in Jupiter. Functions used for unit conversion:
 
-- [`JPT.ConvertFromDocUnit`](../../../../psj-utility/JPT.ConvertFromDocUnit): Convert the inputted value from the current Jupiter unit system to SI[m] unit.
-- [`JPT.ConvertFromMacroUnit`](../../../../psj-utility/JPT.ConvertFromMacroUnit): Convert the inputted value from the specified unit to the SI[m] unit.
-- [`JPT.ConvertValueToDocUnit`](../../../../psj-utility/JPT.ConvertValueToDocUnit): Convert the inputted value from SI[m] units to the current Jupiter unit system.
-- [`JPT.ConvertValueToMacroUnit`](../../../../psj-utility/JPT.ConvertValueToMacroUnit): Convert the inputted value from the SI[m] unit to the specified unit.
+- [`JPT.ConvertFromDocUnit`](../../../../psj-utility/JPT.ConvertFromDocUnit): Convert the inputted value from the
+  current Jupiter unit system to SI[m] unit.
+- [`JPT.ConvertFromMacroUnit`](../../../../psj-utility/JPT.ConvertFromMacroUnit): Convert the inputted value from the
+  specified unit to the SI[m] unit.
+- [`JPT.ConvertValueToDocUnit`](../../../../psj-utility/JPT.ConvertValueToDocUnit): Convert the inputted value from
+  SI[m] units to the current Jupiter unit system.
+- [`JPT.ConvertValueToMacroUnit`](../../../../psj-utility/JPT.ConvertValueToMacroUnit): Convert the inputted value from
+  the SI[m] unit to the specified unit.
 
 > For more information, refer to [Convert Unit tutorial](../../../../tutorials/basic/convert-unit)
 

@@ -1,30 +1,23 @@
 import type { RemarkAutoTypeTableOptions } from 'fumadocs-typescript';
 
-import {
-    RehypeCodeOptions,
-    remarkDirectiveAdmonition,
-    remarkMdxMermaid,
-} from 'fumadocs-core/mdx-plugins';
-import {
-    applyMdxPreset,
-    defineCollections,
-    defineConfig,
-    defineDocs,
-    DocCollection,
-} from 'fumadocs-mdx/config';
+import { RehypeCodeOptions, remarkMdxFiles, remarkMdxMermaid } from 'fumadocs-core/mdx-plugins';
+import { applyMdxPreset, defineCollections, defineConfig, defineDocs, DocCollection } from 'fumadocs-mdx/config';
 import jsonSchema from 'fumadocs-mdx/plugins/json-schema';
 import lastModified from 'fumadocs-mdx/plugins/last-modified';
 import rehypePrettyCode from 'rehype-pretty-code';
+import remarkDirective from 'remark-directive';
 import { z } from 'zod';
 
-import { remarkVersionGateParams } from '@/lib/mdx-plugins/remark-version-gate-params';
-
 import { transformers } from './lib/highlight-code';
+import { remarkDirectiveAdmonition } from './lib/mdx-plugins/remark-directive-admonition';
+import { remarkDirectiveFixer } from './lib/mdx-plugins/remark-directive-fixer';
 import { remarkElementIds } from './lib/mdx-plugins/remark-element-ids';
 import { remarkLinkPreview } from './lib/mdx-plugins/remark-link-preview';
+import { remarkVersionGateParams } from './lib/mdx-plugins/remark-version-gate-params';
 import { defaultShikiOptions } from './lib/shiki';
 import { docsSchema, metaSchemaWithGroup } from './lib/source/schema';
 
+import { remarkDetailsAccordion } from '@/lib/mdx-plugins/remark-details-accordion';
 import type { ElementContent } from 'hast';
 import type { ShikiTransformer } from 'shiki';
 const { rehypeCodeDefaultOptions } = await import('fumadocs-core/mdx-plugins/rehype-code');
@@ -34,8 +27,7 @@ const { createFileSystemTypesCache } = await import('fumadocs-twoslash/cache-fs'
 const { default: remarkMath } = await import('remark-math');
 const { remarkTypeScriptToJavaScript } = await import('fumadocs-docgen/remark-ts2js');
 const { default: rehypeKatex } = await import('rehype-katex');
-const { remarkAutoTypeTable, createGenerator, createFileSystemGeneratorCache } =
-    await import('fumadocs-typescript');
+const { remarkAutoTypeTable, createGenerator, createFileSystemGeneratorCache } = await import('fumadocs-typescript');
 
 const isLint = process.env.LINT === '1';
 
@@ -106,12 +98,16 @@ const mdxOptions: DocCollection['mdxOptions'] = async (environment) => {
         remarkPlugins: isLint
             ? [remarkElementIds]
             : [
+                  remarkDetailsAccordion,
+                  remarkDirectiveFixer,
+                  remarkDirective,
+                  remarkDirectiveAdmonition,
+                  remarkMdxFiles,
                   remarkVersionGateParams,
                   remarkSteps,
                   remarkMath,
                   remarkMdxMermaid,
                   remarkLinkPreview,
-                  remarkDirectiveAdmonition,
                   [remarkAutoTypeTable, typeTableOptions],
                   remarkTypeScriptToJavaScript,
               ],

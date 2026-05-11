@@ -7,7 +7,8 @@ available_versions: 'all'
 
 ## Description
 
-Convert _[DItem](../data-type/psj-utility/pre-utility/built-in-types/DItem)_ object to _[DBody](../data-type/psj-utility/pre-utility/built-in-types/DBody)_ object to get the information of the selected body.
+Convert _[DItem](../data-type/psj-utility/pre-utility/built-in-types/DItem)_ object to
+_[DBody](../data-type/psj-utility/pre-utility/built-in-types/DBody)_ object to get the information of the selected body.
 
 ## Syntax
 

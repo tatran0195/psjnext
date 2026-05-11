@@ -5,7 +5,8 @@ id: NASTRAN_MAIN_LBC_SET
 
 ## Description
 
-A data type uses to Define the boundary conditions that act on the entire analysis to be defined on the specific SUBCASE.
+A data type uses to Define the boundary conditions that act on the entire analysis to be defined on the specific
+SUBCASE.
 
 ## Attributes
 

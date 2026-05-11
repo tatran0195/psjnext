@@ -57,13 +57,7 @@ export function BaseProvider({ children, theme = {}, search, i18n }: RootProvide
 
     if (theme?.enabled !== false)
         body = (
-            <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-                {...theme}
-            >
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange {...theme}>
                 {body}
             </ThemeProvider>
         );

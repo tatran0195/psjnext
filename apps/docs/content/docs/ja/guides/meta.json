@@ -4,12 +4,5 @@
     "title": "Tutorials",
     "description": "Tutorials",
     "icon": "Terminal",
-    "pages": [
-        "---Basics---",
-        "...basic",
-        "---Intermediate---",
-        "...intermediate",
-        "---Advanced---",
-        "...advanced"
-    ]
+    "pages": ["---Basics---", "...basic", "---Intermediate---", "...intermediate", "---Advanced---", "...advanced"]
 }

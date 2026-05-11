@@ -24,16 +24,10 @@ export async function GET(): Promise<Response> {
         const match = page.slugs.find((slug) => slug.match(versionRegex));
         const version = match ? match : null;
 
-        const paramMeta =
-            (data._exports.paramMeta as { name: string; since?: string; removed?: string }[]) || [];
+        const paramMeta = (data._exports.paramMeta as { name: string; since?: string; removed?: string }[]) || [];
 
         if (version && paramMeta.length > 0) {
-            const getVersionStatus = (
-                current: string,
-                introduced?: string,
-                deprecated?: string,
-                removed?: string,
-            ) => {
+            const getVersionStatus = (current: string, introduced?: string, deprecated?: string, removed?: string) => {
                 const parseSemver = (v: string): [number, number, number] => {
                     const [a = 0, b = 0, c = 0] = v.split('.').map(Number);
                     return [a, b, c];
@@ -63,13 +57,9 @@ export async function GET(): Promise<Response> {
             );
 
             if (hiddenParamNames.size > 0 && structuredData) {
-                const validHeadings = structuredData.headings.filter(
-                    (h) => !hiddenParamNames.has(h.content),
-                );
+                const validHeadings = structuredData.headings.filter((h) => !hiddenParamNames.has(h.content));
                 const hiddenHeadingIds = new Set(
-                    structuredData.headings
-                        .filter((h) => hiddenParamNames.has(h.content))
-                        .map((h) => h.id),
+                    structuredData.headings.filter((h) => hiddenParamNames.has(h.content)).map((h) => h.id),
                 );
                 const validContents = structuredData.contents.filter(
                     (c) => !c.heading || !hiddenHeadingIds.has(c.heading),
@@ -85,13 +75,9 @@ export async function GET(): Promise<Response> {
             url: page.url,
             title: page.data.title,
             description: page.data.description,
-            breadcrumbs: items.flatMap<string>((item, i) =>
-                i > 0 && typeof item.name === 'string' ? item.name : [],
-            ),
+            breadcrumbs: items.flatMap<string>((item, i) => (i > 0 && typeof item.name === 'string' ? item.name : [])),
         } as OramaDocument;
     });
 
-    return Response.json(
-        (await Promise.all(promises)).filter((v) => v !== undefined) as OramaDocument[],
-    );
+    return Response.json((await Promise.all(promises)).filter((v) => v !== undefined) as OramaDocument[]);
 }

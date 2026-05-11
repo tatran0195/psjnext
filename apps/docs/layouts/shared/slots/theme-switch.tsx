@@ -30,10 +30,7 @@ export function ThemeSwitch({ className, mode = 'light-dark', ...props }: ThemeS
         setMounted(true);
     }, []);
 
-    const container = cn(
-        'inline-flex items-center rounded-none border p-1 overflow-hidden *:rounded-none',
-        className,
-    );
+    const container = cn('inline-flex items-center rounded-none border p-1 overflow-hidden *:rounded-none', className);
 
     if (mode === 'light-dark') {
         const value = mounted ? resolvedTheme : null;
@@ -49,11 +46,7 @@ export function ThemeSwitch({ className, mode = 'light-dark', ...props }: ThemeS
                     if (key === 'system') return;
 
                     return (
-                        <Icon
-                            key={key}
-                            fill="currentColor"
-                            className={cn(itemVariants({ active: value === key }))}
-                        />
+                        <Icon key={key} fill="currentColor" className={cn(itemVariants({ active: value === key }))} />
                     );
                 })}
             </button>

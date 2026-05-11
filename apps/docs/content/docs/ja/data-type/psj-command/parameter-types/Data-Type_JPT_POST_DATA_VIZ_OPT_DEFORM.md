@@ -12,8 +12,8 @@ A data type is used to set up the result settings for displaying the deformation
 ### `iScaleMethod`
 
 - An _Integer_ specifying the displacement scale method.
-    - 0: Percentage of Model Size
-    - 1: Percentage of Result
+  - 0: Percentage of Model Size
+  - 1: Percentage of Result
 - The default value is 0.
 
 ### `dDisplacementRatio`

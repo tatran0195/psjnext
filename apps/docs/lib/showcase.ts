@@ -38,17 +38,7 @@ export const industriesByLang = {
         'Manufacturing',
         'Research',
     ],
-    ja: [
-        'すべての業界',
-        '自動車',
-        '航空宇宙',
-        '海洋',
-        'エネルギー',
-        '材料',
-        '重機',
-        '製造',
-        '研究',
-    ],
+    ja: ['すべての業界', '自動車', '航空宇宙', '海洋', 'エネルギー', '材料', '重機', '製造', '研究'],
 };
 
 const solutionsEn: Solution[] = [
@@ -68,12 +58,7 @@ const solutionsEn: Solution[] = [
             'S-N curve evaluation',
             'Damage accumulation',
         ],
-        deliverables: [
-            'Excel workbook',
-            'Python automation scripts',
-            'PDF/PPT reports',
-            'Training materials',
-        ],
+        deliverables: ['Excel workbook', 'Python automation scripts', 'PDF/PPT reports', 'Training materials'],
         software: ['Jupiter', 'SunShine', 'MS Excel'],
         duration: '4-6 weeks',
         complexity: 'Standard',
@@ -88,12 +73,7 @@ const solutionsEn: Solution[] = [
         fullDesc:
             'Complete automation pipeline from thermal stress analysis through modal decomposition and RFI (Random Frequency Input) analysis for exhaust system durability assessment.',
         image: '/images/workflow-dark.jpg',
-        capabilities: [
-            'Thermal stress mapping',
-            'Modal analysis',
-            'RFI evaluation',
-            'Lifecycle prediction',
-        ],
+        capabilities: ['Thermal stress mapping', 'Modal analysis', 'RFI evaluation', 'Lifecycle prediction'],
         deliverables: ['Automation framework', 'Analysis templates', 'Validation reports'],
         software: ['Jupiter', 'PSJ', 'SunShine'],
         duration: '6-8 weeks',
@@ -130,12 +110,7 @@ const solutionsEn: Solution[] = [
         fullDesc:
             'Intelligent dialog system that learns from user operations and automatically populates parameters based on historical workflows. Reduces operation time by up to 60% for repetitive analysis tasks.',
         image: '/images/gui-builder.jpg',
-        capabilities: [
-            'Pattern recognition',
-            'Parameter prediction',
-            'User behavior learning',
-            'Adaptive UI',
-        ],
+        capabilities: ['Pattern recognition', 'Parameter prediction', 'User behavior learning', 'Adaptive UI'],
         deliverables: ['ML model', 'Integration plugin', 'Training dataset'],
         software: ['PSJ', 'Python ML stack'],
         duration: '8-12 weeks',
@@ -151,12 +126,7 @@ const solutionsEn: Solution[] = [
         fullDesc:
             'Automated ship hull variant generator that produces thousands of geometric variations for training neural networks in hydrodynamic prediction and design optimization.',
         image: '/showcase/ai-ship.jpg',
-        capabilities: [
-            'Parametric morphing',
-            'Batch generation',
-            'Quality validation',
-            'Dataset curation',
-        ],
+        capabilities: ['Parametric morphing', 'Batch generation', 'Quality validation', 'Dataset curation'],
         deliverables: ['Generation pipeline', 'Validated dataset', 'Quality metrics'],
         software: ['PSJ', 'Jupiter'],
         duration: '6-10 weeks',
@@ -193,12 +163,7 @@ const solutionsEn: Solution[] = [
         fullDesc:
             'Bidirectional coupling system between OpenFOAM CFD solver and SunShine for iterative heat-flow and structural analysis until convergence. Enables true multi-physics simulations.',
         image: '/images/cae-analysis.jpg',
-        capabilities: [
-            'Solver coupling',
-            'Iterative convergence',
-            'Data interpolation',
-            'Convergence monitoring',
-        ],
+        capabilities: ['Solver coupling', 'Iterative convergence', 'Data interpolation', 'Convergence monitoring'],
         deliverables: ['Coupling interface', 'Workflow templates', 'Convergence tools'],
         software: ['OpenFOAM', 'SunShine', 'PSJ'],
         duration: '10-14 weeks',
@@ -255,18 +220,8 @@ const solutionsJa: Solution[] = [
         fullDesc:
             'シャフトのジオメトリパラメータと動作条件を自動的に収集するカスタムExcelベースの入力システム。システムはJupiterおよびSunShineソルバーと統合され、自動レポート機能を備えた包括的な疲労ライフサイクル解析を実行します。',
         image: '/showcase/fatigue.jpg',
-        capabilities: [
-            'パラメータ化されたジオメトリ生成',
-            '多軸疲労解析',
-            'S-N曲線評価',
-            '損傷蓄積解析',
-        ],
-        deliverables: [
-            'Excel ワークブック',
-            'Python 自動化スクリプト',
-            'PDF/PPT レポート',
-            'トレーニング資料',
-        ],
+        capabilities: ['パラメータ化されたジオメトリ生成', '多軸疲労解析', 'S-N曲線評価', '損傷蓄積解析'],
+        deliverables: ['Excel ワークブック', 'Python 自動化スクリプト', 'PDF/PPT レポート', 'トレーニング資料'],
         software: ['Jupiter', 'SunShine', 'MS Excel'],
         duration: '4-6 週間',
         complexity: 'Standard',
@@ -293,8 +248,7 @@ const solutionsJa: Solution[] = [
         category: 'Reporting',
         industry: ['すべての業界'],
         title: 'PowerPoint レポート自動生成',
-        shortDesc:
-            '解析結果をプロフェッショナルな PowerPoint レポートにワンクリックでエクスポート。',
+        shortDesc: '解析結果をプロフェッショナルな PowerPoint レポートにワンクリックでエクスポート。',
         fullDesc:
             '3Dビジュアライゼーション、応力コンター図、アニメーション、および定量的な結果テーブルを含む、ブランド化されたPowerPointプレゼンテーションを自動的に生成するカスタムレポートシステム。',
         image: '/images/product-ui.jpg',
@@ -335,12 +289,7 @@ const solutionsJa: Solution[] = [
         fullDesc:
             '流体予測や設計最適化におけるニューラルネットワークのトレーニングのために、数千の幾何学的バリエーションを生成する自動船体バリアントジェネレーター。',
         image: '/showcase/ai-ship.jpg',
-        capabilities: [
-            'パラメトリックモーフィング',
-            'バッチ生成',
-            '品質検証',
-            'データセットキュレーション',
-        ],
+        capabilities: ['パラメトリックモーフィング', 'バッチ生成', '品質検証', 'データセットキュレーション'],
         deliverables: ['生成パイプライン', '検証済みデータセット', '品質メトリクス'],
         software: ['PSJ', 'Jupiter'],
         duration: '6-10 週間',
@@ -356,12 +305,7 @@ const solutionsJa: Solution[] = [
         fullDesc:
             '現実的な金属の微細構造を生成するためのプロダクションレベルのボロノイ分割エンジン。結晶塑性シミュレーションや粒レベルの材料挙動の研究に使用されます。',
         image: '/images/cae-model.jpg',
-        capabilities: [
-            'ボロノイ分割',
-            '粒界モデリング',
-            '結晶方位設定',
-            'マルチスケールカップリング',
-        ],
+        capabilities: ['ボロノイ分割', '粒界モデリング', '結晶方位設定', 'マルチスケールカップリング'],
         deliverables: ['生成ツール', 'メッシュテンプレート', '検証ケース'],
         software: ['PSJ', 'Jupiter'],
         duration: '5-7 週間',
@@ -393,13 +337,7 @@ const solutionsJa: Solution[] = [
         fullDesc:
             '特定の CFD 解析要件に最適化された高品質の構造化メッシュを作成するための、OpenFOAM ユーティリティを使用したカスタムブロックメッシュジェネレーター。',
         image: '/images/hero-mesh.jpg',
-        capabilities: [
-            '構造化メッシング',
-            '品質管理',
-            '境界層リファインメント',
-            '領域分割',
-            'メッシュ品質メトリクス',
-        ],
+        capabilities: ['構造化メッシング', '品質管理', '境界層リファインメント', '領域分割', 'メッシュ品質メトリクス'],
         deliverables: ['メッシュ生成スクリプト', '品質レポート', 'シミュレーションテンプレート'],
         software: ['OpenFOAM', 'PSJ'],
         duration: '4-6 週間',

@@ -4,11 +4,7 @@ import * as Primitive from '@radix-ui/react-scroll-area';
 
 import { cn } from '../../lib/cn';
 
-export function ScrollArea({
-    className,
-    children,
-    ...props
-}: React.ComponentPropsWithRef<typeof Primitive.Root>) {
+export function ScrollArea({ className, children, ...props }: React.ComponentPropsWithRef<typeof Primitive.Root>) {
     return (
         <Primitive.Root type="scroll" className={cn('overflow-hidden', className)} {...props}>
             {children}

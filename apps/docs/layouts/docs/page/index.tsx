@@ -1,13 +1,5 @@
 'use client';
-import {
-    type ComponentProps,
-    createContext,
-    type FC,
-    type ReactNode,
-    use,
-    useEffect,
-    useState,
-} from 'react';
+import { type ComponentProps, createContext, type FC, type ReactNode, use, useEffect, useState } from 'react';
 
 import { I18nLabel, useI18n } from 'fumadocs-ui/contexts/i18n';
 import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
@@ -19,14 +11,7 @@ import { cn } from '@/lib/cn';
 import { Breadcrumb, type BreadcrumbProps } from './slots/breadcrumb';
 import { Container } from './slots/container';
 import { Footer, type FooterProps } from './slots/footer';
-import {
-    TOC,
-    TOCPopover,
-    type TOCPopoverProps,
-    type TOCProps,
-    TOCProvider,
-    type TOCProviderProps,
-} from './slots/toc';
+import { TOC, TOCPopover, type TOCPopoverProps, type TOCProps, TOCProvider, type TOCProviderProps } from './slots/toc';
 
 import type { TOCItemType } from 'fumadocs-core/toc';
 
@@ -102,9 +87,7 @@ const PageContext = createContext<{
 export function useDocsPage() {
     const context = use(PageContext);
     if (!context)
-        throw new Error(
-            'Please use page components under <DocsPage /> (`fumadocs-ui/layouts/notebook/page`).',
-        );
+        throw new Error('Please use page components under <DocsPage /> (`fumadocs-ui/layouts/notebook/page`).');
     return context;
 }
 
@@ -126,9 +109,7 @@ export function DocsPage({
     }, [full]);
 
     tocEnabled ??= Boolean(!isFull && (toc.length > 0 || tocProps.footer || tocProps.header));
-    tocPopoverEnabled ??= Boolean(
-        toc.length > 0 || tocPopoverProps.header || tocPopoverProps.footer,
-    );
+    tocPopoverEnabled ??= Boolean(toc.length > 0 || tocPopoverProps.header || tocPopoverProps.footer);
 
     const slots: DocsPageSlots = {
         breadcrumb: defaultSlots.breadcrumb ?? Breadcrumb,
@@ -149,11 +130,9 @@ export function DocsPage({
             }}
         >
             <slots.toc.provider single={single} toc={tocEnabled || tocPopoverEnabled ? toc : []}>
-                {tocPopoverEnabled &&
-                    (tocPopoverProps.component ?? <slots.toc.popover {...tocPopoverProps} />)}
+                {tocPopoverEnabled && (tocPopoverProps.component ?? <slots.toc.popover {...tocPopoverProps} />)}
                 <slots.container {...containerProps}>
-                    {breadcrumbEnabled &&
-                        (breadcrumb.component ?? <slots.breadcrumb {...breadcrumb} />)}
+                    {breadcrumbEnabled && (breadcrumb.component ?? <slots.breadcrumb {...breadcrumb} />)}
                     {children}
                     {footerEnabled && (footer.component ?? <slots.footer {...footer} />)}
                 </slots.container>
@@ -241,10 +220,7 @@ export function DocsTitle({ children, className, ...props }: ComponentProps<'h1'
     );
 }
 
-export function PageLastUpdate({
-    date: value,
-    ...props
-}: Omit<ComponentProps<'p'>, 'children'> & { date: Date }) {
+export function PageLastUpdate({ date: value, ...props }: Omit<ComponentProps<'p'>, 'children'> & { date: Date }) {
     const { text } = useI18n();
     const [date, setDate] = useState('');
 

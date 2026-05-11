@@ -22,16 +22,16 @@ A data type uses to control parameters of Force and moment load.
 ### `iEndArrowDir`
 
 - An _Integer_ specifying the drawing position of marker display.
-    - 0: Start at Node. The marker is displayed starting from a node.
-    - 1: End at Node. The marker is displayed ending at a node.
+  - 0: Start at Node. The marker is displayed starting from a node.
+  - 1: End at Node. The marker is displayed ending at a node.
 - The default value is 0.
 
 ### `iEndDistribute`
 
 - An _Integer_ specifying the load distribution.
-    - 0: Per Selected Entity. Apply the load value for each of the selected Entity.
-    - 1: Per Node. Apply equal load value to the node on the selected Entity.
-    - 2: Total of Select. The total value of the load for the selected Entities.
+  - 0: Per Selected Entity. Apply the load value for each of the selected Entity.
+  - 1: Per Node. Apply equal load value to the node on the selected Entity.
+  - 2: Total of Select. The total value of the load for the selected Entities.
 - The default value is 0.
 
 ### `crCurCoord`

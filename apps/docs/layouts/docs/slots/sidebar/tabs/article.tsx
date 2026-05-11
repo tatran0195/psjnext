@@ -185,14 +185,7 @@ const NAV_ITEMS: StackedNavItem[] = [
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function StackedNavLink({
-    href,
-    label,
-    icon,
-    external,
-    collapsedIconMargin,
-    collapsedIconHidden,
-}: StackedNavItem) {
+function StackedNavLink({ href, label, icon, external, collapsedIconMargin, collapsedIconHidden }: StackedNavItem) {
     return (
         <Link
             href={href}
@@ -261,10 +254,7 @@ interface StackedNavProps {
     collapsedLabel?: string;
 }
 
-export function StackedNav({
-    items = NAV_ITEMS,
-    collapsedLabel = 'Our goodies!',
-}: StackedNavProps) {
+export function StackedNav({ items = NAV_ITEMS, collapsedLabel = 'Our goodies!' }: StackedNavProps) {
     return (
         <>
             <style>{`

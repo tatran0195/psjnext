@@ -54,13 +54,7 @@ function getItemOffset(depth: number) {
     return `calc(${2 + 3 * depth} * var(--spacing))`;
 }
 
-export function SidebarContent({
-    mode: allowedMode = 'full',
-    children,
-}: {
-    mode?: Mode | true;
-    children: ReactNode;
-}) {
+export function SidebarContent({ mode: allowedMode = 'full', children }: { mode?: Mode | true; children: ReactNode }) {
     const { collapsed, mode } = useSidebar();
     const [hover, setHover] = useState(false);
     const ref = useRef<HTMLElement | null>(null);
@@ -190,11 +184,7 @@ export function SidebarDrawerContent({ className, children, ...props }: Componen
     );
 }
 
-export function SidebarDrawer({
-    children,
-    className,
-    ...props
-}: ComponentProps<typeof SidebarDrawerContent>) {
+export function SidebarDrawer({ children, className, ...props }: ComponentProps<typeof SidebarDrawerContent>) {
     return (
         <>
             <SidebarDrawerOverlay className="fixed z-40 inset-0 backdrop-blur-xs data-[state=open]:animate-fd-fade-in data-[state=closed]:animate-fd-fade-out" />
@@ -254,10 +244,7 @@ export function SidebarItem({
             ref={ref}
             data-active={active}
             prefetch={prefetch}
-            className={cn(
-                itemVariants({ variant: 'link', highlight: /*depth >= 1*/ false }),
-                className,
-            )}
+            className={cn(itemVariants({ variant: 'link', highlight: /*depth >= 1*/ false }), className)}
             style={{
                 paddingInlineStart: getItemOffset(depth),
                 ...style,
@@ -286,8 +273,7 @@ export function SidebarFolder({
 }) {
     const { defaultOpenLevel } = useSidebar();
     const depth = useFolderDepth() + 1;
-    const defaultOpen =
-        collapsible === false || active || (defaultOpenProp ?? defaultOpenLevel >= depth);
+    const defaultOpen = collapsible === false || active || (defaultOpenProp ?? defaultOpenLevel >= depth);
 
     const [open, setOpen] = useState(() => {
         if (id && isFolderExpanded(id)) return true;
@@ -311,12 +297,7 @@ export function SidebarFolder({
             disabled={!collapsible}
             {...props}
         >
-            <FolderContext
-                value={useMemo(
-                    () => ({ open, setOpen, depth, collapsible }),
-                    [collapsible, depth, open],
-                )}
-            >
+            <FolderContext value={useMemo(() => ({ open, setOpen, depth, collapsible }), [collapsible, depth, open])}>
                 {children}
             </FolderContext>
         </Collapsible>
@@ -338,10 +319,7 @@ export function SidebarFolderTrigger({ children, ...props }: CollapsibleTriggerP
                 {children}
                 <ChevronDown
                     data-icon
-                    className={cn(
-                        'ms-auto transition-transform',
-                        !open && '-rotate-90 rtl:rotate-90',
-                    )}
+                    className={cn('ms-auto transition-transform', !open && '-rotate-90 rtl:rotate-90')}
                 />
             </CollapsibleTrigger>
         );
@@ -388,10 +366,7 @@ export function SidebarFolderLink({
             {collapsible && (
                 <ChevronDown
                     data-icon
-                    className={cn(
-                        'ms-auto transition-transform',
-                        !open && '-rotate-90 rtl:rotate-90',
-                    )}
+                    className={cn('ms-auto transition-transform', !open && '-rotate-90 rtl:rotate-90')}
                 />
             )}
         </Link>
@@ -453,9 +428,7 @@ export function useAutoScroll(active: boolean, ref: RefObject<HTMLElement | null
     useEffect(() => {
         if (active && ref.current) {
             scrollIntoView(ref.current, {
-                boundary: document.getElementById(
-                    mode === 'drawer' ? 'nd-sidebar-mobile' : 'nd-sidebar',
-                ),
+                boundary: document.getElementById(mode === 'drawer' ? 'nd-sidebar-mobile' : 'nd-sidebar'),
                 scrollMode: 'if-needed',
             });
         }

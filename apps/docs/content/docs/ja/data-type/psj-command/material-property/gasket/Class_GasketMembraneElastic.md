@@ -17,10 +17,10 @@ This is an instance of a GasketMembraneElastic class, represents GasketMembraneE
 
 ## GasketMembraneElastic Characteristic {#gasketmembraneelastic-characteristic}
 
-Either `KEY NAME` or `ID` can be used to define the material property.
-The ID of material property which was primarily used in functions can be referred to in the [Int Notation](../../material-types) column.
-However, in order to explicitly describe meaning of material properties, user can use the `KEY NAME` instead of specifying `ID`.
-For example: `YOUNGS_MODULUS` is equal to ID = 1.
+Either `KEY NAME` or `ID` can be used to define the material property. The ID of material property which was primarily
+used in functions can be referred to in the [Int Notation](../../material-types) column. However, in order to explicitly
+describe meaning of material properties, user can use the `KEY NAME` instead of specifying `ID`. For example:
+`YOUNGS_MODULUS` is equal to ID = 1.
 
 | INT Notation | Key Name         | Description                                          |
 | ------------ | ---------------- | ---------------------------------------------------- |

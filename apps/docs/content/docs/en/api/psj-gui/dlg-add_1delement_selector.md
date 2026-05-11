@@ -1,6 +1,8 @@
 ---
 title: 'dlg.add_1delement_selector()'
-description: 'Add "1D element" to the selection list, allowing user to select 1D elements and store the selected 1D elements to the selection list'
+description:
+    'Add "1D element" to the selection list, allowing user to select 1D elements and store the selected 1D elements to
+    the selection list'
 version_introduced: '5.0.1'
 available_versions: 'all'
 ---
@@ -11,7 +13,8 @@ available_versions: 'all'
 
 ## Description
 
-Add "1D element" to the selection list, allowing user to select 1D elements and store the selected 1D elements to the selection list.
+Add "1D element" to the selection list, allowing user to select 1D elements and store the selected 1D elements to the
+selection list.
 
 ## Syntax
 

@@ -3,29 +3,32 @@ title: Creating a standard bolt
 description: A simple example showing how to create a standard bolt by using PSJ
 ---
 
-This tutorial demonstrates how to make a custom bolt by using a pre-defined template of PSJ-Command/Jupiter's Macro.
-It will also integrate the PSJ-Command/Jupiter's Macro to a customized UI dialog by using GUI Command Builder.
+This tutorial demonstrates how to make a custom bolt by using a pre-defined template of PSJ-Command/Jupiter's Macro. It
+will also integrate the PSJ-Command/Jupiter's Macro to a customized UI dialog by using GUI Command Builder.
 
 <Callout type="info" title="In this tutorial, you’ll learn">
-    1. How to get and make use of the PSJ-Command/Jupiter's Macro. 2. Implement the
-    PSJ-Command/Jupiter's Macro to a general Python script for the automation process. 3. Creat a
-    dialog by using GUI Command Builder. 4. Integrate the user script in (2.) to the created dialog
-    in (3.) to make a custom UI function. 5. Add the created custom UI function in (4.) to Jupiter's
-    ribbon and use it.
+    1. How to get and make use of the PSJ-Command/Jupiter's Macro. 2. Implement the PSJ-Command/Jupiter's Macro to a
+    general Python script for the automation process. 3. Creat a dialog by using GUI Command Builder. 4. Integrate the
+    user script in (2.) to the created dialog in (3.) to make a custom UI function. 5. Add the created custom UI
+    function in (4.) to Jupiter's ribbon and use it.
 </Callout>
 ## 0. Overview
 
-**About this dialog**: you will make an UI dialog to integrate the customized PSJ-Command/Jupiter's Macro for the automation process.
+**About this dialog**: you will make an UI dialog to integrate the customized PSJ-Command/Jupiter's Macro for the
+automation process.
 
-After selecting the bolt's size and pressing Apply or OK button (_left picture_), a user-standard bolt will be created and shown in Jupiter's screen (_right picture_).
+After selecting the bolt's size and pressing Apply or OK button (_left picture_), a user-standard bolt will be created
+and shown in Jupiter's screen (_right picture_).
 
 ![Purpose and Target](./assets/purpose_target.png)
 
 **In general, below are the steps that you will follow:**
 
 1. **Get PSJ-Command or Macro**: Execute the available functions in Jupiter to get the respective PSJ-Command or Macro.
-2. **Create DEF function in Python**: Combine PSJ-Command or Macro with Python based script in order to create an user-defined function fully.
-3. **Create User Interface (UI)**: Use GUI Command Builder to make an UI dialog connecting to the user-defined function in (2.).
+2. **Create DEF function in Python**: Combine PSJ-Command or Macro with Python based script in order to create an
+   user-defined function fully.
+3. **Create User Interface (UI)**: Use GUI Command Builder to make an UI dialog connecting to the user-defined function
+   in (2.).
 4. **Implement**: Register the created UI dialog in (3.) to Jupiter.
 
 ---
@@ -44,13 +47,16 @@ Within this example, you also can know how to implement the PSJ-Command/Macro of
 
 ### 1.1. Create 2 cylinders
 
-Use <menuselection>Geometry &#187; Create Entity &#187; Part &#187; Cylinder</menuselection> function to make 2 cylinders in sequence: one for bolt head, the other for bolt body.
+Use <menuselection>Geometry &#187; Create Entity &#187; Part &#187; Cylinder</menuselection> function to make 2
+cylinders in sequence: one for bolt head, the other for bolt body.
 
 ![Make 2 cylinders](./assets/Get_macro.png)
 
-> ※1. The number of the edge of the bolt head. In this case, we inputted 6 for 6 edges of the bolt head. You can change it by your own.
+> ※1. The number of the edge of the bolt head. In this case, we inputted 6 for 6 edges of the bolt head. You can change
+> it by your own.
 >
-> ※2. Value of L parameter will be equal to (Height - Origin-Y), and Origin-Y will be equal to the height of bolt head - 0.005. The reason is to prevent zero-touch case.
+> ※2. Value of L parameter will be equal to (Height - Origin-Y), and Origin-Y will be equal to the height of bolt head -
+> 0.005. The reason is to prevent zero-touch case.
 
 Then, you can see the created bolt on the Jupiter's display window:
 
@@ -85,7 +91,8 @@ CreateCylinderPart("Bolt_Body", 0:0, 0, 0, [0, 0.001995, 0], 0.001, 0.0015, 0.00
 
 ### 1.2. Create assemble faces
 
-Then, use <menuselection>Assemble &#187; Assemble &#187; Assemble Faces</menuselection> function to generate share faces between the created 2 cylinders:
+Then, use <menuselection>Assemble &#187; Assemble &#187; Assemble Faces</menuselection> function to generate share faces
+between the created 2 cylinders:
 
 1. Input tolerance = 0.01 to the Tolerance textbox.
 2. Click on the Find button to find all the faces between the created 2 cylinders.
@@ -120,7 +127,8 @@ AssembleFaceEx([9, 3], 1e-05, 0, 0)
 
 ### 1.3. Merge 2 parts
 
-Next, use <menuselection>Geometry &#187; Edit Entity &#187; Merge Entities &#187; Parts</menuselection> function to merge 2 cylinders into 1 part. This part will be considered as a simple bolt geometry using in this tutorial:
+Next, use <menuselection>Geometry &#187; Edit Entity &#187; Merge Entities &#187; Parts</menuselection> function to
+merge 2 cylinders into 1 part. This part will be considered as a simple bolt geometry using in this tutorial:
 
 1. Select 2 created cylinders with their shared faces.
 2. Click on the Apply or OK button to merge them into 1 part.
@@ -218,16 +226,16 @@ RenameItem("BOLT", 3:1)
 </Tab>
 </Tabs>
 
-Use the above scripts, now parameterize the numbers and add some built-in Python functions (if…else, for, while, etc.) to make the script adapt to different input parameters.
+Use the above scripts, now parameterize the numbers and add some built-in Python functions (if…else, for, while, etc.)
+to make the script adapt to different input parameters.
 
 <Callout type="info" title="To execute the code in Python, use 2 ways as below:">
-    1. PSJ-Command: Copy and paste directly to the creating Python code. 2. Macro: use the following
-    structure to execute the code in python`JPT.Exec(“Macro”)`.
+    1. PSJ-Command: Copy and paste directly to the creating Python code. 2. Macro: use the following structure to
+    execute the code in python`JPT.Exec(“Macro”)`.
 </Callout>
 <Callout type="info">
-    The PSJ-Command and/or Macro is added to create the bolt according to the value generated by
-    user. From now, user can combine the knowledge about Python language and the just generated
-    Macro to create def function.
+    The PSJ-Command and/or Macro is added to create the bolt according to the value generated by user. From now, user
+    can combine the knowledge about Python language and the just generated Macro to create def function.
 </Callout>
 The following process will show you the way to prepare important **def** of this example:
 
@@ -250,7 +258,8 @@ In which:
 
 ### 2.2 Step 2: Prepare standard bolt sizes
 
-The output structure of the parameters of bolt size will follow the following structure: [Bolt head's height, Bolt head's diameter, Bolt body's diameter].
+The output structure of the parameters of bolt size will follow the following structure: [Bolt head's height, Bolt
+head's diameter, Bolt body's diameter].
 
 ```psj
 def get_bolt_size(get_param_bolt_type):
@@ -315,7 +324,11 @@ In which:
 
 > We stored all the related files relating to this tutorial in the Jupiter installation folder.
 >
-> **picture_folder** is the parameter refering to the stored location to get stored pictures. The stored localtion: <menuselection>Jupiter installation folder &#187; SampleData &#187; PSJ &#187; PSJ-GUI &#187; CreateBolt &#187; CreatingBolt_Pics</menuselection>
+> **picture_folder** is the parameter refering to the stored location to get stored pictures. The stored localtion:
+>
+> <menuselection>
+>     Jupiter installation folder &#187; SampleData &#187; PSJ &#187; PSJ-GUI &#187; CreateBolt &#187; CreatingBolt_Pics
+> </menuselection>
 
 ### 2.4. Step 4: Prepare a function to modify the output value of Assemble Faces function
 
@@ -328,11 +341,11 @@ Or, you can understand via the following structure: _1, ["face1-face2","face3-fa
 So, to make it can be used, you can use the following **def** function (or you can create your own function).
 
 <Callout type="info">
-    Whenever start using a function, you should check it's output values and type. In Jupiter, we're
-    supporting a utility called [JPT.Debugger](/docs/psj-utility/JPT.Debugger)
+    Whenever start using a function, you should check it's output values and type. In Jupiter, we're supporting a
+    utility called [JPT.Debugger](/docs/psj-utility/JPT.Debugger)
 </Callout>
-```psj def replace_str(err, in_str): mod_str = in_str for i in range (len(err)): mod_str =
-mod_str.replace(str(err[i]), " ")
+```psj def replace_str(err, in_str): mod_str = in_str for i in range (len(err)): mod_str = mod_str.replace(str(err[i]),
+" ")
 
     mod_str = re.sub("s+", " ", mod_str).strip().split(" ")
     return mod_str
@@ -484,7 +497,8 @@ def on_execute_button_clicked(dlg):
 
 ## 3. Create User Interface (UI)
 
-**Before creating UI for this sample:** The target user interface (_Right picture_) requiring all the components of the GUI Command Builder (_Left picture_).
+**Before creating UI for this sample:** The target user interface (_Right picture_) requiring all the components of the
+GUI Command Builder (_Left picture_).
 
 ![Create def function](./assets/ui1.png)
 
@@ -519,11 +533,16 @@ To add the required components to the creating dialog, please follow the followi
 
 1. Add _Unit System: mm_ by using **Label** component.
 2. Add _an image_ as a preview picture into the creating dialog by using **ImageCtrl** component.
-3. Add _Part Name_ textbox to input the name of the creating bolt by using **Layout**, **Label** and **TextBox** components.
-4. Add _Coordinate System_ selection to select the reference coordinate system for creating bolt by using **Layout**, **Label** and **ComboBox** components.
-5. Add _Bolt Type_ selection to select the reference coordinate system for creating bolt by using **Layout**, **Label** and **ComboBox** components.
-6. Add _Update preview bolt size_ button to update the preview bolt picture on the GUI based on the selected bolt type by using **Layout** and **Button** components.
-7. Add _Bolt Length_ textbox to input the length of the creating bolt by using **Layout**, **Label** and **TextBox** components.
+3. Add _Part Name_ textbox to input the name of the creating bolt by using **Layout**, **Label** and **TextBox**
+   components.
+4. Add _Coordinate System_ selection to select the reference coordinate system for creating bolt by using **Layout**,
+   **Label** and **ComboBox** components.
+5. Add _Bolt Type_ selection to select the reference coordinate system for creating bolt by using **Layout**, **Label**
+   and **ComboBox** components.
+6. Add _Update preview bolt size_ button to update the preview bolt picture on the GUI based on the selected bolt type
+   by using **Layout** and **Button** components.
+7. Add _Bolt Length_ textbox to input the length of the creating bolt by using **Layout**, **Label** and **TextBox**
+   components.
 
 ![Add components](./assets/3_3_CreateAllComponents_V5.0.2.gif)
 
@@ -570,8 +589,7 @@ The created **def** functions in [2.](#2-create-def-function-in-python) and thei
             ButtonApply
         </td>
         <td rowspan="1" colspan="1">
-            dlg.on_button_clicked(<b>name="ButtonApply"</b>,{' '}
-            <b>callfunc=on_execute_button_clicked</b>)
+            dlg.on_button_clicked(<b>name="ButtonApply"</b>, <b>callfunc=on_execute_button_clicked</b>)
         </td>
     </tr>
     <tr>

@@ -14,21 +14,14 @@ export function GlobalFooter() {
             <div className="relative" style={{ padding: '4rem 0' }}>
                 <div className="psj-container">
                     <div className="flex flex-col md:flex-row items-center md:justify-start justify-center gap-8 md:gap-12">
-                        <a
-                            href="https://www.e-technostar.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                        <a href="https://www.e-technostar.com/" target="_blank" rel="noopener noreferrer">
                             <TechnoStarLogo variant="inline" className="h-9 w-auto" />
                         </a>
                         <address
                             className="text-sm leading-relaxed not-italic text-left"
                             style={{ color: 'var(--psj-text-2)' }}
                         >
-                            <strong
-                                className="text-base font-bold mb-1 block"
-                                style={{ color: 'var(--psj-text-1)' }}
-                            >
+                            <strong className="text-base font-bold mb-1 block" style={{ color: 'var(--psj-text-1)' }}>
                                 株式会社テクノスター
                             </strong>
                             東京都港区赤坂7-1-1 青山安田ビル 6F
@@ -47,10 +40,7 @@ export function GlobalFooter() {
             >
                 <div className="psj-container flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium">
                     <div style={{ color: 'var(--psj-text-3)' }}>© 2026 TechnoStar Co., Ltd.</div>
-                    <div
-                        className="flex flex-wrap items-center gap-6"
-                        style={{ color: 'var(--psj-text-2)' }}
-                    >
+                    <div className="flex flex-wrap items-center gap-6" style={{ color: 'var(--psj-text-2)' }}>
                         {[
                             {
                                 label: '採用情報',
@@ -71,12 +61,8 @@ export function GlobalFooter() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-1.5 transition-colors hover:underline"
-                                onMouseEnter={(e) =>
-                                    (e.currentTarget.style.color = 'var(--psj-text-1)')
-                                }
-                                onMouseLeave={(e) =>
-                                    (e.currentTarget.style.color = 'var(--psj-text-2)')
-                                }
+                                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--psj-text-1)')}
+                                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--psj-text-2)')}
                             >
                                 <ChevronRight size={12} strokeWidth={3} />
                                 {link.label}

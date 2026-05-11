@@ -8,15 +8,10 @@ import { i18n } from './lib/i18n';
 const i18nMiddleware = createI18nMiddleware(i18n);
 
 const { rewrite: rewriteLLM } = rewritePath('/:lang/docs{/*path}', '/llms.mdx/:lang/docs{/*path}');
-const { rewrite: rewriteMdx } = rewritePath(
-    '/:lang/docs{/*path}.mdx',
-    '/llms.mdx/:lang/docs{/*path}',
-);
+const { rewrite: rewriteMdx } = rewritePath('/:lang/docs{/*path}.mdx', '/llms.mdx/:lang/docs{/*path}');
 
 export const config = {
-    matcher: [
-        '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:png|jpg|jpeg|gif|webp|avif|svg|ico)).*)',
-    ],
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:png|jpg|jpeg|gif|webp|avif|svg|ico)).*)'],
 };
 
 export default async function proxy(request: NextRequest, event: NextFetchEvent) {

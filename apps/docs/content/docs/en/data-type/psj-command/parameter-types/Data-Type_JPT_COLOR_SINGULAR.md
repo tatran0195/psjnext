@@ -5,7 +5,8 @@ id: COLOR_SINGULAR
 
 ## Description
 
-A data type uses to control the color for each load point, constraint point, rigid element connection point, and material boundary point.
+A data type uses to control the color for each load point, constraint point, rigid element connection point, and
+material boundary point.
 
 ## Attributes
 

@@ -583,12 +583,7 @@ body,
 
     /* ── Gradient text ── */
     .psj-gradient-text {
-        background: linear-gradient(
-            135deg,
-            var(--psj-navy, #002853) 0%,
-            var(--psj-blue, #004ea2) 60%,
-            #1a6dd6 100%
-        );
+        background: linear-gradient(135deg, var(--psj-navy, #002853) 0%, var(--psj-blue, #004ea2) 60%, #1a6dd6 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;

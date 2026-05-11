@@ -11,12 +11,7 @@ import { cn } from '@/lib/cn';
 
 export type BreadcrumbProps = BreadcrumbOptions & ComponentProps<'div'>;
 
-export function Breadcrumb({
-    includeRoot,
-    includeSeparator,
-    includePage,
-    ...props
-}: BreadcrumbProps) {
+export function Breadcrumb({ includeRoot, includeSeparator, includePage, ...props }: BreadcrumbProps) {
     const path = useTreePath();
     const { root } = useTreeContext();
     const items = useMemo(() => {

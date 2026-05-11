@@ -11,11 +11,7 @@ export function compareSemver(a: string, b: string) {
     return 0;
 }
 
-export function matchesSearch(
-    item: SortedResult<string> | undefined,
-    searchString: string,
-    exactMatch?: boolean,
-) {
+export function matchesSearch(item: SortedResult<string> | undefined, searchString: string, exactMatch?: boolean) {
     if (!item || !searchString) {
         return true;
     }

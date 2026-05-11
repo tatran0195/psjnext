@@ -16,6 +16,7 @@ import {
     X,
 } from 'lucide-react';
 
+import { HeroSection } from '@/components/hero-sections';
 import { CtaBand } from '@/components/sections/cta-band';
 import { cn } from '@/lib/cn';
 import { translations } from '@/lib/i18n-translations';
@@ -41,8 +42,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
     const filtered = useMemo(() => {
         const result = [...solutions].filter((sol) => {
             const matchesCategory = activeCategory === 'All' || sol.category === activeCategory;
-            const matchesIndustry =
-                activeIndustry === industries[0] || sol.industry.includes(activeIndustry);
+            const matchesIndustry = activeIndustry === industries[0] || sol.industry.includes(activeIndustry);
             const matchesSearch =
                 sol.title.toLowerCase().includes(search.toLowerCase()) ||
                 sol.code.toLowerCase().includes(search.toLowerCase());
@@ -55,9 +55,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
         } else if (sortBy === showcase.sortByComplexity) {
             const order = { Standard: 1, Advanced: 2, Enterprise: 3 };
             result.sort(
-                (a, b) =>
-                    order[a.complexity as keyof typeof order] -
-                    order[b.complexity as keyof typeof order],
+                (a, b) => order[a.complexity as keyof typeof order] - order[b.complexity as keyof typeof order],
             );
         }
 
@@ -72,26 +70,11 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                 minHeight: '100vh',
             }}
         >
-            {/* layout provides header */}
-            <section className="psj-subpage-hero">
-                <div className="psj-container py-10 lg:py-14 relative z-10">
-                    <div className="max-w-4xl">
-                        <div className="psj-label mb-2">{showcase.showcaseLabel}</div>
-                        <h1
-                            className="psj-h1 mb-4 text-4xl lg:text-5xl"
-                            style={{ color: 'var(--psj-text-1)' }}
-                        >
-                            {showcase.showcaseTitle}
-                        </h1>
-                        <p
-                            className="text-base lg:text-lg leading-relaxed max-w-2xl"
-                            style={{ color: 'var(--psj-text-2)' }}
-                        >
-                            {showcase.showcaseDesc}
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <HeroSection
+                label={showcase.showcaseLabel}
+                title={showcase.showcaseTitle}
+                description={showcase.showcaseDesc}
+            />
 
             {/* ─────── MAIN LAYOUT ─────── */}
             <main id="catalog" className="psj-container py-10">
@@ -117,10 +100,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                     style={{ color: 'var(--psj-text-1)' }}
                                 />
                                 {search && (
-                                    <button
-                                        onClick={() => setSearch('')}
-                                        style={{ color: 'var(--psj-text-3)' }}
-                                    >
+                                    <button onClick={() => setSearch('')} style={{ color: 'var(--psj-text-3)' }}>
                                         <X size={14} />
                                     </button>
                                 )}
@@ -138,11 +118,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                             {/* Sort */}
                             <FilterDropdown
                                 value={sortBy}
-                                options={[
-                                    showcase.sortByRelevant,
-                                    showcase.sortByCode,
-                                    showcase.sortByComplexity,
-                                ]}
+                                options={[showcase.sortByRelevant, showcase.sortByCode, showcase.sortByComplexity]}
                                 onChange={setSortBy}
                                 prefix={showcase.sortPrefix}
                             />
@@ -150,9 +126,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
 
                         {/* Category Chips Row */}
                         <div className="flex flex-wrap items-center gap-2">
-                            {(
-                                Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>
-                            ).map((cat) => {
+                            {(Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>).map((cat) => {
                                 const active = activeCategory === cat;
                                 const config = categoryConfig[cat];
                                 const Icon = config.icon;
@@ -163,13 +137,9 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                         className="flex items-center gap-2 px-4 py-2 text-xs font-bold transition-all"
                                         style={{
                                             border: '1px solid var(--psj-border)',
-                                            background: active
-                                                ? 'var(--psj-blue)'
-                                                : 'var(--psj-surface-1)',
+                                            background: active ? 'var(--psj-blue)' : 'var(--psj-surface-1)',
                                             color: active ? 'white' : 'var(--psj-text-2)',
-                                            borderColor: active
-                                                ? 'var(--psj-blue)'
-                                                : 'var(--psj-border)',
+                                            borderColor: active ? 'var(--psj-blue)' : 'var(--psj-border)',
                                         }}
                                     >
                                         <Icon size={12} />
@@ -188,9 +158,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                     .replace('{count}', filtered.length.toString())
                                     .replace('{total}', solutions.length.toString())}
                             </div>
-                            {(activeCategory !== 'All' ||
-                                activeIndustry !== industries[0] ||
-                                search) && (
+                            {(activeCategory !== 'All' || activeIndustry !== industries[0] || search) && (
                                 <button
                                     onClick={() => {
                                         setActiveCategory('All');
@@ -218,11 +186,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                     className="py-32 text-center"
                                     style={{ border: '1px dashed var(--psj-border)' }}
                                 >
-                                    <Search
-                                        size={28}
-                                        className="mx-auto mb-4"
-                                        style={{ color: 'var(--psj-text-3)' }}
-                                    />
+                                    <Search size={28} className="mx-auto mb-4" style={{ color: 'var(--psj-text-3)' }} />
                                     <p className="text-sm" style={{ color: 'var(--psj-text-2)' }}>
                                         {showcase.noSolutions}
                                     </p>
@@ -249,11 +213,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                             exit={{ opacity: 0 }}
                                             transition={{ duration: 0.3, delay: i * 0.04 }}
                                         >
-                                            <SolutionCard
-                                                sol={sol}
-                                                onSelect={setSelectedSolution}
-                                                labels={showcase}
-                                            />
+                                            <SolutionCard sol={sol} onSelect={setSelectedSolution} labels={showcase} />
                                         </motion.div>
                                     ))}
                                 </div>
@@ -277,11 +237,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
             {/* ─────── DETAIL MODAL ─────── */}
             <AnimatePresence>
                 {selectedSolution && (
-                    <DetailModal
-                        sol={selectedSolution}
-                        onClose={() => setSelectedSolution(null)}
-                        labels={showcase}
-                    />
+                    <DetailModal sol={selectedSolution} onClose={() => setSelectedSolution(null)} labels={showcase} />
                 )}
             </AnimatePresence>
 
@@ -308,20 +264,11 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                             }}
                         >
                             <div className="p-6">
-                                <button
-                                    onClick={() => setMobileFiltersOpen(false)}
-                                    className="mb-6"
-                                >
+                                <button onClick={() => setMobileFiltersOpen(false)} className="mb-6">
                                     <X size={20} />
                                 </button>
-                                <h3 className="text-lg font-bold mb-4">
-                                    {showcase.filterSolutions}
-                                </h3>
-                                {(
-                                    Object.keys(categoryConfig) as Array<
-                                        keyof typeof categoryConfig
-                                    >
-                                ).map((cat) => (
+                                <h3 className="text-lg font-bold mb-4">{showcase.filterSolutions}</h3>
+                                {(Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>).map((cat) => (
                                     <button
                                         key={cat}
                                         onClick={() => {
@@ -331,13 +278,8 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                         className={`w-full text-left px-3 py-2.5 text-sm transition-colors`}
                                         style={{
                                             background:
-                                                activeCategory === cat
-                                                    ? 'var(--psj-blue-subtle)'
-                                                    : 'transparent',
-                                            color:
-                                                activeCategory === cat
-                                                    ? 'var(--psj-blue)'
-                                                    : 'var(--psj-text-2)',
+                                                activeCategory === cat ? 'var(--psj-blue-subtle)' : 'transparent',
+                                            color: activeCategory === cat ? 'var(--psj-blue)' : 'var(--psj-text-2)',
                                             fontWeight: activeCategory === cat ? 700 : 400,
                                             borderLeft:
                                                 activeCategory === cat
@@ -386,11 +328,7 @@ function FilterDropdown({
             >
                 {Icon && <Icon size={14} style={{ color: 'var(--psj-text-3)' }} />}
                 <div className="flex-1 truncate">
-                    {prefix && (
-                        <span className="text-[10px] uppercase font-bold mr-2 opacity-50">
-                            {prefix}
-                        </span>
-                    )}
+                    {prefix && <span className="text-[10px] uppercase font-bold mr-2 opacity-50">{prefix}</span>}
                     {value}
                 </div>
                 <ChevronDown
@@ -430,14 +368,8 @@ function FilterDropdown({
                                         }}
                                         className="w-full text-left px-4 py-2.5 text-[13px] transition-colors flex items-center justify-between"
                                         style={{
-                                            background:
-                                                value === opt
-                                                    ? 'var(--psj-surface-2)'
-                                                    : 'transparent',
-                                            color:
-                                                value === opt
-                                                    ? 'var(--psj-blue)'
-                                                    : 'var(--psj-text-2)',
+                                            background: value === opt ? 'var(--psj-surface-2)' : 'transparent',
+                                            color: value === opt ? 'var(--psj-blue)' : 'var(--psj-text-2)',
                                         }}
                                     >
                                         {opt}
@@ -474,15 +406,8 @@ function CheckList({ items, limit }: { items: string[]; limit?: number }) {
     return (
         <div className={cn('grid gap-1.5', limit ? 'grid-cols-2' : 'grid-cols-1')}>
             {displayItems.map((c) => (
-                <div
-                    key={c}
-                    className="flex items-start gap-1.5 text-xs"
-                    style={{ color: 'var(--psj-text-2)' }}
-                >
-                    <CheckCircle2
-                        size={12}
-                        style={{ color: 'var(--psj-blue)', flexShrink: 0, marginTop: '1px' }}
-                    />
+                <div key={c} className="flex items-start gap-1.5 text-xs" style={{ color: 'var(--psj-text-2)' }}>
+                    <CheckCircle2 size={12} style={{ color: 'var(--psj-blue)', flexShrink: 0, marginTop: '1px' }} />
                     <span className="truncate">{c}</span>
                 </div>
             ))}
@@ -490,15 +415,7 @@ function CheckList({ items, limit }: { items: string[]; limit?: number }) {
     );
 }
 
-function MetaItem({
-    label,
-    value,
-    icon: Icon,
-}: {
-    label: string;
-    value: string;
-    icon?: LucideIcon;
-}) {
+function MetaItem({ label, value, icon: Icon }: { label: string; value: string; icon?: LucideIcon }) {
     return (
         <div>
             <div
@@ -507,10 +424,7 @@ function MetaItem({
             >
                 {label}
             </div>
-            <div
-                className="text-sm font-bold flex items-center gap-1.5"
-                style={{ color: 'var(--psj-text-1)' }}
-            >
+            <div className="text-sm font-bold flex items-center gap-1.5" style={{ color: 'var(--psj-text-1)' }}>
                 {Icon && <Icon size={12} style={{ color: 'var(--psj-blue)' }} />} {value}
             </div>
         </div>
@@ -580,10 +494,7 @@ function SolutionCard({
                     </div>
                 </div>
                 {/* Content */}
-                <div
-                    className="md:col-span-7 p-6 lg:p-7"
-                    style={{ borderRight: '1px solid var(--psj-border)' }}
-                >
+                <div className="md:col-span-7 p-6 lg:p-7" style={{ borderRight: '1px solid var(--psj-border)' }}>
                     <SolutionHeader sol={sol} config={config} />
                     <h3
                         className="text-lg font-bold leading-tight mb-2 transition-colors"
@@ -591,10 +502,7 @@ function SolutionCard({
                     >
                         {sol.title}
                     </h3>
-                    <p
-                        className="text-sm leading-relaxed mb-4"
-                        style={{ color: 'var(--psj-text-2)' }}
-                    >
+                    <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--psj-text-2)' }}>
                         {sol.shortDesc}
                     </p>
 
@@ -643,10 +551,7 @@ function SolutionCard({
                         </div>
                     </div>
                     <div className="space-y-2 mt-4">
-                        <button
-                            onClick={() => onSelect(sol)}
-                            className="psj-btn-primary w-full justify-center"
-                        >
+                        <button onClick={() => onSelect(sol)} className="psj-btn-primary w-full justify-center">
                             {labels.details} <ArrowRight size={12} />
                         </button>
                     </div>
@@ -657,15 +562,7 @@ function SolutionCard({
 }
 
 /* ─── Detail Modal ─── */
-function DetailModal({
-    sol,
-    onClose,
-    labels,
-}: {
-    sol: Solution;
-    onClose: () => void;
-    labels: Record<string, string>;
-}) {
+function DetailModal({ sol, onClose, labels }: { sol: Solution; onClose: () => void; labels: Record<string, string> }) {
     const config = categoryConfig[sol.category];
     return (
         <>
@@ -693,11 +590,7 @@ function DetailModal({
                 >
                     <div className="grid md:grid-cols-2">
                         <div style={{ background: 'var(--psj-surface-2)', minHeight: '240px' }}>
-                            <img
-                                src={sol.image}
-                                alt={sol.title}
-                                className="w-full h-full object-cover"
-                            />
+                            <img src={sol.image} alt={sol.title} className="w-full h-full object-cover" />
                         </div>
                         <div className="p-8">
                             <div className="flex items-center gap-2 mb-5">
@@ -707,21 +600,14 @@ function DetailModal({
                                 >
                                     {sol.code}
                                 </span>
-                                <button
-                                    onClick={onClose}
-                                    className="ml-auto"
-                                    style={{ color: 'var(--psj-text-3)' }}
-                                >
+                                <button onClick={onClose} className="ml-auto" style={{ color: 'var(--psj-text-3)' }}>
                                     <X size={18} />
                                 </button>
                             </div>
                             <h2 className="psj-h3 mb-3" style={{ color: 'var(--psj-text-1)' }}>
                                 {sol.title}
                             </h2>
-                            <p
-                                className="leading-relaxed mb-6"
-                                style={{ color: 'var(--psj-text-2)' }}
-                            >
+                            <p className="leading-relaxed mb-6" style={{ color: 'var(--psj-text-2)' }}>
                                 {sol.fullDesc}
                             </p>
                             <div className="space-y-5">

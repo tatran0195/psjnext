@@ -52,10 +52,7 @@ export interface BaseSlots {
         | false;
 }
 
-export interface BaseSlotsProps<P extends BaseLayoutProps = BaseLayoutProps> extends Pick<
-    P,
-    'nav'
-> {
+export interface BaseSlotsProps<P extends BaseLayoutProps = BaseLayoutProps> extends Pick<P, 'nav'> {
     themeSwitch: Omit<NonNullable<P['themeSwitch']>, 'enabled'>;
     searchToggle: Omit<NonNullable<P['searchToggle']>, 'enabled'>;
 }

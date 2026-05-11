@@ -10,18 +10,9 @@ export function TechnoStarLogo({ variant = 'icon', ...others }: TechnoStarLogoPr
     const radialGradient4 = `radial-gradient-4`;
     const radialGradient5 = `radial-gradient-5`;
     return (
-        <svg
-            viewBox={`${variant === 'icon' ? '0 0 152.01 144.57' : '0 0 523.16 144.57'}`}
-            {...others}
-        >
+        <svg viewBox={`${variant === 'icon' ? '0 0 152.01 144.57' : '0 0 523.16 144.57'}`} {...others}>
             <defs>
-                <radialGradient
-                    id={radialGradient1}
-                    cx={76}
-                    cy={0}
-                    r={85.76}
-                    gradientUnits="userSpaceOnUse"
-                >
+                <radialGradient id={radialGradient1} cx={76} cy={0} r={85.76} gradientUnits="userSpaceOnUse">
                     <stop offset={0.1} stopColor="#fff" />
                     <stop offset={0.33} stopColor="#dfe6ea" />
                     <stop offset={0.79} stopColor="#00b3cd" />

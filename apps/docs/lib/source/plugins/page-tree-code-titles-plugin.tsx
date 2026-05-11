@@ -4,10 +4,7 @@ export function pageTreeCodeTitlesPlugin(): LoaderPlugin {
     return {
         transformPageTree: {
             file(node) {
-                if (
-                    typeof node.name === 'string' &&
-                    (node.name.endsWith('()') || node.name.match(/^<\w+ \/>$/))
-                ) {
+                if (typeof node.name === 'string' && (node.name.endsWith('()') || node.name.match(/^<\w+ \/>$/))) {
                     return {
                         ...node,
                         name: (

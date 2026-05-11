@@ -18,8 +18,7 @@ interface ChangelogEntryPageProps {
 
 export default async function ChangelogEntryPage({ params }: ChangelogEntryPageProps) {
     const { slug, lang } = await params;
-    const t =
-        translations[lang as keyof typeof translations]?.changelog || translations.en.changelog;
+    const t = translations[lang as keyof typeof translations]?.changelog || translations.en.changelog;
     const dateLocale = lang === 'ja' ? 'ja-JP' : 'en-US';
 
     const page = changelog.getPages(lang).find((p) => p.data.slug === slug || p.slugs[0] === slug);
@@ -106,10 +105,7 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
                 }}
             />
 
-            <div
-                className="min-h-screen"
-                style={{ background: 'var(--psj-surface-0)', color: 'var(--psj-text-1)' }}
-            >
+            <div className="min-h-screen" style={{ background: 'var(--psj-surface-0)', color: 'var(--psj-text-1)' }}>
                 <main className="psj-container psj-section">
                     <div className="max-w-4xl mx-auto">
                         <div className="mb-12 flex items-center justify-between">
@@ -125,22 +121,16 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
 
                         <article className="prose prose-sm sm:prose-base dark:prose-invert max-w-none">
                             <header className="mb-10">
-                                <div className="psj-label mb-3">{t.changelogUpdate}</div>
                                 <h1 className="psj-h1 mb-6" style={{ color: 'var(--psj-text-1)' }}>
                                     {entry.title}
                                 </h1>
                                 <div style={{ color: 'var(--psj-text-2)' }}>
                                     {entry.summary && (
                                         <div className="text-lg leading-relaxed mb-4 prose prose-sm sm:prose-base dark:prose-invert max-w-none psj-prose">
-                                            <Markdown options={{ wrapper: 'div' }}>
-                                                {entry.summary}
-                                            </Markdown>
+                                            <Markdown options={{ wrapper: 'div' }}>{entry.summary}</Markdown>
                                         </div>
                                     )}
-                                    <time
-                                        dateTime={entry.date}
-                                        className="text-sm font-mono uppercase tracking-wider"
-                                    >
+                                    <time dateTime={entry.date} className="text-sm font-mono uppercase tracking-wider">
                                         {new Date(entry.date).toLocaleDateString(dateLocale, {
                                             year: 'numeric',
                                             month: 'long',

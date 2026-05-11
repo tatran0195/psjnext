@@ -5,7 +5,8 @@ id: TableColumnInfoVector
 
 ## Description
 
-An instance of a TableColumnInfoVector class or _List of [TableColumnInfo](TableColumnInfo)_ specifying the methods of columns.
+An instance of a TableColumnInfoVector class or _List of [TableColumnInfo](TableColumnInfo)_ specifying the methods of
+columns.
 
 ## Input
 

@@ -481,20 +481,12 @@ export interface PSJAPIServer {
      * Resolve a single item for a given version and locale.
      * All group refs are expanded, deltas applied, translations merged.
      */
-    resolveItem: (
-        id: string,
-        version?: string,
-        locale?: string,
-    ) => Promise<ResolvedItem | undefined>;
+    resolveItem: (id: string, version?: string, locale?: string) => Promise<ResolvedItem | undefined>;
     /**
      * Resolve a single data-type for a given version and locale.
      * Deltas applied, translations merged.
      */
-    resolveDataType: (
-        id: string,
-        version?: string,
-        locale?: string,
-    ) => Promise<ResolvedDataType | undefined>;
+    resolveDataType: (id: string, version?: string, locale?: string) => Promise<ResolvedDataType | undefined>;
     /**
      * Return a {@link SdkVersions} value object derived from the manifest.
      *

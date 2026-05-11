@@ -14,8 +14,7 @@ export function Container(props: ComponentProps<'div'>) {
     const { collapsed } = slots.sidebar?.useSidebar?.() ?? {};
     const [previousCollapsed, setPreviousCollapsed] = useState(collapsed);
     const isCollapseChanged = previousCollapsed !== collapsed;
-    const pageCol =
-        'calc(var(--fd-layout-width,97rem) - var(--fd-sidebar-col) - var(--fd-toc-width))';
+    const pageCol = 'calc(var(--fd-layout-width,97rem) - var(--fd-sidebar-col) - var(--fd-toc-width))';
 
     // will only set data attribute for an instant
     useEffect(() => {

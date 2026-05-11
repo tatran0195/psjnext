@@ -130,13 +130,7 @@ export const Icons = {
         </svg>
     ),
     astro: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            {...props}
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 128 128"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" {...props} width="1.2em" height="1.2em" viewBox="0 0 128 128">
             <path
                 className="fill-current"
                 d="M81.504 9.465c.973 1.207 1.469 2.836 2.457 6.09l21.656 71.136a90 90 0 0 0-25.89-8.765L65.629 30.28a1.833 1.833 0 0 0-3.52.004L48.18 77.902a90.1 90.1 0 0 0-26.003 8.778l21.758-71.14c.996-3.25 1.492-4.876 2.464-6.083a8 8 0 0 1 3.243-2.398c1.433-.575 3.136-.575 6.535-.575H71.72c3.402 0 5.105 0 6.543.579a8 8 0 0 1 3.242 2.402Zm2.59 80.61c-3.57 3.054-10.696 5.136-18.903 5.136c-10.07 0-18.515-3.137-20.754-7.356c-.8 2.418-.98 5.184-.98 6.954c0 0-.527 8.675 5.508 14.71a5.67 5.67 0 0 1 5.672-5.671c5.37 0 5.367 4.683 5.363 8.488v.336c0 5.773 3.527 10.719 8.543 12.805a11.6 11.6 0 0 1-1.172-5.098c0-5.508 3.23-7.555 6.988-9.938c2.989-1.894 6.309-4 8.594-8.222a15.5 15.5 0 0 0 1.875-7.41a15.6 15.6 0 0 0-.734-4.735Zm0 0"
@@ -214,13 +208,7 @@ export const Icons = {
         </svg>
     ),
     reactRouter: () => (
-        <svg
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 412 474"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="1.2em" height="1.2em" viewBox="0 0 412 474" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -239,13 +227,7 @@ export const Icons = {
         </svg>
     ),
     elysia: () => (
-        <svg
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 512 512"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="1.2em" height="1.2em" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -294,32 +276,12 @@ export const Icons = {
             height="1.2em"
             viewBox="0 0 100 100"
         >
-            <mask
-                id="a"
-                style={{ maskType: 'alpha' }}
-                maskUnits="userSpaceOnUse"
-                x="0"
-                y="0"
-                width="100"
-                height="100"
-            >
+            <mask id="a" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
                 <circle cx="50" cy="50" r="50" className="fill-foreground" />
             </mask>
             <g mask="url(#a)">
-                <circle
-                    cx="11"
-                    cy="119"
-                    r="52"
-                    className="fill-muted-foreground stroke-foreground"
-                    strokeWidth="4"
-                />
-                <circle
-                    cx="10"
-                    cy="125"
-                    r="52"
-                    className="fill-muted-foreground stroke-foreground"
-                    strokeWidth="4"
-                />
+                <circle cx="11" cy="119" r="52" className="fill-muted-foreground stroke-foreground" strokeWidth="4" />
+                <circle cx="10" cy="125" r="52" className="fill-muted-foreground stroke-foreground" strokeWidth="4" />
                 <circle
                     cx="9"
                     cy="131"
@@ -327,24 +289,12 @@ export const Icons = {
                     className="fill-muted-foreground stroke-muted-foreground"
                     strokeWidth="4"
                 />
-                <circle
-                    cx="88"
-                    cy="119"
-                    r="52"
-                    className="fill-muted-foreground stroke-foreground"
-                    strokeWidth="4"
-                />
+                <circle cx="88" cy="119" r="52" className="fill-muted-foreground stroke-foreground" strokeWidth="4" />
                 <path
                     className="fill-foreground"
                     d="M89 35h2v5h-2zM83 34l2 1-1 4h-2zM77 31l2 1-3 4-2-1zM73 27l1 1-3 4-1-2zM70 23l1 1-4 3-1-2zM68 18v2l-4 1-1-2zM68 11l1 2-5 1-1-2zM69 6v2h-5V6z"
                 />
-                <circle
-                    cx="89"
-                    cy="125"
-                    r="52"
-                    className="fill-muted-foreground stroke-foreground"
-                    strokeWidth="4"
-                />
+                <circle cx="89" cy="125" r="52" className="fill-muted-foreground stroke-foreground" strokeWidth="4" />
                 <circle
                     cx="90"
                     cy="131"
@@ -363,14 +313,8 @@ export const Icons = {
                     d="M95 123c0 31-20 57-45 57S5 154 5 123c0-27 14-50 33-56l12-2c25 0 45 26 45 58Zm-45 47c22 0 39-22 39-50S72 70 50 70s-39 22-39 50 17 50 39 50Z"
                     className="fill-foreground"
                 />
-                <path
-                    d="M34 29c-4-8-11-5-14-4 2 3 5 4 9 4h5Z"
-                    className="fill-foreground stroke-muted-foreground"
-                />
-                <path
-                    d="M25 38c-1 6 0 14 2 18 5-7 7-13 7-18v-9c-5 1-7 5-9 9Z"
-                    className="fill-muted-foreground"
-                />
+                <path d="M34 29c-4-8-11-5-14-4 2 3 5 4 9 4h5Z" className="fill-foreground stroke-muted-foreground" />
+                <path d="M25 38c-1 6 0 14 2 18 5-7 7-13 7-18v-9c-5 1-7 5-9 9Z" className="fill-muted-foreground" />
                 <path
                     d="M34 29c-1 3-5 11-5 16m5-16c-5 1-7 5-9 9-1 6 0 14 2 18 5-7 7-13 7-18v-9Z"
                     className="stroke-muted-foreground"
@@ -380,14 +324,8 @@ export const Icons = {
                     className="fill-foreground stroke-muted-foreground"
                 />
                 <path d="M34 29h7l18 4c-3-6-9-14-21-7l-4 3Z" className="fill-foreground" />
-                <path
-                    d="M34 29c4-2 12-5 18-1m-18 1h7l18 4c-3-6-9-14-21-7l-4 3Z"
-                    className="stroke-muted-foreground"
-                />
-                <path
-                    d="M32 29a1189 1189 0 0 1-16 19c0-17 7-18 13-19h5a14 14 0 0 1-2 0Z"
-                    className="fill-foreground"
-                />
+                <path d="M34 29c4-2 12-5 18-1m-18 1h7l18 4c-3-6-9-14-21-7l-4 3Z" className="stroke-muted-foreground" />
+                <path d="M32 29a1189 1189 0 0 1-16 19c0-17 7-18 13-19h5a14 14 0 0 1-2 0Z" className="fill-foreground" />
                 <path
                     d="M34 29c-5 1-7 5-9 9l-9 10c0-17 7-18 13-19h5Zm0 0c-5 2-11 3-14 10"
                     className="stroke-muted-foreground"
@@ -408,13 +346,7 @@ export const Icons = {
         </svg>
     ),
     expo: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 32 32"
-            {...props}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 32 32" {...props}>
             <path
                 fill="currentColor"
                 d="M24.292 15.547a3.93 3.93 0 0 0 4.115-3.145a2.57 2.57 0 0 0-2.161-1.177c-2.272-.052-3.491 2.651-1.953 4.323zm-9.177-10.85l5.359-3.104L18.766.63l-7.391 4.281l.589.328l1.119.629l2.032-1.176zm6.046-3.39c.089.027.161.1.188.188l2.484 7.593a.285.285 0 0 1-.125.344a5.06 5.06 0 0 0-2.317 5.693a5.066 5.066 0 0 0 5.401 3.703a.3.3 0 0 1 .307.203l2.563 7.803a.3.3 0 0 1-.125.344l-7.859 4.771a.3.3 0 0 1-.131.036a.26.26 0 0 1-.203-.041l-2.765-1.797a.3.3 0 0 1-.109-.129l-5.396-12.896l-8.219 4.875c-.016.011-.037.021-.052.032a.3.3 0 0 1-.261-.021l-1.859-1.093a.283.283 0 0 1-.115-.381l7.953-15.749a.27.27 0 0 1 .135-.131L18.615.045a.29.29 0 0 1 .292-.005zm-8.322 5.1l-1.932-1.089l-7.693 15.229l1.396.823l6.631-9.015a.28.28 0 0 1 .271-.12a.29.29 0 0 1 .235.177l7.228 17.296l1.933 1.251l-8.063-24.552zm13.406 10.557c-2.256 0-3.787-2.292-2.923-4.376c.86-2.083 3.563-2.619 5.156-1.025c.595.593.928 1.396.928 2.235a3.16 3.16 0 0 1-3.161 3.167z"
@@ -487,13 +419,7 @@ export const Icons = {
                 <clipPath id="a">
                     <path fill="#fff" d="M0 0h146v40.001H0z" />
                 </clipPath>
-                <filter
-                    id="e"
-                    x={-10}
-                    y={3.427}
-                    colorInterpolationFilters="sRGB"
-                    filterUnits="userSpaceOnUse"
-                >
+                <filter id="e" x={-10} y={3.427} colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse">
                     <feFlood floodOpacity={0} result="BackgroundImageFix" />
                     <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                     <feGaussianBlur result="effect1_foregroundBlur_115_108" stdDeviation={5} />
@@ -502,13 +428,7 @@ export const Icons = {
         </svg>
     ),
     vk: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 20 20"
-            {...props}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 20 20" {...props}>
             <path
                 fill="currentColor"
                 fillRule="evenodd"
@@ -541,12 +461,7 @@ export const Icons = {
         </svg>
     ),
     XIcon: ({ className }: { className?: string }) => (
-        <svg
-            className={className}
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
         </svg>
     ),
@@ -588,13 +503,7 @@ export const Icons = {
         </svg>
     ),
     gettingStarted: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.4em"
-            height="1.4em"
-            viewBox="0 0 24 24"
-            {...props}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" viewBox="0 0 24 24" {...props}>
             <path
                 fill="currentColor"
                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m-1 14H9V8h2zm1 0V8l5 4z"
@@ -603,13 +512,7 @@ export const Icons = {
     ),
 
     introduction: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 256 256"
-            {...props}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 256 256" {...props}>
             <path
                 fill="currentColor"
                 d="M232 48h-64a32 32 0 0 0-32 32v87.73a8.17 8.17 0 0 1-7.47 8.25a8 8 0 0 1-8.53-8V80a32 32 0 0 0-32-32H24a8 8 0 0 0-8 8v144a8 8 0 0 0 8 8h72a24 24 0 0 1 24 23.94a7.9 7.9 0 0 0 5.12 7.55A8 8 0 0 0 136 232a24 24 0 0 1 24-24h72a8 8 0 0 0 8-8V56a8 8 0 0 0-8-8m-24 120h-39.73a8.17 8.17 0 0 1-8.25-7.47a8 8 0 0 1 8-8.53h39.73a8.17 8.17 0 0 1 8.25 7.47a8 8 0 0 1-8 8.53m0-32h-39.73a8.17 8.17 0 0 1-8.25-7.47a8 8 0 0 1 8-8.53h39.73a8.17 8.17 0 0 1 8.25 7.47a8 8 0 0 1-8 8.53m0-32h-39.73a8.17 8.17 0 0 1-8.27-7.47a8 8 0 0 1 8-8.53h39.73a8.17 8.17 0 0 1 8.27 7.47a8 8 0 0 1-8 8.53"
@@ -617,13 +520,7 @@ export const Icons = {
         </svg>
     ),
     comparison: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 24 24"
-            {...props}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" {...props}>
             <path
                 fill="currentColor"
                 fillRule="evenodd"
@@ -633,13 +530,7 @@ export const Icons = {
         </svg>
     ),
     installation: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 24 24"
-            {...props}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" {...props}>
             <path
                 fill="currentColor"
                 fillRule="evenodd"
@@ -649,13 +540,7 @@ export const Icons = {
         </svg>
     ),
     basicUsage: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 16 16"
-            {...props}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16" {...props}>
             <path
                 fill="currentColor"
                 d="M2 3.75C2 2.784 2.784 2 3.75 2h8.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25zM6 6.5a.5.5 0 0 0-1 0v4a.5.5 0 0 0 1 0zM8 8a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2A.5.5 0 0 0 8 8m3-2.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0z"
@@ -663,13 +548,7 @@ export const Icons = {
         </svg>
     ),
     api: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 24 24"
-            {...props}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" {...props}>
             <path
                 className="fill-current"
                 fillRule="evenodd"
@@ -679,13 +558,7 @@ export const Icons = {
         </svg>
     ),
     cli: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 256 256"
-            {...props}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 256 256" {...props}>
             <path
                 fill="currentColor"
                 d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16m-91 94.25l-40 32a8 8 0 1 1-10-12.5L107.19 128L75 102.25a8 8 0 1 1 10-12.5l40 32a8 8 0 0 1 0 12.5M176 168h-40a8 8 0 0 1 0-16h40a8 8 0 0 1 0 16"
@@ -693,13 +566,7 @@ export const Icons = {
         </svg>
     ),
     client: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 24 24"
-            {...props}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" {...props}>
             <path
                 fill="currentColor"
                 d="M4 8h4V4H4zm6 12h4v-4h-4zm-6 0h4v-4H4zm0-6h4v-4H4zm6 0h4v-4h-4zm6-10v4h4V4zm-6 4h4V4h-4zm6 6h4v-4h-4zm0 6h4v-4h-4z"
@@ -707,13 +574,7 @@ export const Icons = {
         </svg>
     ),
     cookies: (props?: SVGProps<SVGSVGElement>) => (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 16 16"
-            {...props}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16" {...props}>
             <path
                 fill="currentColor"
                 d="M8 1a7 7 0 1 0 6.926 5.978a.5.5 0 0 0-.781-.338a2 2 0 0 1-3.111-1.273a.5.5 0 0 0-.401-.4A2 2 0 0 1 9.36 1.854a.5.5 0 0 0-.338-.78A7 7 0 0 0 8 1m0 7.75a.75.75 0 1 1 0-1.5a.75.75 0 0 1 0 1.5m-2 2a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0M4.75 7a.75.75 0 1 1 0-1.5a.75.75 0 0 1 0 1.5m5.75 4.25a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0"

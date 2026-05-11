@@ -35,8 +35,7 @@ export interface PsjRenderContext {
 
 // ─── Default Shiki theme ──────────────────────────────────────────────────────
 
-export const DEFAULT_SHIKI_OPTIONS: Omit<CodeToHastOptionsCommon, 'lang'> &
-    CodeOptionsThemes<BundledTheme> = {
+export const DEFAULT_SHIKI_OPTIONS: Omit<CodeToHastOptionsCommon, 'lang'> & CodeOptionsThemes<BundledTheme> = {
     themes: { light: 'github-light', dark: 'github-dark' },
 };
 
@@ -163,10 +162,7 @@ export interface CreatePSJAPIPageOptions {
 // present. Components that receive options downstream use this type so the
 // compiler knows they are non-nullable.
 
-export interface ResolvedPSJAPIPageOptions extends Omit<
-    CreatePSJAPIPageOptions,
-    'shiki' | 'shikiOptions'
-> {
+export interface ResolvedPSJAPIPageOptions extends Omit<CreatePSJAPIPageOptions, 'shiki' | 'shikiOptions'> {
     shiki: ShikiFactory;
     shikiOptions: Omit<CodeToHastOptionsCommon, 'lang'> & CodeOptionsThemes<BundledTheme>;
 }

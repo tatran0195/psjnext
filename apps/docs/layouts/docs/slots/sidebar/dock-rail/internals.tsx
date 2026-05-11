@@ -69,17 +69,9 @@ interface IconWrapperProps {
 
 // const BRIGHT_COLORS = cn('[&_svg]:text-black! dark:[&_svg]:text-white!');
 
-export function IconWrapper({
-    peekMarginLeftPx,
-    hiddenInPeek,
-    active,
-    activeInPeek: _,
-    children,
-}: IconWrapperProps) {
+export function IconWrapper({ peekMarginLeftPx, hiddenInPeek, active, activeInPeek: _, children }: IconWrapperProps) {
     const style: React.CSSProperties =
-        peekMarginLeftPx !== null && peekMarginLeftPx !== 12
-            ? { marginLeft: peekMarginLeftPx }
-            : {};
+        peekMarginLeftPx !== null && peekMarginLeftPx !== 12 ? { marginLeft: peekMarginLeftPx } : {};
 
     return (
         <div
@@ -104,8 +96,7 @@ export function IconWrapper({
 
                 // highlight active icon on hover-group
                 // (active || activeInPeek) && BRIGHT_COLORS,
-                active &&
-                    'group-hover/container:[&_svg]:text-black! dark:group-hover/container:[&_svg]:text-white!',
+                active && 'group-hover/container:[&_svg]:text-black! dark:group-hover/container:[&_svg]:text-white!',
             )}
             style={style}
         >
@@ -194,11 +185,7 @@ export function DockRailRow({ item, meta, index, onItemClick }: DockRailRowProps
         <a
             key={item.href + item.text}
             href={item.href}
-            className={cn(
-                'group/row no-underline',
-                rowCn,
-                'hover:bg-[#eff0f3] dark:hover:bg-[#282828]',
-            )}
+            className={cn('group/row no-underline', rowCn, 'hover:bg-[#eff0f3] dark:hover:bg-[#282828]')}
             style={stackStyle}
             onClick={onItemClick ? () => onItemClick(item) : undefined}
             {...(item.external ? { target: '_blank', rel: 'nofollow noreferrer' } : {})}

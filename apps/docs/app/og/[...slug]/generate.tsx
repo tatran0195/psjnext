@@ -37,13 +37,7 @@ export function generate({ title, description }: GenerateProps) {
             <circle cx="90" cy="90" r="86" fill="url(#logo-iconGradient)" />
             <defs>
                 <filter id="logo-shadow" colorInterpolationFilters="sRGB">
-                    <feDropShadow
-                        dx="0"
-                        dy="0"
-                        stdDeviation="4"
-                        floodColor="white"
-                        floodOpacity="1"
-                    />
+                    <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="white" floodOpacity="1" />
                 </filter>
                 <linearGradient id="logo-iconGradient" gradientTransform="rotate(45)">
                     <stop offset="45%" stopColor="black" />

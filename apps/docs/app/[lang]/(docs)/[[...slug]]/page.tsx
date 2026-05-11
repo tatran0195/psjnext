@@ -15,13 +15,7 @@ import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-categor
 import { LinkPreview } from '@/components/mdx/link-preview';
 import { ParamHeader, ParamSection } from '@/components/mdx/param-badge';
 import { RibbonPath } from '@/components/mdx/ribbon-path';
-import {
-    DocsBody,
-    DocsDescription,
-    DocsPage,
-    DocsTitle,
-    PageLastUpdate,
-} from '@/layouts/docs/page';
+import { DocsBody, DocsDescription, DocsPage, DocsTitle, PageLastUpdate } from '@/layouts/docs/page';
 import { DocsPager } from '@/layouts/shared/docs-pager';
 import { API_VERSIONS } from '@/lib/api-versions';
 import { createMetadata, getPageImage } from '@/lib/metadata';
@@ -40,9 +34,7 @@ import { getSuggestions } from './suggestions';
 function resolveVersion(slug: string[]): { version: string; pageSlug: string[] } {
     const [maybeVersion, ...rest] = slug;
     const isVersionSegment = (API_VERSIONS as readonly string[]).includes(maybeVersion);
-    return isVersionSegment
-        ? { version: maybeVersion, pageSlug: rest }
-        : { version: API_VERSIONS[0], pageSlug: slug };
+    return isVersionSegment ? { version: maybeVersion, pageSlug: rest } : { version: API_VERSIONS[0], pageSlug: slug };
 }
 
 export default async function Page(props: {
@@ -57,13 +49,7 @@ export default async function Page(props: {
     let apiMdxComponents: Partial<Parameters<typeof getMDXComponents>[0]> | undefined;
     const page = source.getPage(slug, lang);
     if (!page)
-        return (
-            <NotFound
-                getSuggestions={async () =>
-                    params.slug ? getSuggestions(params.slug.join(' ')) : []
-                }
-            />
-        );
+        return <NotFound getSuggestions={async () => (params.slug ? getSuggestions(params.slug.join(' ')) : [])} />;
     if (slug[0] === 'api') {
         const { version } = resolveVersion(slug.slice(1));
         apiMdxComponents = {
@@ -81,9 +67,7 @@ export default async function Page(props: {
     const footerPrevious = neighbours.previous
         ? { name: neighbours.previous.name, url: neighbours.previous.url }
         : undefined;
-    const footerNext = neighbours.next
-        ? { name: neighbours.next.name, url: neighbours.next.url }
-        : undefined;
+    const footerNext = neighbours.next ? { name: neighbours.next.name, url: neighbours.next.url } : undefined;
     const markdownUrl = `${page.url}.mdx`;
 
     return (
@@ -100,9 +84,7 @@ export default async function Page(props: {
 
                 {ribbon && <RibbonPath ribbon={ribbon} shortcut={shortcut} variant="inline" />}
 
-                {page.data.description && (
-                    <DocsDescription className="mt-3">{page.data.description}</DocsDescription>
-                )}
+                {page.data.description && <DocsDescription className="mt-3">{page.data.description}</DocsDescription>}
             </div>
             <DocsBody>
                 <Mdx
@@ -126,9 +108,7 @@ export default async function Page(props: {
                         },
                         LinkPreview,
                         blockquote: Callout as unknown as FC<ComponentProps<'blockquote'>>,
-                        DocsCategory: ({ url }: { url?: string }) => (
-                            <DocsCategory url={url ?? page.url} lang={lang} />
-                        ),
+                        DocsCategory: ({ url }: { url?: string }) => <DocsCategory url={url ?? page.url} lang={lang} />,
                         DocsSectionOverview: ({ url }: { url?: string }) => (
                             <DocsSectionOverview url={url ?? page.url} lang={lang} />
                         ),

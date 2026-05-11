@@ -1,14 +1,14 @@
 # PSJ SDK Documentation Format — Specification v3.3
 
-**Specification version:** `3.3`
-**Format identifier:** `psj`
-**File extension:** `.yaml`
+**Specification version:** `3.3` **Format identifier:** `psj` **File extension:** `.yaml`
 
 ---
 
 ## Overview
 
-psj is the authoritative documentation format for the Jupiter CAE Desktop Platform SDK. It describes every callable item — macros, psj-commands, psj-utilities, and psj-gui methods — in a unified schema built for authoring at scale: thousands of items, multiple SDK versions, and multiple human languages.
+psj is the authoritative documentation format for the Jupiter CAE Desktop Platform SDK. It describes every callable item
+— macros, psj-commands, psj-utilities, and psj-gui methods — in a unified schema built for authoring at scale: thousands
+of items, multiple SDK versions, and multiple human languages.
 
 ### Design goals
 
@@ -165,9 +165,11 @@ psj-gui/
 - A locale sidecar contains only natural-language fields. Structural fields never appear in sidecars.
 - Each subfolder MUST contain a `meta.yaml`. The domain root MAY contain a `meta.yaml`.
 - An item `id` MUST equal its path relative to the domain root using `/` separators without file extension.
-- A data-type `id` MUST equal its path relative to `data-type/` using `/` separators without file extension (e.g. `pre/enum/DItemType`).
+- A data-type `id` MUST equal its path relative to `data-type/` using `/` separators without file extension (e.g.
+  `pre/enum/DItemType`).
 - `$ref:data-type/<id>` MUST use the full semantic-scope path (e.g. `$ref:data-type/pre/class/JPT_NASTRAN_ANALYSIS`).
-- `data-type` is a **reference library**, not a domain. It has no manifest entry, no `param_style`, and no renderer domain row.
+- `data-type` is a **reference library**, not a domain. It has no manifest entry, no `param_style`, and no renderer
+  domain row.
 
 ---
 
@@ -285,7 +287,8 @@ description: >
 
 ## 3. Data-type files — `data-type/<scope>/<category>/<id>.yaml`
 
-Data-type files document all types referenced via `$ref:data-type/<id>` in param and return declarations. They are **first-class documentation pages** rendered under `psjapi/data-type/` in Fumadocs, not hidden reference artifacts.
+Data-type files document all types referenced via `$ref:data-type/<id>` in param and return declarations. They are
+**first-class documentation pages** rendered under `psjapi/data-type/` in Fumadocs, not hidden reference artifacts.
 
 ### Scope folders
 
@@ -304,7 +307,8 @@ Data-type files document all types referenced via `$ref:data-type/<id>` in param
 | `enum/`     | `enumeration`    | Integer or string enumeration tables              |
 | `class/`    | `class`          | Constructor + fields types                        |
 
-Data-type files placed at the scope root (e.g. `data-type/pre/`) are index or overview pages with no category subfolder requirement.
+Data-type files placed at the scope root (e.g. `data-type/pre/`) are index or overview pages with no category subfolder
+requirement.
 
 ### 3a. Built-in types
 
@@ -316,8 +320,7 @@ id: built-in/python-built-in-types
 title: 'Python Built-in Types'
 category: built-in
 description: >
-    Standard Python scalar types available as parameter and return
-    types across all PSJ domains.
+    Standard Python scalar types available as parameter and return types across all PSJ domains.
 version_introduced: '5.0.0'
 values:
     - id: String
@@ -348,8 +351,7 @@ values:
     - id: Cursor
       label: Cursor
       description: >
-          Points to any SDK object in the Jupiter database.
-          Passed by reference; resolved at call time.
+          Points to any SDK object in the Jupiter database. Passed by reference; resolved at call time.
     - id: List
       label: List
       description: Ordered collection. Element type specified as List[T].
@@ -369,8 +371,8 @@ title: 'DItemType'
 category: enumeration
 namespace: 'JPT.DItemType'
 description: >
-    Enumeration representing the type of a DItem in Jupiter.
-    Use JPT.DItemType.<NAME> in code, or the integer ID where noted.
+    Enumeration representing the type of a DItem in Jupiter. Use JPT.DItemType.<NAME> in code, or the integer ID where
+    noted.
 version_introduced: '5.0.0'
 values:
     - id: 2
@@ -393,8 +395,7 @@ id: pre/enum/MaterialUnitType
 title: 'Material Unit Types'
 category: enumeration
 description: >
-    Index of all physical unit enumerations available via JPT.UnitType.
-    Each unit group is documented in its own file.
+    Index of all physical unit enumerations available via JPT.UnitType. Each unit group is documented in its own file.
 version_introduced: '5.0.0'
 see_also:
     - $ref: 'data-type/pre/enum/LengthUnit'
@@ -464,8 +465,8 @@ id: gui/class/PSJMessageBox
 title: 'PSJMessageBox'
 category: class
 description: >
-    Message box dialog class. Construct and configure the dialog,
-    then call show() to display it and retrieve the user's response.
+    Message box dialog class. Construct and configure the dialog, then call show() to display it and retrieve the user's
+    response.
 version_introduced: '5.0.0'
 constructor_syntax: 'PSJMessageBox()'
 
@@ -620,8 +621,7 @@ domain: psj-command
 namespace: Analysis.Nastran
 ribbon: 'Analysis > Nastran > LinearStatic'
 description: >
-    Export the Nastran BDF input file for Structure Linear Static
-    analysis (SOL 101).
+    Export the Nastran BDF input file for Structure Linear Static analysis (SOL 101).
 version_introduced: '5.0.0'
 stability: stable
 macro_link: Analysis/NastranJob
@@ -797,8 +797,8 @@ title: 'JPT.BeginDatabaseTransaction()'
 domain: psj-utility
 namespace: JPT
 description: >
-    Disable screen animation, screen update, and status bar updates
-    to improve Jupiter's performance during batch operations.
+    Disable screen animation, screen update, and status bar updates to improve Jupiter's performance during batch
+    operations.
 version_introduced: '5.0.0'
 stability: stable
 syntax: 'JPT.BeginDatabaseTransaction("transactionName")'
@@ -807,8 +807,7 @@ callouts:
     - id: must-end-transaction
       level: warn
       text: >
-          JPT.EndDatabaseTransaction() must be called at the end of
-          the process to return Jupiter to the normal state.
+          JPT.EndDatabaseTransaction() must be called at the end of the process to return Jupiter to the normal state.
 
 params:
     - name: transactionName
@@ -825,7 +824,8 @@ see_also:
 
 ### 5f. PSJ-GUI — class method
 
-Methods on composite class types live as full item files in the `psj-gui` domain. `class_ref` points back to the owning data-type and MUST NOT appear outside `psj-gui`.
+Methods on composite class types live as full item files in the `psj-gui` domain. `class_ref` points back to the owning
+data-type and MUST NOT appear outside `psj-gui`.
 
 ```yaml
 # psj-gui/msgbox/add_button.yaml
@@ -868,8 +868,7 @@ title: 'dlg.add_1delement_selector()'
 domain: psj-gui
 namespace: dlg
 description: >
-    Add a 1D element selector to the dialog, enabling the user to
-    select 1D elements and store the selection.
+    Add a 1D element selector to the dialog, enabling the user to select 1D elements and store the selection.
 version_introduced: '5.0.0'
 stability: stable
 syntax: 'dlg.add_1delement_selector(...)'
@@ -1073,8 +1072,7 @@ returns:
 callouts:
     must-end-transaction:
         text: >
-            処理の終了時にJPT.EndDatabaseTransaction()を呼び出して
-            Jupiterを通常の状態に戻す必要があります。
+            処理の終了時にJPT.EndDatabaseTransaction()を呼び出して Jupiterを通常の状態に戻す必要があります。
 
 examples:
     default-process:
@@ -1206,7 +1204,8 @@ Applies to the four callable item domains only. `data-type` is not a domain and 
 
 ## 10. Data-type renderer
 
-Data-type pages are rendered as first-class pages under `psjapi/data-type/` in Fumadocs. They are navigable, linkable, and expandable by users checking type definitions while reading item documentation.
+Data-type pages are rendered as first-class pages under `psjapi/data-type/` in Fumadocs. They are navigable, linkable,
+and expandable by users checking type definitions while reading item documentation.
 
 ### 10a. Output URL structure
 
@@ -1270,7 +1269,8 @@ psjapi/
 
 ### 10c. Inline type links in item pages
 
-When a param or return `type` contains a `$ref:data-type/<id>`, the renderer MUST emit an inline hyperlink to the corresponding data-type page. The link text is the type's `title`.
+When a param or return `type` contains a `$ref:data-type/<id>`, the renderer MUST emit an inline hyperlink to the
+corresponding data-type page. The link text is the type's `title`.
 
 ```text
 # Rendered param row example:
@@ -1280,7 +1280,9 @@ nastranAnalysis  |  JPT_NASTRAN_ANALYSIS ↗  |  No  |  JPT_NASTRAN_ANALYSIS()
 
 ### 10d. Fumadocs sidebar integration
 
-The `data-type/` tree is included in the Fumadocs sidebar under a top-level `Data Types` section, separate from the four domain sections. Each scope folder (`built-in/`, `pre/`, `post/`, `gui/`) becomes a collapsible sidebar group driven by its `meta.yaml`.
+The `data-type/` tree is included in the Fumadocs sidebar under a top-level `Data Types` section, separate from the four
+domain sections. Each scope folder (`built-in/`, `pre/`, `post/`, `gui/`) becomes a collapsible sidebar group driven by
+its `meta.yaml`.
 
 ```text
 Sidebar:
@@ -1627,7 +1629,8 @@ examples:
 | Untyped list  | `List`                                              | Only when element type is undocumented |
 | Vector        | `Vector`                                            | Fixed-length numeric tuple             |
 
-Renderer MUST emit an inline hyperlink to `psjapi/data-type/<id>` for every `$ref:data-type/<id>` occurrence in a param or return `type` field.
+Renderer MUST emit an inline hyperlink to `psjapi/data-type/<id>` for every `$ref:data-type/<id>` occurrence in a param
+or return `type` field.
 
 ---
 
@@ -1644,25 +1647,61 @@ Tooling MUST enforce these rules at build time and report them as errors.
 5. Each `domain.id` MUST be unique within the manifest domains list.
 6. `data-type` MUST NOT appear as a `domain.id`.
 
-**Identity & references** 7. Each item `id` MUST equal its path relative to the domain root using `/` separators without file extension. 8. Each data-type `id` MUST equal its path relative to `data-type/` using `/` separators without file extension. 9. The first path segment of a data-type `id` MUST be one of `built-in`, `pre`, `post`, `gui`. 10. Every `$group` reference MUST resolve to an existing `_groups/<id>.yaml`. 11. Every `$ref:data-type/<id>` MUST resolve to an existing data-type file whose `category` is consistent with the usage context. 12. Every `$ref: <domain>/<id>` in `see_also` or `methods` MUST resolve to an existing item file. 13. `macro_link` and `command_link` targets MUST resolve to existing item files. 14. `class_ref` MUST resolve to a data-type file with `category: class`. 15. Every `version_introduced` and `changes[].version` MUST match a manifest `versions[].id`.
+**Identity & references** 7. Each item `id` MUST equal its path relative to the domain root using `/` separators without
+file extension. 8. Each data-type `id` MUST equal its path relative to `data-type/` using `/` separators without file
+extension. 9. The first path segment of a data-type `id` MUST be one of `built-in`, `pre`, `post`, `gui`. 10. Every
+`$group` reference MUST resolve to an existing `_groups/<id>.yaml`. 11. Every `$ref:data-type/<id>` MUST resolve to an
+existing data-type file whose `category` is consistent with the usage context. 12. Every `$ref: <domain>/<id>` in
+`see_also` or `methods` MUST resolve to an existing item file. 13. `macro_link` and `command_link` targets MUST resolve
+to existing item files. 14. `class_ref` MUST resolve to a data-type file with `category: class`. 15. Every
+`version_introduced` and `changes[].version` MUST match a manifest `versions[].id`.
 
-**Folder & meta** 16. Every subfolder within a domain root and within `data-type/` MUST contain a `meta.yaml` with `kind: group_meta`. 17. If `order` is present in `meta.yaml`, ALL direct children MUST be listed — partial ordering is not allowed. 18. `order` entries MUST each resolve to an existing child file stem or subfolder name. 19. `meta.<locale>.yaml` locale tag MUST match a locale declared in the manifest. 20. The `group` field MUST NOT appear in any item or data-type file.
+**Folder & meta** 16. Every subfolder within a domain root and within `data-type/` MUST contain a `meta.yaml` with
+`kind: group_meta`. 17. If `order` is present in `meta.yaml`, ALL direct children MUST be listed — partial ordering is
+not allowed. 18. `order` entries MUST each resolve to an existing child file stem or subfolder name. 19.
+`meta.<locale>.yaml` locale tag MUST match a locale declared in the manifest. 20. The `group` field MUST NOT appear in
+any item or data-type file.
 
-**Data-type category placement** 21. `category: built-in` files MUST reside in a `built-in/` subfolder. 22. `category: enumeration` files MUST reside in an `enum/` subfolder. 23. `category: class` files MUST reside in a `class/` subfolder.
+**Data-type category placement** 21. `category: built-in` files MUST reside in a `built-in/` subfolder. 22.
+`category: enumeration` files MUST reside in an `enum/` subfolder. 23. `category: class` files MUST reside in a `class/`
+subfolder.
 
-**Data-type field constraints** 24. `category: built-in` or `category: enumeration` MUST include `values` and MUST NOT include `fields`, `constructor_syntax`, or `methods`. 25. `category: class` MUST NOT include `values`. MAY include `fields`, `constructor_syntax`, and `methods`. 26. `domain_scope` MUST NOT appear in any data-type file.
+**Data-type field constraints** 24. `category: built-in` or `category: enumeration` MUST include `values` and MUST NOT
+include `fields`, `constructor_syntax`, or `methods`. 25. `category: class` MUST NOT include `values`. MAY include
+`fields`, `constructor_syntax`, and `methods`. 26. `domain_scope` MUST NOT appear in any data-type file.
 
-**Item field constraints** 27. `class_ref` MUST NOT appear on items whose `domain` is not `psj-gui`. 28. `macro_link` MUST NOT appear on items whose `domain` is not `psj-command`. 29. `command_link` MUST NOT appear on items whose `domain` is not `macro`. 30. `ribbon` MUST NOT appear on items whose `domain` is not `psj-command`.
+**Item field constraints** 27. `class_ref` MUST NOT appear on items whose `domain` is not `psj-gui`. 28. `macro_link`
+MUST NOT appear on items whose `domain` is not `psj-command`. 29. `command_link` MUST NOT appear on items whose `domain`
+is not `macro`. 30. `ribbon` MUST NOT appear on items whose `domain` is not `psj-command`.
 
-**Group references** 31. `GroupRef.insert_after` MUST name a param that exists in the resolved group after `exclude` is applied. 32. `GroupRef.exclude` names MUST all exist in the referenced group. 33. `GroupRef.override` keys MUST all exist in the referenced group after `exclude` is applied.
+**Group references** 31. `GroupRef.insert_after` MUST name a param that exists in the resolved group after `exclude` is
+applied. 32. `GroupRef.exclude` names MUST all exist in the referenced group. 33. `GroupRef.override` keys MUST all
+exist in the referenced group after `exclude` is applied.
 
-**Delta versioning** 34. `VersionDelta.params` MUST NOT appear on data-type files. 35. `VersionDelta.values` MUST NOT appear on item files or `category: class` data-type files. 36. `VersionDelta.fields` MUST NOT appear on item files, `category: built-in`, or `category: enumeration` data-type files. 37. `VersionDelta.params.remove` names MUST exist in the effective param list at that version. 38. `VersionDelta.params.modify[].name` MUST exist in the effective param list at that version. 39. `VersionDelta.values.remove` ids MUST exist in the effective values list at that version. 40. `VersionDelta.values.modify[].id` MUST exist in the effective values list at that version. 41. `VersionDelta.fields.remove` names MUST exist in the effective fields list at that version. 42. `VersionDelta.fields.modify[].name` MUST exist in the effective fields list at that version.
+**Delta versioning** 34. `VersionDelta.params` MUST NOT appear on data-type files. 35. `VersionDelta.values` MUST NOT
+appear on item files or `category: class` data-type files. 36. `VersionDelta.fields` MUST NOT appear on item files,
+`category: built-in`, or `category: enumeration` data-type files. 37. `VersionDelta.params.remove` names MUST exist in
+the effective param list at that version. 38. `VersionDelta.params.modify[].name` MUST exist in the effective param list
+at that version. 39. `VersionDelta.values.remove` ids MUST exist in the effective values list at that version. 40.
+`VersionDelta.values.modify[].id` MUST exist in the effective values list at that version. 41.
+`VersionDelta.fields.remove` names MUST exist in the effective fields list at that version. 42.
+`VersionDelta.fields.modify[].name` MUST exist in the effective fields list at that version.
 
-**Sidecars** 43. Within a sidecar, `callouts` keys MUST match `id` values in the base file. 44. Within a sidecar, `examples` keys MUST match `id` values in the base file. 45. Within a sidecar, `values` keys MUST match `id` values in the base file `values` list. 46. Within a sidecar, `fields` keys MUST match `name` values in the base file `fields` list. 47. Sidecar `locale` MUST match a locale declared in the manifest.
+**Sidecars** 43. Within a sidecar, `callouts` keys MUST match `id` values in the base file. 44. Within a sidecar,
+`examples` keys MUST match `id` values in the base file. 45. Within a sidecar, `values` keys MUST match `id` values in
+the base file `values` list. 46. Within a sidecar, `fields` keys MUST match `name` values in the base file `fields`
+list. 47. Sidecar `locale` MUST match a locale declared in the manifest.
 
-**Params and values** 48. Positional param `position` values MUST be unique within an item. 49. Named param `name` values MUST be unique within the resolved param list of an item. 50. Each `EnumValue.id` MUST be unique within its `enum_values` list. 51. Each `DataTypeValue.id` MUST be unique within its `values` list. 52. Each `Field.name` MUST be unique within its `fields` list.
+**Params and values** 48. Positional param `position` values MUST be unique within an item. 49. Named param `name`
+values MUST be unique within the resolved param list of an item. 50. Each `EnumValue.id` MUST be unique within its
+`enum_values` list. 51. Each `DataTypeValue.id` MUST be unique within its `values` list. 52. Each `Field.name` MUST be
+unique within its `fields` list.
 
-**Field values** 53. `stability` MUST be one of `stable`, `experimental`, `deprecated`. If absent, treat as `stable`. 54. `Callout.level` MUST be one of `warn`, `info`, `danger`. 55. `Returns.kind` MUST be one of `typed`, `macro_code`, `void`. 56. `kind: typed` MUST include `type`. `kind: void` MUST NOT include `type` or `description`. `kind: macro_code` MUST NOT include `type` and MUST include a non-empty `codes` list. 57. `category` MUST be one of `built-in`, `enumeration`, `class`. 58. `methods` entries MUST use full `$ref` paths including domain prefix.
+**Field values** 53. `stability` MUST be one of `stable`, `experimental`, `deprecated`. If absent, treat as
+`stable`. 54. `Callout.level` MUST be one of `warn`, `info`, `danger`. 55. `Returns.kind` MUST be one of `typed`,
+`macro_code`, `void`. 56. `kind: typed` MUST include `type`. `kind: void` MUST NOT include `type` or `description`.
+`kind: macro_code` MUST NOT include `type` and MUST include a non-empty `codes` list. 57. `category` MUST be one of
+`built-in`, `enumeration`, `class`. 58. `methods` entries MUST use full `$ref` paths including domain prefix.
 
 ---
 
@@ -1674,12 +1713,13 @@ Tooling MUST enforce these rules at build time and report them as errors.
 - The `order` field drives the `pages` array in the emitted `meta.json`.
 - The `title` field resolved via `meta.<locale>.yaml` drives the folder display label.
 - The `folderStyle` configuration determines output shape:
-    - **`folder`**: Emits actual nested sub-directories.
-    - **`separator`**: Emits flattened logical groups using Fumadocs text separators.
+  - **`folder`**: Emits actual nested sub-directories.
+  - **`separator`**: Emits flattened logical groups using Fumadocs text separators.
 
 ### Data-type page generation
 
-The `psjapi/server` converter generates a Fumadocs page for every data-type file. Pages are placed under `psjapi/data-type/<scope>/` mirroring the source tree. The converter:
+The `psjapi/server` converter generates a Fumadocs page for every data-type file. Pages are placed under
+`psjapi/data-type/<scope>/` mirroring the source tree. The converter:
 
 1. Reads each `data-type/<scope>/<category>/<id>.yaml`.
 2. Resolves locale via the sidecar algorithm.
@@ -1689,4 +1729,5 @@ The `psjapi/server` converter generates a Fumadocs page for every data-type file
 
 ### Inline type link resolution
 
-For every param or return `type` containing `$ref:data-type/<id>`, the converter emits a hyperlink component pointing to `psjapi/data-type/<id>`. Broken `$ref` paths are build errors (Rule 11).
+For every param or return `type` containing `$ref:data-type/<id>`, the converter emits a hyperlink component pointing to
+`psjapi/data-type/<id>`. Broken `$ref` paths are build errors (Rule 11).

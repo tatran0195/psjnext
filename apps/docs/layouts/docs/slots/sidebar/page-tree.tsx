@@ -67,9 +67,7 @@ export function createPageTreeRenderer({
                 <SidebarFolder
                     id={nodeId?.toString()}
                     collapsible={node.collapsible}
-                    active={path.some(
-                        (p) => p === node || (p.type === node.type && p.name === node.name),
-                    )}
+                    active={path.some((p) => p === node || (p.type === node.type && p.name === node.name))}
                     defaultOpen={node.defaultOpen}
                 >
                     {node.index ? (
@@ -108,22 +106,16 @@ export function createPageTreeRenderer({
     /**
      * Render sidebar items from page tree
      */
-    return function SidebarPageTree(
-        components: Partial<SidebarPageTreeComponents> & { list?: PageTree.Node[] },
-    ) {
+    return function SidebarPageTree(components: Partial<SidebarPageTreeComponents> & { list?: PageTree.Node[] }) {
         const { Folder, Item, Separator, list } = components;
         const { root } = useTreeContext();
         const pathname = usePathname();
 
-        const rootId =
-            (root as PageTree.Folder).index?.url ?? (root as PageTree.Folder).name ?? 'root';
+        const rootId = (root as PageTree.Folder).index?.url ?? (root as PageTree.Folder).name ?? 'root';
 
         return (
             <RendererContext
-                value={useMemo(
-                    () => ({ Folder, Item, Separator, pathname }),
-                    [Folder, Item, Separator, pathname],
-                )}
+                value={useMemo(() => ({ Folder, Item, Separator, pathname }), [Folder, Item, Separator, pathname])}
             >
                 <Fragment key={rootId?.toString()}>{renderList(list ?? root.children)}</Fragment>
             </RendererContext>

@@ -5,7 +5,8 @@ id: post-time-step-info
 
 ## Description
 
-This is an instance of a PostTimeStepInfo class, represents Post Time, Post Step, Post Frequency information of various analyses in Jupiter.
+This is an instance of a PostTimeStepInfo class, represents Post Time, Post Step, Post Frequency information of various
+analyses in Jupiter.
 
 ## Properties
 

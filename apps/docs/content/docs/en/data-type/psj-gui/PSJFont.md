@@ -5,7 +5,8 @@ id: PSJFont
 
 ## Description
 
-An instance of a PSJFont class, represents attributes for a logical font, such as font size, font type (bold, italic), and effect (underline, strikeout).
+An instance of a PSJFont class, represents attributes for a logical font, such as font size, font type (bold, italic),
+and effect (underline, strikeout).
 
 ## Input
 

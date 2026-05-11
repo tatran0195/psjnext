@@ -58,8 +58,7 @@ export const SHARED_SHIKI_TRANSFORMERS = [
             node.properties['class'] =
                 'no-scrollbar min-w-0 overflow-x-auto px-4 py-3.5 outline-none has-[[data-highlighted-line]]:px-0 has-[[data-line-numbers]]:px-0 has-[[data-slot=tabs]]:p-0';
             // Use CSS variables that switch based on dark mode
-            node.properties['style'] =
-                'background-color: var(--shiki-light-bg); color: var(--shiki-light)';
+            node.properties['style'] = 'background-color: var(--shiki-light-bg); color: var(--shiki-light)';
         },
         code(node) {
             node.properties['data-line-numbers'] = '';

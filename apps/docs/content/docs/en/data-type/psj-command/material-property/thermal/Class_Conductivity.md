@@ -18,10 +18,10 @@ This is an instance of a Conductivity class, represents Conductivity characteris
 
 ## Conductivity Characteristic {#conductivity-characteristic}
 
-Either `KEY NAME` or `ID` can be used to define the material property.
-The ID of material property which was primarily used in functions can be referred to in the [Int Notation](../../material-types) column.
-However, in order to explicitly describe meaning of material properties, user can use the `KEY NAME` instead of specifying `ID`.
-For example: `CONDUCTIVITY` is equal to ID = 51.
+Either `KEY NAME` or `ID` can be used to define the material property. The ID of material property which was primarily
+used in functions can be referred to in the [Int Notation](../../material-types) column. However, in order to explicitly
+describe meaning of material properties, user can use the `KEY NAME` instead of specifying `ID`. For example:
+`CONDUCTIVITY` is equal to ID = 51.
 
 <details>
 

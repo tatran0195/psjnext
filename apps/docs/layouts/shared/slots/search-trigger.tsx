@@ -12,12 +12,7 @@ export interface SearchTriggerProps extends Omit<ComponentProps<'button'>, 'colo
     hideIfDisabled?: boolean;
 }
 
-export function SearchTrigger({
-    hideIfDisabled,
-    size = 'icon-sm',
-    color = 'ghost',
-    ...props
-}: SearchTriggerProps) {
+export function SearchTrigger({ hideIfDisabled, size = 'icon-sm', color = 'ghost', ...props }: SearchTriggerProps) {
     const { setOpenSearch, enabled } = useSearchContext();
     if (hideIfDisabled && !enabled) return null;
 

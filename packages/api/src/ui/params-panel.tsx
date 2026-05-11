@@ -24,9 +24,7 @@ export function ParamsPanel({ entries }: { entries: ParamEntry[] }) {
     const [search, setSearch] = useState('');
     const [activeFilter, setActiveFilter] = useState<FilterType>('all');
 
-    const deprecatedCount = entries.filter(
-        (e) => isDeprecated(e.param) && !isRemoved(e.param),
-    ).length;
+    const deprecatedCount = entries.filter((e) => isDeprecated(e.param) && !isRemoved(e.param)).length;
     const removedCount = entries.filter((e) => isRemoved(e.param)).length;
     // Total count for 'All' includes all valid (non-removed, non-deprecated) + deprecated params,
     // or you can just show all non-removed params. Let's make 'all' show everything except removed.
@@ -37,8 +35,7 @@ export function ParamsPanel({ entries }: { entries: ParamEntry[] }) {
         return entries.filter((e) => {
             // 1. Tag filters
             if (activeFilter === 'all' && isRemoved(e.param)) return false;
-            if (activeFilter === 'deprecated' && (!isDeprecated(e.param) || isRemoved(e.param)))
-                return false;
+            if (activeFilter === 'deprecated' && (!isDeprecated(e.param) || isRemoved(e.param))) return false;
             if (activeFilter === 'removed' && !isRemoved(e.param)) return false;
 
             // 2. Search filter

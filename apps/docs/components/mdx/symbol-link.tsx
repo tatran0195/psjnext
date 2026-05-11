@@ -17,10 +17,7 @@ import type { SymbolEntry } from '@/lib/symbol-resolver';
 
 // ── Category badge styles ─────────────────────────────────────────────────
 
-const CATEGORY_STYLES: Record<
-    SymbolEntry['category'],
-    { link: string; badge: string; label: string }
-> = {
+const CATEGORY_STYLES: Record<SymbolEntry['category'], { link: string; badge: string; label: string }> = {
     'parameter-type': {
         link: 'text-blue-700 dark:text-blue-400',
         badge: 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300',
@@ -114,18 +111,14 @@ export function SymbolLink({ name, href, description, category, children }: Prop
                         <span className="font-mono text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                             {name}
                         </span>
-                        <span
-                            className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${styles.badge}`}
-                        >
+                        <span className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${styles.badge}`}>
                             {styles.label}
                         </span>
                     </span>
 
                     {/* Description */}
                     {description && (
-                        <span className="mt-1 block text-xs text-neutral-600 dark:text-neutral-400">
-                            {description}
-                        </span>
+                        <span className="mt-1 block text-xs text-neutral-600 dark:text-neutral-400">{description}</span>
                     )}
                 </span>
             )}

@@ -60,10 +60,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
         // 3. Tutorials Section
         // Matches anything under tutorials or docs/tutorials
         if (href.includes('/tutorials')) {
-            return (
-                normalizedPath.startsWith('/tutorials') ||
-                normalizedPath.includes('/docs/tutorials')
-            );
+            return normalizedPath.startsWith('/tutorials') || normalizedPath.includes('/docs/tutorials');
         }
 
         // 4. API Reference Section
@@ -93,8 +90,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                             : 'color-mix(in oklch, var(--psj-surface-0) 92%, transparent)',
                     backdropFilter: scrolled || !transparent ? 'blur(16px)' : 'none',
                     WebkitBackdropFilter: scrolled || !transparent ? 'blur(16px)' : 'none',
-                    transition:
-                        'background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
+                    transition: 'background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
                 }}
             >
                 <div className="psj-container w-full flex items-center justify-between">
@@ -118,14 +114,10 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                         letterSpacing: 'var(--tracking-snug)',
                                     }}
                                     onMouseEnter={(e) => {
-                                        if (!active)
-                                            (e.currentTarget as HTMLElement).style.color =
-                                                'var(--psj-text-1)';
+                                        if (!active) (e.currentTarget as HTMLElement).style.color = 'var(--psj-text-1)';
                                     }}
                                     onMouseLeave={(e) => {
-                                        if (!active)
-                                            (e.currentTarget as HTMLElement).style.color =
-                                                'var(--psj-text-2)';
+                                        if (!active) (e.currentTarget as HTMLElement).style.color = 'var(--psj-text-2)';
                                     }}
                                 >
                                     {link.text}
@@ -170,14 +162,11 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                 transition: 'border-color 0.15s, background 0.15s',
                             }}
                             onMouseEnter={(e) => {
-                                (e.currentTarget as HTMLElement).style.borderColor =
-                                    'var(--psj-border-hover)';
-                                (e.currentTarget as HTMLElement).style.background =
-                                    'var(--psj-surface-1)';
+                                (e.currentTarget as HTMLElement).style.borderColor = 'var(--psj-border-hover)';
+                                (e.currentTarget as HTMLElement).style.background = 'var(--psj-surface-1)';
                             }}
                             onMouseLeave={(e) => {
-                                (e.currentTarget as HTMLElement).style.borderColor =
-                                    'var(--psj-border)';
+                                (e.currentTarget as HTMLElement).style.borderColor = 'var(--psj-border)';
                                 (e.currentTarget as HTMLElement).style.background = 'transparent';
                             }}
                         >
@@ -239,10 +228,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                 style={{ borderColor: 'var(--psj-border)' }}
                             >
                                 <TechnoStarLogo variant="inline" className="h-6 w-auto" />
-                                <button
-                                    onClick={() => setMobileOpen(false)}
-                                    style={{ color: 'var(--psj-text-2)' }}
-                                >
+                                <button onClick={() => setMobileOpen(false)} style={{ color: 'var(--psj-text-2)' }}>
                                     <X size={20} />
                                 </button>
                             </div>
@@ -256,12 +242,8 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                             href={link.url}
                                             className="flex items-center px-3 py-3 text-sm font-semibold transition-colors"
                                             style={{
-                                                color: active
-                                                    ? 'var(--psj-blue)'
-                                                    : 'var(--psj-text-2)',
-                                                background: active
-                                                    ? 'var(--psj-blue-subtle)'
-                                                    : 'transparent',
+                                                color: active ? 'var(--psj-blue)' : 'var(--psj-text-2)',
+                                                background: active ? 'var(--psj-blue-subtle)' : 'transparent',
                                                 borderLeft: active
                                                     ? '2px solid var(--psj-blue)'
                                                     : '2px solid transparent',
@@ -272,10 +254,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                     );
                                 })}
                             </div>
-                            <div
-                                className="px-4 pb-8 pt-4 border-t"
-                                style={{ borderColor: 'var(--psj-border)' }}
-                            >
+                            <div className="px-4 pb-8 pt-4 border-t" style={{ borderColor: 'var(--psj-border)' }}>
                                 <FullSearchTrigger className="w-full bg-transparent" />
                             </div>
                         </motion.nav>

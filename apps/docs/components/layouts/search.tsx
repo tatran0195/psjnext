@@ -97,8 +97,7 @@ export default function CustomSearchDialog(props: SharedProps) {
                     <div className="inline-flex items-center gap-2 text-fd-muted-foreground">
                         <ArrowRight className="size-4" />
                         <p>
-                            Jump to{' '}
-                            <span className="font-medium text-fd-foreground">{page.name}</span>
+                            Jump to <span className="font-medium text-fd-foreground">{page.name}</span>
                         </p>
                     </div>
                 ),
@@ -113,9 +112,7 @@ export default function CustomSearchDialog(props: SharedProps) {
             return [
                 ...(Array.isArray(data)
                     ? data
-                          .filter((item) =>
-                              matchesSearch(item, throttledSearch, behavior === 'exact'),
-                          )
+                          .filter((item) => matchesSearch(item, throttledSearch, behavior === 'exact'))
                           .sort((a, b) => {
                               const versionRegex = /^\d+\.\d+\.\d+$/;
                               const aVersion = versionRegex.exec(a.id);
@@ -133,12 +130,7 @@ export default function CustomSearchDialog(props: SharedProps) {
     }, [behavior, throttledSearch, query.data, pageTreeAction]);
 
     return (
-        <SearchDialog
-            search={search}
-            onSearchChange={setSearch}
-            isLoading={query.isLoading}
-            {...props}
-        >
+        <SearchDialog search={search} onSearchChange={setSearch} isLoading={query.isLoading} {...props}>
             <SearchDialogOverlay />
             <SearchDialogContent>
                 <SearchDialogHeader>
@@ -149,12 +141,7 @@ export default function CustomSearchDialog(props: SharedProps) {
                 <SearchDialogList items={searchData} />
                 <SearchDialogFooter className="flex flex-row flex-wrap gap-2 items-center">
                     <ListMenu items={TAGS} label="Version" selected={tag} setSelected={setTag} />
-                    <ListMenu
-                        items={BEHAVIORS}
-                        label="Behavior"
-                        selected={behavior}
-                        setSelected={setBehavior}
-                    />
+                    <ListMenu items={BEHAVIORS} label="Behavior" selected={behavior} setSelected={setBehavior} />
                 </SearchDialogFooter>
             </SearchDialogContent>
         </SearchDialog>

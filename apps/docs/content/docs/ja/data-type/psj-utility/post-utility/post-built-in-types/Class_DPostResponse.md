@@ -5,7 +5,8 @@ id: DPostResponse
 
 ## Description
 
-This is an instance of a DPostResponse class, represents a Post Frequency Response, Post Transient Response, Post Frequency Response (Solver), and Post Transient Response (Solver) inside Jupiter.
+This is an instance of a DPostResponse class, represents a Post Frequency Response, Post Transient Response, Post
+Frequency Response (Solver), and Post Transient Response (Solver) inside Jupiter.
 
 ## Properties
 

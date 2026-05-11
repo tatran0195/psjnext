@@ -213,21 +213,13 @@ interface IconWrapperProps {
     children: React.ReactNode;
 }
 
-function IconWrapper({
-    peekMarginLeftPx,
-    hiddenInPeek,
-    active,
-    activeInPeek,
-    children,
-}: IconWrapperProps) {
+function IconWrapper({ peekMarginLeftPx, hiddenInPeek, active, activeInPeek, children }: IconWrapperProps) {
     /**
      * Inline style carries only the margin-left stagger offset.
      * Opacity is kept as a class so group-hover can override it.
      */
     const style: React.CSSProperties =
-        peekMarginLeftPx !== null && peekMarginLeftPx !== 12
-            ? { marginLeft: peekMarginLeftPx }
-            : {};
+        peekMarginLeftPx !== null && peekMarginLeftPx !== 12 ? { marginLeft: peekMarginLeftPx } : {};
 
     return (
         <div
@@ -401,8 +393,7 @@ export function AsidePosts({
                  * at the default ml-3 position — it will slide in from there on expand.
                  * When peekSlot is assigned, the icon is offset by peekMarginLeft(slot).
                  */
-                const iconMarginLeftPx: number | null =
-                    peekSlot !== null ? peekMarginLeft(peekSlot) : null;
+                const iconMarginLeftPx: number | null = peekSlot !== null ? peekMarginLeft(peekSlot) : null;
 
                 const hiddenInPeek = peekSlot === null;
 
@@ -424,8 +415,7 @@ export function AsidePosts({
                                 'transition-[color,opacity] duration-150 ease-in-out',
                                 'opacity-0 group-hover/container:opacity-100',
                                 'group-hover/row:text-black dark:group-hover/row:text-white',
-                                item.active &&
-                                    'opacity-100! text-black! font-medium! dark:text-white!',
+                                item.active && 'opacity-100! text-black! font-medium! dark:text-white!',
                             )}
                         >
                             {item.text}
@@ -476,11 +466,7 @@ export function AsidePosts({
                     <a
                         key={item.href + item.text}
                         href={item.href}
-                        className={cn(
-                            'group/row no-underline',
-                            rowBase,
-                            'hover:bg-[#eff0f3] dark:hover:bg-[#282828]',
-                        )}
+                        className={cn('group/row no-underline', rowBase, 'hover:bg-[#eff0f3] dark:hover:bg-[#282828]')}
                         style={stackStyle}
                         onClick={onItemClick ? () => onItemClick(item) : undefined}
                         {...(item.external ? { target: '_blank', rel: 'nofollow noreferrer' } : {})}

@@ -1,14 +1,19 @@
 ---
 title: Advanced sample 2 - Set cell alignment and check input value data type
-description: The example demonstrates how a table set cell alignment and check if the value of input value is String/Integer/Double and trigger an event.
+description:
+    The example demonstrates how a table set cell alignment and check if the value of input value is
+    String/Integer/Double and trigger an event.
 ---
 
 ## 🎯 Introduction
 
-In this tutorial, you'll learn how a table set cell alignment and check if the value of input value is String/Integer/Double and trigger an event:
+In this tutorial, you'll learn how a table set cell alignment and check if the value of input value is
+String/Integer/Double and trigger an event:
 
-1. For column "String" and “Double”: Check if cell is empty or not, if it is empty, JPT will fill the cell with yellow color.
-2. For column “Integer”: Check if cell value is negative or not, if it is negative number, JPT will set color to text with red color.
+1. For column "String" and “Double”: Check if cell is empty or not, if it is empty, JPT will fill the cell with yellow
+   color.
+2. For column “Integer”: Check if cell value is negative or not, if it is negative number, JPT will set color to text
+   with red color.
 
 ## 📖 Tutorial
 

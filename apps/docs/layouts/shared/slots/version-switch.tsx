@@ -81,11 +81,7 @@ export function VersionSwitcher() {
                     </span>
                 )}
                 {/* Up/down chevron */}
-                <svg
-                    className="ml-auto size-4 shrink-0 text-foreground/40"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                >
+                <svg className="ml-auto size-4 shrink-0 text-foreground/40" viewBox="0 0 16 16" fill="none">
                     <path
                         d="M5 6.5L8 3.5L11 6.5"
                         stroke="currentColor"
@@ -126,9 +122,7 @@ export function VersionSwitcher() {
                                     }`}
                                 >
                                     <span className="size-4 shrink-0 flex items-center justify-center">
-                                        {isActive && (
-                                            <Check className="size-3.5 text-foreground/70" />
-                                        )}
+                                        {isActive && <Check className="size-3.5 text-foreground/70" />}
                                     </span>
                                     <span className="truncate">{version.label}</span>
                                     {version.badge && (

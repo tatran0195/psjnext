@@ -319,17 +319,13 @@ export const remarkVersionGateParams: Plugin<[VersionGateOptions?], Root> = (opt
                         k++;
                     }
 
-                    const hId =
-                        (headingNode.data as { hProperties?: { id?: string } })?.hProperties?.id ??
-                        '';
+                    const hId = (headingNode.data as { hProperties?: { id?: string } })?.hProperties?.id ?? '';
 
                     // If required, transform the inlineCode to an mdxJsxTextElement `<code>`
                     // so we can insert a red asterisk INSIDE it (which also puts it in the TOC).
                     const isRequired = meta.ranges.some((r) => r.required);
                     if (isRequired) {
-                        const codeIndex = headingNode.children.findIndex(
-                            (n) => n.type === 'inlineCode',
-                        );
+                        const codeIndex = headingNode.children.findIndex((n) => n.type === 'inlineCode');
                         if (codeIndex !== -1) {
                             const codeNode = headingNode.children[codeIndex];
                             const textValue = 'value' in codeNode ? codeNode.value : '';
@@ -386,8 +382,7 @@ export const remarkVersionGateParams: Plugin<[VersionGateOptions?], Root> = (opt
                 if (id && content) sharedHeadings.push({ id, content });
             } else {
                 const text = flattenNode(node as unknown as RootContent).trim();
-                if (text)
-                    sharedContents.push({ heading: sharedHeadings.at(-1)?.id, content: text });
+                if (text) sharedContents.push({ heading: sharedHeadings.at(-1)?.id, content: text });
             }
 
             slots.push({ kind: 'passthrough', node });

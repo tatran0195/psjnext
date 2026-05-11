@@ -30,10 +30,7 @@ export function CtaBand({
                             {subtitle}
                         </div>
                         <h2 className="psj-h2 text-balance mb-4 text-white">{title}</h2>
-                        <p
-                            className="text-sm leading-relaxed max-w-md"
-                            style={{ color: 'rgba(255,255,255,0.7)' }}
-                        >
+                        <p className="text-sm leading-relaxed max-w-md" style={{ color: 'rgba(255,255,255,0.7)' }}>
                             {description}
                         </p>
                     </div>

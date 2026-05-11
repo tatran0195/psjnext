@@ -2,24 +2,13 @@ import { PathUtils } from 'fumadocs-core/source';
 import * as path from 'node:path';
 
 import type { LocaleEntry, PSJAPIServer } from '../types';
-import type {
-    ItemOutput,
-    OutputEntry,
-    PageOutput,
-    PsjPagesBuilderConfig,
-} from '../utils/pages/builder';
+import type { ItemOutput, OutputEntry, PageOutput, PsjPagesBuilderConfig } from '../utils/pages/builder';
 
 import { fromServer } from '../utils/pages/builder';
 
 import type { I18nConfig } from 'fumadocs-core/i18n';
 import type { StructuredData } from 'fumadocs-core/mdx-plugins';
-import type {
-    LoaderPlugin,
-    MetaData,
-    PageData,
-    StaticSource,
-    VirtualFile,
-} from 'fumadocs-core/source';
+import type { LoaderPlugin, MetaData, PageData, StaticSource, VirtualFile } from 'fumadocs-core/source';
 import type { TOCItemType } from 'fumadocs-core/toc';
 
 // ─── Augment PageData ─────────────────────────────────────────────────────────
@@ -172,9 +161,7 @@ export async function psjSource(
 
     // Build a version-order index so we can compare version_introduced vs versionId.
     // Lower index = older version. We use this to skip items not yet introduced.
-    const versionOrder = new Map<string, number>(
-        sdk.manifest.versions.map((v, i) => [v.id, i] as [string, number]),
-    );
+    const versionOrder = new Map<string, number>(sdk.manifest.versions.map((v, i) => [v.id, i] as [string, number]));
 
     function isAvailableInVersion(entry: ItemOutput | PageOutput, versionId: string): boolean {
         // No version filtering when multiVersion is off
@@ -226,9 +213,7 @@ export async function psjSource(
                     }
 
                     if (options.baseUrl) {
-                        const base = options.baseUrl.startsWith('/')
-                            ? options.baseUrl.slice(1)
-                            : options.baseUrl;
+                        const base = options.baseUrl.startsWith('/') ? options.baseUrl.slice(1) : options.baseUrl;
                         filePath = `${base}/${filePath}`;
                     }
 
@@ -245,8 +230,7 @@ export async function psjSource(
                             _psj: psjMeta,
                             getAPIPageProps() {
                                 return {
-                                    itemKey:
-                                        entry.type === 'item' ? entry.item.key : entry.items[0].key,
+                                    itemKey: entry.type === 'item' ? entry.item.key : entry.items[0].key,
                                     version: versionId || undefined,
                                     locale: localeId || undefined,
                                 };
@@ -281,8 +265,7 @@ export async function psjSource(
                 for (const entry of entries) {
                     if (entry.type === 'group') {
                         // Pass group label down — only propagate if it's a sub-group of a domain
-                        const nextGroupLabel =
-                            parent && parent.type === 'group' ? entry.info.title : undefined;
+                        const nextGroupLabel = parent && parent.type === 'group' ? entry.info.title : undefined;
                         onEntries(entry.entries, entry, nextGroupLabel);
                     } else {
                         onEntry(entry as ItemOutput | PageOutput, groupLabel);
@@ -295,14 +278,11 @@ export async function psjSource(
             const pages: string[] = [];
 
             for (const entry of entries) {
-                const relativePath = PathUtils.slash(
-                    parent ? path.relative(parent.path, entry.path) : entry.path,
-                );
+                const relativePath = PathUtils.slash(parent ? path.relative(parent.path, entry.path) : entry.path);
 
                 if (entry.type === 'group') {
                     // Determine if this is a group sub-folder (parent is also a group)
-                    const nextGroupLabel =
-                        parent && parent.type === 'group' ? entry.info.title : undefined;
+                    const nextGroupLabel = parent && parent.type === 'group' ? entry.info.title : undefined;
                     onEntries(entry.entries, entry, nextGroupLabel);
                     if (folderStyle === 'folder') {
                         pages.push(relativePath);
@@ -327,9 +307,7 @@ export async function psjSource(
                             vp = path.join(versionId, vp);
                         }
                         if (options.baseUrl) {
-                            const base = options.baseUrl.startsWith('/')
-                                ? options.baseUrl.slice(1)
-                                : options.baseUrl;
+                            const base = options.baseUrl.startsWith('/') ? options.baseUrl.slice(1) : options.baseUrl;
                             vp = path.join(base, vp);
                         }
                         if (i18nParser === 'dir' && localeId) {
@@ -353,8 +331,9 @@ export async function psjSource(
                                 _psj:
                                     parent.type === 'group'
                                         ? {
-                                              domain: (parent as unknown as Record<string, unknown>)
-                                                  .domain as string | undefined,
+                                              domain: (parent as unknown as Record<string, unknown>).domain as
+                                                  | string
+                                                  | undefined,
                                               group: parent.info.title,
                                           }
                                         : {},

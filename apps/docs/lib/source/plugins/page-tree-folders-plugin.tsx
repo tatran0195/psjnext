@@ -51,14 +51,11 @@ function applyFolderStyles(node: Folder, metaFile: string | undefined) {
     // Derive color from metaFile if available, fallback to extracting from url
     let pathForColor = metaFile ? metaFile : undefined;
     const folderUrl =
-        (node as unknown as Record<string, unknown>).url ||
-        (node.index as unknown as Record<string, unknown>)?.url;
+        (node as unknown as Record<string, unknown>).url || (node.index as unknown as Record<string, unknown>)?.url;
 
     if (!pathForColor && typeof folderUrl === 'string') {
         const segments = folderUrl.split('/').filter(Boolean);
-        const section = segments.find((s: string) =>
-            ['api', 'guides', 'data-type', 'sdk'].includes(s),
-        );
+        const section = segments.find((s: string) => ['api', 'guides', 'data-type', 'sdk'].includes(s));
         if (section) pathForColor = section;
     }
 

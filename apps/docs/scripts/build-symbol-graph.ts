@@ -38,15 +38,7 @@ export interface SymbolEntry {
      * Symbol category -- lets the remark plugin apply different styling
      * or filtering per category.
      */
-    category:
-        | 'parameter-type'
-        | 'class'
-        | 'built-in'
-        | 'element'
-        | 'entity'
-        | 'material-key'
-        | 'unit-key'
-        | 'enum'; // Added enum category for auto-detected symbols
+    category: 'parameter-type' | 'class' | 'built-in' | 'element' | 'entity' | 'material-key' | 'unit-key' | 'enum'; // Added enum category for auto-detected symbols
     /**
      * Optional scope (usually page ID) for disambiguating symbols.
      * Scoped symbols are stored as "scope.name".
@@ -259,8 +251,7 @@ class GraphBuilder {
             .replace(/\.mdx?$/, '')
             .replace(/\\/g, '/');
 
-        const description =
-            extractDescription(text) || (title ? `${title} data type` : `${id} type`);
+        const description = extractDescription(text) || (title ? `${title} data type` : `${id} type`);
 
         this.register({
             name: id,
@@ -302,16 +293,13 @@ class GraphBuilder {
                     // 2. Starts with ELEMKIND_ or ELEMTYPE_
                     // 3. Is all uppercase with underscores (likely a constant) and length > 3
                     const isJPT = token.startsWith('JPT.');
-                    const isElement =
-                        token.startsWith('ELEMKIND_') || token.startsWith('ELEMTYPE_');
+                    const isElement = token.startsWith('ELEMKIND_') || token.startsWith('ELEMTYPE_');
                     const isConstant = /^[A-Z][A-Z0-9_]{3,}$/.test(token);
 
                     if (isJPT || isElement || isConstant) {
                         // Find description in adjacent columns
                         const possibleDesc =
-                            stripMarkdown(cells[i + 1] ?? '') ||
-                            stripMarkdown(cells[i - 1] ?? '') ||
-                            token;
+                            stripMarkdown(cells[i + 1] ?? '') || stripMarkdown(cells[i - 1] ?? '') || token;
 
                         this.register({
                             name: token,

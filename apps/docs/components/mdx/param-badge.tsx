@@ -36,9 +36,7 @@ export function ParamHeader({ children, ...rest }: ComponentProps<'h3'>) {
                     {children}
                 </span>
                 {type && (
-                    <span className="font-mono text-[13px] font-medium text-fd-muted-foreground/50 ml-1">
-                        {type}
-                    </span>
+                    <span className="font-mono text-[13px] font-medium text-fd-muted-foreground/50 ml-1">{type}</span>
                 )}
                 {required && (
                     <span className="text-[10px] font-bold text-red-600 dark:text-red-500 uppercase tracking-widest ml-1">
@@ -76,14 +74,11 @@ export function ParamSection({
     if (!param?.visible) return null;
 
     const isDeprecated =
-        (param.deprecated ? semverGte(currentVersion, param.deprecated) : false) ||
-        !!param.deprecatedMessage;
+        (param.deprecated ? semverGte(currentVersion, param.deprecated) : false) || !!param.deprecatedMessage;
 
     return (
         <ParamContext.Provider value={{ ...param, isDeprecated }}>
-            <div className="border-t border-fd-border/60 first:border-none first:pt-0">
-                {children}
-            </div>
+            <div className="border-t border-fd-border/60 first:border-none first:pt-0">{children}</div>
         </ParamContext.Provider>
     );
 }

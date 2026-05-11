@@ -20,4 +20,6 @@ This is an instance of a DFace class, represents a Face inside Jupiter.
 
 ### Notice
 
-[^(1)]: An asterisk symbol \* in attribute name means that attribute can be changed/assigned from the current to the new value.
+[^(1)]:
+    An asterisk symbol \* in attribute name means that attribute can be changed/assigned from the current to the new
+    value.

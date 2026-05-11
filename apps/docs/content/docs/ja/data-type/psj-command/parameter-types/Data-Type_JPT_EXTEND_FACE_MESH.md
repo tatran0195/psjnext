@@ -12,8 +12,8 @@ A data type used to control the mesh settings of extended face.
 ### `iLengthToFace`
 
 - An _Integer_ specifying the destination method.
-    - 0: Length
-    - 1: To Face
+  - 0: Length
+  - 1: To Face
 - The default value is 0.
 
 ### `dLengthToFace`
@@ -24,8 +24,8 @@ A data type used to control the mesh settings of extended face.
 ### `bUseDivision`
 
 - A _Boolean_ specifying whether to use the mesh division or mesh size method.
-    - _True_: Num of Divisions
-    - _False_: Mesh Size
+  - _True_: Num of Divisions
+  - _False_: Mesh Size
 - The default value is True.
 
 ### `iNumOfDivisions`
@@ -46,33 +46,38 @@ A data type used to control the mesh settings of extended face.
 ### `iElemType`
 
 - An _Integer_ specifying the element type.
-    - 0: Tri3
-    - 1: Quad4
+  - 0: Tri3
+  - 1: Quad4
 - The default value is 0.
 
 ### `dLength`
 
-- A _Double_ specifying the length value when [_iMetric_](./EXTEND_FACE_DIRECTION#imetric)=4, [_iMethod_](./EXTEND_FACE_DIRECTION#imethod)=4.
+- A _Double_ specifying the length value when [_iMetric_](./EXTEND_FACE_DIRECTION#imetric)=4,
+  [_iMethod_](./EXTEND_FACE_DIRECTION#imethod)=4.
 - The default value is 0.01.
 
 ### `dMeshSizeAxis`
 
-- A _Double_ specifying the mesh size (Axis) value when [_iMetric_](./EXTEND_FACE_DIRECTION#imetric)=4. [_iMethod_](./EXTEND_FACE_DIRECTION#imethod)=4.
+- A _Double_ specifying the mesh size (Axis) value when [_iMetric_](./EXTEND_FACE_DIRECTION#imetric)=4.
+  [_iMethod_](./EXTEND_FACE_DIRECTION#imethod)=4.
 - The default value is 0.01.
 
 ### `dArcRadius`
 
-- A _Double_ specifying the arc radius value when [_iMetric_](./EXTEND_FACE_DIRECTION#imetric)=4, [_iMethod_](./EXTEND_FACE_DIRECTION#imethod)=0.
+- A _Double_ specifying the arc radius value when [_iMetric_](./EXTEND_FACE_DIRECTION#imetric)=4,
+  [_iMethod_](./EXTEND_FACE_DIRECTION#imethod)=0.
 - The default value is 0.01.
 
 ### `dAngleOffset`
 
-- A _Double_ specifying the angle offset value when [_iMetric_](./EXTEND_FACE_DIRECTION#imetric)=4, [_iMethod_](./EXTEND_FACE_DIRECTION#imethod)=2.
+- A _Double_ specifying the angle offset value when [_iMetric_](./EXTEND_FACE_DIRECTION#imetric)=4,
+  [_iMethod_](./EXTEND_FACE_DIRECTION#imethod)=2.
 - The default value is 45.
 
 ### `dArcLength`
 
-- A _Double_ specifying the arc length value when [_iMetric_](./EXTEND_FACE_DIRECTION#imetric)=4,[_iMethod_](./EXTEND_FACE_DIRECTION#imethod)=3.
+- A _Double_ specifying the arc length value when
+  [_iMetric_](./EXTEND_FACE_DIRECTION#imetric)=4,[_iMethod_](./EXTEND_FACE_DIRECTION#imethod)=3.
 - The default value is 7.85E-3.
 
 ### `dArcNodesNum`

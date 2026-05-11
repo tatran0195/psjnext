@@ -22,10 +22,7 @@ export function SectionHeader({ label, title, subtitle, link, linkLabel }: Secti
                     {title}
                 </h2>
                 {subtitle && (
-                    <p
-                        className="mt-3 text-base leading-relaxed max-w-xl"
-                        style={{ color: 'var(--psj-text-2)' }}
-                    >
+                    <p className="mt-3 text-base leading-relaxed max-w-xl" style={{ color: 'var(--psj-text-2)' }}>
                         {subtitle}
                     </p>
                 )}
@@ -37,10 +34,7 @@ export function SectionHeader({ label, title, subtitle, link, linkLabel }: Secti
                     style={{ color: 'var(--psj-blue)' }}
                 >
                     {linkLabel}
-                    <ArrowRight
-                        size={15}
-                        className="group-hover:translate-x-1 transition-transform"
-                    />
+                    <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
             )}
         </FadeUp>

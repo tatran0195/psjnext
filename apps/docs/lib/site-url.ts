@@ -1,12 +1,7 @@
 const SITE_FALLBACK_PRODUCTION_URL = 'https://cossistant.com';
 const SITE_FALLBACK_DEVELOPMENT_URL = 'http://localhost:3000';
 
-const SITE_URL_ENV_KEYS = [
-    'PUBLIC_APP_URL',
-    'NEXT_PUBLIC_BASE_URL',
-    'NEXT_PUBLIC_APP_URL',
-    'NEXT_PUBLIC_URL',
-] as const;
+const SITE_URL_ENV_KEYS = ['PUBLIC_APP_URL', 'NEXT_PUBLIC_BASE_URL', 'NEXT_PUBLIC_APP_URL', 'NEXT_PUBLIC_URL'] as const;
 
 function normalizeBaseUrl(raw: string): string {
     const trimmed = raw.trim();
@@ -36,9 +31,7 @@ export function getSiteUrl(): URL {
     }
 
     const fallback =
-        process.env.NODE_ENV === 'development'
-            ? SITE_FALLBACK_DEVELOPMENT_URL
-            : SITE_FALLBACK_PRODUCTION_URL;
+        process.env.NODE_ENV === 'development' ? SITE_FALLBACK_DEVELOPMENT_URL : SITE_FALLBACK_PRODUCTION_URL;
 
     return new URL(fallback);
 }

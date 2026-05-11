@@ -57,9 +57,7 @@ export function TOCScrollArea({ ref, className, ...props }: ComponentProps<'div'
             )}
             {...props}
         >
-            <Primitive.ScrollProvider containerRef={viewRef}>
-                {props.children}
-            </Primitive.ScrollProvider>
+            <Primitive.ScrollProvider containerRef={viewRef}>{props.children}</Primitive.ScrollProvider>
         </div>
     );
 }
@@ -101,10 +99,7 @@ export function TocThumb({ containerRef, ...props }: TocThumbProps) {
             const styles = getComputedStyle(element);
 
             upper = Math.min(upper, element.offsetTop + parseFloat(styles.paddingTop));
-            lower = Math.max(
-                lower,
-                element.offsetTop + element.clientHeight - parseFloat(styles.paddingBottom),
-            );
+            lower = Math.max(lower, element.offsetTop + element.clientHeight - parseFloat(styles.paddingBottom));
         }
 
         return {
@@ -164,10 +159,7 @@ export function TOC({ container, header, footer }: TOCProps) {
             )}
         >
             {header}
-            <h3
-                id="toc-title"
-                className="inline-flex items-center gap-1.5 text-sm text-fd-muted-foreground"
-            >
+            <h3 id="toc-title" className="inline-flex items-center gap-1.5 text-sm text-fd-muted-foreground">
                 <Text className="size-4" />
                 <I18nLabel label="toc" />
             </h3>
@@ -317,9 +309,7 @@ function PageTOCPopoverTrigger({ className, ...props }: ComponentProps<'button'>
                     {items[selectedIdx]?.original.title}
                 </span>
             </span>
-            <ChevronDown
-                className={cn('shrink-0 transition-transform mx-0.5', open && 'rotate-180')}
-            />
+            <ChevronDown className={cn('shrink-0 transition-transform mx-0.5', open && 'rotate-180')} />
         </CollapsibleTrigger>
     );
 }

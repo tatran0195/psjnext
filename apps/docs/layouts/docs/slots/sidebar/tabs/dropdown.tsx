@@ -98,10 +98,7 @@ export function SidebarTabsDropdown({
                             </div>
 
                             <Check
-                                className={cn(
-                                    'shrink-0 ms-auto size-3.5 text-fd-primary',
-                                    !active && 'invisible',
-                                )}
+                                className={cn('shrink-0 ms-auto size-3.5 text-fd-primary', !active && 'invisible')}
                             />
                         </Link>
                     );

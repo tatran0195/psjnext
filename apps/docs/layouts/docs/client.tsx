@@ -6,13 +6,7 @@ import { useIsScrollTop } from 'fumadocs-ui/utils/use-is-scroll-top';
 import { type LinkItemType } from '@/layouts/shared';
 
 import { type DocsLayoutProps } from '.';
-import {
-    baseSlots,
-    type BaseSlots,
-    type BaseSlotsProps,
-    type LayoutTab,
-    useLinkItems,
-} from '../shared';
+import { baseSlots, type BaseSlots, type BaseSlotsProps, type LayoutTab, useLinkItems } from '../shared';
 import { Container } from './slots/container';
 import { Header } from './slots/header';
 import {

@@ -16,8 +16,7 @@ interface ChangelogItemProps {
 }
 
 export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
-    const t =
-        translations[lang as keyof typeof translations]?.changelog || translations.en.changelog;
+    const t = translations[lang as keyof typeof translations]?.changelog || translations.en.changelog;
     const dateLocale = lang === 'ja' ? 'ja-JP' : 'en-US';
 
     const handleCopyLink = (slug: string) => {
@@ -33,7 +32,8 @@ export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98 }}
-            className="grid md:grid-cols-[180px_1fr] items-start gap-x-12 gap-y-6 group"
+            className="grid md:grid-cols-[180px_1fr] items-start gap-x-12 gap-y-6 group scroll-mt-32"
+            id={entry.slug}
         >
             {/* Date & Version */}
             <div className="md:sticky md:top-36 md:self-start z-10">
@@ -91,9 +91,7 @@ export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
                                         key={i}
                                         className="text-sm leading-relaxed prose prose-sm dark:prose-invert max-w-none text-(--psj-text-2)"
                                     >
-                                        <Markdown options={{ forceInline: true, wrapper: 'span' }}>
-                                            {'• ' + h}
-                                        </Markdown>
+                                        <Markdown options={{ forceInline: true, wrapper: 'span' }}>{'• ' + h}</Markdown>
                                     </li>
                                 ))}
                                 {entry.highlights.length > 3 && (
@@ -106,18 +104,10 @@ export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
                     )}
 
                     <div className="psj-card overflow-hidden">
-                        <Link
-                            href={`/changelog/${entry.slug}`}
-                            className="block overflow-hidden relative group/image"
-                        >
+                        <Link href={`/changelog/${entry.slug}`} className="block overflow-hidden relative group/image">
                             {entry.image ? (
                                 <div className="w-full aspect-[2.5/1] sm:aspect-[3.5/1] transition-transform duration-700 group-hover:scale-105 relative overflow-hidden">
-                                    <NextImage
-                                        src={entry.image}
-                                        alt={entry.title}
-                                        fill
-                                        className="object-cover"
-                                    />
+                                    <NextImage src={entry.image} alt={entry.title} fill className="object-cover" />
                                 </div>
                             ) : (
                                 <div
@@ -162,10 +152,7 @@ export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
                             className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-(--psj-blue) group/link"
                         >
                             {t.readFullRelease}
-                            <ChevronRight
-                                size={14}
-                                className="transition-transform group-hover/link:translate-x-1"
-                            />
+                            <ChevronRight size={14} className="transition-transform group-hover/link:translate-x-1" />
                         </Link>
                     </div>
                 </div>

@@ -5,7 +5,8 @@ id: CursorStr
 
 ## Description
 
-Represents a single cursor or multiple cursors separated by commas. It can be used as instead of _Cursor_, or a content of _List of Cursor_
+Represents a single cursor or multiple cursors separated by commas. It can be used as instead of _Cursor_, or a content
+of _List of Cursor_
 
 ## Properties
 

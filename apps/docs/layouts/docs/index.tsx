@@ -52,13 +52,7 @@ export function DocsLayout({
     }, [tabs, tree]);
 
     return (
-        <LayoutBody
-            tree={tree}
-            tabs={resolvedTabs}
-            tabMode={tabMode}
-            sidebar={sidebarProps}
-            {...props}
-        >
+        <LayoutBody tree={tree} tabs={resolvedTabs} tabMode={tabMode} sidebar={sidebarProps} {...props}>
             {children}
         </LayoutBody>
     );

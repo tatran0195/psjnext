@@ -12,15 +12,15 @@ A data type uses to control parameters of bolt type A and B
 ### `iSeatType`
 
 - An _Int_ specifying Connection.
-    - 0 : Create RBE2
-    - 1 : Create RBE3
+  - 0 : Create RBE2
+  - 1 : Create RBE3
 - The default value is 0.
 
 ### `iSeatCase`
 
 - An _Int_ specifying seat setting.
-    - 0: By diameter.
-    - 1: By Layer.
+  - 0: By diameter.
+  - 1: By Layer.
 - The default value is 1.
 
 ### `dSeatDiameter`
@@ -36,8 +36,8 @@ A data type uses to control parameters of bolt type A and B
 ### `iShaftType`
 
 - An _Int_ specifying which shaft type is selected.
-    - 0 : Bar
-    - 1 : RBE2
+  - 0 : Bar
+  - 1 : RBE2
 - The default value is 1.
 
 ### `crBarProp`
@@ -48,24 +48,24 @@ A data type uses to control parameters of bolt type A and B
 ### `iBotConType`
 
 - An _Int_ specifying which connection is created if iCenterType is Spring.
-    - 0 : Create RBE2
-    - 1 : Create RBE3
+  - 0 : Create RBE2
+  - 1 : Create RBE3
 - The default value is 0.
 
 ### `iCenterType`
 
 - An _Int_ specifying center connection type.
-    - 0 : None
-    - 1 : Spring
-    - 2 : PreTension
+  - 0 : None
+  - 1 : Spring
+  - 2 : PreTension
 - The default value is 0.
 
 ### `iCenterPos`
 
 - An _Int_ specifying center position of Bottom Settings.
-    - 0 : Upper
-    - 1 : Middle
-    - 2 : Bottom
+  - 0 : Upper
+  - 1 : Middle
+  - 2 : Bottom
 - The default value is 0.
 
 ### `dlStiffness`

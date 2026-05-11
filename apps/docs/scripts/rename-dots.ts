@@ -47,9 +47,7 @@ async function main() {
                 continue;
             }
 
-            console.log(
-                `${dryRun ? '[DRY RUN] Would rename' : '📝 Renaming'}: ${fileName}  ->  ${newName}`,
-            );
+            console.log(`${dryRun ? '[DRY RUN] Would rename' : '📝 Renaming'}: ${fileName}  ->  ${newName}`);
 
             if (!dryRun) {
                 fs.renameSync(file, newPath);

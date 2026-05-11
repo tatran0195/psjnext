@@ -58,9 +58,7 @@ export async function getSuggestions(pathname: string): Promise<Suggestion[]> {
         const params = new URLSearchParams({ query });
 
         const baseUrl =
-            typeof window !== 'undefined'
-                ? ''
-                : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+            typeof window !== 'undefined' ? '' : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
         const res = await fetch(`${baseUrl}/api/search?${params}`, {
             next: {

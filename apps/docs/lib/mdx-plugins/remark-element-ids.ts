@@ -41,9 +41,7 @@ export function remarkElementIds(): Transformer<Root, Root> {
         visit(tree, 'mdxJsxFlowElement', (element) => {
             if (!element.name || !element.attributes) return;
 
-            const idAttr = element.attributes.find(
-                (attr) => attr.type === 'mdxJsxAttribute' && attr.name === 'id',
-            );
+            const idAttr = element.attributes.find((attr) => attr.type === 'mdxJsxAttribute' && attr.name === 'id');
 
             if (idAttr && typeof idAttr.value === 'string') {
                 (file.data.elementIds as string[]).push(idAttr.value);

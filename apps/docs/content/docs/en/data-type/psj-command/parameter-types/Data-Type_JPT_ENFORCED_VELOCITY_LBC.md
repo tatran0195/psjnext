@@ -11,7 +11,8 @@ A data type uses to control parameters of Enforced Velocity LBC
 
 ### `iDwDof`
 
-- An _Integer_ specifying the degree of freedom (dof). This value is calculated by using OR operator between the following options:
+- An _Integer_ specifying the degree of freedom (dof). This value is calculated by using OR operator between the
+  following options:
 - For example, if x, y, z translation must be constrained, then the iDwDof = 1 |2 |4 = 7.
 - The default value is 0.
 
@@ -53,8 +54,8 @@ A data type uses to control parameters of Enforced Velocity LBC
 ### `iEndArrowDir`
 
 - An _Integer_ specifying the drawing position of marker display.
-    - 0: Start at Node. The marker is displayed starting from a node.
-    - 1: End at Node. The marker is displayed ending at a node.
+  - 0: Start at Node. The marker is displayed starting from a node.
+  - 1: End at Node. The marker is displayed ending at a node.
 - The default value is 0.
 
 ### `crTable`

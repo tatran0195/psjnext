@@ -5,7 +5,8 @@ id: material-types
 
 This is an enumeration type represents type of Material in Jupiter.  
 The ID of material property which was primarily used in functions can be referred to in the Int Notation column.  
-However, in order to explicitly describe meaning of material properties, user can use the `KEY NAME` instead of specifying `ID`.  
+However, in order to explicitly describe meaning of material properties, user can use the `KEY NAME` instead of
+specifying `ID`.  
 For example: `YOUNGS_MODULUS` is equal to ID = 1.
 
 | Int Notation | Key Name                            | Description                                                       |

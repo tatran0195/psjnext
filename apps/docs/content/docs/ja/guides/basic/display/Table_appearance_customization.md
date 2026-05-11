@@ -3,8 +3,7 @@ title: Table Appearance Customization
 description: This example demonstrates how to customize the appearance of a table
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs"; import Tab from "@theme/Tab";
 
 ## 🎯 Introduction
 
@@ -59,8 +58,8 @@ if __name__=='__main__':
     main()
 ```
 
-</TabItem>
-<TabItem value="type2">
+</Tab>
+<Tab value="type2">
 
 ```psj
 # Encoding for Japanese
@@ -108,5 +107,5 @@ if __name__=='__main__':
     main()
 ```
 
-</TabItem>
+</Tab>
 </Tabs>

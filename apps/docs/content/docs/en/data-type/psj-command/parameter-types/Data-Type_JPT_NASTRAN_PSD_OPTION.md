@@ -47,36 +47,36 @@ A data type uses for curve plotter output request setting
 ### `iOutputType`
 
 - An _Integer_ specifying the output type.
-    - 0: PSDF.
-    - 1: Auto Correlation.
-    - 2: PSDF and Auto Correlation.
+  - 0: PSDF.
+  - 1: Auto Correlation.
+  - 2: PSDF and Auto Correlation.
 - The default value is 0.
 
 ### `iDispType`
 
 - An _Integer_ specifying the displacement output type.
-    - 0: XYPUNCH.
-    - 1: XYPLOT.
-    - 2: XYPUNCH & XYPLOT.
-    - 3: input nothing.
+  - 0: XYPUNCH.
+  - 1: XYPLOT.
+  - 2: XYPUNCH & XYPLOT.
+  - 3: input nothing.
 - The default value is 0.
 
 ### `iVelocityType`
 
 - An _Integer_ specifying the velocity output type.
-    - 0: XYPUNCH.
-    - 1: XYPLOT.
-    - 2: XYPUNCH & XYPLOT.
-    - 3: input nothing.
+  - 0: XYPUNCH.
+  - 1: XYPLOT.
+  - 2: XYPUNCH & XYPLOT.
+  - 3: input nothing.
 - The default value is 0.
 
 ### `iAcceType`
 
 - An _Integer_ specifying the acceleration output type.
-    - 0: XYPUNCH.
-    - 1: XYPLOT.
-    - 2: XYPUNCH & XYPLOT.
-    - 3: input nothing.
+  - 0: XYPUNCH.
+  - 1: XYPLOT.
+  - 2: XYPUNCH & XYPLOT.
+  - 3: input nothing.
 - The default value is 0.
 
 ### `dStartFreq`

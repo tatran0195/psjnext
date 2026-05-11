@@ -19,4 +19,6 @@ This is an instance of a DGroup class, represents a Group inside Jupiter.
 
 ### Notice
 
-[^(1)]: An asterisk symbol \* in attribute name means that attribute can be changed/assigned from the current to the new value.
+[^(1)]:
+    An asterisk symbol \* in attribute name means that attribute can be changed/assigned from the current to the new
+    value.

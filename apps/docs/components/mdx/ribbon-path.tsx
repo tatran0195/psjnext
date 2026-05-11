@@ -7,33 +7,14 @@ interface RibbonPathProps {
     className?: string;
 }
 
-export function RibbonPath({
-    ribbon,
-    shortcut,
-    variant = 'inline',
-    className = '',
-}: RibbonPathProps) {
+export function RibbonPath({ ribbon, shortcut, variant = 'inline', className = '' }: RibbonPathProps) {
     const segments = ribbon.split('>').map((s) => s.trim());
     const lastIndex = segments.length - 1;
 
     if (variant === 'ghost')
-        return (
-            <GhostVariant
-                segments={segments}
-                shortcut={shortcut}
-                className={className}
-                lastIndex={lastIndex}
-            />
-        );
+        return <GhostVariant segments={segments} shortcut={shortcut} className={className} lastIndex={lastIndex} />;
 
-    return (
-        <InlineVariant
-            segments={segments}
-            shortcut={shortcut}
-            className={className}
-            lastIndex={lastIndex}
-        />
-    );
+    return <InlineVariant segments={segments} shortcut={shortcut} className={className} lastIndex={lastIndex} />;
 }
 
 function InlineVariant({
@@ -49,21 +30,13 @@ function InlineVariant({
 }) {
     return (
         <div className={`not-prose flex items-center gap-2 flex-wrap ${className}`}>
-            <MousePointerClick
-                size={12}
-                style={{ color: 'var(--psj-text-3)' }}
-                className="shrink-0"
-            />
+            <MousePointerClick size={12} style={{ color: 'var(--psj-text-3)' }} className="shrink-0" />
             {segments.map((seg, i) => {
                 const isFinal = i === lastIndex;
                 return (
                     <span key={i} className="flex items-center gap-2">
                         {i > 0 && (
-                            <ChevronRight
-                                size={11}
-                                style={{ color: 'var(--psj-text-3)' }}
-                                className="shrink-0"
-                            />
+                            <ChevronRight size={11} style={{ color: 'var(--psj-text-3)' }} className="shrink-0" />
                         )}
                         <span
                             className={`text-xs ${isFinal ? 'font-medium' : ''}`}

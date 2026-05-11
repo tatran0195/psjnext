@@ -17,7 +17,8 @@ Design tokens extracted from CSSOM frequency analysis without LLM interpretation
 
 ## Typography
 
-Uses Noto Sans JP throughout for a uniform feel. Weight range spans regular, medium, bold. Sizes range from 12px to 16px.
+Uses Noto Sans JP throughout for a uniform feel. Weight range spans regular, medium, bold. Sizes range from 12px to
+16px.
 
 ## Elevation
 

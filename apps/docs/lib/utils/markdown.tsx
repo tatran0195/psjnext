@@ -22,8 +22,7 @@ export function getMarkdownOptions() {
         overrides: {
             h1: {
                 props: {
-                    className:
-                        'text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-6 mt-8 scroll-mt-20',
+                    className: 'text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-6 mt-8 scroll-mt-20',
                 },
             },
             h2: {
@@ -34,8 +33,7 @@ export function getMarkdownOptions() {
             },
             h3: {
                 props: {
-                    className:
-                        'text-xl md:text-2xl font-medium text-foreground mt-8 mb-3 scroll-mt-20',
+                    className: 'text-xl md:text-2xl font-medium text-foreground mt-8 mb-3 scroll-mt-20',
                 },
             },
             h4: {
@@ -70,8 +68,7 @@ export function getMarkdownOptions() {
             },
             code: {
                 props: {
-                    className:
-                        'bg-muted text-foreground px-1.5 py-0.5 rounded text-sm font-mono border border-border',
+                    className: 'bg-muted text-foreground px-1.5 py-0.5 rounded text-sm font-mono border border-border',
                 },
             },
             pre: {
@@ -85,8 +82,7 @@ export function getMarkdownOptions() {
             },
             a: {
                 props: {
-                    className:
-                        'text-primary hover:text-primary/80 underline underline-offset-4 transition-colors',
+                    className: 'text-primary hover:text-primary/80 underline underline-offset-4 transition-colors',
                 },
             },
             hr: {

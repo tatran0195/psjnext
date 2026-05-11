@@ -3,8 +3,7 @@ title: Table Appearance Customization
 description: This example demonstrates how to customize the appearance of a table
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs"; import TabItem from "@theme/TabItem";
 
 ## 🎯 Introduction
 

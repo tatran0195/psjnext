@@ -299,8 +299,7 @@ export function LinkSidebar() {
                                                 Content Unavailable
                                             </p>
                                             <p className="text-sm text-fd-muted-foreground mt-1 max-w-[200px]">
-                                                We couldn&apos;t retrieve the documentation for this
-                                                link.
+                                                We couldn&apos;t retrieve the documentation for this link.
                                             </p>
                                         </div>
                                     </div>
@@ -318,9 +317,7 @@ export function LinkSidebar() {
                                             [&_p]:text-sm [&_p]:leading-relaxed
                                         "
                                     >
-                                        <LinkPreviewProvider allowPreview={false}>
-                                            {data?.content}
-                                        </LinkPreviewProvider>
+                                        <LinkPreviewProvider allowPreview={false}>{data?.content}</LinkPreviewProvider>
                                     </div>
                                 )}
                             </div>

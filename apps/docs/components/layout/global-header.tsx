@@ -18,11 +18,7 @@ export interface GlobalHeaderProps {
     className?: string;
 }
 
-export function GlobalHeader({
-    transparent = false,
-    sidebarTrigger,
-    className,
-}: GlobalHeaderProps) {
+export function GlobalHeader({ transparent = false, sidebarTrigger, className }: GlobalHeaderProps) {
     const pathname = usePathname();
     const path = useTreePath();
     const { root } = useTreeContext();
@@ -97,14 +93,10 @@ export function GlobalHeader({
                                             href={item.url}
                                             className="transition-colors hover:opacity-80"
                                             style={{
-                                                color: isLast
-                                                    ? 'var(--psj-text-2)'
-                                                    : 'var(--psj-text-3)',
+                                                color: isLast ? 'var(--psj-text-2)' : 'var(--psj-text-3)',
                                                 fontWeight: isLast ? 500 : 400,
                                             }}
-                                            onMouseEnter={(e) =>
-                                                (e.currentTarget.style.color = 'var(--psj-text-1)')
-                                            }
+                                            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--psj-text-1)')}
                                             onMouseLeave={(e) =>
                                                 (e.currentTarget.style.color = isLast
                                                     ? 'var(--psj-text-2)'
@@ -116,9 +108,7 @@ export function GlobalHeader({
                                     ) : (
                                         <span
                                             style={{
-                                                color: isLast
-                                                    ? 'var(--psj-text-2)'
-                                                    : 'var(--psj-text-3)',
+                                                color: isLast ? 'var(--psj-text-2)' : 'var(--psj-text-3)',
                                                 fontWeight: isLast ? 500 : 400,
                                             }}
                                         >

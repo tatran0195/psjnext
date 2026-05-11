@@ -12,8 +12,8 @@ A data type is used to set up the result settings for displaying Max/Min value.
 ### `iGroupMethod`
 
 - An _Integer_ specifying the the group method.
-    - 0: For All
-    - 1: For Each
+  - 0: For All
+  - 1: For Each
 - The default value is 0.
 
 ### `iMaxColor`

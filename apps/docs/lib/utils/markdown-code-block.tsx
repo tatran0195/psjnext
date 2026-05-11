@@ -202,11 +202,7 @@ function CopyButton({ code }: { code: string }) {
 }
 
 // Determine diff line color based on leading +/- character
-function getDiffColor(
-    language: Language,
-    line: { content: string }[],
-    mode: 'light' | 'dark',
-): string | undefined {
+function getDiffColor(language: Language, line: { content: string }[], mode: 'light' | 'dark'): string | undefined {
     if (language !== 'diff') {
         return undefined;
     }
@@ -233,8 +229,7 @@ export const SyntaxHighlightedPre = ({
     let filename: string | undefined;
 
     if (children && typeof children === 'object' && 'props' in children) {
-        const childProps = (children as { props?: { children?: string; className?: string } })
-            .props;
+        const childProps = (children as { props?: { children?: string; className?: string } }).props;
         if (childProps?.children) {
             code = childProps.children.trim();
         }
@@ -248,17 +243,13 @@ export const SyntaxHighlightedPre = ({
     // If no code content, return a simple pre element
     if (!code) {
         return (
-            <pre
-                className="bg-muted p-4 rounded-none text-sm font-mono overflow-x-auto mb-4"
-                {...props}
-            >
+            <pre className="bg-muted p-4 rounded-none text-sm font-mono overflow-x-auto mb-4" {...props}>
                 {children}
             </pre>
         );
     }
 
-    const languageLabel =
-        typeof language === 'string' && language !== 'text' ? language : undefined;
+    const languageLabel = typeof language === 'string' && language !== 'text' ? language : undefined;
 
     return (
         <figure
@@ -309,8 +300,7 @@ export const SyntaxHighlightedPre = ({
                                 {tokens.map((line, i) => {
                                     const lineProps = getLineProps({ line });
                                     const diffColor = getDiffColor(language, line, 'light');
-                                    const lineClassName =
-                                        `${lineProps.className ?? ''} table-row`.trim();
+                                    const lineClassName = `${lineProps.className ?? ''} table-row`.trim();
                                     return (
                                         <span key={i} {...lineProps} className={lineClassName}>
                                             <span className="table-cell pr-4 text-muted-foreground select-none text-right opacity-50">
@@ -357,8 +347,7 @@ export const SyntaxHighlightedPre = ({
                                 {tokens.map((line, i) => {
                                     const lineProps = getLineProps({ line });
                                     const diffColor = getDiffColor(language, line, 'dark');
-                                    const lineClassName =
-                                        `${lineProps.className ?? ''} table-row`.trim();
+                                    const lineClassName = `${lineProps.className ?? ''} table-row`.trim();
                                     return (
                                         <span key={i} {...lineProps} className={lineClassName}>
                                             <span className="table-cell pr-4 text-muted-foreground select-none text-right opacity-50">

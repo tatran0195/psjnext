@@ -14,7 +14,8 @@ body:
     - type: textarea
       attributes:
           label: To Reproduce
-          description: A step-by-step description of how to reproduce the issue, or a link to the reproducible repository.
+          description:
+              A step-by-step description of how to reproduce the issue, or a link to the reproducible repository.
           placeholder: |
               1. Start the application in development (next dev)
               2. Click X

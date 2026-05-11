@@ -64,10 +64,7 @@ export const viewport: Viewport = {
     ],
 };
 
-export default async function RootLayout(props: {
-    children: ReactNode;
-    params: Promise<{ lang?: string }>;
-}) {
+export default async function RootLayout(props: { children: ReactNode; params: Promise<{ lang?: string }> }) {
     const params = await props.params;
 
     const lang = params.lang ?? 'en';

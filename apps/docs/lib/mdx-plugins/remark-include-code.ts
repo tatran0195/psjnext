@@ -68,10 +68,7 @@ function parseHlMarkers(code: string): ParseResult {
     });
 
     // Build Shiki spec string: ranges first, then singles (sorted)
-    const parts: string[] = [
-        ...ranges.map(([s, e]) => `${s}-${e}`),
-        ...singles.sort((a, b) => a - b).map(String),
-    ];
+    const parts: string[] = [...ranges.map(([s, e]) => `${s}-${e}`), ...singles.sort((a, b) => a - b).map(String)];
     const hlSpec = parts.length > 0 ? `{${parts.join(',')}}` : '';
 
     return { cleanCode: cleanLines.join('\n'), hlSpec };
@@ -121,11 +118,7 @@ function findMatchingPy(mdFilePath: string): string | null {
 
     // Locate the content/docs/cli segment
     const cliIdx = parts.findIndex(
-        (p, i) =>
-            p === 'content' &&
-            i + 2 < parts.length &&
-            parts[i + 1] === 'docs' &&
-            parts[i + 2] === 'cli',
+        (p, i) => p === 'content' && i + 2 < parts.length && parts[i + 1] === 'docs' && parts[i + 2] === 'cli',
     );
     if (cliIdx === -1) return null;
 

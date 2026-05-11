@@ -1,13 +1,5 @@
 'use client';
-import {
-    createContext,
-    type ReactNode,
-    type RefObject,
-    use,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+import { createContext, type ReactNode, type RefObject, use, useMemo, useRef, useState } from 'react';
 
 import { usePathname } from 'fumadocs-core/framework';
 import { useMediaQuery } from 'fumadocs-core/utils/use-media-query';
@@ -56,11 +48,7 @@ export const FolderContext = createContext<{
     collapsible: boolean;
 } | null>(null);
 
-export function SidebarProvider({
-    defaultOpenLevel = 0,
-    prefetch,
-    children,
-}: SidebarProviderProps) {
+export function SidebarProvider({ defaultOpenLevel = 0, prefetch, children }: SidebarProviderProps) {
     const closeOnRedirect = useRef(true);
     const [open, setOpen] = useState(false);
     const [collapsed, setCollapsed] = useState(false);

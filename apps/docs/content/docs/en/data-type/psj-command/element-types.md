@@ -3,9 +3,10 @@ title: Element Types
 id: element-types
 ---
 
-An enumeration that represents element types.
-The ID of `ElemKind` and `ElemType` which is primarily used in functions can be referred to in the Int Notation column.  
-However, in order to explicitly describe meaning of ID, user can use `JPT.ElemKind.ElemKind` or `JPT.ElemType.ElemType` instead of specifying ID.  
+An enumeration that represents element types. The ID of `ElemKind` and `ElemType` which is primarily used in functions
+can be referred to in the Int Notation column.  
+However, in order to explicitly describe meaning of ID, user can use `JPT.ElemKind.ElemKind` or `JPT.ElemType.ElemType`
+instead of specifying ID.  
 For example:
 
 - `JPT.ElemKind.ELEMKIND_2D` is equal to ID = 3.
@@ -37,9 +38,11 @@ For example:
 |                       |               |                                 | 22                    | `ELEMTYPE_MASS`      | Mass element                                              |
 |                       |               |                                 | 23                    | `ELEMTYPE_VIRTUAL`   | Virtual element (only ID)                                 |
 
-### Notice:
+### Notice
 
-[^(1)]: A special element type differs from processing element, used to describe connection element. For example: RBE, Plot, Mass,...
+[^(1)]:
+    A special element type differs from processing element, used to describe connection element. For example: RBE, Plot,
+    Mass,...
 
 [^(2)]: This is the axisymmetric semi-infinite heat transfer element for MARC software.
 

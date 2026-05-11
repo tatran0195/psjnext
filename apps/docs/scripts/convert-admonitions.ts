@@ -96,8 +96,7 @@ Examples:
     const targetPath = args[0];
     const dryRun = args.includes('--dry-run');
     const extIndex = args.indexOf('--ext');
-    const extensions =
-        extIndex !== -1 && args[extIndex + 1] ? args[extIndex + 1].split(',') : ['md', 'mdx'];
+    const extensions = extIndex !== -1 && args[extIndex + 1] ? args[extIndex + 1].split(',') : ['md', 'mdx'];
 
     if (!fs.existsSync(targetPath)) {
         console.error(`❌ Path not found: ${targetPath}`);

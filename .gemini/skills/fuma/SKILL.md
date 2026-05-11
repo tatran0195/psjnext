@@ -6,13 +6,15 @@ allowed-tools: Read, Write
 
 # Fumadocs Documentation Styling
 
-Comprehensive guide for creating beautiful, consistent documentation using Fumadocs with our established design patterns.
+Comprehensive guide for creating beautiful, consistent documentation using Fumadocs with our established design
+patterns.
 
 ## Purpose
 
 _Level 2 (Workflow)_
 
-Standardize documentation styling across all Fumadocs-based sites with reusable components, theme-aware designs, and interactive elements.
+Standardize documentation styling across all Fumadocs-based sites with reusable components, theme-aware designs, and
+interactive elements.
 
 ## Technology Stack
 
@@ -119,8 +121,7 @@ type IconName = 'rocket' | 'terminal' | 'book' | 'zap';
 const variants = {
     primary:
         'bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white shadow-lg shadow-indigo-500/25',
-    secondary:
-        'bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-white',
+    secondary: 'bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-white',
     outline:
         'border-2 border-fd-foreground/20 hover:border-fd-foreground/40 text-fd-foreground hover:bg-fd-foreground/5',
     bright: 'bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 text-white font-semibold shadow-lg shadow-purple-500/30',
@@ -217,11 +218,7 @@ const colorStyles = {
 export function PrimitiveCard({ icon, name, description, invocation, color }) {
     return (
         <div
-            className={cn(
-                'relative rounded-xl border p-4 transition-all hover:scale-[1.02]',
-                styles.bg,
-                styles.border,
-            )}
+            className={cn('relative rounded-xl border p-4 transition-all hover:scale-[1.02]', styles.bg, styles.border)}
         >
             {/* Icon + Name */}
             {/* Description */}

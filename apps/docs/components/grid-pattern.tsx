@@ -42,14 +42,7 @@ export function GridPattern({ width, height, x, y, squares, ...props }: GridPatt
     return (
         <svg aria-hidden="true" {...props}>
             <defs>
-                <pattern
-                    id={patternId}
-                    width={width}
-                    height={height}
-                    patternUnits="userSpaceOnUse"
-                    x={x}
-                    y={y}
-                >
+                <pattern id={patternId} width={width} height={height} patternUnits="userSpaceOnUse" x={x} y={y}>
                     <path d={`M.5 ${height}V.5H${width}`} fill="none" />
                 </pattern>
             </defs>

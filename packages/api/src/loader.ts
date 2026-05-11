@@ -163,11 +163,7 @@ async function loadSdk(rootDir: string): Promise<LoadedSdk> {
         } else if (basename.startsWith('meta.')) {
             const locale = basename.slice(5); // remove meta.
             const sidecar = await safeReadYaml<GroupMetaSidecar>(filePath);
-            if (sidecar)
-                groupMetaSidecars.set(
-                    `data-type/${dirName === '.' ? '' : dirName}.${locale}`,
-                    sidecar,
-                );
+            if (sidecar) groupMetaSidecars.set(`data-type/${dirName === '.' ? '' : dirName}.${locale}`, sidecar);
         } else {
             const localeMatch = basename.match(/^(.+)\.([a-z]{2})$/);
             if (localeMatch) {
@@ -200,18 +196,14 @@ async function loadSdk(rootDir: string): Promise<LoadedSdk> {
                 const meta = await safeReadYaml<GroupMetaFile>(filePath);
                 if (meta && meta.kind === 'group_meta') {
                     // key includes domain to avoid collision, e.g. macro/SubFolder
-                    groupMetas.set(
-                        `${domain}/${dirName === '.' ? '' : dirName}`.replace(/\/$/, ''),
-                        meta,
-                    );
+                    groupMetas.set(`${domain}/${dirName === '.' ? '' : dirName}`.replace(/\/$/, ''), meta);
                 }
             } else if (basename.startsWith('meta.')) {
                 const locale = basename.slice(5); // remove meta.
                 const sidecar = await safeReadYaml<GroupMetaSidecar>(filePath);
                 if (sidecar)
                     groupMetaSidecars.set(
-                        `${domain}/${dirName === '.' ? '' : dirName}`.replace(/\/$/, '') +
-                            `.${locale}`,
+                        `${domain}/${dirName === '.' ? '' : dirName}`.replace(/\/$/, '') + `.${locale}`,
                         sidecar,
                     );
             } else {
@@ -269,10 +261,7 @@ function expandGroup(groupId: string, groups: Map<string, ParamGroupFile>): Para
 }
 
 /** Expand param list (which may contain GroupRef entries) into a flat Param list */
-function expandParams(
-    raw: ParamOrGroupRef[],
-    groups: Map<string, ParamGroupFile>,
-): ParamWithGroup[] {
+function expandParams(raw: ParamOrGroupRef[], groups: Map<string, ParamGroupFile>): ParamWithGroup[] {
     const result: Param[] = [];
 
     for (const entry of raw) {
@@ -395,10 +384,7 @@ function applyDeltasToParams(
                 if (changes.required !== undefined) existing.required = changes.required;
                 if (changes.deprecated !== undefined) existing.deprecated = changes.deprecated;
                 if (changes.enum_values) {
-                    existing.enum_values = applyEnumPatch(
-                        existing.enum_values,
-                        changes.enum_values,
-                    );
+                    existing.enum_values = applyEnumPatch(existing.enum_values, changes.enum_values);
                 }
                 result[idx] = existing;
             }
@@ -408,11 +394,7 @@ function applyDeltasToParams(
     return result;
 }
 
-function applyDeltasToFields(
-    fields: Field[],
-    deltas: VersionDelta[],
-    targetVersions: string[],
-): Field[] {
+function applyDeltasToFields(fields: Field[], deltas: VersionDelta[], targetVersions: string[]): Field[] {
     let result: Field[] = [...fields];
 
     for (const delta of deltas) {
@@ -450,10 +432,7 @@ function applyDeltasToFields(
                 if (changes.remarks !== undefined) existing.remarks = changes.remarks;
                 if (changes.deprecated !== undefined) existing.deprecated = changes.deprecated;
                 if (changes.enum_values) {
-                    existing.enum_values = applyEnumPatch(
-                        existing.enum_values,
-                        changes.enum_values,
-                    );
+                    existing.enum_values = applyEnumPatch(existing.enum_values, changes.enum_values);
                 }
                 result[idx] = existing;
             }
@@ -462,11 +441,7 @@ function applyDeltasToFields(
     return result;
 }
 
-function applyDeltasToValues(
-    values: EnumValue[],
-    deltas: VersionDelta[],
-    targetVersions: string[],
-): EnumValue[] {
+function applyDeltasToValues(values: EnumValue[], deltas: VersionDelta[], targetVersions: string[]): EnumValue[] {
     let result: EnumValue[] = [...values];
     for (const delta of deltas) {
         if (!targetVersions.includes(delta.version)) continue;
@@ -509,11 +484,7 @@ function applyDeltasToValues(
 
 // ─── Locale resolution ────────────────────────────────────────────────────────
 
-function translateParam<T extends Param>(
-    param: T,
-    key: string,
-    translation: ParamTranslation | undefined,
-): T {
+function translateParam<T extends Param>(param: T, key: string, translation: ParamTranslation | undefined): T {
     if (!translation) return param;
     const result = { ...param };
     if (translation.display_name) result.display_name = translation.display_name;
@@ -564,12 +535,7 @@ function translateExamples(
 
 // ─── Item resolution ──────────────────────────────────────────────────────────
 
-export function resolveItem(
-    item: ItemFile,
-    sdk: LoadedSdk,
-    version: string,
-    locale: string,
-): ResolvedItem {
+export function resolveItem(item: ItemFile, sdk: LoadedSdk, version: string, locale: string): ResolvedItem {
     const { manifest, groups, itemSidecars, groupSidecars } = sdk;
 
     // 1. Expand group refs → flat params (as of version_introduced)
@@ -578,11 +544,7 @@ export function resolveItem(
     // 2. Apply deltas up to requested version
     if (item.changes && item.changes.length > 0) {
         const targetVersions = versionsUpTo(manifest, version);
-        params = applyDeltasToParams(
-            params as Param[],
-            item.changes,
-            targetVersions,
-        ) as ParamWithGroup[];
+        params = applyDeltasToParams(params as Param[], item.changes, targetVersions) as ParamWithGroup[];
     }
 
     // 3. Determine top-level item fields including delta item patches
@@ -628,9 +590,7 @@ export function resolveItem(
         }
 
         // Translate params that came from groups
-        const groupIds = new Set(
-            params.map((p) => (p as ParamWithGroup)._fromGroup).filter((p) => p !== undefined),
-        );
+        const groupIds = new Set(params.map((p) => (p as ParamWithGroup)._fromGroup).filter((p) => p !== undefined));
         for (const groupId of groupIds) {
             const groupSidecarKey = `${groupId}.${locale}`;
             const groupSidecar = groupSidecars.get(groupSidecarKey);
@@ -653,9 +613,7 @@ export function resolveItem(
                         if ((p as ParamWithGroup)._fromGroup !== groupId) return p;
                         // Only translate if not already translated by child group sidecar
                         const key = p.position !== undefined ? String(p.position) : (p.name ?? '');
-                        const childTranslation = (
-                            groupSidecar.params as Record<string, ParamTranslation>
-                        )?.[key];
+                        const childTranslation = (groupSidecar.params as Record<string, ParamTranslation>)?.[key];
                         if (childTranslation) return p; // already handled
                         const t = (parentSidecar.params as Record<string, ParamTranslation>)?.[key];
                         return translateParam(p, key, t);
@@ -677,9 +635,7 @@ export function resolveItem(
 
     // 6. Apply version-aware deprecated_in / removed_in
     //    Build a version-order index: lower index = older version.
-    const versionOrder = new Map<string, number>(
-        manifest.versions.map((v, i) => [v.id, i] as [string, number]),
-    );
+    const versionOrder = new Map<string, number>(manifest.versions.map((v, i) => [v.id, i] as [string, number]));
     const targetIdx = versionOrder.get(version) ?? manifest.versions.length - 1;
 
     const versionedParams = resolvedParams.map((p) => {
@@ -724,12 +680,7 @@ export function resolveItem(
     };
 }
 
-export function resolveDataType(
-    dt: DataTypeFile,
-    sdk: LoadedSdk,
-    version: string,
-    locale: string,
-): ResolvedDataType {
+export function resolveDataType(dt: DataTypeFile, sdk: LoadedSdk, version: string, locale: string): ResolvedDataType {
     const { manifest, dataTypeSidecars } = sdk;
 
     let values = dt.values ? [...dt.values] : undefined;
@@ -795,9 +746,7 @@ export function resolveDataType(
         }
     }
 
-    const versionOrder = new Map<string, number>(
-        manifest.versions.map((v, i) => [v.id, i] as [string, number]),
-    );
+    const versionOrder = new Map<string, number>(manifest.versions.map((v, i) => [v.id, i] as [string, number]));
     const targetIdx = versionOrder.get(version) ?? manifest.versions.length - 1;
 
     let resolvedFields: ResolvedField[] | undefined;
@@ -868,33 +817,23 @@ export function createPSJAPI(options: PSJAPIOptions): PSJAPIServer {
             };
         },
 
-        async resolveItem(
-            id: string,
-            version?: string,
-            locale?: string,
-        ): Promise<ResolvedItem | undefined> {
+        async resolveItem(id: string, version?: string, locale?: string): Promise<ResolvedItem | undefined> {
             const sdk = await getLoadedSdk();
             const item = sdk.items.get(id);
             if (!item) return undefined;
 
-            const resolvedVersion =
-                version ?? sdk.manifest.current_version ?? sdk.manifest.versions.at(-1)?.id ?? '0';
+            const resolvedVersion = version ?? sdk.manifest.current_version ?? sdk.manifest.versions.at(-1)?.id ?? '0';
             const resolvedLocale = locale ?? defaultLocale;
 
             return resolveItem(item, sdk, resolvedVersion, resolvedLocale);
         },
 
-        async resolveDataType(
-            id: string,
-            version?: string,
-            locale?: string,
-        ): Promise<ResolvedDataType | undefined> {
+        async resolveDataType(id: string, version?: string, locale?: string): Promise<ResolvedDataType | undefined> {
             const sdk = await getLoadedSdk();
             const dt = sdk.dataTypes.get(id);
             if (!dt) return undefined;
 
-            const resolvedVersion =
-                version ?? sdk.manifest.current_version ?? sdk.manifest.versions.at(-1)?.id ?? '0';
+            const resolvedVersion = version ?? sdk.manifest.current_version ?? sdk.manifest.versions.at(-1)?.id ?? '0';
             const resolvedLocale = locale ?? defaultLocale;
 
             return resolveDataType(dt, sdk, resolvedVersion, resolvedLocale);

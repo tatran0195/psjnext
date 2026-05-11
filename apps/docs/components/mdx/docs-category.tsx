@@ -84,12 +84,7 @@ export function DocsSectionOverview({
                 }
 
                 return (
-                    <Card
-                        key={i}
-                        title={title.replace('PSJ ', '')}
-                        href={resolveUrl(href)}
-                        description={description}
-                    />
+                    <Card key={i} title={title.replace('PSJ ', '')} href={resolveUrl(href)} description={description} />
                 );
             })}
         </Cards>

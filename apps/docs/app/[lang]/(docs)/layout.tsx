@@ -14,12 +14,7 @@ export default async function Layout(props: LayoutProps<'/[lang]'>) {
 
     return (
         <TreeContextProvider tree={tree}>
-            <ClientDocsLayout
-                tree={tree}
-                tabs={[]}
-                links={navLinks}
-                nav={{ mode: 'top', title: <PsjLogo /> }}
-            >
+            <ClientDocsLayout tree={tree} tabs={[]} links={navLinks} nav={{ mode: 'top', title: <PsjLogo /> }}>
                 {props.children}
             </ClientDocsLayout>
             <LinkSidebar />

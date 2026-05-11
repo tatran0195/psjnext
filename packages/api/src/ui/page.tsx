@@ -120,10 +120,7 @@ export function createPSJAPIPage(
                 ? options.renderHeading
                 : (props: HTMLAttributes<HTMLHeadingElement>, depth: number) => {
                       const id =
-                          props.id ??
-                          (typeof props.children === 'string'
-                              ? slugger.slug(props.children)
-                              : undefined);
+                          props.id ?? (typeof props.children === 'string' ? slugger.slug(props.children) : undefined);
                       return (
                           <Heading id={id} key={id} as={`h${depth}` as 'h1'} {...props}>
                               {props.children}
@@ -133,12 +130,7 @@ export function createPSJAPIPage(
         };
     }
 
-    return async function PSJAPIItem({
-        itemKey,
-        version,
-        locale,
-        headingLevel = 1,
-    }: PSJAPIItemProps) {
+    return async function PSJAPIItem({ itemKey, version, locale, headingLevel = 1 }: PSJAPIItemProps) {
         const item = await server.resolveItem(itemKey, version, locale);
 
         if (!item) {
@@ -154,8 +146,7 @@ export function createPSJAPIPage(
 
         // Determine active version / locale
         const sdk = await server.getProcessedSdk();
-        const activeVersion =
-            version ?? sdk.manifest.current_version ?? sdk.manifest.versions.at(-1)?.id ?? '0';
+        const activeVersion = version ?? sdk.manifest.current_version ?? sdk.manifest.versions.at(-1)?.id ?? '0';
         const activeLocale = locale ?? server.options.defaultLocale ?? 'en';
 
         return (

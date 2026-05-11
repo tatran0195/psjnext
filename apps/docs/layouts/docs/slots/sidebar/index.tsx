@@ -66,9 +66,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
         const result: NestedTab[] = [];
         for (const node of path) {
             if (node.type === 'folder' && (node as PageTree.Folder & { group: boolean }).group) {
-                const options = node.children.filter(
-                    (n) => n.type === 'folder',
-                ) as PageTree.Folder[];
+                const options = node.children.filter((n) => n.type === 'folder') as PageTree.Folder[];
                 if (options.length === 0) continue;
 
                 const nodeTabs = options.map((folder) => {
@@ -82,8 +80,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                 });
 
                 const active =
-                    nodeTabs.find((t) => path.includes(t.$folder as unknown as PageTree.Node)) ??
-                    nodeTabs[0];
+                    nodeTabs.find((t) => path.includes(t.$folder as unknown as PageTree.Node)) ?? nodeTabs[0];
                 result.push({ tabs: nodeTabs, active });
             }
         }
@@ -128,10 +125,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
         if (typeof banner === 'function') return createElement(banner, props);
 
         return (
-            <div
-                {...props}
-                className={cn('flex flex-col gap-2 p-0 pt-2 pb-0 empty:hidden', props.className)}
-            >
+            <div {...props} className={cn('flex flex-col gap-2 p-0 pt-2 pb-0 empty:hidden', props.className)}>
                 {props.children}
                 {banner}
             </div>
@@ -154,11 +148,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
             {menuItems
                 .filter((item) => item.type !== 'icon')
                 .map((item, i, arr) => (
-                    <SidebarLinkItem
-                        key={i}
-                        item={item}
-                        className={cn('lg:hidden', i === arr.length - 1 && 'mb-3')}
-                    />
+                    <SidebarLinkItem key={i} item={item} className={cn('lg:hidden', i === arr.length - 1 && 'mb-3')} />
                 ))}
             <SidebarPageTree {...components} list={filteredList} />
         </SidebarViewport>
@@ -182,8 +172,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                                 buttonVariants({
                                                     color: 'ghost',
                                                     size: 'icon-sm',
-                                                    className:
-                                                        'mt-px mb-auto text-fd-muted-foreground',
+                                                    className: 'mt-px mb-auto text-fd-muted-foreground',
                                                 }),
                                             )}
                                         >
@@ -200,10 +189,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                 />
                             )}
 
-                            <SearchComposition
-                                filterQuery={filterQuery}
-                                setFilterQuery={setFilterQuery}
-                            />
+                            <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
                             {/* <DockRail
                                 items={nestedTabs[1].tabs.map((i) => ({
                                     href: i.url,
@@ -268,16 +254,9 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                             </SidebarTrigger>
                             {tabs.length > 0 && <SidebarTabsDropdown options={tabs} />}
                             {nestedTabs.map((level, i) => (
-                                <SidebarTabsDropdown
-                                    key={i}
-                                    options={level.tabs}
-                                    activeItem={level.active}
-                                />
+                                <SidebarTabsDropdown key={i} options={level.tabs} activeItem={level.active} />
                             ))}
-                            <SearchComposition
-                                filterQuery={filterQuery}
-                                setFilterQuery={setFilterQuery}
-                            />
+                            <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
                         </>
                     ),
                 })}

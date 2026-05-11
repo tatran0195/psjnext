@@ -24,14 +24,8 @@ export interface PsjToTextOptions {
     includeDescription?: boolean;
 }
 
-function buildFrontmatter(
-    title: string,
-    description: string | undefined,
-    options: PsjToTextOptions,
-): string {
-    const base = options.frontmatter
-        ? options.frontmatter(title, description)
-        : { title, description, full: true };
+function buildFrontmatter(title: string, description: string | undefined, options: PsjToTextOptions): string {
+    const base = options.frontmatter ? options.frontmatter(title, description) : { title, description, full: true };
 
     const lines = ['---'];
     for (const [key, value] of Object.entries(base)) {

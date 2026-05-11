@@ -19,18 +19,8 @@ export function useLinkPreviewConfig() {
     return React.useContext(LinkPreviewContext);
 }
 
-export function LinkPreviewProvider({
-    children,
-    allowPreview,
-}: {
-    children: React.ReactNode;
-    allowPreview: boolean;
-}) {
-    return (
-        <LinkPreviewContext.Provider value={{ allowPreview }}>
-            {children}
-        </LinkPreviewContext.Provider>
-    );
+export function LinkPreviewProvider({ children, allowPreview }: { children: React.ReactNode; allowPreview: boolean }) {
+    return <LinkPreviewContext.Provider value={{ allowPreview }}>{children}</LinkPreviewContext.Provider>;
 }
 
 export interface LinkPreviewProps {
@@ -54,9 +44,7 @@ export function LinkPreview({
     const allowPreview = propAllowPreview ?? contextAllowPreview;
     const { open: openSidebar } = useLinkSidebar();
     const [data, setData] = React.useState<PreviewData | null>(
-        initialTitle
-            ? { title: initialTitle, description: initialDescription, content: null }
-            : null,
+        initialTitle ? { title: initialTitle, description: initialDescription, content: null } : null,
     );
     const [isLoading, setIsLoading] = React.useState(!initialTitle || !data?.content);
     const [error, setError] = React.useState(false);
@@ -153,14 +141,10 @@ export function LinkPreview({
                             {isLoading ? (
                                 <div className="h-5 w-1/2 animate-pulse rounded bg-muted" />
                             ) : (
-                                <p className="truncate text-sm font-semibold text-fd-foreground">
-                                    {data?.title}
-                                </p>
+                                <p className="truncate text-sm font-semibold text-fd-foreground">{data?.title}</p>
                             )}
                             {data?.description && !isLoading && (
-                                <p className="truncate text-xs text-fd-muted-foreground mt-0.5">
-                                    {data.description}
-                                </p>
+                                <p className="truncate text-xs text-fd-muted-foreground mt-0.5">{data.description}</p>
                             )}
                         </div>
 
@@ -193,9 +177,7 @@ export function LinkPreview({
                                             [&_p]:text-sm [&_p]:leading-relaxed
                                         "
                                     >
-                                        <LinkPreviewProvider allowPreview={false}>
-                                            {data?.content}
-                                        </LinkPreviewProvider>
+                                        <LinkPreviewProvider allowPreview={false}>{data?.content}</LinkPreviewProvider>
                                     </div>
                                 )}
                             </div>

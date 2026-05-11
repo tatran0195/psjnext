@@ -12,12 +12,7 @@ export function ClientDocsLayout({ tree, children, ...props }: DocsLayoutProps) 
     const isApiRoute = pathname.includes('/docs/api');
 
     return (
-        <DocsLayout
-            tree={tree}
-            tabMode={isApiRoute ? 'sidebar' : undefined}
-            nav={{ enabled: true }}
-            {...props}
-        >
+        <DocsLayout tree={tree} tabMode={isApiRoute ? 'sidebar' : undefined} nav={{ enabled: true }} {...props}>
             {children}
         </DocsLayout>
     );

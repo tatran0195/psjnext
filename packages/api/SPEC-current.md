@@ -1,12 +1,10 @@
 # psjapi — Jupiter CAE Desktop SDK Documentation Format
 
-**Format identifier:** `psjapi`
-**File extension:** `.yaml` (identified by `psjapi:` version key)
-**Current version:** `1.0`
+**Format identifier:** `psjapi` **File extension:** `.yaml` (identified by `psjapi:` version key) **Current version:**
+`1.0`
 
-psjapi is the documentation format for the Jupiter CAE Desktop Platform SDK.
-It describes every callable item in the SDK — macros, psj-commands, psj-utilities,
-and psj-gui methods — in a unified schema designed for authoring at scale:
+psjapi is the documentation format for the Jupiter CAE Desktop Platform SDK. It describes every callable item in the SDK
+— macros, psj-commands, psj-utilities, and psj-gui methods — in a unified schema designed for authoring at scale:
 thousands of items, multiple SDK versions, and multiple human languages.
 
 ---
@@ -46,10 +44,9 @@ psj-gui/
   <id>.ja.yaml
 ```
 
-The base file (`.yaml`) is always English — the source of truth for both structure
-and English text. A locale sidecar contains only the natural-language fields for
-that locale. Structural fields (`id`, `type`, `default`, `syntax`, `code`, …)
-never appear in sidecars.
+The base file (`.yaml`) is always English — the source of truth for both structure and English text. A locale sidecar
+contains only the natural-language fields for that locale. Structural fields (`id`, `type`, `default`, `syntax`, `code`,
+…) never appear in sidecars.
 
 ---
 
@@ -103,9 +100,8 @@ domains:
 
 ## 2. Param group files — `_groups/<id>.yaml`
 
-A param group is a named, ordered list of param definitions with no domain,
-syntax, or return value of its own. Any item file includes it by reference.
-Groups can extend other groups.
+A param group is a named, ordered list of param definitions with no domain, syntax, or return value of its own. Any item
+file includes it by reference. Groups can extend other groups.
 
 ### 2a. Group definition
 
@@ -334,9 +330,8 @@ params:
 
 ### 2b. Group locale sidecar
 
-The group sidecar translates params that belong to the group. Items referencing
-the group pick up these translations automatically — they are never duplicated
-into item-level sidecars.
+The group sidecar translates params that belong to the group. Items referencing the group pick up these translations
+automatically — they are never duplicated into item-level sidecars.
 
 ```yaml
 # _groups/advc-process-base.ja.yaml
@@ -470,8 +465,7 @@ params:
 
 ### 3a. Minimal item — pure group reference
 
-Seven Nastran commands share identical params. Each item file is four lines of
-identity plus one `$group` reference.
+Seven Nastran commands share identical params. Each item file is four lines of identity plus one `$group` reference.
 
 ```yaml
 # psj-command/Analysis-Nastran-LinearStatic.yaml
@@ -495,10 +489,9 @@ returns:
     description: The created Nastran job.
 ```
 
-The six other identical Nastran commands (`NormalModes`, `LinearBuckling`,
-`ModalFrequencyResponse`, `ModalTransientResponse`, `SteadyState`, `Transient`)
-follow exactly this pattern, differing only in `id`, `title`, `ribbon`,
-`description`, and their SOL number.
+The six other identical Nastran commands (`NormalModes`, `LinearBuckling`, `ModalFrequencyResponse`,
+`ModalTransientResponse`, `SteadyState`, `Transient`) follow exactly this pattern, differing only in `id`, `title`,
+`ribbon`, `description`, and their SOL number.
 
 ### 3b. Item that extends a group with excluded and reordered params
 
@@ -599,8 +592,8 @@ returns:
 
 ### 3c. Item with group insertion — ADVC Dynamic process
 
-`Dynamic` is identical to `Static` except two params are inserted mid-list.
-The `insert_after` + `insert` mechanism handles this without forking a new group.
+`Dynamic` is identical to `Static` except two params are inserted mid-list. The `insert_after` + `insert` mechanism
+handles this without forking a new group.
 
 ```yaml
 # psj-command/Analysis-ADVC-MakeProcess-Dynamic.yaml
@@ -676,8 +669,8 @@ returns:
 
 ### 3e. Macro — positional params
 
-Macros carry `position` instead of (or alongside) `name`. The C-style identifier
-is preserved exactly as written in the source.
+Macros carry `position` instead of (or alongside) `name`. The C-style identifier is preserved exactly as written in the
+source.
 
 ```yaml
 # macro/AdvcStaticProcess.yaml
@@ -854,16 +847,15 @@ domain: psj-utility
 group: performance
 namespace: JPT
 description: >
-    Disable screen animation, screen update, and status bar updates to improve
-    Jupiter's performance during batch operations.
+    Disable screen animation, screen update, and status bar updates to improve Jupiter's performance during batch
+    operations.
 version_introduced: '5.0.0'
 syntax: 'JPT.BeginDatabaseTransaction("transactionName")'
 
 callouts:
     - level: warn
       text: >
-          JPT.EndDatabaseTransaction() must be called at the end of the process
-          to return Jupiter to the normal state.
+          JPT.EndDatabaseTransaction() must be called at the end of the process to return Jupiter to the normal state.
 
 params:
     - name: transactionName
@@ -889,8 +881,7 @@ domain: psj-gui
 group: dlg-methods
 namespace: dlg
 description: >
-    Add a 1D element selector to the dialog, enabling the user to select
-    1D elements and store the selection.
+    Add a 1D element selector to the dialog, enabling the user to select 1D elements and store the selection.
 version_introduced: '5.0.0'
 syntax: 'dlg.add_1delement_selector(...)'
 
@@ -909,10 +900,9 @@ returns:
 
 ## 4. Delta versioning
 
-Item files carry a `changes` block describing only what differs between versions.
-Items with no `changes` block are identical across all versions since
-`version_introduced`. Most items in a backward-compatible SDK will have no
-`changes` block at all.
+Item files carry a `changes` block describing only what differs between versions. Items with no `changes` block are
+identical across all versions since `version_introduced`. Most items in a backward-compatible SDK will have no `changes`
+block at all.
 
 ### 4a. Removing params across a version
 
@@ -1009,8 +999,8 @@ changes:
 
 - The base `params` list represents the item as of `version_introduced`.
 - `changes` entries are applied in version order up to the requested version.
-- `remove` deletes a param from the resolved list. The definition stays in the
-  file above `changes` so older-version renders still have it.
+- `remove` deletes a param from the resolved list. The definition stays in the file above `changes` so older-version
+  renders still have it.
 - `add` inserts at the named position; omit `after` to append.
 - `modify` patches only the named fields; all other fields are unchanged.
 
@@ -1020,8 +1010,7 @@ changes:
 
 ### 5a. What belongs in a sidecar
 
-Sidecars contain **only natural-language fields**. Structural fields are never
-translated and never appear in sidecars.
+Sidecars contain **only natural-language fields**. Structural fields are never translated and never appear in sidecars.
 
 | Field                                    | Localizable?      |
 | ---------------------------------------- | ----------------- |
@@ -1048,8 +1037,7 @@ locale: ja
 id: Analysis-ADVC-MakeProcess-Static
 
 description: >
-    ADVC構造スタティックプロセスを作成します。
-    このプロセスは1回または複数回作成できます。
+    ADVC構造スタティックプロセスを作成します。 このプロセスは1回または複数回作成できます。
 
 # Only params that are NOT from a group are translated here.
 # Group params are translated in _groups/advc-process-struct.ja.yaml
@@ -1148,14 +1136,12 @@ locale: ja
 id: JPT-BeginDatabaseTransaction
 
 description: >
-    スクリーンアニメーション、画面更新、ステータスバーの更新を無効にして
-    Jupiterのパフォーマンスを向上させます。
+    スクリーンアニメーション、画面更新、ステータスバーの更新を無効にして Jupiterのパフォーマンスを向上させます。
 
 callouts:
     - level: warn
       text: >
-          処理の終了時にJPT.EndDatabaseTransaction()を呼び出して
-          Jupiterを通常の状態に戻す必要があります。
+          処理の終了時にJPT.EndDatabaseTransaction()を呼び出して Jupiterを通常の状態に戻す必要があります。
 
 params:
     transactionName:
@@ -1189,16 +1175,14 @@ function get_text(item_id, field_path, locale):
   4. Fallback: return base_file[field_path]   # EN text, no error
 ```
 
-Fallback is silent. Partial translations are valid and expected — an item where
-only some params are translated shows the translated text for those params and
-English for the rest. No build failure, no missing-key warnings.
+Fallback is silent. Partial translations are valid and expected — an item where only some params are translated shows
+the translated text for those params and English for the rest. No build failure, no missing-key warnings.
 
 ---
 
 ## 7. Renderer decisions driven by `domain`
 
-All four domains share the same schema. The `domain` field tells the renderer
-which display choices to apply:
+All four domains share the same schema. The `domain` field tells the renderer which display choices to apply:
 
 | Behaviour                           | `macro`           | `psj-command`   | `psj-utility` | `psj-gui`   |
 | ----------------------------------- | ----------------- | --------------- | ------------- | ----------- |

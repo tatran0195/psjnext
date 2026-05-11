@@ -12,25 +12,27 @@ A data type uses to control parameters of Nastran Settings
 ### `iPOST`
 
 - An _Integer_ specifying the output type for the post-processing results file.
-    - 0: Create XDB file.
-    - -1: Create OP2 file (for Patran).
-    - -2: Create OP2 file (for I-Deas).
+  - 0: Create XDB file.
+  - -1: Create OP2 file (for Patran).
+  - -2: Create OP2 file (for I-Deas).
 - The default value is -1.
 
 ### `iOGEOM`
 
 - An _Integer_ specifying Controls the output of geometry data blocks to the Nastran Binary Results File.
-    - 0: input not thing.
-    - 1: enable the output of geometry data blocks to the Nastran Binary Results File.
-    - 2: disable the output of geometry data blocks to the Nastran Binary Results File.
+  - 0: input not thing.
+  - 1: enable the output of geometry data blocks to the Nastran Binary Results File.
+  - 2: disable the output of geometry data blocks to the Nastran Binary Results File.
 - The default value is 0.
 
 ### `iAUTOSPC`
 
-- An _Integer_ specifying the Automatic single point constraint option. AUTOSPC specifying the action to take when singularities exist in the stiffness matrix Setting AUTOSPC to ON means that singularities will be constrained automatically.
-    - 0: input not thing.
-    - 1: turn on the automatic single point constraint option.
-    - 2: turn off the automatic single point constraint option.
+- An _Integer_ specifying the Automatic single point constraint option. AUTOSPC specifying the action to take when
+  singularities exist in the stiffness matrix Setting AUTOSPC to ON means that singularities will be constrained
+  automatically.
+  - 0: input not thing.
+  - 1: turn on the automatic single point constraint option.
+  - 2: turn off the automatic single point constraint option.
 - The default value is 0.
 
 ### `strGRDPNT`
@@ -40,7 +42,9 @@ A data type uses to control parameters of Nastran Settings
 
 ### `strWTMASS`
 
-- A _String_ specifying the global mass matrix scaling factor.The terms of the global mass matrix are multiplied by the value of WTMASS when they are generated. This parameter is used when material density is input in weight instead of mass units
+- A _String_ specifying the global mass matrix scaling factor.The terms of the global mass matrix are multiplied by the
+  value of WTMASS when they are generated. This parameter is used when material density is input in weight instead of
+  mass units
 - The default value is "".
 
 ### `strK6ROT`
@@ -56,42 +60,42 @@ A data type uses to control parameters of Nastran Settings
 ### `iBAILOUT`
 
 - An _Integer_ specifying the control of execution against the pseudo-singularity.
-    - 0: continue run.
-    - -1: end run.
+  - 0: continue run.
+  - -1: end run.
 - The default value is DFLT_INT.
 
 ### `iPRGPST`
 
 - An _Integer_ specifying the controls the printout of singularities.
-    - 0: input not thing.
-    - 1: turn on the controls the printout of singularities option.
-    - 2: turn off the controls the printout of singularities option.
+  - 0: input not thing.
+  - 1: turn on the controls the printout of singularities option.
+  - 2: turn off the controls the printout of singularities option.
 - The default value is 2.
 
 ### `iRESVEC`
 
 - An _Integer_ specifying the Residual Vector Selection.
-    - 0: input not thing.
-    - 1: Enables the calculation of residual vectors.
-    - 2: Disables the calculation of residual vectors.
+  - 0: input not thing.
+  - 1: Enables the calculation of residual vectors.
+  - 2: Disables the calculation of residual vectors.
 - The default value is 0.
 
 ### `dG`
 
-- A _Double_ specifying the uniform structural damping coefficient in the formulation of
-  dynamics problems. If PARAM,G is used in transient analysis PARAM,W3 must be greater than zero or PARAM,G will be ignored.
+- A _Double_ specifying the uniform structural damping coefficient in the formulation of dynamics problems. If PARAM,G
+  is used in transient analysis PARAM,W3 must be greater than zero or PARAM,G will be ignored.
 - The default value is DFLT_DBL.
 
 ### `dHFREQ`
 
-- A _Double_ specifying the upper frequency range for calculation of rigid body modes in
-  static analysis with inertia relief.
+- A _Double_ specifying the upper frequency range for calculation of rigid body modes in static analysis with inertia
+  relief.
 - The default value is DFLT_DBL.
 
 ### `dLFREQ`
 
-- A _Double_ specifying the lower frequency range for calculation of rigid body modes in
-  static analysis with inertia relief.
+- A _Double_ specifying the lower frequency range for calculation of rigid body modes in static analysis with inertia
+  relief.
 - The default value is DFLT_DBL.
 
 ### `dW3`
@@ -108,7 +112,8 @@ A data type uses to control parameters of Nastran Settings
 
 ### `iMEFFMASS`
 
-- An _Integer_ specifying The terms of the structural mass matrix are multiplied by the value of WTMASS when they are generated.
+- An _Integer_ specifying The terms of the structural mass matrix are multiplied by the value of WTMASS when they are
+  generated.
 - The default value is 0.
 
 ### `MEFFMASS_GRID_ID`
@@ -119,6 +124,6 @@ A data type uses to control parameters of Nastran Settings
 ### `iMLDS`
 
 - An _Integer_ specifying the MLDS(Multi-Level Dynamic Substructuring).
-    - 0: NO.
-    - 1: YES [Multi Level Dynamic Substructuring].
+  - 0: NO.
+  - 1: YES [Multi Level Dynamic Substructuring].
 - The default value is 1.

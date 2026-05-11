@@ -98,12 +98,7 @@ const CALLOUT_ICONS: Record<CalloutLevel, string> = {
 
 function CalloutBox({ level, children }: { level: CalloutLevel; children: ReactNode }) {
     return (
-        <div
-            className={cn(
-                'not-prose flex gap-3 rounded-md border-l-4 px-4 py-3 text-sm my-3',
-                CALLOUT_STYLES[level],
-            )}
-        >
+        <div className={cn('not-prose flex gap-3 rounded-md border-l-4 px-4 py-3 text-sm my-3', CALLOUT_STYLES[level])}>
             <span className="shrink-0 text-base leading-5 mt-0.5">{CALLOUT_ICONS[level]}</span>
             <div className="min-w-0">{children}</div>
         </div>
@@ -116,9 +111,7 @@ function InfoTag({ label, value }: { label: string; value: string }) {
     return (
         <div className="inline-flex items-baseline gap-1.5 rounded border border-fd-border bg-fd-secondary/60 px-2 py-1 text-xs max-w-full">
             <span className="font-semibold text-fd-foreground/70 shrink-0">{label}</span>
-            <code className="min-w-0 flex-1 text-fd-muted-foreground break-all font-mono">
-                {value}
-            </code>
+            <code className="min-w-0 flex-1 text-fd-muted-foreground break-all font-mono">{value}</code>
         </div>
     );
 }
@@ -200,9 +193,7 @@ function Property({
             </div>
 
             {/* description + meta */}
-            <div className="prose-no-margin pt-1.5 empty:hidden text-fd-muted-foreground/90 text-sm">
-                {children}
-            </div>
+            <div className="prose-no-margin pt-1.5 empty:hidden text-fd-muted-foreground/90 text-sm">{children}</div>
         </div>
     );
 }
@@ -224,9 +215,7 @@ function ParamProperty({
     const nameNode = (
         <>
             {isMacro && param.position !== undefined && (
-                <span className="text-fd-muted-foreground me-1 text-[0.65rem]">
-                    {param.position}.
-                </span>
+                <span className="text-fd-muted-foreground me-1 text-[0.65rem]">{param.position}.</span>
             )}
             {displayName}
         </>
@@ -247,29 +236,19 @@ function ParamProperty({
             {/* Inline meta tags */}
             <div className="flex flex-wrap gap-2 mt-2 not-prose empty:hidden">
                 {param.default !== undefined && <InfoTag label="Default" value={param.default} />}
-                {param.deprecated_in && (
-                    <InfoTag label="Deprecated in" value={param.deprecated_in} />
-                )}
+                {param.deprecated_in && <InfoTag label="Deprecated in" value={param.deprecated_in} />}
                 {param.removed_in && <InfoTag label="Removed in" value={param.removed_in} />}
             </div>
 
             {/* Enum chips */}
-            {param.enum_values && param.enum_values.length > 0 && (
-                <EnumChips values={param.enum_values} />
-            )}
+            {param.enum_values && param.enum_values.length > 0 && <EnumChips values={param.enum_values} />}
         </Property>
     );
 }
 
 // ─── Returns section ──────────────────────────────────────────────────────────
 
-function ReturnsSection({
-    returns,
-    resolveRef,
-}: {
-    returns: Returns;
-    resolveRef: (ref: string) => string;
-}) {
+function ReturnsSection({ returns, resolveRef }: { returns: Returns; resolveRef: (ref: string) => string }) {
     if (returns.kind === 'void') {
         return <p className="text-sm text-fd-muted-foreground italic">No return value.</p>;
     }
@@ -282,9 +261,7 @@ function ReturnsSection({
                     type={<TypeWithRefs type={returns.type ?? 'unknown'} resolveRef={resolveRef} />}
                     required={false}
                 >
-                    {returns.description && (
-                        <p className="text-fd-muted-foreground text-sm">{returns.description}</p>
-                    )}
+                    {returns.description && <p className="text-fd-muted-foreground text-sm">{returns.description}</p>}
                 </Property>
             </div>
         );
@@ -295,12 +272,7 @@ function ReturnsSection({
         return (
             <div className="rounded-lg border border-fd-border bg-fd-card overflow-hidden divide-y divide-fd-border/50">
                 {returns.codes.map((code) => (
-                    <Property
-                        key={code.value}
-                        name={<code>{code.value}</code>}
-                        type={null}
-                        required={false}
-                    >
+                    <Property key={code.value} name={<code>{code.value}</code>} type={null} required={false}>
                         <p className="text-fd-muted-foreground text-sm">{code.meaning}</p>
                     </Property>
                 ))}
@@ -313,13 +285,7 @@ function ReturnsSection({
 
 // ─── See Also ─────────────────────────────────────────────────────────────────
 
-function SeeAlsoSection({
-    refs,
-    resolveRef,
-}: {
-    refs: SeeAlsoRef[];
-    resolveRef: (ref: string) => string;
-}) {
+function SeeAlsoSection({ refs, resolveRef }: { refs: SeeAlsoRef[]; resolveRef: (ref: string) => string }) {
     if (refs.length === 0) return null;
     return (
         <div className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -343,11 +309,7 @@ function SeeAlsoSection({
                                 stroke="currentColor"
                                 strokeWidth={2}
                             >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M9 5l7 7-7 7"
-                                />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                             </svg>
                         </span>
                     </a>
@@ -446,13 +408,7 @@ function SectionDivider() {
 
 // ─── Examples panel (fumadocs-aligned, native codeblocks) ─────────────────────
 
-function ExamplesPanel({
-    examples,
-    renderedNodes,
-}: {
-    examples: Example[];
-    renderedNodes: ReactNode[];
-}) {
+function ExamplesPanel({ examples, renderedNodes }: { examples: Example[]; renderedNodes: ReactNode[] }) {
     if (examples.length === 0) {
         return (
             <div className="rounded-xl border border-fd-border bg-fd-card/50 px-4 py-8 text-sm text-fd-muted-foreground italic text-center">
@@ -466,9 +422,7 @@ function ExamplesPanel({
         return (
             <div className="rounded-xl overflow-hidden border border-fd-border bg-fd-card shadow-sm">
                 <div className="flex items-center justify-between gap-3 border-b border-fd-border bg-fd-secondary/30 px-4 py-2.5">
-                    <span className="text-xs font-semibold text-fd-foreground truncate">
-                        {ex.title ?? 'Example'}
-                    </span>
+                    <span className="text-xs font-semibold text-fd-foreground truncate">{ex.title ?? 'Example'}</span>
                 </div>
                 <div className="p-1">
                     {/* Native Fumadocs CodeBlock rendering handles the copy button and rounded corners naturally here! */}
@@ -668,15 +622,11 @@ export async function PSJAPIItemRenderer({
     ]);
 
     const paramDescNodes = await Promise.all(
-        item.params.map((p) =>
-            p.description ? renderMarkdown(p.description) : Promise.resolve(null),
-        ),
+        item.params.map((p) => (p.description ? renderMarkdown(p.description) : Promise.resolve(null))),
     );
 
     const exampleNodes = await Promise.all(
-        item.examples.map((ex) =>
-            renderCodeBlock(ex.language === 'psj' ? psjLanguage : ex.language, ex.code),
-        ),
+        item.examples.map((ex) => renderCodeBlock(ex.language === 'psj' ? psjLanguage : ex.language, ex.code)),
     );
 
     // ── Slots ─────────────────────────────────────────────────────────────────
@@ -684,25 +634,17 @@ export async function PSJAPIItemRenderer({
     const headerSlot = renderHeading(headingLevel, item.title, { id: item.id });
 
     const metaSlot = (
-        <ItemMeta
-            item={item}
-            showDomainBadge={showDomainBadge}
-            showRibbon={showRibbon}
-            resolveRef={resolveRef}
-        />
+        <ItemMeta item={item} showDomainBadge={showDomainBadge} showRibbon={showRibbon} resolveRef={resolveRef} />
     );
 
-    const descriptionSlot = descriptionNode ? (
-        <div className="prose-no-margin">{descriptionNode}</div>
-    ) : null;
+    const descriptionSlot = descriptionNode ? <div className="prose-no-margin">{descriptionNode}</div> : null;
 
     const calloutsSlot =
         item.callouts.length > 0 ? (
             <div className="flex flex-col gap-2">
                 {item.callouts.map((c, i) => {
                     const text = calloutNodes[i];
-                    if (renderCallout)
-                        return <Fragment key={i}>{renderCallout(c.level, text, ctx)}</Fragment>;
+                    if (renderCallout) return <Fragment key={i}>{renderCallout(c.level, text, ctx)}</Fragment>;
                     return (
                         <CalloutBox key={i} level={c.level}>
                             {text}
@@ -766,9 +708,7 @@ export async function PSJAPIItemRenderer({
             </div>
         ) : null;
 
-    const examplesPanelSlot = (
-        <ExamplesPanel examples={item.examples} renderedNodes={exampleNodes} />
-    );
+    const examplesPanelSlot = <ExamplesPanel examples={item.examples} renderedNodes={exampleNodes} />;
 
     const slots: ItemLayoutSlots = {
         header: headerSlot,

@@ -115,10 +115,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
             {/* ══════════════════════════════════════════════════════════════════
                 HERO — CAE Engineering background
             ════════════════════════════════════════════════════════════════════ */}
-            <section
-                className="cae-hero-bg"
-                style={{ borderBottom: '1px solid var(--psj-border)' }}
-            >
+            <section className="cae-hero-bg" style={{ borderBottom: '1px solid var(--psj-border)' }}>
                 {/* Animated mesh dots */}
                 <div className="cae-hero-dots" />
                 {/* Animated scan line */}
@@ -151,15 +148,10 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                             </FadeUp>
 
                             <FadeUp delay={80}>
-                                <h1
-                                    className="psj-h1 text-balance mb-6"
-                                    style={{ color: 'var(--psj-text-1)' }}
-                                >
+                                <h1 className="psj-h1 text-balance mb-6" style={{ color: 'var(--psj-text-1)' }}>
                                     {landing.heroTitle_1}
                                     <br />
-                                    <span style={{ color: 'var(--psj-blue)' }}>
-                                        {landing.heroTitle_2}
-                                    </span>
+                                    <span style={{ color: 'var(--psj-blue)' }}>{landing.heroTitle_2}</span>
                                 </h1>
                             </FadeUp>
 
@@ -193,11 +185,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                 >
                                     {landing.heroChecklist.map((t) => (
                                         <span key={t} className="flex items-center gap-1.5">
-                                            <CheckCircle2
-                                                size={11}
-                                                style={{ color: 'var(--psj-blue)' }}
-                                            />{' '}
-                                            {t}
+                                            <CheckCircle2 size={11} style={{ color: 'var(--psj-blue)' }} /> {t}
                                         </span>
                                     ))}
                                 </div>
@@ -233,10 +221,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                             />
                                         ))}
                                     </div>
-                                    <span
-                                        className="font-mono text-[10px]"
-                                        style={{ color: 'var(--psj-text-3)' }}
-                                    >
+                                    <span className="font-mono text-[10px]" style={{ color: 'var(--psj-text-3)' }}>
                                         {landing.heroCodeFilename}
                                     </span>
                                     <span
@@ -278,67 +263,40 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                             </span>{' '}
                                             *
                                         </p>
-                                        <p
-                                            className="text-[11px]"
-                                            style={{ color: 'var(--psj-text-3)' }}
-                                        >
+                                        <p className="text-[11px]" style={{ color: 'var(--psj-text-3)' }}>
                                             # Macro — auto-recorded after UI operation
                                         </p>
                                         <p>
                                             CreateCube([0,0,0], [10,10,10],{' '}
-                                            <span style={{ color: '#D4570D' }}>
-                                                &quot;Cube_1&quot;
-                                            </span>
-                                            )
+                                            <span style={{ color: '#D4570D' }}>&quot;Cube_1&quot;</span>)
                                         </p>
                                         <p>ImprintLines([[7.8,0,10],[2.2,10,10]], [6:26], 1)</p>
-                                        <p
-                                            className="mt-3 text-[11px]"
-                                            style={{ color: 'var(--psj-text-3)' }}
-                                        >
+                                        <p className="mt-3 text-[11px]" style={{ color: 'var(--psj-text-3)' }}>
                                             # PSJ-Utility — query model data
                                         </p>
                                         <p>
                                             nodes = psj.utility.
-                                            <span style={{ color: 'var(--psj-blue)' }}>
-                                                get_node_coords
-                                            </span>
+                                            <span style={{ color: 'var(--psj-blue)' }}>get_node_coords</span>
                                             (model)
                                         </p>
-                                        <p
-                                            className="mt-3 text-[11px]"
-                                            style={{ color: 'var(--psj-text-3)' }}
-                                        >
+                                        <p className="mt-3 text-[11px]" style={{ color: 'var(--psj-text-3)' }}>
                                             # PSJ-GUI — custom dialog
                                         </p>
                                         <p>
                                             dlg = psj.gui.
-                                            <span style={{ color: 'var(--psj-blue)' }}>Dialog</span>
-                                            (
-                                            <span style={{ color: '#D4570D' }}>
-                                                &quot;Bolt Generator&quot;
-                                            </span>
-                                            )
+                                            <span style={{ color: 'var(--psj-blue)' }}>Dialog</span>(
+                                            <span style={{ color: '#D4570D' }}>&quot;Bolt Generator&quot;</span>)
                                         </p>
                                         <p>
                                             dlg.
-                                            <span style={{ color: 'var(--psj-blue)' }}>
-                                                add_input
-                                            </span>
-                                            (
-                                            <span style={{ color: '#D4570D' }}>
-                                                &quot;diameter&quot;
-                                            </span>
-                                            , 12.0)
+                                            <span style={{ color: 'var(--psj-blue)' }}>add_input</span>(
+                                            <span style={{ color: '#D4570D' }}>&quot;diameter&quot;</span>, 12.0)
                                         </p>
                                         <p>
                                             dlg.
                                             <span style={{ color: 'var(--psj-blue)' }}>show</span>()
                                         </p>
-                                        <p
-                                            className="animate-pulse"
-                                            style={{ color: 'var(--psj-blue)' }}
-                                        >
+                                        <p className="animate-pulse" style={{ color: 'var(--psj-blue)' }}>
                                             ▊
                                         </p>
                                     </div>
@@ -422,16 +380,10 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                         <div className="lg:col-span-4">
                             <FadeUp>
                                 <div className="psj-label mb-4">{landing.phiLabel}</div>
-                                <h2
-                                    className="psj-h2 text-balance mb-6"
-                                    style={{ color: 'var(--psj-text-1)' }}
-                                >
+                                <h2 className="psj-h2 text-balance mb-6" style={{ color: 'var(--psj-text-1)' }}>
                                     {landing.phiTitle}
                                 </h2>
-                                <p
-                                    className="text-base leading-relaxed mb-8"
-                                    style={{ color: 'var(--psj-text-2)' }}
-                                >
+                                <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--psj-text-2)' }}>
                                     {landing.phiDesc}
                                 </p>
                                 <Link
@@ -440,10 +392,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                     style={{ color: 'var(--psj-blue)' }}
                                 >
                                     {landing.phiReadDocs}
-                                    <ArrowRight
-                                        size={15}
-                                        className="group-hover:translate-x-1 transition-transform"
-                                    />
+                                    <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </FadeUp>
                         </div>
@@ -460,10 +409,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                                     border: '1px solid var(--psj-blue-subtle2)',
                                                 }}
                                             >
-                                                <f.icon
-                                                    size={20}
-                                                    style={{ color: 'var(--psj-blue)' }}
-                                                />
+                                                <f.icon size={20} style={{ color: 'var(--psj-blue)' }} />
                                             </div>
                                             <div>
                                                 <div
@@ -480,10 +426,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                                 </div>
                                             </div>
                                         </div>
-                                        <p
-                                            className="text-sm leading-relaxed"
-                                            style={{ color: 'var(--psj-text-2)' }}
-                                        >
+                                        <p className="text-sm leading-relaxed" style={{ color: 'var(--psj-text-2)' }}>
                                             {f.desc}
                                         </p>
                                     </div>
@@ -534,10 +477,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                             {m.label}
                                         </span>
                                     </div>
-                                    <p
-                                        className="text-sm leading-relaxed mb-5"
-                                        style={{ color: 'var(--psj-text-2)' }}
-                                    >
+                                    <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--psj-text-2)' }}>
                                         {m.desc}
                                     </p>
                                     <Link
@@ -567,25 +507,16 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                     <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12">
                         <div className="shrink-0 max-w-xs">
                             <div className="psj-label mb-3">{landing.industryHeader_label}</div>
-                            <h3
-                                className="psj-h3 text-balance mb-4"
-                                style={{ color: 'var(--psj-text-1)' }}
-                            >
+                            <h3 className="psj-h3 text-balance mb-4" style={{ color: 'var(--psj-text-1)' }}>
                                 {landing.industryHeader_title}
                             </h3>
-                            <p
-                                className="text-sm leading-relaxed"
-                                style={{ color: 'var(--psj-text-2)' }}
-                            >
+                            <p className="text-sm leading-relaxed" style={{ color: 'var(--psj-text-2)' }}>
                                 {landing.industryHeader_desc}
                             </p>
                         </div>
                         <div className="flex-1 grid grid-cols-2 sm:grid-cols-5 gap-4">
                             {industries.map((ind) => (
-                                <div
-                                    key={ind.name}
-                                    className="psj-card-interactive p-5 text-center group"
-                                >
+                                <div key={ind.name} className="psj-card-interactive p-5 text-center group">
                                     <ind.icon
                                         size={22}
                                         className="mx-auto mb-3 transition-colors"

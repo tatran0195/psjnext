@@ -35,11 +35,7 @@ export function DocsPager({ previous, next, markdownUrl }: DocsPagerProps) {
                 onClick={() => setFull(!full)}
                 title={full ? 'Collapse' : 'Expand'}
             >
-                {full ? (
-                    <FoldHorizontal className="size-4" />
-                ) : (
-                    <UnfoldHorizontal className="size-4" />
-                )}
+                {full ? <FoldHorizontal className="size-4" /> : <UnfoldHorizontal className="size-4" />}
             </button>
             {previous ? (
                 <Link href={previous.url} className={buttonClass}>
@@ -60,11 +56,7 @@ export function DocsPager({ previous, next, markdownUrl }: DocsPagerProps) {
                 </div>
             )}
             {markdownUrl && (
-                <MarkdownCopyButton
-                    markdownUrl={markdownUrl}
-                    title="Copy markdown"
-                    className={buttonClass}
-                />
+                <MarkdownCopyButton markdownUrl={markdownUrl} title="Copy markdown" className={buttonClass} />
             )}
         </div>
     );

@@ -13,9 +13,8 @@ available_versions: 'all'
 
 Disable screen animation, screen update, and status bar update information to improve Jupiter's performance.
 
-:::important
-[JPT.EndDatabaseTransaction()](JPT.EndDatabaseTransaction) should be used at the end of the process, to return Jupiter to the normal state.
-:::
+:::important [JPT.EndDatabaseTransaction()](JPT.EndDatabaseTransaction) should be used at the end of the process, to
+return Jupiter to the normal state. :::
 
 ## Syntax
 

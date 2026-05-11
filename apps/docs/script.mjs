@@ -8,8 +8,8 @@ for (const file of files) {
     const filePath = path.join(changelogDir, file);
     let content = fs.readFileSync(filePath, 'utf8');
 
-    const tipRegex = /:::tip Highlight updates\n([\s\S]*?)\n:::/g;
-    const tipRegexAlt = /:::tip Highlight updates([\s\S]*?)###/g; // sometimes missing ending :::
+    const tipRegex = /:::tip[Highlight updates]\n([\s\S]*?)\n:::/g;
+    const tipRegexAlt = /:::tip[Highlight updates]([\s\S]*?)###/g; // sometimes missing ending :::
 
     // reset regexes just in case
     tipRegex.lastIndex = 0;
