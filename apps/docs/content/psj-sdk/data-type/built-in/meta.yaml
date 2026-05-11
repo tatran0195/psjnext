@@ -1,9 +1,0 @@
-psj: '3.3'
-kind: group_meta
-title: 'Built-in Types'
-description: >
-    Scalar primitives and core types.
-order:
-    - python-built-in-types
-    - jupiter-built-in-types
-icon: code

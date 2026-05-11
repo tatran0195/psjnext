@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-import { changelog } from '@/lib/source';
+
 import { getSiteOrigin } from '@/lib/site-url';
+import { changelog } from '@/lib/source';
 
 export async function GET() {
     const origin = getSiteOrigin();
@@ -9,20 +10,22 @@ export async function GET() {
         .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
         .filter((entry) => !entry.data.draft);
 
-    const rssItems = entries.map((entry) => {
-        const url = `${origin}/changelog/${entry.data.slug}`;
-        const date = new Date(entry.data.date).toUTCString();
-        
-        return `
+    const rssItems = entries
+        .map((entry) => {
+            const url = `${origin}/changelog/${entry.data.slug}`;
+            const date = new Date(entry.data.date).toUTCString();
+
+            return `
     <item>
       <title><![CDATA[${entry.data.version} - ${entry.data.title}]]></title>
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
       <pubDate>${date}</pubDate>
       <description><![CDATA[${entry.data.summary}]]></description>
-      ${entry.data.tags ? entry.data.tags.map(tag => `<category>${tag}</category>`).join('') : ''}
+      ${entry.data.tags ? entry.data.tags.map((tag) => `<category>${tag}</category>`).join('') : ''}
     </item>`;
-    }).join('');
+        })
+        .join('');
 
     const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">

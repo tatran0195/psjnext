@@ -1,7 +1,8 @@
 'use client';
 
-import Link from 'next/link';
+import Link from 'fumadocs-core/link';
 import { ArrowRight } from 'lucide-react';
+
 import { FadeUp } from './fade-up';
 
 interface SectionHeaderProps {
@@ -12,13 +13,7 @@ interface SectionHeaderProps {
     linkLabel?: string;
 }
 
-export function SectionHeader({
-    label,
-    title,
-    subtitle,
-    link,
-    linkLabel,
-}: SectionHeaderProps) {
+export function SectionHeader({ label, title, subtitle, link, linkLabel }: SectionHeaderProps) {
     return (
         <FadeUp className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
@@ -27,7 +22,10 @@ export function SectionHeader({
                     {title}
                 </h2>
                 {subtitle && (
-                    <p className="mt-3 text-base leading-relaxed max-w-xl" style={{ color: 'var(--psj-text-2)' }}>
+                    <p
+                        className="mt-3 text-base leading-relaxed max-w-xl"
+                        style={{ color: 'var(--psj-text-2)' }}
+                    >
                         {subtitle}
                     </p>
                 )}
@@ -39,7 +37,10 @@ export function SectionHeader({
                     style={{ color: 'var(--psj-blue)' }}
                 >
                     {linkLabel}
-                    <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight
+                        size={15}
+                        className="group-hover:translate-x-1 transition-transform"
+                    />
                 </Link>
             )}
         </FadeUp>

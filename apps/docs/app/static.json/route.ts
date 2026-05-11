@@ -18,13 +18,14 @@ export async function GET(): Promise<Response> {
         });
 
         const data = await page.data.load();
-        
+
         let structuredData = data.structuredData;
         const versionRegex = /(\d+\.\d+\.\d+)/;
         const match = page.slugs.find((slug) => slug.match(versionRegex));
         const version = match ? match : null;
 
-        const paramMeta = (data.paramMeta as { name: string; since?: string; removed?: string }[]) || [];
+        const paramMeta =
+            (data._exports.paramMeta as { name: string; since?: string; removed?: string }[]) || [];
 
         if (version && paramMeta.length > 0) {
             const getVersionStatus = (
@@ -63,15 +64,15 @@ export async function GET(): Promise<Response> {
 
             if (hiddenParamNames.size > 0 && structuredData) {
                 const validHeadings = structuredData.headings.filter(
-                    (h: any) => !hiddenParamNames.has(h.content),
+                    (h) => !hiddenParamNames.has(h.content),
                 );
                 const hiddenHeadingIds = new Set(
                     structuredData.headings
-                        .filter((h: any) => hiddenParamNames.has(h.content))
-                        .map((h: any) => h.id),
+                        .filter((h) => hiddenParamNames.has(h.content))
+                        .map((h) => h.id),
                 );
                 const validContents = structuredData.contents.filter(
-                    (c: any) => !c.heading || !hiddenHeadingIds.has(c.heading),
+                    (c) => !c.heading || !hiddenHeadingIds.has(c.heading),
                 );
                 structuredData = { headings: validHeadings, contents: validContents };
             }

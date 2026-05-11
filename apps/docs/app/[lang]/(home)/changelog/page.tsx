@@ -1,9 +1,12 @@
+import { Metadata } from 'next';
+
 import { Changelog } from '@/components/changelog';
 import { changelog } from '@/lib/source';
 
-export default async function ChangelogPage() {
+export default async function ChangelogPage({ params }: { params: Promise<{ lang: string }> }) {
+    const { lang } = await params;
     const sortedEntries = changelog
-        .getPages()
+        .getPages(lang)
         .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
         .filter((entry) => !entry?.data.draft)
         .map((entry) => ({
@@ -19,16 +22,17 @@ export default async function ChangelogPage() {
 
     return (
         <div>
-            <Changelog entries={sortedEntries} />
+            <Changelog entries={sortedEntries} lang={lang} />
         </div>
     );
 }
 
-export async function generateMetadata() {
+export async function generateMetadata(_props: {
+    params: Promise<{ slug?: string[]; lang: string }>;
+}): Promise<Metadata> {
     return {
         title: 'Changelog — New Features, Improvements, and Fixes',
-        description:
-            'Stay up to date with the latest features, improvements, and fixes in PSJ.',
+        description: 'Stay up to date with the latest features, improvements, and fixes in PSJ.',
         openGraph: {
             title: 'Changelog — New Features, Improvements, and Fixes',
             description:

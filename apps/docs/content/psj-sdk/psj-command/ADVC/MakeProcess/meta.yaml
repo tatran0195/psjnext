@@ -1,9 +1,0 @@
-psj: '3.3'
-kind: group_meta
-title: 'Make Process'
-description: >
-    Commands for creating analysis processes.
-order:
-    - Static
-    - Dynamic
-icon: play

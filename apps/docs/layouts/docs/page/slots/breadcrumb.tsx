@@ -32,18 +32,12 @@ export function Breadcrumb({
     return (
         <div
             {...props}
-            className={cn(
-                'flex items-center gap-2 text-xs',
-                props.className,
-            )}
+            className={cn('flex items-center gap-2 text-xs', props.className)}
             style={{ color: 'var(--psj-text-3)', ...props.style }}
         >
             {items.map((item, i) => {
                 const isLast = i === items.length - 1;
-                const className = cn(
-                    'truncate',
-                    isLast && 'font-medium',
-                );
+                const className = cn('truncate', isLast && 'font-medium');
 
                 return (
                     <Fragment key={i}>
@@ -52,12 +46,19 @@ export function Breadcrumb({
                             <Link
                                 href={item.url}
                                 className={cn(className, 'transition-colors hover:opacity-80')}
-                                style={{ color: isLast ? 'var(--psj-text-1)' : 'var(--psj-text-3)' }}
+                                style={{
+                                    color: isLast ? 'var(--psj-text-1)' : 'var(--psj-text-3)',
+                                }}
                             >
                                 {item.name}
                             </Link>
                         ) : (
-                            <span className={className} style={{ color: isLast ? 'var(--psj-text-1)' : 'var(--psj-text-3)' }}>
+                            <span
+                                className={className}
+                                style={{
+                                    color: isLast ? 'var(--psj-text-1)' : 'var(--psj-text-3)',
+                                }}
+                            >
                                 {item.name}
                             </span>
                         )}

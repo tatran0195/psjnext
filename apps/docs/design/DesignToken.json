@@ -1,153 +1,153 @@
 {
-  "color": {
-    "color-1": {
-      "$type": "color",
-      "$value": "#111111",
-      "$description": "Frequency rank #1 (632 occurrences)"
+    "color": {
+        "color-1": {
+            "$type": "color",
+            "$value": "#111111",
+            "$description": "Frequency rank #1 (632 occurrences)"
+        },
+        "color-2": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Frequency rank #2 (365 occurrences)"
+        },
+        "color-3": {
+            "$type": "color",
+            "$value": "#004ea2",
+            "$description": "Frequency rank #3 (106 occurrences)"
+        },
+        "color-4": {
+            "$type": "color",
+            "$value": "#797979",
+            "$description": "Frequency rank #4 (20 occurrences)"
+        },
+        "color-5": {
+            "$type": "color",
+            "$value": "#000000",
+            "$description": "Frequency rank #5 (16 occurrences)"
+        },
+        "color-6": {
+            "$type": "color",
+            "$value": "#f1f2f6",
+            "$description": "Frequency rank #6 (10 occurrences)"
+        },
+        "color-7": {
+            "$type": "color",
+            "$value": "#002853",
+            "$description": "Frequency rank #7 (4 occurrences)"
+        },
+        "color-8": {
+            "$type": "color",
+            "$value": "#004084",
+            "$description": "Frequency rank #8 (4 occurrences)"
+        },
+        "color-9": {
+            "$type": "color",
+            "$value": "#e8e8e8",
+            "$description": "Frequency rank #9 (3 occurrences)"
+        },
+        "color-10": {
+            "$type": "color",
+            "$value": "#dddddd",
+            "$description": "Frequency rank #10 (3 occurrences)"
+        }
     },
-    "color-2": {
-      "$type": "color",
-      "$value": "#ffffff",
-      "$description": "Frequency rank #2 (365 occurrences)"
+    "typography": {
+        "type-1": {
+            "$type": "typography",
+            "$value": {
+                "fontFamily": "Noto Sans JP",
+                "fontSize": "16px",
+                "fontWeight": 400,
+                "lineHeight": "28px",
+                "letterSpacing": "1.6px"
+            },
+            "$description": "Frequency rank #1"
+        },
+        "type-2": {
+            "$type": "typography",
+            "$value": {
+                "fontFamily": "Noto Sans JP",
+                "fontSize": "12px",
+                "fontWeight": 500,
+                "lineHeight": "18px",
+                "letterSpacing": "1.2px"
+            },
+            "$description": "Frequency rank #2"
+        },
+        "type-3": {
+            "$type": "typography",
+            "$value": {
+                "fontFamily": "Noto Sans JP",
+                "fontSize": "14px",
+                "fontWeight": 700,
+                "lineHeight": "30px",
+                "letterSpacing": "normal"
+            },
+            "$description": "Frequency rank #3"
+        },
+        "type-4": {
+            "$type": "typography",
+            "$value": {
+                "fontFamily": "Noto Sans JP",
+                "fontSize": "18px",
+                "fontWeight": 700,
+                "lineHeight": "27px",
+                "letterSpacing": "1.8px"
+            },
+            "$description": "Frequency rank #4"
+        },
+        "type-5": {
+            "$type": "typography",
+            "$value": {
+                "fontFamily": "Noto Sans JP",
+                "fontSize": "12px",
+                "fontWeight": 700,
+                "lineHeight": "18px",
+                "letterSpacing": "1.2px"
+            },
+            "$description": "Frequency rank #5"
+        }
     },
-    "color-3": {
-      "$type": "color",
-      "$value": "#004ea2",
-      "$description": "Frequency rank #3 (106 occurrences)"
-    },
-    "color-4": {
-      "$type": "color",
-      "$value": "#797979",
-      "$description": "Frequency rank #4 (20 occurrences)"
-    },
-    "color-5": {
-      "$type": "color",
-      "$value": "#000000",
-      "$description": "Frequency rank #5 (16 occurrences)"
-    },
-    "color-6": {
-      "$type": "color",
-      "$value": "#f1f2f6",
-      "$description": "Frequency rank #6 (10 occurrences)"
-    },
-    "color-7": {
-      "$type": "color",
-      "$value": "#002853",
-      "$description": "Frequency rank #7 (4 occurrences)"
-    },
-    "color-8": {
-      "$type": "color",
-      "$value": "#004084",
-      "$description": "Frequency rank #8 (4 occurrences)"
-    },
-    "color-9": {
-      "$type": "color",
-      "$value": "#e8e8e8",
-      "$description": "Frequency rank #9 (3 occurrences)"
-    },
-    "color-10": {
-      "$type": "color",
-      "$value": "#dddddd",
-      "$description": "Frequency rank #10 (3 occurrences)"
+    "spacing": {
+        "space-1": {
+            "$type": "dimension",
+            "$value": "24px"
+        },
+        "space-2": {
+            "$type": "dimension",
+            "$value": "22px"
+        },
+        "space-3": {
+            "$type": "dimension",
+            "$value": "20px"
+        },
+        "space-4": {
+            "$type": "dimension",
+            "$value": "12px"
+        },
+        "space-5": {
+            "$type": "dimension",
+            "$value": "30px"
+        },
+        "space-6": {
+            "$type": "dimension",
+            "$value": "16px"
+        },
+        "space-7": {
+            "$type": "dimension",
+            "$value": "4px"
+        },
+        "space-8": {
+            "$type": "dimension",
+            "$value": "8px"
+        },
+        "space-9": {
+            "$type": "dimension",
+            "$value": "45px"
+        },
+        "space-10": {
+            "$type": "dimension",
+            "$value": "70px"
+        }
     }
-  },
-  "typography": {
-    "type-1": {
-      "$type": "typography",
-      "$value": {
-        "fontFamily": "Noto Sans JP",
-        "fontSize": "16px",
-        "fontWeight": 400,
-        "lineHeight": "28px",
-        "letterSpacing": "1.6px"
-      },
-      "$description": "Frequency rank #1"
-    },
-    "type-2": {
-      "$type": "typography",
-      "$value": {
-        "fontFamily": "Noto Sans JP",
-        "fontSize": "12px",
-        "fontWeight": 500,
-        "lineHeight": "18px",
-        "letterSpacing": "1.2px"
-      },
-      "$description": "Frequency rank #2"
-    },
-    "type-3": {
-      "$type": "typography",
-      "$value": {
-        "fontFamily": "Noto Sans JP",
-        "fontSize": "14px",
-        "fontWeight": 700,
-        "lineHeight": "30px",
-        "letterSpacing": "normal"
-      },
-      "$description": "Frequency rank #3"
-    },
-    "type-4": {
-      "$type": "typography",
-      "$value": {
-        "fontFamily": "Noto Sans JP",
-        "fontSize": "18px",
-        "fontWeight": 700,
-        "lineHeight": "27px",
-        "letterSpacing": "1.8px"
-      },
-      "$description": "Frequency rank #4"
-    },
-    "type-5": {
-      "$type": "typography",
-      "$value": {
-        "fontFamily": "Noto Sans JP",
-        "fontSize": "12px",
-        "fontWeight": 700,
-        "lineHeight": "18px",
-        "letterSpacing": "1.2px"
-      },
-      "$description": "Frequency rank #5"
-    }
-  },
-  "spacing": {
-    "space-1": {
-      "$type": "dimension",
-      "$value": "24px"
-    },
-    "space-2": {
-      "$type": "dimension",
-      "$value": "22px"
-    },
-    "space-3": {
-      "$type": "dimension",
-      "$value": "20px"
-    },
-    "space-4": {
-      "$type": "dimension",
-      "$value": "12px"
-    },
-    "space-5": {
-      "$type": "dimension",
-      "$value": "30px"
-    },
-    "space-6": {
-      "$type": "dimension",
-      "$value": "16px"
-    },
-    "space-7": {
-      "$type": "dimension",
-      "$value": "4px"
-    },
-    "space-8": {
-      "$type": "dimension",
-      "$value": "8px"
-    },
-    "space-9": {
-      "$type": "dimension",
-      "$value": "45px"
-    },
-    "space-10": {
-      "$type": "dimension",
-      "$value": "70px"
-    }
-  }
 }

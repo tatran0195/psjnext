@@ -1,12 +1,17 @@
 import * as Twoslash from 'fumadocs-twoslash/ui';
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Banner } from 'fumadocs-ui/components/banner';
 import * as FilesComponents from 'fumadocs-ui/components/files';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 import * as TabsComponents from 'fumadocs-ui/components/tabs';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 
-import { RibbonPath } from '@/components/mdx/ribbon-path';
-import { SymbolLink } from '@/components/mdx/symbol-link';
+import { LinkPreview } from './mdx/link-preview';
+import { Mermaid } from './mdx/mermaid';
+import { RibbonPath } from './mdx/ribbon-path';
+import { SymbolLink } from './mdx/symbol-link';
+import { Video } from './mdx/video';
 
 import type { MDXComponents } from 'mdx/types';
 
@@ -18,8 +23,13 @@ export function getMDXComponents(components?: MDXComponents) {
         ...Twoslash,
         Accordion,
         Accordions,
-        SymbolLink,
         RibbonPath,
+        Banner,
+        Mermaid,
+        TypeTable,
+        SymbolLink,
+        LinkPreview,
+        Video,
         // oxlint-disable-next-line typescript/no-explicit-any
         img: (props: any) => {
             const isGif =

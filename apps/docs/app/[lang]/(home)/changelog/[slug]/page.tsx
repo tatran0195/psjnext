@@ -1,26 +1,35 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import Link from 'fumadocs-core/link';
 import { ArrowLeftIcon } from 'lucide-react';
 import Markdown from 'markdown-to-jsx';
 
+import { Grid } from '@/components/grid-pattern';
+import { getMDXComponents } from '@/components/mdx';
+import { i18n } from '@/lib/i18n';
+import { translations } from '@/lib/i18n-translations';
 import { changelog } from '@/lib/source';
-import { getMarkdownOptions } from '@/lib/utils/markdown';
 
 interface ChangelogEntryPageProps {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string; lang: string }>;
 }
 
 export default async function ChangelogEntryPage({ params }: ChangelogEntryPageProps) {
-    const { slug } = await params;
+    const { slug, lang } = await params;
+    const t =
+        translations[lang as keyof typeof translations]?.changelog || translations.en.changelog;
+    const dateLocale = lang === 'ja' ? 'ja-JP' : 'en-US';
 
-    const entry = changelog.getPages().find((entry) => entry.data.slug === slug)?.data;
+    const page = changelog.getPages(lang).find((p) => p.data.slug === slug || p.slugs[0] === slug);
 
-    if (!entry) {
+    if (!page) {
         notFound();
     }
+
+    const entry = page.data;
+    const { body: Mdx } = await page.data.load();
 
     const articleSchema = {
         '@context': 'https://schema.org',
@@ -37,24 +46,22 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
         publisher: {
             '@type': 'Organization',
             name: 'PSJ',
-            url: 'https://psj.ai',
+            url: 'https://psjdoc.e-technostar.com',
             logo: {
                 '@type': 'ImageObject',
-                url: 'https://psj.ai/favicon/android-chrome-512x512.png',
+                url: 'https://psjdoc.e-technostar.com/favicon/android-chrome-512x512.png',
             },
         },
         mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': `https://psj.ai/changelog/${slug}`,
+            '@id': `https://psjdoc.e-technostar.com/${lang}/changelog/${slug}`,
         },
         ...(entry.image && {
             image: {
                 '@type': 'ImageObject',
-                url: entry.image.src.startsWith('http')
-                    ? entry.image.src
-                    : `https://psj.ai${entry.image.src}`,
-                width: entry.image.width,
-                height: entry.image.height,
+                url: `https://psjdoc.e-technostar.com/${lang}/${entry.image.startsWith('/') ? entry.image.slice(1) : entry.image}`,
+                width: 1200,
+                height: 630,
             },
         }),
     };
@@ -66,20 +73,20 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
             {
                 '@type': 'ListItem',
                 position: 1,
-                name: 'Home',
-                item: 'https://psj.ai',
+                name: t.home,
+                item: 'https://psjdoc.e-technostar.com',
             },
             {
                 '@type': 'ListItem',
                 position: 2,
-                name: 'Changelog',
-                item: 'https://psj.ai/changelog',
+                name: t.changelog,
+                item: `https://psjdoc.e-technostar.com/${lang}/changelog`,
             },
             {
                 '@type': 'ListItem',
                 position: 3,
                 name: entry.title,
-                item: `https://psj.ai/changelog/${slug}`,
+                item: `https://psjdoc.e-technostar.com/${lang}/changelog/${slug}`,
             },
         ],
     };
@@ -99,7 +106,7 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
                 }}
             />
 
-            <div 
+            <div
                 className="min-h-screen"
                 style={{ background: 'var(--psj-surface-0)', color: 'var(--psj-text-1)' }}
             >
@@ -112,20 +119,29 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
                                 style={{ color: 'var(--psj-blue)' }}
                             >
                                 <ArrowLeftIcon className="mr-2 h-4 w-4" />
-                                Back to changelog
+                                {t.backToChangelog}
                             </Link>
                         </div>
 
                         <article className="prose prose-sm sm:prose-base dark:prose-invert max-w-none">
                             <header className="mb-10">
-                                <div className="psj-label mb-3">Changelog Update</div>
-                                <h1 className="psj-h1 mb-6" style={{ color: 'var(--psj-text-1)' }}>{entry.title}</h1>
+                                <div className="psj-label mb-3">{t.changelogUpdate}</div>
+                                <h1 className="psj-h1 mb-6" style={{ color: 'var(--psj-text-1)' }}>
+                                    {entry.title}
+                                </h1>
                                 <div style={{ color: 'var(--psj-text-2)' }}>
                                     {entry.summary && (
-                                        <p className="text-lg leading-relaxed mb-4">{entry.summary}</p>
+                                        <div className="text-lg leading-relaxed mb-4 prose prose-sm sm:prose-base dark:prose-invert max-w-none psj-prose">
+                                            <Markdown options={{ wrapper: 'div' }}>
+                                                {entry.summary}
+                                            </Markdown>
+                                        </div>
                                     )}
-                                    <time dateTime={entry.date} className="text-sm font-mono uppercase tracking-wider">
-                                        {new Date(entry.date).toLocaleDateString('en-US', {
+                                    <time
+                                        dateTime={entry.date}
+                                        className="text-sm font-mono uppercase tracking-wider"
+                                    >
+                                        {new Date(entry.date).toLocaleDateString(dateLocale, {
                                             year: 'numeric',
                                             month: 'long',
                                             day: 'numeric',
@@ -134,23 +150,90 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
                                 </div>
                             </header>
 
-                            {entry.image && (
+                            {entry.image ? (
                                 <div className="mb-12">
                                     <Image
-                                        src={entry.image.src}
-                                        alt={entry.image.alt ?? entry.title}
-                                        width={entry.image.width}
-                                        height={entry.image.height}
+                                        src={entry.image}
+                                        alt={entry.title}
+                                        width={1200}
+                                        height={630}
                                         className="w-full rounded-none object-cover border"
                                         style={{ borderColor: 'var(--psj-border)' }}
                                     />
                                 </div>
+                            ) : (
+                                <div
+                                    className="mb-12 w-full aspect-[2.5/1] sm:aspect-[3.5/1] flex flex-col justify-center relative overflow-hidden border rounded-lg"
+                                    style={{
+                                        background:
+                                            'linear-gradient(135deg, var(--psj-surface-0) 0%, var(--psj-surface-1) 100%)',
+                                        borderColor: 'var(--psj-border)',
+                                    }}
+                                >
+                                    <Grid size={32} />
+                                    <div
+                                        className="absolute inset-0 opacity-[0.03]"
+                                        style={{
+                                            backgroundImage:
+                                                'radial-gradient(var(--psj-text-1) 1.5px, transparent 1.5px)',
+                                            backgroundSize: '32px 32px',
+                                        }}
+                                    />
+                                    <div
+                                        className="absolute right-4 top-4 text-[100px] sm:text-[160px] font-black tracking-tighter opacity-[0.04] leading-none select-none max-w-[50%]"
+                                        style={{ color: 'var(--psj-text-1)' }}
+                                    >
+                                        {entry.version || 'PSJ'}
+                                    </div>
+                                    <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-(--psj-blue) rounded-full blur-[128px] opacity-10" />
+
+                                    <div className="relative z-10 px-8 sm:px-16 flex flex-col gap-4">
+                                        <div
+                                            className="inline-flex items-center w-fit border rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest bg-background/50 backdrop-blur-sm"
+                                            style={{
+                                                borderColor: 'var(--psj-border)',
+                                                color: 'var(--psj-blue)',
+                                            }}
+                                        >
+                                            {t.changelogRelease}
+                                        </div>
+                                        <div
+                                            className="text-5xl sm:text-7xl font-black tracking-tighter"
+                                            style={{ color: 'var(--psj-text-1)' }}
+                                        >
+                                            {entry.version || t.defaultUpdateTitle}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {entry.highlights && entry.highlights.length > 0 && (
+                                <div
+                                    className="mb-12 p-6 rounded-lg border bg-(--psj-surface-1)"
+                                    style={{ borderColor: 'var(--psj-border)' }}
+                                >
+                                    <h3
+                                        className="text-xs font-bold uppercase tracking-widest mb-4"
+                                        style={{ color: 'var(--psj-blue)' }}
+                                    >
+                                        {t.highlightUpdates}
+                                    </h3>
+                                    <ul className="space-y-2 list-disc list-inside">
+                                        {entry.highlights.map((h, i) => (
+                                            <li
+                                                key={i}
+                                                className="text-base leading-relaxed prose prose-sm sm:prose-base dark:prose-invert max-w-none psj-prose"
+                                                style={{ color: 'var(--psj-text-1)' }}
+                                            >
+                                                <Markdown>{h}</Markdown>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             )}
 
                             <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none">
-                                <Markdown options={getMarkdownOptions()}>
-                                    {entry.id}
-                                </Markdown>
+                                <Mdx components={getMDXComponents({})} />
                             </div>
                         </article>
                     </div>
@@ -161,13 +244,19 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
 }
 
 export async function generateStaticParams() {
-    return changelog.getPages().map((page) => ({ slug: page.data.slug }));
+    return i18n.languages.flatMap((lang) =>
+        changelog.getPages(lang).map((page) => ({
+            lang,
+            slug: page.data.slug || page.slugs[0],
+        })),
+    );
 }
 
 export async function generateMetadata({ params }: ChangelogEntryPageProps): Promise<Metadata> {
-    const { slug } = await params;
+    const { slug, lang } = await params;
 
-    const entry = changelog.getPage([slug])?.data;
+    const page = changelog.getPages(lang).find((p) => p.data.slug === slug || p.slugs[0] === slug);
+    const entry = page?.data;
 
     if (!entry) {
         return {};
@@ -183,10 +272,10 @@ export async function generateMetadata({ params }: ChangelogEntryPageProps): Pro
             images: entry.image
                 ? [
                       {
-                          url: entry.image.src,
-                          width: entry.image.width ?? 800,
-                          height: entry.image.height ?? 400,
-                          alt: entry.image.alt ?? entry.title,
+                          url: entry.image,
+                          width: 1200,
+                          height: 630,
+                          alt: entry.title,
                       },
                   ]
                 : ['/opengraph.png'],

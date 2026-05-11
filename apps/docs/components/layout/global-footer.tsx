@@ -1,6 +1,7 @@
 'use client';
 
 import { ChevronRight } from 'lucide-react';
+
 import { TechnoStarLogo } from '@/components/icons/logo';
 
 export function GlobalFooter() {
@@ -20,8 +21,14 @@ export function GlobalFooter() {
                         >
                             <TechnoStarLogo variant="inline" className="h-9 w-auto" />
                         </a>
-                        <address className="text-sm leading-relaxed not-italic text-left" style={{ color: 'var(--psj-text-2)' }}>
-                            <strong className="text-base font-bold mb-1 block" style={{ color: 'var(--psj-text-1)' }}>
+                        <address
+                            className="text-sm leading-relaxed not-italic text-left"
+                            style={{ color: 'var(--psj-text-2)' }}
+                        >
+                            <strong
+                                className="text-base font-bold mb-1 block"
+                                style={{ color: 'var(--psj-text-1)' }}
+                            >
                                 株式会社テクノスター
                             </strong>
                             東京都港区赤坂7-1-1 青山安田ビル 6F
@@ -31,10 +38,19 @@ export function GlobalFooter() {
             </div>
 
             {/* Bottom Copyright & Links Section */}
-            <div style={{ background: 'var(--psj-surface-3)', padding: '0.75rem 0', borderTop: '1px solid var(--psj-border)' }}>
+            <div
+                style={{
+                    background: 'var(--psj-surface-3)',
+                    padding: '0.75rem 0',
+                    borderTop: '1px solid var(--psj-border)',
+                }}
+            >
                 <div className="psj-container flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium">
                     <div style={{ color: 'var(--psj-text-3)' }}>© 2026 TechnoStar Co., Ltd.</div>
-                    <div className="flex flex-wrap items-center gap-6" style={{ color: 'var(--psj-text-2)' }}>
+                    <div
+                        className="flex flex-wrap items-center gap-6"
+                        style={{ color: 'var(--psj-text-2)' }}
+                    >
                         {[
                             {
                                 label: '採用情報',
@@ -55,8 +71,12 @@ export function GlobalFooter() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-1.5 transition-colors hover:underline"
-                                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--psj-text-1)')}
-                                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--psj-text-2)')}
+                                onMouseEnter={(e) =>
+                                    (e.currentTarget.style.color = 'var(--psj-text-1)')
+                                }
+                                onMouseLeave={(e) =>
+                                    (e.currentTarget.style.color = 'var(--psj-text-2)')
+                                }
                             >
                                 <ChevronRight size={12} strokeWidth={3} />
                                 {link.label}

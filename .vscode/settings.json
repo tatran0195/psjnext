@@ -7,6 +7,7 @@
     "files.associations": {
         "**/packages/create-app/template/**/*": "plaintext"
     },
+    "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
     "[json]": {
         "editor.defaultFormatter": "oxc.oxc-vscode"
     },

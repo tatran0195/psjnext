@@ -1,8 +1,0 @@
-psj: '3.3'
-kind: group_meta
-title: 'Analysis Macros'
-description: >
-    Macros for analysis operations.
-order:
-    - AdvcStaticProcess
-icon: folder

@@ -49,13 +49,21 @@ function InlineVariant({
 }) {
     return (
         <div className={`not-prose flex items-center gap-2 flex-wrap ${className}`}>
-            <MousePointerClick size={12} style={{ color: 'var(--psj-text-3)' }} className="shrink-0" />
+            <MousePointerClick
+                size={12}
+                style={{ color: 'var(--psj-text-3)' }}
+                className="shrink-0"
+            />
             {segments.map((seg, i) => {
                 const isFinal = i === lastIndex;
                 return (
                     <span key={i} className="flex items-center gap-2">
                         {i > 0 && (
-                            <ChevronRight size={11} style={{ color: 'var(--psj-text-3)' }} className="shrink-0" />
+                            <ChevronRight
+                                size={11}
+                                style={{ color: 'var(--psj-text-3)' }}
+                                className="shrink-0"
+                            />
                         )}
                         <span
                             className={`text-xs ${isFinal ? 'font-medium' : ''}`}
@@ -69,7 +77,11 @@ function InlineVariant({
             {shortcut && (
                 <kbd
                     className="ml-1 inline-flex items-center gap-0.5 px-1.5 py-0.5 font-mono text-[10px]"
-                    style={{ border: '1px solid var(--psj-border)', background: 'var(--psj-surface-1)', color: 'var(--psj-text-2)' }}
+                    style={{
+                        border: '1px solid var(--psj-border)',
+                        background: 'var(--psj-surface-1)',
+                        color: 'var(--psj-text-2)',
+                    }}
                 >
                     {shortcut}
                 </kbd>
@@ -90,12 +102,20 @@ function GhostVariant({
     className?: string;
 }) {
     return (
-        <p className={`not-prose flex items-center gap-2 text-xs flex-wrap ${className}`} style={{ color: 'var(--psj-text-3)' }}>
+        <p
+            className={`not-prose flex items-center gap-2 text-xs flex-wrap ${className}`}
+            style={{ color: 'var(--psj-text-3)' }}
+        >
             <MousePointerClick size={12} className="shrink-0" />
             {segments.map((seg, i) => (
                 <span key={i} className="flex items-center gap-2">
                     {i > 0 && <span style={{ opacity: 0.3 }}>/</span>}
-                    <span className={i === lastIndex ? 'font-medium' : ''} style={{ color: i === lastIndex ? 'var(--psj-text-1)' : 'var(--psj-text-3)' }}>
+                    <span
+                        className={i === lastIndex ? 'font-medium' : ''}
+                        style={{
+                            color: i === lastIndex ? 'var(--psj-text-1)' : 'var(--psj-text-3)',
+                        }}
+                    >
                         {seg}
                     </span>
                 </span>
@@ -103,7 +123,11 @@ function GhostVariant({
             {shortcut && (
                 <kbd
                     className="ml-1 px-1.5 py-0.5 font-mono text-[10px]"
-                    style={{ border: '1px solid var(--psj-border)', background: 'var(--psj-surface-1)', color: 'var(--psj-text-2)' }}
+                    style={{
+                        border: '1px solid var(--psj-border)',
+                        background: 'var(--psj-surface-1)',
+                        color: 'var(--psj-text-2)',
+                    }}
                 >
                     {shortcut}
                 </kbd>

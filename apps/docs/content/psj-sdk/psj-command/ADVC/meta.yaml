@@ -1,8 +1,0 @@
-psj: '3.3'
-kind: group_meta
-title: 'ADVC'
-description: >
-    ADVC Solver integration commands.
-order:
-    - MakeProcess
-icon: folder

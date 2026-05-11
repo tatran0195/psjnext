@@ -29,4 +29,5 @@ export type Meta = InferMetaType<typeof source>;
 export const changelog = loader({
     source: toFumadocsSource(changelogPosts, []),
     baseUrl: '/changelog',
+    i18n,
 });

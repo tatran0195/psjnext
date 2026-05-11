@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { use, useMemo, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import {
@@ -18,22 +18,31 @@ import {
 
 import { CtaBand } from '@/components/sections/cta-band';
 import { cn } from '@/lib/cn';
-import { categoryConfig, industries, Solution, solutions } from '@/lib/showcase';
+import { translations } from '@/lib/i18n-translations';
+import { categoryConfig, getIndustries, getSolutions, Solution } from '@/lib/showcase';
 
-export default function CAEServices() {
+export default function CAEServices({ params }: { params: Promise<{ lang: string }> }) {
+    const { lang } = use(params);
+
+    const t = translations[lang as keyof typeof translations] || translations.en;
+    const { showcase } = t;
+
+    const solutions = getSolutions(lang);
+    const industries = getIndustries(lang);
+
     const [activeCategory, setActiveCategory] = useState<keyof typeof categoryConfig>('All');
-    const [activeIndustry, setActiveIndustry] = useState('All Industries');
+    const [activeIndustry, setActiveIndustry] = useState(industries[0]);
     const [search, setSearch] = useState('');
     const [selectedSolution, setSelectedSolution] = useState<Solution | null>(null);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-    const [sortBy, setSortBy] = useState('Most relevant');
+    const [sortBy, setSortBy] = useState<string>(showcase.sortByRelevant);
 
     const filtered = useMemo(() => {
-        const result = solutions.filter((sol) => {
+        const result = [...solutions].filter((sol) => {
             const matchesCategory = activeCategory === 'All' || sol.category === activeCategory;
             const matchesIndustry =
-                activeIndustry === 'All Industries' || sol.industry.includes(activeIndustry);
+                activeIndustry === industries[0] || sol.industry.includes(activeIndustry);
             const matchesSearch =
                 sol.title.toLowerCase().includes(search.toLowerCase()) ||
                 sol.code.toLowerCase().includes(search.toLowerCase());
@@ -41,9 +50,9 @@ export default function CAEServices() {
         });
 
         // Sorting
-        if (sortBy === 'Solution code') {
+        if (sortBy === showcase.sortByCode) {
             result.sort((a, b) => a.code.localeCompare(b.code));
-        } else if (sortBy === 'Complexity') {
+        } else if (sortBy === showcase.sortByComplexity) {
             const order = { Standard: 1, Advanced: 2, Enterprise: 3 };
             result.sort(
                 (a, b) =>
@@ -53,7 +62,7 @@ export default function CAEServices() {
         }
 
         return result;
-    }, [activeCategory, activeIndustry, search, sortBy]);
+    }, [activeCategory, activeIndustry, search, sortBy, solutions, industries, showcase]);
 
     return (
         <div
@@ -67,19 +76,18 @@ export default function CAEServices() {
             <section className="psj-subpage-hero">
                 <div className="psj-container py-10 lg:py-14 relative z-10">
                     <div className="max-w-4xl">
-                        <div className="psj-label mb-2">Technical Showcase</div>
+                        <div className="psj-label mb-2">{showcase.showcaseLabel}</div>
                         <h1
                             className="psj-h1 mb-4 text-4xl lg:text-5xl"
                             style={{ color: 'var(--psj-text-1)' }}
                         >
-                            Showcase Catalog
+                            {showcase.showcaseTitle}
                         </h1>
                         <p
                             className="text-base lg:text-lg leading-relaxed max-w-2xl"
                             style={{ color: 'var(--psj-text-2)' }}
                         >
-                            Explore our production-grade CAE automation solutions and specialized
-                            engineering services developed for industry-leading organizations.
+                            {showcase.showcaseDesc}
                         </p>
                     </div>
                 </div>
@@ -104,7 +112,7 @@ export default function CAEServices() {
                                 <input
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    placeholder="Search by code or title..."
+                                    placeholder={showcase.searchByCode}
                                     className="bg-transparent text-sm outline-none flex-1"
                                     style={{ color: 'var(--psj-text-1)' }}
                                 />
@@ -124,15 +132,19 @@ export default function CAEServices() {
                                 options={industries}
                                 onChange={setActiveIndustry}
                                 icon={Building2}
-                                prefix="Industry:"
+                                prefix={showcase.industryPrefix}
                             />
 
                             {/* Sort */}
                             <FilterDropdown
                                 value={sortBy}
-                                options={['Most relevant', 'Solution code', 'Complexity']}
+                                options={[
+                                    showcase.sortByRelevant,
+                                    showcase.sortByCode,
+                                    showcase.sortByComplexity,
+                                ]}
                                 onChange={setSortBy}
-                                prefix="Sort:"
+                                prefix={showcase.sortPrefix}
                             />
                         </div>
 
@@ -172,21 +184,23 @@ export default function CAEServices() {
                                 className="text-[11px] uppercase tracking-widest font-bold"
                                 style={{ color: 'var(--psj-text-3)' }}
                             >
-                                Showing {filtered.length} of {solutions.length} Results
+                                {showcase.showingResults
+                                    .replace('{count}', filtered.length.toString())
+                                    .replace('{total}', solutions.length.toString())}
                             </div>
                             {(activeCategory !== 'All' ||
-                                activeIndustry !== 'All Industries' ||
+                                activeIndustry !== industries[0] ||
                                 search) && (
                                 <button
                                     onClick={() => {
                                         setActiveCategory('All');
-                                        setActiveIndustry('All Industries');
+                                        setActiveIndustry(industries[0]);
                                         setSearch('');
                                     }}
                                     className="text-[11px] uppercase tracking-widest font-bold underline"
                                     style={{ color: 'var(--psj-blue)' }}
                                 >
-                                    Clear all filters
+                                    {showcase.clearFilters}
                                 </button>
                             )}
                         </div>
@@ -210,18 +224,18 @@ export default function CAEServices() {
                                         style={{ color: 'var(--psj-text-3)' }}
                                     />
                                     <p className="text-sm" style={{ color: 'var(--psj-text-2)' }}>
-                                        No solutions match your criteria
+                                        {showcase.noSolutions}
                                     </p>
                                     <button
                                         onClick={() => {
                                             setActiveCategory('All');
-                                            setActiveIndustry('All Industries');
+                                            setActiveIndustry(industries[0]);
                                             setSearch('');
                                         }}
                                         className="mt-4 text-sm font-bold"
                                         style={{ color: 'var(--psj-blue)' }}
                                     >
-                                        Reset filters
+                                        {showcase.resetFilters}
                                     </button>
                                 </motion.div>
                             ) : (
@@ -238,6 +252,7 @@ export default function CAEServices() {
                                             <SolutionCard
                                                 sol={sol}
                                                 onSelect={setSelectedSolution}
+                                                labels={showcase}
                                             />
                                         </motion.div>
                                     ))}
@@ -250,11 +265,11 @@ export default function CAEServices() {
 
             {/* ─────── BOTTOM CTA ─────── */}
             <CtaBand
-                subtitle="Custom Engineering"
-                title="Don't see what you need?"
-                description="Our team specializes in custom CAE automation pipelines tailored to your specific engineering challenges."
-                primaryLink={{ href: '#', label: 'Request a quote' }}
-                secondaryLink={{ href: '#', label: 'Schedule a call' }}
+                subtitle={showcase.ctaSubtitle}
+                title={showcase.ctaTitle}
+                description={showcase.ctaDesc}
+                primaryLink={{ href: '#', label: showcase.ctaPrimaryLabel }}
+                secondaryLink={{ href: '#', label: showcase.ctaSecondaryLabel }}
             />
 
             {/* Layout provides footer */}
@@ -262,7 +277,11 @@ export default function CAEServices() {
             {/* ─────── DETAIL MODAL ─────── */}
             <AnimatePresence>
                 {selectedSolution && (
-                    <DetailModal sol={selectedSolution} onClose={() => setSelectedSolution(null)} />
+                    <DetailModal
+                        sol={selectedSolution}
+                        onClose={() => setSelectedSolution(null)}
+                        labels={showcase}
+                    />
                 )}
             </AnimatePresence>
 
@@ -295,7 +314,9 @@ export default function CAEServices() {
                                 >
                                     <X size={20} />
                                 </button>
-                                <h3 className="text-lg font-bold mb-4">Filter Solutions</h3>
+                                <h3 className="text-lg font-bold mb-4">
+                                    {showcase.filterSolutions}
+                                </h3>
                                 {(
                                     Object.keys(categoryConfig) as Array<
                                         keyof typeof categoryConfig
@@ -379,6 +400,7 @@ function FilterDropdown({
                         transform: isOpen ? 'rotate(180deg)' : 'none',
                     }}
                     className="transition-transform duration-200"
+                    aria-hidden="true"
                 />
             </button>
 
@@ -528,7 +550,15 @@ function SolutionHeader({ sol, config }: { sol: Solution; config: SolutionConfig
 }
 
 /* ─── Solution Card ─── */
-function SolutionCard({ sol, onSelect }: { sol: Solution; onSelect: (s: Solution) => void }) {
+function SolutionCard({
+    sol,
+    onSelect,
+    labels,
+}: {
+    sol: Solution;
+    onSelect: (s: Solution) => void;
+    labels: Record<string, string>;
+}) {
     const config = categoryConfig[sol.category];
     return (
         <article className="psj-card group" style={{ borderLeft: `3px solid ${config.color}` }}>
@@ -580,7 +610,7 @@ function SolutionCard({ sol, onSelect }: { sol: Solution; onSelect: (s: Solution
                             className="text-[10px] uppercase tracking-widest font-bold mr-1"
                             style={{ color: 'var(--psj-text-3)' }}
                         >
-                            Software:
+                            {labels.software}
                         </span>
                         {sol.software.map((s) => (
                             <Tag key={s}>{s}</Tag>
@@ -593,13 +623,13 @@ function SolutionCard({ sol, onSelect }: { sol: Solution; onSelect: (s: Solution
                     style={{ background: 'var(--psj-surface-1)' }}
                 >
                     <div className="space-y-4">
-                        <MetaItem label="Duration" value={sol.duration} icon={Clock} />
+                        <MetaItem label={labels.duration} value={sol.duration} icon={Clock} />
                         <div>
                             <div
                                 className="text-[10px] uppercase tracking-widest font-bold mb-1"
                                 style={{ color: 'var(--psj-text-3)' }}
                             >
-                                Industry
+                                {labels.industry}
                             </div>
                             {sol.industry.slice(0, 2).map((i) => (
                                 <div
@@ -617,7 +647,7 @@ function SolutionCard({ sol, onSelect }: { sol: Solution; onSelect: (s: Solution
                             onClick={() => onSelect(sol)}
                             className="psj-btn-primary w-full justify-center"
                         >
-                            Details <ArrowRight size={12} />
+                            {labels.details} <ArrowRight size={12} />
                         </button>
                     </div>
                 </div>
@@ -627,7 +657,15 @@ function SolutionCard({ sol, onSelect }: { sol: Solution; onSelect: (s: Solution
 }
 
 /* ─── Detail Modal ─── */
-function DetailModal({ sol, onClose }: { sol: Solution; onClose: () => void }) {
+function DetailModal({
+    sol,
+    onClose,
+    labels,
+}: {
+    sol: Solution;
+    onClose: () => void;
+    labels: Record<string, string>;
+}) {
     const config = categoryConfig[sol.category];
     return (
         <>
@@ -692,7 +730,7 @@ function DetailModal({ sol, onClose }: { sol: Solution; onClose: () => void }) {
                                         className="text-[10px] uppercase tracking-widest font-bold mb-3 flex items-center gap-1.5"
                                         style={{ color: 'var(--psj-text-3)' }}
                                     >
-                                        <Settings size={12} /> Capabilities
+                                        <Settings size={12} /> {labels.capabilities}
                                     </h4>
                                     <CheckList items={sol.capabilities} />
                                 </div>
@@ -701,7 +739,7 @@ function DetailModal({ sol, onClose }: { sol: Solution; onClose: () => void }) {
                                         className="text-[10px] uppercase tracking-widest font-bold mb-3 flex items-center gap-1.5"
                                         style={{ color: 'var(--psj-text-3)' }}
                                     >
-                                        <Box size={12} /> Deliverables
+                                        <Box size={12} /> {labels.deliverables}
                                     </h4>
                                     <div className="flex flex-wrap gap-1.5">
                                         {sol.deliverables.map((d) => (
@@ -715,11 +753,11 @@ function DetailModal({ sol, onClose }: { sol: Solution; onClose: () => void }) {
                                     className="grid grid-cols-2 gap-4 pt-4"
                                     style={{ borderTop: '1px solid var(--psj-border)' }}
                                 >
-                                    <MetaItem label="Duration" value={sol.duration} />
-                                    <MetaItem label="Complexity" value={sol.complexity} />
+                                    <MetaItem label={labels.duration} value={sol.duration} />
+                                    <MetaItem label={labels.complexity} value={sol.complexity} />
                                 </div>
                                 <a href="#" className="psj-btn-primary w-full justify-center">
-                                    Request Consultation
+                                    {labels.requestConsultation}
                                 </a>
                             </div>
                         </div>

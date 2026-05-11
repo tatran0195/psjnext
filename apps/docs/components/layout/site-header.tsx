@@ -1,11 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { useTheme } from '@teispace/next-themes';
 import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'fumadocs-core/link';
 import { Menu, Moon, Sun, X } from 'lucide-react';
 
 import { TechnoStarLogo } from '@/components/icons/logo';
@@ -61,7 +61,8 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
         // Matches anything under tutorials or docs/tutorials
         if (href.includes('/tutorials')) {
             return (
-                normalizedPath.startsWith('/tutorials') || normalizedPath.includes('/docs/tutorials')
+                normalizedPath.startsWith('/tutorials') ||
+                normalizedPath.includes('/docs/tutorials')
             );
         }
 

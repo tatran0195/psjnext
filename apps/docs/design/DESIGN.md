@@ -3,6 +3,7 @@
 Design tokens extracted from CSSOM frequency analysis without LLM interpretation.
 
 ## Colors
+
 - **Color-1** (#111111): Frequency rank #1 (632 occurrences)
 - **Color-2** (#ffffff): Frequency rank #2 (365 occurrences)
 - **Color-3** (#004ea2): Frequency rank #3 (106 occurrences)
@@ -27,6 +28,7 @@ This design uses no shadows. Depth is conveyed through border contrast and surfa
 (none detected)
 
 ## Do's and Don'ts
+
 - Do maintain consistent spacing using the base grid
 - Do use the primary color only for the single most important action per screen
 - Don't mix rounded and sharp corners in the same view

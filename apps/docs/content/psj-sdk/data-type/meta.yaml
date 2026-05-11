@@ -1,9 +1,0 @@
-psj: '3.3'
-kind: group_meta
-title: 'Data Types'
-description: >
-    Common data types used across PSJ SDK.
-order:
-    - built-in
-    - pre
-icon: library

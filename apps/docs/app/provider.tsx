@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 
+import { LinkSidebarProvider } from '@/components/mdx/link-sidebar';
 import { i18nUI } from '@/lib/i18n';
 
 import { BaseProvider } from './provider.base';
@@ -20,7 +21,9 @@ export function Provider({ children, lang }: { children: ReactNode; lang: string
             i18n={i18nUI.provider(lang)}
             theme={{ enabled: true, defaultTheme: 'system', enableSystem: true }}
         >
-            <TooltipProvider>{children}</TooltipProvider>
+            <TooltipProvider>
+                <LinkSidebarProvider>{children}</LinkSidebarProvider>
+            </TooltipProvider>
         </BaseProvider>
     );
 }

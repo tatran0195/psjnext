@@ -5,9 +5,7 @@ import Link from 'fumadocs-core/link';
 import { findNeighbour } from 'fumadocs-core/page-tree';
 import { PathUtils } from 'fumadocs-core/source';
 import * as Twoslash from 'fumadocs-twoslash/ui';
-import { Banner } from 'fumadocs-ui/components/banner';
 import { Callout } from 'fumadocs-ui/components/callout';
-import { TypeTable } from 'fumadocs-ui/components/type-table';
 
 import type { ApiVersion } from '@/lib/api-versions';
 
@@ -15,10 +13,8 @@ import { NotFound } from '@/components/layouts/not-found';
 import { getMDXComponents } from '@/components/mdx';
 import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-category';
 import { LinkPreview } from '@/components/mdx/link-preview';
-import { Mermaid } from '@/components/mdx/mermaid';
 import { ParamHeader, ParamSection } from '@/components/mdx/param-badge';
 import { RibbonPath } from '@/components/mdx/ribbon-path';
-import { SymbolLink } from '@/components/mdx/symbol-link';
 import {
     DocsBody,
     DocsDescription,
@@ -113,7 +109,7 @@ export default async function Page(props: {
                     components={getMDXComponents({
                         ...Twoslash,
                         a({ href, ...props }: ComponentProps<'a'>) {
-                            if (!href) return <a {...props} />;
+                            if (!href) return <Link href={href} {...props} />;
                             const found = source.getPageByHref(href, {
                                 dir: PathUtils.dirname(page.path),
                             });
@@ -128,10 +124,6 @@ export default async function Page(props: {
                                 </LinkPreview>
                             );
                         },
-                        Banner,
-                        Mermaid,
-                        TypeTable,
-                        SymbolLink,
                         LinkPreview,
                         blockquote: Callout as unknown as FC<ComponentProps<'blockquote'>>,
                         DocsCategory: ({ url }: { url?: string }) => (

@@ -7,13 +7,9 @@ export interface ChangelogFrontmatter {
     version: string;
     title: string;
     summary: string;
+    highlights?: string[];
     tags?: string[];
-    image: {
-        src: string;
-        alt: string;
-        width: number;
-        height: number;
-    };
+    image?: string;
 }
 
 export interface ChangelogEntry extends ChangelogFrontmatter {

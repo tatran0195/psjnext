@@ -1,9 +1,0 @@
-﻿psj: '3.3'
-kind: data_type
-id: pre/class/JPT_ADVC_STRUCT_TIME_STEP
-title: 'JPT_ADVC_STRUCT_TIME_STEP'
-category: class
-description: Placeholder for JPT_ADVC_STRUCT_TIME_STEP type.
-version_introduced: '5.0.0'
-constructor_syntax: 'JPT_ADVC_STRUCT_TIME_STEP()'
-fields: []

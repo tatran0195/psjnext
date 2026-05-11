@@ -1,10 +1,12 @@
 'use client';
 
 import type { ComponentProps } from 'react';
+
 import { Sidebar as SidebarIcon } from 'lucide-react';
 
 import { GlobalHeader } from '@/components/layout/global-header';
 import { cn } from '@/lib/cn';
+
 import { useNotebookLayout } from '../client';
 
 export function Header(props: ComponentProps<'header'>) {
@@ -17,7 +19,7 @@ export function Header(props: ComponentProps<'header'>) {
             transparent={isNavTransparent && !open}
             className={cn(
                 'sticky [grid-area:header] top-(--fd-docs-row-1) layout:[--fd-header-height:104px]',
-                props.className
+                props.className,
             )}
             sidebarTrigger={
                 SidebarTrigger ? (
@@ -29,5 +31,3 @@ export function Header(props: ComponentProps<'header'>) {
         />
     );
 }
-
-
