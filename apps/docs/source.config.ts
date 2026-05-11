@@ -4,11 +4,10 @@ import { RehypeCodeOptions, remarkMdxFiles, remarkMdxMermaid } from 'fumadocs-co
 import { applyMdxPreset, defineCollections, defineConfig, defineDocs, DocCollection } from 'fumadocs-mdx/config';
 import jsonSchema from 'fumadocs-mdx/plugins/json-schema';
 import lastModified from 'fumadocs-mdx/plugins/last-modified';
-import rehypePrettyCode from 'rehype-pretty-code';
 import remarkDirective from 'remark-directive';
 import { z } from 'zod';
+import { transformerMetaHighlight, transformerRemoveNotationEscape } from '@shikijs/transformers'
 
-import { transformers } from './lib/highlight-code';
 import { remarkDirectiveAdmonition } from './lib/mdx-plugins/remark-directive-admonition';
 import { remarkDirectiveFixer } from './lib/mdx-plugins/remark-directive-fixer';
 import { remarkElementIds } from './lib/mdx-plugins/remark-element-ids';
@@ -17,7 +16,6 @@ import { remarkVersionGateParams } from './lib/mdx-plugins/remark-version-gate-p
 import { defaultShikiOptions } from './lib/shiki';
 import { docsSchema, metaSchemaWithGroup } from './lib/source/schema';
 
-import { remarkDetailsAccordion } from '@/lib/mdx-plugins/remark-details-accordion';
 import type { ElementContent } from 'hast';
 import type { ShikiTransformer } from 'shiki';
 const { rehypeCodeDefaultOptions } = await import('fumadocs-core/mdx-plugins/rehype-code');
@@ -57,7 +55,8 @@ const mdxOptions: DocCollection['mdxOptions'] = async (environment) => {
                               },
                           },
                       }),
-                      transformerEscape(),
+                      transformerRemoveNotationEscape(),
+                      transformerMetaHighlight(),
                   ],
                   lazy: false,
                   langs: ['js', 'jsx', 'ts', 'tsx', 'py', 'shell', 'bat', 'python'],
@@ -98,7 +97,7 @@ const mdxOptions: DocCollection['mdxOptions'] = async (environment) => {
         remarkPlugins: isLint
             ? [remarkElementIds]
             : [
-                  remarkDetailsAccordion,
+                //   remarkDetailsAccordion,
                   remarkDirectiveFixer,
                   remarkDirective,
                   remarkDirectiveAdmonition,
@@ -113,16 +112,6 @@ const mdxOptions: DocCollection['mdxOptions'] = async (environment) => {
               ],
         rehypePlugins: (v) => [
             rehypeKatex,
-            [
-                rehypePrettyCode,
-                {
-                    theme: {
-                        dark: 'github-dark',
-                        light: 'github-light-default',
-                    },
-                    transformers,
-                },
-            ],
             ...v,
         ],
     })(environment);
@@ -143,26 +132,6 @@ export const docs = defineDocs({
         schema: metaSchemaWithGroup,
     },
 });
-
-function transformerEscape(): ShikiTransformer {
-    return {
-        name: '@shikijs/transformers:remove-notation-escape',
-        code(hast) {
-            function replace(node: ElementContent) {
-                if (node.type === 'text') {
-                    node.value = node.value.replace('[\\!code', '[!code');
-                } else if ('children' in node) {
-                    for (const child of node.children) {
-                        replace(child);
-                    }
-                }
-            }
-
-            replace(hast);
-            return hast;
-        },
-    };
-}
 
 export const changelog = defineCollections({
     type: 'doc',
