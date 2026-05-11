@@ -194,3 +194,61 @@
 #nd-page .prose {
     @apply text-[14px];
 }
+
+/* app/globals.css (or wherever your Tailwind base lives) */
+
+@layer base {
+    .prose details {
+        @apply rounded-lg border border-fd-border bg-fd-card my-4 overflow-hidden;
+    }
+
+    .prose details summary {
+        @apply flex cursor-pointer select-none items-center justify-between
+           px-4 py-3 font-medium text-fd-foreground
+           hover:bg-fd-accent/50 transition-colors list-none;
+    }
+
+    /* remove default browser marker */
+    .prose details summary::-webkit-details-marker {
+        display: none;
+    }
+    .prose details summary::marker {
+        display: none;
+    }
+
+    /* chevron icon via pseudo-element */
+    .prose details summary::after {
+        content: '';
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        transition: transform 0.2s ease;
+    }
+
+    .prose details[open] summary::after {
+        transform: rotate(180deg);
+    }
+
+    /* content area */
+    .prose details > *:not(summary) {
+        @apply px-4 pb-4 pt-2 text-fd-muted-foreground;
+    }
+
+    /* open state — slight top border separator */
+    .prose details[open] summary {
+        @apply border-b border-fd-border;
+    }
+
+    .prose details > *:not(summary) {
+        @apply px-4 pb-4 pt-2;
+    }
+
+    /* ensure ul inside details gets indent, not reset */
+    .prose details ul {
+        @apply mt-0 pl-5;
+    }
+}
