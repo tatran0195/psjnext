@@ -19,24 +19,40 @@ export function ParamHeader({ children, ...rest }: ComponentProps<'h3'>) {
     const param = useContext(ParamContext);
 
     if (!param) return <h3 {...rest}>{children}</h3>;
-    const { isDeprecated, deprecatedMessage, note } = param;
+    const { isDeprecated, deprecatedMessage, note, type, required } = param;
 
     return (
         <>
             <h3
                 {...rest}
-                className={cn('flex flex-wrap items-center gap-2', rest.className)}
+                className={cn(
+                    'flex flex-wrap items-baseline gap-x-2 gap-y-1 mt-8 mb-1 text-[16px] font-bold group/param',
+                    '[&_[data-param-asterisk]]:hidden',
+                    rest.className,
+                )}
                 style={{ opacity: isDeprecated ? 0.55 : 1 }}
             >
-                {children}
+                <span className="text-fd-foreground [&_code]:bg-transparent [&_code]:p-0 [&_code]:border-none [&_code]:text-current [&_code]:font-bold">
+                    {children}
+                </span>
+                {type && (
+                    <span className="font-mono text-[13px] font-medium text-fd-muted-foreground/50 ml-1">
+                        {type}
+                    </span>
+                )}
+                {required && (
+                    <span className="text-[10px] font-bold text-red-600 dark:text-red-500 uppercase tracking-widest ml-1">
+                        REQUIRED
+                    </span>
+                )}
             </h3>
             {isDeprecated && deprecatedMessage && (
-                <Callout type="warn" className="whitespace-pre-wrap">
+                <Callout type="warn" className="whitespace-pre-wrap mt-2">
                     {deprecatedMessage}
                 </Callout>
             )}
             {note && (
-                <Callout type="info" className="whitespace-pre-wrap">
+                <Callout type="info" className="whitespace-pre-wrap mt-2">
                     {note}
                 </Callout>
             )}
@@ -64,6 +80,10 @@ export function ParamSection({
         !!param.deprecatedMessage;
 
     return (
-        <ParamContext.Provider value={{ ...param, isDeprecated }}>{children}</ParamContext.Provider>
+        <ParamContext.Provider value={{ ...param, isDeprecated }}>
+            <div className="border-t border-fd-border/60 first:border-none first:pt-0">
+                {children}
+            </div>
+        </ParamContext.Provider>
     );
 }

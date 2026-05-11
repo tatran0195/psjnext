@@ -167,8 +167,10 @@ export const changelog = defineCollections({
         id: z.string(),
         slug: z.string(),
         date: z.string(),
+        version: z.string(),
         title: z.string(),
         summary: z.string(),
+        tags: z.array(z.string()).optional(),
         draft: z.boolean().optional(),
         image: z.object({
             src: z.string(),

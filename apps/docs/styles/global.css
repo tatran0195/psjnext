@@ -322,6 +322,20 @@ body, #nd-page, #nd-page .prose {
     .psj-section   { @apply py-16 lg:py-24; }
     .psj-section-sm{ @apply py-10 lg:py-16; }
 
+    /* ── Subpage Hero ── */
+    .psj-subpage-hero {
+        @apply relative overflow-hidden bg-(--psj-surface-1) border-b border-(--psj-border);
+    }
+    .psj-subpage-hero::before {
+        content: '';
+        @apply absolute inset-0 pointer-events-none;
+        background-image: 
+            linear-gradient(var(--psj-grid-line) 1px, transparent 1px),
+            linear-gradient(90deg, var(--psj-grid-line) 1px, transparent 1px);
+        background-size: 32px 32px;
+        opacity: 0.5;
+    }
+
     /* ── Text helpers ── */
     .psj-label {
         font-size: var(--text-xs);
@@ -529,4 +543,39 @@ body, #nd-page, #nd-page .prose {
     .scrollbar-hide::-webkit-scrollbar { display: none; }
 
     .animate-marquee { animation: psj-marquee 40s linear infinite; }
+}
+
+/* ── Fumadocs UI Normalization (Sharp Corners) ── */
+.fd-card,
+.fd-cards > a,
+.fd-cards > div,
+.fd-search-item,
+[data-search-dialog],
+[data-search-dialog] kbd,
+[data-search-dialog] button,
+[data-search-dialog] input,
+.fd-popover,
+.fd-dialog,
+.fd-popover-content,
+.fd-dialog-content,
+.fd-hover-card-content,
+.fd-type-table,
+.fd-callout,
+.fd-banner,
+.fd-breadcrumb-item,
+.fd-toc-popover-content {
+    border-radius: 0px !important;
+}
+
+/* Search results active state */
+.fd-search-item[data-active="true"] {
+    border-radius: 0px !important;
+}
+
+/* Code block elements */
+.fd-codeblock,
+.fd-codeblock-content,
+.fd-codeblock pre,
+.fd-codeblock code {
+    border-radius: 0px !important;
 }

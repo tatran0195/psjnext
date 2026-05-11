@@ -48,7 +48,7 @@ export function DockRail({
             className={cn(
                 'group/container',
                 'relative flex flex-col gap-px w-full min-h-10',
-                'rounded-sm overflow-hidden',
+                'rounded-none overflow-hidden',
                 className,
             )}
         >

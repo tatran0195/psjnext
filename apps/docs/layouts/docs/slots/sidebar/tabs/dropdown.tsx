@@ -14,7 +14,7 @@ import { useSidebar } from '..';
 const IconBox = ({ children, className, ...props }: ComponentProps<'div'>) => (
     <div
         className={cn(
-            'flex items-center justify-center [&_svg]:size-[18px] rounded-lg size-8 shrink-0 text-(--tab-color) bg-(--tab-color)/10 border border-(--tab-color)/20 p-1.5',
+            'flex items-center justify-center [&_svg]:size-[18px] rounded-none size-8 shrink-0 text-(--tab-color) bg-(--tab-color)/10 border border-(--tab-color)/20 p-1.5',
             className,
         )}
         style={{ '--tab-color': 'var(--color-fd-primary, var(--color-fd-foreground))' } as object}
@@ -65,7 +65,7 @@ export function SidebarTabsDropdown({
                 <PopoverTrigger
                     {...props}
                     className={cn(
-                        'flex items-center gap-2 rounded-lg p-2 text-start text-fd-secondary-foreground transition-colors hover:bg-fd-accent/15 data-[state=open]:bg-fd-accent/15 data-[state=open]:text-fd-accent-foreground',
+                        'flex items-center gap-2 rounded-none p-2 text-start text-fd-secondary-foreground transition-colors hover:bg-fd-accent/15 data-[state=open]:bg-fd-accent/15 data-[state=open]:text-fd-accent-foreground',
                         props.className,
                     )}
                 >
@@ -85,7 +85,7 @@ export function SidebarTabsDropdown({
                             onClick={onClick}
                             {...item.props}
                             className={cn(
-                                'flex items-center gap-2 rounded-lg p-1.5 hover:bg-fd-accent/15 hover:text-fd-accent-foreground',
+                                'flex items-center gap-2 rounded-none p-1.5 hover:bg-fd-accent/15 hover:text-fd-accent-foreground',
                                 active && 'bg-fd-accent/15 text-fd-accent-foreground',
                             )}
                         >

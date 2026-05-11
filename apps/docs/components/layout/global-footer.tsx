@@ -11,7 +11,7 @@ export function GlobalFooter() {
         >
             {/* Top Info Section */}
             <div className="relative" style={{ padding: '4rem 0' }}>
-                <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+                <div className="psj-container">
                     <div className="flex flex-col md:flex-row items-center md:justify-start justify-center gap-8 md:gap-12">
                         <a
                             href="https://www.e-technostar.com/"
@@ -32,7 +32,7 @@ export function GlobalFooter() {
 
             {/* Bottom Copyright & Links Section */}
             <div style={{ background: 'var(--psj-surface-3)', padding: '0.75rem 0', borderTop: '1px solid var(--psj-border)' }}>
-                <div className="max-w-[1280px] mx-auto px-6 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium">
+                <div className="psj-container flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium">
                     <div style={{ color: 'var(--psj-text-3)' }}>© 2026 TechnoStar Co., Ltd.</div>
                     <div className="flex flex-wrap items-center gap-6" style={{ color: 'var(--psj-text-2)' }}>
                         {[

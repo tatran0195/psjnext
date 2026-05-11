@@ -36,7 +36,7 @@ import { createPageTreeRenderer } from './page-tree';
 import { FolderContext, type Mode, useFolderDepth, useSidebar } from './provider';
 
 const itemVariants = cva(
-    'relative flex flex-row items-center gap-2 rounded-lg p-2 text-start text-fd-muted-foreground wrap-anywhere [&_svg]:size-4 [&_svg]:shrink-0',
+    'relative flex flex-row items-center gap-2 rounded-none p-2 text-start text-fd-muted-foreground wrap-anywhere [&_svg]:size-4 [&_svg]:shrink-0',
     {
         variants: {
             variant: {
@@ -103,7 +103,7 @@ export function SidebarContent({
                     'absolute flex flex-col w-full inset-s-0 inset-y-0 items-end text-sm duration-250 *:w-(--fd-sidebar-width)',
                     navMode === 'auto' && 'bg-fd-card border-e',
                     collapsed && [
-                        'inset-y-2 rounded-xl bg-fd-card transition-transform border w-(--fd-sidebar-width)',
+                        'inset-y-2 rounded-none bg-fd-card transition-transform border w-(--fd-sidebar-width)',
                         hover
                             ? 'shadow-lg translate-x-2 rtl:-translate-x-2'
                             : '-translate-x-(--fd-sidebar-width) rtl:translate-x-full',

@@ -240,6 +240,15 @@ function wrapInParamSection(block: RootContent[], meta: ParamMeta): RootContent 
                 return [version, { visible: false }];
             }
             const active = resolveActiveRange(meta.ranges, version);
+
+            // Inherit 'required' status: if any applicable range (since <= version) has required: true,
+            // the parameter remains required.
+            const isRequired = meta.ranges.some((r) => {
+                const isApplicable = !r.since || semverGte(version, r.since);
+                const isNotRemoved = !r.removed || !semverGte(version, r.removed);
+                return isApplicable && isNotRemoved && r.required;
+            });
+
             return [
                 version,
                 {
@@ -249,7 +258,7 @@ function wrapInParamSection(block: RootContent[], meta: ParamMeta): RootContent 
                     ...(active?.deprecatedMessage && {
                         deprecatedMessage: active.deprecatedMessage,
                     }),
-                    ...(active?.required && { required: true }),
+                    required: isRequired || undefined,
                     ...(active?.note && { note: active.note }),
                     ...(meta.type && { type: meta.type }),
                 } satisfies ResolvedParam,
@@ -336,8 +345,8 @@ export const remarkVersionGateParams: Plugin<[VersionGateOptions?], Root> = (opt
                                         attributes: [
                                             {
                                                 type: 'mdxJsxAttribute',
-                                                name: 'className',
-                                                value: 'text-red-500 ml-0.5',
+                                                name: 'data-param-asterisk',
+                                                value: 'true',
                                             },
                                         ],
                                         children: [{ type: 'text', value: '*' }],

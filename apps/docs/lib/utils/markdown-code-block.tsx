@@ -189,7 +189,7 @@ function CopyButton({ code }: { code: string }) {
         <button
             type="button"
             onClick={handleCopy}
-            className="absolute top-3 right-3 p-2 rounded-md bg-muted/50 hover:bg-muted transition-colors z-10"
+            className="absolute top-3 right-3 p-2 rounded-none bg-muted/50 hover:bg-muted transition-colors z-10"
             aria-label="Copy code"
         >
             {copied ? (
@@ -249,7 +249,7 @@ export const SyntaxHighlightedPre = ({
     if (!code) {
         return (
             <pre
-                className="bg-muted p-4 rounded-lg text-sm font-mono overflow-x-auto mb-4"
+                className="bg-muted p-4 rounded-none text-sm font-mono overflow-x-auto mb-4"
                 {...props}
             >
                 {children}
@@ -262,7 +262,7 @@ export const SyntaxHighlightedPre = ({
 
     return (
         <figure
-            className="group relative mb-6 overflow-hidden rounded-lg border border-border bg-card"
+            className="group relative mb-6 overflow-hidden rounded-none border border-border bg-card"
             aria-label={
                 filename
                     ? `Code example: ${filename}`

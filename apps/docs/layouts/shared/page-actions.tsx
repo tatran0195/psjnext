@@ -245,7 +245,7 @@ export function ViewOptionsPopover({
                         href={item.href}
                         rel="noreferrer noopener"
                         target="_blank"
-                        className="text-sm p-2 rounded-lg inline-flex items-center gap-2 hover:text-fd-accent-foreground hover:bg-fd-accent [&_svg]:size-4"
+                        className="text-sm p-2 rounded-none inline-flex items-center gap-2 hover:text-fd-accent-foreground hover:bg-fd-accent [&_svg]:size-4"
                     >
                         {item.icon}
                         {item.title}

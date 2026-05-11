@@ -47,7 +47,7 @@ export const ListMenu = <T,>({ items, label, selected, setSelected }: ListMenuPr
                                 setOpen(false);
                             }}
                             className={cn(
-                                'rounded-lg text-start px-2 py-1.5',
+                                'rounded-none text-start px-2 py-1.5',
                                 isSelected
                                     ? 'text-fd-primary bg-fd-primary/10'
                                     : 'hover:text-fd-accent-foreground hover:bg-fd-accent',

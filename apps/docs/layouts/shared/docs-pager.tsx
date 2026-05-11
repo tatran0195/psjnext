@@ -23,9 +23,9 @@ export function DocsPager({ previous, next, markdownUrl }: DocsPagerProps) {
     } = useDocsPage();
 
     const buttonClass =
-        'flex size-7 items-center justify-center rounded-md bg-muted/50 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:size-8';
+        'flex size-7 items-center justify-center rounded-none bg-muted/50 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:size-8';
     const disabledClass =
-        'flex size-7 items-center justify-center rounded-md bg-muted/30 text-muted-foreground/40 cursor-not-allowed sm:size-8';
+        'flex size-7 items-center justify-center rounded-none bg-muted/30 text-muted-foreground/40 cursor-not-allowed sm:size-8';
 
     return (
         <div className="flex items-center gap-1">

@@ -29,7 +29,7 @@ export function NotFound(props: NotFoundProps) {
             <div className="mt-8 w-full">
                 <Suspense
                     fallback={
-                        <div className="overflow-hidden rounded-2xl border bg-fd-card shadow-sm">
+                        <div className="overflow-hidden rounded-none border bg-fd-card shadow-sm">
                             <div className="px-5 py-4 text-sm text-fd-muted-foreground">
                                 Finding alternatives...
                             </div>
@@ -48,7 +48,7 @@ async function Alternative({ getSuggestions }: NotFoundProps) {
 
     if (suggestions.length === 0) {
         return (
-            <div className="rounded-2xl border bg-fd-card p-8 text-center shadow-sm">
+            <div className="rounded-none border bg-fd-card p-8 text-center shadow-sm">
                 <p className="mb-4 text-sm text-fd-muted-foreground">No similar pages found.</p>
 
                 <Link href="/" className={cn(buttonVariants({ variant: 'secondary' }))}>
@@ -59,7 +59,7 @@ async function Alternative({ getSuggestions }: NotFoundProps) {
     }
 
     return (
-        <div className="overflow-hidden rounded-2xl border bg-fd-card shadow-sm">
+        <div className="overflow-hidden rounded-none border bg-fd-card shadow-sm">
             {suggestions.map((doc, index) => (
                 <Link
                     key={doc.id}
@@ -74,7 +74,7 @@ async function Alternative({ getSuggestions }: NotFoundProps) {
                         <p
                             className={cn(
                                 'text-sm font-medium leading-5 text-fd-foreground',
-                                '[&_mark]:rounded-md',
+                                '[&_mark]:rounded-none',
                                 '[&_mark]:bg-fd-primary/15',
                                 '[&_mark]:px-1',
                                 '[&_mark]:py-0.5',

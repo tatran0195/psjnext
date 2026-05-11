@@ -31,7 +31,7 @@ export function ThemeSwitch({ className, mode = 'light-dark', ...props }: ThemeS
     }, []);
 
     const container = cn(
-        'inline-flex items-center rounded-full border p-1 overflow-hidden *:rounded-full',
+        'inline-flex items-center rounded-none border p-1 overflow-hidden *:rounded-none',
         className,
     );
 

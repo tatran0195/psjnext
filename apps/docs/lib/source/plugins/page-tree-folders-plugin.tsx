@@ -66,7 +66,7 @@ function applyFolderStyles(node: Folder, metaFile: string | undefined) {
 
     const Box = ({ children }: { children: React.ReactNode }) => (
         <div
-            className="flex items-center justify-center [&_svg]:size-[18px] rounded-lg size-8 shrink-0 text-(--tab-color) bg-(--tab-color)/10 border border-(--tab-color)/20 p-1.5"
+            className="flex items-center justify-center [&_svg]:size-[18px] rounded-none size-8 shrink-0 text-(--tab-color) bg-(--tab-color)/10 border border-(--tab-color)/20 p-1.5"
             style={{ '--tab-color': color } as object}
         >
             {children}

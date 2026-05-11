@@ -44,7 +44,7 @@ export function LanguageSelect({
                         key={item.locale}
                         type="button"
                         className={cn(
-                            'px-2 py-1.5 text-start text-sm rounded-lg transition-colors',
+                            'px-2 py-1.5 text-start text-sm rounded-none transition-colors',
                             item.locale === context.locale
                                 ? 'bg-fd-primary/10 text-fd-primary'
                                 : 'text-fd-muted-foreground hover:bg-fd-accent hover:text-fd-accent-foreground',

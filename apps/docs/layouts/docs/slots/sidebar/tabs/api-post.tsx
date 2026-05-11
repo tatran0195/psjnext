@@ -371,7 +371,7 @@ export function AsidePosts({
                 // No gap — rows are stacked via negative margin-top.
                 // overflow-hidden clips the stack in collapsed state.
                 'relative flex flex-col w-full min-h-10',
-                'rounded overflow-hidden',
+                'rounded-none overflow-hidden',
                 className,
             )}
         >

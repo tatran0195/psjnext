@@ -96,7 +96,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                         'background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
                 }}
             >
-                <div className="w-full max-w-[1280px] mx-auto px-6 lg:px-10 flex items-center justify-between">
+                <div className="psj-container w-full flex items-center justify-between">
                     {/* Logo */}
                     <Link href="/landing" aria-label="e-TechnoStar Home">
                         <TechnoStarLogo variant="inline" className="h-6 sm:h-7 w-auto" />
@@ -164,7 +164,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                 border: '1px solid var(--psj-border)',
                                 background: 'transparent',
                                 color: 'var(--psj-text-2)',
-                                borderRadius: '6px',
+                                borderRadius: '0',
                                 cursor: 'pointer',
                                 transition: 'border-color 0.15s, background 0.15s',
                             }}

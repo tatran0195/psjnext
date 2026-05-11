@@ -329,7 +329,7 @@ function SearchComposition({
     setFilterQuery: (value: string) => void;
 }) {
     return (
-        <div className="inline-flex items-center gap-2 rounded-lg p-1.5 ps-2 text-sm hover:text-fd-muted-foreground transition-colors focus-within:bg-fd-accent focus-within:text-fd-accent-foreground">
+        <div className="inline-flex items-center gap-2 rounded-none p-1.5 ps-2 text-sm hover:text-fd-muted-foreground transition-colors focus-within:bg-fd-accent focus-within:text-fd-accent-foreground">
             <Search className="size-4 shrink-0 text-fd-muted-foreground" />
             <input
                 type="text"

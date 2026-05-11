@@ -5,7 +5,9 @@
    ═══════════════════════════════════════════════════════════════════════════════ */
 
 /* ── H2 accent bar ─────────────────────────────────────────────────────────── */
-#nd-page .prose h2 > a { @apply relative pl-3; }
+#nd-page .prose h2 > a {
+    @apply relative pl-3;
+}
 
 #nd-page .prose h2 > a::before {
     content: '';
@@ -20,7 +22,7 @@
 
 /* ── Inline code ────────────────────────────────────────────────────────────── */
 #nd-page :not(pre) > code {
-    background: var(--psj-surface-2);
+    /* background: var(--psj-surface-2); */
     border: 1px solid var(--psj-border);
     color: var(--psj-text-1);
     padding: 0.15em 0.45em;
@@ -32,23 +34,25 @@
 
 /* ── Code blocks ────────────────────────────────────────────────────────────── */
 #nd-page pre {
-    border: 1px solid var(--psj-border) !important;
+    /* border: 1px solid var(--psj-border) !important; */
     border-radius: 0 !important;
     font-size: 0.875rem !important;
     line-height: 1.6 !important;
-    background: var(--psj-surface-3) !important;
+    /* background: var(--psj-surface-3) !important; */
 }
-.dark #nd-page pre {
-    border-color: var(--psj-border) !important;
-    background: var(--psj-surface-3) !important;
-}
+/* .dark #nd-page pre { */
+/* border-color: var(--psj-border) !important; */
+/* background: var(--psj-surface-3) !important; */
+/* } */
 
 /* ── Cards ──────────────────────────────────────────────────────────────────── */
 .fd-card {
     border-radius: 0 !important;
     border-color: var(--psj-border);
     background: var(--psj-surface-1);
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 .fd-card:hover {
     border-color: var(--psj-blue);
@@ -110,9 +114,15 @@
     vertical-align: top;
     color: var(--psj-text-2);
 }
-#nd-page .prose tr { transition: background-color 0.15s ease; }
-#nd-page .prose tr:hover td { background: var(--psj-blue-subtle); }
-#nd-page .prose tr:last-child td { border-bottom: none; }
+#nd-page .prose tr {
+    transition: background-color 0.15s ease;
+}
+#nd-page .prose tr:hover td {
+    background: var(--psj-blue-subtle);
+}
+#nd-page .prose tr:last-child td {
+    border-bottom: none;
+}
 
 /* ── Twoslash ───────────────────────────────────────────────────────────────── */
 .twoslash-hover {
@@ -127,14 +137,20 @@
     font-family: var(--font-mono) !important;
     font-size: 0.8125rem !important;
 }
-.twoslash-popup-info:hover { border-color: var(--psj-blue) !important; }
+.twoslash-popup-info:hover {
+    border-color: var(--psj-blue) !important;
+}
 
 /* ── Search dialog ──────────────────────────────────────────────────────────── */
-#nd-searchbox { border-radius: 0 !important; }
+#nd-searchbox {
+    border-radius: 0 !important;
+}
 
 /* ── Header ─────────────────────────────────────────────────────────────────── */
 /* Ensure the Fumadocs docs header border uses the PSJ token */
-#nd-subnav [data-header-body] { border-bottom-color: var(--psj-border); }
+#nd-subnav [data-header-body] {
+    border-bottom-color: var(--psj-border);
+}
 
 /* ── Sidebar ────────────────────────────────────────────────────────────────── */
 /* Active item: left accent + blue gradient */
@@ -158,11 +174,23 @@
 
 /* ── List spacing ───────────────────────────────────────────────────────────── */
 #nd-page .prose ul,
-#nd-page .prose ol { margin: 1em 0; padding-left: 1.5em; }
-#nd-page .prose li { margin-top: 0.5em; }
+#nd-page .prose ol {
+    margin: 1em 0;
+    padding-left: 1.5em;
+}
+#nd-page .prose li {
+    margin-top: 0.5em;
+}
 
 /* ── Prose paragraph spacing ────────────────────────────────────────────────── */
 #nd-page .prose p + h2,
-#nd-page .prose ul + h2 { margin-top: 2.5em; }
+#nd-page .prose ul + h2 {
+    margin-top: 2.5em;
+}
 #nd-page .prose p + h3,
-#nd-page .prose ul + h3 { margin-top: 2em; }
+#nd-page .prose ul + h3 {
+    margin-top: 2em;
+}
+#nd-page .prose {
+    @apply text-[14px];
+}

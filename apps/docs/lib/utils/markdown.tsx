@@ -4,8 +4,10 @@ export interface ChangelogFrontmatter {
     id: string;
     slug: string;
     date: string;
+    version: string;
     title: string;
     summary: string;
+    tags?: string[];
     image: {
         src: string;
         alt: string;

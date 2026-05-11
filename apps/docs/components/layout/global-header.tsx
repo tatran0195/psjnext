@@ -9,6 +9,7 @@ import { useTreeContext, useTreePath } from 'fumadocs-ui/contexts/tree';
 
 import { SiteHeader } from '@/components/layout/site-header';
 import { cn } from '@/lib/cn';
+import { getSpecialPageBreadcrumbs } from '@/lib/breadcrumbs';
 
 export interface GlobalHeaderProps {
     transparent?: boolean;
@@ -23,13 +24,9 @@ export function GlobalHeader({ transparent = false, sidebarTrigger, className }:
     
     // Auto-resolve breadcrumbs via Fumadocs tree
     const breadcrumbItems = useMemo(() => {
-        // If we are on landing or showcase, provide hardcoded breadcrumbs to match previous implementation
-        if (pathname.includes('/landing')) {
-            return [{ name: 'Home', url: '/' }, { name: 'PSJ — Python Scripting for Jupiter' }];
-        }
-        if (pathname.includes('/showcase')) {
-            return [{ name: 'Home', url: '/' }, { name: 'Showcase', url: '/showcase' }, { name: 'CAE Solution Catalog' }];
-        }
+        // Handle special pages (landing, showcase, etc) via centralized config
+        const specialBreadcrumbs = getSpecialPageBreadcrumbs(pathname);
+        if (specialBreadcrumbs) return specialBreadcrumbs;
         
         // Use Fumadocs generic breadcrumbs
         const docsBreadcrumbs = getBreadcrumbItemsFromPath(root, path, {

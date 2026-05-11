@@ -274,7 +274,7 @@ export function StackedNav({
 
             <nav
                 aria-label={collapsedLabel}
-                className="stacked-nav group/nav relative flex flex-col gap-px mb-1 w-full min-h-10 rounded-sm overflow-hidden"
+                className="stacked-nav group/nav relative flex flex-col gap-px mb-1 w-full min-h-10 rounded-none overflow-hidden"
             >
                 {items.map((item) => (
                     <StackedNavLink key={item.href} {...item} />

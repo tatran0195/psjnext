@@ -231,7 +231,7 @@ export function DocsTitle({ children, className, ...props }: ComponentProps<'h1'
             <span className="flex-1 min-w-0">{children}</span>
             <button
                 type="button"
-                className="opacity-0 group-hover:opacity-100 transition-opacity p-2 rounded-md hover:bg-fd-muted text-fd-muted-foreground hover:text-fd-foreground shrink-0"
+                className="opacity-0 group-hover:opacity-100 transition-opacity p-2 rounded-none hover:bg-fd-muted text-fd-muted-foreground hover:text-fd-foreground shrink-0"
                 onClick={onClick}
                 aria-label="Copy title"
             >
