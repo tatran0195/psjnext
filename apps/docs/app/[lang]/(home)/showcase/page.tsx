@@ -149,11 +149,8 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                             })}
                         </div>
 
-                        <div className="flex items-center justify-between pt-2">
-                            <div
-                                className="text-[11px] uppercase tracking-widest font-bold"
-                                style={{ color: 'var(--psj-text-3)' }}
-                            >
+                        <div className="flex items-center justify-between">
+                            <div className="text-[10px] uppercase tracking-[0.15em] font-bold text-(--psj-text-3)">
                                 {showcase.showingResults
                                     .replace('{count}', filtered.length.toString())
                                     .replace('{total}', solutions.length.toString())}

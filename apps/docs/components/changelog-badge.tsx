@@ -27,7 +27,7 @@ export function ChangelogBadge({ children, variant = 'default', className }: Cha
     return (
         <span
             className={cn(
-                'inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider border align-middle mr-2',
+                'inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-[0.15em] border align-middle mr-2',
                 variants[variant],
                 className,
             )}

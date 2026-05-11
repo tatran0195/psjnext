@@ -1,12 +1,12 @@
 import type { RemarkAutoTypeTableOptions } from 'fumadocs-typescript';
 
+import { transformerMetaHighlight, transformerRemoveNotationEscape } from '@shikijs/transformers';
 import { RehypeCodeOptions, remarkMdxFiles, remarkMdxMermaid } from 'fumadocs-core/mdx-plugins';
 import { applyMdxPreset, defineCollections, defineConfig, defineDocs, DocCollection } from 'fumadocs-mdx/config';
 import jsonSchema from 'fumadocs-mdx/plugins/json-schema';
 import lastModified from 'fumadocs-mdx/plugins/last-modified';
 import remarkDirective from 'remark-directive';
 import { z } from 'zod';
-import { transformerMetaHighlight, transformerRemoveNotationEscape } from '@shikijs/transformers'
 
 import { remarkDirectiveAdmonition } from './lib/mdx-plugins/remark-directive-admonition';
 import { remarkDirectiveFixer } from './lib/mdx-plugins/remark-directive-fixer';
@@ -16,8 +16,6 @@ import { remarkVersionGateParams } from './lib/mdx-plugins/remark-version-gate-p
 import { defaultShikiOptions } from './lib/shiki';
 import { docsSchema, metaSchemaWithGroup } from './lib/source/schema';
 
-import type { ElementContent } from 'hast';
-import type { ShikiTransformer } from 'shiki';
 const { rehypeCodeDefaultOptions } = await import('fumadocs-core/mdx-plugins/rehype-code');
 const { remarkSteps } = await import('fumadocs-core/mdx-plugins/remark-steps');
 const { transformerTwoslash } = await import('fumadocs-twoslash');
@@ -97,10 +95,9 @@ const mdxOptions: DocCollection['mdxOptions'] = async (environment) => {
         remarkPlugins: isLint
             ? [remarkElementIds]
             : [
-                //   remarkDetailsAccordion,
                   remarkDirectiveFixer,
                   remarkDirective,
-                  remarkDirectiveAdmonition,
+                  [remarkDirectiveAdmonition, { types: { tip: 'idea' } }],
                   remarkMdxFiles,
                   remarkVersionGateParams,
                   remarkSteps,
@@ -110,10 +107,7 @@ const mdxOptions: DocCollection['mdxOptions'] = async (environment) => {
                   [remarkAutoTypeTable, typeTableOptions],
                   remarkTypeScriptToJavaScript,
               ],
-        rehypePlugins: (v) => [
-            rehypeKatex,
-            ...v,
-        ],
+        rehypePlugins: (v) => [rehypeKatex, ...v],
     })(environment);
 };
 

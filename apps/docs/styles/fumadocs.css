@@ -195,16 +195,14 @@
     @apply text-[14px];
 }
 
-/* app/globals.css (or wherever your Tailwind base lives) */
-
 @layer base {
     .prose details {
-        @apply rounded-lg border border-fd-border bg-fd-card my-4 overflow-hidden;
+        @apply rounded-lg border border-fd-border bg-fd-card my-2 overflow-hidden;
     }
 
     .prose details summary {
         @apply flex cursor-pointer select-none items-center justify-between
-           px-4 py-3 font-medium text-fd-foreground
+           px-4 py-2 font-medium text-fd-foreground
            hover:bg-fd-accent/50 transition-colors list-none;
     }
 
@@ -235,7 +233,7 @@
 
     /* content area */
     .prose details > *:not(summary) {
-        @apply px-4 pb-4 pt-2 text-fd-muted-foreground;
+        @apply !my-2 text-fd-muted-foreground;
     }
 
     /* open state — slight top border separator */
@@ -244,11 +242,11 @@
     }
 
     .prose details > *:not(summary) {
-        @apply px-4 pb-4 pt-2;
+        @apply px-2 py-1;
     }
 
     /* ensure ul inside details gets indent, not reset */
     .prose details ul {
-        @apply mt-0 pl-5;
+        @apply mt-0 ml-5;
     }
 }

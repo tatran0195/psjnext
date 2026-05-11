@@ -55,16 +55,12 @@ export default function ChangelogPage({ params }: { params: Promise<{ lang: stri
 
     return (
         <div className="min-h-screen" style={{ background: 'var(--psj-surface-0)', color: 'var(--psj-text-1)' }}>
-            <HeroSection
-                label={t.platformUpdates}
-                title={t.changelog}
-                description={t.changelogDescription}
-            />
+            <HeroSection label={t.platformUpdates} title={t.changelog} description={t.changelogDescription} />
 
-            <main className="psj-container py-12 lg:py-20">
+            <main className="psj-container py-10">
                 <div className="max-w-7xl mx-auto">
                     {/* ─────── INLINE FILTER BAR ─────── */}
-                    <div className="flex flex-col gap-6 mb-8 lg:mb-16">
+                    <div className="flex flex-col gap-6 mb-4 lg:mb-8">
                         {/* Primary Filter Row */}
                         <div className="flex flex-wrap items-center gap-4">
                             {/* Search */}
@@ -115,8 +111,8 @@ export default function ChangelogPage({ params }: { params: Promise<{ lang: stri
                         </div>
 
                         {/* Summary Row */}
-                        <div className="flex items-center justify-between pt-2">
-                            <div className="text-[11px] uppercase tracking-widest font-bold text-(--psj-text-3)">
+                        <div className="flex items-center justify-between">
+                            <div className="text-[10px] uppercase tracking-[0.15em] font-bold text-(--psj-text-3)">
                                 {t.showingResults
                                     .replace('{count}', filteredEntries.length.toString())
                                     .replace('{total}', sortedEntries.length.toString())}
@@ -139,7 +135,7 @@ export default function ChangelogPage({ params }: { params: Promise<{ lang: stri
                         {/* ─────── VERSION SIDEBAR ─────── */}
                         <aside className="hidden lg:block sticky top-36 max-h-[calc(100vh-160px)] overflow-y-auto pr-6 space-y-8 scrollbar-hide border-r border-(--psj-border)">
                             <div className="space-y-4">
-                                <div className="text-[11px] uppercase tracking-[0.2em] font-black text-(--psj-text-3)">
+                                <div className="text-[11px] uppercase tracking-[0.3em] font-extrabold text-(--psj-text-3)">
                                     {t.allVersions}
                                 </div>
                                 <div className="flex flex-col gap-3">
@@ -149,10 +145,10 @@ export default function ChangelogPage({ params }: { params: Promise<{ lang: stri
                                             href={`#${entry.slug}`}
                                             className="group flex flex-col gap-1 transition-all hover:translate-x-1"
                                         >
-                                            <span className="text-[13px] font-black text-(--psj-text-1) group-hover:text-(--psj-blue) transition-colors">
+                                            <span className="text-sm font-bold text-(--psj-text-1) group-hover:text-(--psj-blue) transition-colors">
                                                 {entry.version}
                                             </span>
-                                            <span className="text-[10px] font-bold text-(--psj-text-3) uppercase tracking-tighter">
+                                            <span className="text-[10px] font-semibold text-(--psj-text-3) uppercase tracking-widest">
                                                 {new Date(entry.date).toLocaleDateString(
                                                     lang === 'ja' ? 'ja-JP' : 'en-US',
                                                     {

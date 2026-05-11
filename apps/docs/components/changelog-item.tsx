@@ -36,11 +36,11 @@ export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
             id={entry.slug}
         >
             {/* Date & Version */}
-            <div className="md:sticky md:top-36 md:self-start z-10">
+            <div className="md:sticky md:top-36 md:self-start z-10 mt-2.5">
                 <div className="flex flex-col md:items-end gap-2">
                     {entry.version ? (
                         <div
-                            className="inline-block translate-y-[0.08em] px-2.5 py-1 text-[11px] font-black tracking-wider uppercase bg-(--psj-blue) text-white"
+                            className="inline-block translate-y-[0.08em] px-2.5 py-1 text-[11px] font-bold tracking-[0.1em] uppercase bg-(--psj-blue) text-white"
                             style={{
                                 boxShadow: '4px 4px 0 var(--psj-blue-subtle)',
                             }}
@@ -52,7 +52,7 @@ export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
                     )}
                     <time
                         dateTime={entry.date}
-                        className="text-xs font-bold text-(--psj-text-3) tracking-widest uppercase"
+                        className="text-[10px] font-medium text-(--psj-text-3) tracking-[0.3em] uppercase"
                     >
                         {new Date(entry.date).toLocaleDateString(dateLocale, {
                             month: 'short',
@@ -66,21 +66,23 @@ export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
             {/* Content Area */}
             <div className="space-y-8">
                 <div className="space-y-4">
-                    <div className="flex items-start justify-between gap-4">
-                        <h2 className="psj-h2 text-2xl group-hover:text-(--psj-blue) transition-colors">
+                    <div className="flex items-center justify-between gap-4">
+                        <h2 className="psj-h2 text-3xl lg:text-4xl font-black tracking-tighter group-hover:text-(--psj-blue) transition-colors">
                             <Link href={`/changelog/${entry.slug}`}>{entry.title}</Link>
                         </h2>
                         <button
                             onClick={() => handleCopyLink(entry.slug)}
-                            className="translate-y-[0.08em] p-2 hover:bg-(--psj-surface-2) rounded-full transition-colors shrink-0"
+                            className="translate-y-[0.08em] p-2 hover:bg-(--psj-surface-2) rounded-full transition-colors shrink-0 cursor-pointer"
                             title={t.copyLink}
                         >
                             <Link2 size={16} className="text-(--psj-text-3)" />
                         </button>
                     </div>
 
-                    <div className="text-base leading-relaxed opacity-90 prose prose-sm sm:prose-base dark:prose-invert max-w-none psj-prose text-(--psj-text-2)">
-                        <Markdown options={{ wrapper: 'div' }}>{entry.summary}</Markdown>
+                    <div className="text-[15px] leading-relaxed prose prose-sm sm:prose-base dark:prose-invert max-w-none psj-prose text-(--psj-text-3)">
+                        <Markdown options={{ wrapper: 'div' }} className="whitespace-pre-wrap">
+                            {entry.summary}
+                        </Markdown>
                     </div>
 
                     {entry.highlights && entry.highlights.length > 0 && (
@@ -106,12 +108,12 @@ export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
                     <div className="psj-card overflow-hidden">
                         <Link href={`/changelog/${entry.slug}`} className="block overflow-hidden relative group/image">
                             {entry.image ? (
-                                <div className="w-full aspect-[2.5/1] sm:aspect-[3.5/1] transition-transform duration-700 group-hover:scale-105 relative overflow-hidden">
+                                <div className="w-full aspect-[2.5/1] sm:aspect-[3/1] transition-transform duration-700 group-hover:scale-105 relative overflow-hidden">
                                     <NextImage src={entry.image} alt={entry.title} fill className="object-cover" />
                                 </div>
                             ) : (
                                 <div
-                                    className="w-full aspect-[2.5/1] sm:aspect-[3.5/1] flex flex-col justify-center transition-transform duration-700 group-hover:scale-105 relative overflow-hidden"
+                                    className="w-full aspect-[2.5/1] sm:aspect-[3/1] flex flex-col justify-center transition-transform duration-700 group-hover:scale-105 relative overflow-hidden"
                                     style={{
                                         background:
                                             'linear-gradient(135deg, var(--psj-surface-1) 0%, var(--psj-surface-2) 100%)',
@@ -149,7 +151,7 @@ export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
 
                         <Link
                             href={`/changelog/${entry.slug}`}
-                            className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-(--psj-blue) group/link"
+                            className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-(--psj-blue) group/link"
                         >
                             {t.readFullRelease}
                             <ChevronRight size={14} className="transition-transform group-hover/link:translate-x-1" />

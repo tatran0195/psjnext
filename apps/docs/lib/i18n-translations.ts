@@ -98,7 +98,7 @@ export const translations = {
         },
         changelog: {
             title: 'Changelog',
-            description: 'Product updates and release notes for PSJ CAE automation platform.',
+            description: 'Product updates and release notes for PSJ (Python Scripting for Jupiter).',
             searchPlaceholder: 'Search changelog...',
             filterByVersion: 'Filter by version',
             filterByTag: 'Filter by tag',
