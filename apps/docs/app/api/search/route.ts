@@ -6,7 +6,7 @@ import { createFromSource } from 'fumadocs-core/search/server';
 import { LoaderConfig, LoaderOutput } from 'fumadocs-core/source';
 import { basename, extname } from 'node:path';
 
-import { API_VERSIONS } from '@/lib/api-versions';
+import { env } from '@/env';
 import { source } from '@/lib/source';
 
 export const { GET } = createFromSource(source, {
@@ -26,7 +26,7 @@ export const { GET } = createFromSource(source, {
         const version: string =
             (page.data._version as string | undefined) ??
             page.slugs.find((s) => versionRegex.test(s)) ??
-            API_VERSIONS[0];
+            env.API_VERSIONS[0];
 
         let structuredData: StructuredData | undefined;
         if ('structuredData' in page.data) {

@@ -6,6 +6,7 @@ import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
 import { Geist_Mono, Inter, Noto_Sans_JP } from 'next/font/google';
 
 import { GlobalFooter } from '@/components/layout/global-footer';
+import { LinkSidebar } from '@/components/mdx/link-sidebar';
 import { createMetadata } from '@/lib/metadata';
 import { getSiteUrl } from '@/lib/site-url';
 import { source } from '@/lib/source';
@@ -66,8 +67,8 @@ export const viewport: Viewport = {
 
 export default async function RootLayout(props: { children: ReactNode; params: Promise<{ lang?: string }> }) {
     const params = await props.params;
-
     const lang = params.lang ?? 'en';
+
     return (
         <html
             lang={lang}
@@ -78,7 +79,10 @@ export default async function RootLayout(props: { children: ReactNode; params: P
             <Body>
                 <NextProvider>
                     <TreeContextProvider tree={source.getPageTree(lang)}>
-                        <Provider lang={lang}>{props.children}</Provider>
+                        <Provider lang={lang}>
+                            {props.children}
+                            <LinkSidebar />
+                        </Provider>
                     </TreeContextProvider>
                 </NextProvider>
                 <GlobalFooter />

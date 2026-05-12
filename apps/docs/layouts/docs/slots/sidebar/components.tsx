@@ -94,7 +94,7 @@ export function SidebarContent({ mode: allowedMode = 'full', children }: { mode?
                 data-collapsed={collapsed}
                 data-hovered={collapsed && hover}
                 className={cn(
-                    'absolute flex flex-col w-full inset-s-0 inset-y-0 items-end text-sm duration-250 *:w-(--fd-sidebar-width)',
+                    'absolute flex flex-col w-full inset-s-1 inset-y-0 items-end text-sm duration-250 *:w-(--fd-sidebar-width)',
                     navMode === 'auto' && 'bg-fd-card border-e',
                     collapsed && [
                         'inset-y-2 rounded-none bg-fd-card transition-transform border w-(--fd-sidebar-width)',

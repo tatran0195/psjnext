@@ -12,7 +12,7 @@ export type { AsidePostItem, DockRailProps } from './types';
 export function DockRail({
     items = DEFAULT_ITEMS,
     activeHref,
-    collapsedCount: rawCollapsedCount = 3,
+    collapsedCount: rawCollapsedCount = 4,
     collapsedLabel = 'Our goodies!',
     className,
     onItemClick,

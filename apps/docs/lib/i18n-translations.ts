@@ -1,6 +1,6 @@
 export const translations = {
     en: {
-        landing: {
+        enterprise: {
             heroBadge: 'PSJ v5.1 — Production Release',
             heroTitle_1: 'Python Scripting',
             heroTitle_2: 'for Jupiter',
@@ -140,7 +140,7 @@ export const translations = {
         },
     },
     ja: {
-        landing: {
+        enterprise: {
             heroBadge: 'PSJ v5.1 — プロダクションリリース',
             heroTitle_1: 'Python スクリプティング',
             heroTitle_2: 'Jupiter のために',

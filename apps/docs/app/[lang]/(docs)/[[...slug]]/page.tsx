@@ -7,17 +7,15 @@ import { PathUtils } from 'fumadocs-core/source';
 import * as Twoslash from 'fumadocs-twoslash/ui';
 import { Callout } from 'fumadocs-ui/components/callout';
 
-import type { ApiVersion } from '@/lib/api-versions';
-
 import { NotFound } from '@/components/layouts/not-found';
 import { getMDXComponents } from '@/components/mdx';
 import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-category';
 import { LinkPreview } from '@/components/mdx/link-preview';
-import { ParamHeader, ParamSection } from '@/components/mdx/param-badge';
+import { ParamHeader, ParamSection } from '@/components/mdx/param-section';
 import { RibbonPath } from '@/components/mdx/ribbon-path';
+import { env } from '@/env';
 import { DocsBody, DocsDescription, DocsPage, DocsTitle, PageLastUpdate } from '@/layouts/docs/page';
-import { DocsPager } from '@/layouts/shared/docs-pager';
-import { API_VERSIONS } from '@/lib/api-versions';
+import { DocsPageActions } from '@/layouts/shared/page-actions';
 import { createMetadata, getPageImage } from '@/lib/metadata';
 import { source } from '@/lib/source';
 
@@ -33,8 +31,10 @@ import { getSuggestions } from './suggestions';
  */
 function resolveVersion(slug: string[]): { version: string; pageSlug: string[] } {
     const [maybeVersion, ...rest] = slug;
-    const isVersionSegment = (API_VERSIONS as readonly string[]).includes(maybeVersion);
-    return isVersionSegment ? { version: maybeVersion, pageSlug: rest } : { version: API_VERSIONS[0], pageSlug: slug };
+    const isVersionSegment = (env.API_VERSIONS as readonly string[]).includes(maybeVersion);
+    return isVersionSegment
+        ? { version: maybeVersion, pageSlug: rest }
+        : { version: env.API_VERSIONS[0], pageSlug: slug };
 }
 
 export default async function Page(props: {
@@ -44,18 +44,19 @@ export default async function Page(props: {
     const params = await props.params;
     const { slug = [], lang } = params;
 
-    // Resolve page + optional API-specific MDX component overrides.
-    // let page: ReturnType<typeof source.getPage>;
     let apiMdxComponents: Partial<Parameters<typeof getMDXComponents>[0]> | undefined;
     const page = source.getPage(slug, lang);
-    if (!page)
-        return <NotFound getSuggestions={async () => (params.slug ? getSuggestions(params.slug.join(' ')) : [])} />;
+    if (!page) {
+        const query = slug.join(' ');
+        return <NotFound getSuggestions={() => getSuggestions(query)} />;
+    }
+
     if (slug[0] === 'api') {
         const { version } = resolveVersion(slug.slice(1));
         apiMdxComponents = {
             h3: (props: ComponentProps<'h3'>) => <ParamHeader {...props} />,
             ParamSection: (props: Omit<ComponentProps<typeof ParamSection>, 'currentVersion'>) => (
-                <ParamSection {...props} currentVersion={version as ApiVersion} />
+                <ParamSection {...props} currentVersion={version} />
             ),
         };
     }
@@ -75,7 +76,7 @@ export default async function Page(props: {
             <div>
                 <div className="flex flex-wrap items-start justify-between gap-4">
                     <DocsTitle className="mb-0">{page.data.title}</DocsTitle>
-                    <DocsPager
+                    <DocsPageActions
                         {...(footerPrevious && { previous: { url: footerPrevious.url } })}
                         {...(footerNext && { next: { url: footerNext.url } })}
                         markdownUrl={markdownUrl}
@@ -129,7 +130,7 @@ export async function generateMetadata(props: {
     const { slug = [], lang } = params;
 
     let querySlug = slug;
-    if (slug[0] === 'api' && (API_VERSIONS as readonly string[]).includes(slug[1])) {
+    if (slug[0] === 'api' && (env.API_VERSIONS as readonly string[]).includes(slug[1])) {
         // Strip the version segment so source.getPage can resolve the canonical page.
         querySlug = ['api', ...slug.slice(2)];
     }
@@ -170,7 +171,7 @@ export function generateStaticParams() {
         .getPages()
         .filter((p) => p.slugs[0] === 'api' && p.slugs[1] !== undefined)
         .flatMap((p) =>
-            API_VERSIONS.map((version) => ({
+            env.API_VERSIONS.map((version) => ({
                 slug: ['api', version, ...p.slugs.slice(1)],
                 lang: 'en',
             })),

@@ -1,0 +1,24 @@
+import type { ReactNode } from 'react';
+
+import * as PageTree from 'fumadocs-core/page-tree';
+
+import type { LoaderPlugin } from 'fumadocs-core/source';
+
+export type IconResolver = (icon: string | undefined) => ReactNode;
+
+export function iconPlugin(resolveIcon: IconResolver): LoaderPlugin {
+    function replaceIcon<T extends PageTree.Node>(node: T): T {
+        if (node.icon === undefined || typeof node.icon === 'string') node.icon = resolveIcon(node.icon);
+
+        return node;
+    }
+
+    return {
+        name: 'fumadocs:icon',
+        transformPageTree: {
+            file: replaceIcon,
+            folder: replaceIcon,
+            separator: replaceIcon,
+        },
+    };
+}

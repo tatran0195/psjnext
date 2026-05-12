@@ -22,7 +22,6 @@ import { ArrowRight } from 'lucide-react';
 
 import { ListMenu } from '@/components/ui/list-menu';
 import { useThrottledValue } from '@/hooks/use-throttle';
-import { API_VERSIONS } from '@/lib/api-versions';
 import { compareSemver, matchesSearch } from '@/lib/search';
 
 import type { Item, Node } from 'fumadocs-core/page-tree';
@@ -34,11 +33,6 @@ const TAGS = [
         description: 'All results',
         value: undefined,
     },
-    ...API_VERSIONS.map((version) => ({
-        name: version,
-        description: `Only results about ${version}`,
-        value: version,
-    })),
 ];
 
 const BEHAVIORS = [
@@ -54,7 +48,7 @@ const BEHAVIORS = [
     },
 ];
 
-export default function CustomSearchDialog(props: SharedProps) {
+export default function CustomSearchDialog(props: SharedProps & { versions: { label: string; value: string }[] }) {
     const { locale } = useI18n();
     const [tag, setTag] = useState<string | undefined>();
     const [behavior, setBehavior] = useState<string | undefined>();
@@ -66,7 +60,6 @@ export default function CustomSearchDialog(props: SharedProps) {
     const { full } = useTreeContext();
     const router = useRouter();
     const throttledSearch = useThrottledValue(search, 100);
-
     const searchMap = useMemo(() => {
         const map = new Map<string, Item>();
 
@@ -129,6 +122,17 @@ export default function CustomSearchDialog(props: SharedProps) {
             : null;
     }, [behavior, throttledSearch, query.data, pageTreeAction]);
 
+    const allTags = useMemo(() => {
+        return [
+            ...TAGS,
+            ...(props.versions || []).map((v) => ({
+                name: `v${v.version}`,
+                description: `Released on ${v.date ?? 'Unknown'}`,
+                value: v.version,
+            })),
+        ];
+    }, [props.versions]);
+
     return (
         <SearchDialog search={search} onSearchChange={setSearch} isLoading={query.isLoading} {...props}>
             <SearchDialogOverlay />
@@ -140,7 +144,7 @@ export default function CustomSearchDialog(props: SharedProps) {
                 </SearchDialogHeader>
                 <SearchDialogList items={searchData} />
                 <SearchDialogFooter className="flex flex-row flex-wrap gap-2 items-center">
-                    <ListMenu items={TAGS} label="Version" selected={tag} setSelected={setTag} />
+                    <ListMenu items={allTags} label="Version" selected={tag} setSelected={setTag} />
                     <ListMenu items={BEHAVIORS} label="Behavior" selected={behavior} setSelected={setBehavior} />
                 </SearchDialogFooter>
             </SearchDialogContent>

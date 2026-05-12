@@ -41,10 +41,10 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
         const normalizedPath = pathname.replace(/^\/(en|ja)/, '') || '/';
         const normalizedHref = href.replace(/^\/(en|ja)/, '');
 
-        // 1. Home / Landing Section
-        // Matches root, /en, /ja, or /landing
-        if (href === '/landing') {
-            return normalizedPath === '/' || normalizedPath === '/landing';
+        // 1. Home / Enterpise Section
+        // Matches root, /en, /ja, or /enterpise
+        if (href === '/enterpise') {
+            return normalizedPath === '/' || normalizedPath === '/enterpise';
         }
 
         // 2. Fundamentals Section
@@ -95,7 +95,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             >
                 <div className="psj-container w-full flex items-center justify-between">
                     {/* Logo */}
-                    <Link href="/landing" aria-label="e-TechnoStar Home">
+                    <Link href="/enterpise" aria-label="e-TechnoStar Home">
                         <TechnoStarLogo variant="inline" className="h-6 sm:h-7 w-auto" />
                     </Link>
 

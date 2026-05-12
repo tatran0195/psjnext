@@ -1,6 +1,3 @@
-export const API_VERSIONS = process.env.VERSIONS ? process.env.VERSIONS.split(',') : ['5.1.0'];
-export type ApiVersion = (typeof API_VERSIONS)[number];
-
 export type VersionStatus = 'available' | 'deprecated' | 'removed' | 'unavailable';
 
 function parseSemver(v: string): [number, number, number] {

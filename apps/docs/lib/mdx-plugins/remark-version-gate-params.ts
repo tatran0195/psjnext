@@ -1,14 +1,15 @@
 import { valueToEstree } from 'estree-util-value-to-estree';
 
-import { API_VERSIONS, semverGte } from '@/lib/api-versions';
+import { semverGte } from '@/lib/api-versions';
 
 import { flattenNode, getVersionStatus } from './utils';
 
+import { env } from '@/env';
 import type { Heading, PhrasingContent, Root, RootContent } from 'mdast';
 import type { MdxjsEsm } from 'mdast-util-mdx';
 import type { Plugin, Transformer } from 'unified';
 
-// ─── Public API ───────────────────────────────────────────────────────────────
+// ─── Public API
 
 export interface VersionGateOptions {
     /** Minimum heading depth that starts a param section. Default: 3. */
@@ -61,7 +62,7 @@ interface StructuredData {
     contents: StructuredDataContent[];
 }
 
-// ─── Constants ────────────────────────────────────────────────────────────────
+// ─── Constants─
 
 const DEFAULTS = {
     minHeadingDepth: 3,
@@ -70,7 +71,7 @@ const DEFAULTS = {
 
 const ANNOTATION_RE = /@(?:since|removed|deprecated|type|required|optional|inputs?|note)/i;
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+// ─── Helpers───
 
 function isHeading(node: RootContent): node is Heading {
     return node.type === 'heading';
@@ -235,7 +236,7 @@ function resolveActiveRange(ranges: VersionRange[], version: string): VersionRan
 // Replace wrapInParamSection
 function wrapInParamSection(block: RootContent[], meta: ParamMeta): RootContent {
     const versionMap: Record<string, ResolvedParam> = Object.fromEntries(
-        API_VERSIONS.map((version) => {
+       env.API_VERSIONS.map((version) => {
             if (!isVisibleAt(meta, version)) {
                 return [version, { visible: false }];
             }
@@ -280,7 +281,7 @@ function wrapInParamSection(block: RootContent[], meta: ParamMeta): RootContent 
     } as unknown as RootContent;
 }
 
-// ─── Plugin ───────────────────────────────────────────────────────────────────
+// ─── Plugin────
 
 export const remarkVersionGateParams: Plugin<[VersionGateOptions?], Root> = (options) => {
     const { minHeadingDepth, exportParamMeta } = { ...DEFAULTS, ...options };
@@ -394,7 +395,7 @@ export const remarkVersionGateParams: Plugin<[VersionGateOptions?], Root> = (opt
         const paramSlots = slots.filter((s): s is ParamSlot => s.kind === 'param');
 
         const versionedStructuredData = Object.fromEntries(
-            API_VERSIONS.map((version) => {
+            env.API_VERSIONS.map((version) => {
                 const headings = [...sharedHeadings];
                 const contents = [...sharedContents];
 

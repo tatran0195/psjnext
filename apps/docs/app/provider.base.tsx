@@ -1,6 +1,7 @@
 'use client';
 
-import { lazy, type ReactNode } from 'react';
+import dynamic from 'next/dynamic';
+import { type ReactNode } from 'react';
 
 import { ThemeProvider, type ThemeProviderProps } from '@teispace/next-themes';
 import { DefaultSearchDialogProps } from 'fumadocs-ui/components/dialog/search-default';
@@ -9,51 +10,39 @@ import { SearchProvider, SearchProviderProps } from 'fumadocs-ui/contexts/search
 
 interface SearchOptions extends Omit<SearchProviderProps, 'options' | 'children'> {
     options?: Partial<DefaultSearchDialogProps>;
-
-    /**
-     * Enable search functionality
-     *
-     * @defaultValue `true`
-     */
     enabled?: boolean;
+    versions?: { version: string; date: string }[];
 }
 
 interface ThemeOptions extends ThemeProviderProps {
-    /**
-     * Enable `next-themes`
-     *
-     * @defaultValue true
-     */
     enabled?: boolean;
 }
 
 export interface RootProviderProps {
-    /**
-     * @remarks `SearchProviderProps`
-     */
     search?: Partial<SearchOptions>;
-
-    /**
-     * Customize options for `next-themes`
-     */
     theme?: ThemeOptions;
-
     i18n?: Omit<I18nProviderProps, 'children'>;
-
     children?: ReactNode;
 }
 
-const DefaultSearchDialog = lazy(() => import('fumadocs-ui/components/dialog/search-default'));
+const SearchDialogComponent = dynamic(() => import('@/components/layouts/search'), {
+    ssr: false,
+});
 
 export function BaseProvider({ children, theme = {}, search, i18n }: RootProviderProps) {
     let body = children;
 
-    if (search?.enabled !== false)
+    if (search?.enabled !== false) {
+        const SearchDialog = (props: DefaultSearchDialogProps) => {
+            return <SearchDialogComponent {...props} versions={search?.versions ?? []} />;
+        };
+
         body = (
-            <SearchProvider SearchDialog={DefaultSearchDialog} {...search}>
+            <SearchProvider SearchDialog={SearchDialog} {...search}>
                 {body}
             </SearchProvider>
         );
+    }
 
     if (theme?.enabled !== false)
         body = (

@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
 
 import { Archive, Tag } from 'lucide-react';
 
-import { API_VERSIONS, getVersionStatus } from '@/lib/api-versions';
+import { env } from '@/env';
+import { getVersionStatus } from '@/lib/api-versions';
 
 import type { StructuredData } from 'fumadocs-core/mdx-plugins';
 import type * as PageTree from 'fumadocs-core/page-tree';
@@ -36,15 +37,6 @@ function nodeStoragePath(node: { $id?: string }): string {
     const colonIdx = id.indexOf(':');
     return colonIdx !== -1 ? id.slice(colonIdx + 1) : id;
 }
-
-// const Box = ({ children, color }: { children: React.ReactNode; color: string }) => (
-//     <div
-//         className="flex items-center justify-center [&_svg]:size-[18px] rounded-lg size-8 shrink-0 text-(--tab-color) bg-(--tab-color)/10 border border-(--tab-color)/20 p-1.5"
-//         style={{ '--tab-color': color } as object}
-//     >
-//         {children}
-//     </div>
-// );
 
 /**
  * Resolve sidebar icon and label for a version by its position in API_VERSIONS.
@@ -115,6 +107,8 @@ function installStructuredDataGetter(
         enumerable: false,
     });
 }
+
+const API_VERSIONS = env.API_VERSIONS;
 
 export function versionPlugin(): LoaderPlugin {
     const isMultiVersion = API_VERSIONS.length > 1;

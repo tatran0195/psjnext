@@ -40,9 +40,10 @@ export interface SidebarProps extends ComponentProps<'aside'> {
     banner?: ReactNode | FC<ComponentProps<'div'>>;
     footer?: ReactNode | FC<ComponentProps<'div'>>;
     collapsible?: boolean;
+    searchable?: boolean;
 }
 
-export function Sidebar({ banner, footer, components, collapsible = true, ...rest }: SidebarProps) {
+export function Sidebar({ banner, footer, components, collapsible = true, searchable = true, ...rest }: SidebarProps) {
     const {
         menuItems,
         slots,
@@ -189,18 +190,19 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                 />
                             )}
 
-                            <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
-                            {/* <DockRail
-                                items={nestedTabs[1].tabs.map((i) => ({
+                            <DockRail
+                                items={nestedTabs[1]?.tabs.map((i) => ({
                                     href: i.url,
                                     text: i.title?.toString() || '',
                                     icon: i.icon,
                                 }))}
-                                collapsedCount={3}
-                                activeHref={nestedTabs[1].tabs[1].url}
-                            /> */}
-                            <DockRail collapsedCount={4} />
+                                activeHref={lastActiveTab?.url}
+                            />
                             <VersionSwitcher />
+
+                            {searchable && (
+                                <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
+                            )}
 
                             {/* {nestedTabs.map((level, i) => (
                                 <SidebarTabsDropdown
@@ -256,7 +258,9 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                             {nestedTabs.map((level, i) => (
                                 <SidebarTabsDropdown key={i} options={level.tabs} activeItem={level.active} />
                             ))}
-                            <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
+                            {searchable && (
+                                <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
+                            )}{' '}
                         </>
                     ),
                 })}
@@ -303,18 +307,25 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
 function SearchComposition({
     filterQuery,
     setFilterQuery,
+    className,
 }: {
     filterQuery: string;
     setFilterQuery: (value: string) => void;
+    className?: string;
 }) {
     return (
-        <div className="inline-flex items-center gap-2 rounded-none p-1.5 ps-2 text-sm hover:text-fd-muted-foreground transition-colors focus-within:bg-fd-accent focus-within:text-fd-accent-foreground">
+        <div
+            className={cn(
+                'inline-flex items-center gap-2 rounded-none p-1.5 ps-2 text-sm hover:text-fd-muted-foreground transition-colors focus-within:bg-fd-accent focus-within:text-fd-accent-foreground',
+                className,
+            )}
+        >
             <Search className="size-4 shrink-0 text-fd-muted-foreground" />
             <input
                 type="text"
                 value={filterQuery}
                 onChange={(e) => setFilterQuery(e.target.value)}
-                placeholder="Filter composition..."
+                placeholder="Filter..."
                 className="w-full min-w-0 bg-transparent outline-none placeholder:text-fd-muted-foreground"
             />
         </div>
@@ -323,3 +334,4 @@ function SearchComposition({
 
 export * from './components';
 export * from './provider';
+

@@ -22,6 +22,96 @@ import {
     ZapIcon,
 } from 'lucide-react';
 
+```mermaid
+flowchart LR
+
+    %% Root
+    root[PSJ DATA TYPE]
+
+    %% Level 2 Main Categories
+    cmd[PSJ-Command type]
+    util[PSJ-Utility type]
+    gui[PSJ-GUI type]
+
+    %% Level 3 Sub Categories
+    preUtil[Pre-Utility type]
+    postUtil[Post-Utility type]
+
+    %% Level 4 Green category nodes
+    cmd_builtin[Built-in type]
+    cmd_enum[Enumeration type]
+    pre_builtin[Built-in type]
+    pre_enum[Enumeration type]
+    post_builtin[Built-in type]
+    post_enum[Enumeration type]
+    gui_builtin[Built-in type]
+
+
+    %% ===================== HIERARCHY CONNECTIONS =====================
+    root --> cmd
+    root --> util
+    root --> gui
+
+    %% PSJ Command Branch
+    cmd --> cmd_builtin
+    cmd --> cmd_enum
+    cmd_builtin --> py_std[Python standard<br/>built-in type]
+    cmd_builtin --> jup_adv[Jupiter advanced<br/>built-in type]
+    cmd_enum --> item[Item type]
+    cmd_enum --> elem[Element type]
+    cmd_enum --> mesh[Data structure of<br/>mesh and analysis]
+
+    %% Pre-Utility Branch
+    util --> preUtil
+    util --> postUtil
+    preUtil --> pre_builtin
+    preUtil --> pre_enum
+    pre_builtin --> pretype[Pre type]
+    pre_enum --> unit[Unit]
+    pre_enum --> pick[Associated pick]
+    pre_enum --> path[Path]
+    pre_enum --> table[Table]
+    pre_enum --> bool[Boolean]
+    pre_enum --> msgbox[Message box]
+    pre_enum --> select[Select method]
+
+    %% Post-Utility Branch
+    postUtil --> post_builtin
+    postUtil --> post_enum
+    post_builtin --> posttype[Post type]
+    post_builtin --> post_opt[Post data option]
+    post_builtin --> post_step[Post time step]
+
+    post_enum --> job[Post job]
+    post_enum --> analysis[Post analysis]
+    post_enum --> range[Post data range]
+    post_enum --> location[Post data location]
+    post_enum --> convert[Post data conversion]
+    post_enum --> continuous[Post data continuous]
+    post_enum --> coord[Post data coordinate]
+    post_enum --> d1[Post data 1D]
+    post_enum --> d2[Post data 2D]
+    post_enum --> complex[Post data complex]
+
+    %% GUI Branch
+    gui --> gui_builtin
+    gui_builtin --> guiobj[GUI object]
+
+
+    %% ===================== EXACT COLOR MATCH =====================
+    classDef rootNode fill:#b3d0ed,stroke:#4477aa,stroke-width:3px,font-weight:bold
+    classDef level2 fill:#f7c9a9,stroke:#b85000,stroke-width:2px
+    classDef level3 fill:#ffdd88,stroke:#b09000,stroke-width:2px
+    classDef category fill:#b9d9a3,stroke:#508030,stroke-width:2px
+    classDef leaf fill:#f9adff,stroke:#ff22aa,stroke-width:2px
+
+    class root rootNode
+    class cmd,util,gui level2
+    class preUtil,postUtil level3
+    class cmd_builtin,cmd_enum,pre_builtin,pre_enum,post_builtin,post_enum,gui_builtin category
+    class py_std,jup_adv,item,elem,mesh,pretype,unit,pick,path,table,bool,msgbox,select,posttype,post_opt,post_step,job,analysis,range,location,convert,continuous,coord,d1,d2,complex,guiobj leaf
+```
+
 ## Why PSJ exists
 
 CAE workflows have a natural tension: the software is powerful, but repetitive work is slow, error-prone, and hard to

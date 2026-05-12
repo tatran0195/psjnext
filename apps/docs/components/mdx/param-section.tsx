@@ -6,7 +6,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 import type { ResolvedParam } from '@/lib/mdx-plugins/remark-version-gate-params';
 
-import { semverGte, type ApiVersion } from '@/lib/api-versions';
+import { semverGte } from '@/lib/api-versions';
 import { cn } from '@/lib/cn';
 
 interface ParamContextValue extends ResolvedParam {
@@ -67,7 +67,7 @@ export function ParamSection({
 }: {
     children: React.ReactNode;
     versionMap: string;
-    currentVersion: ApiVersion;
+    currentVersion: string;
 }) {
     const param: ResolvedParam = JSON.parse(versionMap)[currentVersion];
 

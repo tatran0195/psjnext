@@ -29,75 +29,72 @@ import { SectionHeader } from '@/components/sections/section-header';
 import { StatCard } from '@/components/sections/stat-card';
 import { translations } from '@/lib/i18n-translations';
 
-/* ═══════════════════════════════════════════════════════════════════════════════
-   PAGE
-   ═══════════════════════════════════════════════════════════════════════════════ */
-export default function LandingPage({ params: { lang } }: { params: { lang: string } }) {
+export default function EnterprisePage({ params: { lang } }: { params: { lang: string } }) {
     const t = translations[lang as keyof typeof translations] || translations.en;
-    const { landing } = t;
+    const { enterprise } = t;
 
     const modules = [
         {
             icon: Play,
-            label: landing.module_1_label,
-            desc: landing.module_1_desc,
+            label: enterprise.module_1_label,
+            desc: enterprise.module_1_desc,
             color: 'var(--color-brand-cyan)',
         },
         {
             icon: Terminal,
-            label: landing.module_2_label,
-            desc: landing.module_2_desc,
+            label: enterprise.module_2_label,
+            desc: enterprise.module_2_desc,
             color: 'var(--color-brand-purple)',
         },
         {
             icon: Cpu,
-            label: landing.module_3_label,
-            desc: landing.module_3_desc,
+            label: enterprise.module_3_label,
+            desc: enterprise.module_3_desc,
             color: 'var(--color-brand-green)',
         },
         {
             icon: MousePointerClick,
-            label: landing.module_4_label,
-            desc: landing.module_4_desc,
+            label: enterprise.module_4_label,
+            desc: enterprise.module_4_desc,
             color: 'var(--color-brand-orange)',
         },
         {
             icon: Terminal,
-            label: landing.module_5_label,
-            desc: landing.module_5_desc,
+            label: enterprise.module_5_label,
+            desc: enterprise.module_5_desc,
             color: 'var(--color-brand-yellow)',
         },
         {
             icon: Code2,
-            label: landing.module_6_label,
-            desc: landing.module_6_desc,
+            label: enterprise.module_6_label,
+            desc: enterprise.module_6_desc,
             color: 'var(--color-brand-blue)',
         },
     ];
 
     const fourF = [
         {
-            label: landing.phiFriendly_label,
-            sub: landing.phiFriendly_sub,
-            desc: landing.phiFriendly_desc,
+            label: enterprise.phiFriendly_label,
+            sub: enterprise.phiFriendly_sub,
+            desc: enterprise.phiFriendly_desc,
             icon: MousePointerClick,
         },
         {
-            label: landing.phiFast_label,
-            sub: landing.phiFast_sub,
-            desc: landing.phiFast_desc,
+            label: enterprise.phiFast_label,
+            sub: enterprise.phiFast_sub,
+            desc: enterprise.phiFast_desc,
             icon: Zap,
         },
         {
-            label: landing.phiFunctional_label,
-            sub: landing.phiFunctional_sub,
-            desc: landing.phiFunctional_desc,
+            label: enterprise.phiFunctional_label,
+            sub: enterprise.phiFunctional_sub,
+            desc: enterprise.phiFunctional_desc,
             icon: Wrench,
         },
         {
-            label: landing.phiFlexible_label,
-            sub: landing.phiFlexible_sub,
-            desc: landing.phiFlexible_desc,
+            label: enterprise.phiFlexible_label,
+            sub: enterprise.phiFlexible_sub,
+            desc: enterprise.phiFlexible_desc,
             icon: Settings,
         },
     ];
@@ -142,16 +139,16 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                         className="text-[10px] uppercase tracking-[0.25em] font-bold"
                                         style={{ color: 'var(--psj-blue)' }}
                                     >
-                                        {landing.heroBadge}
+                                        {enterprise.heroBadge}
                                     </span>
                                 </div>
                             </FadeUp>
 
                             <FadeUp delay={80}>
                                 <h1 className="psj-h1 text-balance mb-6" style={{ color: 'var(--psj-text-1)' }}>
-                                    {landing.heroTitle_1}
+                                    {enterprise.heroTitle_1}
                                     <br />
-                                    <span style={{ color: 'var(--psj-blue)' }}>{landing.heroTitle_2}</span>
+                                    <span style={{ color: 'var(--psj-blue)' }}>{enterprise.heroTitle_2}</span>
                                 </h1>
                             </FadeUp>
 
@@ -160,17 +157,17 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                     className="text-lg leading-relaxed max-w-xl mb-10 text-balance"
                                     style={{ color: 'var(--psj-text-2)' }}
                                 >
-                                    {landing.heroDesc}
+                                    {enterprise.heroDesc}
                                 </p>
                             </FadeUp>
 
                             <FadeUp delay={240}>
                                 <div className="flex flex-wrap gap-4">
                                     <Link href="/docs" className="psj-btn-primary">
-                                        {landing.heroGetStarted} <ArrowRight size={15} />
+                                        {enterprise.heroGetStarted} <ArrowRight size={15} />
                                     </Link>
                                     <Link href="/tutorials" className="psj-btn-secondary">
-                                        <Play size={15} /> {landing.heroViewTutorials}
+                                        <Play size={15} /> {enterprise.heroViewTutorials}
                                     </Link>
                                 </div>
                             </FadeUp>
@@ -183,7 +180,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                         color: 'var(--psj-text-3)',
                                     }}
                                 >
-                                    {landing.heroChecklist.map((t) => (
+                                    {enterprise.heroChecklist.map((t) => (
                                         <span key={t} className="flex items-center gap-1.5">
                                             <CheckCircle2 size={11} style={{ color: 'var(--psj-blue)' }} /> {t}
                                         </span>
@@ -222,7 +219,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                         ))}
                                     </div>
                                     <span className="font-mono text-[10px]" style={{ color: 'var(--psj-text-3)' }}>
-                                        {landing.heroCodeFilename}
+                                        {enterprise.heroCodeFilename}
                                     </span>
                                     <span
                                         className="text-[10px] font-medium px-2 py-0.5"
@@ -231,7 +228,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                             color: 'var(--psj-text-3)',
                                         }}
                                     >
-                                        {landing.heroCodeLanguage}
+                                        {enterprise.heroCodeLanguage}
                                     </span>
                                 </div>
                                 {/* Code */}
@@ -319,9 +316,9 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                                 display: 'inline-block',
                                             }}
                                         />
-                                        {landing.heroCodeStatusBar_1}
+                                        {enterprise.heroCodeStatusBar_1}
                                     </span>
-                                    <span>{landing.heroCodeStatusBar_2}</span>
+                                    <span>{enterprise.heroCodeStatusBar_2}</span>
                                 </div>
                             </div>
                         </FadeUp>
@@ -343,23 +340,23 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                     >
                         <StatCard
                             icon={<Award size={13} />}
-                            value={landing.stats_1_value}
-                            label={landing.stats_1_label}
+                            value={enterprise.stats_1_value}
+                            label={enterprise.stats_1_label}
                         />
                         <StatCard
                             icon={<Users size={13} />}
-                            value={landing.stats_2_value}
-                            label={landing.stats_2_label}
+                            value={enterprise.stats_2_value}
+                            label={enterprise.stats_2_label}
                         />
                         <StatCard
                             icon={<Building2 size={13} />}
-                            value={landing.stats_3_value}
-                            label={landing.stats_3_label}
+                            value={enterprise.stats_3_value}
+                            label={enterprise.stats_3_label}
                         />
                         <StatCard
                             icon={<TrendingUp size={13} />}
-                            value={landing.stats_4_value}
-                            label={landing.stats_4_label}
+                            value={enterprise.stats_4_value}
+                            label={enterprise.stats_4_label}
                         />
                     </div>
                 </div>
@@ -379,19 +376,19 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                         {/* Left */}
                         <div className="lg:col-span-4">
                             <FadeUp>
-                                <div className="psj-label mb-4">{landing.phiLabel}</div>
+                                <div className="psj-label mb-4">{enterprise.phiLabel}</div>
                                 <h2 className="psj-h2 text-balance mb-6" style={{ color: 'var(--psj-text-1)' }}>
-                                    {landing.phiTitle}
+                                    {enterprise.phiTitle}
                                 </h2>
                                 <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--psj-text-2)' }}>
-                                    {landing.phiDesc}
+                                    {enterprise.phiDesc}
                                 </p>
                                 <Link
                                     href="/docs"
                                     className="group inline-flex items-center gap-2 text-sm font-bold transition-colors"
                                     style={{ color: 'var(--psj-blue)' }}
                                 >
-                                    {landing.phiReadDocs}
+                                    {enterprise.phiReadDocs}
                                     <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </FadeUp>
@@ -448,10 +445,10 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
             >
                 <div className="psj-container psj-section">
                     <SectionHeader
-                        label={landing.moduleHeader_label}
-                        title={landing.moduleHeader_title}
+                        label={enterprise.moduleHeader_label}
+                        title={enterprise.moduleHeader_title}
                         link="/docs"
-                        linkLabel={landing.moduleHeader_linkLabel}
+                        linkLabel={enterprise.moduleHeader_linkLabel}
                     />
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                         {modules.map((m, i) => (
@@ -485,7 +482,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                         className="inline-flex items-center gap-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-all translate-y-1 group-hover:translate-y-0"
                                         style={{ color: 'var(--psj-blue)' }}
                                     >
-                                        {landing.exploreModule} <ChevronRight size={12} />
+                                        {enterprise.exploreModule} <ChevronRight size={12} />
                                     </Link>
                                 </div>
                             </FadeUp>
@@ -506,12 +503,12 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                 <div className="psj-container psj-section-sm">
                     <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12">
                         <div className="shrink-0 max-w-xs">
-                            <div className="psj-label mb-3">{landing.industryHeader_label}</div>
+                            <div className="psj-label mb-3">{enterprise.industryHeader_label}</div>
                             <h3 className="psj-h3 text-balance mb-4" style={{ color: 'var(--psj-text-1)' }}>
-                                {landing.industryHeader_title}
+                                {enterprise.industryHeader_title}
                             </h3>
                             <p className="text-sm leading-relaxed" style={{ color: 'var(--psj-text-2)' }}>
-                                {landing.industryHeader_desc}
+                                {enterprise.industryHeader_desc}
                             </p>
                         </div>
                         <div className="flex-1 grid grid-cols-2 sm:grid-cols-5 gap-4">
@@ -532,7 +529,7 @@ export default function LandingPage({ params: { lang } }: { params: { lang: stri
                                         className="text-[10px] uppercase tracking-widest font-bold mt-1 num-marker"
                                         style={{ color: 'var(--psj-text-3)' }}
                                     >
-                                        {ind.clients} {landing.industryClients}
+                                        {ind.clients} {enterprise.industryClients}
                                     </div>
                                 </div>
                             ))}

@@ -18,12 +18,12 @@ import { I18nLabel, useI18n } from 'fumadocs-ui/contexts/i18n';
 import { useTreePath } from 'fumadocs-ui/contexts/tree';
 import { ChevronDown, Text } from 'lucide-react';
 
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { useNotebookLayout } from '@/layouts/docs/client';
 import { cn } from '@/lib/cn';
 import { mergeRefs } from '@/lib/merge-refs';
 
-import { TOCItems, TOCEmpty, TOCItem } from './toc-clerk';
+import { TOCEmpty, TOCItem, TOCItems } from './toc-clerk';
 
 const TOCContext = createContext<Primitive.TOCItemType[]>([]);
 
@@ -154,7 +154,7 @@ export function TOC({ container, header, footer }: TOCProps) {
             id="nd-toc"
             {...container}
             className={cn(
-                'sticky top-(--fd-docs-row-3) [grid-area:toc] h-[calc(var(--fd-docs-height)-var(--fd-docs-row-3))] flex flex-col w-(--fd-toc-width) pt-12 pe-4 pb-2 xl:layout:[--fd-toc-width:268px] max-xl:hidden',
+                'sticky top-(--fd-docs-row-3) [grid-area:toc] h-[calc(var(--fd-docs-height)-var(--fd-docs-row-3))] flex flex-col w-(--fd-toc-width) pt-10 pe-4 pb-2 xl:layout:[--fd-toc-width:268px] max-xl:hidden',
                 container?.className,
             )}
         >

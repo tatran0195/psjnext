@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import * as Twoslash from 'fumadocs-twoslash/ui';
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { Banner } from 'fumadocs-ui/components/banner';
@@ -27,7 +29,11 @@ export function getMDXComponents(components?: MDXComponents) {
         Accordions,
         RibbonPath,
         Banner,
-        Mermaid,
+        Mermaid: ({ chart }: { chart: string }) => (
+            <Suspense fallback={<div className="h-40 animate-pulse rounded-lg bg-fd-muted" />}>
+                <Mermaid chart={chart} />
+            </Suspense>
+        ),
         TypeTable,
         SymbolLink,
         LinkPreview,

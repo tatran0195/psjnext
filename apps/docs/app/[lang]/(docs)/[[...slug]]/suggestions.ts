@@ -1,4 +1,5 @@
-import type { Suggestion } from '@/components/layouts/not-found';
+import { Suggestion } from '@/components/layouts/not-found';
+import { env } from '@/env';
 
 interface SearchResult {
     id: string;
@@ -57,8 +58,7 @@ export async function getSuggestions(pathname: string): Promise<Suggestion[]> {
     try {
         const params = new URLSearchParams({ query });
 
-        const baseUrl =
-            typeof window !== 'undefined' ? '' : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+        const baseUrl = typeof window !== 'undefined' ? '' : env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
         const res = await fetch(`${baseUrl}/api/search?${params}`, {
             next: {

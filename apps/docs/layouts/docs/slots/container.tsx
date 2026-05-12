@@ -6,6 +6,29 @@ import { cn } from '@/lib/cn';
 
 import { useNotebookLayout } from '../client';
 
+const PAGE_COLS = 'calc(var(--fd-layout-width,97rem) - var(--fd-sidebar-col) - var(--fd-toc-width))';
+
+const LAYOUT_TEMPLATES = {
+    fluid: {
+        top: `"header header header"
+            "sidebar toc-popover toc-popover"
+            "sidebar main toc" 1fr / var(--fd-sidebar-col) 1fr var(--fd-toc-width)`,
+        side: `"sidebar header header"
+            "sidebar toc-popover toc-popover"
+            "sidebar main toc" 1fr / var(--fd-sidebar-col) 1fr var(--fd-toc-width)`,
+    },
+    container: {
+        top: `". header header header ."
+"sidebar sidebar toc-popover toc-popover ."
+"sidebar sidebar main toc ." 1fr / minmax(min-content, 1fr) var(--fd-sidebar-col) minmax(0, ${PAGE_COLS}) var(--fd-toc-width) minmax(min-content, 1fr)`,
+        side: `"sidebar sidebar header header ."
+"sidebar sidebar toc-popover toc-popover ."
+"sidebar sidebar main toc ." 1fr / minmax(min-content, 1fr) var(--fd-sidebar-col) minmax(0, ${PAGE_COLS}) var(--fd-toc-width) minmax(min-content, 1fr)`,
+    },
+};
+
+const layout: keyof typeof LAYOUT_TEMPLATES = 'fluid';
+
 export function Container(props: ComponentProps<'div'>) {
     const {
         props: { nav },
@@ -14,9 +37,7 @@ export function Container(props: ComponentProps<'div'>) {
     const { collapsed } = slots.sidebar?.useSidebar?.() ?? {};
     const [previousCollapsed, setPreviousCollapsed] = useState(collapsed);
     const isCollapseChanged = previousCollapsed !== collapsed;
-    const pageCol = 'calc(var(--fd-layout-width,97rem) - var(--fd-sidebar-col) - var(--fd-toc-width))';
 
-    // will only set data attribute for an instant
     useEffect(() => {
         if (isCollapseChanged) setPreviousCollapsed(collapsed);
     }, [collapsed, isCollapseChanged]);
@@ -29,25 +50,7 @@ export function Container(props: ComponentProps<'div'>) {
             {...props}
             style={
                 {
-                    gridTemplate:
-                        //     nav?.mode === 'top'
-                        //         ? `"header header header"
-                        //             "sidebar toc-popover toc-popover"
-                        //             "sidebar main toc" 1fr / var(--fd-sidebar-col) 1fr var(--fd-toc-width)`
-                        //         : `"sidebar header header"
-                        //             "sidebar toc-popover toc-popover"
-                        //             "sidebar main toc" 1fr / var(--fd-sidebar-col) 1fr var(--fd-toc-width)`,
-                        // '--fd-docs-row-1': 'var(--fd-banner-height, 0px)',
-                        // '--fd-docs-row-2': 'calc(var(--fd-docs-row-1) + var(--fd-header-height))',
-                        // '--fd-docs-row-3': 'calc(var(--fd-docs-row-2) + var(--fd-toc-popover-height))',
-                        // '--fd-sidebar-col': collapsed ? '0px' : 'var(--fd-sidebar-width)',
-                        nav?.mode === 'top'
-                            ? `". header header header ."
-"sidebar sidebar toc-popover toc-popover ."
-"sidebar sidebar main toc ." 1fr / minmax(min-content, 1fr) var(--fd-sidebar-col) minmax(0, ${pageCol}) var(--fd-toc-width) minmax(min-content, 1fr)`
-                            : `"sidebar sidebar header header ."
-"sidebar sidebar toc-popover toc-popover ."
-"sidebar sidebar main toc ." 1fr / minmax(min-content, 1fr) var(--fd-sidebar-col) minmax(0, ${pageCol}) var(--fd-toc-width) minmax(min-content, 1fr)`,
+                    gridTemplate: nav?.mode === 'top' ? LAYOUT_TEMPLATES[layout].top : LAYOUT_TEMPLATES[layout].side,
                     '--fd-docs-row-1': 'var(--fd-banner-height, 0px)',
                     '--fd-docs-row-2': 'calc(var(--fd-docs-row-1) + var(--fd-header-height))',
                     '--fd-docs-row-3': 'calc(var(--fd-docs-row-2) + var(--fd-toc-popover-height))',

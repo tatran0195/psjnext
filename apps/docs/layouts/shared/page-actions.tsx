@@ -1,15 +1,27 @@
 'use client';
+
+import Link from 'next/link';
 import { type ComponentProps, useMemo, useState } from 'react';
 
 import { usePathname } from 'fumadocs-core/framework';
 import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
-import { Check, ChevronDown, Copy, ExternalLinkIcon, Loader2, TextIcon } from 'lucide-react';
+import { Check, ChevronDown, ChevronLeft, ChevronRight, Copy, ExternalLinkIcon, FoldHorizontal, Loader2, TextIcon, UnfoldHorizontal } from 'lucide-react';
 
 import { buttonVariants } from '@/components/ui/button';
-import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { useDocsPage } from '@/layouts/docs/page';
 import { cn } from '@/lib/cn';
 
 const cache = new Map<string, Promise<string>>();
+
+function isAllowedUrl(url: string): boolean {
+    try {
+        const parsed = new URL(url);
+        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+    } catch {
+        return false;
+    }
+}
 
 /**
  * see https://fumadocs.dev/docs/integrations/llms#page-actions to customise.
@@ -25,6 +37,11 @@ export function MarkdownCopyButton({
 }) {
     const [isLoading, setLoading] = useState(false);
     const [checked, onClick] = useCopyButton(async () => {
+        if (!isAllowedUrl(markdownUrl)) {
+            console.error('Invalid URL scheme:', markdownUrl);
+            return;
+        }
+
         const cached = cache.get(markdownUrl);
         if (cached) return navigator.clipboard.writeText(await cached);
 
@@ -99,7 +116,7 @@ export function ViewOptionsPopover({
             },
             markdownUrl && {
                 title: 'View as Markdown',
-                href: markdownUrl,
+                href: isAllowedUrl(markdownUrl) ? markdownUrl : '#',
                 icon: <TextIcon />,
             },
             {
@@ -232,5 +249,60 @@ export function ViewOptionsPopover({
                 ))}
             </PopoverContent>
         </Popover>
+    );
+}
+
+type PagerItem = {
+    url: string;
+};
+
+type DocsPagerProps = {
+    previous?: PagerItem;
+    next?: PagerItem;
+    markdownUrl?: string;
+};
+
+export function DocsPageActions({ previous, next, markdownUrl }: DocsPagerProps) {
+    const {
+        props: { full, setFull },
+    } = useDocsPage();
+
+    const buttonClass =
+        'flex size-7 items-center justify-center rounded-none bg-muted/50 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:size-8';
+    const disabledClass =
+        'flex size-7 items-center justify-center rounded-none bg-muted/30 text-muted-foreground/40 cursor-not-allowed sm:size-8';
+
+    return (
+        <div className="flex items-center gap-1">
+            <button
+                type="button"
+                className={buttonClass}
+                onClick={() => setFull(!full)}
+                title={full ? 'Collapse' : 'Expand'}
+            >
+                {full ? <FoldHorizontal className="size-4" /> : <UnfoldHorizontal className="size-4" />}
+            </button>
+            {previous ? (
+                <Link href={previous.url} className={buttonClass}>
+                    <ChevronLeft className="size-4" />
+                </Link>
+            ) : (
+                <div className={disabledClass}>
+                    <ChevronLeft className="size-4" />
+                </div>
+            )}
+            {next ? (
+                <Link href={next.url} className={buttonClass}>
+                    <ChevronRight className="size-4" />
+                </Link>
+            ) : (
+                <div className={disabledClass}>
+                    <ChevronRight className="size-4" />
+                </div>
+            )}
+            {markdownUrl && (
+                <MarkdownCopyButton markdownUrl={markdownUrl} title="Copy markdown" className={buttonClass} />
+            )}
+        </div>
     );
 }

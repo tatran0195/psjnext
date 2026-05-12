@@ -9,10 +9,10 @@ const withAnalyzer = createBundleAnalyzer({
 
 const config: NextConfig = {
     env: {
-        VERSIONS: process.env.VERSIONS,
-        BASE_URL: process.env.BASE_URL,
+        API_VERSIONS: process.env.API_VERSIONS,
     },
     reactStrictMode: true,
+    transpilePackages: ['@mermaid-js/layout-elk'],
 
     logging: {
         fetches: {
