@@ -5,29 +5,18 @@ import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 
+import type { translations } from '@/lib/i18n-translations';
+import type { ChangelogFrontmatter } from '@/lib/utils/markdown';
+
 import { ChangelogItem } from '@/components/changelog-item';
 import { cn } from '@/lib/cn';
-import { translations } from '@/lib/i18n-translations';
-
-export interface ChangelogEntry {
-    id: string;
-    slug: string;
-    date: string;
-    version: string;
-    title: string;
-    summary: string;
-    tags: string[] | undefined;
-    image: string | undefined;
-}
 
 type Props = {
-    entries: ChangelogEntry[];
-    lang: string;
+    entries: ChangelogFrontmatter[];
+    t: (typeof translations)[keyof typeof translations]['changelog'];
 };
 
-export default function PageClient({ entries, lang }: Props) {
-    const t = translations[lang as keyof typeof translations]?.changelog || translations.en.changelog;
-
+export default function PageClient({ entries, t }: Props) {
     const [search, setSearch] = useState('');
     const [activeTag, setActiveTag] = useState<string>(t.all);
 
@@ -143,14 +132,7 @@ export default function PageClient({ entries, lang }: Props) {
                                             {entry.version}
                                         </span>
                                         <span className="text-[10px] font-semibold text-(--psj-text-3) uppercase tracking-widest">
-                                            {new Date(entry.date).toLocaleDateString(
-                                                lang === 'ja' ? 'ja-JP' : 'en-US',
-                                                {
-                                                    month: 'short',
-                                                    day: 'numeric',
-                                                    year: 'numeric',
-                                                },
-                                            )}
+                                            {entry.date}
                                         </span>
                                     </a>
                                 ))}
@@ -186,9 +168,7 @@ export default function PageClient({ entries, lang }: Props) {
                                     </button>
                                 </motion.div>
                             ) : (
-                                filteredEntries.map((entry) => (
-                                    <ChangelogItem key={entry.id} entry={entry} lang={lang} />
-                                ))
+                                filteredEntries.map((entry) => <ChangelogItem key={entry.id} entry={entry} t={t} />)
                             )}
                         </AnimatePresence>
                     </div>

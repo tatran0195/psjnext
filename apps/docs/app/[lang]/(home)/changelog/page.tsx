@@ -17,7 +17,11 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
         .map((entry) => ({
             id: entry.data.id,
             slug: entry.data.slug,
-            date: entry.data.date,
+            date: new Date(entry.data.date).toLocaleDateString(lang === 'ja' ? 'ja-JP' : 'en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+            }),
             version: entry.data.version,
             title: entry.data.title,
             summary: entry.data.summary,
@@ -30,7 +34,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
             <HeroSection label={t.platformUpdates} title={t.changelog} description={t.changelogDescription} />
 
             <div className="psj-container py-10">
-                <PageClient lang={lang} entries={sortedEntries} />
+                <PageClient t={t} entries={sortedEntries} />
             </div>
         </div>
     );

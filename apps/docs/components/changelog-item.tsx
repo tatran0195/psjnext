@@ -1,23 +1,24 @@
 import NextImage from 'next/image';
+import { useParams } from 'next/navigation';
 
 import { motion } from 'framer-motion';
 import Link from 'fumadocs-core/link';
 import { ChevronRight, Link2 } from 'lucide-react';
 import Markdown from 'markdown-to-jsx';
 
+import type { translations } from '@/lib/i18n-translations';
 import type { ChangelogFrontmatter } from '@/lib/utils/markdown';
 
 import { Grid } from '@/components/grid-pattern';
-import { translations } from '@/lib/i18n-translations';
 
 interface ChangelogItemProps {
     entry: ChangelogFrontmatter;
-    lang?: string;
+    t: (typeof translations)[keyof typeof translations]['changelog'];
 }
 
-export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
-    const t = translations[lang as keyof typeof translations]?.changelog || translations.en.changelog;
-    const dateLocale = lang === 'ja' ? 'ja-JP' : 'en-US';
+export function ChangelogItem({ entry, t }: ChangelogItemProps) {
+    const params = useParams();
+    const lang = (params?.lang as string) || 'en';
 
     const handleCopyLink = (slug: string) => {
         const url = `${window.location.origin}/${lang}/changelog/${slug}`;
@@ -54,11 +55,7 @@ export function ChangelogItem({ entry, lang = 'en' }: ChangelogItemProps) {
                         dateTime={entry.date}
                         className="text-[10px] font-medium text-(--psj-text-3) tracking-[0.3em] uppercase"
                     >
-                        {new Date(entry.date).toLocaleDateString(dateLocale, {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric',
-                        })}
+                        {entry.date}
                     </time>
                 </div>
             </div>
