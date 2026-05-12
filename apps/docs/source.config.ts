@@ -1,3 +1,7 @@
+import nextEnv from '@next/env';
+const { loadEnvConfig } = nextEnv;
+loadEnvConfig(process.cwd());
+
 import type { RemarkAutoTypeTableOptions } from 'fumadocs-typescript';
 
 import { transformerMetaHighlight, transformerRemoveNotationEscape } from '@shikijs/transformers';

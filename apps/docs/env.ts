@@ -1,7 +1,7 @@
 import { createEnv } from '@t3-oss/env-nextjs';
 import { z } from 'zod';
 
-const csvArray = z.string().transform((value) =>
+const csvArray = z.string().catch('').transform((value) =>
     value
         .split(',')
         .map((v) => v.trim())
@@ -21,4 +21,7 @@ export const env = createEnv({
         API_VERSIONS: process.env.API_VERSIONS,
         NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     },
+
+    skipValidation: !!process.env.SKIP_ENV_VALIDATION,
+    emptyStringAsUndefined: true,
 });
