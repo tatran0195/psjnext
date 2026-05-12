@@ -130,8 +130,7 @@ export async function generateMetadata(props: {
     const { slug = [], lang } = params;
 
     let querySlug = slug;
-    if (slug[0] === 'api' && (env.API_VERSIONS as readonly string[]).includes(slug[1])) {
-        // Strip the version segment so source.getPage can resolve the canonical page.
+    if (slug[1] === 'api' && (env.API_VERSIONS as readonly string[]).includes(slug[2])) {
         querySlug = ['api', ...slug.slice(2)];
     }
 
@@ -139,8 +138,7 @@ export async function generateMetadata(props: {
     if (!page) {
         return createMetadata({ title: 'Not Found' });
     }
-
-    const description = page.data.description ?? 'The library for building documentation sites';
+    const description = page.data.description ?? 'Python Scripting for Jupiter';
     const image = {
         url: getPageImage(page).url,
         width: 1200,
@@ -151,7 +149,7 @@ export async function generateMetadata(props: {
         title: page.data.title,
         description,
         openGraph: {
-            url: `/docs/${page.slugs.join('/')}`,
+            url: page.url,
             images: [image],
         },
         twitter: {
@@ -161,18 +159,13 @@ export async function generateMetadata(props: {
 }
 
 export function generateStaticParams() {
-    // Standard docs params (all non-api pages, emitted with lang).
     const docsParams = source.generateParams('slug', 'lang');
-
-    // API pages require versioned canonical paths: /api/[version]/[...pageSlug].
-    // Versionless /api/... URLs are handled at runtime — must NOT be pre-rendered
-    // since the target version changes when a new version is released.
     const apiParams = source
         .getPages()
-        .filter((p) => p.slugs[0] === 'api' && p.slugs[1] !== undefined)
+        .filter((p) => p.slugs[1] === 'api' && p.slugs[2] !== undefined)
         .flatMap((p) =>
             env.API_VERSIONS.map((version) => ({
-                slug: ['api', version, ...p.slugs.slice(1)],
+                slug: ['api', version, ...p.slugs.slice(2)],
                 lang: 'en',
             })),
         );

@@ -190,7 +190,7 @@ export function versionPlugin(): LoaderPlugin {
                         ...file,
                         path: file.path,
                         slugs,
-                        data: Object.assign(Object.create(originalData), {
+                        data: Object.assign(originalData, {
                             _version: version,
                             _status: status,
                         }) as typeof file.data,
