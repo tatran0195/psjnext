@@ -40,10 +40,9 @@ export interface SidebarProps extends ComponentProps<'aside'> {
     banner?: ReactNode | FC<ComponentProps<'div'>>;
     footer?: ReactNode | FC<ComponentProps<'div'>>;
     collapsible?: boolean;
-    searchable?: boolean;
 }
 
-export function Sidebar({ banner, footer, components, collapsible = true, searchable = true, ...rest }: SidebarProps) {
+export function Sidebar({ banner, footer, components, collapsible = true, ...rest }: SidebarProps) {
     const {
         menuItems,
         slots,
@@ -155,6 +154,8 @@ export function Sidebar({ banner, footer, components, collapsible = true, search
         </SidebarViewport>
     );
 
+    const isApiRoute = pathname.split('/')[2] == 'api';
+
     return (
         <>
             <SidebarContent {...rest}>
@@ -190,18 +191,19 @@ export function Sidebar({ banner, footer, components, collapsible = true, search
                                 />
                             )}
 
-                            <DockRail
-                                items={nestedTabs[1]?.tabs.map((i) => ({
-                                    href: i.url,
-                                    text: i.title?.toString() || '',
-                                    icon: i.icon,
-                                }))}
-                                activeHref={lastActiveTab?.url}
-                            />
-                            <VersionSwitcher />
-
-                            {searchable && (
-                                <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
+                            {isApiRoute && (
+                                <>
+                                    <DockRail
+                                        items={nestedTabs[1]?.tabs.map((i) => ({
+                                            href: i.url,
+                                            text: i.title?.toString() || '',
+                                            icon: i.icon,
+                                        }))}
+                                        activeHref={lastActiveTab?.url}
+                                    />
+                                    <VersionSwitcher  />
+                                    <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
+                                </>
                             )}
 
                             {/* {nestedTabs.map((level, i) => (
@@ -258,9 +260,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, search
                             {nestedTabs.map((level, i) => (
                                 <SidebarTabsDropdown key={i} options={level.tabs} activeItem={level.active} />
                             ))}
-                            {searchable && (
-                                <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
-                            )}{' '}
+                            <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
                         </>
                     ),
                 })}

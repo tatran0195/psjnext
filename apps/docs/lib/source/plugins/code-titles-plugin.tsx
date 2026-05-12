@@ -4,12 +4,14 @@ export function codeTitlesPlugin(): LoaderPlugin {
     return {
         transformPageTree: {
             file(node) {
-                if (typeof node.name === 'string' && (node.name.endsWith('()') || node.name.match(/^<\w+ \/>$/))) {
+                if (typeof node.name !== 'string') return node;
+                const trimmed = node.name.trim();
+                if (trimmed.endsWith('()') || /^<\w[\w.]*\s*\/>$/.test(trimmed)) {
                     return {
                         ...node,
                         name: (
                             <code key="0" className="text-[0.8125rem]">
-                                {node.name}
+                                {trimmed}
                             </code>
                         ),
                     };

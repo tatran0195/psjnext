@@ -203,7 +203,7 @@ export function MermaidViewer({ mode, svg: staticSvg, chart }: Props) {
             </p>
 
             {/* Viewport */}
-            <div className="h-[520px] w-full cursor-grab overflow-hidden active:cursor-grabbing">
+            <div className="w-full cursor-grab overflow-hidden active:cursor-grabbing">
                 {result ? (
                     <div ref={viewportRef} className="h-full w-full" dangerouslySetInnerHTML={{ __html: result.svg }} />
                 ) : (

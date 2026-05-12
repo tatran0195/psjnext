@@ -21,6 +21,7 @@ import { useTreeContext } from 'fumadocs-ui/contexts/tree';
 import { ArrowRight } from 'lucide-react';
 
 import { ListMenu } from '@/components/ui/list-menu';
+import { useVersionContext } from '@/contexts/versions';
 import { useThrottledValue } from '@/hooks/use-throttle';
 import { compareSemver, matchesSearch } from '@/lib/search';
 
@@ -48,13 +49,13 @@ const BEHAVIORS = [
     },
 ];
 
-export default function CustomSearchDialog(props: SharedProps & { versions: { label: string; value: string }[] }) {
+export default function CustomSearchDialog(props: SharedProps) {
     const { locale } = useI18n();
-    const [tag, setTag] = useState<string | undefined>();
+    const { versions, currentVersion, setCurrentVersion } = useVersionContext();
     const [behavior, setBehavior] = useState<string | undefined>();
     const { search, setSearch, query } = useDocsSearch({
         type: 'fetch',
-        tag,
+        tag: currentVersion,
         locale,
     });
     const { full } = useTreeContext();
@@ -125,13 +126,13 @@ export default function CustomSearchDialog(props: SharedProps & { versions: { la
     const allTags = useMemo(() => {
         return [
             ...TAGS,
-            ...(props.versions || []).map((v) => ({
-                name: `v${v.version}`,
-                description: `Released on ${v.date ?? 'Unknown'}`,
-                value: v.version,
+            ...(versions || []).map((v) => ({
+                name: `v${v.value}`,
+                description: `Released on ${v.releasedAt ?? 'Unknown'}`,
+                value: v.value,
             })),
         ];
-    }, [props.versions]);
+    }, [versions]);
 
     return (
         <SearchDialog search={search} onSearchChange={setSearch} isLoading={query.isLoading} {...props}>
@@ -144,7 +145,7 @@ export default function CustomSearchDialog(props: SharedProps & { versions: { la
                 </SearchDialogHeader>
                 <SearchDialogList items={searchData} />
                 <SearchDialogFooter className="flex flex-row flex-wrap gap-2 items-center">
-                    <ListMenu items={allTags} label="Version" selected={tag} setSelected={setTag} />
+                    <ListMenu items={allTags} label="Version" selected={currentVersion} setSelected={setCurrentVersion} />
                     <ListMenu items={BEHAVIORS} label="Behavior" selected={behavior} setSelected={setBehavior} />
                 </SearchDialogFooter>
             </SearchDialogContent>

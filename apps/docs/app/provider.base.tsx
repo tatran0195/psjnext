@@ -11,7 +11,6 @@ import { SearchProvider, SearchProviderProps } from 'fumadocs-ui/contexts/search
 interface SearchOptions extends Omit<SearchProviderProps, 'options' | 'children'> {
     options?: Partial<DefaultSearchDialogProps>;
     enabled?: boolean;
-    versions?: { version: string; date: string }[];
 }
 
 interface ThemeOptions extends ThemeProviderProps {
@@ -25,7 +24,7 @@ export interface RootProviderProps {
     children?: ReactNode;
 }
 
-const SearchDialogComponent = dynamic(() => import('@/components/layouts/search'), {
+const SearchDialog = dynamic(() => import('@/components/layouts/search'), {
     ssr: false,
 });
 
@@ -33,9 +32,6 @@ export function BaseProvider({ children, theme = {}, search, i18n }: RootProvide
     let body = children;
 
     if (search?.enabled !== false) {
-        const SearchDialog = (props: DefaultSearchDialogProps) => {
-            return <SearchDialogComponent {...props} versions={search?.versions ?? []} />;
-        };
 
         body = (
             <SearchProvider SearchDialog={SearchDialog} {...search}>

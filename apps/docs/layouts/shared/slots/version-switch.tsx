@@ -4,38 +4,23 @@ import { useEffect, useRef, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { Check } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
 
-export interface DocsVersion {
-    /**
-     * Display label shown in switcher (e.g. "Latest", "Beta")
-     */
-    label: string;
-    /**
-     * Numeric version for badge rendering (e.g. "1.6").
-     */
-    version: string;
-    /**
-     * URL path segment (e.g. "beta"). null = latest (no prefix).
-     */
-    slug: string | null;
-    /**
-     * Small badge shown next to label (e.g. "beta").
-     */
-    badge: string | null;
+import { useVersionContext, type VersionItem } from '@/contexts/versions';
+
+function formatVersion(item: VersionItem, isLatest: boolean): { label: string; badge: string | undefined } {
+    return {
+        label: `v${item.value}`,
+        badge: isLatest ? 'Latest' : undefined,
+    };
 }
 
-const docsVersions = [
-    { label: 'v1.6.0', version: '1.6.0', slug: null, badge: null },
-    { label: 'v1.5.0', version: '1.5.0', slug: 'v1.5.0', badge: 'v1.5.0' },
-];
-
-/** Version switcher for the docs sidebar — full-width popover dropdown below the search bar. */
 export function VersionSwitcher() {
-    // const pathname = usePathname() || "/docs";
-    // const router = useRouter();
+    const { versions, currentVersion, setCurrentVersion } = useVersionContext();
     const [open, setOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
-    const currentVersion = { label: 'v1.5.0', version: '1.5.0', slug: 'v1.5.0', badge: 'v1.5.0' };
+    const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(() => {
         function onClickOutside(e: MouseEvent) {
@@ -49,12 +34,33 @@ export function VersionSwitcher() {
         return () => document.removeEventListener('mousedown', onClickOutside);
     }, [open]);
 
-    function handleSelect(version: DocsVersion) {
+    function handleSelect(item: VersionItem) {
+        setCurrentVersion(item.value);
         setOpen(false);
-        if (version.slug === currentVersion.slug) return;
-        // const pagePath = stripVersionPrefix(pathname, currentVersion);
-        // router.push(versionedDocsHref(pagePath, version));
+
+        // Pathname: /{lang}/api/{version}/...rest
+        // segments: ['', lang, 'api', version, ...rest]
+        const segments = pathname.split('/');
+        const apiIdx = segments.indexOf('api');
+
+        if (apiIdx !== -1 && segments[apiIdx + 1]) {
+            // Swap the version segment and push to the equivalent page.
+            segments[apiIdx + 1] = item.value;
+            router.push(segments.join('/'));
+        } else {
+            // Not on an API page — go to the API root for the selected version.
+            const lang = segments[1] ?? 'en';
+            router.push(`/${lang}/api/${item.value}`);
+        }
     }
+
+    // Derive label/badge for the active button display.
+    const activeItem = versions.find((v) => v.value === currentVersion) ?? versions[0];
+    const activeFormatted = activeItem
+        ? formatVersion(activeItem, activeItem === versions[0])
+        : { label: 'Select version', badge: undefined };
+
+    if (versions.length === 0) return null;
 
     return (
         <div ref={containerRef} className="relative border-y border-foreground/5">
@@ -74,10 +80,10 @@ export function VersionSwitcher() {
                 >
                     <path d="M7 8.25a2.75 2.75 0 1 0 0-5.5a2.75 2.75 0 0 0 0 5.5m0 0V12m0 3.75a2.75 2.75 0 1 0 0 5.5a2.75 2.75 0 0 0 0-5.5m0 0V12m10-3.75a2.75 2.75 0 1 0 0-5.5a2.75 2.75 0 0 0 0 5.5m0 0V9a3 3 0 0 1-3 3H7" />
                 </svg>
-                <span className="truncate">{currentVersion.label}</span>
-                {currentVersion.badge && (
+                <span className="truncate">{activeFormatted.label}</span>
+                {activeFormatted.badge && (
                     <span className="font-mono text-[9px] uppercase tracking-wider px-1.5 py-0.5 border border-dashed border-foreground/20 text-foreground/45">
-                        {currentVersion.badge}
+                        {activeFormatted.badge}
                     </span>
                 )}
                 {/* Up/down chevron */}
@@ -108,13 +114,14 @@ export function VersionSwitcher() {
                         transition={{ duration: 0.12, ease: 'easeOut' }}
                         className="absolute left-0 right-0 top-full z-50 border-b border-foreground/[0.08] bg-background shadow-lg shadow-black/10 dark:shadow-black/40 py-1"
                     >
-                        {docsVersions.map((version) => {
-                            const isActive = version.slug === currentVersion.slug;
+                        {versions.map((item, idx) => {
+                            const isActive = item.value === currentVersion;
+                            const { label, badge } = formatVersion(item, idx === 0);
                             return (
                                 <button
-                                    key={version.version}
+                                    key={item.value}
                                     type="button"
-                                    onClick={() => handleSelect(version)}
+                                    onClick={() => handleSelect(item)}
                                     className={`flex w-full items-center gap-2 px-4 py-2 text-sm transition-colors duration-150 ${
                                         isActive
                                             ? 'text-foreground bg-foreground/5'
@@ -124,10 +131,10 @@ export function VersionSwitcher() {
                                     <span className="size-4 shrink-0 flex items-center justify-center">
                                         {isActive && <Check className="size-3.5 text-foreground/70" />}
                                     </span>
-                                    <span className="truncate">{version.label}</span>
-                                    {version.badge && (
+                                    <span className="truncate">{label}</span>
+                                    {badge && (
                                         <span className="font-mono text-[9px] uppercase tracking-wider px-1.5 py-0.5 border border-dashed border-foreground/20 text-foreground/45">
-                                            {version.badge}
+                                            {badge}
                                         </span>
                                     )}
                                 </button>

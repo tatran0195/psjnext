@@ -46,8 +46,8 @@ export function getApiVersions() {
         const page = changelogMap.get(version);
 
         return {
-            version,
-            date: page?.data.date ?? null,
+            value: version,
+            releasedAt: page?.data.date ?? null,
         };
     });
 }
