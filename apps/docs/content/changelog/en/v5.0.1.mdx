@@ -5,15 +5,14 @@ date: '2024-10-15'
 version: 'v5.0.1'
 title: 'Release Note V5.0.1'
 summary: |
-  This release mainly focuses on new [PSJ-GUI](../psj-gui) and [PSJ-Utility](../psj-utility)
-  features.
+    This release mainly focuses on new [PSJ-GUI](../psj-gui) and [PSJ-Utility](../psj-utility)
+    features.
 tags: ['Release']
 ---
 
 :::tip[Highlight updates]
 
-This release mainly focuses on new [PSJ-GUI](../psj-gui) and [PSJ-Utility](../psj-utility)
-features. In detail:
+This release mainly focuses on new [PSJ-GUI](../psj-gui) and [PSJ-Utility](../psj-utility) features. In detail:
 
 - Improve usability of PSJ-GUI commands (API) and GUI Command Builder.
 - Add new PSJ-Utility commands (API), especially Preview and Post Utility.
@@ -98,8 +97,8 @@ _[`ElemType`](../data-type/psj-command/element-types)_ are also added:
 </details>
 
 - PSJ-Utility: has been separated into 2 types Pre-Utility and Post-Utility:
-  - Pre-Utility: Data type used for pre-processing workflow, with some new classes and updates:
-    - Built-in-type: Add new _[DItemPair](../data-type/psj-utility/pre-utility/built-in-types/DItemPair)_,
+    - Pre-Utility: Data type used for pre-processing workflow, with some new classes and updates:
+        - Built-in-type: Add new _[DItemPair](../data-type/psj-utility/pre-utility/built-in-types/DItemPair)_,
           _[DItemPairVector](../data-type/psj-utility/pre-utility/built-in-types/DItemPairVector)_,
           _[DCoord](../data-type/psj-utility/pre-utility/built-in-types/DCoord)_,
           _[CoordVector](../data-type/psj-utility/pre-utility/built-in-types/CoordVector)_,
@@ -112,7 +111,7 @@ _[`ElemType`](../data-type/psj-command/element-types)_ are also added:
           _[Document](../data-type/psj-utility/pre-utility/built-in-types/Document)_. Furthermore,
           _[DBody](../data-type/psj-utility/pre-utility/built-in-types/DBody)_ has been added new attribute
           `properties`.
-    - Enumeration type: Added new type `JPT.PathType.FILE_PATH` of
+        - Enumeration type: Added new type `JPT.PathType.FILE_PATH` of
           _[Path Types](../data-type/psj-utility/pre-utility/enumeration-types/path-types/)_. Additionally, new types of
           _[DTableType](../data-type/psj-utility/pre-utility/enumeration-types/dtable-types)_ are added:
 
@@ -147,11 +146,11 @@ _[`ElemType`](../data-type/psj-command/element-types)_ are also added:
 </details>
 
 - Post-Utility: Data type used for post-processing workflow, with whole new classes added:
-  - Built-in-type: _[DPostElem](../data-type/psj-utility/post-utility/post-built-in-types/DPostElem)_,
+    - Built-in-type: _[DPostElem](../data-type/psj-utility/post-utility/post-built-in-types/DPostElem)_,
       _[DPostNode](../data-type/psj-utility/post-utility/post-built-in-types/DPostNode)_,
       _[Post Data Option](../data-type/psj-utility/post-utility/post-built-in-types/post-data-op)_,
       _[Post Time Step Info](../data-type/psj-utility/post-utility/post-built-in-types/post-time-step-info)_.
-  - Enumeration type:
+    - Enumeration type:
       _[Post Analysis Types](../data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)_,
       _[Post Data Range Types](../data-type/psj-utility/post-utility/enumeration-types/post-data-range-types)_,
       _[Post Result Data Location Types](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-loc-types)_,
@@ -234,8 +233,8 @@ aspect.
 #### 📏 GUI Command Builder
 
 - Add [collapse/expansion functions](../gui-command-builder#hierarchy-window) to the hierarchy toolbar.
-  - Expand all tree nodes: Expand all components inside selected container.
-  - Collapse all tree nodes: Collapse all components inside selected container.
+    - Expand all tree nodes: Expand all components inside selected container.
+    - Collapse all tree nodes: Collapse all components inside selected container.
 - Add [Save As](../gui-command-builder#tool-menu) button to the toolbar menu.
   ![Save As](/docs/GUI_CommandBuilder_Component_SaveAs_V5.0.1.png)
 - Add name of file on the top-left corner when opening \*.jdb and working behavior when saving data (an asterisk \* will
@@ -255,10 +254,7 @@ aspect.
   ![Rename Components](/docs/GUI_CommandBuilder_Component-Parameter_Dialog6_V5.0.1.png)
 - Enable option of other components/containers which are in GroupBox container with using `Has Check Label` will be
   disabled and grayed out automatically. At that time, their enable control will depends on their parent GroupBox.
-  <Video
-    src="/video/PSJ_GUI_Command_Builder_GroupBox.mp4"
-    muted
-  />
+    <Video src="/video/PSJ_GUI_Command_Builder_GroupBox.mp4" muted />
 
 #### 📝 API
 

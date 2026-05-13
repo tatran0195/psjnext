@@ -125,7 +125,10 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
         if (typeof banner === 'function') return createElement(banner, props);
 
         return (
-            <div {...props} className={cn('flex flex-col gap-2 p-0 pt-0.35 sm:pt-2 pb-0 empty:hidden', props.className)}>
+            <div
+                {...props}
+                className={cn('flex flex-col gap-2 p-0 pt-0.35 sm:pt-2 pb-0 empty:hidden', props.className)}
+            >
                 {props.children}
                 {banner}
             </div>
@@ -201,7 +204,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                         }))}
                                         activeHref={lastActiveTab?.url}
                                     />
-                                    <VersionSwitcher  />
+                                    <VersionSwitcher />
                                     <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
                                 </>
                             )}
@@ -334,4 +337,3 @@ function SearchComposition({
 
 export * from './components';
 export * from './provider';
-

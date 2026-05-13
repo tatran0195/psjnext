@@ -18,7 +18,7 @@ interface TreeChartProps {
 export default function TreeChart({ chartPath, showLegend = false, footer }: TreeChartProps) {
     const raw = fs.readFileSync(path.join(process.cwd(), chartPath), 'utf8');
     const config = yaml.parse(raw) as ChartConfig;
-    const { tree, theme, lineColors, layout, legend, chrome, title } = config;
+    const { tree, theme, layout, legend, chrome, title } = config;
 
     return (
         <div
@@ -34,7 +34,6 @@ export default function TreeChart({ chartPath, showLegend = false, footer }: Tre
             <TreeCanvas
                 tree={tree}
                 theme={theme}
-                lineColors={lineColors}
                 layout={layout}
                 chrome={chrome}
                 title={title}

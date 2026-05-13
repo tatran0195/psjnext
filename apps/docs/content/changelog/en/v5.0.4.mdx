@@ -5,15 +5,15 @@ date: '2024-10-15'
 version: 'v5.0.4'
 title: 'Release Note V5.0.4'
 summary: |
-  This release adds API functions primarily to enhance Post processing. It also updates macros
-  and PSJ Command for new features and new options.
+    This release adds API functions primarily to enhance Post processing. It also updates macros
+    and PSJ Command for new features and new options.
 tags: ['Release']
 ---
 
 :::tip[Highlight updates]
 
-This release adds API functions primarily to enhance Post processing. It also updates macros
-and PSJ Command for new features and new options. In detail:
+This release adds API functions primarily to enhance Post processing. It also updates macros and PSJ Command for new
+features and new options. In detail:
 
 - New data types, macros, and APIs for the OOBB Alignment (New Feature) have been added.
 - Added macro and API to Show/Hide parts appearance.
@@ -27,11 +27,9 @@ and PSJ Command for new features and new options. In detail:
 
 ### 📦 Data types
 
-- PSJ-Command:
-  - New Enumeration Type
-      _[`AnalysisType`](../data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)_ are added.
-<details>
-<summary>List of newly added Post Analysis type </summary>
+- PSJ-Command: - New Enumeration Type
+  _[`AnalysisType`](../data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)_ are added. <details>
+    <summary>List of newly added Post Analysis type </summary>
 
 | INT NOTATION | TYPE OF POST ANALYSIS                                      |
 | ------------ | ---------------------------------------------------------- |
@@ -40,11 +38,9 @@ and PSJ Command for new features and new options. In detail:
 
 </details>
 
-- PSJ-Utility:
-  - New Enumeration Type _[`DTableType`](../data-type/psj-utility/post-utility/enumeration-types/post-dtable-types)_
-      are added. 
-<details> 
-<summary>List of newly added Post DTalbe type</summary>
+- PSJ-Utility: - New Enumeration Type
+  _[`DTableType`](../data-type/psj-utility/post-utility/enumeration-types/post-dtable-types)_ are added. <details>
+    <summary>List of newly added Post DTalbe type</summary>
 
 | ID  | DTABLE TYPE                       | Description        |
 | --- | --------------------------------- | ------------------ |
@@ -85,20 +81,16 @@ Updated by adding new option or by aspect of usability/maintainability.
 
 <details>
 
-<summary>List of newly added command</summary>
-        - `JPT.EnableAllLicenses` : Enable all the available licenses.
-        - `JPT.GetAllContacts` : Get the information of all existing contacts.
-        - `JPT.GetAllLicensesStatus` : Get the status of all the available licenses.
-        - `JPT.GetAllPostNodes` : Get all the information of Post (read-only) nodes. It works on Post document.
-        - `JPT.GetAllPostElems` : Get all the information of Post (read-only) elements. It works on Post document.
-        - `JPT.GetInternalIDRefItem`: Get internal ID of reference entity.
-        - `JPT.GetResultTitle`: Get contents of title when result is loaded.
-        - `JPT.GetScreenHeight` : Get the height of screen window.
-        - `JPT.GetScreenPositionOfEntities` : Obtains the position of the specified item in the Main Window.
-        - `JPT.GetScreenWidth` : Get the width of screen window.
-        - `JPT.GetAllResultsByElemId` : Get all the result values of specified Element by ID.
-        - `JPT.GetAllResultsByNodeId` : Get the result value of specified Node by ID.
-        - `JPT.GetPostSolverTypeString` :Get import result type and return an Enum value representing the type.
+<summary>List of newly added command</summary>- `JPT.EnableAllLicenses` : Enable all the available licenses. -
+`JPT.GetAllContacts` : Get the information of all existing contacts. - `JPT.GetAllLicensesStatus` : Get the status of
+all the available licenses. - `JPT.GetAllPostNodes` : Get all the information of Post (read-only) nodes. It works on
+Post document. - `JPT.GetAllPostElems` : Get all the information of Post (read-only) elements. It works on Post
+document. - `JPT.GetInternalIDRefItem`: Get internal ID of reference entity. - `JPT.GetResultTitle`: Get contents of
+title when result is loaded. - `JPT.GetScreenHeight` : Get the height of screen window. -
+`JPT.GetScreenPositionOfEntities` : Obtains the position of the specified item in the Main Window. -
+`JPT.GetScreenWidth` : Get the width of screen window. - `JPT.GetAllResultsByElemId` : Get all the result values of
+specified Element by ID. - `JPT.GetAllResultsByNodeId` : Get the result value of specified Node by ID. -
+`JPT.GetPostSolverTypeString` :Get import result type and return an Enum value representing the type.
 
 </details>
 
@@ -106,13 +98,12 @@ Updated by adding new option or by aspect of usability/maintainability.
 
 <details>
 
-<summary>List of commands changed and modified</summary>
-        - `JPT.GetAllNodes` : Display a hint when it is run on Post documents to inform the user that this function is exclusively for Pre documents.
-        - `JPT.GetAllElems` : Display a hint when it is run on Post documents to inform the user that this function is exclusively for Pre documents.
-        - `JPT.GetMaxResultId` : Enables to get value only for visible entities.
-        - `JPT.GetMaxResultValue` : Enables to get value only for visible entities.
-        - `JPT.GetMinResultId` : Enables to get value only for visible entities.
-        - `JPT.GetMinResultValue` : Enables to get value only for visible entities.
+<summary>List of commands changed and modified</summary>- `JPT.GetAllNodes` : Display a hint when it is run on Post
+documents to inform the user that this function is exclusively for Pre documents. - `JPT.GetAllElems` : Display a hint
+when it is run on Post documents to inform the user that this function is exclusively for Pre documents. -
+`JPT.GetMaxResultId` : Enables to get value only for visible entities. - `JPT.GetMaxResultValue` : Enables to get value
+only for visible entities. - `JPT.GetMinResultId` : Enables to get value only for visible entities. -
+`JPT.GetMinResultValue` : Enables to get value only for visible entities.
 
 </details>
 
@@ -137,10 +128,9 @@ Updated by adding new option or by aspect of usability/maintainability.
 - 3 new API commands are added:
 
 <details>
-<summary>List of newly added commands</summary>
-        - `dlg.set_item_visible`: Set the state of the created component as visible or hidden.
-        - `dlg.is_groupbox_checked`: Check the state of a GroupBox's checkbox.
-        - `dlg.on_groupbox_checked`: Bind a created def function to a GroupBox's CheckBox.
+    <summary>List of newly added commands</summary>- `dlg.set_item_visible`: Set the state of the created component as
+    visible or hidden. - `dlg.is_groupbox_checked`: Check the state of a GroupBox's checkbox. -
+    `dlg.on_groupbox_checked`: Bind a created def function to a GroupBox's CheckBox.
 </details>
 
 ### ⚙ Macro
@@ -149,17 +139,14 @@ Updated by adding new option or by aspect of usability/maintainability.
 
 <details>
 
-<summary>List of newly added macros</summary>
-        - `ALIGNMENTBYOOBB` : Align the position of the target part with the position of the reference part by using OOBB (Object Oriented Boundary Box).
-        - `CmdWriteCSVForGeneralReportLinearStatic`: macro for export Linear Static report into CSV file.
-        - `CmdWriteCSVForGeneralReportModal`: macro for export Modal report into CSV file.
-        - `ExportGroup`: Enables to export group by macro.
-        - `ExportWindowSettings`: Enables to export window settings by macro.
-        - `ImportGroup`: Enables to import group by macro.
-        - `SetHidingElementFactor`: (For Topology Optimization) Enables to indicate hiding source and factor.
-        - `SetPartAppearance` : Enables to Show/Hide Part Appearance by macro.
-        - `ToPre`: macro for convert Post document to Pre document.
-        - `ToPost`: macro for convert Pre document to Post document.
+<summary>List of newly added macros</summary>- `ALIGNMENTBYOOBB` : Align the position of the target part with the
+position of the reference part by using OOBB (Object Oriented Boundary Box). -
+`CmdWriteCSVForGeneralReportLinearStatic`: macro for export Linear Static report into CSV file. -
+`CmdWriteCSVForGeneralReportModal`: macro for export Modal report into CSV file. - `ExportGroup`: Enables to export
+group by macro. - `ExportWindowSettings`: Enables to export window settings by macro. - `ImportGroup`: Enables to import
+group by macro. - `SetHidingElementFactor`: (For Topology Optimization) Enables to indicate hiding source and factor. -
+`SetPartAppearance` : Enables to Show/Hide Part Appearance by macro. - `ToPre`: macro for convert Post document to Pre
+document. - `ToPost`: macro for convert Pre document to Post document.
 
 </details>
 

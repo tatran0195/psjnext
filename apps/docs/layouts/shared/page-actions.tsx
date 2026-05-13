@@ -5,7 +5,18 @@ import { type ComponentProps, useMemo, useState } from 'react';
 
 import { usePathname } from 'fumadocs-core/framework';
 import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
-import { Check, ChevronDown, ChevronLeft, ChevronRight, Copy, ExternalLinkIcon, FoldHorizontal, Loader2, TextIcon, UnfoldHorizontal } from 'lucide-react';
+import {
+    Check,
+    ChevronDown,
+    ChevronLeft,
+    ChevronRight,
+    Copy,
+    ExternalLinkIcon,
+    FoldHorizontal,
+    Loader2,
+    TextIcon,
+    UnfoldHorizontal,
+} from 'lucide-react';
 
 import { buttonVariants } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';

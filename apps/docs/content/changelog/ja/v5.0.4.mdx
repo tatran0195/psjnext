@@ -5,8 +5,8 @@ date: '2024-10-15'
 version: 'v5.0.4'
 title: 'リリースノートV5.0.4'
 summary: |
-  V5.0.4では、主に表示操作を強化するためのAPI機能を追加しました。また、新機能や新オプション用にマクロやPSJ
-  Commandを更新しています。
+    V5.0.4では、主に表示操作を強化するためのAPI機能を追加しました。また、新機能や新オプション用にマクロやPSJ
+    Commandを更新しています。
 tags: ['Release']
 ---
 
@@ -28,9 +28,8 @@ Commandを更新しています。
 ### 📦 データタイプ
 
 - PSJ-Command:
-  - 列挙型　*[`AnalysisType`](../data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)*
-      に新規タイプを追加しました。
-<details>
+    - 列挙型　*[`AnalysisType`](../data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)*
+      に新規タイプを追加しました。 <details>
         <summary>新規追加Post Analysis型一覧</summary>
 
 | 整数表記 | POST ANALYSISタイプ                                        |
@@ -41,9 +40,8 @@ Commandを更新しています。
 </details>
 
 - PSJ-Utility:
-  - 列挙型　*[`DTableType`](../data-type/psj-utility/post-utility/enumeration-types/post-dtable-types)*
-      に新規タイプを追加しました。
-<details>
+    - 列挙型　*[`DTableType`](../data-type/psj-utility/post-utility/enumeration-types/post-dtable-types)*
+      に新規タイプを追加しました。 <details>
         <summary>新規追加Post DTables型一覧</summary>
 
 | 整数表記 | POST DTABLEタイプ                 |
@@ -85,17 +83,15 @@ Commandを更新しています。
 
 <details>
 
-<summary>新規追加API一覧</summary>
-        - `JPT.GetAllPostNodes` : 全てのPost節点 （読み取り専用）を取得します。 Postドキュメントでのみ動作します。
-        - `JPT.GetAllPostElems` : 全てのPost要素 （読み取り専用）を取得します。 Postドキュメントでのみ動作します。
-        - `JPT.EnableAllLicenses` : 利用可能なすべてのライセンスを有効にします。
-        - `JPT.GetAllContacts` : 全ての存在する接触情報を取得します。
-        - `JPT.GetAllLicensesStatus` : すべてのライセンス状態を取得します。
-        - `JPT.GetInternalIDRefItem`: 参照エンティティの内部IDを取得します。
-        - `JPT.GetResultTitle`: 結果がロードされているとき、タイトルの内容を取得します。
-        - `JPT.GetScreenHeight` : メインウィンドウの高さを取得します。
-        - `JPT.GetScreenPositionOfEntities` : 指定したエンティティのメインウィンドウ内での位置を取得します。
-        - `JPT.GetScreenWidth` : メインウィンドウの幅を取得します。
+<summary>新規追加API一覧</summary>- `JPT.GetAllPostNodes` : 全てのPost節点 （読み取り専用）を取得します。
+Postドキュメントでのみ動作します。 - `JPT.GetAllPostElems` : 全てのPost要素 （読み取り専用）を取得します。
+Postドキュメントでのみ動作します。 - `JPT.EnableAllLicenses` : 利用可能なすべてのライセンスを有効にします。 -
+`JPT.GetAllContacts` : 全ての存在する接触情報を取得します。 - `JPT.GetAllLicensesStatus` :
+すべてのライセンス状態を取得します。 - `JPT.GetInternalIDRefItem`: 参照エンティティの内部IDを取得します。 -
+`JPT.GetResultTitle`: 結果がロードされているとき、タイトルの内容を取得します。 - `JPT.GetScreenHeight` :
+メインウィンドウの高さを取得します。 - `JPT.GetScreenPositionOfEntities` :
+指定したエンティティのメインウィンドウ内での位置を取得します。 - `JPT.GetScreenWidth` :
+メインウィンドウの幅を取得します。
 
 </details>
 
@@ -145,17 +141,16 @@ Commandを更新しています。
 
 <details>
 
-<summary>新規追加マクロ一覧</summary>
-        - `ALIGNMENTBYOOBB` : OOBB（Object Oriented Boundary Box）を使用して、対象パートの位置を基準パートの位置に合わせる機能のマクロです。
-        - `CmdWriteCSVForGeneralReportLinearStatic`: レポート機能（静解析）をCSVファイルにエクスポートするためのマクロです。
-        - `CmdWriteCSVForGeneralReportModal`: レポート機能（モード解析）をCSVファイルにエクスポートするためのマクロです。
-        - `ExportGroup`: グループのエクスポートマクロを追加しました。
-        - `ExportWindowSettings`: ウィンドウ設定エクスポートマクロを追加しました。
-        - `ImportGroup`: グループのインポートマクロを追加しました。
-        - `SetHidingElementFactor`:（トポロジー最適化用）非表示要素の係数と結果を指定するマクロを追加しました。
-        - `SetPartAppearance` : パート外観の表示・非表示を切り替えるマクロを追加しました。
-        - `ToPre`: ポストドキュメントをプレドキュメントに変換するためのマクロを追加しました
-        - `ToPost`: macro for convert Pre document to Post document.
+<summary>新規追加マクロ一覧</summary>- `ALIGNMENTBYOOBB` : OOBB（Object Oriented Boundary
+Box）を使用して、対象パートの位置を基準パートの位置に合わせる機能のマクロです。 -
+`CmdWriteCSVForGeneralReportLinearStatic`: レポート機能（静解析）をCSVファイルにエクスポートするためのマクロです。 -
+`CmdWriteCSVForGeneralReportModal`: レポート機能（モード解析）をCSVファイルにエクスポートするためのマクロです。 -
+`ExportGroup`: グループのエクスポートマクロを追加しました。 - `ExportWindowSettings`:
+ウィンドウ設定エクスポートマクロを追加しました。 - `ImportGroup`: グループのインポートマクロを追加しました。 -
+`SetHidingElementFactor`:（トポロジー最適化用）非表示要素の係数と結果を指定するマクロを追加しました。 -
+`SetPartAppearance` : パート外観の表示・非表示を切り替えるマクロを追加しました。 - `ToPre`:
+ポストドキュメントをプレドキュメントに変換するためのマクロを追加しました - `ToPost`: macro for convert Pre document to
+Post document.
 
 </details>
 

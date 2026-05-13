@@ -5,15 +5,15 @@ date: '2024-10-15'
 version: 'v5.0.3'
 title: 'Release Note V5.0.3'
 summary: |
-  This release adds API functions primarily to enhance Post processing. It also updates macros
-  and PSJ Command for new features and new options.
+    This release adds API functions primarily to enhance Post processing. It also updates macros
+    and PSJ Command for new features and new options.
 tags: ['Release']
 ---
 
 :::tip[Highlight updates]
 
-This release adds API functions primarily to enhance Post processing. It also updates macros
-and PSJ Command for new features and new options. In detail:
+This release adds API functions primarily to enhance Post processing. It also updates macros and PSJ Command for new
+features and new options. In detail:
 
 - New data types, macros, and APIs for the Custom Notes (New Feature) control have been added.
 - Added API to retrieve Post result display information.
@@ -29,10 +29,8 @@ and PSJ Command for new features and new options. In detail:
 
 ### 📦 Data types
 
-- PSJ-Command:
-  - New Enumeration Type _[`DItemType`](../data-type/psj-command/DItem-types)_ and is added.
-<details>
-<summary>List of newly added DItemType</summary>
+- PSJ-Command: - New Enumeration Type _[`DItemType`](../data-type/psj-command/DItem-types)_ and is added. <details>
+    <summary>List of newly added DItemType</summary>
 
 | INT NOTATION | TYPE OF DITEM            |
 | ------------ | ------------------------ |
@@ -42,8 +40,8 @@ and PSJ Command for new features and new options. In detail:
 </details>
 
 - New Enumeration Type _[`PathType`](../data-type/psj-utility/pre-utility/enumeration-types/path-types)_ is added.
-<details>
-      <summary>List of newly added PathType</summary>
+  <details>
+    <summary>List of newly added PathType</summary>
 
 | INT NOTATION | TYPE OF PATHTYPE                |
 | ------------ | ------------------------------- |
@@ -51,11 +49,9 @@ and PSJ Command for new features and new options. In detail:
 
 </details>
 
-- PSJ-Utility:
-  - New Enumeration Type _[`DTableType`](../data-type/psj-utility/pre-utility/enumeration-types/dtable-types)_ is
-      added. 
-<details> 
-<summary>List of newly added DTableType</summary>
+- PSJ-Utility: - New Enumeration Type
+  _[`DTableType`](../data-type/psj-utility/pre-utility/enumeration-types/dtable-types)_ is added. <details>
+    <summary>List of newly added DTableType</summary>
 
 | INT NOTATION | TYPE OF DTABLE                                 |
 | ------------ | ---------------------------------------------- |
@@ -89,33 +85,24 @@ Updated by adding new option or by aspect of usability/maintainability.
 
 <details>
 
-<summary>List of newly added command</summary>
-        - `JPT.GetAppPathInfo()`: Get the information of path specified by PathType.
-        - `JPT.SelectionByIDs()`: Select entities by using their IDs.
-        - `JPT.IsSpatialPointRendered()`:Check if a specified point (node) that has the spatial coordinates (X, Y, Z) is rendered in the current view.
-        - `JPT.CloseAllGraphViews()` : Close all chart views.
-        - `JPT.CloseGraphViewByDocumentName()`: Close all chart views of indicated document.
-        - `JPT.ConvertCoordinateFromGlobalToLocal()`: Convert global coordinate of selected DItem Type into specified local coordinate.
-        - `JPT.HighlightByID()`: The command highlights LBC and property items in the Assemble Tree. At the same time, it changes the display of part faces connected to the highlighted LBC/property in the Main Window.
-        - `JPT.SetActiveDocumentByID()`: Active the document specified by ID.
-        - `JPT.SetActiveDocumentByName()`: Active the document specified by Name.
-        - `JPT.GetDocumentList()`: Get a list of documents opening at current.
-        - `JPT.GetActiveDocument()`: Get the active document.
-        - `JPT.GetDocumentByID()`: Get a document specified by ID.
-        - `JPT.GetDocumentByName()`: Get a document specified by Name.
-        - `JPT.CloseDocumentByID()`: Close a document specified by ID.
-        - `GetAllCustomNotes`: Get all Custom Notes.
-        - `GetAllCustomNoteCollections`: Get all Custom Note Collections.
-        - `JPT.GetCurrentDeformation()`: Get current deformation settings.
-        - `JPT.GetCurrentViewPoint()`: Get current view point settings.
-        - `JPT.GetCurrentCrossSection()`: Get current cross section settings.
-        - `JPT.GetCurrentContour()`: Get current contour settings.
-        - `JPT.GetCurrentCircle()`: Get current circle settings.
-        - `JPT.GetCurrentDiagram()`: Get current diagram settings.
-        - `JPT.GetCurrentVector()`: Get current vector settings.
-        - `JPT.GetCurrentAnimation()`: Get current animation settings.
-        - `JPT.CastDItemToDRONode()`: Convert DItem object to DPostNode object.
-        - `JPT.CastDItemToDROElem()`: Convert DItem object to DPostElem object.
+<summary>List of newly added command</summary>- `JPT.GetAppPathInfo()`: Get the information of path specified by
+PathType. - `JPT.SelectionByIDs()`: Select entities by using their IDs. - `JPT.IsSpatialPointRendered()`:Check if a
+specified point (node) that has the spatial coordinates (X, Y, Z) is rendered in the current view. -
+`JPT.CloseAllGraphViews()` : Close all chart views. - `JPT.CloseGraphViewByDocumentName()`: Close all chart views of
+indicated document. - `JPT.ConvertCoordinateFromGlobalToLocal()`: Convert global coordinate of selected DItem Type into
+specified local coordinate. - `JPT.HighlightByID()`: The command highlights LBC and property items in the Assemble Tree.
+At the same time, it changes the display of part faces connected to the highlighted LBC/property in the Main Window. -
+`JPT.SetActiveDocumentByID()`: Active the document specified by ID. - `JPT.SetActiveDocumentByName()`: Active the
+document specified by Name. - `JPT.GetDocumentList()`: Get a list of documents opening at current. -
+`JPT.GetActiveDocument()`: Get the active document. - `JPT.GetDocumentByID()`: Get a document specified by ID. -
+`JPT.GetDocumentByName()`: Get a document specified by Name. - `JPT.CloseDocumentByID()`: Close a document specified by
+ID. - `GetAllCustomNotes`: Get all Custom Notes. - `GetAllCustomNoteCollections`: Get all Custom Note Collections. -
+`JPT.GetCurrentDeformation()`: Get current deformation settings. - `JPT.GetCurrentViewPoint()`: Get current view point
+settings. - `JPT.GetCurrentCrossSection()`: Get current cross section settings. - `JPT.GetCurrentContour()`: Get current
+contour settings. - `JPT.GetCurrentCircle()`: Get current circle settings. - `JPT.GetCurrentDiagram()`: Get current
+diagram settings. - `JPT.GetCurrentVector()`: Get current vector settings. - `JPT.GetCurrentAnimation()`: Get current
+animation settings. - `JPT.CastDItemToDRONode()`: Convert DItem object to DPostNode object. -
+`JPT.CastDItemToDROElem()`: Convert DItem object to DPostElem object.
 
 </details>
 
@@ -123,8 +110,8 @@ Updated by adding new option or by aspect of usability/maintainability.
 
 <details>
 
-<summary>List of commands changed and modified</summary>
-        - `JPT.EnableLicenseFeature()`: Changed so that JPT_BASE is automatically enabled when a license that requires JPT_BASE to be enabled is specified and activated.
+<summary>List of commands changed and modified</summary>- `JPT.EnableLicenseFeature()`: Changed so that JPT_BASE is
+automatically enabled when a license that requires JPT_BASE to be enabled is specified and activated.
 
 </details>
 
@@ -152,16 +139,12 @@ Updated by adding new option or by aspect of usability/maintainability.
 
 <details>
 
-<summary>List of newly added macros</summary>
-        - `ViewRemoveMode`: macro for turn ON/OFF remove mode.
-        - `ViewShowGroupMode`: macro for turn ON/OFF group mode.
-        - `ViewShowGlobalCoordinate`: macro for turn ON/OFF show global coordinate.
-        - `CmdSetPreUnit`: macro for setting pre document units.
-        - `SetDefaultInitialViewPoint`: macro for setting initial view point.
-        - `ShowContactPairData`: macro implements the display of selections in the Contact Pair Selection dialog.
-        - `CreateCustomNote`: macro create a Custom Note under specified Collection.
-        - `CreateCollection`: macro create a Collection.
-        - `EditCustomNoteWndPosition`: macro move the indicated custom note to specified screen position.
+<summary>List of newly added macros</summary>- `ViewRemoveMode`: macro for turn ON/OFF remove mode. -
+`ViewShowGroupMode`: macro for turn ON/OFF group mode. - `ViewShowGlobalCoordinate`: macro for turn ON/OFF show global
+coordinate. - `CmdSetPreUnit`: macro for setting pre document units. - `SetDefaultInitialViewPoint`: macro for setting
+initial view point. - `ShowContactPairData`: macro implements the display of selections in the Contact Pair Selection
+dialog. - `CreateCustomNote`: macro create a Custom Note under specified Collection. - `CreateCollection`: macro create
+a Collection. - `EditCustomNoteWndPosition`: macro move the indicated custom note to specified screen position.
 
 </details>
 
@@ -176,11 +159,11 @@ Updated by adding new option or by aspect of usability/maintainability.
 ### 🚅 Sample
 
 - Add new tutorials of intermediate level.
-  - _[Solving plane stress problem.](../tutorials/intermediate/parts-name-mesh-property)_
-  - _[Small sample of model setting, analysis and result check.](../tutorials/intermediate/plate-static)_
-  - _[Small sample to read / write CSV file.](../tutorials/intermediate/user-material)_
+    - _[Solving plane stress problem.](../tutorials/intermediate/parts-name-mesh-property)_
+    - _[Small sample of model setting, analysis and result check.](../tutorials/intermediate/plate-static)_
+    - _[Small sample to read / write CSV file.](../tutorials/intermediate/user-material)_
 - Add a new tutorial of python code.
-  - _[Python Tips - File I/O](../tutorials/basic/python-tips-file-io)_
+    - _[Python Tips - File I/O](../tutorials/basic/python-tips-file-io)_
 
 ### 📝 Other
 

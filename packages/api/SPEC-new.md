@@ -1713,8 +1713,8 @@ unique within its `fields` list.
 - The `order` field drives the `pages` array in the emitted `meta.json`.
 - The `title` field resolved via `meta.<locale>.yaml` drives the folder display label.
 - The `folderStyle` configuration determines output shape:
-  - **`folder`**: Emits actual nested sub-directories.
-  - **`separator`**: Emits flattened logical groups using Fumadocs text separators.
+    - **`folder`**: Emits actual nested sub-directories.
+    - **`separator`**: Emits flattened logical groups using Fumadocs text separators.
 
 ### Data-type page generation
 

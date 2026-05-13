@@ -32,7 +32,6 @@ export function BaseProvider({ children, theme = {}, search, i18n }: RootProvide
     let body = children;
 
     if (search?.enabled !== false) {
-
         body = (
             <SearchProvider SearchDialog={SearchDialog} {...search}>
                 {body}

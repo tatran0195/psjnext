@@ -5,7 +5,7 @@ date: '2024-10-15'
 version: 'v5.0.3'
 title: 'リリースノートV5.0.3'
 summary: |
-  更新のハイライトこのリリースでは、主に事後処理を強化するためのAPI機能が追加されました。また、新機能や新しいオプションのために、マクロとPSJコマンドが更新されています。
+    更新のハイライトこのリリースでは、主に事後処理を強化するためのAPI機能が追加されました。また、新機能や新しいオプションのために、マクロとPSJコマンドが更新されています。
 tags: ['Release']
 ---
 
@@ -27,10 +27,8 @@ tags: ['Release']
 
 ### 📦 データ型
 
-- PSJ-Command:
-  - 新しい列挙型 _[`DItemType`](../data-type/psj-command/DItem-types)_ が追加されました。
-<details>
-<summary>新しく追加されたDItemTypeの一覧</summary>
+- PSJ-Command: - 新しい列挙型 _[`DItemType`](../data-type/psj-command/DItem-types)_ が追加されました。 <details>
+    <summary>新しく追加されたDItemTypeの一覧</summary>
 
 | INT NOTATION | DITEMの種別              |
 | ------------ | ------------------------ |
@@ -40,8 +38,8 @@ tags: ['Release']
 </details>
 
 - 新しい列挙型 _[`PathType`](../data-type/psj-utility/pre-utility/enumeration-types/path-types)_ が追加されました。
-<details>
-<summary>新しく追加されたPathTypeの一覧</summary>
+    <details>
+  <summary>新しく追加されたPathTypeの一覧</summary>
 
 | INT NOTATION | PATHTYPEの種別                  |
 | ------------ | ------------------------------- |
@@ -49,11 +47,9 @@ tags: ['Release']
 
 </details>
 
-- PSJ-Utility:
-  - 新しい列挙型 _[`DTableType`](../data-type/psj-utility/pre-utility/enumeration-types/dtable-types)_
-      が追加されました。 
-<details> 
-<summary>新しく追加されたDTableTypeの一覧</summary>
+- PSJ-Utility: - 新しい列挙型 _[`DTableType`](../data-type/psj-utility/pre-utility/enumeration-types/dtable-types)_
+  が追加されました。 <details>
+    <summary>新しく追加されたDTableTypeの一覧</summary>
 
 | INT NOTATION | DTABLEの種別                                   |
 | ------------ | ---------------------------------------------- |
@@ -85,33 +81,26 @@ tags: ['Release']
 
 <details>
 
-<summary>新しく追加されたコマンドの一覧</summary>
-        - `JPT.GetAppPathInfo()`: PathTypeで指定されたパスの情報を取得します。
-        - `JPT.SelectionByIDs()`: IDを使用してエンティティを選択します。
-        - `JPT.IsSpatialPointRendered()`: 現在のビューで(X, Y, Z)の空間座標を持つ指定された点（節点）が表示されているかを確認します。
-        - `JPT.CloseAllGraphViews()` : すべてのグラフビューを閉じます。
-        - `JPT.CloseGraphViewByDocumentName()`: 指定されたドキュメントのすべてのグラフビューを閉じます。
-        - `JPT.ConvertCoordinateFromGlobalToLocal()`: 選択したDItem Typeのグローバル座標を指定されたローカル座標に変換します。
-        - `JPT.HighlightByID()`: コマンドはアセンブルツリー内のLBCおよびプロパティアイテムをハイライトします。同時に、ハイライトされたLBC/プロパティに接続されたパーツのフェースの表示も変更されます。
-        - `JPT.SetActiveDocumentByID()`: 指定されたIDのドキュメントをアクティブにします。
-        - `JPT.SetActiveDocumentByName()`: 指定された名前のドキュメントをアクティブにします。
-        - `JPT.GetDocumentList()`: 現在開いているドキュメントのリストを取得します。
-        - `JPT.GetActiveDocument()`: アクティブなドキュメントを取得します。
-        - `JPT.GetDocumentByID()`: 指定されたIDのドキュメントを取得します。
-        - `JPT.GetDocumentByName()`: 指定された名前のドキュメントを取得します。
-        - `JPT.CloseDocumentByID()`: 指定されたIDのドキュメントを閉じます。
-        - `GetAllCustomNotes`: すべてのカスタムノートを取得します。
-        - `GetAllCustomNoteCollections`: すべてのカスタムノートコレクションを取得します。
-        - `JPT.GetCurrentDeformation()`: 現在の変形設定を取得します。
-        - `JPT.GetCurrentViewPoint()`: 現在のビューポイント設定を取得します。
-        - `JPT.GetCurrentCrossSection()`: 現在の断面設定を取得します。
-        - `JPT.GetCurrentContour()`: 現在のコンター設定を取得します。
-        - `JPT.GetCurrentCircle()`: 現在の円設定を取得します。
-        - `JPT.GetCurrentDiagram()`: 現在のダイアグラム設定を取得します。
-        - `JPT.GetCurrentVector()`: 現在のベクトル設定を取得します。
-        - `JPT.GetCurrentAnimation()`: 現在のアニメーション設定を取得します。
-        - `JPT.CastDItemToDRONode()`: DItemオブジェクトをDPostNodeオブジェクトに変換します。
-        - `JPT.CastDItemToDROElem()`: DItemオブジェクトをDPostElemオブジェクトに変換します。
+<summary>新しく追加されたコマンドの一覧</summary>- `JPT.GetAppPathInfo()`: PathTypeで指定されたパスの情報を取得します。
+- `JPT.SelectionByIDs()`: IDを使用してエンティティを選択します。 - `JPT.IsSpatialPointRendered()`: 現在のビューで(X, Y,
+Z)の空間座標を持つ指定された点（節点）が表示されているかを確認します。 - `JPT.CloseAllGraphViews()` :
+すべてのグラフビューを閉じます。 - `JPT.CloseGraphViewByDocumentName()`:
+指定されたドキュメントのすべてのグラフビューを閉じます。 - `JPT.ConvertCoordinateFromGlobalToLocal()`: 選択したDItem
+Typeのグローバル座標を指定されたローカル座標に変換します。 - `JPT.HighlightByID()`:
+コマンドはアセンブルツリー内のLBCおよびプロパティアイテムをハイライトします。同時に、ハイライトされたLBC/プロパティに接続されたパーツのフェースの表示も変更されます。
+- `JPT.SetActiveDocumentByID()`: 指定されたIDのドキュメントをアクティブにします。 - `JPT.SetActiveDocumentByName()`:
+指定された名前のドキュメントをアクティブにします。 - `JPT.GetDocumentList()`:
+現在開いているドキュメントのリストを取得します。 - `JPT.GetActiveDocument()`: アクティブなドキュメントを取得します。 -
+`JPT.GetDocumentByID()`: 指定されたIDのドキュメントを取得します。 - `JPT.GetDocumentByName()`:
+指定された名前のドキュメントを取得します。 - `JPT.CloseDocumentByID()`: 指定されたIDのドキュメントを閉じます。 -
+`GetAllCustomNotes`: すべてのカスタムノートを取得します。 - `GetAllCustomNoteCollections`:
+すべてのカスタムノートコレクションを取得します。 - `JPT.GetCurrentDeformation()`: 現在の変形設定を取得します。 -
+`JPT.GetCurrentViewPoint()`: 現在のビューポイント設定を取得します。 - `JPT.GetCurrentCrossSection()`:
+現在の断面設定を取得します。 - `JPT.GetCurrentContour()`: 現在のコンター設定を取得します。 - `JPT.GetCurrentCircle()`:
+現在の円設定を取得します。 - `JPT.GetCurrentDiagram()`: 現在のダイアグラム設定を取得します。 - `JPT.GetCurrentVector()`:
+現在のベクトル設定を取得します。 - `JPT.GetCurrentAnimation()`: 現在のアニメーション設定を取得します。 -
+`JPT.CastDItemToDRONode()`: DItemオブジェクトをDPostNodeオブジェクトに変換します。 - `JPT.CastDItemToDROElem()`:
+DItemオブジェクトをDPostElemオブジェクトに変換します。
 
 </details>
 
@@ -119,8 +108,8 @@ tags: ['Release']
 
 <details>
 
-<summary>変更および修正されたコマンドの一覧</summary>
-        - `JPT.EnableLicenseFeature()`: JPT_BASEが自動的に有効化されるように変更されました。
+<summary>変更および修正されたコマンドの一覧</summary>- `JPT.EnableLicenseFeature()`:
+JPT_BASEが自動的に有効化されるように変更されました。
 
 </details>
 
@@ -148,16 +137,13 @@ tags: ['Release']
 
 <details>
 
-<summary>新しく追加されたマクロの一覧</summary>
-        - `ViewRemoveMode`: リムーブモードのON/OFFを切り替えるためのマクロ。
-        - `ViewShowGroupMode`: グループモードのON/OFFを切り替えるためのマクロ。
-        - `ViewShowGlobalCoordinate`: グローバル座標の表示をON/OFFするためのマクロ。
-        - `CmdSetPreUnit`: ドキュメントの単位設定用のマクロ。
-        - `SetDefaultInitialViewPoint`: 初期ビューポイントを設定するためのマクロ。
-        - `ShowContactPairData`: コンタクトペア選択ダイアログでの選択の表示を実装するマクロ。
-        - `CreateCustomNote`: 指定されたコレクションの下にカスタムノートを作成するマクロ。
-        - `CreateCollection`: コレクションを作成するマクロ。
-        - `EditCustomNoteWndPosition`: 指定したカスタムノートを指定した画面位置に移動するマクロ。
+<summary>新しく追加されたマクロの一覧</summary>- `ViewRemoveMode`: リムーブモードのON/OFFを切り替えるためのマクロ。 -
+`ViewShowGroupMode`: グループモードのON/OFFを切り替えるためのマクロ。 - `ViewShowGlobalCoordinate`:
+グローバル座標の表示をON/OFFするためのマクロ。 - `CmdSetPreUnit`: ドキュメントの単位設定用のマクロ。 -
+`SetDefaultInitialViewPoint`: 初期ビューポイントを設定するためのマクロ。 - `ShowContactPairData`:
+コンタクトペア選択ダイアログでの選択の表示を実装するマクロ。 - `CreateCustomNote`:
+指定されたコレクションの下にカスタムノートを作成するマクロ。 - `CreateCollection`: コレクションを作成するマクロ。 -
+`EditCustomNoteWndPosition`: 指定したカスタムノートを指定した画面位置に移動するマクロ。
 
 </details>
 
@@ -172,11 +158,11 @@ tags: ['Release']
 ### 🚅 サンプル
 
 - 中級者向けの新しいチュートリアルが追加されました。
-  - _[Solving plane stress problem.](../tutorials/intermediate/parts-name-mesh-property)_
-  - _[Small sample of model setting, analysis and result check.](../tutorials/intermediate/plate-static)_
-  - _[Small sample to read / write CSV file.](../tutorials/intermediate/user-material)_
+    - _[Solving plane stress problem.](../tutorials/intermediate/parts-name-mesh-property)_
+    - _[Small sample of model setting, analysis and result check.](../tutorials/intermediate/plate-static)_
+    - _[Small sample to read / write CSV file.](../tutorials/intermediate/user-material)_
 - Pythonコードの新しいチュートリアルが追加されました。
-  - _[Python Tips - File I/O](../tutorials/basic/python-tips-file-io)_
+    - _[Python Tips - File I/O](../tutorials/basic/python-tips-file-io)_
 
 ### 📝 その他
 

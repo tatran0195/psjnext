@@ -5,7 +5,7 @@ date: '2024-10-15'
 version: 'v5.0.1'
 title: 'リリースノートV5.0.1'
 summary: |
-  主なアップデート内容本リリースは主に新しい[PSJ-GUI](../psj-gui)と[PSJ-Utility](../psj-utility)機能に焦点を当てています。
+    主なアップデート内容本リリースは主に新しい[PSJ-GUI](../psj-gui)と[PSJ-Utility](../psj-utility)機能に焦点を当てています。
 tags: ['Release']
 ---
 
@@ -94,9 +94,9 @@ tags: ['Release']
 </details>
 
 - PSJ-Utility: プリユーティリティとポストユーティリティの2つのタイプに分離されました：
-  - プリユーティリティ: 前処理ワークフローで使用されるデータ型で、新しいクラスとアップデートを含みます：
-    - 組み込み型: 新しい*[DItemPair](../data-type/psj-utility/pre-utility/built-in-types/DItemPair)*、*[DItemPairVector](../data-type/psj-utility/pre-utility/built-in-types/DItemPairVector)*、*[DCoord](../data-type/psj-utility/pre-utility/built-in-types/DCoord)*、*[CoordVector](../data-type/psj-utility/pre-utility/built-in-types/CoordVector)*、*[DConnect](../data-type/psj-utility/pre-utility/built-in-types/DConnect)*、*[ConnectVector](../data-type/psj-utility/pre-utility/built-in-types/ConnectVector)*、*[DLoadBC](../data-type/psj-utility/pre-utility/built-in-types/DLoadBC)*、*[LoadBCVector](../data-type/psj-utility/pre-utility/built-in-types/LoadBCVector)*、*[DSolverJob](../data-type/psj-utility/pre-utility/built-in-types/DSolverJob)*、*[SolverJobVector](../data-type/psj-utility/pre-utility/built-in-types/SolverJobVector)*、*[Document](../data-type/psj-utility/pre-utility/built-in-types/Document)*を追加。さらに、*[DBody](../data-type/psj-utility/pre-utility/built-in-types/DBody)*に新しい属性`properties`が追加されました。
-    - 列挙型:
+    - プリユーティリティ: 前処理ワークフローで使用されるデータ型で、新しいクラスとアップデートを含みます：
+        - 組み込み型: 新しい*[DItemPair](../data-type/psj-utility/pre-utility/built-in-types/DItemPair)*、_[DItemPairVector](../data-type/psj-utility/pre-utility/built-in-types/DItemPairVector)_、_[DCoord](../data-type/psj-utility/pre-utility/built-in-types/DCoord)_、_[CoordVector](../data-type/psj-utility/pre-utility/built-in-types/CoordVector)_、_[DConnect](../data-type/psj-utility/pre-utility/built-in-types/DConnect)_、_[ConnectVector](../data-type/psj-utility/pre-utility/built-in-types/ConnectVector)_、_[DLoadBC](../data-type/psj-utility/pre-utility/built-in-types/DLoadBC)_、_[LoadBCVector](../data-type/psj-utility/pre-utility/built-in-types/LoadBCVector)_、_[DSolverJob](../data-type/psj-utility/pre-utility/built-in-types/DSolverJob)_、_[SolverJobVector](../data-type/psj-utility/pre-utility/built-in-types/SolverJobVector)_、*[Document](../data-type/psj-utility/pre-utility/built-in-types/Document)*を追加。さらに、*[DBody](../data-type/psj-utility/pre-utility/built-in-types/DBody)*に新しい属性`properties`が追加されました。
+        - 列挙型:
           *[パス型](../data-type/psj-utility/pre-utility/enumeration-types/path-types/)*の新しいタイプ`JPT.PathType.FILE_PATH`を追加。また、新しい*[DTableType](../data-type/psj-utility/pre-utility/enumeration-types/dtable-types)*のタイプが追加されました：
 
 <details>
@@ -130,12 +130,12 @@ tags: ['Release']
 </details>
 
 - ポストユーティリティ: 後処理ワークフローで使用されるデータ型で、全く新しいクラスが追加されました：
-  - 組み込み型:
-      *[DPostElem](../data-type/psj-utility/post-utility/post-built-in-types/DPostElem)*、*[DPostNode](../data-type/psj-utility/post-utility/post-built-in-types/DPostNode)*、*[ポストデータオプション](../data-type/psj-utility/post-utility/post-built-in-types/post-data-op)*、*[ポストタイムステップ情報](../data-type/psj-utility/post-utility/post-built-in-types/post-time-step-info)*。
-  - 列挙型:
-      *[ポスト解析タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)*、*[ポストデータ範囲タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-data-range-types)*、*[ポスト結果データ位置タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-loc-types)*、*[ポスト結果データ変換タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-cnv-types)*、*[ポスト結果データ連続タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-cont-types)*、*[ポスト結果データ座標タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-coord-types)*、*[ポスト結果データ荷重1Dタイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-load1d-types)*、*[ポスト結果データ荷重2Dタイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-load2d-types)*、*[ポスト結果データ複素数タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-complex-types)*。
+    - 組み込み型:
+      _[DPostElem](../data-type/psj-utility/post-utility/post-built-in-types/DPostElem)_、_[DPostNode](../data-type/psj-utility/post-utility/post-built-in-types/DPostNode)_、_[ポストデータオプション](../data-type/psj-utility/post-utility/post-built-in-types/post-data-op)_、_[ポストタイムステップ情報](../data-type/psj-utility/post-utility/post-built-in-types/post-time-step-info)_。
+    - 列挙型:
+      _[ポスト解析タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)_、_[ポストデータ範囲タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-data-range-types)_、_[ポスト結果データ位置タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-loc-types)_、_[ポスト結果データ変換タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-cnv-types)_、_[ポスト結果データ連続タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-cont-types)_、_[ポスト結果データ座標タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-coord-types)_、_[ポスト結果データ荷重1Dタイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-load1d-types)_、_[ポスト結果データ荷重2Dタイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-load2d-types)_、_[ポスト結果データ複素数タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-complex-types)_。
 
-- PSJ-GUI: テーブル操作用の新しいクラスを追加：*[TableCellID](../data-type/psj-gui/TableCellID)*、*[TableCellVector](../data-type/psj-gui/TableCellVector)*、*[TableCellRange](../data-type/psj-gui/TableCellRange)*、*[TableCellRangeVector](../data-type/psj-gui/TableCellRangeVector)*、*[TableColumnInfo](../data-type/psj-gui/TableColumnInfo)*、*[TableColumnInfoVector](../data-type/psj-gui/TableColumnInfoVector)*。
+- PSJ-GUI: テーブル操作用の新しいクラスを追加：_[TableCellID](../data-type/psj-gui/TableCellID)_、_[TableCellVector](../data-type/psj-gui/TableCellVector)_、_[TableCellRange](../data-type/psj-gui/TableCellRange)_、_[TableCellRangeVector](../data-type/psj-gui/TableCellRangeVector)_、_[TableColumnInfo](../data-type/psj-gui/TableColumnInfo)_、_[TableColumnInfoVector](../data-type/psj-gui/TableColumnInfoVector)_。
 
 ### ⌘ PSJ-Command
 
@@ -202,8 +202,8 @@ PSJ-Commandのキーワード引数名を変更し、使用時の可読性を確
 #### 📏 GUIコマンドビルダー
 
 - 階層ツールバーに[展開/折りたたみ機能](../gui-command-builder#hierarchy-window)を追加。
-  - すべてのツリーノードを展開：選択されたコンテナ内のすべてのコンポーネントを展開。
-  - すべてのツリーノードを折りたたみ：選択されたコンテナ内のすべてのコンポーネントを折りたたみ。
+    - すべてのツリーノードを展開：選択されたコンテナ内のすべてのコンポーネントを展開。
+    - すべてのツリーノードを折りたたみ：選択されたコンテナ内のすべてのコンポーネントを折りたたみ。
 - ツールバーメニューに[名前を付けて保存](../gui-command-builder#tool-menu)ボタンを追加。
   ![名前を付けて保存](/docs/GUI_CommandBuilder_Component_SaveAs_V5.0.1.png)
 - \*.jdbを開いたときの左上角にファイル名を追加し、データ保存時の作業動作（データが変更された場合、\*.jdbの名前にアスタリスク\*が追加されます）。
@@ -221,10 +221,7 @@ PSJ-Commandのキーワード引数名を変更し、使用時の可読性を確
 - コンポーネント名の変更：TabWnd、Browser、PagesCtrl。
   ![コンポーネント名変更](/docs/GUI_CommandBuilder_Component-Parameter_Dialog6_V5.0.1.png)
 - `チェックラベルあり`を使用するGroupBoxコンテナ内の他のコンポーネント/コンテナの有効オプションは自動的に無効化され、グレーアウトされます。その時、それらの有効制御は親GroupBoxに依存します。
-  <Video
-    src="/video/PSJ_GUI_Command_Builder_GroupBox.mp4"
-    muted
-  />
+    <Video src="/video/PSJ_GUI_Command_Builder_GroupBox.mp4" muted />
 
 #### 📝 API
 

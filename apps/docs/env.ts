@@ -1,12 +1,15 @@
 import { createEnv } from '@t3-oss/env-nextjs';
 import { z } from 'zod';
 
-const csvArray = z.string().catch('').transform((value) =>
-    value
-        .split(',')
-        .map((v) => v.trim())
-        .filter(Boolean),
-);
+const csvArray = z
+    .string()
+    .catch('')
+    .transform((value) =>
+        value
+            .split(',')
+            .map((v) => v.trim())
+            .filter(Boolean),
+    );
 
 export const env = createEnv({
     server: {

@@ -1,10 +1,10 @@
 'use client';
 
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { Check } from 'lucide-react';
-import { usePathname, useRouter } from 'next/navigation';
 
 import { useVersionContext, type VersionItem } from '@/contexts/versions';
 

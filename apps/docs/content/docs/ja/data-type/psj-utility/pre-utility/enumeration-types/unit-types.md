@@ -47,7 +47,7 @@ This is an enumeration type represents units used in Jupiter. Functions used for
 | 26  | `JPT.UnitType.Unit_HeatFlux`                 | Heat flux                       | $mW/mm^2\\W/m^2\\miuW/mm^2\\kcal/mm^2*h\\lbf/ft*s\\lbf/in*s$                               |
 | 27  | `JPT.UnitType.Unit_HeatGeneration`           | Heat generation                 | $mW/mm^3\\W/m^3\\miuW/mm^3\\kcal//mm^3*h\\lbf/ft^2*s\\lbf/in^2*s$                          |
 | 28  | `JPT.UnitType.Unit_LinearDensity`            | Linear density                  | $kg/m\\oz/ft\\oz/in\\lb/yd$                                                                |
-| 29  | `JPT.UnitType.Unit_SurfaceDensity`           | Surface density                 | $t/mm^2\\kg/m^2\\kg/mm^2\\kgf*s^2/mm^3\\slug/ft^2\\lbf*s^2/in^3$                          |
+| 29  | `JPT.UnitType.Unit_SurfaceDensity`           | Surface density                 | $t/mm^2\\kg/m^2\\kg/mm^2\\kgf*s^2/mm^3\\slug/ft^2\\lbf*s^2/in^3$                           |
 | 30  | `JPT.UnitType.Unit_AreaMomentInertia`        | Moment of Inertia (Area)        | $mm^4\\m^4\\ft^4\\in^4\\cm^4$                                                              |
 | 31  | `JPT.UnitType.Unit_TorsionalConst`           | Torsional rigidity              | $mm^4\\m^4\\ft^4\\in^4\\cm^4$                                                              |
 | 32  | `JPT.UnitType.Unit_WarpCoef`                 | Warping factor                  | $mm^6\\m^6\\ft^6\\in^6\\cm^6$                                                              |

@@ -1,4 +1,3 @@
-
 // ── Types ──────────────────────────────────────────────────────────────────────
 
 export type NodeKind = 'root' | 'branch' | 'category' | 'leaf';
@@ -47,7 +46,6 @@ export interface ChartConfig {
     title?: string;
     tree: TreeNode;
     theme: ThemeTokens;
-    lineColors: [string, string, string, string];
     layout: LayoutConfig;
     legend: LegendItem[];
     chrome: {

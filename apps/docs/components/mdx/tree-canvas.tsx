@@ -114,51 +114,56 @@ interface Segment {
 
 const Connectors: FC<{
     rects: Rect[];
-    lineColors: [string, string, string, string];
     layout: LayoutConfig;
     width: number;
     height: number;
-}> = ({ rects, lineColors, layout, width, height }) => {
-    const lineColor = (d: number) => lineColors[Math.min(d, lineColors.length - 1)];
+}> = ({ rects, layout, width, height }) => {
     const byId = Object.fromEntries(rects.map((r) => [r.node.id, r]));
     const segs: Segment[] = [];
 
     rects.forEach((r) => {
         if (!r.node.children?.length) return;
 
-        // If children aren't in rects (collapsed), don't draw connectors
-        const first = byId[r.node.children[0].id];
-        if (!first) return;
-
-        const color = lineColor(r.depth);
         const exitX = r.x + r.w;
         const exitY = r.y + r.h / 2;
         const midX = exitX + layout.colGap / 2;
-        const last = byId[r.node.children[r.node.children.length - 1].id];
-
-        segs.push({ x1: exitX, y1: exitY, x2: midX, y2: exitY, color, key: `${r.node.id}-stem` });
-
-        if (r.node.children.length > 1) {
-            segs.push({
-                x1: midX,
-                y1: first.y + first.h / 2,
-                x2: midX,
-                y2: last.y + last.h / 2,
-                color,
-                key: `${r.node.id}-rail`,
-            });
-        }
 
         r.node.children.forEach((ch) => {
             const cr = byId[ch.id];
             if (!cr) return;
+
+            const targetColor = cr.tokens.bd;
+
+            // 1. Stem segment (shared horizontal part from parent to split point)
+            segs.push({
+                x1: exitX,
+                y1: exitY,
+                x2: midX,
+                y2: exitY,
+                color: targetColor,
+                key: `${r.node.id}-${ch.id}-stem`,
+            });
+
+            // 2. Rail segment (vertical part to child's row)
+            if (cr.y + cr.h / 2 !== exitY) {
+                segs.push({
+                    x1: midX,
+                    y1: exitY,
+                    x2: midX,
+                    y2: cr.y + cr.h / 2,
+                    color: targetColor,
+                    key: `${r.node.id}-${ch.id}-rail`,
+                });
+            }
+
+            // 3. Stub segment (horizontal part into child)
             segs.push({
                 x1: midX,
                 y1: cr.y + cr.h / 2,
                 x2: cr.x,
                 y2: cr.y + cr.h / 2,
-                color,
-                key: `${r.node.id}-stub-${ch.id}`,
+                color: targetColor,
+                key: `${r.node.id}-${ch.id}-stub`,
             });
         });
     });
@@ -316,7 +321,6 @@ const Legend: FC<{ items: LegendItem[]; theme: ThemeTokens; textMuted: string }>
 interface TreeCanvasProps {
     tree: TreeNode;
     theme: ThemeTokens;
-    lineColors: [string, string, string, string];
     layout: LayoutConfig;
     chrome: {
         bg: string;
@@ -328,7 +332,7 @@ interface TreeCanvasProps {
     legend?: LegendItem[];
 }
 
-export function TreeCanvas({ tree, theme, lineColors, layout, chrome, title, legend }: TreeCanvasProps) {
+export function TreeCanvas({ tree, theme, layout, chrome, title, legend }: TreeCanvasProps) {
     const { collapsed, toggle, expandAll, collapseAll } = useCollapse(tree);
 
     const rects = useMemo(
@@ -417,13 +421,7 @@ export function TreeCanvas({ tree, theme, lineColors, layout, chrome, title, leg
                         flexShrink: 0,
                     }}
                 >
-                    <Connectors
-                        rects={rects}
-                        lineColors={lineColors}
-                        layout={layout}
-                        width={canvasW}
-                        height={canvasH}
-                    />
+                    <Connectors rects={rects} layout={layout} width={canvasW} height={canvasH} />
                     {rects.map((r) => (
                         <NodeBox
                             key={r.node.id}

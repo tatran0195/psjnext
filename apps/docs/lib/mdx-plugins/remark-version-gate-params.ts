@@ -1,10 +1,10 @@
 import { valueToEstree } from 'estree-util-value-to-estree';
 
+import { env } from '@/env';
 import { semverGte } from '@/lib/api-versions';
 
 import { flattenNode, getVersionStatus } from './utils';
 
-import { env } from '@/env';
 import type { Heading, PhrasingContent, Root, RootContent } from 'mdast';
 import type { MdxjsEsm } from 'mdast-util-mdx';
 import type { Plugin, Transformer } from 'unified';
@@ -236,7 +236,7 @@ function resolveActiveRange(ranges: VersionRange[], version: string): VersionRan
 // Replace wrapInParamSection
 function wrapInParamSection(block: RootContent[], meta: ParamMeta): RootContent {
     const versionMap: Record<string, ResolvedParam> = Object.fromEntries(
-       env.API_VERSIONS.map((version) => {
+        env.API_VERSIONS.map((version) => {
             if (!isVisibleAt(meta, version)) {
                 return [version, { visible: false }];
             }

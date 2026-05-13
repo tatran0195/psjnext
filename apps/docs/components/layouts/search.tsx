@@ -145,7 +145,12 @@ export default function CustomSearchDialog(props: SharedProps) {
                 </SearchDialogHeader>
                 <SearchDialogList items={searchData} />
                 <SearchDialogFooter className="flex flex-row flex-wrap gap-2 items-center">
-                    <ListMenu items={allTags} label="Version" selected={currentVersion} setSelected={setCurrentVersion} />
+                    <ListMenu
+                        items={allTags}
+                        label="Version"
+                        selected={currentVersion}
+                        setSelected={setCurrentVersion}
+                    />
                     <ListMenu items={BEHAVIORS} label="Behavior" selected={behavior} setSelected={setBehavior} />
                 </SearchDialogFooter>
             </SearchDialogContent>
