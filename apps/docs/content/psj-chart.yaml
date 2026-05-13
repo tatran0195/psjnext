@@ -1,0 +1,154 @@
+title: PSJ Data Type
+
+chrome:
+    bg: '#f8fafc'
+    panel: '#ffffff'
+    border: '#e2e8f0'
+    textMuted: '#64748b'
+
+theme:
+    root:
+        bg: '#dbeafe'
+        bd: '#93c5fd'
+        tx: '#004ea2'
+    branch:
+        bg: '#fef9c3'
+        bd: '#fde047'
+        tx: '#854d0e'
+    category:
+        bg: '#dcfce7'
+        bd: '#86efac'
+        tx: '#166534'
+    leaf:
+        bg: '#fce7f3'
+        bd: '#f9a8d4'
+        tx: '#9d174d'
+
+lineColors:
+    - '#d97706'
+    - '#16a34a'
+    - '#16a34a'
+    - '#db2777'
+
+layout:
+    colW: 130
+    colGap: 36
+    rowGap: 8
+    rootW: 52
+    rootH: 72
+    pad: 10
+
+legend:
+    - kind: root
+      label: Root
+    - kind: branch
+      label: Branch
+    - kind: category
+      label: Category
+    - kind: leaf
+      label: Leaf type
+
+tree:
+    id: psj
+    label: "PSJ\nDATA TYPE"
+    children:
+        - id: cmd
+          label: PSJ-Command type
+          children:
+              - id: cmd-b
+                label: Built-in type
+                children:
+                    - id: py-std
+                      label: "Python standard\nbuilt-in type"
+                    - id: jup-adv
+                      label: "Jupiter advanced\nbuilt-in type"
+              - id: cmd-e
+                label: Enumeration type
+                children:
+                    - id: item-t
+                      label: Item type
+                    - id: elem-t
+                      label: Element type
+                    - id: mesh-t
+                      label: "Data structure of\nmesh and analysis"
+
+        - id: util
+          label: PSJ-Utility type
+          children:
+              - id: pre
+                label: Pre-Utility type
+                style:
+                    bg: '#fff7ed'
+                    bd: '#fb923c'
+                    tx: '#9a3412'
+                children:
+                    - id: pre-b
+                      label: Built-in type
+                      children:
+                          - id: pre-t
+                            label: Pre type
+                    - id: pre-e
+                      label: Enumeration type
+                      children:
+                          - id: unit
+                            label: Unit
+                          - id: assoc
+                            label: Associated pick
+                          - id: path
+                            label: Path
+                          - id: table
+                            label: Table
+                          - id: bool
+                            label: Boolean
+                          - id: msgbox
+                            label: Message box
+                          - id: selm
+                            label: Select method
+              - id: post
+                label: Post-Utility type
+                style:
+                    bg: '#fff7ed'
+                    bd: '#fb923c'
+                    tx: '#9a3412'
+                children:
+                    - id: post-b
+                      label: Built-in type
+                      children:
+                          - id: post-t
+                            label: Post type
+                          - id: post-do
+                            label: Post data option
+                          - id: post-ts
+                            label: Post time step
+                    - id: post-e
+                      label: Enumeration type
+                      children:
+                          - id: pj
+                            label: Post job
+                          - id: pa
+                            label: Post analysis
+                          - id: pdr
+                            label: Post data range
+                          - id: pdl
+                            label: Post data location
+                          - id: pdc
+                            label: Post data conversion
+                          - id: pdco
+                            label: Post data continuous
+                          - id: pdcd
+                            label: Post data coordinate
+                          - id: pd1
+                            label: Post data 1D
+                          - id: pd2
+                            label: Post data 2D
+                          - id: pdcx
+                            label: Post data complex
+
+        - id: gui
+          label: PSJ-GUI type
+          children:
+              - id: gui-b
+                label: Built-in type
+                children:
+                    - id: gui-obj
+                      label: GUI object
