@@ -17,18 +17,18 @@ A data type is used to set up the result settings for displaying the contour.
 ### `iContourType`
 
 - An _Integer_ specifying the contour type.
-  - 0: Continuous
-  - 1: Step
-  - 2: Iso Surface
+    - 0: Continuous
+    - 1: Step
+    - 2: Iso Surface
 - The default value is 1.
 
 ### `iMaxMinType`
 
 - An _Integer_ specifying the Max/Min type to display by contour.
-  - 0: Visible Entity
-  - 1: Total Entity
-  - 2: User Define
-  - 3: Multiple Result
+    - 0: Visible Entity
+    - 1: Total Entity
+    - 2: User Define
+    - 3: Multiple Result
 - The default value is 0.
 
 ### `dMaxUser`
@@ -89,10 +89,10 @@ A data type is used to set up the result settings for displaying the contour.
 ### `iLogType`
 
 - An _Integer_ specifying the log type for displaying.
-  - 0: None
-  - 1: LogE
-  - 2: Log10
-  - 3: SPL
+    - 0: None
+    - 1: LogE
+    - 2: Log10
+    - 3: SPL
 - The default value is 0.
 
 ### `bShowBlankValueAs0`
@@ -123,8 +123,8 @@ A data type is used to set up the result settings for displaying the contour.
 ### `iInterpolateMethod`
 
 - An _Integer_ specifying the interpolation method.
-  - 0: Fixed
-  - 1: Interpolate
+    - 0: Fixed
+    - 1: Interpolate
 - The default value is 0.
 
 ### `ilInterpolateInfo`
@@ -135,9 +135,9 @@ A data type is used to set up the result settings for displaying the contour.
 ### `iMethodShowRigidSpringElemColor`
 
 - An _Integer_ specifying color type of Rigid/Spring Elements.
-  - 0: Display with the color specified by `iRigidSpringElemColor`
-  - 1: Display original LBC Visualize color.
-  - 2: Show translation contour.
+    - 0: Display with the color specified by `iRigidSpringElemColor`
+    - 1: Display original LBC Visualize color.
+    - 2: Show translation contour.
 - The default value is 1.
 
 ### `iRigidSpringElemColor`

@@ -6,7 +6,15 @@ import type { RemarkAutoTypeTableOptions } from 'fumadocs-typescript';
 
 import { transformerMetaHighlight, transformerRemoveNotationEscape } from '@shikijs/transformers';
 import { RehypeCodeOptions, remarkMdxFiles, remarkMdxMermaid } from 'fumadocs-core/mdx-plugins';
-import { applyMdxPreset, defineCollections, defineConfig, defineDocs, DocCollection } from 'fumadocs-mdx/config';
+import { pageSchema } from 'fumadocs-core/source/schema';
+import {
+    applyMdxPreset,
+    defineCollections,
+    defineConfig,
+    defineDocs,
+    DocCollection,
+    metaSchema,
+} from 'fumadocs-mdx/config';
 import jsonSchema from 'fumadocs-mdx/plugins/json-schema';
 import lastModified from 'fumadocs-mdx/plugins/last-modified';
 import remarkDirective from 'remark-directive';
@@ -18,7 +26,6 @@ import { remarkElementIds } from './lib/mdx-plugins/remark-element-ids';
 import { remarkLinkPreview } from './lib/mdx-plugins/remark-link-preview';
 import { remarkVersionGateParams } from './lib/mdx-plugins/remark-version-gate-params';
 import { defaultShikiOptions } from './lib/shiki';
-import { docsSchema, metaSchemaWithGroup } from './lib/source/schema';
 
 const { rehypeCodeDefaultOptions } = await import('fumadocs-core/mdx-plugins/rehype-code');
 const { remarkSteps } = await import('fumadocs-core/mdx-plugins/remark-steps');
@@ -117,7 +124,16 @@ const mdxOptions: DocCollection['mdxOptions'] = async (environment) => {
 
 export const docs = defineDocs({
     docs: {
-        schema: docsSchema,
+        schema: pageSchema.extend({
+            index: z.boolean().default(false),
+            ribbon: z.string().optional(),
+            shortcut: z.string().optional(),
+            since: z.string().optional(),
+            deprecated: z.string().optional(),
+            removed: z.string().optional(),
+            _version: z.string().optional(),
+            _status: z.string().optional(),
+        }),
         postprocess: {
             includeProcessedMarkdown: true,
             extractLinkReferences: true,
@@ -127,7 +143,11 @@ export const docs = defineDocs({
         mdxOptions,
     },
     meta: {
-        schema: metaSchemaWithGroup,
+        schema: metaSchema.extend({
+            group: z.boolean().optional(),
+            groupType: z.enum(['stacked', 'tabs']).default('tabs').optional(),
+            groupOrder: z.number().default(0).optional(),
+        }),
     },
 });
 

@@ -12,9 +12,9 @@ A data type is used to set up the result settings for displaying the animation.
 ### `iMode`
 
 - An _Integer_ specifying the animation mode.
-  - 0: Single
-  - 1: Multiple
-  - 2: Multi-Analysis
+    - 0: Single
+    - 1: Multiple
+    - 2: Multi-Analysis
 - The default value is 0.
 
 ### `iFPS`
@@ -30,16 +30,16 @@ A data type is used to set up the result settings for displaying the animation.
 ### `iDivideMethod`
 
 - An _Integer_ specifying the dividing method between initial state and maximum deformation.
-  - 0: Linear
-  - 1: Sine
+    - 0: Linear
+    - 1: Sine
 - The default value is 1.
 
 ### `iLoopType`
 
 - An _Integer_ specifying the behavior type of the animation.
-  - 0: One Way
-  - 1: Go & Return
-  - 2: Cycle
+    - 0: One Way
+    - 1: Go & Return
+    - 2: Cycle
 - The default value is 1.
 
 ### `iAnimationResultType`
@@ -90,8 +90,8 @@ A data type is used to set up the result settings for displaying the animation.
 ### `iSectionMode`
 
 - An _Integer_ specifying the animation type during cross section display.
-  - 0: Euler Display
-  - 1: Lagrange display
+    - 0: Euler Display
+    - 1: Lagrange display
 - The default value is 0.
 
 ### `bSetTime`

@@ -326,7 +326,9 @@ In which:
 >
 > **picture_folder** is the parameter refering to the stored location to get stored pictures. The stored localtion:
 >
-> <menuselection>Jupiter installation folder &#187; SampleData &#187; PSJ &#187; PSJ-GUI &#187; CreateBolt &#187; CreatingBolt_Pics</menuselection>
+> <menuselection>
+>     Jupiter installation folder &#187; SampleData &#187; PSJ &#187; PSJ-GUI &#187; CreateBolt &#187; CreatingBolt_Pics
+> </menuselection>
 
 ### 2.4. Step 4: Prepare a function to modify the output value of Assemble Faces function
 
@@ -342,18 +344,13 @@ So, to make it can be used, you can use the following **def** function (or you c
     Whenever start using a function, you should check it's output values and type. In Jupiter, we're supporting a
     utility called [JPT.Debugger](/docs/psj-utility/JPT.Debugger)
 </Callout>
-```psj
-def replace_str(err, in_str):
-    mod_str = in_str
-    for i in range (len(err)):
-        mod_str = mod_str.replace(str(err[i]), " ")
-    mod_str = re.sub("s+", " ", mod_str).strip().split(" ")
-    return mod_str
-```
+```psj def replace_str(err, in_str): mod_str = in_str for i in range (len(err)): mod_str = mod_str.replace(str(err[i]),
+" ") mod_str = re.sub("s+", " ", mod_str).strip().split(" ") return mod_str ```
 
 ### 2.5. Step 5: Prepare the execution function
 
-Based on the created PSJ-Command and Jupiter's Macro from the previous steps, the **on_execute_button_clicked()** function is responsible for implementing the Apply or OK button. It will have the following structure:
+Based on the created PSJ-Command and Jupiter's Macro from the previous steps, the **on_execute_button_clicked()**
+function is responsible for implementing the Apply or OK button. It will have the following structure:
 
 <Tabs
   groupId="commands-macros"
@@ -428,7 +425,7 @@ def on_execute_button_clicked(dlg):
         new_name = dlg.get_item_text(name="part_name") + "_" + str(len([_.id for _ in JPT.GetAllParts()]) + 1)
 
     dlg.set_item_text(name="part_name", text=new_name)
-````
+```
 
 </Tab>
 <Tab value="macro">

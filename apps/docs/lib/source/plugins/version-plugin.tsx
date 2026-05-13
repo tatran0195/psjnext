@@ -3,16 +3,23 @@ import { ReactNode } from 'react';
 import { Archive, Tag } from 'lucide-react';
 
 import { env } from '@/env';
-import { getVersionStatus } from '@/lib/api-versions';
+import { getVersionStatus, semverGte } from '@/lib/api-versions';
+import { getApiVersions } from '@/lib/source';
 
 import type { StructuredData } from 'fumadocs-core/mdx-plugins';
 import type * as PageTree from 'fumadocs-core/page-tree';
 import type { LoaderPlugin } from 'fumadocs-core/source';
 
+interface FolderNode extends PageTree.Folder {
+    group?: boolean;
+    groupType?: 'stacked' | 'tabs';
+    groupOrder?: number;
+}
+
 export interface VersionedPageFrontmatter {
     title: string;
     description?: string;
-    introduced?: string;
+    since?: string;
     deprecated?: string;
     removed?: string;
     ribbon?: string;
@@ -43,7 +50,7 @@ function nodeStoragePath(node: { $id?: string }): string {
  * idx === 0  → latest  → Tag icon     + "Latest"
  * idx  > 0  → archive → Archive icon + "Version X.Y"
  */
-function resolveVersionMeta(idx: number): { icon: ReactNode | string; description: string } {
+function _resolveVersionMeta(idx: number): { icon: ReactNode | string; description: string } {
     return idx === 0
         ? {
               icon: <Tag />,
@@ -115,9 +122,7 @@ function installVersionedGetters(
                 if (!version) return result;
 
                 const exports = (result._exports ?? result) as Record<string, unknown>;
-                const versionedMap = exports.versionedStructuredData as
-                    | Record<string, StructuredData>
-                    | undefined;
+                const versionedMap = exports.versionedStructuredData as Record<string, StructuredData> | undefined;
 
                 if (versionedMap?.[version] && Array.isArray(result.toc)) {
                     const validIds = new Set(versionedMap[version]!.headings.map((h) => h.id));
@@ -145,7 +150,7 @@ export function versionPlugin(): LoaderPlugin {
 
     return {
         name: 'fumadocs:api-versions',
-        enforce: 'pre',
+        enforce: 'post',
 
         transformStorage({ storage }) {
             const apiFiles = storage.getFiles().filter((f) => f.startsWith('api/'));
@@ -205,7 +210,7 @@ export function versionPlugin(): LoaderPlugin {
                 const loadFn = originalData.load as (() => Promise<Record<string, unknown>>) | undefined;
 
                 for (const version of API_VERSIONS) {
-                    const status = getVersionStatus(version, fm.introduced, fm.deprecated, fm.removed);
+                    const status = getVersionStatus(version, fm.since, fm.deprecated, fm.removed);
 
                     if (!isPageVisible(status)) continue;
 
@@ -242,6 +247,7 @@ export function versionPlugin(): LoaderPlugin {
                 if (apiFolderIdx === -1) return node;
 
                 const apiFolder = node.children[apiFolderIdx] as PageTree.Folder;
+                const versions = getApiVersions();
 
                 const versionedChildren: PageTree.Node[] = apiFolder.children
                     .filter((child): child is PageTree.Folder => {
@@ -250,19 +256,32 @@ export function versionPlugin(): LoaderPlugin {
                         const segment = storagePath.split('/').pop() ?? '';
                         return (API_VERSIONS as readonly string[]).includes(segment);
                     })
-                    .map((child, idx) => ({
-                        ...child,
-                        defaultOpen: false,
-                        group: true,
-                        type: 'folder',
-                        ...resolveVersionMeta(idx),
-                    }));
+                    .sort((a, b) => {
+                        const versionA = typeof a.name === 'string' ? a.name : '';
+                        const versionB = typeof b.name === 'string' ? b.name : '';
+                        return semverGte(versionA, versionB) ? -1 : 1;
+                    })
+                    .map((child, _idx) => {
+                        const versionMeta = versions.find((v) => v.value === child.name);
+                        return {
+                            ...child,
+                            defaultOpen: false,
+                            description: versionMeta?.releasedAt ?? 'Unreleased',
+                            group: true,
+                            type: 'folder',
+                            groupType: 'stacked',
+                            groupOrder: 1,
+                            icon: <Tag />,
+                        };
+                    });
 
-                const newApiFolder: PageTree.Folder & { root: true; group: true } = {
+                const newApiFolder: FolderNode & { root: true } = {
                     ...apiFolder,
                     children: versionedChildren,
                     root: true,
                     group: true,
+                    groupType: 'tabs',
+                    groupOrder: 0,
                 };
 
                 const newChildren = [...node.children];

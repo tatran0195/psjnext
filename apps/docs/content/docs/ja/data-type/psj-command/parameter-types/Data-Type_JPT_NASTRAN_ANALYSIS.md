@@ -12,31 +12,31 @@ A data type uses to control parameters of Nastran Analysis
 ### `iSolverType`
 
 - An _Integer_ specifying solver type.
-  - 0: Unknown solver type.
-  - 1: MSC Nastran solver type.
-  - 2: NX Nastran solver type.
-  - 3: Dynamic solver type.
-  - 4: Dynamic solver type for Designer.
-  - 5: Abaqus solver type.
-  - 6: Sunshine Solver type.
-  - 7: Sunshine Solver type for Designer.
+    - 0: Unknown solver type.
+    - 1: MSC Nastran solver type.
+    - 2: NX Nastran solver type.
+    - 3: Dynamic solver type.
+    - 4: Dynamic solver type for Designer.
+    - 5: Abaqus solver type.
+    - 6: Sunshine Solver type.
+    - 7: Sunshine Solver type for Designer.
 - The default value is 0.
 
 ### `iWriteType`
 
 - An _Integer_ specifying the writing type of solver input file.
-  - 0: Writing by model.
-  - 1: Writing by each body.
-  - 2: Writing by bodies.
-  - 3: Writing by each body, omitting the prefix in part file names.
+    - 0: Writing by model.
+    - 1: Writing by each body.
+    - 2: Writing by bodies.
+    - 3: Writing by each body, omitting the prefix in part file names.
 - The default value is 0.
 
 ### `iGridFormatType`
 
 - An _Integer_ specifying the Grid output format.
-  - 0: Single. Small field format output.
-  - 1: Double. Large field format output.
-  - 2: Single F.P. Specify the floating-point number small field format output.
+    - 0: Single. Small field format output.
+    - 1: Double. Large field format output.
+    - 2: Single F.P. Specify the floating-point number small field format output.
 - The default value is 0.
 
 ### `bDeleteFloatingNodes`

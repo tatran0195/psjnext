@@ -356,9 +356,9 @@ function ItemMeta({
                     </span>
                 )}
 
-                {item.version_introduced && (
+                {item.introduced && (
                     <span className="text-fd-muted-foreground text-xs ml-1">
-                        Added in <code>{item.version_introduced}</code>
+                        Added in <code>{item.introduced}</code>
                     </span>
                 )}
 

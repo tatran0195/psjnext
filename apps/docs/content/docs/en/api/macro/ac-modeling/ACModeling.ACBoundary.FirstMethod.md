@@ -1,8 +1,8 @@
 ---
 title: 'ACModeling.ACBoundary.FirstMethod() '
 description: 'Unknown Description'
-version_introduced: '5.1.0'
-available_versions: 'all'
+since: '5.1.0'
+deprecated: '5.2.0'
 ribbon: 'ACModeling > ACBoundary > FirstMethod'
 ---
 
@@ -31,7 +31,7 @@ The part.
 
 The is merge part.
 
-<!-- @since:5.1.0 @required -->
+<!-- @since:5.1.0 @required @type:list[Cursor] -->
 
 ### bIsRenumber
 

@@ -14,7 +14,7 @@ export interface AsidePostItem {
 }
 
 export interface DockRailProps {
-    items?: AsidePostItem[];
+    options?: AsidePostItem[];
     /**
      * Href to auto-mark as active. Takes precedence over per-item `active` flag.
      */
@@ -38,7 +38,7 @@ export interface DockRailProps {
 
 // ─── Default items ────────────────────────────────────────────────────────────
 
-export const DEFAULT_ITEMS: AsidePostItem[] = [
+export const DEFAULT_OPTIONS: AsidePostItem[] = [
     { href: '/benchmarks', text: 'Benchmarks', icon: <BenchmarksIcon /> },
     {
         href: 'https://driz.link/extension',

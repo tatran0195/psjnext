@@ -32,7 +32,7 @@ A data type uses to control parameters of bolt hole face.
 ### `iBoltType`
 
 - An _Int_ specifying Bolt Type.
-  - 0: Type A
-  - 1: Type B
-  - 2: Type C
-  - 3: Type D
+    - 0: Type A
+    - 1: Type B
+    - 2: Type C
+    - 3: Type D

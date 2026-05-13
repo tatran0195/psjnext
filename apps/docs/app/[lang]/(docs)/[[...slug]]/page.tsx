@@ -13,9 +13,11 @@ import { DocsCategory, DocsSectionOverview } from '@/components/mdx/docs-categor
 import { LinkPreview } from '@/components/mdx/link-preview';
 import { ParamHeader, ParamSection } from '@/components/mdx/param-section';
 import { RibbonPath } from '@/components/mdx/ribbon-path';
+import { DeprecatedBadge, VersionBadge } from '@/components/mdx/version-badge';
 import { env } from '@/env';
 import { DocsBody, DocsDescription, DocsPage, DocsTitle, PageLastUpdate } from '@/layouts/docs/page';
 import { DocsPageActions } from '@/layouts/shared/page-actions';
+import { getVersionStatus } from '@/lib/api-versions';
 import { createMetadata, getPageImage } from '@/lib/metadata';
 import { source } from '@/lib/source';
 
@@ -51,12 +53,20 @@ export default async function Page(props: {
         return <NotFound getSuggestions={() => getSuggestions(query)} />;
     }
 
+    let version: string | undefined;
+    let isDeprecated = false;
+
     if (slug[0] === 'api') {
-        const { version } = resolveVersion(slug.slice(1));
+        const resolved = resolveVersion(slug.slice(1));
+        version = resolved.version;
+
+        const status = getVersionStatus(version, page.data.since, page.data.deprecated, page.data.removed);
+        isDeprecated = status === 'deprecated';
+
         apiMdxComponents = {
             h3: (props: ComponentProps<'h3'>) => <ParamHeader {...props} />,
             ParamSection: (props: Omit<ComponentProps<typeof ParamSection>, 'currentVersion'>) => (
-                <ParamSection {...props} currentVersion={version} />
+                <ParamSection {...props} currentVersion={version!} />
             ),
         };
     }
@@ -74,13 +84,25 @@ export default async function Page(props: {
     return (
         <DocsPage toc={toc} breadcrumb={{ enabled: false }}>
             <div>
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                    <DocsTitle className="mb-0">{page.data.title}</DocsTitle>
-                    <DocsPageActions
-                        {...(footerPrevious && { previous: { url: footerPrevious.url } })}
-                        {...(footerNext && { next: { url: footerNext.url } })}
-                        markdownUrl={markdownUrl}
-                    />
+                <div className="space-y-2">
+                    {page.data.since && <VersionBadge version={page.data.since} />}
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                        <div className="relative inline-block">
+                            <DocsTitle className="mb-0">{page.data.title}</DocsTitle>
+
+                            {isDeprecated && (
+                                <div className="absolute left-full top-1 ml-4 whitespace-nowrap">
+                                    <DeprecatedBadge />
+                                </div>
+                            )}
+                        </div>
+
+                        <DocsPageActions
+                            {...(footerPrevious && { previous: { url: footerPrevious.url } })}
+                            {...(footerNext && { next: { url: footerNext.url } })}
+                            markdownUrl={markdownUrl}
+                        />
+                    </div>
                 </div>
 
                 {ribbon && <RibbonPath ribbon={ribbon} shortcut={shortcut} variant="inline" />}
@@ -138,7 +160,6 @@ export async function generateMetadata(props: {
     if (!page) {
         return createMetadata({ title: 'Not Found' });
     }
-    console.log(page.data);
     const description = page.data.description ?? 'Python Scripting for Jupiter';
     const image = {
         url: getPageImage(page).url,

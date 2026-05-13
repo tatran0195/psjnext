@@ -159,7 +159,7 @@ export async function psjSource(
 
     const allEntries = await fromServer(server, options);
 
-    // Build a version-order index so we can compare version_introduced vs versionId.
+    // Build a version-order index so we can compare introduced  vs versionId.
     // Lower index = older version. We use this to skip items not yet introduced.
     const versionOrder = new Map<string, number>(sdk.manifest.versions.map((v, i) => [v.id, i] as [string, number]));
 
@@ -170,16 +170,16 @@ export async function psjSource(
 
         if (entry.type === 'item') {
             const item = sdk.items.get(entry.item.key);
-            if (!item?.version_introduced) return true;
-            const introIdx = versionOrder.get(item.version_introduced) ?? 0;
+            if (!item?.introduced) return true;
+            const introIdx = versionOrder.get(item.introduced) ?? 0;
             return introIdx <= targetIdx;
         }
         if (entry.type === 'page') {
             // Show page if at least one of its items is available
             return entry.items.some((ref) => {
                 const item = sdk.items.get(ref.key);
-                if (!item?.version_introduced) return true;
-                const introIdx = versionOrder.get(item.version_introduced) ?? 0;
+                if (!item?.introduced) return true;
+                const introIdx = versionOrder.get(item.introduced) ?? 0;
                 return introIdx <= targetIdx;
             });
         }

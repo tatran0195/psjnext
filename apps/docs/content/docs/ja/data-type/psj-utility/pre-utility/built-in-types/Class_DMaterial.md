@@ -33,8 +33,8 @@ This is an instance of a DMaterial class, represents user material item inside J
 #### `unit`
 
 - An _Enum_ specifying the _[unit of material](../../../../data-type/psj-command/material-unit-types)_ to be converted.
-  - For the material property with unit, the unit should be specified.
-  - For the non-unit material property, the unit should be set by None, -1, or set it empty.
+    - For the material property with unit, the unit should be specified.
+    - For the non-unit material property, the unit should be set by None, -1, or set it empty.
 - The default value is -1.
 
 ```psj {2-5} title="Sample Code"
@@ -73,8 +73,8 @@ pprint(mat0.SetValues(values=[8500], keys=list_keys, unit=unit))
 #### `unit`
 
 - An _Enum_ specifying the _[unit of material](../../../../data-type/psj-command/material-unit-types)_ to be converted.
-  - For the material property with unit, the unit should be specified.
-  - For the non-unit material property, the unit should be set by None, -1, or set it empty.
+    - For the material property with unit, the unit should be specified.
+    - For the non-unit material property, the unit should be set by None, -1, or set it empty.
 - The default value is -1.
 
 ```psj {2-5} title="Sample Code"

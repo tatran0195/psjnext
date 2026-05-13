@@ -12,8 +12,8 @@ A data type uses to control parameters of pretension load.
 ### `iSolverType`
 
 - An _Int_ specifying Solver type.
-  - 0: All
-  - 1: Abaqus
+    - 0: All
+    - 1: Abaqus
 - The default value is 0.
 
 ### `dValue`

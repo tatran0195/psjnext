@@ -1,8 +1,7 @@
 ---
 title: 'dlg.activate_selector()'
 description: 'Activate selector by selector id.'
-version_introduced: '5.1.0'
-available_versions: 'all'
+since: '5.1.0'
 ---
 
 ## Description

@@ -1,8 +1,7 @@
 ---
 title: 'Analysis.AbaqusStep.CoupledTDStep()'
 description: 'Create Abaqus step for Coupled Temperature-Displacement analysis'
-version_introduced: '5.0.1'
-available_versions: 'all'
+since: '5.0.1'
 ribbon: 'Analysis > AbaqusStep > CoupledTDStep'
 ---
 

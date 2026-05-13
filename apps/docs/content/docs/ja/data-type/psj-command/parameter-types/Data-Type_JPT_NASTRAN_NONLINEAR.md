@@ -17,11 +17,11 @@ A data type uses to defines a set of parameters for nonlinear static analysis it
 ### `iKMETHOD`
 
 - An _Integer_ specifying the method for controlling stiffness updates.
-  - 0: AUTO.
-  - 1: ITER.
-  - 2: SEMI.
-  - 3: FNT.
-  - 4: PFNT.
+    - 0: AUTO.
+    - 1: ITER.
+    - 2: SEMI.
+    - 3: FNT.
+    - 4: PFNT.
 - The default value is 3.
 
 ### `iMAXITER`

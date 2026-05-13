@@ -240,7 +240,7 @@ export interface ItemFile {
     ribbon?: string;
     stability?: Stability;
     description: string;
-    version_introduced: string;
+    since: string;
     /** id of the macro this command wraps (psj-command only) */
     macro_link?: string;
     /** id of the command that wraps this macro (macro only) */
@@ -277,7 +277,7 @@ export interface DataTypeFile {
     category: 'built-in' | 'enumeration' | 'class';
     namespace?: string;
     description: string;
-    version_introduced: string;
+    since: string;
     stability?: Stability;
 
     // category: built-in or enumeration
@@ -408,7 +408,7 @@ export interface ResolvedItem {
     ribbon?: string;
     stability: Stability;
     description: string;
-    version_introduced: string;
+    since: string;
     macro_link?: string;
     command_link?: string;
     class_ref?: string;
@@ -431,7 +431,7 @@ export interface ResolvedDataType {
     category: 'built-in' | 'enumeration' | 'class';
     namespace?: string;
     description: string;
-    version_introduced: string;
+    since: string;
     stability: Stability;
 
     // category: built-in or enumeration

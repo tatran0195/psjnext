@@ -11,11 +11,17 @@ import { cn } from '@/lib/cn';
 
 import { useSidebar } from '..';
 
-const IconBox = ({ children, className, ...props }: ComponentProps<'div'>) => (
+interface IconBoxProps extends ComponentProps<'div'> {
+    children: ReactNode;
+    boxed?: boolean;
+}
+
+export const IconBox = ({ children, className, boxed = false, ...props }: IconBoxProps) => (
     <div
         className={cn(
-            'flex items-center justify-center [&_svg]:size-[18px] rounded-none size-8 shrink-0 text-(--tab-color) bg-(--tab-color)/10 border border-(--tab-color)/20 p-1.5',
+            'flex items-center justify-center [&_svg]:size-[18px] rounded-none size-8 shrink-0 text-(--tab-color)',
             className,
+            boxed && 'bg-(--tab-color)/10 border border-(--tab-color)/20 p-1.5',
         )}
         style={{ '--tab-color': 'var(--color-fd-primary, var(--color-fd-foreground))' } as object}
         {...props}
@@ -24,16 +30,18 @@ const IconBox = ({ children, className, ...props }: ComponentProps<'div'>) => (
     </div>
 );
 
+interface SidebarTabsDropdownProps {
+    options: LayoutTab[];
+    placeholder?: ReactNode;
+    activeItem?: LayoutTab;
+}
+
 export function SidebarTabsDropdown({
     options,
     placeholder,
     activeItem,
     ...props
-}: {
-    placeholder?: ReactNode;
-    options: LayoutTab[];
-    activeItem?: LayoutTab;
-} & ComponentProps<'button'>) {
+}: SidebarTabsDropdownProps & ComponentProps<'button'>) {
     const { closeOnRedirect } = useSidebar();
     const pathname = usePathname();
 
@@ -65,7 +73,7 @@ export function SidebarTabsDropdown({
                 <PopoverTrigger
                     {...props}
                     className={cn(
-                        'flex items-center gap-2 rounded-none p-2 text-start text-fd-secondary-foreground transition-colors hover:bg-fd-accent/15 data-[state=open]:bg-fd-accent/15 data-[state=open]:text-fd-accent-foreground',
+                        'flex items-center gap-2 rounded-none px-2 py-1 text-start text-fd-secondary-foreground transition-colors hover:bg-fd-accent/15 data-[state=open]:bg-fd-accent/15 data-[state=open]:text-fd-accent-foreground',
                         props.className,
                     )}
                 >
@@ -85,7 +93,7 @@ export function SidebarTabsDropdown({
                             onClick={onClick}
                             {...item.props}
                             className={cn(
-                                'flex items-center gap-2 rounded-none p-1.5 hover:bg-fd-accent/15 hover:text-fd-accent-foreground',
+                                'flex items-center gap-2 rounded-none px-1.5 py-1 hover:bg-fd-accent/15 hover:text-fd-accent-foreground',
                                 active && 'bg-fd-accent/15 text-fd-accent-foreground',
                             )}
                         >

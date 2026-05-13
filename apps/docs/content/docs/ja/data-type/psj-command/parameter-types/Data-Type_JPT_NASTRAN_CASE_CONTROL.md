@@ -12,10 +12,10 @@ A data type uses to control parameters of Nastran Case Control
 ### `iECHO`
 
 - An _Integer_ specifying the Echo Request of the Bulk Data.
-  - 0: No echo will be output.
-  - 1: Sorted echo will be output.
-  - 2: Unsorted echo will be output.
-  - 3: Sorted and Unsorted echo will be output.
+    - 0: No echo will be output.
+    - 1: Sorted echo will be output.
+    - 2: Unsorted echo will be output.
+    - 3: Sorted and Unsorted echo will be output.
 - The default value is 0.
 
 ### `strTitle`

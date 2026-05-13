@@ -687,7 +687,7 @@
 @source inline("version-order");
 @source inline("versionId");
 @source inline("versionOrder");
-@source inline("version_introduced");
+@source inline("introduced ");
 @source inline("versioned");
 @source inline("versions");
 @source inline("vfile");

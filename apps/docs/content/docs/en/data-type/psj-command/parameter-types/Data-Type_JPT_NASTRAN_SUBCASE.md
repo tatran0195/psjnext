@@ -62,36 +62,36 @@ A data type uses to control parameters of Nastran Subcase
 ### `iOutputreqDisplacement`
 
 - An _Integer_ specifying the displacement output request.
-  - 0: NONE.
-  - DFLT_INT: ALL.
+    - 0: NONE.
+    - DFLT_INT: ALL.
 - The default value is 0.
 
 ### `iOutputreqStress`
 
 - An _Integer_ specifying the element stress output request.
-  - 0: NONE.
-  - DFLT_INT: ALL.
+    - 0: NONE.
+    - DFLT_INT: ALL.
 - The default value is 0.
 
 ### `iOutputreqStrain`
 
 - An _Integer_ specifying the element strain output request.
-  - 0: NONE.
-  - DFLT_INT: ALL.
+    - 0: NONE.
+    - DFLT_INT: ALL.
 - The default value is 0.
 
 ### `iOutputreqAcceleration`
 
 - An _Integer_ specifying the acceleration output request.
-  - 0: NONE.
-  - DFLT_INT: ALL.
+    - 0: NONE.
+    - DFLT_INT: ALL.
 - The default value is 0.
 
 ### `iOutputreqVelocity`
 
 - An _Integer_ specifying the velocity output request.
-  - 0: NONE.
-  - DFLT_INT: ALL.
+    - 0: NONE.
+    - DFLT_INT: ALL.
 - The default value is 0.
 
 ### `iNlparm`

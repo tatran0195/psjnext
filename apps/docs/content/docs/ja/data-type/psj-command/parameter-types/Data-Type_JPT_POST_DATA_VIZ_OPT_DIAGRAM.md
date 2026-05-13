@@ -12,8 +12,8 @@ A data type is used to set up the result settings for displaying the diagram.
 ### `iScaleMethod`
 
 - An _Integer_ specifying the scaling method of the vector.
-  - 0: Model size ratio
-  - 1: Screen size ratio
+    - 0: Model size ratio
+    - 1: Screen size ratio
 - The default value is 0.
 
 ### `dRatioModel`

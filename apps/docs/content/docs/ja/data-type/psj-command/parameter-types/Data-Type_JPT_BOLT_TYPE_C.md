@@ -12,22 +12,22 @@ A data type uses to control parameters of bolt type C
 ### `iTopConType`
 
 - An _Int_ specifying Connection.
-  - 0 : Create RBE2
-  - 1 : Create RBE3
+    - 0 : Create RBE2
+    - 1 : Create RBE3
 - The default value is 0.
 
 ### `iBotConType`
 
 - An _Int_ specifying which connection is created if iCenterType is Spring.
-  - 0 : Create RBE2
-  - 1 : Create RBE3
+    - 0 : Create RBE2
+    - 1 : Create RBE3
 - The default value is 0.
 
 ### `iCenterType`
 
 - An _Int_ specifying center connection type.
-  - 0 : None
-  - 1 : Spring
+    - 0 : None
+    - 1 : Spring
 - The default value is 0.
 
 ### `dlStiffness`

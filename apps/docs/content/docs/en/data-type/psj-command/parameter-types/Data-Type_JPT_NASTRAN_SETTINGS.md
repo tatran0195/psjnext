@@ -12,17 +12,17 @@ A data type uses to control parameters of Nastran Settings
 ### `iPOST`
 
 - An _Integer_ specifying the output type for the post-processing results file.
-  - 0: Create XDB file.
-  - -1: Create OP2 file (for Patran).
-  - -2: Create OP2 file (for I-Deas).
+    - 0: Create XDB file.
+    - -1: Create OP2 file (for Patran).
+    - -2: Create OP2 file (for I-Deas).
 - The default value is -1.
 
 ### `iOGEOM`
 
 - An _Integer_ specifying Controls the output of geometry data blocks to the Nastran Binary Results File.
-  - 0: input not thing.
-  - 1: enable the output of geometry data blocks to the Nastran Binary Results File.
-  - 2: disable the output of geometry data blocks to the Nastran Binary Results File.
+    - 0: input not thing.
+    - 1: enable the output of geometry data blocks to the Nastran Binary Results File.
+    - 2: disable the output of geometry data blocks to the Nastran Binary Results File.
 - The default value is 0.
 
 ### `iAUTOSPC`
@@ -30,9 +30,9 @@ A data type uses to control parameters of Nastran Settings
 - An _Integer_ specifying the Automatic single point constraint option. AUTOSPC specifying the action to take when
   singularities exist in the stiffness matrix Setting AUTOSPC to ON means that singularities will be constrained
   automatically.
-  - 0: input not thing.
-  - 1: turn on the automatic single point constraint option.
-  - 2: turn off the automatic single point constraint option.
+    - 0: input not thing.
+    - 1: turn on the automatic single point constraint option.
+    - 2: turn off the automatic single point constraint option.
 - The default value is 0.
 
 ### `strGRDPNT`
@@ -60,24 +60,24 @@ A data type uses to control parameters of Nastran Settings
 ### `iBAILOUT`
 
 - An _Integer_ specifying the control of execution against the pseudo-singularity.
-  - 0: continue run.
-  - -1: end run.
+    - 0: continue run.
+    - -1: end run.
 - The default value is DFLT_INT.
 
 ### `iPRGPST`
 
 - An _Integer_ specifying the controls the printout of singularities.
-  - 0: input not thing.
-  - 1: turn on the controls the printout of singularities option.
-  - 2: turn off the controls the printout of singularities option.
+    - 0: input not thing.
+    - 1: turn on the controls the printout of singularities option.
+    - 2: turn off the controls the printout of singularities option.
 - The default value is 2.
 
 ### `iRESVEC`
 
 - An _Integer_ specifying the Residual Vector Selection.
-  - 0: input not thing.
-  - 1: Enables the calculation of residual vectors.
-  - 2: Disables the calculation of residual vectors.
+    - 0: input not thing.
+    - 1: Enables the calculation of residual vectors.
+    - 2: Disables the calculation of residual vectors.
 - The default value is 0.
 
 ### `dG`
@@ -124,6 +124,6 @@ A data type uses to control parameters of Nastran Settings
 ### `iMLDS`
 
 - An _Integer_ specifying the MLDS(Multi-Level Dynamic Substructuring).
-  - 0: NO.
-  - 1: YES [Multi Level Dynamic Substructuring].
+    - 0: NO.
+    - 1: YES [Multi Level Dynamic Substructuring].
 - The default value is 1.

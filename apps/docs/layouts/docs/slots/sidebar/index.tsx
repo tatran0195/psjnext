@@ -10,8 +10,7 @@ import { Languages, Search, SidebarIcon, X } from 'lucide-react';
 import { buttonVariants } from '@/components/ui/button';
 import { DockRail } from '@/layouts/docs/slots/sidebar/dock-rail';
 import { SidebarTabsDropdown } from '@/layouts/docs/slots/sidebar/tabs/dropdown';
-import { getFirstUrl, LayoutTab, LinkItem } from '@/layouts/shared';
-import { VersionSwitcher } from '@/layouts/shared/slots/version-switch';
+import { getFirstUrl, isLayoutTabActive, LayoutTab, LinkItem } from '@/layouts/shared';
 import { cn } from '@/lib/cn';
 import { sidebarMatch } from '@/lib/tree-filter';
 
@@ -30,9 +29,18 @@ import {
 
 import type * as PageTree from 'fumadocs-core/page-tree';
 
+interface FolderNode extends PageTree.Folder {
+    group?: boolean;
+    groupType?: 'stacked' | 'tabs';
+    groupOrder?: number;
+}
+
 export interface NestedTab {
     tabs: LayoutTab[];
     active?: LayoutTab;
+    groupType: 'stacked' | 'tabs';
+    groupOrder: number;
+    depth: number;
 }
 
 export interface SidebarProps extends ComponentProps<'aside'> {
@@ -64,30 +72,42 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
 
     const nestedTabs = useMemo(() => {
         const result: NestedTab[] = [];
-        for (const node of path) {
-            if (node.type === 'folder' && (node as PageTree.Folder & { group: boolean }).group) {
-                const options = node.children.filter((n) => n.type === 'folder') as PageTree.Folder[];
+        for (let i = 0; i < path.length; i++) {
+            const node = path[i];
+            if (node.type !== 'folder') continue;
+            const folder = node as unknown as FolderNode;
+
+            if (folder.group) {
+                const options = folder.children.filter((n: PageTree.Node) => n.type === 'folder') as PageTree.Folder[];
                 if (options.length === 0) continue;
 
-                const nodeTabs = options.map((folder) => {
+                const nodeTabs = options.map((childFolder) => {
                     return {
-                        title: folder.name,
-                        url: getFirstUrl(folder) ?? '',
-                        icon: folder.icon,
-                        description: folder.description,
-                        $folder: folder,
+                        title: childFolder.name,
+                        url: getFirstUrl(childFolder) ?? '',
+                        icon: childFolder.icon,
+                        description: childFolder.description,
+                        $folder: childFolder,
                     } as LayoutTab;
                 });
 
                 const active =
-                    nodeTabs.find((t) => path.includes(t.$folder as unknown as PageTree.Node)) ?? nodeTabs[0];
-                result.push({ tabs: nodeTabs, active });
+                    nodeTabs.find((t) => path.includes(t.$folder as PageTree.Node)) ??
+                    nodeTabs.find((t) => isLayoutTabActive(t, pathname));
+                result.push({
+                    tabs: nodeTabs,
+                    active,
+                    groupType: folder.groupType ?? 'tabs',
+                    groupOrder: folder.groupOrder ?? 0,
+                    depth: i,
+                });
             }
         }
+        result.sort((a, b) => b.groupOrder - a.groupOrder || b.depth - a.depth);
         return result;
-    }, [path]);
+    }, [path, pathname]);
 
-    const lastActiveTab = nestedTabs[nestedTabs.length - 1]?.active;
+    const lastActiveTab = nestedTabs.find((level) => level.active)?.active;
     const root: PageTree.Root | PageTree.Folder = (lastActiveTab?.$folder ??
         path.findLast((item) => item.type === 'folder' && item.root) ??
         baseRoot) as PageTree.Root | PageTree.Folder;
@@ -194,32 +214,34 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                 />
                             )}
 
-                            {isApiRoute && (
-                                <>
+                            {nestedTabs.map((level, i) =>
+                                level.groupType === 'tabs' ? (
+                                    <SidebarTabsDropdown
+                                        key={i}
+                                        options={level.tabs}
+                                        activeItem={level.active}
+                                        className={i < nestedTabs.length - 1 ? '-mb-1' : ''}
+                                    />
+                                ) : (
                                     <DockRail
-                                        items={nestedTabs[1]?.tabs.map((i) => ({
+                                        key={i}
+                                        options={level.tabs.map((i) => ({
                                             href: i.url,
                                             text: i.title?.toString() || '',
                                             icon: i.icon,
                                         }))}
-                                        activeHref={lastActiveTab?.url}
+                                        activeHref={level.active?.url}
+                                        className={i < nestedTabs.length - 1 ? '-mb-1' : ''}
                                     />
-                                    <VersionSwitcher />
-                                    <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
-                                </>
+                                ),
                             )}
-
-                            {/* {nestedTabs.map((level, i) => (
-                                <SidebarTabsDropdown
-                                    key={i}
-                                    options={level.tabs}
-                                    activeItem={level.active}
-                                    className={i < nestedTabs.length - 1 ? '-mb-1' : ''}
-                                />
-                            ))} */}
+                            {isApiRoute && (
+                                <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
+                            )}
                         </>
                     ),
                 })}
+                <div className="border-t border-fd-border my-2" />
                 {viewport}
                 {renderFooter({
                     className: cn(

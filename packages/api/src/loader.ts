@@ -538,7 +538,7 @@ function translateExamples(
 export function resolveItem(item: ItemFile, sdk: LoadedSdk, version: string, locale: string): ResolvedItem {
     const { manifest, groups, itemSidecars, groupSidecars } = sdk;
 
-    // 1. Expand group refs → flat params (as of version_introduced)
+    // 1. Expand group refs → flat params (as of introduced )
     let params: ParamWithGroup[] = expandParams(item.params, groups);
 
     // 2. Apply deltas up to requested version
@@ -666,7 +666,7 @@ export function resolveItem(item: ItemFile, sdk: LoadedSdk, version: string, loc
         ribbon,
         stability,
         description,
-        version_introduced: item.version_introduced,
+        since: item.introduced,
         macro_link: item.macro_link,
         command_link: item.command_link,
         class_ref: item.class_ref,
@@ -775,7 +775,7 @@ export function resolveDataType(dt: DataTypeFile, sdk: LoadedSdk, version: strin
         category: dt.category,
         namespace: dt.namespace,
         description,
-        version_introduced: dt.version_introduced,
+        since: dt.introduced,
         stability,
         values,
         constructor_syntax: dt.constructor_syntax,

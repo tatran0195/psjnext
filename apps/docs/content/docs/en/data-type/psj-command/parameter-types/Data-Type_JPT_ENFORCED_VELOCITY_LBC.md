@@ -54,8 +54,8 @@ A data type uses to control parameters of Enforced Velocity LBC
 ### `iEndArrowDir`
 
 - An _Integer_ specifying the drawing position of marker display.
-  - 0: Start at Node. The marker is displayed starting from a node.
-  - 1: End at Node. The marker is displayed ending at a node.
+    - 0: Start at Node. The marker is displayed starting from a node.
+    - 1: End at Node. The marker is displayed ending at a node.
 - The default value is 0.
 
 ### `crTable`

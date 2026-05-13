@@ -1,8 +1,7 @@
 ---
 title: 'ACModeling.Cut()'
 description: 'cut for ACModeling'
-version_introduced: '5.0.1'
-available_versions: 'all'
+since: '5.0.1'
 ribbon: 'ACModeling > Cut'
 ---
 

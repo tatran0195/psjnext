@@ -3,35 +3,34 @@ import { useMemo } from 'react';
 import { cn } from '@/lib/cn';
 
 import { buildMetas, DockRailRow, peekMarginLeft } from './internals';
-import { DEFAULT_ITEMS, DockRailProps } from './types';
+import { DEFAULT_OPTIONS, DockRailProps } from './types';
 
 export * from './icons';
-export { DEFAULT_ITEMS } from './types';
 export type { AsidePostItem, DockRailProps } from './types';
 
 export function DockRail({
-    items = DEFAULT_ITEMS,
+    options = DEFAULT_OPTIONS,
     activeHref,
     collapsedCount: rawCollapsedCount = 4,
     collapsedLabel = 'Our goodies!',
     className,
     onItemClick,
 }: DockRailProps) {
-    const collapsedCount = Math.min(Math.max(rawCollapsedCount, 0), items.length);
+    const collapsedCount = Math.min(Math.max(rawCollapsedCount, 0), options.length);
     const lastSlot = collapsedCount - 1;
 
-    const resolvedItems = useMemo(
+    const resolvedOptions = useMemo(
         () =>
-            items.map((item) => ({
+            options.map((item) => ({
                 ...item,
                 active: activeHref !== undefined ? item.href === activeHref : (item.active ?? false),
             })),
-        [items, activeHref],
+        [options, activeHref],
     );
 
-    const activeItem = useMemo(() => resolvedItems.find((item) => item.active) ?? null, [resolvedItems]);
+    const activeItem = useMemo(() => resolvedOptions.find((item) => item.active) ?? null, [resolvedOptions]);
 
-    const metas = useMemo(() => buildMetas(resolvedItems, collapsedCount), [resolvedItems, collapsedCount]);
+    const metas = useMemo(() => buildMetas(resolvedOptions, collapsedCount), [resolvedOptions, collapsedCount]);
 
     const overlayText: string | null =
         activeItem?.text ?? (collapsedLabel !== false ? (collapsedLabel as string) : null);
@@ -45,7 +44,7 @@ export function DockRail({
                 className,
             )}
         >
-            {resolvedItems.map((item, index) => (
+            {resolvedOptions.map((item, index) => (
                 <DockRailRow
                     key={item.href + item.text}
                     item={item}

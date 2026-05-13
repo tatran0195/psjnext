@@ -12,15 +12,15 @@ A data type uses to control parameters of bolt type D
 ### `iConType`
 
 - An _Int_ specifying connection type.
-  - 0: RBE2
-  - 1: RBE3
+    - 0: RBE2
+    - 1: RBE3
 - The default value is 0.
 
 ### `iConCase`
 
 - An _Int_ specifying connection setting.
-  - 0: By diameter.
-  - 1: By Layer.
+    - 0: By diameter.
+    - 1: By Layer.
 - The default value is 1.
 
 ### `dConDiamter`

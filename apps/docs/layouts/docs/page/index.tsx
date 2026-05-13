@@ -3,7 +3,7 @@ import { type ComponentProps, createContext, type FC, type ReactNode, use, useEf
 
 import { I18nLabel, useI18n } from 'fumadocs-ui/contexts/i18n';
 import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
-import { Check, Copy, Edit } from 'lucide-react';
+import { Edit } from 'lucide-react';
 
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/cn';
@@ -203,19 +203,14 @@ export function DocsTitle({ children, className, ...props }: ComponentProps<'h1'
         <h1
             {...props}
             className={cn(
-                'group flex items-center gap-2 text-[1.75em] font-semibold wrap-break-word min-w-0',
+                'group flex items-center gap-2 text-[1.75em] font-semibold wrap-break-word min-w-0 cursor-pointer',
                 className,
+                // if checked, change color in timeout and back to original color
+                checked && 'text-primary',
             )}
+            onClick={onClick}
         >
-            <span className="flex-1 min-w-0">{children}</span>
-            <button
-                type="button"
-                className="opacity-0 group-hover:opacity-100 transition-opacity p-2 rounded-none hover:bg-fd-muted text-fd-muted-foreground hover:text-fd-foreground shrink-0"
-                onClick={onClick}
-                aria-label="Copy title"
-            >
-                {checked ? <Check className="size-4" /> : <Copy className="size-4" />}
-            </button>
+            {children}
         </h1>
     );
 }

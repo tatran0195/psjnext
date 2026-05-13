@@ -9,6 +9,8 @@ import type { ResolvedParam } from '@/lib/mdx-plugins/remark-version-gate-params
 import { semverGte } from '@/lib/api-versions';
 import { cn } from '@/lib/cn';
 
+import { DeprecatedBadge } from './version-badge';
+
 interface ParamContextValue extends ResolvedParam {
     isDeprecated: boolean;
 }
@@ -43,6 +45,7 @@ export function ParamHeader({ children, ...rest }: ComponentProps<'h3'>) {
                         REQUIRED
                     </span>
                 )}
+                {isDeprecated && <DeprecatedBadge className="ml-1" />}
             </h3>
             {isDeprecated && deprecatedMessage && (
                 <Callout type="warn" className="whitespace-pre-wrap mt-2">

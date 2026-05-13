@@ -321,7 +321,7 @@ title: 'Python Built-in Types'
 category: built-in
 description: >
     Standard Python scalar types available as parameter and return types across all PSJ domains.
-version_introduced: '5.0.0'
+since: '5.0.0'
 values:
     - id: String
       label: String
@@ -346,7 +346,7 @@ title: 'Jupiter Built-in Types'
 category: built-in
 description: >
     Advanced built-in types specific to the Jupiter CAE platform.
-version_introduced: '5.0.0'
+since: '5.0.0'
 values:
     - id: Cursor
       label: Cursor
@@ -373,7 +373,7 @@ namespace: 'JPT.DItemType'
 description: >
     Enumeration representing the type of a DItem in Jupiter. Use JPT.DItemType.<NAME> in code, or the integer ID where
     noted.
-version_introduced: '5.0.0'
+since: '5.0.0'
 values:
     - id: 2
       name: INST
@@ -396,7 +396,7 @@ title: 'Material Unit Types'
 category: enumeration
 description: >
     Index of all physical unit enumerations available via JPT.UnitType. Each unit group is documented in its own file.
-version_introduced: '5.0.0'
+since: '5.0.0'
 see_also:
     - $ref: 'data-type/pre/enum/LengthUnit'
     - $ref: 'data-type/pre/enum/TimeUnit'
@@ -414,7 +414,7 @@ title: 'LengthUnit'
 category: enumeration
 namespace: 'JPT.UnitType'
 description: Enumeration of length unit variants.
-version_introduced: '5.0.0'
+since: '5.0.0'
 
 values:
     - id: 0
@@ -439,7 +439,7 @@ title: 'JPT_NASTRAN_ANALYSIS'
 category: class
 description: >
     Input parameter block for Nastran analysis configuration.
-version_introduced: '5.0.0'
+since: '5.0.0'
 constructor_syntax: 'JPT_NASTRAN_ANALYSIS(iSolverType=0)'
 
 fields:
@@ -467,7 +467,7 @@ category: class
 description: >
     Message box dialog class. Construct and configure the dialog, then call show() to display it and retrieve the user's
     response.
-version_introduced: '5.0.0'
+since: '5.0.0'
 constructor_syntax: 'PSJMessageBox()'
 
 # Methods are full item files in the psj-gui domain.
@@ -622,7 +622,7 @@ namespace: Analysis.Nastran
 ribbon: 'Analysis > Nastran > LinearStatic'
 description: >
     Export the Nastran BDF input file for Structure Linear Static analysis (SOL 101).
-version_introduced: '5.0.0'
+since: '5.0.0'
 stability: stable
 macro_link: Analysis/NastranJob
 syntax: 'Analysis.Nastran.LinearStatic(...)'
@@ -648,7 +648,7 @@ namespace: Analysis.Nastran
 ribbon: 'Analysis > Nastran > DirectFrequencyResponse'
 description: >
     Export the Nastran BDF for Direct Frequency Response analysis (SOL 108).
-version_introduced: '5.0.0'
+since: '5.0.0'
 stability: stable
 macro_link: Analysis/NastranJob
 syntax: 'Analysis.Nastran.DirectFrequencyResponse(...)'
@@ -691,7 +691,7 @@ domain: psj-command
 namespace: Analysis.ADVC.MakeProcess
 ribbon: 'Analysis > ADVC > Make Process > Dynamic'
 description: Create an ADVC Structure Dynamic process.
-version_introduced: '5.0.0'
+since: '5.0.0'
 stability: stable
 macro_link: Analysis/AdvcDynamicProcess
 syntax: 'Analysis.ADVC.MakeProcess.Dynamic(...)'
@@ -726,7 +726,7 @@ id: Analysis/AdvcStaticProcess
 title: 'AdvcStaticProcess()'
 domain: macro
 description: Create ADVC static process.
-version_introduced: '5.0.0'
+since: '5.0.0'
 stability: stable
 command_link: ADVC/MakeProcess/Static
 syntax: >
@@ -799,7 +799,7 @@ namespace: JPT
 description: >
     Disable screen animation, screen update, and status bar updates to improve Jupiter's performance during batch
     operations.
-version_introduced: '5.0.0'
+since: '5.0.0'
 stability: stable
 syntax: 'JPT.BeginDatabaseTransaction("transactionName")'
 
@@ -835,7 +835,7 @@ title: 'PSJMessageBox.add_button()'
 domain: psj-gui
 namespace: PSJMessageBox
 description: Add a custom button to the message box.
-version_introduced: '5.0.0'
+since: '5.0.0'
 stability: stable
 syntax: 'msgbox.add_button(text, id)'
 class_ref: 'data-type/gui/class/PSJMessageBox'
@@ -869,7 +869,7 @@ domain: psj-gui
 namespace: dlg
 description: >
     Add a 1D element selector to the dialog, enabling the user to select 1D elements and store the selection.
-version_introduced: '5.0.0'
+since: '5.0.0'
 stability: stable
 syntax: 'dlg.add_1delement_selector(...)'
 
@@ -896,7 +896,7 @@ psj: '3.3'
 id: ADVC/Structure
 title: 'Analysis.ADVC.Structure()'
 domain: psj-command
-version_introduced: '5.0.0'
+since: '5.0.0'
 macro_link: Analysis/ADVC_Structure
 syntax: 'Analysis.ADVC.Structure(...)'
 
@@ -1004,7 +1004,7 @@ changes:
 
 **Resolution rules:**
 
-- The base `params` / `values` / `fields` list represents the file as of `version_introduced`.
+- The base `params` / `values` / `fields` list represents the file as of `introduced `.
 - `changes` entries are applied in version order up to the requested version.
 - `remove` deletes an entry from the resolved list; the definition stays in the file for older-version renders.
 - `add` inserts at the named position; omit `after` to append.
@@ -1020,33 +1020,33 @@ changes:
 
 ### 7a. Localizable vs. structural fields
 
-| Field                              | Localizable?                |
-| ---------------------------------- | --------------------------- |
-| `description` (any file)           | ✅                          |
-| `params[].description`             | ✅                          |
-| `params[].display_name`            | ✅                          |
-| `params[].deprecated`              | ✅ reason string            |
-| `enum_values[].label`              | ✅                          |
-| `enum_values[].description`        | ✅                          |
-| `fields[].description`             | ✅                          |
-| `fields[].remarks`                 | ✅                          |
-| `fields[].enum_values[].label`     | ✅                          |
-| `values[].label`                   | ✅                          |
-| `values[].description`             | ✅                          |
-| `returns.description`              | ✅                          |
-| `returns.codes[].meaning`          | ✅                          |
-| `callouts[].text`                  | ✅                          |
-| `examples[].title`                 | ✅                          |
-| `meta.yaml` → `title`              | ✅ via `meta.<locale>.yaml` |
-| `meta.yaml` → `description`        | ✅ via `meta.<locale>.yaml` |
-| `id`, `title`, `syntax`, `code`    | ❌ code symbols             |
-| `type`, `default`, `required`      | ❌ structural               |
-| `namespace`, `ribbon`, `domain`    | ❌ structural               |
-| `version_introduced`, `macro_link` | ❌ structural               |
-| `stability`, `category`            | ❌ structural               |
-| `constructor_syntax`               | ❌ code symbol              |
-| `values[].id`, `values[].name`     | ❌ structural               |
-| `fields[].name`, `fields[].type`   | ❌ structural               |
+| Field                            | Localizable?                |
+| -------------------------------- | --------------------------- |
+| `description` (any file)         | ✅                          |
+| `params[].description`           | ✅                          |
+| `params[].display_name`          | ✅                          |
+| `params[].deprecated`            | ✅ reason string            |
+| `enum_values[].label`            | ✅                          |
+| `enum_values[].description`      | ✅                          |
+| `fields[].description`           | ✅                          |
+| `fields[].remarks`               | ✅                          |
+| `fields[].enum_values[].label`   | ✅                          |
+| `values[].label`                 | ✅                          |
+| `values[].description`           | ✅                          |
+| `returns.description`            | ✅                          |
+| `returns.codes[].meaning`        | ✅                          |
+| `callouts[].text`                | ✅                          |
+| `examples[].title`               | ✅                          |
+| `meta.yaml` → `title`            | ✅ via `meta.<locale>.yaml` |
+| `meta.yaml` → `description`      | ✅ via `meta.<locale>.yaml` |
+| `id`, `title`, `syntax`, `code`  | ❌ code symbols             |
+| `type`, `default`, `required`    | ❌ structural               |
+| `namespace`, `ribbon`, `domain`  | ❌ structural               |
+| `introduced `, `macro_link`      | ❌ structural               |
+| `stability`, `category`          | ❌ structural               |
+| `constructor_syntax`             | ❌ code symbol              |
+| `values[].id`, `values[].name`   | ❌ structural               |
+| `fields[].name`, `fields[].type` | ❌ structural               |
 
 ### 7b. Item locale sidecar
 
@@ -1318,7 +1318,7 @@ domain: string              # required; must match a manifest domain id
 namespace: string?          # optional; dotted call prefix; omit for macros
 ribbon: string?             # optional; psj-command only
 description: string         # required; localizable
-version_introduced: string  # required; must match a manifest version id
+since: string  # required; must match a manifest version id
 stability: string?          # optional; stable | experimental | deprecated; default: stable
 macro_link: string?         # optional; path-based id; psj-command only
 command_link: string?       # optional; path-based id; macro only
@@ -1343,7 +1343,7 @@ title: string               # required; display title
 category: string            # required; built-in | enumeration | class
 namespace: string?          # optional; Python accessor prefix e.g. JPT.DItemType
 description: string         # required; localizable
-version_introduced: string  # required; must match a manifest version id
+since: string  # required; must match a manifest version id
 stability: string?          # optional; stable | experimental | deprecated; default: stable
 
 # category: built-in or enumeration
@@ -1653,8 +1653,8 @@ extension. 9. The first path segment of a data-type `id` MUST be one of `built-i
 `$group` reference MUST resolve to an existing `_groups/<id>.yaml`. 11. Every `$ref:data-type/<id>` MUST resolve to an
 existing data-type file whose `category` is consistent with the usage context. 12. Every `$ref: <domain>/<id>` in
 `see_also` or `methods` MUST resolve to an existing item file. 13. `macro_link` and `command_link` targets MUST resolve
-to existing item files. 14. `class_ref` MUST resolve to a data-type file with `category: class`. 15. Every
-`version_introduced` and `changes[].version` MUST match a manifest `versions[].id`.
+to existing item files. 14. `class_ref` MUST resolve to a data-type file with `category: class`. 15. Every `introduced `
+and `changes[].version` MUST match a manifest `versions[].id`.
 
 **Folder & meta** 16. Every subfolder within a domain root and within `data-type/` MUST contain a `meta.yaml` with
 `kind: group_meta`. 17. If `order` is present in `meta.yaml`, ALL direct children MUST be listed — partial ordering is

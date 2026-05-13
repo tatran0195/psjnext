@@ -1,8 +1,7 @@
 ---
 title: 'Analysis.Abaqus()'
 description: 'Create an Abaqus job'
-version_introduced: '5.0.1'
-available_versions: 'all'
+since: '5.0.1'
 ribbon: 'Analysis > Abaqus'
 macro_link: '[CreateAbaqusJob](../../macro/analysis/CreateAbaqusJob)'
 ---
@@ -34,8 +33,8 @@ Analysis.Abaqus(...)
 ### `crEdit` @type(Cursor) @default(None)
 
 - An existing Abaqus job.
-  - If this parameter is used, the specified job will be modified.
-  - If it is lef&#x74;_&#x4E;one_, a new job will be created.
+    - If this parameter is used, the specified job will be modified.
+    - If it is lef&#x74;_&#x4E;one_, a new job will be created.
 
 ## Return Code
 

@@ -477,7 +477,7 @@ group: Nastran
 namespace: Analysis.Nastran
 ribbon: Analysis > Nastran > LinearStatic
 description: Export the Nastran BDF input file for Structure Linear Static analysis (SOL 101).
-version_introduced: '5.0.0'
+since: '5.0.0'
 macro_link: NastranJob
 
 params:
@@ -505,7 +505,7 @@ group: Nastran
 namespace: Analysis.Nastran
 ribbon: Analysis > Nastran > DirectFrequencyResponse
 description: Export the Nastran BDF for Direct Frequency Response analysis (SOL 108).
-version_introduced: '5.0.0'
+since: '5.0.0'
 macro_link: NastranJob
 
 params:
@@ -605,7 +605,7 @@ group: ADVC
 namespace: Analysis.ADVC.MakeProcess
 ribbon: Analysis > ADVC > Make Process > Dynamic
 description: Create an ADVC Structure Dynamic process.
-version_introduced: '5.0.0'
+since: '5.0.0'
 macro_link: AdvcDynamicProcess
 
 params:
@@ -643,7 +643,7 @@ group: ADVC
 namespace: Analysis.ADVC.MakeProcess
 ribbon: Analysis > ADVC > Make Process > Eigen Value
 description: Create an ADVC EigenValue (Normal Modes) process.
-version_introduced: '5.0.0'
+since: '5.0.0'
 macro_link: AdvcEigenProcess
 
 params:
@@ -680,7 +680,7 @@ title: AdvcStaticProcess()
 domain: macro
 group: analysis
 description: Create ADVC static process.
-version_introduced: '5.0.0'
+since: '5.0.0'
 command_link: Analysis-ADVC-MakeProcess-Static
 
 syntax: >
@@ -849,7 +849,7 @@ namespace: JPT
 description: >
     Disable screen animation, screen update, and status bar updates to improve Jupiter's performance during batch
     operations.
-version_introduced: '5.0.0'
+since: '5.0.0'
 syntax: 'JPT.BeginDatabaseTransaction("transactionName")'
 
 callouts:
@@ -882,7 +882,7 @@ group: dlg-methods
 namespace: dlg
 description: >
     Add a 1D element selector to the dialog, enabling the user to select 1D elements and store the selection.
-version_introduced: '5.0.0'
+since: '5.0.0'
 syntax: 'dlg.add_1delement_selector(...)'
 
 params:
@@ -901,8 +901,8 @@ returns:
 ## 4. Delta versioning
 
 Item files carry a `changes` block describing only what differs between versions. Items with no `changes` block are
-identical across all versions since `version_introduced`. Most items in a backward-compatible SDK will have no `changes`
-block at all.
+identical across all versions since `introduced `. Most items in a backward-compatible SDK will have no `changes` block
+at all.
 
 ### 4a. Removing params across a version
 
@@ -912,7 +912,7 @@ psjapi: '1.0'
 id: Analysis-ADVC-Structure
 title: Analysis.ADVC.Structure()
 domain: psj-command
-version_introduced: '5.0.0'
+since: '5.0.0'
 macro_link: ADVC_Structure
 
 params:
@@ -997,7 +997,7 @@ changes:
 
 **Resolution rules:**
 
-- The base `params` list represents the item as of `version_introduced`.
+- The base `params` list represents the item as of `introduced `.
 - `changes` entries are applied in version order up to the requested version.
 - `remove` deletes a param from the resolved list. The definition stays in the file above `changes` so older-version
   renders still have it.
@@ -1026,7 +1026,7 @@ Sidecars contain **only natural-language fields**. Structural fields are never t
 | `id`, `title`, `syntax`, `code`          | ❌ — code symbols |
 | `type`, `default`, `required`            | ❌ — structural   |
 | `namespace`, `ribbon`, `domain`, `group` | ❌ — structural   |
-| `version_introduced`, `macro_link`       | ❌ — structural   |
+| `introduced `, `macro_link`              | ❌ — structural   |
 
 ### 5b. Item locale sidecar
 
@@ -1211,12 +1211,12 @@ ribbon: string?            # UI ribbon path; psj-command only
 author: string?
 author_url: string?
 description: string        # required; localizable
-version_introduced: string # required; e.g. "5.0.0"
+since: string # required; e.g. "5.0.0"
 macro_link: string?        # id of the macro this command wraps; psj-command only
 command_link: string?      # id of the command that wraps this macro; macro only
 syntax: string?            # verbatim signature; NOT localizable
 callouts: [Callout]?       # warning/info boxes; text IS localizable
-params: [Param | GroupRef] # ordered list; defines params as of version_introduced
+params: [Param | GroupRef] # ordered list; defines params as of introduced
 returns: Returns            # required
 examples: [Example]?       # always inline; never file links
 see_also: [Ref]?
