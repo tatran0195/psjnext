@@ -1,0 +1,177 @@
+{
+    "enterprise": {
+        "hero": {
+            "badge": "PSJ v5.1 — プロダクションリリース",
+            "title0": "Python スクリプティング",
+            "title1": "Jupiter のために",
+            "desc": "業界標準の CAE 自動化プラットフォーム。Python 3 のパワーを最大限に活用し、プロダクションレベルのシミュレーションワークフローを構築。",
+            "cta": {
+                "primary": "今すぐ始める",
+                "secondary": "チュートリアルを見る"
+            },
+            "code": {
+                "filename": "automate.py — PSJ v5.1",
+                "language": "Python 3.x",
+                "statusBar0": "Jupiter に接続中",
+                "statusBar1": "PSJ v5.1.1 安定版"
+            }
+        },
+        "phi": {
+            "label": "コア・フィロソフィー",
+            "title": "4F デザイン原則",
+            "desc": "PSJは、あらゆる規模の組織におけるCAE自動化の課題を解決するために設計された、4つのコア・エンジニアリング原則に基づいて構築されています。",
+            "readDocs": "ドキュメントを読む",
+            "cards": [
+                {
+                    "label": "Friendly",
+                    "sub": "プログラマーでなくても",
+                    "desc": "マクロ記録機能により、コードを書かずに誰でもワークフローを自動化できます。"
+                },
+                {
+                    "label": "Fast",
+                    "sub": "自動化による高速化",
+                    "desc": "反復作業を排除。数時間の作業が数秒のスクリプトになります。"
+                },
+                {
+                    "label": "Functional",
+                    "sub": "IDE & GUI ビルダー",
+                    "desc": "予測チップやダイアログビルダーを備えた開発ツールを内蔵。"
+                },
+                {
+                    "label": "Flexible",
+                    "sub": "高度なシミュレーション",
+                    "desc": "Python 3 エコシステム（NumPy、Pandas、scikit-learn、pptxなど）をフル活用。"
+                }
+            ]
+        },
+        "modules": {
+            "header": {
+                "label": "システムアーキテクチャ",
+                "title": "6つの統合モジュール",
+                "linkLabel": "アーキテクチャ資料を見る"
+            },
+            "exploreLabel": "モジュールを見る",
+            "items": [
+                { "label": "Macro", "desc": "Jupiter の GUI 操作を自動記録し、スクリプト化します。" },
+                { "label": "PSJ-Command", "desc": "Jupiter のあらゆるダイアログ機能をコマンド言語で再現します。" },
+                { "label": "PSJ-Utility", "desc": "モデルデータベース（ID、名前、色、ジオメトリ）を照会します。" },
+                { "label": "PSJ-GUI", "desc": "コード不要のビジュアル GUI コマンドビルダー。" },
+                { "label": "Custom Shell", "desc": "リアルタイムのエラー出力を備えた対話型デバッグシェル。" },
+                { "label": "Custom IDE", "desc": "オートコンプリートと予測チップを備えたスマート IDE。" }
+            ]
+        },
+        "industries": {
+            "header": {
+                "label": "対象業界",
+                "title": "さまざまな分野のCAEチームを支援",
+                "desc": "自動車の衝突解析から海洋流体力学まで、PSJは業界ごとのシミュレーションパイプラインに柔軟に対応します。"
+            }
+        }
+    },
+    "docs": {
+        "promoCard": {
+            "badge": "専門サポート",
+            "heading": "ワークフローでお困りですか？",
+            "description": "専門家に相談して、エンジニアリングプロセスを最適化しましょう。",
+            "cta": "お問い合わせ"
+        }
+    },
+    "showcase": {
+        "header": {
+            "label": "テクニカルショーケース",
+            "title": "ショーケースカタログ",
+            "desc": "業界をリードする組織のために開発された、プロダクションレベルの CAE 自動化ソリューションと専門的なエンジニアリングサービスをご覧ください。"
+        },
+        "search": {
+            "byCode": "コードまたはタイトルで検索...",
+            "updates": "更新履歴を検索"
+        },
+        "filters": {
+            "industryPrefix": "業界:",
+            "sortPrefix": "並べ替え:",
+            "sortByRelevant": "関連度順",
+            "sortByCode": "ソリューションコード",
+            "sortByComplexity": "難易度順",
+            "filterSolutions": "ソリューションを絞り込む"
+        },
+        "results": {
+            "showing": "{count} / {total} 件の結果を表示中",
+            "clearFilters": "すべてのフィルターを解除",
+            "noSolutions": "条件に一致する解決策が見つかりませんでした",
+            "resetFilters": "フィルターをリセット"
+        },
+        "card": {
+            "details": "詳細を見る",
+            "requestConsultation": "相談を依頼する",
+            "capabilities": "機能・特徴",
+            "deliverables": "成果物",
+            "duration": "期間",
+            "complexity": "難易度",
+            "industry": "業界",
+            "software": "使用ソフトウェア:"
+        },
+        "cta": {
+            "subtitle": "カスタムエンジニアリング",
+            "title": "お探しのものが見つかりませんか？",
+            "desc": "当社のチームは、お客様固有のエンジニアリング課題に合わせたカスタム CAE 自動化パイプラインの構築を専門としています。",
+            "primaryLabel": "見積もりを依頼する",
+            "secondaryLabel": "相談を予約する"
+        }
+    },
+    "changelog": {
+        "nav": {
+            "home": "ホーム",
+            "backToChangelog": "更新履歴一覧に戻る"
+        },
+        "header": {
+            "label": "プラットフォームの更新",
+            "title": "プロダクト更新履歴",
+            "desc": "PSJエンジニアリング自動化プラットフォームの最新機能、パフォーマンス向上、技術的なアップデートをご確認いただけます。"
+        },
+        "sidebar": {
+            "allVersions": "全バージョン"
+        },
+        "search": {
+            "placeholder": "更新履歴を検索...",
+            "searchUpdates": "更新履歴を検索",
+            "find": "検索..."
+        },
+        "filters": {
+            "filterByVersion": "バージョンで絞り込む",
+            "filterByTag": "タグで絞り込む",
+            "filterByDate": "日付で絞り込む",
+            "sortBy": "並べ替え",
+            "sortByDate": "日付順",
+            "sortByVersion": "バージョン順",
+            "allTags": "すべてのタグ",
+            "categories": "カテゴリー",
+            "all": "すべて",
+            "clearFilters": "すべてのフィルターをクリア"
+        },
+        "results": {
+            "showing": "{count} / {total} 件の更新を表示中",
+            "noUpdates": "条件に一致する更新履歴が見つかりませんでした",
+            "noResults": "結果が見つかりませんでした"
+        },
+        "badges": {
+            "feature": "機能追加",
+            "fix": "バグ修正",
+            "breaking": "破壊的変更",
+            "maintenance": "メンテナンス",
+            "deprecated": "非推奨",
+            "preview": "プレビュー",
+            "legacy": "レガシー",
+            "release": "リリース"
+        },
+        "entry": {
+            "moreUpdates": "件の追加更新",
+            "releaseNote": "リリースノート",
+            "defaultTitle": "アップデート",
+            "copyLink": "リンクをコピー",
+            "readDetails": "詳細を見る",
+            "highlights": "主要なアップデート",
+            "releaseDetails": "更新内容の詳細",
+            "missingVersion": "バージョン情報なし"
+        }
+    }
+}

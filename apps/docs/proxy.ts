@@ -15,14 +15,9 @@ export const config = {
 };
 
 export default async function proxy(request: NextRequest, event: NextFetchEvent) {
-    const response = await i18nMiddleware(request, event);
-
-    if (response?.status && response.status >= 300 && response.status < 400) {
-        return response;
-    }
-
     const { pathname } = request.nextUrl;
 
+    // ── 1. LLM / MDX rewrites — run BEFORE i18n so paths are matched as-is ──
     const mdxResult = rewriteMdx(pathname);
     if (mdxResult) {
         return NextResponse.rewrite(new URL(mdxResult, request.nextUrl));
@@ -35,5 +30,6 @@ export default async function proxy(request: NextRequest, event: NextFetchEvent)
         }
     }
 
-    return response || NextResponse.next();
+    // ── 2. fumadocs i18n — handles locale detection, prefix redirect, cookie ──
+    return i18nMiddleware(request, event);
 }

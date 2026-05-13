@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from 'next';
-import type { ReactNode } from 'react';
 
 import { NextProvider } from 'fumadocs-core/framework/next';
 import { TreeContextProvider } from 'fumadocs-ui/contexts/tree';
+import { Locale, NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 import { Geist_Mono, Inter, Noto_Sans_JP } from 'next/font/google';
 
 import { GlobalFooter } from '@/components/layout/global-footer';
@@ -12,8 +13,8 @@ import { getSiteUrl } from '@/lib/site-url';
 import { source } from '@/lib/source';
 import '@/styles/global.css';
 
+import { Provider } from '../provider';
 import { Body } from './layout.client';
-import { Provider } from './provider';
 
 export const metadata: Metadata = createMetadata({
     title: {
@@ -65,23 +66,25 @@ export const viewport: Viewport = {
     ],
 };
 
-export default async function RootLayout(props: { children: ReactNode; params: Promise<{ lang?: string }> }) {
-    const params = await props.params;
-    const lang = params.lang ?? 'en';
+export default async function RootLayout({ children, params }: LayoutProps<'/[locale]'>) {
+    const { locale } = await params;
+    const messages = await getMessages();
 
     return (
         <html
-            lang={lang}
+            lang={locale}
             className={`${inter.variable} ${notoSansJP.variable} ${mono.variable}`}
             suppressHydrationWarning
             data-scroll-behavior="smooth"
         >
             <Body>
                 <NextProvider>
-                    <TreeContextProvider tree={source.getPageTree(lang)}>
-                        <Provider lang={lang}>
-                            {props.children}
-                            <LinkSidebar />
+                    <TreeContextProvider tree={source.getPageTree(locale)}>
+                        <Provider lang={locale}>
+                            <NextIntlClientProvider messages={messages} locale={locale as Locale}>
+                                {children}
+                                <LinkSidebar />
+                            </NextIntlClientProvider>
                         </Provider>
                     </TreeContextProvider>
                 </NextProvider>

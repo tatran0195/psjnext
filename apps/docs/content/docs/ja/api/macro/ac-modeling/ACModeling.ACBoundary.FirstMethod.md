@@ -7,7 +7,7 @@ ribbon: 'ACModeling > ACBoundary > FirstMethod'
 
 ## Description
 
-Unknown Description
+Unknown Description in japanese
 
 ## Syntax
 

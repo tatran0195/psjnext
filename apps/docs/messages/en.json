@@ -1,0 +1,177 @@
+{
+    "enterprise": {
+        "hero": {
+            "badge": "PSJ v5.1 — Production Release",
+            "title0": "Python Scripting",
+            "title1": "for Jupiter",
+            "desc": "The industry-standard CAE automation platform. Build production-grade simulation workflows with the full power of Python 3.",
+            "cta": {
+                "primary": "Get Started",
+                "secondary": "View Tutorials"
+            },
+            "code": {
+                "filename": "automate.py — PSJ v5.1",
+                "language": "Python 3.x",
+                "statusBar0": "Connected to Jupiter",
+                "statusBar1": "PSJ v5.1.1 Stable"
+            }
+        },
+        "phi": {
+            "label": "Core Philosophy",
+            "title": "The 4F Design Principle",
+            "desc": "PSJ is built around four core engineering principles — designed to solve every CAE automation challenge across organizations of all sizes.",
+            "readDocs": "Read the documentation",
+            "cards": [
+                {
+                    "label": "Friendly",
+                    "sub": "Even non-programmers",
+                    "desc": "Macro recording means anyone can automate workflows without writing code."
+                },
+                {
+                    "label": "Fast",
+                    "sub": "Through automation",
+                    "desc": "Eliminate repetitive operations. Hours of work become seconds of script."
+                },
+                {
+                    "label": "Functional",
+                    "sub": "IDE & GUI Builder",
+                    "desc": "Built-in development tools with full predictive tips and dialog builder."
+                },
+                {
+                    "label": "Flexible",
+                    "sub": "Advanced simulation",
+                    "desc": "Full Python 3 ecosystem — NumPy, Pandas, scikit-learn, pptx and more."
+                }
+            ]
+        },
+        "modules": {
+            "header": {
+                "label": "System Architecture",
+                "title": "Six Integrated Modules",
+                "linkLabel": "View architecture docs"
+            },
+            "exploreLabel": "Explore module",
+            "items": [
+                { "label": "Macro", "desc": "Auto-recorded script equivalents of Jupiter GUI operations." },
+                { "label": "PSJ-Command", "desc": "Command-language replay of any Jupiter dialog function." },
+                { "label": "PSJ-Utility", "desc": "Query model database: IDs, names, colors, geometry." },
+                { "label": "PSJ-GUI", "desc": "Visual GUI Command Builder — no code required." },
+                { "label": "Custom Shell", "desc": "Interactive debug shell with real-time error output." },
+                { "label": "Custom IDE", "desc": "Smart IDE with auto-complete and predictive tips." }
+            ]
+        },
+        "industries": {
+            "header": {
+                "label": "Industries Served",
+                "title": "Powering CAE teams across sectors",
+                "desc": "From automotive crash to marine hydrodynamics, PSJ adapts to industry-specific simulation pipelines."
+            }
+        }
+    },
+    "docs": {
+        "promoCard": {
+            "badge": "Expert Support",
+            "heading": "Need help with your workflow?",
+            "description": "Talk to a specialist and optimize your engineering process today.",
+            "cta": "Contact us"
+        }
+    },
+    "showcase": {
+        "header": {
+            "label": "Technical Showcase",
+            "title": "Showcase Catalog",
+            "desc": "Explore our production-grade CAE automation solutions and specialized engineering services developed for industry-leading organizations."
+        },
+        "search": {
+            "byCode": "Search by code or title...",
+            "updates": "Search updates"
+        },
+        "filters": {
+            "industryPrefix": "Industry:",
+            "sortPrefix": "Sort:",
+            "sortByRelevant": "Most relevant",
+            "sortByCode": "Solution code",
+            "sortByComplexity": "Complexity",
+            "filterSolutions": "Filter Solutions"
+        },
+        "results": {
+            "showing": "Showing {count} of {total} Results",
+            "clearFilters": "Clear all filters",
+            "noSolutions": "No solutions match your criteria",
+            "resetFilters": "Reset filters"
+        },
+        "card": {
+            "details": "Details",
+            "requestConsultation": "Request Consultation",
+            "capabilities": "Capabilities",
+            "deliverables": "Deliverables",
+            "duration": "Duration",
+            "complexity": "Complexity",
+            "industry": "Industry",
+            "software": "Software:"
+        },
+        "cta": {
+            "subtitle": "Custom Engineering",
+            "title": "Don't see what you need?",
+            "desc": "Our team specializes in custom CAE automation pipelines tailored to your specific engineering challenges.",
+            "primaryLabel": "Request a quote",
+            "secondaryLabel": "Schedule a call"
+        }
+    },
+    "changelog": {
+        "nav": {
+            "home": "Home",
+            "backToChangelog": "Back to changelog"
+        },
+        "header": {
+            "label": "Platform Updates",
+            "title": "Changelog",
+            "desc": "Product updates and release notes for PSJ CAE automation platform."
+        },
+        "sidebar": {
+            "allVersions": "All versions"
+        },
+        "search": {
+            "placeholder": "Search changelog...",
+            "searchUpdates": "Search updates",
+            "find": "Search..."
+        },
+        "filters": {
+            "filterByVersion": "Filter by version",
+            "filterByTag": "Filter by tag",
+            "filterByDate": "Filter by date",
+            "sortBy": "Sort by",
+            "sortByDate": "Date",
+            "sortByVersion": "Version",
+            "allTags": "All tags",
+            "categories": "Categories",
+            "all": "All",
+            "clearFilters": "Clear all filters"
+        },
+        "results": {
+            "showing": "Showing {count} of {total} results",
+            "noUpdates": "No updates matched your criteria",
+            "noResults": "No results found"
+        },
+        "badges": {
+            "feature": "Feature",
+            "fix": "Fix",
+            "breaking": "Breaking",
+            "maintenance": "Maintenance",
+            "deprecated": "Deprecated",
+            "preview": "Preview",
+            "legacy": "Legacy",
+            "release": "Release"
+        },
+        "entry": {
+            "moreUpdates": "more updates",
+            "releaseNote": "Release Note",
+            "defaultTitle": "Update",
+            "copyLink": "Copy Link",
+            "readDetails": "Read details",
+            "highlights": "Highlights",
+            "releaseDetails": "Release Details",
+            "missingVersion": "No Version"
+        }
+    }
+}

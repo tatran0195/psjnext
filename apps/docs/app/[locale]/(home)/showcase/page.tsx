@@ -22,15 +22,15 @@ import { cn } from '@/lib/cn';
 import { translations, type TranslationDict } from '@/lib/i18n';
 import { categoryConfig, getIndustries, getSolutions, Solution } from '@/lib/showcase';
 
-export default function CAEServices({ params }: { params: Promise<{ lang: string }> }) {
-    const { lang } = use(params);
+export default function CAEServices({ params }: { params: Promise<{ locale: string }> }) {
+    const { locale } = use(params);
 
-    const t = translations[lang as keyof typeof translations] || translations.en;
+    const t = translations[locale as keyof typeof translations] || translations.en;
     const { showcase } = t;
     const { header, search: searchT, filters, results, card, cta } = showcase;
 
-    const solutions = getSolutions(lang);
-    const industries = getIndustries(lang);
+    const solutions = getSolutions(locale);
+    const industries = getIndustries(locale);
 
     const [activeCategory, setActiveCategory] = useState<keyof typeof categoryConfig>('All');
     const [activeIndustry, setActiveIndustry] = useState(industries[0]);

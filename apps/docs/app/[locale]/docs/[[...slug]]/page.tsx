@@ -6,6 +6,7 @@ import { findNeighbour } from 'fumadocs-core/page-tree';
 import { PathUtils } from 'fumadocs-core/source';
 import * as Twoslash from 'fumadocs-twoslash/ui';
 import { Callout } from 'fumadocs-ui/components/callout';
+import { Locale } from 'next-intl';
 
 import { NotFound } from '@/components/layouts/not-found';
 import { getMDXComponents } from '@/components/mdx';
@@ -40,14 +41,14 @@ function resolveVersion(slug: string[]): { version: string; pageSlug: string[] }
 }
 
 export default async function Page(props: {
-    params: Promise<{ slug?: string[]; lang: string }>;
+    params: Promise<{ slug?: string[]; locale: Locale }>;
     searchParams: Promise<{ v?: string }>;
 }) {
     const params = await props.params;
-    const { slug = [], lang } = params;
+    const { slug = [], locale } = params;
 
     let apiMdxComponents: Partial<Parameters<typeof getMDXComponents>[0]> | undefined;
-    const page = source.getPage(slug, lang);
+    const page = source.getPage(slug, locale);
     if (!page) {
         const query = slug.join(' ');
         return <NotFound getSuggestions={() => getSuggestions(query)} />;
@@ -74,7 +75,7 @@ export default async function Page(props: {
     const { body: Mdx, toc, lastModified } = await page.data.load();
     const { ribbon, shortcut } = page.data;
 
-    const neighbours = findNeighbour(source.getPageTree(lang), page.url);
+    const neighbours = findNeighbour(source.getPageTree(locale), page.url);
     const footerPrevious = neighbours.previous
         ? { name: neighbours.previous.name, url: neighbours.previous.url }
         : undefined;
@@ -131,14 +132,16 @@ export default async function Page(props: {
                         },
                         LinkPreview,
                         blockquote: Callout as unknown as FC<ComponentProps<'blockquote'>>,
-                        DocsCategory: ({ url }: { url?: string }) => <DocsCategory url={url ?? page.url} lang={lang} />,
+                        DocsCategory: ({ url }: { url?: string }) => (
+                            <DocsCategory url={url ?? page.url} lang={locale} />
+                        ),
                         DocsSectionOverview: ({ url }: { url?: string }) => (
-                            <DocsSectionOverview url={url ?? page.url} lang={lang} />
+                            <DocsSectionOverview url={url ?? page.url} lang={locale} />
                         ),
                         ...apiMdxComponents,
                     })}
                 />
-                {page.data.index ? <DocsCategory url={page.url} lang={lang} /> : null}
+                {page.data.index ? <DocsCategory url={page.url} lang={locale} /> : null}
             </DocsBody>
             {lastModified && <PageLastUpdate date={lastModified} />}
         </DocsPage>
@@ -181,7 +184,7 @@ export async function generateMetadata(props: {
 }
 
 export function generateStaticParams() {
-    const docsParams = source.generateParams('slug', 'lang');
+    const docsParams = source.generateParams('slug', 'locale');
     const apiParams = source
         .getPages()
         .filter((p) => p.slugs[1] === 'api' && p.slugs[2] !== undefined)

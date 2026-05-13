@@ -4,19 +4,19 @@ import { changelog } from '@/lib/source';
 
 import PageClient from './page.client';
 
-export default async function Page({ params }: { params: Promise<{ lang: string }> }) {
-    const { lang } = await params;
-    const t = getDictionary(lang, 'changelog');
+export default async function Page({ params }: LayoutProps<'/[locale]'>) {
+    const { locale } = await params;
+    const t = getDictionary(locale, 'changelog');
 
     const allEntries = changelog
-        .getPages(lang)
+        .getPages(locale)
         .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
         .reverse()
         .filter((entry) => !entry?.data.draft)
         .map((entry) => ({
             id: entry.data.id,
             slug: entry.data.slug,
-            date: new Date(entry.data.date).toLocaleDateString(lang === 'ja' ? 'ja-JP' : 'en-US', {
+            date: new Date(entry.data.date).toLocaleDateString(locale === 'ja' ? 'ja-JP' : 'en-US', {
                 month: 'short',
                 day: 'numeric',
                 year: 'numeric',

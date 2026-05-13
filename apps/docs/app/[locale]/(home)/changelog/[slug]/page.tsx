@@ -13,15 +13,15 @@ import { translations } from '@/lib/i18n-translations';
 import { changelog } from '@/lib/source';
 
 interface ChangelogEntryPageProps {
-    params: Promise<{ slug: string; lang: string }>;
+    params: Promise<{ slug: string; locale: string }>;
 }
 
 export default async function ChangelogEntryPage({ params }: ChangelogEntryPageProps) {
-    const { slug, lang } = await params;
-    const t = translations[lang as keyof typeof translations]?.changelog || translations.en.changelog;
-    const dateLocale = lang === 'ja' ? 'ja-JP' : 'en-US';
+    const { slug, locale } = await params;
+    const t = translations[locale as keyof typeof translations]?.changelog || translations.en.changelog;
+    const dateLocale = locale === 'ja' ? 'ja-JP' : 'en-US';
 
-    const page = changelog.getPages(lang).find((p) => p.data.slug === slug || p.slugs[0] === slug);
+    const page = changelog.getPages(locale).find((p) => p.data.slug === slug || p.slugs[0] === slug);
 
     if (!page) {
         notFound();
@@ -53,12 +53,12 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
         },
         mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': `https://psjdoc.e-technostar.com/${lang}/changelog/${slug}`,
+            '@id': `https://psjdoc.e-technostar.com/${locale}/changelog/${slug}`,
         },
         ...(entry.image && {
             image: {
                 '@type': 'ImageObject',
-                url: `https://psjdoc.e-technostar.com/${lang}/${entry.image.startsWith('/') ? entry.image.slice(1) : entry.image}`,
+                url: `https://psjdoc.e-technostar.com/${locale}/${entry.image.startsWith('/') ? entry.image.slice(1) : entry.image}`,
                 width: 1200,
                 height: 630,
             },
@@ -79,13 +79,13 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
                 '@type': 'ListItem',
                 position: 2,
                 name: t.header.title,
-                item: `https://psjdoc.e-technostar.com/${lang}/changelog`,
+                item: `https://psjdoc.e-technostar.com/${locale}/changelog`,
             },
             {
                 '@type': 'ListItem',
                 position: 3,
                 name: entry.title,
-                item: `https://psjdoc.e-technostar.com/${lang}/changelog/${slug}`,
+                item: `https://psjdoc.e-technostar.com/${locale}/changelog/${slug}`,
             },
         ],
     };
@@ -243,9 +243,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ChangelogEntryPageProps): Promise<Metadata> {
-    const { slug, lang } = await params;
+    const { slug, locale } = await params;
 
-    const page = changelog.getPages(lang).find((p) => p.data.slug === slug || p.slugs[0] === slug);
+    const page = changelog.getPages(locale).find((p) => p.data.slug === slug || p.slugs[0] === slug);
     const entry = page?.data;
 
     if (!entry) {

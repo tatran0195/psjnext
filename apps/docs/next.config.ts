@@ -2,10 +2,12 @@ import type { NextConfig } from 'next';
 
 import createBundleAnalyzer from '@next/bundle-analyzer';
 import { createMDX } from 'fumadocs-mdx/next';
+import createNextIntlPlugin from 'next-intl/plugin';
 
 const withAnalyzer = createBundleAnalyzer({
     enabled: process.env.ANALYZE === 'true',
 });
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 const config: NextConfig = {
     env: {
@@ -42,4 +44,4 @@ const config: NextConfig = {
 
 const withMDX = createMDX();
 
-export default withAnalyzer(withMDX(config));
+export default withAnalyzer(withNextIntl(withMDX(config)));

@@ -5,8 +5,9 @@ import { statusBadgesPlugin } from 'fumadocs-core/source/status-badges';
 import { toFumadocsSource } from 'fumadocs-mdx/runtime/server';
 
 import { env } from '@/env';
+// import { i18n } from '../i18n';
+import { i18nDocsConfig as i18n } from '@/i18n/routing';
 
-import { i18n } from '../i18n';
 import { codeTitlesPlugin } from './plugins/code-titles-plugin';
 import { iconsPlugin } from './plugins/icons-plugin';
 import { versionPlugin } from './plugins/version-plugin';
