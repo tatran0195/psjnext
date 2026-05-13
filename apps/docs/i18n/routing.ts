@@ -1,4 +1,4 @@
-import { I18nConfig } from 'fumadocs-core/i18n';
+import { defineI18n, I18nConfig } from 'fumadocs-core/i18n';
 import { defineRouting } from 'next-intl/routing';
 
 export const routing = defineRouting({
@@ -14,3 +14,5 @@ export const i18nDocsConfig: I18nConfig = {
     parser: 'dir',
     fallbackLanguage: 'en',
 };
+
+export const i18n = defineI18n(i18nDocsConfig);

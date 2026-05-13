@@ -3,9 +3,9 @@ import { type NextFetchEvent, type NextRequest, NextResponse } from 'next/server
 import { createI18nMiddleware } from 'fumadocs-core/i18n/middleware';
 import { isMarkdownPreferred, rewritePath } from 'fumadocs-core/negotiation';
 
-import { i18n } from './lib/i18n';
+import { i18nDocsConfig } from './i18n/routing';
 
-const i18nMiddleware = createI18nMiddleware(i18n);
+const i18nMiddleware = createI18nMiddleware(i18nDocsConfig);
 
 const { rewrite: rewriteLLM } = rewritePath('/:lang/docs{/*path}', '/llms.mdx/:lang/docs{/*path}');
 const { rewrite: rewriteMdx } = rewritePath('/:lang/docs{/*path}.mdx', '/llms.mdx/:lang/docs{/*path}');

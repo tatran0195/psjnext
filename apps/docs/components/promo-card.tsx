@@ -1,12 +1,13 @@
 import { ComponentProps } from 'react';
 
 import { ArrowRight, Sparkles, Zap } from 'lucide-react';
+import { type Locale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 
 import { cn } from '@/lib/cn';
 
-export const PromoCard = async ({ ...props }: ComponentProps<'div'>) => {
-    const t = await getTranslations('docs.promoCard');
+export const PromoCard = async ({ locale, ...props }: ComponentProps<'div'> & { locale: Locale }) => {
+    const t = await getTranslations({ locale, namespace: 'docs.promoCard' });
 
     return (
         <div {...props} className={cn('-mx-1', props.className)}>

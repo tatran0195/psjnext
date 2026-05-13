@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 
 import { LinkSidebarProvider } from '@/components/mdx/link-sidebar';
-import { i18nUI } from '@/lib/i18n';
+import { i18nUI } from '@/i18n/fd-translations';
 
 import { BaseProvider } from './provider.base';
 

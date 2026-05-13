@@ -17,11 +17,11 @@ import {
     Wrench,
     Zap,
 } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 import { CtaBand } from '@/components/sections/cta-band';
 import { FadeUp } from '@/components/sections/fade-up';
 import { SectionHeader } from '@/components/sections/section-header';
-import { getDictionary } from '@/lib/i18n';
 
 // Icon sets for the 4F philosophy cards and module items — indexed to match
 // the translation arrays so order is the single source of truth.
@@ -45,9 +45,8 @@ const INDUSTRY_ITEMS = [
     { icon: Atom, fields: 'Reactor · Thermal · Fluid' },
 ] as const;
 
-export default async function Page({ params }: { params: Promise<{ lang: string }> }) {
-    const { lang } = await params;
-    const { hero, phi, modules, industries } = getDictionary(lang, 'enterprise');
+export default async function Page() {
+    const t = await getTranslations('enterprise');
 
     return (
         <>
@@ -81,16 +80,16 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
                                         className="text-[10px] uppercase tracking-[0.25em] font-bold"
                                         style={{ color: 'var(--psj-blue)' }}
                                     >
-                                        {hero.badge}
+                                        {t('hero.badge')}
                                     </span>
                                 </div>
                             </FadeUp>
 
                             <FadeUp delay={80}>
                                 <h1 className="psj-h1 text-balance mb-6" style={{ color: 'var(--psj-text-1)' }}>
-                                    {hero.title[0]}
+                                    {t('hero.title.0')}
                                     <br />
-                                    <span style={{ color: 'var(--psj-blue)' }}>{hero.title[1]}</span>
+                                    <span style={{ color: 'var(--psj-blue)' }}>{t('hero.title.1')}</span>
                                 </h1>
                             </FadeUp>
 
@@ -99,17 +98,17 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
                                     className="text-lg leading-relaxed max-w-xl mb-10 text-balance"
                                     style={{ color: 'var(--psj-text-2)' }}
                                 >
-                                    {hero.desc}
+                                    {t('hero.desc')}
                                 </p>
                             </FadeUp>
 
                             <FadeUp delay={240}>
                                 <div className="flex flex-wrap gap-4">
                                     <Link href="/docs" className="psj-btn-primary">
-                                        {hero.cta.primary} <ArrowRight size={15} />
+                                        {t('hero.cta.primary')} <ArrowRight size={15} />
                                     </Link>
                                     <Link href="/tutorials" className="psj-btn-secondary">
-                                        <Play size={15} /> {hero.cta.secondary}
+                                        <Play size={15} /> {t('hero.cta.secondary')}
                                     </Link>
                                 </div>
                             </FadeUp>
@@ -145,7 +144,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
                                         ))}
                                     </div>
                                     <span className="font-mono text-[10px]" style={{ color: 'var(--psj-text-3)' }}>
-                                        {hero.code.filename}
+                                        {t('hero.code.filename')}
                                     </span>
                                     <span
                                         className="text-[10px] font-medium px-2 py-0.5"
@@ -154,7 +153,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
                                             color: 'var(--psj-text-3)',
                                         }}
                                     >
-                                        {hero.code.language}
+                                        {t('hero.code.language')}
                                     </span>
                                 </div>
                                 {/* Code */}
@@ -190,9 +189,9 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
                                                 display: 'inline-block',
                                             }}
                                         />
-                                        {hero.code.statusBar[0]}
+                                        {t('hero.code.statusBar.0')}
                                     </span>
-                                    <span>{hero.code.statusBar[1]}</span>
+                                    <span>{t('hero.code.statusBar.1')}</span>
                                 </div>
                             </div>
                         </FadeUp>
@@ -214,19 +213,19 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
                         {/* Left */}
                         <div className="lg:col-span-4">
                             <FadeUp>
-                                <div className="psj-label mb-4">{phi.label}</div>
+                                <div className="psj-label mb-4">{t('phi.label')}</div>
                                 <h2 className="psj-h2 text-balance mb-6" style={{ color: 'var(--psj-text-1)' }}>
-                                    {phi.title}
+                                    {t('phi.title')}
                                 </h2>
                                 <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--psj-text-2)' }}>
-                                    {phi.desc}
+                                    {t('phi.desc')}
                                 </p>
                                 <Link
                                     href="/docs"
                                     className="group inline-flex items-center gap-2 text-sm font-bold transition-colors"
                                     style={{ color: 'var(--psj-blue)' }}
                                 >
-                                    {phi.readDocs}
+                                    {t('phi.readDocs')}
                                     <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </FadeUp>
@@ -234,7 +233,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
 
                         {/* Right — 4 cards */}
                         <div className="lg:col-span-8 grid sm:grid-cols-2 gap-5">
-                            {phi.cards.map((card, i) => {
+                            {(t.raw('phi.cards') as { label: string; sub: string; desc: string }[]).map((card, i) => {
                                 const Icon = PHI_ICONS[i];
                                 return (
                                     <FadeUp key={card.label} delay={i * 50}>
@@ -290,13 +289,13 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
             >
                 <div className="psj-container psj-section">
                     <SectionHeader
-                        label={modules.header.label}
-                        title={modules.header.title}
+                        label={t.raw('modules.header.label')}
+                        title={t.raw('modules.header.title')}
                         link="/docs"
-                        linkLabel={modules.header.linkLabel}
+                        linkLabel={t.raw('modules.header.linkLabel')}
                     />
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {modules.items.map((mod, i) => {
+                        {(t.raw('modules.items') as { label: string; sub: string; desc: string }[]).map((mod, i) => {
                             const Icon = MODULE_ICONS[i];
                             const color = MODULE_COLORS[i];
                             return (
@@ -333,7 +332,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
                                             className="inline-flex items-center gap-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-all translate-y-1 group-hover:translate-y-0"
                                             style={{ color: 'var(--psj-blue)' }}
                                         >
-                                            {modules.exploreLabel} <ChevronRight size={12} />
+                                            {t.raw('modules.exploreLabel')} <ChevronRight size={12} />
                                         </Link>
                                     </div>
                                 </FadeUp>
@@ -355,12 +354,12 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
                 <div className="psj-container psj-section-sm">
                     <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12">
                         <div className="shrink-0 max-w-xs">
-                            <div className="psj-label mb-3">{industries.header.label}</div>
+                            <div className="psj-label mb-3">{t('industries.header.label')}</div>
                             <h3 className="psj-h3 text-balance mb-4" style={{ color: 'var(--psj-text-1)' }}>
-                                {industries.header.title}
+                                {t('industries.header.title')}
                             </h3>
                             <p className="text-sm leading-relaxed" style={{ color: 'var(--psj-text-2)' }}>
-                                {industries.header.desc}
+                                {t('industries.header.desc')}
                             </p>
                         </div>
                         <div className="flex-1 grid grid-cols-2 sm:grid-cols-5 gap-4">

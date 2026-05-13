@@ -11,6 +11,9 @@
     "[json]": {
         "editor.defaultFormatter": "oxc.oxc-vscode"
     },
+    "i18n-ally.localesPaths": ["apps/docs/locales"],
+    "i18n-ally.keystyle": "nested",
+    "i18n-ally.sourceLanguage": "ja",
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "oxc.oxc-vscode",
     "oxc.fmt.configPath": ".oxfmtrc.jsonc",
