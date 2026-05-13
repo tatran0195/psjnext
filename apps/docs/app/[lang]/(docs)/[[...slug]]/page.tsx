@@ -138,6 +138,7 @@ export async function generateMetadata(props: {
     if (!page) {
         return createMetadata({ title: 'Not Found' });
     }
+    console.log(page.data);
     const description = page.data.description ?? 'Python Scripting for Jupiter';
     const image = {
         url: getPageImage(page).url,

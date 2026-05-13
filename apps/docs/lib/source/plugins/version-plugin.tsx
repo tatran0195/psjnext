@@ -72,7 +72,7 @@ function resolveVersionMeta(idx: number): { icon: ReactNode | string; descriptio
  * never consulted. This ensures pages with @removed params (e.g. bIsMergePart
  * @removed:5.2.0) are excluded from search even when only one version exists.
  */
-function installStructuredDataGetter(
+function installVersionedGetters(
     originalData: Record<string, unknown>,
     loadFn: (() => Promise<Record<string, unknown>>) | undefined,
     fixedVersion?: string,
@@ -106,6 +106,36 @@ function installStructuredDataGetter(
         configurable: true,
         enumerable: false,
     });
+
+    if (loadFn) {
+        Object.defineProperty(originalData, 'load', {
+            value: async function (this: Record<string, unknown>) {
+                const result = await loadFn();
+                const version = fixedVersion ?? (this._version as string);
+                if (!version) return result;
+
+                const exports = (result._exports ?? result) as Record<string, unknown>;
+                const versionedMap = exports.versionedStructuredData as
+                    | Record<string, StructuredData>
+                    | undefined;
+
+                if (versionedMap?.[version] && Array.isArray(result.toc)) {
+                    const validIds = new Set(versionedMap[version]!.headings.map((h) => h.id));
+                    return {
+                        ...result,
+                        toc: (result.toc as { url: string }[]).filter((item) => {
+                            const id = item.url.startsWith('#') ? item.url.slice(1) : item.url;
+                            return validIds.has(id);
+                        }),
+                    };
+                }
+                return result;
+            },
+            configurable: true,
+            enumerable: false,
+            writable: true,
+        });
+    }
 }
 
 const API_VERSIONS = env.API_VERSIONS;
@@ -133,7 +163,7 @@ export function versionPlugin(): LoaderPlugin {
                     const originalData = file.data as Record<string, unknown>;
                     if (originalData._version) continue;
 
-                    installStructuredDataGetter(
+                    installVersionedGetters(
                         originalData,
                         originalData.load as (() => Promise<Record<string, unknown>>) | undefined,
                         API_VERSIONS[0], // fixed: single version, no shell prototype chain
@@ -174,10 +204,6 @@ export function versionPlugin(): LoaderPlugin {
                 const fm = file.data as VersionedPageFrontmatter;
                 const loadFn = originalData.load as (() => Promise<Record<string, unknown>>) | undefined;
 
-                // No fixedVersion — getter reads this._version from the shell
-                // at call time, giving each version its own structured data slice.
-                installStructuredDataGetter(originalData, loadFn);
-
                 for (const version of API_VERSIONS) {
                     const status = getVersionStatus(version, fm.introduced, fm.deprecated, fm.removed);
 
@@ -186,14 +212,19 @@ export function versionPlugin(): LoaderPlugin {
                     const storageKey = `api/${version}/${filePath.replace(/^api\//, '')}`;
                     const slugs = storageKey.replace(/\.mdx?$/, '').split('/');
 
+                    const versionedData = {
+                        ...originalData,
+                        _version: version,
+                        _status: status,
+                    } as typeof originalData;
+
+                    installVersionedGetters(versionedData, loadFn, version);
+
                     storage.write(storageKey, {
                         ...file,
                         path: file.path,
                         slugs,
-                        data: Object.assign(originalData, {
-                            _version: version,
-                            _status: status,
-                        }) as typeof file.data,
+                        data: versionedData as typeof file.data,
                     });
                 }
 

@@ -326,9 +326,7 @@ In which:
 >
 > **picture_folder** is the parameter refering to the stored location to get stored pictures. The stored localtion:
 >
-> <menuselection>
->     Jupiter installation folder &#187; SampleData &#187; PSJ &#187; PSJ-GUI &#187; CreateBolt &#187; CreatingBolt_Pics
-> </menuselection>
+> <menuselection>Jupiter installation folder &#187; SampleData &#187; PSJ &#187; PSJ-GUI &#187; CreateBolt &#187; CreatingBolt_Pics</menuselection>
 
 ### 2.4. Step 4: Prepare a function to modify the output value of Assemble Faces function
 
@@ -344,13 +342,14 @@ So, to make it can be used, you can use the following **def** function (or you c
     Whenever start using a function, you should check it's output values and type. In Jupiter, we're supporting a
     utility called [JPT.Debugger](/docs/psj-utility/JPT.Debugger)
 </Callout>
-```psj def replace_str(err, in_str): mod_str = in_str for i in range (len(err)): mod_str = mod_str.replace(str(err[i]),
-" ")
-
+```psj
+def replace_str(err, in_str):
+    mod_str = in_str
+    for i in range (len(err)):
+        mod_str = mod_str.replace(str(err[i]), " ")
     mod_str = re.sub("s+", " ", mod_str).strip().split(" ")
     return mod_str
-
-````
+```
 
 ### 2.5. Step 5: Prepare the execution function
 

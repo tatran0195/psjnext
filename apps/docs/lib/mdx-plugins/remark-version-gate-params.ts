@@ -5,7 +5,7 @@ import { semverGte } from '@/lib/api-versions';
 
 import { flattenNode, getVersionStatus } from './utils';
 
-import type { Heading, PhrasingContent, Root, RootContent } from 'mdast';
+import type { Heading, Root, RootContent } from 'mdast';
 import type { MdxjsEsm } from 'mdast-util-mdx';
 import type { Plugin, Transformer } from 'unified';
 
@@ -324,34 +324,34 @@ export const remarkVersionGateParams: Plugin<[VersionGateOptions?], Root> = (opt
 
                     // If required, transform the inlineCode to an mdxJsxTextElement `<code>`
                     // so we can insert a red asterisk INSIDE it (which also puts it in the TOC).
-                    const isRequired = meta.ranges.some((r) => r.required);
-                    if (isRequired) {
-                        const codeIndex = headingNode.children.findIndex((n) => n.type === 'inlineCode');
-                        if (codeIndex !== -1) {
-                            const codeNode = headingNode.children[codeIndex];
-                            const textValue = 'value' in codeNode ? codeNode.value : '';
-                            headingNode.children[codeIndex] = {
-                                type: 'mdxJsxTextElement',
-                                name: 'code',
-                                attributes: [],
-                                children: [
-                                    { type: 'text', value: textValue },
-                                    {
-                                        type: 'mdxJsxTextElement',
-                                        name: 'span',
-                                        attributes: [
-                                            {
-                                                type: 'mdxJsxAttribute',
-                                                name: 'data-param-asterisk',
-                                                value: 'true',
-                                            },
-                                        ],
-                                        children: [{ type: 'text', value: '*' }],
-                                    },
-                                ],
-                            } as unknown as PhrasingContent;
-                        }
-                    }
+                    // const isRequired = meta.ranges.some((r) => r.required);
+                    // if (isRequired) {
+                    //     const codeIndex = headingNode.children.findIndex((n) => n.type === 'inlineCode');
+                    //     if (codeIndex !== -1) {
+                    //         const codeNode = headingNode.children[codeIndex];
+                    //         const textValue = 'value' in codeNode ? codeNode.value : '';
+                    //         headingNode.children[codeIndex] = {
+                    //             type: 'mdxJsxTextElement',
+                    //             name: 'code',
+                    //             attributes: [],
+                    //             children: [
+                    //                 { type: 'text', value: textValue },
+                    //                 {
+                    //                     type: 'mdxJsxTextElement',
+                    //                     name: 'span',
+                    //                     attributes: [
+                    //                         {
+                    //                             type: 'mdxJsxAttribute',
+                    //                             name: 'data-param-asterisk',
+                    //                             value: 'true',
+                    //                         },
+                    //                     ],
+                    //                     children: [{ type: 'text', value: '*' }],
+                    //                 },
+                    //             ],
+                    //         } as unknown as PhrasingContent;
+                    //     }
+                    // }
 
                     const hContent = flattenNode(headingNode as unknown as RootContent).trim();
 
