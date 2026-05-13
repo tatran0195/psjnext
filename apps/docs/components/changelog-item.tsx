@@ -6,14 +6,14 @@ import Link from 'fumadocs-core/link';
 import { ChevronRight, Link2 } from 'lucide-react';
 import Markdown from 'markdown-to-jsx';
 
-import type { translations } from '@/lib/i18n-translations';
 import type { ChangelogFrontmatter } from '@/lib/utils/markdown';
 
 import { Grid } from '@/components/grid-pattern';
+import { type TranslationDict } from '@/lib/i18n';
 
 interface ChangelogItemProps {
     entry: ChangelogFrontmatter;
-    t: (typeof translations)[keyof typeof translations]['changelog'];
+    t: TranslationDict['changelog'];
 }
 
 export function ChangelogItem({ entry, t }: ChangelogItemProps) {
@@ -49,7 +49,7 @@ export function ChangelogItem({ entry, t }: ChangelogItemProps) {
                             {entry.version}
                         </div>
                     ) : (
-                        <div className="text-[10px] text-red-500">{t.missingVersion}</div>
+                        <div className="text-[10px] text-red-500">{t.entry.missingVersion}</div>
                     )}
                     <time
                         dateTime={entry.date}
@@ -70,7 +70,7 @@ export function ChangelogItem({ entry, t }: ChangelogItemProps) {
                         <button
                             onClick={() => handleCopyLink(entry.slug)}
                             className="translate-y-[0.08em] p-2 hover:bg-(--psj-surface-2) rounded-full transition-colors shrink-0 cursor-pointer"
-                            title={t.copyLink}
+                            title={t.entry.copyLink}
                         >
                             <Link2 size={16} className="text-(--psj-text-3)" />
                         </button>
@@ -95,7 +95,7 @@ export function ChangelogItem({ entry, t }: ChangelogItemProps) {
                                 ))}
                                 {entry.highlights.length > 3 && (
                                     <li className="text-xs font-bold uppercase tracking-widest mt-2 text-(--psj-blue)">
-                                        + {entry.highlights.length - 3} {t.moreUpdates}
+                                        + {entry.highlights.length - 3} {t.entry.moreUpdates}
                                     </li>
                                 )}
                             </ul>
@@ -122,10 +122,10 @@ export function ChangelogItem({ entry, t }: ChangelogItemProps) {
                                     </div>
                                     <div className="relative z-10 px-12 flex flex-col gap-3">
                                         <div className="inline-flex items-center w-fit border rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest text-(--psj-blue) border-(--psj-border) bg-(--psj-surface-0)">
-                                            {t.releaseNote}
+                                            {t.entry.releaseNote}
                                         </div>
                                         <div className="text-4xl lg:text-5xl font-black tracking-tight text-(--psj-text-1)">
-                                            {entry.version || t.defaultUpdateTitle}
+                                            {entry.version || t.entry.defaultTitle}
                                         </div>
                                         <div className="h-1 w-12 bg-(--psj-blue) mt-2"></div>
                                     </div>
@@ -150,7 +150,7 @@ export function ChangelogItem({ entry, t }: ChangelogItemProps) {
                             href={`/changelog/${entry.slug}`}
                             className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-(--psj-blue) group/link"
                         >
-                            {t.readFullRelease}
+                            {t.entry.readDetails}
                             <ChevronRight size={14} className="transition-transform group-hover/link:translate-x-1" />
                         </Link>
                     </div>

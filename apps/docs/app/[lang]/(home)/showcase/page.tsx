@@ -19,7 +19,7 @@ import {
 import { HeroSection } from '@/components/hero-sections';
 import { CtaBand } from '@/components/sections/cta-band';
 import { cn } from '@/lib/cn';
-import { translations } from '@/lib/i18n-translations';
+import { translations, type TranslationDict } from '@/lib/i18n';
 import { categoryConfig, getIndustries, getSolutions, Solution } from '@/lib/showcase';
 
 export default function CAEServices({ params }: { params: Promise<{ lang: string }> }) {
@@ -27,6 +27,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
 
     const t = translations[lang as keyof typeof translations] || translations.en;
     const { showcase } = t;
+    const { header, search: searchT, filters, results, card, cta } = showcase;
 
     const solutions = getSolutions(lang);
     const industries = getIndustries(lang);
@@ -37,7 +38,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
     const [selectedSolution, setSelectedSolution] = useState<Solution | null>(null);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-    const [sortBy, setSortBy] = useState<string>(showcase.sortByRelevant);
+    const [sortBy, setSortBy] = useState<string>(filters.sortByRelevant);
 
     const filtered = useMemo(() => {
         const result = [...solutions].filter((sol) => {
@@ -50,9 +51,9 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
         });
 
         // Sorting
-        if (sortBy === showcase.sortByCode) {
+        if (sortBy === filters.sortByCode) {
             result.sort((a, b) => a.code.localeCompare(b.code));
-        } else if (sortBy === showcase.sortByComplexity) {
+        } else if (sortBy === filters.sortByComplexity) {
             const order = { Standard: 1, Advanced: 2, Enterprise: 3 };
             result.sort(
                 (a, b) => order[a.complexity as keyof typeof order] - order[b.complexity as keyof typeof order],
@@ -60,7 +61,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
         }
 
         return result;
-    }, [activeCategory, activeIndustry, search, sortBy, solutions, industries, showcase]);
+    }, [activeCategory, activeIndustry, search, sortBy, solutions, industries, filters]);
 
     return (
         <div
@@ -70,11 +71,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                 minHeight: '100vh',
             }}
         >
-            <HeroSection
-                label={showcase.showcaseLabel}
-                title={showcase.showcaseTitle}
-                description={showcase.showcaseDesc}
-            />
+            <HeroSection label={header.label} title={header.title} description={header.desc} />
 
             {/* ─────── MAIN LAYOUT ─────── */}
             <main id="catalog" className="psj-container py-10">
@@ -95,7 +92,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                 <input
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    placeholder={showcase.searchByCode}
+                                    placeholder={searchT.byCode}
                                     className="bg-transparent text-sm outline-none flex-1"
                                     style={{ color: 'var(--psj-text-1)' }}
                                 />
@@ -112,15 +109,15 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                 options={industries}
                                 onChange={setActiveIndustry}
                                 icon={Building2}
-                                prefix={showcase.industryPrefix}
+                                prefix={filters.industryPrefix}
                             />
 
                             {/* Sort */}
                             <FilterDropdown
                                 value={sortBy}
-                                options={[showcase.sortByRelevant, showcase.sortByCode, showcase.sortByComplexity]}
+                                options={[filters.sortByRelevant, filters.sortByCode, filters.sortByComplexity]}
                                 onChange={setSortBy}
-                                prefix={showcase.sortPrefix}
+                                prefix={filters.sortPrefix}
                             />
                         </div>
 
@@ -151,7 +148,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
 
                         <div className="flex items-center justify-between">
                             <div className="text-[10px] uppercase tracking-[0.15em] font-bold text-(--psj-text-3)">
-                                {showcase.showingResults
+                                {results.showing
                                     .replace('{count}', filtered.length.toString())
                                     .replace('{total}', solutions.length.toString())}
                             </div>
@@ -165,7 +162,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                     className="text-[11px] uppercase tracking-widest font-bold underline"
                                     style={{ color: 'var(--psj-blue)' }}
                                 >
-                                    {showcase.clearFilters}
+                                    {results.clearFilters}
                                 </button>
                             )}
                         </div>
@@ -185,7 +182,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                 >
                                     <Search size={28} className="mx-auto mb-4" style={{ color: 'var(--psj-text-3)' }} />
                                     <p className="text-sm" style={{ color: 'var(--psj-text-2)' }}>
-                                        {showcase.noSolutions}
+                                        {results.noSolutions}
                                     </p>
                                     <button
                                         onClick={() => {
@@ -196,7 +193,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                         className="mt-4 text-sm font-bold"
                                         style={{ color: 'var(--psj-blue)' }}
                                     >
-                                        {showcase.resetFilters}
+                                        {results.resetFilters}
                                     </button>
                                 </motion.div>
                             ) : (
@@ -210,7 +207,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                             exit={{ opacity: 0 }}
                                             transition={{ duration: 0.3, delay: i * 0.04 }}
                                         >
-                                            <SolutionCard sol={sol} onSelect={setSelectedSolution} labels={showcase} />
+                                            <SolutionCard sol={sol} onSelect={setSelectedSolution} labels={card} />
                                         </motion.div>
                                     ))}
                                 </div>
@@ -222,11 +219,11 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
 
             {/* ─────── BOTTOM CTA ─────── */}
             <CtaBand
-                subtitle={showcase.ctaSubtitle}
-                title={showcase.ctaTitle}
-                description={showcase.ctaDesc}
-                primaryLink={{ href: '#', label: showcase.ctaPrimaryLabel }}
-                secondaryLink={{ href: '#', label: showcase.ctaSecondaryLabel }}
+                subtitle={cta.subtitle}
+                title={cta.title}
+                description={cta.desc}
+                primaryLink={{ href: '#', label: cta.primaryLabel }}
+                secondaryLink={{ href: '#', label: cta.secondaryLabel }}
             />
 
             {/* Layout provides footer */}
@@ -234,7 +231,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
             {/* ─────── DETAIL MODAL ─────── */}
             <AnimatePresence>
                 {selectedSolution && (
-                    <DetailModal sol={selectedSolution} onClose={() => setSelectedSolution(null)} labels={showcase} />
+                    <DetailModal sol={selectedSolution} onClose={() => setSelectedSolution(null)} labels={card} />
                 )}
             </AnimatePresence>
 
@@ -264,7 +261,7 @@ export default function CAEServices({ params }: { params: Promise<{ lang: string
                                 <button onClick={() => setMobileFiltersOpen(false)} className="mb-6">
                                     <X size={20} />
                                 </button>
-                                <h3 className="text-lg font-bold mb-4">{showcase.filterSolutions}</h3>
+                                <h3 className="text-lg font-bold mb-4">{filters.filterSolutions}</h3>
                                 {(Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>).map((cat) => (
                                     <button
                                         key={cat}
@@ -468,7 +465,7 @@ function SolutionCard({
 }: {
     sol: Solution;
     onSelect: (s: Solution) => void;
-    labels: Record<string, string>;
+    labels: TranslationDict['showcase']['card'];
 }) {
     const config = categoryConfig[sol.category];
     return (
@@ -559,7 +556,15 @@ function SolutionCard({
 }
 
 /* ─── Detail Modal ─── */
-function DetailModal({ sol, onClose, labels }: { sol: Solution; onClose: () => void; labels: Record<string, string> }) {
+function DetailModal({
+    sol,
+    onClose,
+    labels,
+}: {
+    sol: Solution;
+    onClose: () => void;
+    labels: TranslationDict['showcase']['card'];
+}) {
     const config = categoryConfig[sol.category];
     return (
         <>

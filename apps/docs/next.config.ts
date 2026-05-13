@@ -38,22 +38,6 @@ const config: NextConfig = {
             },
         ],
     },
-
-    async redirects() {
-        return [
-            {
-                source: '/:lang/docs',
-                destination: '/:lang',
-                permanent: true,
-            },
-
-            {
-                source: '/:lang/docs/:path*',
-                destination: '/:lang/:path*',
-                permanent: true,
-            },
-        ];
-    },
 };
 
 const withMDX = createMDX();

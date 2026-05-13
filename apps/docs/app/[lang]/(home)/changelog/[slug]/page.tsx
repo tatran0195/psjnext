@@ -72,13 +72,13 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
             {
                 '@type': 'ListItem',
                 position: 1,
-                name: t.home,
+                name: t.nav.home,
                 item: 'https://psjdoc.e-technostar.com',
             },
             {
                 '@type': 'ListItem',
                 position: 2,
-                name: t.changelog,
+                name: t.header.title,
                 item: `https://psjdoc.e-technostar.com/${lang}/changelog`,
             },
             {
@@ -115,7 +115,7 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
                                 style={{ color: 'var(--psj-blue)' }}
                             >
                                 <ArrowLeftIcon className="mr-2 h-4 w-4" />
-                                {t.backToChangelog}
+                                {t.nav.backToChangelog}
                             </Link>
                         </div>
 
@@ -185,13 +185,13 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
                                                 color: 'var(--psj-blue)',
                                             }}
                                         >
-                                            {t.changelogRelease}
+                                            {t.entry.releaseDetails}
                                         </div>
                                         <div
                                             className="text-5xl sm:text-7xl font-black tracking-tighter"
                                             style={{ color: 'var(--psj-text-1)' }}
                                         >
-                                            {entry.version || t.defaultUpdateTitle}
+                                            {entry.version || t.entry.defaultTitle}
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
                                         className="text-xs font-bold uppercase tracking-widest mb-4"
                                         style={{ color: 'var(--psj-blue)' }}
                                     >
-                                        {t.highlightUpdates}
+                                        {t.entry.highlights}
                                     </h3>
                                     <ul className="space-y-2 list-disc list-inside">
                                         {entry.highlights.map((h, i) => (

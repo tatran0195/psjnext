@@ -241,7 +241,6 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                         </>
                     ),
                 })}
-                <div className="border-t border-fd-border my-2" />
                 {viewport}
                 {renderFooter({
                     className: cn(

@@ -16,16 +16,8 @@ export const APP_VERSIONS = ['5.0.1', '5.1.0'];
 export const source = loader({
     source: docs.toFumadocsSource(),
     i18n,
-    baseUrl: '/',
-    plugins: [
-        iconsPlugin(),
-        // customIconsPlugin(),
-        codeTitlesPlugin(),
-        versionPlugin(),
-        statusBadgesPlugin(),
-        slugsPlugin(),
-        // pageTreeFoldersPlugin(),
-    ],
+    baseUrl: '/docs',
+    plugins: [iconsPlugin(), codeTitlesPlugin(), versionPlugin(), statusBadgesPlugin(), slugsPlugin()],
 });
 
 export type Page = InferPageType<typeof source>;
