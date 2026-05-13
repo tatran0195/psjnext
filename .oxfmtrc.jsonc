@@ -9,8 +9,8 @@
         "CHANGELOG.md",
         "pnpm-lock.yaml",
         ".github/**/*.md",
-
-        "packages/create-app/versions.json",
+        "*.md",
+        "*.mdx",
 
         "**/test/out/**/*",
         "**/test/fixtures/**/*.output.*",
@@ -19,14 +19,7 @@
         "out",
         ".content-collections",
 
-        "examples/obsidian/content/docs/vault/**/*",
-        "examples/obsidian/obsidian/Obsidian Vault",
-
         ".content-collections/**/*",
-
-        "packages/mdx-remote/test/fixtures/**/*.js",
-        "packages/mdx-remote/test/fixtures/**/*.json",
-        "packages/core/test/fixtures/page-trees/**/*.json",
 
         "routeTree.gen.ts",
     ],
@@ -68,10 +61,6 @@
             "rules": {
                 "react/no-unknown-property": "off",
             },
-        },
-        {
-            "files": ["*.md", "*.mdx"],
-            "tabWidth": 2,
         },
     ],
 }

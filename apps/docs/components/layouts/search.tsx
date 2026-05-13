@@ -21,7 +21,6 @@ import { useTreeContext } from 'fumadocs-ui/contexts/tree';
 import { ArrowRight } from 'lucide-react';
 
 import { ListMenu } from '@/components/ui/list-menu';
-import { useVersionContext } from '@/contexts/versions';
 import { useThrottledValue } from '@/hooks/use-throttle';
 import { compareSemver, matchesSearch } from '@/lib/search';
 
@@ -51,11 +50,11 @@ const BEHAVIORS = [
 
 export default function CustomSearchDialog(props: SharedProps) {
     const { locale } = useI18n();
-    const { versions, currentVersion, setCurrentVersion } = useVersionContext();
+    const [version, setVersion] = useState<string | undefined>();
     const [behavior, setBehavior] = useState<string | undefined>();
     const { search, setSearch, query } = useDocsSearch({
         type: 'fetch',
-        tag: currentVersion,
+        tag: version,
         locale,
     });
     const { full } = useTreeContext();
@@ -123,17 +122,6 @@ export default function CustomSearchDialog(props: SharedProps) {
             : null;
     }, [behavior, throttledSearch, query.data, pageTreeAction]);
 
-    const allTags = useMemo(() => {
-        return [
-            ...TAGS,
-            ...(versions || []).map((v) => ({
-                name: `v${v.value}`,
-                description: `Released on ${v.releasedAt ?? 'Unknown'}`,
-                value: v.value,
-            })),
-        ];
-    }, [versions]);
-
     return (
         <SearchDialog search={search} onSearchChange={setSearch} isLoading={query.isLoading} {...props}>
             <SearchDialogOverlay />
@@ -145,12 +133,7 @@ export default function CustomSearchDialog(props: SharedProps) {
                 </SearchDialogHeader>
                 <SearchDialogList items={searchData} />
                 <SearchDialogFooter className="flex flex-row flex-wrap gap-2 items-center">
-                    <ListMenu
-                        items={allTags}
-                        label="Version"
-                        selected={currentVersion}
-                        setSelected={setCurrentVersion}
-                    />
+                    <ListMenu items={TAGS} label="Version" selected={version} setSelected={setVersion} />
                     <ListMenu items={BEHAVIORS} label="Behavior" selected={behavior} setSelected={setBehavior} />
                 </SearchDialogFooter>
             </SearchDialogContent>
