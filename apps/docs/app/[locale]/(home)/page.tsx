@@ -87,9 +87,9 @@ export default async function Page() {
 
                             <FadeUp delay={80}>
                                 <h1 className="psj-h1 text-balance mb-6" style={{ color: 'var(--psj-text-1)' }}>
-                                    {t('hero.title.0')}
+                                    {t('hero.title0')}
                                     <br />
-                                    <span style={{ color: 'var(--psj-blue)' }}>{t('hero.title.1')}</span>
+                                    <span style={{ color: 'var(--psj-blue)' }}>{t('hero.title1')}</span>
                                 </h1>
                             </FadeUp>
 
@@ -189,9 +189,9 @@ export default async function Page() {
                                                 display: 'inline-block',
                                             }}
                                         />
-                                        {t('hero.code.statusBar.0')}
+                                        {t('hero.code.statusBar0')}
                                     </span>
-                                    <span>{t('hero.code.statusBar.1')}</span>
+                                    <span>{t('hero.code.statusBar1')}</span>
                                 </div>
                             </div>
                         </FadeUp>

@@ -5,12 +5,12 @@ import { notFound } from 'next/navigation';
 import Link from 'fumadocs-core/link';
 import { ArrowLeftIcon } from 'lucide-react';
 import Markdown from 'markdown-to-jsx';
+import { getTranslations } from 'next-intl/server';
 
 import { Grid } from '@/components/grid-pattern';
 import { getMDXComponents } from '@/components/mdx';
 import { i18n } from '@/lib/i18n';
 import { changelog } from '@/lib/source';
-import { getTranslations } from 'next-intl/server';
 
 export default async function ChangelogEntryPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
     const { slug, locale } = await params;
@@ -238,7 +238,11 @@ export async function generateStaticParams() {
     );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ slug: string; locale: string }>;
+}): Promise<Metadata> {
     const { slug, locale } = await params;
 
     const page = changelog.getPages(locale).find((p) => p.data.slug === slug || p.slugs[0] === slug);

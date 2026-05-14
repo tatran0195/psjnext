@@ -1,4 +1,7 @@
-import { Code, Database, Info, Settings2, Sparkles, Terminal, Wrench, Zap, icons } from 'lucide-react';
+// components/ui/badge.tsx
+'use client';
+
+import { Braces, Bug, Code2, Database, Sparkles, Tag, Wrench, Zap, type LucideIcon } from 'lucide-react';
 
 import { cn } from '@/lib/cn';
 
@@ -7,9 +10,8 @@ export type BadgeVariant = 'feature' | 'fix' | 'api' | 'utility' | 'macro' | 'da
 interface BadgeProps {
     label: string;
     variant?: BadgeVariant;
-    className?: string;
-    showIcon?: boolean;
     icon?: string;
+    className?: string;
 }
 
 const variants: Record<BadgeVariant, string> = {
@@ -23,27 +25,31 @@ const variants: Record<BadgeVariant, string> = {
     default: 'bg-gray-500/10    text-gray-600    border-gray-200    dark:text-gray-400    dark:border-gray-500/30',
 };
 
-const variantIcons: Record<BadgeVariant, React.ElementType> = {
-    feature: Sparkles,
-    fix: Wrench,
-    api: Code,
-    utility: Settings2,
-    macro: Terminal,
+const defaultIcons: Record<BadgeVariant, LucideIcon> = {
+    feature: Zap,
+    fix: Bug,
+    api: Code2,
+    utility: Wrench,
+    macro: Braces,
     data: Database,
-    highlight: Zap,
-    default: Info,
+    highlight: Sparkles,
+    default: Tag,
 };
 
-export function Badge({ label, variant = 'default', className, showIcon = true, icon }: BadgeProps) {
-    let Icon: React.ElementType | null = null;
-    console.log({ label, icon });
-    if (showIcon) {
-        if (icon && icon in icons) {
-            Icon = icons[icon as keyof typeof icons] as React.ElementType;
-        } else {
-            Icon = variantIcons[variant];
-        }
-    }
+// Lucide icon map for custom icon override via string
+const iconMap: Record<string, LucideIcon> = {
+    zap: Zap,
+    bug: Bug,
+    code2: Code2,
+    wrench: Wrench,
+    braces: Braces,
+    database: Database,
+    sparkles: Sparkles,
+    tag: Tag,
+};
+
+export function Badge({ label, variant = 'default', icon, className }: BadgeProps) {
+    const IconComponent = icon ? (iconMap[icon] ?? defaultIcons[variant]) : defaultIcons[variant];
 
     return (
         <span
@@ -53,7 +59,7 @@ export function Badge({ label, variant = 'default', className, showIcon = true, 
                 className,
             )}
         >
-            {Icon && <Icon className="w-3 h-3" />}
+            <IconComponent className="size-2.5 shrink-0" aria-hidden />
             {label}
         </span>
     );

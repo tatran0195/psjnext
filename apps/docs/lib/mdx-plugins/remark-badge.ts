@@ -1,10 +1,11 @@
 import { visit } from 'unist-util-visit';
 
-// lib/remark-badge.ts
 import type { Root } from 'mdast';
 import type { Plugin } from 'unified';
 
 export type BadgeVariant = 'feature' | 'fix' | 'api' | 'utility' | 'macro' | 'data' | 'highlight' | 'default';
+
+export type BadgeIcon = 'zap' | 'bug' | 'code2' | 'wrench' | 'braces' | 'database' | 'sparkles' | 'tag';
 
 const SHORTHAND_VARIANTS = [
     'feature',
@@ -16,22 +17,7 @@ const SHORTHAND_VARIANTS = [
     'highlight',
 ] as const satisfies ReadonlyArray<BadgeVariant>;
 
-const SHORTHAND_PATTERN = SHORTHAND_VARIANTS.join('|');
-
-/**
- * Matches:
- *   ::badge[Label](variant=feature)   — full syntax with variant
- *   ::badge[Label]                    — full syntax, default variant
- *   ::feature[Label]                  — shorthand
- */
-const BADGE_REGEX = new RegExp(
-    `::(?:badge\\[([^\\]]+)\\](?:\\(variant=(${SHORTHAND_PATTERN}|default)\\))?|(${SHORTHAND_PATTERN})\\[([^\\]]+)\\])`,
-    'g',
-);
-
-// -----------------------------------------------------------------
 // AST node types
-// -----------------------------------------------------------------
 interface MdxJsxAttribute {
     type: 'mdxJsxAttribute';
     name: string;
@@ -46,144 +32,74 @@ interface MdxJsxTextElement {
     data: { _mdxExplicitJsx: true };
 }
 
-function createBadgeNode(label: string, variant: BadgeVariant = 'default'): MdxJsxTextElement {
+interface TextDirectiveNode {
+    type: 'textDirective';
+    name: string;
+    // remark-directive stores parsed attributes here
+    attributes?: Record<string, string>;
+    children: Array<{ type: string; value?: string }>;
+}
+
+function createBadgeNode(label: string, variant: BadgeVariant = 'default', icon?: string): MdxJsxTextElement {
+    const attributes: MdxJsxAttribute[] = [
+        {
+            type: 'mdxJsxAttribute',
+            name: 'variant',
+            value: variant,
+        },
+        {
+            type: 'mdxJsxAttribute',
+            name: 'label',
+            value: label,
+        },
+    ];
+
+    if (icon) {
+        attributes.push({
+            type: 'mdxJsxAttribute',
+            name: 'icon',
+            value: icon,
+        });
+    }
+
     return {
         type: 'mdxJsxTextElement',
         name: 'Badge',
-        attributes: [
-            {
-                type: 'mdxJsxAttribute',
-                name: 'variant',
-                value: variant,
-            },
-            {
-                type: 'mdxJsxAttribute',
-                name: 'label',
-                value: label,
-            },
-        ],
+        attributes,
         children: [],
         data: { _mdxExplicitJsx: true },
     };
 }
 
 /**
- * Remark plugin to convert badge directives to Badge components.
+ * Remark plugin to convert text directives into Badge components.
+ * Supports both full syntax and shorthand variants.
  */
 export const remarkBadge: Plugin<[], Root> = () => {
     return (tree) => {
-        visit(tree, (node, index, parent) => {
+        visit(tree, 'textDirective', (node, index, parent) => {
             if (!parent || index === undefined) return;
-            const n = node as unknown as {
-                type: string;
-                name?: string;
-                children?: Array<{ type: string; value?: string }>;
-                attributes?: Record<string, string>;
-            };
-            if (n.type === 'leafDirective' || n.type === 'textDirective') {
-                const { name, children, attributes } = n;
-                if (
-                    name === 'badge' ||
-                    (typeof name === 'string' && (SHORTHAND_VARIANTS as readonly string[]).includes(name))
-                ) {
-                    let text = '';
-                    if (children && children[0] && children[0].type === 'text' && children[0].value) {
-                        text = children[0].value;
-                    }
-                    const variant = name === 'badge' ? (attributes?.variant ?? 'default') : name;
-                    (parent.children as unknown[])[index] = createBadgeNode(text, variant as BadgeVariant);
-                }
-            }
-        });
 
-        visit(tree, 'paragraph', (paragraph) => {
-            const children = paragraph.children as unknown as Array<{
-                type: string;
-                value?: string;
-                url?: string;
-                children?: Array<{ type: string; value?: string }>;
-            }>;
-            let i = 0;
-            while (i < children.length) {
-                const node = children[i];
+            const directive = node as unknown as TextDirectiveNode;
+            const { name, attributes, children } = directive;
 
-                if (node.type === 'text') {
-                    const value = node.value as string;
+            const isShorthand = (SHORTHAND_VARIANTS as readonly string[]).includes(name);
+            const isBadge = name === 'badge';
 
-                    if (value.endsWith('::badge')) {
-                        const nextNode = children[i + 1];
-                        if (nextNode && nextNode.type === 'link') {
-                            const url = nextNode.url as string;
-                            if (url.startsWith('variant=') || url === 'default') {
-                                const variant = url.replace('variant=', '');
-                                let label = '';
-                                if (nextNode.children && nextNode.children[0] && nextNode.children[0].type === 'text') {
-                                    label = nextNode.children[0].value ?? '';
-                                }
+            if (!isBadge && !isShorthand) return;
 
-                                if (value === '::badge') {
-                                    children.splice(
-                                        i,
-                                        2,
-                                        createBadgeNode(
-                                            label,
-                                            variant as BadgeVariant,
-                                        ) as unknown as (typeof children)[0],
-                                    );
-                                } else {
-                                    // Slicing out `::badge` from the text
-                                    node.value = value.slice(0, -7);
-                                    children.splice(
-                                        i + 1,
-                                        1,
-                                        createBadgeNode(
-                                            label,
-                                            variant as BadgeVariant,
-                                        ) as unknown as (typeof children)[0],
-                                    );
-                                }
-                                i++; // Move past the new badge node
-                                continue;
-                            }
-                        }
-                    }
+            // Extract label from directive children text nodes
+            const label = children
+                .filter((c) => c.type === 'text')
+                .map((c) => c.value ?? '')
+                .join('');
 
-                    // For all other cases, try our regex
-                    // Reset lastIndex
-                    BADGE_REGEX.lastIndex = 0;
-                    if (BADGE_REGEX.test(value)) {
-                        BADGE_REGEX.lastIndex = 0;
-                        const newNodes = [];
-                        let lastIndex = 0;
-                        let match: RegExpExecArray | null;
+            // attributes is a flat key-value object from remark-directive
+            const variant = isBadge ? ((attributes?.variant ?? 'default') as BadgeVariant) : (name as BadgeVariant);
 
-                        while ((match = BADGE_REGEX.exec(value)) !== null) {
-                            const [fullMatch, badgeLabel, badgeVariant, shorthandVariant, shorthandLabel] = match;
-                            const matchStart = match.index;
+            const icon = attributes?.icon as BadgeIcon | undefined;
 
-                            if (matchStart > lastIndex) {
-                                newNodes.push({ type: 'text', value: value.slice(lastIndex, matchStart) });
-                            }
-
-                            const label = badgeLabel ?? shorthandLabel ?? '';
-                            const variant = (badgeVariant ?? shorthandVariant ?? 'default') as BadgeVariant;
-
-                            newNodes.push(createBadgeNode(label, variant));
-                            lastIndex = matchStart + fullMatch.length;
-                        }
-
-                        if (lastIndex < value.length) {
-                            newNodes.push({ type: 'text', value: value.slice(lastIndex) });
-                        }
-
-                        children.splice(i, 1, ...(newNodes as unknown as typeof children));
-                        i += newNodes.length; // skip the newly inserted nodes
-                        continue;
-                    }
-                }
-
-                i++;
-            }
+            (parent.children as unknown[])[index] = createBadgeNode(label, variant, icon);
         });
     };
 };
