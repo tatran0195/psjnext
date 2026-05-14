@@ -1,8 +1,9 @@
 ---
-title: 'ACModeling.ACBoundary.FirstMethod() '
-description: 'Unknown Description'
-since: '5.1.0'
-ribbon: 'ACModeling > ACBoundary > FirstMethod'
+title: "ACModeling.ACBoundary.FirstMethod()"
+description: "Unknown Description"
+version _introduced: "5.0.1"
+available _versions: "all"
+ribbon: "ACModeling > ACBoundary > FirstMethod"
 ---
 
 ## Description
@@ -15,26 +16,22 @@ Unknown Description
 ACModeling.ACBoundary.FirstMethod(...)
 ```
 
-## Parameters
+## Inputs
 
-<!-- @since:5.0.1 @required @type:PartCollection -->
+<!-- @since:5.0.1 @type:List[Cursor] @required -->
+### `crlParts`
 
-### crlParts
+- The part.
 
-The part.
+<!-- @since:5.0.1 @type:Boolean @required -->
+### `bIsMergePart`
 
-<!-- @since:5.0.1 @required @type:list[Cursor] -->
-<!-- @removed:5.2.0 -->
+- The is merge part.
 
-### bIsMergePart
+<!-- @since:5.0.1 @type:Boolean @required -->
+### `bIsRenumber`
 
-The is merge part.
-
-<!-- @since:5.1.0 @required -->
-
-### bIsRenumber
-
-The is renumber.
+- The is renumber.
 
 ## Return Code
 

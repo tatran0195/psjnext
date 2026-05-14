@@ -1,8 +1,9 @@
 ---
-title: 'Analysis.AbaqusStep.CoupledTDStep()'
-description: 'Create Abaqus step for Coupled Temperature-Displacement analysis'
-since: '5.0.1'
-ribbon: 'Analysis > AbaqusStep > CoupledTDStep'
+title: "Analysis.AbaqusStep.CoupledTDStep()"
+description: "Create Abaqus step for Coupled Temperature-Displacement analysis"
+version _introduced: "5.0.1"
+available _versions: "all"
+ribbon: "Analysis > AbaqusStep > CoupledTDStep"
 ---
 
 ## Description
@@ -17,119 +18,148 @@ Analysis.AbaqusStep.CoupledTDStep(...)
 
 ## Inputs
 
-### `strName` @type(String) @required
+<!-- @since:5.0.1 @type:String @required -->
+### `strName`
 
 - The step name of Coupled Temperature-Displacement analysis.
 
-### `strDesp` @type(String) @default("")
+<!-- @since:5.0.1 @type:String @optional @default:"" -->
+### `strDesp`
 
 - The step description of Coupled Temperature-Displacement analysis.
 
-### `iEnableAutomatic` @type(Integer) @default(0)
+<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
+### `iEnableAutomatic`
 
 - The increment method.
 
-### `iMaxInc` @type(Integer) @default(100)
+<!-- @since:5.0.1 @type:Integer @optional @default:100 -->
+### `iMaxInc`
 
 - The maximum number of increments.
 
-### `dInitSize` @type(Double) @default(1.0)
+<!-- @since:5.0.1 @type:Double @optional @default:1.0 -->
+### `dInitSize`
 
 - The initial increment size.
 
-### `dMinSize` @type(Double) @default(1.0e-5)
+<!-- @since:5.0.1 @type:Double @optional @default:1.0e-5 -->
+### `dMinSize`
 
 - The minimum increment size.
 
-### `dMaxSize` @type(Double) @default(1.0)
+<!-- @since:5.0.1 @type:Double @optional @default:1.0 -->
+### `dMaxSize`
 
 - The maximum increment size.
 
-### `abaqusPair1` @type(ABAQUS_PAIR) @default(ABAQUS_PAIR)
+<!-- @since:5.0.1 @type:ABAQUS _PAIR @optional @default:ABAQUS _PAIR -->
+### `abaqusPair1`
 
 - The maximum value of the allowable temperature change.
 
-### `abaqusPair2` @type(ABAQUS_PAIR) @default(ABAQUS_PAIR)
+<!-- @since:5.0.1 @type:ABAQUS _PAIR @optional @default:ABAQUS _PAIR -->
+### `abaqusPair2`
 
 - The creep/swelling/viscoelastic strain error tolerance value.
 
-### `iCSVIntegration` @type(Integer) @default(0)
+<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
+### `iCSVIntegration`
 
 - The creep/swelling/viscoelastic integration method.
 
-### `iMethod` @type(Integer) @default(0)
+<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
+### `iMethod`
 
 - The equation solver method.
 
-### `iMatrixStorage` @type(Integer) @default(0)
+<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
+### `iMatrixStorage`
 
 - The equation solver matrix storage setting.
 
-### `iSolutionTech` @type(Integer) @default(0)
+<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
+### `iSolutionTech`
 
 - The solution technique.
 
-### `iAllowedIters` @type(Integer) @default(8)
+<!-- @since:5.0.1 @type:Integer @optional @default:8 -->
+### `iAllowedIters`
 
 - The number of iterations allowed before the kernel matrix is reformed.
 
-### `dAdjustFactor` @type(Double) @default(1.0)
+<!-- @since:5.0.1 @type:Double @optional @default:1.0 -->
+### `dAdjustFactor`
 
 - The adjustment factor for the number of solutions in any iteration.
 
-### `iMaxContactIter` @type(Integer) @default(30)
+<!-- @since:5.0.1 @type:Integer @optional @default:30 -->
+### `iMaxContactIter`
 
 - The maximum number of contact iterations.
 
-### `iType` @type(Integer) @default(0)
+<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
+### `iType`
 
 - The automatic static stabilization.
 
-### `iEnableUseAdaptive` @type(Integer) @default(1)
+<!-- @since:5.0.1 @type:Integer @optional @default:1 -->
+### `iEnableUseAdaptive`
 
 - Whether or not use adaptive stabilization with max. Ratio of stabilization to strain energy.
 
-### `dDampingFactor` @type(Double) @default(0.0002)
+<!-- @since:5.0.1 @type:Double @optional @default:0.0002 -->
+### `dDampingFactor`
 
 - The damping factor for automatic static stabilization.
 
-### `dMaxRationofStrainEnergy` @type(Double) @default(0.05)
+<!-- @since:5.0.1 @type:Double @optional @default:0.05 -->
+### `dMaxRationofStrainEnergy`
 
 - The maximum ratio of stabilization to strain energy for automatic static stabilization.
 
-### `iEnableNlgeom` @type(Integer) @default(0)
+<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
+### `iEnableNlgeom`
 
 - Whether or not to consider geometric nonlinear (large deformation) analysis.
 
-### `dTimePeriod` @type(Double) @default(1.0)
+<!-- @since:5.0.1 @type:Double @optional @default:1.0 -->
+### `dTimePeriod`
 
 - The analysis time.
 
-### `iTransient` @type(Integer) @default(1)
+<!-- @since:5.0.1 @type:Integer @optional @default:1 -->
+### `iTransient`
 
 - The analysis response type.
 
-### `iConvertDscntIter` @type(Integer) @default(0)
+<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
+### `iConvertDscntIter`
 
 - The conversion of severe discontinuity iterations.
 
-### `iRamp` @type(Integer) @default(1)
+<!-- @since:5.0.1 @type:Integer @optional @default:1 -->
+### `iRamp`
 
 - The number of linear change over step.
 
-### `iExtrapolateMethod` @type(Integer) @default(0)
+<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
+### `iExtrapolateMethod`
 
 - The Extrapolate previous state at start of each increment.
 
-### `iEnableIncludeCSV` @type(Integer) @default(0)
+<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
+### `iEnableIncludeCSV`
 
 - The inclusion of creep/swelling/viscoelatic behavior.
 
-### `listAbaqusOutputRequest` @type(ABAQUS_OUTPUT_REQUEST) @default(ABAQUS_OUTPUT_REQUEST)
+<!-- @since:5.0.1 @type:ABAQUS _OUTPUT _REQUEST @optional @default:ABAQUS _OUTPUT _REQUEST -->
+### `listAbaqusOutputRequest`
 
-- List specifying the list of Abaqus output request.
+- The list specifying the list of Abaqus output request.
 
-### `crEdit` @type(Cursor) @default(None)
+<!-- @since:5.0.1 @type:Cursor @optional @default:None -->
+### `crEdit`
 
 - The editing Abaqus Coupled Temperature-Displacement step.
 
@@ -145,40 +175,40 @@ import re
 
 Geometry.Part.Cube(iPartColor=5619133)
 Meshing.SolidMeshing(crlParts=[Part(1)],
-                     bTet10=True,
-                     dGradingFactor=1.05,
-                     dStretchLimit=0.1,
-                     iSpeedVsQual=1,
-                     iRegion=1,
-                     bSafeMode=False,
-                     iParallel=12,
-                     bInternalMeshOnly=False,
+                     bTet10=True, 
+                     dGradingFactor=1.05, 
+                     dStretchLimit=0.1, 
+                     iSpeedVsQual=1, 
+                     iRegion=1, 
+                     bSafeMode=False, 
+                     iParallel=12, 
+                     bInternalMeshOnly=False, 
                      iPartColor=65280)
+                     
+Properties.Material.Add("Concrete", 
+                        [Density([(DENSITY, 2.3e-09)]), 
+                        Elastic([(YOUNGS _MODULUS, 30000.0), 
+                                 (POISSONS _RATIO, 0.18)])])
 
-Properties.Material.Add("Concrete",
-                        [Density([(DENSITY, 2.3e-09)]),
-                        Elastic([(YOUNGS_MODULUS, 30000.0),
-                                 (POISSONS_RATIO, 0.18)])])
-
-Properties.Solid(crlTargets=[Part(1)],
-                 strName="Solid Property 1",
-                 iPropertyColor=12275404,
-                 crMaterial=Material(1),
-                 iCordM=-2,
-                 dDynaRemeshVal1=DFLT_DBL,
-                 dDynaRemeshVal2=DFLT_DBL,
-                 dDispHG=DFLT_DBL,
+Properties.Solid(crlTargets=[Part(1)], 
+                 strName="Solid Property 1", 
+                 iPropertyColor=12275404, 
+                 crMaterial=Material(1), 
+                 iCordM=-2, 
+                 dDynaRemeshVal1=DFLT _DBL,
+                 dDynaRemeshVal2=DFLT _DBL, 
+                 dDispHG=DFLT _DBL, 
                  iFLG=-1)
 
-creating_status = Analysis.AbaqusStep.CoupledTDStep(strName="Step1",
-                                                    strDesp="Test",
-                                                    abaqusPair1=ABAQUS_PAIR(dlTList=[0.0]),
-                                                    abaqusPair2=ABAQUS_PAIR(dlTList=[0.0]),
-                                                    iMatrixStorage=1,
-                                                    iType=2,
-                                                    iEnableNlgeom=1,
-                                                    iTransient=0,
+creating _status = Analysis.AbaqusStep.CoupledTDStep(strName="Step1", 
+                                                    strDesp="Test", 
+                                                    abaqusPair1=ABAQUS _PAIR(dlTList=[0.0]), 
+                                                    abaqusPair2=ABAQUS _PAIR(dlTList=[0.0]), 
+                                                    iMatrixStorage=1, 
+                                                    iType=2, 
+                                                    iEnableNlgeom=1, 
+                                                    iTransient=0, 
                                                     listAbaqusOutputRequest=[])
 
-JPT.Debugger(creating_status)
+JPT.Debugger(creating _status)
 ```

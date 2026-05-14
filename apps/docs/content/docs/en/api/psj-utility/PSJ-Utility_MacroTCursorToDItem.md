@@ -1,0 +1,39 @@
+---
+title: "JPT.MacroTCursorToDItem()"
+description: "Convert cursor (Macro string type) to a DItem object"
+version _introduced: "5.0.1"
+available _versions: "all"
+---
+
+## Description
+
+Convert cursor (Macro string type) to a _[DItem](../data-type/psj-utility/pre-utility/built-in-types/DItem)_ object.
+
+## Syntax
+
+```psj
+JPT.MacroTCursorToDItem(cursor)
+```
+
+## Inputs
+
+<!-- @since:5.0.1 @type:String @required -->
+### `cursor`
+
+- The cursor (Macro string type).
+
+## Return Code
+
+A _[DItem](../data-type/psj-utility/pre-utility/built-in-types/DItem)_ object.
+
+## Sample Code
+
+```psj {6}
+# Prepare model
+Geometry.Part.Cube()
+JPT.ViewFitToModel()
+
+# Convert to DItem and get all the information of the created Cube _1
+dItem = JPT.Debugger(JPT.MacroTCursorToDItem("3:1"))
+JPT.Debugger(dItem)
+```

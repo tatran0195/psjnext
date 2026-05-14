@@ -1,0 +1,41 @@
+---
+title: "Meshing.LocalSettings.BoltEdge()"
+description: "Set the mesh setting for bolt edges (Define the settings before surface mesh creation)"
+version _introduced: "5.1.0"
+available _versions: "all"
+ribbon: "Meshing > LocalSettings > BoltEdge"
+macro _link: ""
+---
+
+## Description
+
+Set the mesh setting for bolt edges (Define the settings before surface mesh creation)
+
+## Syntax
+
+```psj
+Meshing.LocalSettings.BoltEdge(...)
+```
+
+## Inputs
+
+<!-- @since:5.1.0 @type:Integer @optional @default:0 -->
+### `iCircleDivision`
+
+- The number of division in circumferential direction.
+
+<!-- @since:5.1.0 @type:List[Cursor] @optional @default:[] -->
+### `crlTargets`
+
+- The target Edges of the local mesh setting.
+
+## Return Code
+
+A _Cursor_ specifying the created local mesh setting if success, or None if fail.
+
+## Sample Code
+
+```psj {2}
+Geometry.Part.Cylinder()
+Meshing.LocalSettings.BoltEdge(iCircleDivision=8, crlTargets=[Edge(2, 1)])
+```

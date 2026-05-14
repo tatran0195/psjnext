@@ -1,0 +1,60 @@
+---
+title: "dlg.get _table _sel _range()"
+description: "Get the information and attributes of the selected ranges (multi cells)"
+version _introduced: "5.0.1"
+available _versions: "all"
+---
+
+## Description
+
+Get the information and attributes of the selected ranges (multi cells).
+
+## Syntax
+
+```psj
+dlg.get _table _sel _range(...)
+```
+
+## Inputs
+
+<!-- @since:5.0.1 @type:String @required -->
+### `name`
+
+- The name of Table.
+
+## Return Code
+
+- A _[TableCellRangeVector](../data-type/psj-gui/TableCellRangeVector)_ object or _List of [TableCellRange](../data-type/psj-gui/TableCellRange)_ specifying the methods of ranges.
+
+## Sample Code
+
+```psj {4}
+from pyjdg import *
+
+def on _context _click(dlg,name,menu):
+    rangevector=dlg.get _table _sel _range(name="Table1")
+    for i in range(rangevector.size()):
+        print("The range number {} has information".format(i+1))
+        print("Range's position (left) = "+str(rangevector[0].left))
+        print("Range's position (top) = "+str(rangevector[0].top))
+        print("Range's position (right) = "+str(rangevector[0].right))
+        print("Range's position (bottom) = "+str(rangevector[0].bottom))
+        print("---------------------------")
+
+def main():
+    dlg=JDGCreator(title="Dialog",resizable=True,validation=True)
+    dlg.add _table(name="Table1",rows=16,
+        columns=["Heading1","Heading2","Heading3","Heading4","Heading5"],
+        layout="Window",width=550,height=300)
+    dlg.add _hlayout(name="footer",layout="Window")
+    dlg.add _space(orientation="horizontal",layout="footer")
+    dlg.add _button(name="ButtonOk",text="Ok",layout="footer")
+    dlg.add _button(name="ButtonCancel",text="Cancel",layout="footer")
+    dlg.add _space(orientation="horizontal",layout="footer")
+    dlg.add _table _right _menu(name="Table1",menus=["Check cell info"])
+    dlg.generate _window()
+    dlg.on _table _right _menu(name="Table1",callfunc=on _context _click)
+
+if __name__=='__main__':
+    main()
+```

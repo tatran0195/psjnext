@@ -1,9 +1,9 @@
 ---
-title: 'ACModeling.CloseHoleAuto()'
-description: 'ACModeling CloseHoleAuto'
-introduced: '5.0.1'
-removed: '5.2.0'
-ribbon: 'ACModeling > CloseHoleAuto'
+title: "ACModeling.CloseHoleAuto()"
+description: "ACModeling CloseHoleAuto"
+version _introduced: "5.0.1"
+available _versions: "all"
+ribbon: "ACModeling > CloseHoleAuto"
 ---
 
 ## Description
@@ -18,7 +18,8 @@ ACModeling.CloseHoleAuto(...)
 
 ## Inputs
 
-### `crlClosedHoleParts` @required @since:5.0.1 @removed:5.2.0
+<!-- @since:5.0.1 @type:List[Cursor] @required -->
+### `crlClosedHoleParts`
 
 - The closed hole parts.
 

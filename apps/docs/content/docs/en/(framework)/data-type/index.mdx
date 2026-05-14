@@ -1,0 +1,211 @@
+---
+title: Data Types
+description: All data types used in PSJ.
+---
+
+
+PSJ has 4 data types:
+
+- Python standard built-in types
+- PSJ-Command types
+- PSJ-Utility types
+- PSJ-GUI types
+
+<TreeChart chartPath="content/data-type-chart.yaml" />
+
+```mermaid
+flowchart LR
+
+    %% Root
+    root[PSJ DATA TYPE]
+
+    %% Level 2 Main Categories
+    cmd[PSJ-Command type]
+    util[PSJ-Utility type]
+    gui[PSJ-GUI type]
+
+    %% Level 3 Sub Categories
+    preUtil[Pre-Utility type]
+    postUtil[Post-Utility type]
+
+    %% Level 4 Green category nodes
+    cmd_builtin[Built-in type]
+    cmd_enum[Enumeration type]
+    pre_builtin[Built-in type]
+    pre_enum[Enumeration type]
+    post_builtin[Built-in type]
+    post_enum[Enumeration type]
+    gui_builtin[Built-in type]
+
+
+    %% ===================== HIERARCHY CONNECTIONS =====================
+    root --> cmd
+    root --> util
+    root --> gui
+
+    %% PSJ Command Branch
+    cmd --> cmd_builtin
+    cmd --> cmd_enum
+    cmd_builtin --> py_std[Python standard<br/>built-in type]
+    cmd_builtin --> jup_adv[Jupiter advanced<br/>built-in type]
+    cmd_enum --> item[Item type]
+    cmd_enum --> elem[Element type]
+    cmd_enum --> mesh[Data structure of<br/>mesh and analysis]
+
+    %% Pre-Utility Branch
+    util --> preUtil
+    util --> postUtil
+    preUtil --> pre_builtin
+    preUtil --> pre_enum
+    pre_builtin --> pretype[Pre type]
+    pre_enum --> unit[Unit]
+    pre_enum --> pick[Associated pick]
+    pre_enum --> path[Path]
+    pre_enum --> table[Table]
+    pre_enum --> bool[Boolean]
+    pre_enum --> msgbox[Message box]
+    pre_enum --> select[Select method]
+
+    %% Post-Utility Branch
+    postUtil --> post_builtin
+    postUtil --> post_enum
+    post_builtin --> posttype[Post type]
+    post_builtin --> post_opt[Post data option]
+    post_builtin --> post_step[Post time step]
+
+    post_enum --> job[Post job]
+    post_enum --> analysis[Post analysis]
+    post_enum --> range[Post data range]
+    post_enum --> location[Post data location]
+    post_enum --> convert[Post data conversion]
+    post_enum --> continuous[Post data continuous]
+    post_enum --> coord[Post data coordinate]
+    post_enum --> d1[Post data 1D]
+    post_enum --> d2[Post data 2D]
+    post_enum --> complex[Post data complex]
+
+    %% GUI Branch
+    gui --> gui_builtin
+    gui_builtin --> guiobj[GUI object]
+
+
+    %% ===================== EXACT COLOR MATCH =====================
+    classDef rootNode fill:#b3d0ed,stroke:#4477aa,stroke-width:3px,font-weight:bold
+    classDef level2 fill:#f7c9a9,stroke:#b85000,stroke-width:2px
+    classDef level3 fill:#ffdd88,stroke:#b09000,stroke-width:2px
+    classDef category fill:#b9d9a3,stroke:#508030,stroke-width:2px
+    classDef leaf fill:#f9adff,stroke:#ff22aa,stroke-width:2px
+
+    class root rootNode
+    class cmd,util,gui level2
+    class preUtil,postUtil level3
+    class cmd_builtin,cmd_enum,pre_builtin,pre_enum,post_builtin,post_enum,gui_builtin category
+    class py_std,jup_adv,item,elem,mesh,pretype,unit,pick,path,table,bool,msgbox,select,posttype,post_opt,post_step,job,analysis,range,location,convert,continuous,coord,d1,d2,complex,guiobj leaf
+```
+
+Below session will briefly introduce their structures and usages.
+
+## PSJ-Command type
+
+Data types used by PSJ-Command functions, including:
+
+### Built-in type
+
+There are 2 built-in types:
+
+#### 1. Python Standard built-in type
+
+The principal built-in types are numerics, sequences, mappings, classes, instances and exceptions. For more information,
+please visit [Python official document](https://docs.python.org/3/library/stdtypes.html)
+
+#### 2. Jupiter advanced built-in type
+
+Data types used in all PSJ-Commands functions, including: `cursor`, `position`, `vector`, `bool`, `int list`,
+`double list`, `string list`, `List of Cursor`, `List of Cursor list`, `position list`, `vector list`, `bool list`,
+`cursor pair`, `cursor pair list`, `TSheetd`
+
+You can see the [detailed information here](./data-type/psj-command/built-in-types).
+
+### Enumerations type
+
+This includes enumerations used for:
+
+- [Representing DItem type](./data-type/psj-command/DItem-types)
+- [Representing element type](./data-type/psj-command/element-types)
+- [Representing data structure of mesh and analysis](./data-type/psj-command/parameter-types/ABAQUS_LBC_STEP_INFO)
+
+## PSJ-Utility type
+
+Data type used by PSJ-Utility functions, including Pre-Utility and Post-Utility:
+
+### Pre-Utility
+
+Data type used for preprocessing workflow, including:
+
+#### Built-in type
+
+Data structure used mainly for storing model database at preprocessing workflow, including: `BodyVector`,
+`ConnectVector`, `CoordVector`, `DBody`, `DConnect`, `DCoord`, `DEdge`, `DElem`, `DFace`, `DGroup`, `DItem`,
+`DItemPair`, `DItemPairVector`, `DItemVector`, `DLoadBC`, `DSolverJob`, `DNode`, `Document`, `DoubleVector`,
+`EdgeVector`, `ElemVector`, `FaceVector`, `GroupVector`, `LoadBCVector`, `SolverJobVector`, `NodeVector`,
+`StringVector`, `TVector3d`, `VersionInfo`
+
+You can see the [full list here](./data-type/psj-utility/pre-utility/built-in-types/DBody).
+
+#### Enumerations type
+
+This includes data structure used for:
+
+- [Working with unit](./data-type/psj-utility/pre-utility/enumeration-types/unit-types)
+- [Representing associated pick](./data-type/psj-utility/pre-utility/enumeration-types/associate-types)
+- [Representing full link to the specified path](./data-type/psj-utility/pre-utility/enumeration-types/path-types)
+- [Representing table](./data-type/psj-utility/pre-utility/enumeration-types/dtable-types)
+- [Representing boolean](./data-type/psj-utility/pre-utility/enumeration-types/bool-types)
+- [Representing message box type](./data-type/psj-utility/pre-utility/enumeration-types/msgbox-types)
+- [Representing message box option type](./data-type/psj-utility/pre-utility/enumeration-types/msgbox-option-types)
+- [Representing select method](./data-type/psj-utility/pre-utility/enumeration-types/select-method-types)
+
+### Post-Utility
+
+Data type used for postprocessing workflow, including:
+
+#### Built-in type
+
+Data structure used mainly for storing model database at postprocessing workflow, including: `DPostElem`, `DPostNode`,
+`Post data option` and `Post time step`.
+
+You can see the [full list here](./data-type/psj-utility/post-utility/post-built-in-types/DPostElem).
+
+#### Enumerations type
+
+This includes data structure used for:
+
+- [Post job type](./data-type/psj-utility/post-utility/enumeration-types/post-job-types)
+- [Post analysis type](./data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)
+- [Post data range types](./data-type/psj-utility/post-utility/enumeration-types/post-data-range-types)
+- [Post data location type](./data-type/psj-utility/post-utility/enumeration-types/post-result-data-loc-types)
+- [Post data conversion type](./data-type/psj-utility/post-utility/enumeration-types/post-result-data-cnv-types)
+- [Post data continuous type](./data-type/psj-utility/post-utility/enumeration-types/post-result-data-cont-types)
+- [Post data coordinate](./data-type/psj-utility/post-utility/enumeration-types/post-result-data-coord-types)
+- [Post data 1D type](./data-type/psj-utility/post-utility/enumeration-types/post-result-data-load1d-types)
+- [Post data 2D type](./data-type/psj-utility/post-utility/enumeration-types/post-result-data-load2d-types)
+- [Post data complex type](./data-type/psj-utility/post-utility/enumeration-types/post-result-data-complex-types)
+
+## PSJ-GUI type
+
+Data types used by PSJ-GUI functions, including:
+
+### Built-in type
+
+Data structure used mainly for working with Jupiter GUI, including: `TableCellID`, `TableCellVector`, `TableCellRange`,
+`TableCellRangeVector`, `TableColumnInfo`, `TableColumnInfoVector`, `PSJFont`, `PSJMessageBox`.
+
+You can see the [full list here](./data-type/psj-gui/TableCellID).
+
+### Enumerations type
+
+This includes data structure used for `PSJMessageBox`:
+
+- [MessageBox Icon Types](./data-type/psj-gui/psj-message-box/msgbox-icon-types)
+- [MessageBox Button Types](./data-type/psj-gui/psj-message-box/msgbox-button-types)
+- [MessageBox Position Types](./data-type/psj-gui/psj-message-box/msgbox-position-types)

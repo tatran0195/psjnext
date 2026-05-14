@@ -11,6 +11,7 @@
         "install-libraries",
         "---Core Components---",
         "...core",
+        "data-type",
         "---Extensions---",
         "...extensions",
         "---References---",

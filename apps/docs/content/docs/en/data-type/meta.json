@@ -1,8 +1,0 @@
-{
-    "$schema": "..\\..\\..\\..\\..\\.source\\json-schema\\docs.meta.json",
-    "title": "Data Type",
-    "description": "Data Type",
-    "icon": "BookType",
-    "root": true,
-    "group": true
-}
