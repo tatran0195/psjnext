@@ -27,10 +27,10 @@ A data type uses to control parameters of Nastran Freq Timestep
 ### `iDampingType`
 
 - An _Integer_ specifying the Modal Damping Table type.
-    - 0: None type.
-    - 1: CRIT type (Critical damping ratio) .
-    - 2: G type (Structural damping coefficient).
-    - 3: Q type (Q factor).
+  - 0: None type.
+  - 1: CRIT type (Critical damping ratio) .
+  - 2: G type (Structural damping coefficient).
+  - 3: Q type (Q factor).
 - The default value is 2.
 
 ### `iModalDampingTableId`

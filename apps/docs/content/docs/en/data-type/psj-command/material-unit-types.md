@@ -31,11 +31,11 @@ Available units for time.
 
 <summary> **`TimeUnit`** </summary>
 
-| ID  | Key Name | Usage         | Description |
-| --- | -------- | ------------- | ----------- | ----- |
-| 0   | Time_s   | JPT.TimeUnit. | Time_s      | $s$   |
-| 1   | Time_min | JPT.TimeUnit. | Time_min    | $min$ |
-| 2   | Time_h   | JPT.TimeUnit. | Time_h      | $h$   |
+| ID  | Key Name | Usage                 | Description |
+| --- | -------- | --------------------- | ----------- |
+| 0   | Time_s   | JPT.TimeUnit.Time_s   | $s$         |
+| 1   | Time_min | JPT.TimeUnit.Time_min | $min$       |
+| 2   | Time_h   | JPT.TimeUnit.Time_h   | $h$         |
 
 </details>
 
@@ -458,14 +458,14 @@ Available units for heat generation.
 
 <summary> **`HeatGenerationUnit`** </summary>
 
-| ID  | Key Name                 | Usage                   | Description              |
-| --- | ------------------------ | ----------------------- | ------------------------ | -------------- |
-| 1   | HeatGeneration_mW_mm3    | JPT.HeatGenerationUnit. | HeatGeneration_mW_mm3    | $mW/mm^3$      |
-| 2   | HeatGeneration_W_m3      | JPT.HeatGenerationUnit. | HeatGeneration_W_m3      | $W/m^3$        |
-| 3   | HeatGeneration_miuW_mm3  | JPT.HeatGenerationUnit. | HeatGeneration_miuW_mm3  | $miuW/mm^3$    |
-| 4   | HeatGeneration_kcal_mm3h | JPT.HeatGenerationUnit. | HeatGeneration_kcal_mm3h | $kcal//mm^3*h$ |
-| 5   | HeatGeneration_lbf_ft2s  | JPT.HeatGenerationUnit. | HeatGeneration_lbf_ft2s  | $lbf/ft^2*s$   |
-| 6   | HeatGeneration_lbf_in2s  | JPT.HeatGenerationUnit. | HeatGeneration_lbf_in2s  | $lbf/in^2*s$   |
+| ID  | Key Name                 | Usage                                           | Description    |
+| --- | ------------------------ | ----------------------------------------------- | -------------- |
+| 1   | HeatGeneration_mW_mm3    | JPT.HeatGenerationUnit.HeatGeneration_mW_mm3    | $mW/mm^3$      |
+| 2   | HeatGeneration_W_m3      | JPT.HeatGenerationUnit.HeatGeneration_W_m3      | $W/m^3$        |
+| 3   | HeatGeneration_miuW_mm3  | JPT.HeatGenerationUnit.HeatGeneration_miuW_mm3  | $miuW/mm^3$    |
+| 4   | HeatGeneration_kcal_mm3h | JPT.HeatGenerationUnit.HeatGeneration_kcal_mm3h | $kcal//mm^3*h$ |
+| 5   | HeatGeneration_lbf_ft2s  | JPT.HeatGenerationUnit.HeatGeneration_lbf_ft2s  | $lbf/ft^2*s$   |
+| 6   | HeatGeneration_lbf_in2s  | JPT.HeatGenerationUnit.HeatGeneration_lbf_in2s  | $lbf/in^2*s$   |
 
 </details>
 
@@ -670,10 +670,10 @@ Available units for electrical resistivity.
 
 <summary> **`ElectricalResistivityUnit`** </summary>
 
-| ID  | Key Name                     | Usage    | Description |
-| --- | ---------------------------- | -------- | ----------- |
-| 0   | ElectricalResistivity_Ohm_m  | $Ohm-mm$ |
-| 1   | ElectricalResistivity_Ohm_mm | $Ohm-m$  |
+| ID  | Key Name                     | Usage  | Description |
+| --- | ---------------------------- | ------ | ----------- |
+| 0   | ElectricalResistivity_Ohm_m  | Ohm-m  |             |
+| 1   | ElectricalResistivity_Ohm_mm | Ohm-mm |             |
 
 </details>
 

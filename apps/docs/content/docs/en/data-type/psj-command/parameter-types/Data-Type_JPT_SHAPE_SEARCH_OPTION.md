@@ -12,20 +12,20 @@ A data type uses to control parameters of shape search.
 ### `iType`
 
 - An _Integer_ specifying search target.
-    - 0: Arc
-    - 1: Circle/Concentric
-    - 2: Loop
-    - 3: Planar
-    - 4: Cone
-    - 5: Disc
-    - 6: Hollow Disc
-    - 7: Full
-    - 8: Full Cylinder by One Face
-    - 9: Closed Partial Cylinder
-    - 10: Opened Partial Cylinder
-    - 11: Fillet (Rad)
-    - 12: Fillet (Arc Len.)
-    - 13: Tiny Face
+  - 0: Arc
+  - 1: Circle/Concentric
+  - 2: Loop
+  - 3: Planar
+  - 4: Cone
+  - 5: Disc
+  - 6: Hollow Disc
+  - 7: Full
+  - 8: Full Cylinder by One Face
+  - 9: Closed Partial Cylinder
+  - 10: Opened Partial Cylinder
+  - 11: Fillet (Rad)
+  - 12: Fillet (Arc Len.)
+  - 13: Tiny Face
 
 ### `bAll`
 

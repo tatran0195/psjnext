@@ -38,7 +38,7 @@ For example:
 |                       |               |                                 | 22                    | `ELEMTYPE_MASS`      | Mass element                                              |
 |                       |               |                                 | 23                    | `ELEMTYPE_VIRTUAL`   | Virtual element (only ID)                                 |
 
-### Notice
+## Notice
 
 [^(1)]:
     A special element type differs from processing element, used to describe connection element. For example: RBE, Plot,

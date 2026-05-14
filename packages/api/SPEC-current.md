@@ -901,7 +901,7 @@ returns:
 ## 4. Delta versioning
 
 Item files carry a `changes` block describing only what differs between versions. Items with no `changes` block are
-identical across all versions since `introduced `. Most items in a backward-compatible SDK will have no `changes` block
+identical across all versions since `introduced`. Most items in a backward-compatible SDK will have no `changes` block
 at all.
 
 ### 4a. Removing params across a version
@@ -997,7 +997,7 @@ changes:
 
 **Resolution rules:**
 
-- The base `params` list represents the item as of `introduced `.
+- The base `params` list represents the item as of `introduced`.
 - `changes` entries are applied in version order up to the requested version.
 - `remove` deletes a param from the resolved list. The definition stays in the file above `changes` so older-version
   renders still have it.
@@ -1026,7 +1026,7 @@ Sidecars contain **only natural-language fields**. Structural fields are never t
 | `id`, `title`, `syntax`, `code`          | ❌ — code symbols |
 | `type`, `default`, `required`            | ❌ — structural   |
 | `namespace`, `ribbon`, `domain`, `group` | ❌ — structural   |
-| `introduced `, `macro_link`              | ❌ — structural   |
+| `introduced`, `macro_link`              | ❌ — structural   |
 
 ### 5b. Item locale sidecar
 

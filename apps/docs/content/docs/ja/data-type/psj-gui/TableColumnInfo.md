@@ -30,8 +30,8 @@ To create a TableColumnInfo object, defines a variable with TableColumnInfo(...)
 ### `filter`
 
 - A _Boolean_ specifying the state of filter mode of column of table.
-    - _True_: filter mode will be shown.
-    - _False_: filter mode will be hidden.
+  - _True_: filter mode will be shown.
+  - _False_: filter mode will be hidden.
 - The default value is _False_.
 
 ## Attributes
@@ -54,8 +54,8 @@ Get attributes of TableColumnInfo.
 ### `column_filter`
 
 - An _Integer_ specifying the state of filter mode of column of table.
-    - 1: filter mode is using.
-    - 0: filter mode is not using.
+  - 1: filter mode is using.
+  - 0: filter mode is not using.
 - The default value is 0.
 
 ## Remarks

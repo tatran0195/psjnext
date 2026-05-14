@@ -1004,7 +1004,7 @@ changes:
 
 **Resolution rules:**
 
-- The base `params` / `values` / `fields` list represents the file as of `introduced `.
+- The base `params` / `values` / `fields` list represents the file as of `introduced`.
 - `changes` entries are applied in version order up to the requested version.
 - `remove` deletes an entry from the resolved list; the definition stays in the file for older-version renders.
 - `add` inserts at the named position; omit `after` to append.
@@ -1042,7 +1042,7 @@ changes:
 | `id`, `title`, `syntax`, `code`  | ❌ code symbols             |
 | `type`, `default`, `required`    | ❌ structural               |
 | `namespace`, `ribbon`, `domain`  | ❌ structural               |
-| `introduced `, `macro_link`      | ❌ structural               |
+| `introduced`, `macro_link`      | ❌ structural               |
 | `stability`, `category`          | ❌ structural               |
 | `constructor_syntax`             | ❌ code symbol              |
 | `values[].id`, `values[].name`   | ❌ structural               |
@@ -1653,7 +1653,7 @@ extension. 9. The first path segment of a data-type `id` MUST be one of `built-i
 `$group` reference MUST resolve to an existing `_groups/<id>.yaml`. 11. Every `$ref:data-type/<id>` MUST resolve to an
 existing data-type file whose `category` is consistent with the usage context. 12. Every `$ref: <domain>/<id>` in
 `see_also` or `methods` MUST resolve to an existing item file. 13. `macro_link` and `command_link` targets MUST resolve
-to existing item files. 14. `class_ref` MUST resolve to a data-type file with `category: class`. 15. Every `introduced `
+to existing item files. 14. `class_ref` MUST resolve to a data-type file with `category: class`. 15. Every `introduced`
 and `changes[].version` MUST match a manifest `versions[].id`.
 
 **Folder & meta** 16. Every subfolder within a domain root and within `data-type/` MUST contain a `meta.yaml` with
@@ -1713,8 +1713,8 @@ unique within its `fields` list.
 - The `order` field drives the `pages` array in the emitted `meta.json`.
 - The `title` field resolved via `meta.<locale>.yaml` drives the folder display label.
 - The `folderStyle` configuration determines output shape:
-    - **`folder`**: Emits actual nested sub-directories.
-    - **`separator`**: Emits flattened logical groups using Fumadocs text separators.
+  - **`folder`**: Emits actual nested sub-directories.
+  - **`separator`**: Emits flattened logical groups using Fumadocs text separators.
 
 ### Data-type page generation
 

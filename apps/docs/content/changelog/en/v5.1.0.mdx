@@ -5,12 +5,11 @@ date: '2024-10-15'
 version: 'v5.1.0'
 title: 'Release Note V5.1.0'
 summary: |
-    Version 5.1 brings major updates focused on **enhancing Post-processing functionality** and **strengthening
-    visualization and automation features**. Significant improvements have been made to PSJ Commands, macros, GUI
-    operations, and PSJ Utilities-resulting in greater scripting control and more intuitive operation.
+  Version 5.1 brings major updates focused on **enhancing Post-processing functionality** and **strengthening
+  visualization and automation features**. Significant improvements have been made to PSJ Commands, macros, GUI
+  operations, and PSJ Utilities-resulting in greater scripting control and more intuitive operation.
 tags: ['Release']
 ---
-
 :::tip[Highlight updates]
 
 Version 5.1 brings major updates focused on **enhancing Post-processing functionality** and **strengthening
@@ -34,8 +33,9 @@ In detail:
 ### 📦 Data types
 
 - PSJ-Command: - New types of _[`DItemType`](../data-type/psj-command/DItem-types)_ are added.
+
 <details>
-    <summary id="new-ditem-type">List of newly added DItemType</summary>
+<summary id="new-ditem-type">List of newly added DItemType</summary>
 
 | INT NOTATION | TYPE OF DITEM                                     | DESCRIPTION                                                                             |
 | ------------ | ------------------------------------------------- | --------------------------------------------------------------------------------------- |
@@ -90,7 +90,7 @@ In detail:
 | 229          | `POST_MBD_FATIGUE_PROPERTY`                       | Post fatigue property                                                                   |
 | 230          | `POST_MBD_FATIGUE_CONDITION`                      | Post fatigue condition                                                                  |
 | 231          | `CONNECT_LINEARGAP`                               | Connection: Linear Gap                                                                  |
-| 233          | `POST_MBD_FATIGUE_STRESS_RECOVERY`                |
+| 233          | `POST_MBD_FATIGUE_STRESS_RECOVERY`                |                                                                                         |
 | 234          | `CONTACT_FRONTISTR`                               | Connection: Contact (FRONTISTR)                                                         |
 | 235          | `POST_ACTRAN_CONTRIBUTION_RESULT_CURVE`           | Post Actran contribution result curve                                                   |
 | 236          | `POST_MAC_SENSOR`                                 | Post MAC Sensor                                                                         |
@@ -136,9 +136,10 @@ In detail:
 
 - Add new data type _[`Material Types`](../data-type/psj-command/material-types)_ for PSJ material.
 - Add new data type _[`Material Unit Types`](../data-type/psj-command/material-unit-types)_ for PSJ material.
-- Add new data types of `Material Property` for PSJ material 
+- Add new data types of `Material Property` for PSJ material
+
 <details>
-    <summary id="new-material-property">List of newly added data types of Material Property</summary>
+<summary id="new-material-property">List of newly added data types of Material Property</summary>
 
 | PROPERTY                                                                                                   | DESCRIPTION                                       |
 | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
@@ -167,7 +168,6 @@ In detail:
 - Add new class type to work with Pre commands
 
 <details>
-
 <summary id="new-class-type-pre">List of newly added class types for Pre commands</summary>
 
 | Parameter Types                                                                               |
@@ -181,7 +181,6 @@ In detail:
 - Add new class types to work with Post commands
 
 <details>
-
 <summary id="new-class-type-post">List of newly added class types for Post commands</summary>
 
 | Parameter Types                                                                                                 |
@@ -213,19 +212,19 @@ In detail:
 - PSJ-Utility:
   - Pre-Utility: Update and add some class types used for pre-processing.
     - A new attribute is added to _[`DNode`](../data-type/psj-utility/pre-utility/built-in-types/DNode)_ to access
-          Local Coordinate assigned to the node.
+      Local Coordinate assigned to the node.
     - Add new class type _[`DSubGroup`](../data-type/psj-utility/pre-utility/built-in-types/DSubGroup)_ to access
-          Sub Group Data.
+      Sub Group Data.
     - Add new class type _[`SubGroupVector`](../data-type/psj-utility/pre-utility/built-in-types/SubGroupVector)_ to
-          access SubGroup vector.
+      access SubGroup vector.
     - Add new class type _[`DFieldData`](../data-type/psj-utility/pre-utility/built-in-types/DFieldData)_ to access
-          Field Data.
+      Field Data.
     - Add new class type _[`CursorStr`](../data-type/psj-utility/pre-utility/built-in-types/CursorStr)_ to get type
-          and ID directly from a CursorStr.
+      and ID directly from a CursorStr.
   - Post-Utility: Add new classes to work with the response condition:
-      _[`DPostAnalysis`](../data-type/psj-utility/post-utility/post-built-in-types/DPostAnalysis)_,
-      _[`DPostResponse`](../data-type/psj-utility/post-utility/post-built-in-types/DPostResponse)_,
-      _[`DPostResultCurve`](../data-type/psj-utility/post-utility/post-built-in-types/DPostResultCurve)_.
+    _[`DPostAnalysis`](../data-type/psj-utility/post-utility/post-built-in-types/DPostAnalysis)_,
+    _[`DPostResponse`](../data-type/psj-utility/post-utility/post-built-in-types/DPostResponse)_,
+    _[`DPostResultCurve`](../data-type/psj-utility/post-utility/post-built-in-types/DPostResultCurve)_.
 
 ### ⌘ PSJ-Command
 
@@ -1014,3 +1013,4 @@ Draft Angle function. - `ViewShowLocalCoordinate`: Turn on/off local coordinate 
 - Fix the bug where `JPT.GetResultIncrements` returns the Result Increment ID incorrectly.
 - Correct the description of `JPT.GetMinResultValue()` and `JPT.GetMaxResultValue()`.
 - Fix the bug where `JPT.GetInternalIDRefItem` returned 0 when ID duplication occured across different entities.
+#### Broken Heading

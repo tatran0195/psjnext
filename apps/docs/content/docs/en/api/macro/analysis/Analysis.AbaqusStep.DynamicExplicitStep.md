@@ -36,8 +36,8 @@ Analysis.AbaqusStep.DynamicExplicitStep(...)
 ### `iIncrmtEstimator` @type(Integer) @default(0)
 
 - The use of the stable increment estimator.
-    - 0: Global
-    - 1: Element by element
+  - 0: Global
+  - 1: Element by element
 
 ### `abaqusPair1` @type(ABAQUS_PAIR) @default(ABAQUS_PAIR)
 
@@ -54,8 +54,8 @@ Analysis.AbaqusStep.DynamicExplicitStep(...)
 ### `iEnableNlgeom` @type(Integer) @default(1)
 
 - Whether or not to consider geometric nonlinear (large deformation) analysis.
-    - 0: Not consider
-    - 1: Consider
+  - 0: Not consider
+  - 1: Consider
 
 ### `dTimePeriod` @type(Double) @default(1.0)
 
@@ -80,8 +80,8 @@ Analysis.AbaqusStep.DynamicExplicitStep(...)
 ### `crEdit` @type(Cursor) @default(None)
 
 - An existing Abaqus step.
-    - If this parameter is used, the specified step will be modified.
-    - If it is lef&#x74;_&#x4E;one_, a new step will be created.
+  - If this parameter is used, the specified step will be modified.
+  - If it is lef&#x74;_&#x4E;one_, a new step will be created.
 
 ## Return Code
 

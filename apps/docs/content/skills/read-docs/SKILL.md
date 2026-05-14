@@ -18,9 +18,9 @@ Fumadocs-powered sites typically expose three LLM-friendly features:
    `/llms.mdx/docs/<path>/content.md` for each page. Some sites also rewrite `/docs/.../page.mdx` or negotiate
    `Accept: text/markdown` to that URL via middleware.  
    Example:
-    - Rendered page: <https://example.com/docs/installation>
-    - Markdown for LLMs: <https://example.com/llms.mdx/docs/installation/content.md>  
-      Prefer this over scraping HTML when the site exposes it.
+   - Rendered page: <https://example.com/docs/installation>
+   - Markdown for LLMs: <https://example.com/llms.mdx/docs/installation/content.md>  
+     Prefer this over scraping HTML when the site exposes it.
 
 3. **Search API**  
    The site exposes a JSON search endpoint:  

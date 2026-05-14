@@ -1,8 +1,7 @@
 ---
 title: Advanced sample 2 - Set cell alignment and check input value data type
-description:
-    The example demonstrates how a table set cell alignment and check if the value of input value is
-    String/Integer/Double and trigger an event.
+description: The example demonstrates how a table set cell alignment and check if the value of input value is
+  String/Integer/Double and trigger an event.
 ---
 
 ## 🎯 Introduction

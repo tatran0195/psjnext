@@ -33,8 +33,8 @@ Analysis.Abaqus(...)
 ### `crEdit` @type(Cursor) @default(None)
 
 - An existing Abaqus job.
-    - If this parameter is used, the specified job will be modified.
-    - If it is lef&#x74;_&#x4E;one_, a new job will be created.
+  - If this parameter is used, the specified job will be modified.
+  - If it is lef&#x74;_&#x4E;one_, a new job will be created.
 
 ## Return Code
 

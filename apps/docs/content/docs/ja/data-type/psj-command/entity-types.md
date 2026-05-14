@@ -233,7 +233,7 @@ For example: `JPT.DItemType.BODY` is equal to ID = 3.
 | 230          | `POST_MBD_FATIGUE_CONDITION`                      | Post fatigue condition                                                         |
 | 231          | `CONNECT_LINEARGAP`                               | Connection: Linear Gap                                                         |
 | 232          | `OPTISHAPE_TS_JOB`                                | OPTISHAPE Post job                                                             |
-| 233          | `POST_MBD_FATIGUE_STRESS_RECOVERY`                |
+| 233          | `POST_MBD_FATIGUE_STRESS_RECOVERY`                |                                                                                |
 | 234          | `CONTACT_FRONTISTR`                               | Connection: Contact (FRONTISTR)                                                |
 | 235          | `POST_ACTRAN_CONTRIBUTION_RESULT_CURVE`           | Post Actran contribution result curve                                          |
 | 236          | `POST_MAC_SENSOR`                                 | Post MAC Sensor                                                                |

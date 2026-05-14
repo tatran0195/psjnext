@@ -5,7 +5,7 @@ date: '2024-10-15'
 version: 'v5.0.3'
 title: 'リリースノートV5.0.3'
 summary: |
-    更新のハイライトこのリリースでは、主に事後処理を強化するためのAPI機能が追加されました。また、新機能や新しいオプションのために、マクロとPSJコマンドが更新されています。
+  更新のハイライトこのリリースでは、主に事後処理を強化するためのAPI機能が追加されました。また、新機能や新しいオプションのために、マクロとPSJコマンドが更新されています。
 tags: ['Release']
 ---
 
@@ -86,18 +86,12 @@ tags: ['Release']
 
 <details>
 
-<summary>新しく追加されたコマンドの一覧</summary>
-- `JPT.GetAppPathInfo()`: PathTypeで指定されたパスの情報を取得します。
-- `JPT.SelectionByIDs()`: IDを使用してエンティティを選択します。
-- `JPT.IsSpatialPointRendered()`: 現在のビューで(X, Y,
-Z)の空間座標を持つ指定された点（節点）が表示されているかを確認します。
-- `JPT.CloseAllGraphViews()` :
-すべてのグラフビューを閉じます。
-- `JPT.CloseGraphViewByDocumentName()`:
-指定されたドキュメントのすべてのグラフビューを閉じます。
-- `JPT.ConvertCoordinateFromGlobalToLocal()`: 選択したDItem
-Typeのグローバル座標を指定されたローカル座標に変換します。
-- `JPT.HighlightByID()`:
+<summary>新しく追加されたコマンドの一覧</summary>- `JPT.GetAppPathInfo()`: PathTypeで指定されたパスの情報を取得します。
+- `JPT.SelectionByIDs()`: IDを使用してエンティティを選択します。 - `JPT.IsSpatialPointRendered()`: 現在のビューで(X, Y,
+Z)の空間座標を持つ指定された点（節点）が表示されているかを確認します。 - `JPT.CloseAllGraphViews()` :
+すべてのグラフビューを閉じます。 - `JPT.CloseGraphViewByDocumentName()`:
+指定されたドキュメントのすべてのグラフビューを閉じます。 - `JPT.ConvertCoordinateFromGlobalToLocal()`:
+選択したDItemTypeのグローバル座標を指定されたローカル座標に変換します。 - `JPT.HighlightByID()`:
 コマンドはアセンブルツリー内のLBCおよびプロパティアイテムをハイライトします。同時に、ハイライトされたLBC/プロパティに接続されたパーツのフェースの表示も変更されます。
 - `JPT.SetActiveDocumentByID()`: 指定されたIDのドキュメントをアクティブにします。 - `JPT.SetActiveDocumentByName()`:
 指定された名前のドキュメントをアクティブにします。 - `JPT.GetDocumentList()`:
@@ -132,13 +126,14 @@ JPT_BASEが自動的に有効化されるように変更されました。
 
 <details>
 <summary>新しく追加されたコマンドの一覧</summary>
-        - `dlg.remove_combobox_option()`: Comboboxのすべてまたは一部のオプションを削除します。
-        - `dlg.remove_listbox_options()`: Listboxのすべてまたは一部のオプションを削除します。
-        - `dlg.get_listbox_sels()`: Listbox内の全ての選択されたインデックスを取得します。
-        - `dlg.get_table_cell_fill_color()`: 選択した/指定したセルの塗りつぶし色を取得します。
-        - `dlg.on_spin_changed()`: Spinの値が変更された後に関数を実行できるようになります。
-        - `dlg.on_listbox_sel()`: ListBoxアイテムが選択された後に関数を実行できるようになります。
-        - `dlg.fill_table_by_file()`: GUI上で右クリックを使用せずに、ファイルからテーブルデータを直接設定します。
+
+- `dlg.remove_combobox_option()`: Comboboxのすべてまたは一部のオプションを削除します。
+- `dlg.remove_listbox_options()`: Listboxのすべてまたは一部のオプションを削除します。
+- `dlg.get_listbox_sels()`: Listbox内の全ての選択されたインデックスを取得します。
+- `dlg.get_table_cell_fill_color()`: 選択した/指定したセルの塗りつぶし色を取得します。
+- `dlg.on_spin_changed()`: Spinの値が変更された後に関数を実行できるようになります。
+- `dlg.on_listbox_sel()`: ListBoxアイテムが選択された後に関数を実行できるようになります。
+- `dlg.fill_table_by_file()`: GUI上で右クリックを使用せずに、ファイルからテーブルデータを直接設定します。
 
 </details>
 
@@ -148,19 +143,13 @@ JPT_BASEが自動的に有効化されるように変更されました。
 
 <details>
 
-<summary>新しく追加されたマクロの一覧</summary>
-- `ViewRemoveMode`: リムーブモードのON/OFFを切り替えるためのマクロ。
-- `ViewShowGroupMode`: グループモードのON/OFFを切り替えるためのマクロ。
-- `ViewShowGlobalCoordinate`:
-グローバル座標の表示をON/OFFするためのマクロ。
-- `CmdSetPreUnit`: ドキュメントの単位設定用のマクロ。
-- `SetDefaultInitialViewPoint`: 初期ビューポイントを設定するためのマクロ。
-- `ShowContactPairData`:
-コンタクトペア選択ダイアログでの選択の表示を実装するマクロ。
-- `CreateCustomNote`:
-指定されたコレクションの下にカスタムノートを作成するマクロ。
-- `CreateCollection`: コレクションを作成するマクロ。
-- `EditCustomNoteWndPosition`: 指定したカスタムノートを指定した画面位置に移動するマクロ。
+<summary>新しく追加されたマクロの一覧</summary>- `ViewRemoveMode`: リムーブモードのON/OFFを切り替えるためのマクロ。 -
+`ViewShowGroupMode`: グループモードのON/OFFを切り替えるためのマクロ。 - `ViewShowGlobalCoordinate`:
+グローバル座標の表示をON/OFFするためのマクロ。 - `CmdSetPreUnit`: ドキュメントの単位設定用のマクロ。 -
+`SetDefaultInitialViewPoint`: 初期ビューポイントを設定するためのマクロ。 - `ShowContactPairData`:
+コンタクトペア選択ダイアログでの選択の表示を実装するマクロ。 - `CreateCustomNote`:
+指定されたコレクションの下にカスタムノートを作成するマクロ。 - `CreateCollection`: コレクションを作成するマクロ。 -
+`EditCustomNoteWndPosition`: 指定したカスタムノートを指定した画面位置に移動するマクロ。
 
 </details>
 
@@ -227,7 +216,3 @@ JPT_BASEが自動的に有効化されるように変更されました。
 ### 📝 その他
 
 - IDEのImport Python Macro Log (Ctrl+J)で一部のコマンドがインポートされないエラーを修正しました。
-
-```
-
-```

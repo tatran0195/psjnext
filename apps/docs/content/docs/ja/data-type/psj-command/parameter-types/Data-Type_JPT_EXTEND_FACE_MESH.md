@@ -12,8 +12,8 @@ A data type used to control the mesh settings of extended face.
 ### `iLengthToFace`
 
 - An _Integer_ specifying the destination method.
-    - 0: Length
-    - 1: To Face
+  - 0: Length
+  - 1: To Face
 - The default value is 0.
 
 ### `dLengthToFace`
@@ -24,8 +24,8 @@ A data type used to control the mesh settings of extended face.
 ### `bUseDivision`
 
 - A _Boolean_ specifying whether to use the mesh division or mesh size method.
-    - _True_: Num of Divisions
-    - _False_: Mesh Size
+  - _True_: Num of Divisions
+  - _False_: Mesh Size
 - The default value is True.
 
 ### `iNumOfDivisions`
@@ -46,8 +46,8 @@ A data type used to control the mesh settings of extended face.
 ### `iElemType`
 
 - An _Integer_ specifying the element type.
-    - 0: Tri3
-    - 1: Quad4
+  - 0: Tri3
+  - 1: Quad4
 - The default value is 0.
 
 ### `dLength`

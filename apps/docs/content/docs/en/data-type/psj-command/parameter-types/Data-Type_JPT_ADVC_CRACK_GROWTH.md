@@ -12,17 +12,17 @@ A data type uses to control parameters of ADVC Crach Growth.
 ### `iEvaluationPoint`
 
 - An _Int_ specifying evaluation point.
-    - 0: no selection
-    - 1: Mean
-    - 2: Max
+  - 0: no selection
+  - 1: Mean
+  - 2: Max
 - The default value is 2.
 
 ### `iEvaluationValue`
 
 - An _Int_ specifying evaluation value.
-    - 0:InElasticStrainEnergyDensity.
-    - 1:AmplitudeInElasticStrain.
-    - 2:PrincipalStress.
-    - 3:PrincipalInElasticStrain
-    - 4:MisesInElasticStrainRange
+  - 0:InElasticStrainEnergyDensity.
+  - 1:AmplitudeInElasticStrain.
+  - 2:PrincipalStress.
+  - 3:PrincipalInElasticStrain
+  - 4:MisesInElasticStrainRange
 - The default value is 0.

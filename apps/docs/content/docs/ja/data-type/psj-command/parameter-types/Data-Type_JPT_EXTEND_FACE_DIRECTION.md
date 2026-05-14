@@ -12,11 +12,11 @@ A data type used to control the direction settings for extended face.
 ### `iMetric`
 
 - An _Integer_ specifying the method to create the face.
-    - 0: Coordinate
-    - 1: 2 Nodes
-    - 2: Element Edge
-    - 3: Offset
-    - 4: Cylinder
+  - 0: Coordinate
+  - 1: 2 Nodes
+  - 2: Element Edge
+  - 3: Offset
+  - 4: Cylinder
 - The default value is 0.
 
 ### `iCoordinateSystem`
@@ -27,8 +27,8 @@ A data type used to control the direction settings for extended face.
 ### `iDirection`
 
 - An _Integer_ specifying direction to extend the face when iMetric=0.
-    - 0: By Components
-    - 1: By Angles
+  - 0: By Components
+  - 1: By Angles
 - The default value is 0.
 
 ### `dComponentX`
@@ -69,19 +69,19 @@ A data type used to control the direction settings for extended face.
 ### `iMethod`
 
 - An _Integer_ specifying method to create the face when _iMetric_=4.
-    - 0: To Axis
-    - 1: To Face
-    - 2: Arc Angle
-    - 3: Arc Length
-    - 4: Sweep
+  - 0: To Axis
+  - 1: To Face
+  - 2: Arc Angle
+  - 3: Arc Length
+  - 4: Sweep
 - The default value is 0.
 
 ### `iAxisPlane`
 
 - An _Integer_ specifying axis plane when _iMethod_=0.
-    - 0: XY
-    - 1: YZ
-    - 2: ZX
+  - 0: XY
+  - 1: YZ
+  - 2: ZX
 - The default value is 0.
 
 ### `dZXY`

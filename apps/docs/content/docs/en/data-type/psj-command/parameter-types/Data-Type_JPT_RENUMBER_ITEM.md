@@ -1,8 +1,3 @@
----
-title: RENUMBER_ITEM
-id: RENUMBER_ITEM
----
-
 # RENUMBER_ITEM
 
 ## Description
@@ -66,7 +61,7 @@ A data type uses to control parameters of Renumber Item
 ### `dlCoordTolerance`
 
 - A _List of Double_ specifying the coordinate tolerance.
-- The default value is [0.0, 0.0, 0,0].
+- The default value is [0.0, 0.0, 0.0].
 
 ### `iConflictStrategy`
 

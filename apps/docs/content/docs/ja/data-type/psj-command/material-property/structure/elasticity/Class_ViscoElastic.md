@@ -11,11 +11,11 @@ This is an instance of a Viscoelastic class, represents Viscoelastic characteris
 
 | Attribute             | Description                                                                                           |
 | --------------------- | ----------------------------------------------------------------------------------------------------- |
-| viscoElastic          | A _List of Tuple_ specifying all data of [Viscoelastic characteristic](#Viscoelastic-characteristic). |
+| viscoElastic          | A _List of Tuple_ specifying all data of [Viscoelastic characteristic](#viscoelastic-characteristic). |
 | timeShiftTempDepend   | A _Boolean_ specifying the use of temperature-dependent data.                                         |
 | timeShiftDependencies | A _Integer_ specifying the use of time-dependent data.                                                |
 
-## Viscoelastic Characteristic {#Viscoelastic-characteristic}
+## Viscoelastic Characteristic {#viscoelastic-characteristic}
 
 Either `KEY NAME` or `ID` can be used to define the material property. The ID of material property which was primarily
 used in functions can be referred to in the [Int Notation](../../../material-types) column. However, in order to
