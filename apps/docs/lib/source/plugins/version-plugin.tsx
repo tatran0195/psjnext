@@ -82,7 +82,7 @@ function _resolveVersionMeta(idx: number): { icon: ReactNode | string; descripti
 function installVersionedGetters(
     originalData: Record<string, unknown>,
     loadFn: (() => Promise<Record<string, unknown>>) | undefined,
-    fixedVersion?: string,
+    fixedVersion?: string
 ): void {
     Object.defineProperty(originalData, 'structuredData', {
         get(this: Record<string, unknown>) {
@@ -147,6 +147,7 @@ const API_VERSIONS = env.API_VERSIONS;
 
 export function versionPlugin(): LoaderPlugin {
     const isMultiVersion = API_VERSIONS.length > 1;
+    const SEMVER_SEGMENT_RE = /^api\/\d+\.\d+/;
 
     return {
         name: 'fumadocs:api-versions',
@@ -154,6 +155,11 @@ export function versionPlugin(): LoaderPlugin {
 
         transformStorage({ storage }) {
             const apiFiles = storage.getFiles().filter((f) => f.startsWith('api/'));
+            // ── Pre-flight: already-versioned folder layout ──────────────────
+            // If api/ already contains semver subfolders (api/5.2.0/…), the
+            // content was authored pre-versioned. Skip fan-out entirely to
+            // avoid double-nesting and redundant getter installation.
+            if (apiFiles.some((f) => SEMVER_SEGMENT_RE.test(f))) return;
 
             // ── Single-version path ──────────────────────────────────────────────
             // No file fan-out, no deletions, no new storage keys. We only install
@@ -171,7 +177,7 @@ export function versionPlugin(): LoaderPlugin {
                     installVersionedGetters(
                         originalData,
                         originalData.load as (() => Promise<Record<string, unknown>>) | undefined,
-                        API_VERSIONS[0], // fixed: single version, no shell prototype chain
+                        API_VERSIONS[0] // fixed: single version, no shell prototype chain
                     );
                 }
                 return;
@@ -242,11 +248,23 @@ export function versionPlugin(): LoaderPlugin {
                 if (!isMultiVersion) return node;
 
                 const apiFolderIdx = node.children.findIndex(
-                    (n): n is PageTree.Folder => n.type === 'folder' && nodeStoragePath(n).toLowerCase() === 'api',
+                    (n): n is PageTree.Folder => n.type === 'folder' && nodeStoragePath(n).toLowerCase() === 'api'
                 );
                 if (apiFolderIdx === -1) return node;
 
                 const apiFolder = node.children[apiFolderIdx] as PageTree.Folder;
+
+                // ── Pre-flight: already-versioned folder layout ──────────────
+                // Mirror the transformStorage guard at the page-tree level.
+                // If any direct child of api/ is already a semver folder, the
+                // tree was built from pre-versioned content; leave it alone.
+                const hasVersionedChildren = apiFolder.children.some((child) => {
+                    if (child.type !== 'folder') return false;
+                    const seg = nodeStoragePath(child).split('/').pop() ?? '';
+                    return /^\d+\.\d+/.test(seg);
+                });
+                if (hasVersionedChildren) return node;
+
                 const versions = getApiVersions();
 
                 const versionedChildren: PageTree.Node[] = apiFolder.children
