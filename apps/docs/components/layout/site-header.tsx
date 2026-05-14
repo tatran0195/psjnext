@@ -3,6 +3,7 @@
 import { useTheme } from '@teispace/next-themes';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
+    ArrowRight,
     BookOpen,
     ChevronDown,
     Compass,
@@ -14,6 +15,7 @@ import {
     Moon,
     Package,
     Play,
+    Sparkles,
     Sun,
     Terminal,
     X,
@@ -39,6 +41,27 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
     const pathname = usePathname();
     const { resolvedTheme, setTheme } = useTheme();
     const isDark = resolvedTheme === 'dark';
+
+    const versions = (process.env.API_VERSIONS || '').split(',').filter(Boolean);
+    const latestVersion = versions[0];
+    const isMultiVersion = versions.length > 1;
+
+    const getVersionedLink = (href: string) => {
+        if (!isMultiVersion || !latestVersion) return href;
+        if (href.startsWith('/docs/api/')) {
+            const product = href.replace('/docs/api/', '');
+            if (!/^\d+\.\d+\.\d+\//.test(product)) {
+                return `/docs/api/${latestVersion}/${product}`;
+            }
+        }
+        if (href.startsWith('/docs/data-types')) {
+            const product = href.replace('/docs/data-types', '');
+            if (!/^\d+\.\d+\.\d+\//.test(product)) {
+                return `/docs/api/${latestVersion}/data-types${product}`;
+            }
+        }
+        return href;
+    };
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 30);
@@ -158,27 +181,21 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                         {/* Documentation Mega Menu */}
                                         <div className="group relative">
                                             <button
-                                                className="relative px-4 py-2 text-[13px] font-semibold transition-colors duration-200 flex items-center gap-1.5"
-                                                style={{
-                                                    color: isDocsActive ? 'var(--psj-blue)' : 'var(--psj-text-2)',
-                                                    letterSpacing: 'var(--tracking-snug)',
-                                                }}
-                                                onMouseEnter={(e) => {
-                                                    if (!isDocsActive)
-                                                        (e.currentTarget as HTMLElement).style.color =
-                                                            'var(--psj-text-1)';
-                                                }}
-                                                onMouseLeave={(e) => {
-                                                    if (!isDocsActive)
-                                                        (e.currentTarget as HTMLElement).style.color =
-                                                            'var(--psj-text-2)';
-                                                }}
+                                                className={`relative px-4 py-2 text-[13px] font-semibold transition-all duration-300 flex items-center gap-1.5 group/link ${
+                                                    isDocsActive
+                                                        ? 'text-psj-blue'
+                                                        : 'text-psj-text-2 hover:text-psj-text-1'
+                                                }`}
                                             >
-                                                Documentation
+                                                <span>Documentation</span>
                                                 <ChevronDown
                                                     size={14}
-                                                    className={`opacity-60 group-hover:rotate-180 transition-transform duration-300 ${isDocsActive ? 'text-psj-blue' : ''}`}
+                                                    className={`transition-transform duration-300 group-hover:rotate-180 ${
+                                                        isDocsActive ? 'text-psj-blue' : 'text-psj-text-3'
+                                                    }`}
                                                 />
+                                                {/* Hover Indicator Bridge */}
+                                                <div className="absolute bottom-0 left-4 right-4 h-0.5 bg-psj-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                                                 {isDocsActive && (
                                                     <motion.div
                                                         layoutId="psj-nav-indicator"
@@ -189,18 +206,21 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                             </button>
 
                                             {/* Dropdown Container */}
-                                            <div className="absolute top-full left-0 pt-[1px] invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300 z-50">
+                                            <div className="absolute top-[calc(100%-8px)] left-1/2 -translate-x-1/2 pt-4 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300 z-50">
                                                 <div
-                                                    className="w-[880px] p-0 rounded-none border border-psj-border shadow-2xl shadow-psj-navy/10 overflow-hidden"
+                                                    className="w-[1000px] p-0 rounded-none border border-psj-border shadow-2xl shadow-psj-navy/10 overflow-hidden relative"
                                                     style={{ background: 'var(--psj-surface-0)' }}
                                                 >
-                                                    <div className="h-1 bg-psj-blue w-full" />
+                                                    {/* Navigation Caret */}
+                                                    <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-psj-blue rotate-45" />
+
+                                                    <div className="h-1 bg-psj-blue w-full relative z-10" />
                                                     <div className="grid grid-cols-12">
                                                         {/* Left Content Area */}
-                                                        <div className="col-span-9 p-5 grid grid-cols-3 gap-x-12 gap-y-10">
+                                                        <div className="col-span-8 py-8 px-10 grid grid-cols-3 gap-x-12 gap-y-10">
                                                             {/* Column 1: Framework */}
                                                             <div>
-                                                                <h3 className="psj-label mb-6 text-psj-blue/80 tracking-[0.1em] uppercase text-[11px]">
+                                                                <h3 className="psj-label mb-8 text-psj-blue/60 tracking-[0.2em] uppercase text-[10px] font-bold">
                                                                     Framework
                                                                 </h3>
                                                                 <ul className="space-y-1">
@@ -209,7 +229,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                                             href="/docs"
                                                                             className="group/item flex items-center gap-4 p-3 -mx-3 hover:bg-psj-surface-1 transition-all duration-300"
                                                                         >
-                                                                            <div className="w-11 h-11 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue group-hover/item:text-white group-hover/item:border-psj-blue transition-all duration-300">
+                                                                            <div className="w-11 h-11 shrink-0 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue/10 group-hover/item:border-psj-blue/30 transition-all duration-300">
                                                                                 <Home size={18} strokeWidth={2.5} />
                                                                             </div>
                                                                             <div>
@@ -227,7 +247,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                                             href="/docs/quick-start"
                                                                             className="group/item flex items-center gap-4 p-3 -mx-3 hover:bg-psj-surface-1 transition-all duration-300"
                                                                         >
-                                                                            <div className="w-11 h-11 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue group-hover/item:text-white group-hover/item:border-psj-blue transition-all duration-300">
+                                                                            <div className="w-11 h-11 shrink-0 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue/10 group-hover/item:border-psj-blue/30 transition-all duration-300">
                                                                                 <Zap size={18} strokeWidth={2.5} />
                                                                             </div>
                                                                             <div>
@@ -245,7 +265,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                                             href="/docs/psj-structure"
                                                                             className="group/item flex items-center gap-4 p-3 -mx-3 hover:bg-psj-surface-1 transition-all duration-300"
                                                                         >
-                                                                            <div className="w-11 h-11 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue group-hover/item:text-white group-hover/item:border-psj-blue transition-all duration-300">
+                                                                            <div className="w-11 h-11 shrink-0 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue/10 group-hover/item:border-psj-blue/30 transition-all duration-300">
                                                                                 <Layers size={18} strokeWidth={2.5} />
                                                                             </div>
                                                                             <div>
@@ -263,7 +283,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
 
                                                             {/* Column 2: Guides */}
                                                             <div>
-                                                                <h3 className="psj-label mb-6 text-psj-blue/80 tracking-[0.1em] uppercase text-[11px]">
+                                                                <h3 className="psj-label mb-8 text-psj-blue/60 tracking-[0.2em] uppercase text-[10px] font-bold">
                                                                     Guides
                                                                 </h3>
                                                                 <ul className="space-y-1">
@@ -272,7 +292,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                                             href="/docs/guides/basic"
                                                                             className="group/item flex items-center gap-4 p-3 -mx-3 hover:bg-psj-surface-1 transition-all duration-300"
                                                                         >
-                                                                            <div className="w-11 h-11 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue group-hover/item:text-white group-hover/item:border-psj-blue transition-all duration-300">
+                                                                            <div className="w-11 h-11 shrink-0 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue/10 group-hover/item:border-psj-blue/30 transition-all duration-300">
                                                                                 <BookOpen size={18} strokeWidth={2.5} />
                                                                             </div>
                                                                             <div>
@@ -290,7 +310,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                                             href="/docs/guides/intermediate"
                                                                             className="group/item flex items-center gap-4 p-3 -mx-3 hover:bg-psj-surface-1 transition-all duration-300"
                                                                         >
-                                                                            <div className="w-11 h-11 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue group-hover/item:text-white group-hover/item:border-psj-blue transition-all duration-300">
+                                                                            <div className="w-11 h-11 shrink-0 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue/10 group-hover/item:border-psj-blue/30 transition-all duration-300">
                                                                                 <Compass size={18} strokeWidth={2.5} />
                                                                             </div>
                                                                             <div>
@@ -308,7 +328,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                                             href="/docs/guides/advanced"
                                                                             className="group/item flex items-center gap-4 p-3 -mx-3 hover:bg-psj-surface-1 transition-all duration-300"
                                                                         >
-                                                                            <div className="w-11 h-11 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue group-hover/item:text-white group-hover/item:border-psj-blue transition-all duration-300">
+                                                                            <div className="w-11 h-11 shrink-0 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue/10 group-hover/item:border-psj-blue/30 transition-all duration-300">
                                                                                 <GraduationCap
                                                                                     size={18}
                                                                                     strokeWidth={2.5}
@@ -335,10 +355,10 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                                 <ul className="space-y-1">
                                                                     <li>
                                                                         <Link
-                                                                            href="/docs/api/macro"
+                                                                            href={getVersionedLink('/docs/api/macro')}
                                                                             className="group/item flex items-center gap-4 p-3 -mx-3 hover:bg-psj-surface-1 transition-all duration-300"
                                                                         >
-                                                                            <div className="w-11 h-11 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue group-hover/item:text-white group-hover/item:border-psj-blue transition-all duration-300">
+                                                                            <div className="w-11 h-11 shrink-0 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue/10 group-hover/item:border-psj-blue/30 transition-all duration-300">
                                                                                 <Play size={18} strokeWidth={2.5} />
                                                                             </div>
                                                                             <div>
@@ -346,17 +366,19 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                                                     Macro
                                                                                 </div>
                                                                                 <div className="text-[11px] text-psj-text-3 leading-tight mt-0.5">
-                                                                                    Automation engine
+                                                                                    Built-in Jupiter API
                                                                                 </div>
                                                                             </div>
                                                                         </Link>
                                                                     </li>
                                                                     <li>
                                                                         <Link
-                                                                            href="/docs/api/psj-command"
+                                                                            href={getVersionedLink(
+                                                                                '/docs/api/psj-command'
+                                                                            )}
                                                                             className="group/item flex items-center gap-4 p-3 -mx-3 hover:bg-psj-surface-1 transition-all duration-300"
                                                                         >
-                                                                            <div className="w-11 h-11 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue group-hover/item:text-white group-hover/item:border-psj-blue transition-all duration-300">
+                                                                            <div className="w-11 h-11 shrink-0 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue/10 group-hover/item:border-psj-blue/30 transition-all duration-300">
                                                                                 <Terminal size={18} strokeWidth={2.5} />
                                                                             </div>
                                                                             <div>
@@ -364,17 +386,17 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                                                     PSJ Command
                                                                                 </div>
                                                                                 <div className="text-[11px] text-psj-text-3 leading-tight mt-0.5">
-                                                                                    Command CLI
+                                                                                    Pythonic Command System
                                                                                 </div>
                                                                             </div>
                                                                         </Link>
                                                                     </li>
                                                                     <li>
                                                                         <Link
-                                                                            href="/docs/data-types"
+                                                                            href={getVersionedLink('/docs/data-types')}
                                                                             className="group/item flex items-center gap-4 p-3 -mx-3 hover:bg-psj-surface-1 transition-all duration-300"
                                                                         >
-                                                                            <div className="w-11 h-11 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue group-hover/item:text-white group-hover/item:border-psj-blue transition-all duration-300">
+                                                                            <div className="w-11 h-11 shrink-0 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue/10 group-hover/item:border-psj-blue/30 transition-all duration-300">
                                                                                 <Package size={18} strokeWidth={2.5} />
                                                                             </div>
                                                                             <div>
@@ -382,17 +404,17 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                                                     PSJ-Utility
                                                                                 </div>
                                                                                 <div className="text-[11px] text-psj-text-3 leading-tight mt-0.5">
-                                                                                    Type system reference
+                                                                                    Model Querying & Helpers
                                                                                 </div>
                                                                             </div>
                                                                         </Link>
                                                                     </li>
                                                                     <li>
                                                                         <Link
-                                                                            href="/docs/api/psj-gui"
+                                                                            href={getVersionedLink('/docs/api/psj-gui')}
                                                                             className="group/item flex items-center gap-4 p-3 -mx-3 hover:bg-psj-surface-1 transition-all duration-300"
                                                                         >
-                                                                            <div className="w-11 h-11 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue group-hover/item:text-white group-hover/item:border-psj-blue transition-all duration-300">
+                                                                            <div className="w-11 h-11 shrink-0 flex items-center justify-center bg-psj-surface-1 border border-psj-border text-psj-blue group-hover/item:bg-psj-blue/10 group-hover/item:border-psj-blue/30 transition-all duration-300">
                                                                                 <Layout size={18} strokeWidth={2.5} />
                                                                             </div>
                                                                             <div>
@@ -400,7 +422,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                                                     PSJ-GUI
                                                                                 </div>
                                                                                 <div className="text-[11px] text-psj-text-3 leading-tight mt-0.5">
-                                                                                    Type system reference
+                                                                                    GUI Creation Library
                                                                                 </div>
                                                                             </div>
                                                                         </Link>
@@ -410,29 +432,53 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                         </div>
 
                                                         {/* Right Side Callout (The "Cover" Area) */}
-                                                        <div className="col-span-3 bg-psj-surface-1/30 p-5 border-l border-psj-border flex flex-col justify-between relative overflow-hidden">
-                                                            <div className="absolute top-0 right-0 -mr-12 -mt-12 w-48 h-48 bg-psj-blue/5 rounded-full blur-3xl" />
+                                                        <div className="col-span-4 bg-psj-surface-1/40 py-8 px-10 border-l border-psj-border flex flex-col justify-between relative overflow-hidden group/callout">
+                                                            {/* Background Glows */}
+                                                            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-psj-blue/10 rounded-full blur-[80px] group-hover/callout:bg-psj-blue/20 transition-colors duration-700" />
+                                                            <div className="absolute bottom-0 left-0 -ml-8 -mb-8 w-32 h-32 bg-psj-blue/5 rounded-full blur-[40px]" />
+
                                                             <div className="relative z-10">
-                                                                <div className="inline-flex px-2 py-0.5 bg-psj-blue text-[9px] font-bold text-white mb-6 tracking-wider">
-                                                                    NEW RELEASE
+                                                                <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-psj-blue/10 border border-psj-blue/20 text-psj-blue text-[10px] font-bold mb-6 tracking-widest uppercase">
+                                                                    <Sparkles size={12} className="fill-psj-blue/20" />
+                                                                    Latest Release
                                                                 </div>
-                                                                <h5 className="text-[18px] font-bold text-psj-text-1 leading-tight mb-4">
-                                                                    Enterprise Documentation 2.0
+                                                                <h5 className="text-[20px] font-extrabold text-psj-text-1 leading-tight mb-3 tracking-tight">
+                                                                    What&apos;s New in <br />
+                                                                    <span className="text-psj-blue">Jupiter {latestVersion || '5.x'}</span>
                                                                 </h5>
-                                                                <p className="text-[12px] text-psj-text-3 leading-relaxed opacity-80">
-                                                                    Experience our fastest documentation engine yet,
-                                                                    featuring global search, deep-linking, and
-                                                                    multi-version support.
+                                                                <p className="text-[13px] text-psj-text-3 leading-relaxed opacity-80 mb-6">
+                                                                    Explore the latest PSJ advancements, featuring
+                                                                    optimized Pythonic commands and the new native GUI
+                                                                    builder.
                                                                 </p>
+
+                                                                <div className="space-y-3">
+                                                                    <div className="flex items-center gap-3 text-[11px] text-psj-text-2">
+                                                                        <Zap size={12} className="text-psj-blue" />
+                                                                        <span className="whitespace-nowrap">
+                                                                            New GUI Command Builder
+                                                                        </span>
+                                                                    </div>
+                                                                    <div className="flex items-center gap-3 text-[11px] text-psj-text-2">
+                                                                        <Zap size={12} className="text-psj-blue" />
+                                                                        <span className="whitespace-nowrap">
+                                                                            Enhanced PSJ-Utility API
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
+
                                                             <Link
                                                                 href="/changelog"
-                                                                className="psj-btn-primary w-full justify-center !text-[12px] !px-2 !py-3.5 !rounded-none mt-8 group transition-all duration-300 hover:shadow-lg hover:shadow-psj-blue/20"
+                                                                className="psj-btn-primary w-full justify-center !text-[12px] !px-6 !py-4 !rounded-none mt-10 group/btn transition-all duration-300 hover:shadow-xl hover:shadow-psj-blue/20 relative overflow-hidden"
                                                             >
-                                                                <span>Explore Changelog</span>
-                                                                <X
+                                                                <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+                                                                <span className="relative z-10 whitespace-nowrap">
+                                                                    Explore Changelog
+                                                                </span>
+                                                                <ArrowRight
                                                                     size={14}
-                                                                    className="ml-2 group-hover:translate-x-1 transition-transform rotate-45"
+                                                                    className="ml-2 relative z-10 group-hover/btn:translate-x-1 transition-transform"
                                                                 />
                                                             </Link>
                                                         </div>

@@ -1,7 +1,13 @@
 {
     "tailwindCSS.experimental.classRegex": [
-        ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-        ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+        [
+            "cva\\(([^)]*)\\)",
+            "[\"'`]([^\"'`]*).*?[\"'`]"
+        ],
+        [
+            "cn\\(([^)]*)\\)",
+            "(?:'|\"|`)([^']*)(?:'|\"|`)"
+        ]
     ],
     "oxc.enable.oxlint": true,
     "files.associations": {
@@ -11,7 +17,9 @@
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "i18n-ally.localesPaths": ["apps/docs/locales"],
+    "i18n-ally.localesPaths": [
+        "apps/docs/locales"
+    ],
     "i18n-ally.keystyle": "nested",
     "i18n-ally.sourceLanguage": "ja",
     "editor.formatOnSave": true,
@@ -39,6 +47,7 @@
         "oxlint",
         "postpublish",
         "psjapi",
+        "Pythonic",
         "shiki",
         "shikijs",
         "stopwords",

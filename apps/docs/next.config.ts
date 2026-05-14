@@ -9,6 +9,9 @@ const withAnalyzer = createBundleAnalyzer({
 });
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
+const versions = (process.env.API_VERSIONS || '').split(',').filter(Boolean);
+const latestVersion = versions[0] || '5.1.0';
+
 const config: NextConfig = {
     env: {
         API_VERSIONS: process.env.API_VERSIONS,
@@ -39,6 +42,22 @@ const config: NextConfig = {
                 port: '',
             },
         ],
+    },
+
+    async redirects() {
+        if (versions.length <= 1) return [];
+        return [
+            {
+                source: '/docs/api/:product(macro|psj-command|psj-gui)',
+                destination: `/docs/api/${latestVersion}/:product`,
+                permanent: false,
+            },
+            {
+                source: '/docs/data-types',
+                destination: `/docs/api/${latestVersion}/data-types`,
+                permanent: false,
+            },
+        ];
     },
 };
 
