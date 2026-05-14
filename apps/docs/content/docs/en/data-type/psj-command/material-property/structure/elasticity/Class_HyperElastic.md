@@ -42,7 +42,6 @@ explicitly describe meaning of material properties, user can use the `KEY NAME` 
 `PRESSURE_FORCE_LOADING` is equal to ID = 63.\
 
 <details>
-
 <summary> **`strainEnergyPotentialOrder = ARRUDA_BOYCE`** </summary>
 
 | INT Notation | Key Name              | Description                                          |
@@ -75,7 +74,6 @@ JPT.Debugger(structure_steel) #for checking return value
 
 </details>
 <details>
-
 <summary> **`strainEnergyPotentialOrder = MARLOW`** </summary>
 
 | INT Notation | Key Name              | Description                                          |
@@ -103,7 +101,6 @@ JPT.Debugger(structure_steel) #for checking return value
 
 </details>
 <details>
-
 <summary> **`strainEnergyPotentialOrder = MOONEY_RIVLIN`** </summary>
 
 | INT Notation | Key Name              | Description                                          |
@@ -131,7 +128,6 @@ JPT.Debugger(structure_steel) #for checking return value
 
 </details>
 <details>
-
 <summary> **`strainEnergyPotentialOrder = NEO_HOOKE`** </summary>
 
 | INT Notation | Key Name              | Description                                          |
@@ -159,7 +155,6 @@ JPT.Debugger(structure_steel) #for checking return value
 
 </details>
 <details>
-
 <summary> **`strainEnergyPotentialOrder = OGDEN`** </summary>
 
 | INT Notation | Key Name              | Description                                          |
@@ -187,7 +182,6 @@ JPT.Debugger(structure_steel) #for checking return value
 
 </details>
 <details>
-
 <summary> **`strainEnergyPotentialOrder = POLYNOMIAL`** </summary>
 
 | INT Notation | Key Name              | Description                                          |
@@ -221,7 +215,6 @@ JPT.Debugger(structure_steel) #for checking return value
 
 </details>
 <details>
-
 <summary> **`strainEnergyPotentialOrder = REDUCED_POLYNOMIAL`** </summary>
 
 | INT Notation | Key Name              | Description                                          |
@@ -254,7 +247,6 @@ JPT.Debugger(structure_steel) #for checking return value
 
 </details>
 <details>
-
 <summary> **`strainEnergyPotentialOrder = USER`** </summary>
 
 | INT Notation | Key Name              | Description                                          |
@@ -282,7 +274,6 @@ JPT.Debugger(structure_steel) #for checking return value
 
 </details>
 <details>
-
 <summary> **`strainEnergyPotentialOrder = VAN_DER_WAALS`** </summary>
 
 | INT Notation | Key Name              | Description                                          |
@@ -318,7 +309,6 @@ JPT.Debugger(structure_steel) #for checking return value
 
 </details>
 <details>
-
 <summary> **`strainEnergyPotentialOrder = YEOH`** </summary>
 
 | INT Notation | Key Name        | Description                                           |

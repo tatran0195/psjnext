@@ -29,7 +29,6 @@ explicitly describe meaning of material properties, user can use the `KEY NAME` 
 `YOUNGS_MODULUS` is equal to ID = 1.
 
 <details>
-
 <summary> **`elasticType = ISOTROPIC`** </summary>
 
 | INT Notation | Key Name                            | Description                                                      |
@@ -66,7 +65,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`elasticType = ORTHOTROPIC(2D)`** </summary>
 
 | INT Notation | Key Name | Description                         |
@@ -111,7 +109,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`elasticType = ORTHOTROPIC(3D Type1)`** </summary>
 
 | INT Notation | Key Name       | Description                                          |
@@ -152,7 +149,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`elasticType = ORTHOTROPIC(3D Type2)`** </summary>
 
 | INT Notation | Key Name       | Description                                          |
@@ -193,7 +189,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`elasticType = ANISOTROPIC(2D)`** </summary>
 
 | INT Notation | Key Name                            | Description                                                      |
@@ -224,7 +219,6 @@ JPT.Debugger(density) #for checking return value
 </details>
 
 <details>
-
 <summary> **`elasticType = ANISOTROPIC(3D)`** </summary>
 
 | INT Notation | Key Name | Description                       |
@@ -255,7 +249,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`elasticType = LAMINA`** </summary>
 
 | INT Notation | Key Name       | Description                                          |
@@ -278,7 +271,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`elasticType = TRACTION`** </summary>
 
 | INT Notation | Key Name       | Description                                          |
@@ -307,7 +299,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`elasticType = COUPLE_TRACTION`** </summary>
 
 | INT Notation | Key Name       | Description                                          |
@@ -330,7 +321,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`elasticType = SHORT_FIBER`** </summary>
 
 | INT Notation | Key Name       | Description                                          |

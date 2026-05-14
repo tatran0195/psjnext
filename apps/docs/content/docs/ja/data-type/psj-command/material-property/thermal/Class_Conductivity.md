@@ -24,7 +24,6 @@ describe meaning of material properties, user can use the `KEY NAME` instead of 
 `CONDUCTIVITY` is equal to ID = 51.
 
 <details>
-
 <summary> **`conductivityType = ISOTROPIC`** </summary>
 
 | Int Notation | Key Name       | Description                                          |
@@ -48,7 +47,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`conductivityType = ORTHOTROPIC`** </summary>
 
 | Int Notation | Key Name       | Description                                          |
@@ -75,7 +73,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`conductivityType = ANISOTROPIC`** </summary>
 
 | Int Notation | Key Name       | Description                                          |

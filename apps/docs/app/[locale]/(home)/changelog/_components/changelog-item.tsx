@@ -2,12 +2,12 @@ import NextImage from 'next/image';
 import { useParams } from 'next/navigation';
 
 import { motion } from 'framer-motion';
-import Link from 'fumadocs-core/link';
 import { ChevronRight, Link2 } from 'lucide-react';
 import Markdown from 'markdown-to-jsx';
 import { useTranslations } from 'next-intl';
 
 import { Grid } from '@/components/grid-pattern';
+import { Link } from '@/i18n/navigation';
 
 export interface ChangelogFrontmatter {
     id: string;

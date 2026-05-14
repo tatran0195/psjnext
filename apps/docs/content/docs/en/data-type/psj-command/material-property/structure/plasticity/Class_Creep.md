@@ -26,7 +26,6 @@ explicitly describe meaning of material properties, user can use the `KEY NAME` 
 `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 
 <details>
-
 <summary> **`lawType = Strain-Hardening`** </summary>
 
 | INT Notation | Key Name             | Description                                          |
@@ -55,7 +54,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`lawType = Time-Hardening`** </summary>
 
 | INT Notation | Key Name             | Description                                          |
@@ -84,7 +82,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`lawType = Hyperbolic-Sine`** </summary>
 
 | INT Notation | Key Name             | Description                                          |
@@ -118,7 +115,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`lawType = ADVC-Law`** </summary>
 
 | INT Notation | Key Name | Description                       |

@@ -34,7 +34,6 @@ explicitly describe meaning of material properties, user can use the `KEY NAME` 
 `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 
 <details>
-
 <summary> **`harden = Isotropic`** </summary>
 
 | INT Notation | Key Name        | Description                                           |
@@ -68,7 +67,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`harden = Kinematic`** </summary>
 
 | INT Notation | Key Name        | Description                                           |
@@ -97,7 +95,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`harden = Johnson_Cook`** </summary>
 
 | INT Notation | Key Name        | Description                                           |
@@ -131,7 +128,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`harden = User`** </summary>
 
 | INT Notation | Key Name        | Description                                           |
@@ -155,7 +151,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`harden = Combined`** </summary>
 
 | INT Notation | Key Name        | Description                                                         |

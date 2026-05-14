@@ -25,7 +25,6 @@ describe meaning of material properties, user can use the `KEY NAME` instead of 
 equal to ID = 69.
 
 <details>
-
 <summary> **`expansionType = ISOTROPIC`** </summary>
 
 | INT Notation | Key Name       | Description                                                |
@@ -49,7 +48,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`expansionType = ORTHOTROPIC(2D)`** </summary>
 
 | INT Notation | Key Name       | Description                                          |
@@ -76,7 +74,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`expansionType = ORTHOTROPIC(3D)`** </summary>
 
 | INT Notation | Key Name       | Description                                          |
@@ -105,7 +102,6 @@ JPT.Debugger(density) #for checking return value
 </details>
 
 <details>
-
 <summary> **`expansionType = ANISOTROPIC(2D)`** </summary>
 
 | INT Notation | Key Name       | Description                                          |
@@ -134,7 +130,6 @@ JPT.Debugger(sample_Mat) #for checking return value
 </details>
 
 <details>
-
 <summary> **`expansionType = ANISOTROPIC(3D)`** </summary>
 
 | INT Notation | Key Name       | Description                                          |

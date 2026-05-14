@@ -24,7 +24,6 @@ describe meaning of material properties, user can use the `KEY NAME` instead of 
 `PRESSURE_FORCE_LOADING` is equal to ID = 63.
 
 <details>
-
 <summary> **`viscosityType = NewTonian`** </summary>
 
 | INT Notation | Key Name    | Description                                          |

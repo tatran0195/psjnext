@@ -569,7 +569,6 @@ Available units for mass moment of inertia per unit length.
 </details>
 
 <details>
-
 <summary> **`MomentInertiaUnit`** </summary>
 
 Available units for inertia (Area) moment.
