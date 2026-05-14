@@ -9,13 +9,13 @@
     },
     "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
     "[json]": {
-        "editor.defaultFormatter": "oxc.oxc-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "i18n-ally.localesPaths": ["apps/docs/locales"],
     "i18n-ally.keystyle": "nested",
     "i18n-ally.sourceLanguage": "ja",
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "oxc.fmt.configPath": ".oxfmtrc.jsonc",
     "terminal.integrated.scrollback": 10000,
     "typescript.tsdk": "node_modules/typescript/lib",
@@ -47,19 +47,19 @@
         "twoslash"
     ],
     "[typescript]": {
-        "editor.defaultFormatter": "oxc.oxc-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[markdown]": {
         "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
     },
     "[mdx]": {
-        "editor.defaultFormatter": "unifiedjs.vscode-mdx"
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
     },
     "[typescriptreact]": {
-        "editor.defaultFormatter": "oxc.oxc-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[jsonc]": {
-        "editor.defaultFormatter": "oxc.oxc-vscode"
+        "editor.defaultFormatter": "vscode.json-language-features"
     },
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit",
