@@ -253,18 +253,6 @@ export function versionPlugin(): LoaderPlugin {
                 if (apiFolderIdx === -1) return node;
 
                 const apiFolder = node.children[apiFolderIdx] as PageTree.Folder;
-
-                // ── Pre-flight: already-versioned folder layout ──────────────
-                // Mirror the transformStorage guard at the page-tree level.
-                // If any direct child of api/ is already a semver folder, the
-                // tree was built from pre-versioned content; leave it alone.
-                const hasVersionedChildren = apiFolder.children.some((child) => {
-                    if (child.type !== 'folder') return false;
-                    const seg = nodeStoragePath(child).split('/').pop() ?? '';
-                    return /^\d+\.\d+/.test(seg);
-                });
-                if (hasVersionedChildren) return node;
-
                 const versions = getApiVersions();
 
                 const versionedChildren: PageTree.Node[] = apiFolder.children

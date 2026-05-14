@@ -19,6 +19,7 @@ import { SymbolLink } from './mdx/symbol-link';
 import { Video } from './mdx/video';
 
 import type { MDXComponents } from 'mdx/types';
+import TreeChartLoader from './mdx/tree-loader';
 
 export function getMDXComponents(components?: MDXComponents) {
     return {
@@ -31,6 +32,7 @@ export function getMDXComponents(components?: MDXComponents) {
         Accordions,
         RibbonPath,
         Badge,
+        TreeChart: (props) => <TreeChartLoader {...props} />,
         Banner,
         Mermaid: ({ chart }: { chart: string }) => (
             <Suspense fallback={<div className="h-40 animate-pulse rounded-lg bg-fd-muted" />}>

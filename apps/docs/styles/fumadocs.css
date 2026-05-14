@@ -149,9 +149,9 @@
 }
 
 /* ── Accordion ──────────────────────────────────────────────────────────────── */
-[data-state='open'] > button {
+/* [data-state='open'] > button {
     background: var(--psj-blue-subtle);
-}
+} */
 
 /* ── List spacing ───────────────────────────────────────────────────────────── */
 #nd-page .prose ul,

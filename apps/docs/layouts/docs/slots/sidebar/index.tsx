@@ -198,7 +198,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                                     color: 'ghost',
                                                     size: 'icon-sm',
                                                     className: 'mt-px mb-auto text-fd-muted-foreground',
-                                                }),
+                                                })
                                             )}
                                         >
                                             <SidebarIcon />
@@ -233,7 +233,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                         activeHref={level.active?.url}
                                         className={i < nestedTabs.length - 1 ? '-mb-1' : ''}
                                     />
-                                ),
+                                )
                             )}
                             {isApiRoute && (
                                 <SearchComposition filterQuery={filterQuery} setFilterQuery={setFilterQuery} />
@@ -244,8 +244,8 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                 {viewport}
                 {renderFooter({
                     className: cn(
-                        'flex-row text-fd-muted-foreground items-center border-t px-1 py-2.5',
-                        iconLinks.length > 0 && 'max-lg:flex',
+                        'flex-row text-fd-muted-foreground items-center px-1 py-2.5',
+                        iconLinks.length > 0 && 'max-lg:flex'
                     ),
                     children: iconLinks.map((item, i) => (
                         <LinkItem
@@ -256,7 +256,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                     size: 'icon-sm',
                                     color: 'ghost',
                                     className: 'lg:hidden',
-                                }),
+                                })
                             )}
                             aria-label={item.label}
                         >
@@ -275,7 +275,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                         size: 'icon-sm',
                                         color: 'ghost',
                                         className: 'ms-auto text-fd-muted-foreground',
-                                    }),
+                                    })
                                 )}
                             >
                                 <X />
@@ -291,9 +291,9 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                 {viewport}
                 {renderFooter({
                     className: cn(
-                        'flex-row text-fd-muted-foreground items-center border-t p-0 pt-2 justify-end',
+                        'flex-row text-fd-muted-foreground items-center p-0 pt-2 justify-end',
                         (slots.languageSelect || slots.themeSwitch) && 'flex',
-                        iconLinks.length > 0 && 'max-lg:flex',
+                        iconLinks.length > 0 && 'max-lg:flex'
                     ),
                     children: (
                         <>
@@ -307,7 +307,7 @@ export function Sidebar({ banner, footer, components, collapsible = true, ...res
                                             color: 'ghost',
                                         }),
                                         'text-fd-muted-foreground lg:hidden',
-                                        i === iconLinks.length - 1 && 'me-auto',
+                                        i === iconLinks.length - 1 && 'me-auto'
                                     )}
                                     aria-label={item.label}
                                 >
@@ -341,7 +341,7 @@ function SearchComposition({
         <div
             className={cn(
                 'inline-flex items-center gap-2 rounded-none p-1.5 ps-2 text-sm hover:text-fd-muted-foreground transition-colors focus-within:bg-fd-accent focus-within:text-fd-accent-foreground',
-                className,
+                className
             )}
         >
             <Search className="size-4 shrink-0 text-fd-muted-foreground" />

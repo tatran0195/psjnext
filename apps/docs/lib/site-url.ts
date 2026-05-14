@@ -1,4 +1,4 @@
-const SITE_FALLBACK_PRODUCTION_URL = 'https://cossistant.com';
+const SITE_FALLBACK_PRODUCTION_URL = 'https://psjdoc.e-technostar.com';
 const SITE_FALLBACK_DEVELOPMENT_URL = 'http://localhost:3000';
 
 const SITE_URL_ENV_KEYS = ['PUBLIC_APP_URL', 'NEXT_PUBLIC_BASE_URL', 'NEXT_PUBLIC_APP_URL', 'NEXT_PUBLIC_URL'] as const;
