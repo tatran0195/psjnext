@@ -90,24 +90,37 @@ Updated by adding new option or by aspect of usability/maintainability.
 
 <details>
 
-<summary>List of newly added command</summary>- `JPT.GetAppPathInfo()`: Get the information of path specified by
-PathType. - `JPT.SelectionByIDs()`: Select entities by using their IDs. - `JPT.IsSpatialPointRendered()`:Check if a
-specified point (node) that has the spatial coordinates (X, Y, Z) is rendered in the current view. -
-`JPT.CloseAllGraphViews()` : Close all chart views. - `JPT.CloseGraphViewByDocumentName()`: Close all chart views of
-indicated document. - `JPT.ConvertCoordinateFromGlobalToLocal()`: Convert global coordinate of selected DItem Type into
-specified local coordinate. - `JPT.HighlightByID()`: The command highlights LBC and property items in the Assemble Tree.
+<summary>List of newly added command</summary>
+
+- `JPT.GetAppPathInfo()`: Get the information of path specified by
+PathType.
+- `JPT.SelectionByIDs()`: Select entities by using their IDs.
+- `JPT.IsSpatialPointRendered()`:Check if a specified point (node) that has the spatial coordinates (X, Y, Z) is rendered in the current view.
+- `JPT.CloseAllGraphViews()` : Close all chart views.
+- `JPT.CloseGraphViewByDocumentName()`: Close all chart views of indicated document.
+- `JPT.ConvertCoordinateFromGlobalToLocal()`: Convert global coordinate of selected DItem Type into
+specified local coordinate.
+- `JPT.HighlightByID()`: The command highlights LBC and property items in the Assemble Tree.
 At the same time, it changes the display of part faces connected to the highlighted LBC/property in the Main Window. -
-`JPT.SetActiveDocumentByID()`: Active the document specified by ID. - `JPT.SetActiveDocumentByName()`: Active the
-document specified by Name. - `JPT.GetDocumentList()`: Get a list of documents opening at current. -
-`JPT.GetActiveDocument()`: Get the active document. - `JPT.GetDocumentByID()`: Get a document specified by ID. -
-`JPT.GetDocumentByName()`: Get a document specified by Name. - `JPT.CloseDocumentByID()`: Close a document specified by
-ID. - `GetAllCustomNotes`: Get all Custom Notes. - `GetAllCustomNoteCollections`: Get all Custom Note Collections. -
-`JPT.GetCurrentDeformation()`: Get current deformation settings. - `JPT.GetCurrentViewPoint()`: Get current view point
-settings. - `JPT.GetCurrentCrossSection()`: Get current cross section settings. - `JPT.GetCurrentContour()`: Get current
-contour settings. - `JPT.GetCurrentCircle()`: Get current circle settings. - `JPT.GetCurrentDiagram()`: Get current
-diagram settings. - `JPT.GetCurrentVector()`: Get current vector settings. - `JPT.GetCurrentAnimation()`: Get current
-animation settings. - `JPT.CastDItemToDRONode()`: Convert DItem object to DPostNode object. -
-`JPT.CastDItemToDROElem()`: Convert DItem object to DPostElem object.
+`JPT.SetActiveDocumentByID()`: Active the document specified by ID.
+- `JPT.SetActiveDocumentByName()`: Active the document specified by Name. 
+- `JPT.GetDocumentList()`: Get a list of documents opening at current. 
+- `JPT.GetActiveDocument()`: Get the active document. 
+- `JPT.GetDocumentByID()`: Get a document specified by ID. 
+- `JPT.GetDocumentByName()`: Get a document specified by Name. 
+- `JPT.CloseDocumentByID()`: Close a document specified by ID. 
+- `GetAllCustomNotes`: Get all Custom Notes. 
+- `GetAllCustomNoteCollections`: Get all Custom Note Collections. 
+- `JPT.GetCurrentDeformation()`: Get current deformation settings. 
+- `JPT.GetCurrentViewPoint()`: Get current view point settings. 
+- `JPT.GetCurrentCrossSection()`: Get current cross section settings. 
+- `JPT.GetCurrentContour()`: Get current contour settings. 
+- `JPT.GetCurrentCircle()`: Get current circle settings. 
+- `JPT.GetCurrentDiagram()`: Get current diagram settings. 
+- `JPT.GetCurrentVector()`: Get current vector settings. 
+- `JPT.GetCurrentAnimation()`: Get current animation settings. 
+- `JPT.CastDItemToDRONode()`: Convert DItem object to DPostNode object. 
+- `JPT.CastDItemToDROElem()`: Convert DItem object to DPostElem object.
 
 </details>
 
@@ -115,8 +128,9 @@ animation settings. - `JPT.CastDItemToDRONode()`: Convert DItem object to DPostN
 
 <details>
 
-<summary>List of commands changed and modified</summary>- `JPT.EnableLicenseFeature()`: Changed so that JPT_BASE is
-automatically enabled when a license that requires JPT_BASE to be enabled is specified and activated.
+<summary>List of commands changed and modified</summary>
+
+- `JPT.EnableLicenseFeature()`: Changed so that JPT_BASE is automatically enabled when a license that requires JPT_BASE to be enabled is specified and activated.
 
 </details>
 
@@ -128,13 +142,14 @@ automatically enabled when a license that requires JPT_BASE to be enabled is spe
 
 <details>
 <summary>List of newly added commands</summary>
-        - `dlg.remove_combobox_option()`: Remove all or some options of a Combobox.
-        - `dlg.remove_listbox_options()`: Remove all or some options of a Listbox.
-        - `dlg.get_listbox_sels()`: Get all selected indexes in Listbox.
-        - `dlg.get_table_cell_fill_color()`: Get the fill color of selected/specified cell.
-        - `dlg.on_spin_changed()`: Enables to run a function after a Spin value is changed.
-        - `dlg.on_listbox_sel()`: Enables to run a function after a ListBox item is selected.
-        - `dlg.fill_table_by_file()`: Set Table data from file directly without using right-click on GUI.
+
+- `dlg.remove_combobox_option()`: Remove all or some options of a Combobox.
+- `dlg.remove_listbox_options()`: Remove all or some options of a Listbox.
+- `dlg.get_listbox_sels()`: Get all selected indexes in Listbox.
+- `dlg.get_table_cell_fill_color()`: Get the fill color of selected/specified cell.
+- `dlg.on_spin_changed()`: Enables to run a function after a Spin value is changed.
+- `dlg.on_listbox_sel()`: Enables to run a function after a ListBox item is selected.
+- `dlg.fill_table_by_file()`: Set Table data from file directly without using right-click on GUI.
 
 </details>
 
@@ -144,12 +159,17 @@ automatically enabled when a license that requires JPT_BASE to be enabled is spe
 
 <details>
 
-<summary>List of newly added macros</summary>- `ViewRemoveMode`: macro for turn ON/OFF remove mode. -
-`ViewShowGroupMode`: macro for turn ON/OFF group mode. - `ViewShowGlobalCoordinate`: macro for turn ON/OFF show global
-coordinate. - `CmdSetPreUnit`: macro for setting pre document units. - `SetDefaultInitialViewPoint`: macro for setting
-initial view point. - `ShowContactPairData`: macro implements the display of selections in the Contact Pair Selection
-dialog. - `CreateCustomNote`: macro create a Custom Note under specified Collection. - `CreateCollection`: macro create
-a Collection. - `EditCustomNoteWndPosition`: macro move the indicated custom note to specified screen position.
+<summary>List of newly added macros</summary>
+
+- `ViewRemoveMode`: macro for turn ON/OFF remove mode. 
+- `ViewShowGroupMode`: macro for turn ON/OFF group mode. 
+- `ViewShowGlobalCoordinate`: macro for turn ON/OFF show global coordinate. 
+- `CmdSetPreUnit`: macro for setting pre document units. 
+- `SetDefaultInitialViewPoint`: macro for setting initial view point. 
+- `ShowContactPairData`: macro implements the display of selections in the Contact Pair Selection dialog. 
+- `CreateCustomNote`: macro create a Custom Note under specified Collection. 
+- `CreateCollection`: macro create a Collection. 
+- `EditCustomNoteWndPosition`: macro move the indicated custom note to specified screen position.
 
 </details>
 
@@ -157,7 +177,8 @@ a Collection. - `EditCustomNoteWndPosition`: macro move the indicated custom not
 
 <details>
 <summary>List of marcos changed and modified</summary>
-        - `LaunchOperation()`: Enabled to return value of succeed/failed.
+
+- `LaunchOperation()`: Enabled to return value of succeed/failed.
 
 </details>
 

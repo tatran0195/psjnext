@@ -10,7 +10,6 @@ tags: ['Release']
 ---
 
 :::tip[Highlight updates]
-
 主なアップデート内容本リリースは主に新しい[PSJ-GUI](../psj-gui)と[PSJ-Utility](../psj-utility)機能に焦点を当てています。詳細：
 
 - PSJ-GUIコマンド（API）とGUIコマンドビルダーの使いやすさを向上。
@@ -18,7 +17,6 @@ tags: ['Release']
 - PSJ-Command、PSJ-Utility、PSJ-GUI用の新しいデータ型を追加。
 - PSJコマンドで使用される引数名を修正。
 - PSJ-GUI、GUIコマンドビルダーのクラッシュ問題と軽微なバグを修正。
-
 :::
 
 ## 🚀 新機能
@@ -26,133 +24,127 @@ tags: ['Release']
 ### 📦 データ型
 
 - PSJ-Command:
-  EntityTypeは*[`DItemType`](../data-type/psj-command/DItem-types)*に統合され、JupiterでDItemの型を表す公式タイプになりました。新しい*[`DItemType`](../data-type/psj-command/DItem-types)*のタイプも追加されました。
+  EntityTypeは\*[`DItemType`](../data-type/psj-command/DItem-types)_に統合され、JupiterでDItemの型を表す公式タイプになりました。新しい_[`DItemType`](../data-type/psj-command/DItem-types)\*のタイプも追加されました。
 
 <details>
-<summary>新しく追加されたDItemTypeのリスト</summary>
+  <summary>新しく追加されたDItemTypeのリスト</summary>
 
-| INT 記法 | DItemの型                                    |
-| -------- | -------------------------------------------- |
-| 8        | JPT.DItemType.SHAPELINK                      |
-| 9        | JPT.DItemType.BODYLINK                       |
-| 17       | JPT.DItemType.REF_SHAPELINK                  |
-| 18       | JPT.DItemType.REF_BODYLINK                   |
-| 48       | JPT.DItemType.LBC_TEMP_LOAD                  |
-| 59       | JPT.DItemType.LBC_DYNAMIC_INITIAL_CONDITION  |
-| 62       | JPT.DItemType.LBC_MAPPING_FORCE              |
-| 63       | JPT.DItemType.LBC_MAPPING_TEMP_LOAD          |
-| 174      | JPT.DItemType.LBC_MAPPING_TEMP_INIT          |
-| 66       | JPT.DItemType.LBC_INITSTRESS_GENERAL         |
-| 77       | JPT.DItemType.LBC_WELD                       |
-| 92       | JPT.DItemType.PROPERTY_3D_WELDBEAD           |
-| 95       | JPT.DItemType.SECTION_SKETCHER               |
-| 100      | JPT.DItemType.CONNECT_PROD                   |
-| 104      | JPT.DItemType.CONNECT_MOMENT                 |
-| 105      | JPT.DItemType.CONNECT_WELD                   |
-| 113      | JPT.DItemType.CONTACT                        |
-| 114      | JPT.DItemType.CUSTOM_ATTR_STRING             |
-| 115      | JPT.DItemType.CUSTOM_ATTR_VECTOR             |
-| 116      | JPT.DItemType.CUSTOM_ATTR_DOUBLE             |
-| 128      | JPT.DItemType.ADVCPROCESS_SSH                |
-| 129      | JPT.DItemType.ADVCPROCESS_TH                 |
-| 149      | JPT.DItemType.WELDORDER                      |
-| 150      | JPT.DItemType.ATTRIBUTE_FXWELD               |
-| 154      | JPT.DItemType.ATTRIBUTE_PS_BLENDSURFACE      |
-| 160      | JPT.DItemType.LBC_PRETENSION_NXN             |
-| 161      | JPT.DItemType.LBC_MAPPING_TEMP_MARINE_ENGINE |
-| 162      | JPT.DItemType.USER_PROP                      |
-| 165      | JPT.DItemType.LBC_MAPPING_FORCEDDISPLACEMENT |
-| 166      | JPT.DItemType.LBC_MAPPING_FORCED_TEMP        |
-| 167      | JPT.DItemType.NASTRAN_POSTJOB                |
-| 168      | JPT.DItemType.ADVC2_POSTJOB                  |
-| 183      | JPT.DItemType.TSV_POSTJOB                    |
-| 184      | JPT.DItemType.MARCJOB                        |
-| 173      | JPT.DItemType.PERMASJOB                      |
-| 180      | JPT.DItemType.FRONTISTRJOB                   |
-| 192      | JPT.DItemType.POST_NODE                      |
-| 193      | JPT.DItemType.POST_ELEM                      |
-| 232      | JPT.DItemType.OPTISHAPE_TS_JOB               |
-
+  | INT 記法 | DItemの型                                          |
+  | ------ | ------------------------------------------------ |
+  | 8      | JPT.DItemType.SHAPELINK                          |
+  | 9      | JPT.DItemType.BODYLINK                           |
+  | 17     | JPT.DItemType.REF\_SHAPELINK                     |
+  | 18     | JPT.DItemType.REF\_BODYLINK                      |
+  | 48     | JPT.DItemType.LBC\_TEMP\_LOAD                    |
+  | 59     | JPT.DItemType.LBC\_DYNAMIC\_INITIAL\_CONDITION   |
+  | 62     | JPT.DItemType.LBC\_MAPPING\_FORCE                |
+  | 63     | JPT.DItemType.LBC\_MAPPING\_TEMP\_LOAD           |
+  | 174    | JPT.DItemType.LBC\_MAPPING\_TEMP\_INIT           |
+  | 66     | JPT.DItemType.LBC\_INITSTRESS\_GENERAL           |
+  | 77     | JPT.DItemType.LBC\_WELD                          |
+  | 92     | JPT.DItemType.PROPERTY\_3D\_WELDBEAD             |
+  | 95     | JPT.DItemType.SECTION\_SKETCHER                  |
+  | 100    | JPT.DItemType.CONNECT\_PROD                      |
+  | 104    | JPT.DItemType.CONNECT\_MOMENT                    |
+  | 105    | JPT.DItemType.CONNECT\_WELD                      |
+  | 113    | JPT.DItemType.CONTACT                            |
+  | 114    | JPT.DItemType.CUSTOM\_ATTR\_STRING               |
+  | 115    | JPT.DItemType.CUSTOM\_ATTR\_VECTOR               |
+  | 116    | JPT.DItemType.CUSTOM\_ATTR\_DOUBLE               |
+  | 128    | JPT.DItemType.ADVCPROCESS\_SSH                   |
+  | 129    | JPT.DItemType.ADVCPROCESS\_TH                    |
+  | 149    | JPT.DItemType.WELDORDER                          |
+  | 150    | JPT.DItemType.ATTRIBUTE\_FXWELD                  |
+  | 154    | JPT.DItemType.ATTRIBUTE\_PS\_BLENDSURFACE        |
+  | 160    | JPT.DItemType.LBC\_PRETENSION\_NXN               |
+  | 161    | JPT.DItemType.LBC\_MAPPING\_TEMP\_MARINE\_ENGINE |
+  | 162    | JPT.DItemType.USER\_PROP                         |
+  | 165    | JPT.DItemType.LBC\_MAPPING\_FORCEDDISPLACEMENT   |
+  | 166    | JPT.DItemType.LBC\_MAPPING\_FORCED\_TEMP         |
+  | 167    | JPT.DItemType.NASTRAN\_POSTJOB                   |
+  | 168    | JPT.DItemType.ADVC2\_POSTJOB                     |
+  | 183    | JPT.DItemType.TSV\_POSTJOB                       |
+  | 184    | JPT.DItemType.MARCJOB                            |
+  | 173    | JPT.DItemType.PERMASJOB                          |
+  | 180    | JPT.DItemType.FRONTISTRJOB                       |
+  | 192    | JPT.DItemType.POST\_NODE                         |
+  | 193    | JPT.DItemType.POST\_ELEM                         |
+  | 232    | JPT.DItemType.OPTISHAPE\_TS\_JOB                 |
 </details>
 
-また、新しく*[`ElemKind`](../data-type/psj-command/element-types)*と*[`ElemType`](../data-type/psj-command/element-types)*のタイプも追加されました：
+また、新しく\*[`ElemKind`](../data-type/psj-command/element-types)_と_[`ElemType`](../data-type/psj-command/element-types)\*のタイプも追加されました：
 
 <details>
-<summary>新しく追加されたElemKindとElemTypeのリスト</summary>
+  <summary>新しく追加されたElemKindとElemTypeのリスト</summary>
 
-| ElemKind Int記法 | 要素の種類    | ElemType Int記法 | 要素のタイプ       |
-| ---------------- | ------------- | ---------------- | ------------------ |
-| 3                | `ELEMKIND_2D` | 17               | `ELEMTYPE_QUAD6`   |
-|                  |               | 18               | `ELEMTYPE_QUAD9`   |
-| 4                | `ELEMKIND_3D` | 19               | `ELEMTYPE_PRISM12` |
-|                  |               | 20               | `ELEMTYPE_HEX18`   |
-| 5                | `ELEMKIND_SP` | 16               | `ELEMTYPE_PLOT`    |
-|                  |               | 21               | `ELEMTYPE_RBE`     |
-|                  |               | 22               | `ELEMTYPE_MASS`    |
-|                  |               | 23               | `ELEMTYPE_VIRTUAL` |
-
+  | ElemKind Int記法 | 要素の種類         | ElemType Int記法 | 要素のタイプ             |
+  | -------------- | ------------- | -------------- | ------------------ |
+  | 3              | `ELEMKIND_2D` | 17             | `ELEMTYPE_QUAD6`   |
+  |                |               | 18             | `ELEMTYPE_QUAD9`   |
+  | 4              | `ELEMKIND_3D` | 19             | `ELEMTYPE_PRISM12` |
+  |                |               | 20             | `ELEMTYPE_HEX18`   |
+  | 5              | `ELEMKIND_SP` | 16             | `ELEMTYPE_PLOT`    |
+  |                |               | 21             | `ELEMTYPE_RBE`     |
+  |                |               | 22             | `ELEMTYPE_MASS`    |
+  |                |               | 23             | `ELEMTYPE_VIRTUAL` |
 </details>
 
 - PSJ-Utility: プリユーティリティとポストユーティリティの2つのタイプに分離されました：
   - プリユーティリティ: 前処理ワークフローで使用されるデータ型で、新しいクラスとアップデートを含みます：
-    - 組み込み型: 新しい*[DItemPair](../data-type/psj-utility/pre-utility/built-in-types/DItemPair)*、*[DItemPairVector](../data-type/psj-utility/pre-utility/built-in-types/DItemPairVector)*、*[DCoord](../data-type/psj-utility/pre-utility/built-in-types/DCoord)*、*[CoordVector](../data-type/psj-utility/pre-utility/built-in-types/CoordVector)*、*[DConnect](../data-type/psj-utility/pre-utility/built-in-types/DConnect)*、*[ConnectVector](../data-type/psj-utility/pre-utility/built-in-types/ConnectVector)*、*[DLoadBC](../data-type/psj-utility/pre-utility/built-in-types/DLoadBC)*、*[LoadBCVector](../data-type/psj-utility/pre-utility/built-in-types/LoadBCVector)*、*[DSolverJob](../data-type/psj-utility/pre-utility/built-in-types/DSolverJob)*、*[SolverJobVector](../data-type/psj-utility/pre-utility/built-in-types/SolverJobVector)*、*[Document](../data-type/psj-utility/pre-utility/built-in-types/Document)*を追加。さらに、*[DBody](../data-type/psj-utility/pre-utility/built-in-types/DBody)*に新しい属性`properties`が追加されました。
+    - 組み込み型: 新しい\*[DItemPair](../data-type/psj-utility/pre-utility/built-in-types/DItemPair)_、_[DItemPairVector](../data-type/psj-utility/pre-utility/built-in-types/DItemPairVector)_、_[DCoord](../data-type/psj-utility/pre-utility/built-in-types/DCoord)_、_[CoordVector](../data-type/psj-utility/pre-utility/built-in-types/CoordVector)_、_[DConnect](../data-type/psj-utility/pre-utility/built-in-types/DConnect)_、_[ConnectVector](../data-type/psj-utility/pre-utility/built-in-types/ConnectVector)_、_[DLoadBC](../data-type/psj-utility/pre-utility/built-in-types/DLoadBC)_、_[LoadBCVector](../data-type/psj-utility/pre-utility/built-in-types/LoadBCVector)_、_[DSolverJob](../data-type/psj-utility/pre-utility/built-in-types/DSolverJob)_、_[SolverJobVector](../data-type/psj-utility/pre-utility/built-in-types/SolverJobVector)_、_[Document](../data-type/psj-utility/pre-utility/built-in-types/Document)_を追加。さらに、_[DBody](../data-type/psj-utility/pre-utility/built-in-types/DBody)\*に新しい属性`properties`が追加されました。
     - 列挙型:
-      *[パス型](../data-type/psj-utility/pre-utility/enumeration-types/path-types/)*の新しいタイプ`JPT.PathType.FILE_PATH`を追加。また、新しい*[DTableType](../data-type/psj-utility/pre-utility/enumeration-types/dtable-types)*のタイプが追加されました：
+      \*[パス型](../data-type/psj-utility/pre-utility/enumeration-types/path-types/)_の新しいタイプ`JPT.PathType.FILE_PATH`を追加。また、新しい_[DTableType](../data-type/psj-utility/pre-utility/enumeration-types/dtable-types)\*のタイプが追加されました：
 
 <details>
-<summary>新しく追加されたDTableTypeのリスト</summary>
+  <summary>新しく追加されたDTableTypeのリスト</summary>
 
-| ID  | Dtableタイプ                             |
-| --- | ---------------------------------------- |
-| 58  | `JPT.DTableType.DTABLE_SUP_GROUP`        |
-| 60  | `JPT.DTableType.DTABLE_ELEMEDGE_GROUP`   |
-| 62  | `JPT.DTableType.DTABLE_SECTION`          |
-| 65  | `JPT.DTableType.DTABLE_CUSTOM_ATTRIBUTE` |
-| 79  | `JPT.DTableType.DTABLE_LBC_DOFSET`       |
-| 86  | `JPT.DTableType.DTABLE_POSTJOB`          |
-| 87  | `JPT.DTableType.DTABLE_USER_RESULT`      |
-
+  | ID | Dtableタイプ                                |
+  | -- | ---------------------------------------- |
+  | 58 | `JPT.DTableType.DTABLE_SUP_GROUP`        |
+  | 60 | `JPT.DTableType.DTABLE_ELEMEDGE_GROUP`   |
+  | 62 | `JPT.DTableType.DTABLE_SECTION`          |
+  | 65 | `JPT.DTableType.DTABLE_CUSTOM_ATTRIBUTE` |
+  | 79 | `JPT.DTableType.DTABLE_LBC_DOFSET`       |
+  | 86 | `JPT.DTableType.DTABLE_POSTJOB`          |
+  | 87 | `JPT.DTableType.DTABLE_USER_RESULT`      |
 </details>
 
-            新しい*[UnitType](../data-type/psj-utility/pre-utility/enumeration-types/unit-types)*も追加されました：
+新しい\*[UnitType](../data-type/psj-utility/pre-utility/enumeration-types/unit-types)\*も追加されました：
 
 <details>
-<summary>新しく追加されたUnitTypeのリスト</summary>
+  <summary>新しく追加されたUnitTypeのリスト</summary>
 
-| ID  | 単位タイプ                                | 文字列単位                    |
-| --- | ----------------------------------------- | ----------------------------- |
-| 28  | `JPT.UnitType.Unit_LinearDensity`         | $kg/m\\oz/ft\\oz/in\\lb/yd$   |
-| 29  | `JPT.UnitType.Unit_SurfaceDensity`        |                               |
-| 30  | `JPT.UnitType.Unit_AreaMomentInertia`     | $mm^4\\m^4\\ft^4\\in^4\\cm^4$ |
-| 37  | `JPT.UnitType.Unit_StrainEnergy`          | $N-mm\\N-m$                   |
-| 41  | `JPT.UnitType.Unit_ElectricalResistivity` | $Ohm-mm\\Ohm-m$               |
-
+  | ID | 単位タイプ                                     | 文字列単位                     |
+  | -- | ----------------------------------------- | ------------------------- |
+  | 28 | `JPT.UnitType.Unit_LinearDensity`         | $kg/m\oz/ft\oz/in\lb/yd$  |
+  | 29 | `JPT.UnitType.Unit_SurfaceDensity`        |                           |
+  | 30 | `JPT.UnitType.Unit_AreaMomentInertia`     | $mm^4\m^4\ft^4\in^4\cm^4$ |
+  | 37 | `JPT.UnitType.Unit_StrainEnergy`          | $N-mm\N-m$                |
+  | 41 | `JPT.UnitType.Unit_ElectricalResistivity` | $Ohm-mm\Ohm-m$            |
 </details>
 
 - ポストユーティリティ: 後処理ワークフローで使用されるデータ型で、全く新しいクラスが追加されました：
   - 組み込み型:
-    *[DPostElem](../data-type/psj-utility/post-utility/post-built-in-types/DPostElem)*、*[DPostNode](../data-type/psj-utility/post-utility/post-built-in-types/DPostNode)*、*[ポストデータオプション](../data-type/psj-utility/post-utility/post-built-in-types/post-data-op)*、*[ポストタイムステップ情報](../data-type/psj-utility/post-utility/post-built-in-types/post-time-step-info)*。
+    _[DPostElem](../data-type/psj-utility/post-utility/post-built-in-types/DPostElem)_、_[DPostNode](../data-type/psj-utility/post-utility/post-built-in-types/DPostNode)_、_[ポストデータオプション](../data-type/psj-utility/post-utility/post-built-in-types/post-data-op)_、_[ポストタイムステップ情報](../data-type/psj-utility/post-utility/post-built-in-types/post-time-step-info)_。
   - 列挙型:
-    *[ポスト解析タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)*、*[ポストデータ範囲タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-data-range-types)*、*[ポスト結果データ位置タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-loc-types)*、*[ポスト結果データ変換タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-cnv-types)*、*[ポスト結果データ連続タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-cont-types)*、*[ポスト結果データ座標タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-coord-types)*、*[ポスト結果データ荷重1Dタイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-load1d-types)*、*[ポスト結果データ荷重2Dタイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-load2d-types)*、*[ポスト結果データ複素数タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-complex-types)*。
+    _[ポスト解析タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)_、_[ポストデータ範囲タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-data-range-types)_、_[ポスト結果データ位置タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-loc-types)_、_[ポスト結果データ変換タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-cnv-types)_、_[ポスト結果データ連続タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-cont-types)_、_[ポスト結果データ座標タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-coord-types)_、_[ポスト結果データ荷重1Dタイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-load1d-types)_、_[ポスト結果データ荷重2Dタイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-load2d-types)_、_[ポスト結果データ複素数タイプ](../data-type/psj-utility/post-utility/enumeration-types/post-result-data-complex-types)_。
 
-- PSJ-GUI: テーブル操作用の新しいクラスを追加：*[TableCellID](../data-type/psj-gui/TableCellID)*、*[TableCellVector](../data-type/psj-gui/TableCellVector)*、*[TableCellRange](../data-type/psj-gui/TableCellRange)*、*[TableCellRangeVector](../data-type/psj-gui/TableCellRangeVector)*、*[TableColumnInfo](../data-type/psj-gui/TableColumnInfo)*、*[TableColumnInfoVector](../data-type/psj-gui/TableColumnInfoVector)*。
+- PSJ-GUI: テーブル操作用の新しいクラスを追加：_[TableCellID](../data-type/psj-gui/TableCellID)_、_[TableCellVector](../data-type/psj-gui/TableCellVector)_、_[TableCellRange](../data-type/psj-gui/TableCellRange)_、_[TableCellRangeVector](../data-type/psj-gui/TableCellRangeVector)_、_[TableColumnInfo](../data-type/psj-gui/TableColumnInfo)_、_[TableColumnInfoVector](../data-type/psj-gui/TableColumnInfoVector)_。
 
 ### ⌘ PSJ-Command
 
 PSJ-Commandのキーワード引数名を変更し、使用時の可読性を確保し、科学用語の側面を統一しました。
 
 <details>
+  <summary>変更されたコマンドのリスト</summary>
 
-<summary>変更されたコマンドのリスト</summary>
-
-| PSJ-Command                                                                                                   | 旧                | 新                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------------- |
-| [Analysis.AbaqusStep.CoupledTDStep](../psj-command/analysis/Analysis.AbaqusStep.CoupledTDStep)                | dDampingfactor    | [dDampingFactor](../psj-command/analysis/Analysis.AbaqusStep.CoupledTDStep#ddampingfactor)          |
-| [Analysis.AbaqusStep.DynamicStep](../psj-command/analysis/Analysis.AbaqusStep.DynamicStep)                    | iNlgeom           | [iNlGeom](../psj-command/analysis/Analysis.AbaqusStep.DynamicStep#inlgeom)                          |
-| [Analysis.AbaqusStep.SteadyStateStep](../psj-command/analysis/Analysis.AbaqusStep.SteadyStateStep)            | iNlgeom           | [iNlGeom](../psj-command/analysis/Analysis.AbaqusStep.SteadyStateStep#inlgeom)                      |
-| [BoundaryConditions.Pressure.General](../psj-command/boundary-conditions/BoundaryConditions.Pressure.General) | iArrowdir         | [iArrowDir](../psj-command/boundary-conditions/BoundaryConditions.Pressure.General#iarrowdir)       |
-| [Connections.MPC.Equation.SemiAuto](../psj-command/connections/Connections.MPC.Equation.SemiAuto)             | listMPCConnection | [listMpcConnection](../psj-command/connections/Connections.MPC.Equation.SemiAuto#listmpcconnection) |
-
+  | PSJ-Command                                                                                                   | 旧                 | 新                                                                                                   |
+  | ------------------------------------------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------------- |
+  | [Analysis.AbaqusStep.CoupledTDStep](../psj-command/analysis/Analysis.AbaqusStep.CoupledTDStep)                | dDampingfactor    | [dDampingFactor](../psj-command/analysis/Analysis.AbaqusStep.CoupledTDStep#ddampingfactor)          |
+  | [Analysis.AbaqusStep.DynamicStep](../psj-command/analysis/Analysis.AbaqusStep.DynamicStep)                    | iNlgeom           | [iNlGeom](../psj-command/analysis/Analysis.AbaqusStep.DynamicStep#inlgeom)                          |
+  | [Analysis.AbaqusStep.SteadyStateStep](../psj-command/analysis/Analysis.AbaqusStep.SteadyStateStep)            | iNlgeom           | [iNlGeom](../psj-command/analysis/Analysis.AbaqusStep.SteadyStateStep#inlgeom)                      |
+  | [BoundaryConditions.Pressure.General](../psj-command/boundary-conditions/BoundaryConditions.Pressure.General) | iArrowdir         | [iArrowDir](../psj-command/boundary-conditions/BoundaryConditions.Pressure.General#iarrowdir)       |
+  | [Connections.MPC.Equation.SemiAuto](../psj-command/connections/Connections.MPC.Equation.SemiAuto)             | listMPCConnection | [listMpcConnection](../psj-command/connections/Connections.MPC.Equation.SemiAuto#listmpcconnection) |
 </details>
 
 ### 🛠 PSJ-Utility
@@ -162,39 +154,37 @@ PSJ-Commandのキーワード引数名を変更し、使用時の可読性を確
 データベースクエリ、プレビュー、後処理に関連する29の新しいAPIコマンドが追加されました：
 
 <details>
+  <summary>新しく追加されたコマンドのリスト</summary>
 
-<summary>新しく追加されたコマンドのリスト</summary>
-
-- `JPT.GetAllCoordinates()`: 作成されたすべての座標系の情報を取得。
-- `JPT.GetAssemblyEntityData()` : アセンブリツリーから特定のアイテムのすべての情報を取得。
-- `JPT.GetSelectedElemEdges()` : 選択された要素エッジのすべての情報を取得。
-- `JPT.GetSuppressedParts()` : すべての抑制されたパーツのすべての情報を取得。
-- `JPT.GetPostElemFromPosition()` : 特定の位置からポスト要素を取得。
-- `JPT.GetAllAvailableResultOptions()` : 入力された結果タイプの利用可能なすべての結果オプションを取得。
-- `JPT.GetActiveDataOption()` : 作業中の結果のアクティブなポストデータオプションを取得。
-- `JPT.GetResultByNodeId()` : IDで指定されたノードの結果値を取得。
-- `JPT.GetResultByElemId()` : IDで指定された要素の結果値を取得。
-- `JPT.GetElementResult()` : 条件を満たす結果がロードされた要素を取得。
-- `JPT.GetNodeResult()` : 条件を満たす結果がロードされたノードを取得。
-- `JPT.GetResultSetName()` : 結果セット（サブケース）の名前を取得。
-- `JPT.GetTimeStepInfoName()` : タイムステップ情報の名前を取得。
-- `JPT.GetActivePostJob()` : アクティブなポストジョブの情報を取得。
-- `JPT.PostHasDeform()` : 作業中の結果に変形があるかどうかを確認。
-- `JPT.SelectionByID()` : IDを使用してエンティティを選択。
-- `JPT.ClearPreview()` : メイン画面のプレビューレンダリングをクリア。
-- `JPT.HidePreview()` : メイン画面のプレビューレンダリングを非表示。プレビューは存在しているが、非表示になります。
-- `JPT.ShowPreview()` : メイン画面のプレビューレンダリングを表示。
-- `JPT.PreviewTranslation()` : ボディ移動の結果プレビューを表示。
-- `JPT.PreviewScaling()` : ボディスケーリングの結果プレビューを表示。
-- `JPT.PreviewRotate()` : ボディ回転の結果プレビューを表示。
-- `JPT.PreviewMirror()` : ボディミラーの結果プレビューを表示。
-- `JPT.PreviewBCForceGeneral()` : ターゲットに一般的な力を適用する結果プレビューを表示。
-- `JPT.PreviewBCForceNormal()` : ターゲットに法線力を適用する結果プレビューを表示。
-- `JPT.PreviewBCPressureGeneral()` : ターゲットに一般的な圧力を適用する結果プレビューを表示。
-- `JPT.UpdateCheckboxAssembly()` : アセンブリツリーのアイテムのチェックボックスの状態を設定。
-- `JPT.GetAllSolverJobs()` : ソルバージョブのすべての情報（ジョブ名、ステップ、ジョブ説明）を取得。
-- `JPT.MacroTCursorPairToDItemPair()` : カーソルペア（マクロ文字列タイプ）をDItemオブジェクトのペアに変換。
-
+  - `JPT.GetAllCoordinates()`: 作成されたすべての座標系の情報を取得。
+  - `JPT.GetAssemblyEntityData()` : アセンブリツリーから特定のアイテムのすべての情報を取得。
+  - `JPT.GetSelectedElemEdges()` : 選択された要素エッジのすべての情報を取得。
+  - `JPT.GetSuppressedParts()` : すべての抑制されたパーツのすべての情報を取得。
+  - `JPT.GetPostElemFromPosition()` : 特定の位置からポスト要素を取得。
+  - `JPT.GetAllAvailableResultOptions()` : 入力された結果タイプの利用可能なすべての結果オプションを取得。
+  - `JPT.GetActiveDataOption()` : 作業中の結果のアクティブなポストデータオプションを取得。
+  - `JPT.GetResultByNodeId()` : IDで指定されたノードの結果値を取得。
+  - `JPT.GetResultByElemId()` : IDで指定された要素の結果値を取得。
+  - `JPT.GetElementResult()` : 条件を満たす結果がロードされた要素を取得。
+  - `JPT.GetNodeResult()` : 条件を満たす結果がロードされたノードを取得。
+  - `JPT.GetResultSetName()` : 結果セット（サブケース）の名前を取得。
+  - `JPT.GetTimeStepInfoName()` : タイムステップ情報の名前を取得。
+  - `JPT.GetActivePostJob()` : アクティブなポストジョブの情報を取得。
+  - `JPT.PostHasDeform()` : 作業中の結果に変形があるかどうかを確認。
+  - `JPT.SelectionByID()` : IDを使用してエンティティを選択。
+  - `JPT.ClearPreview()` : メイン画面のプレビューレンダリングをクリア。
+  - `JPT.HidePreview()` : メイン画面のプレビューレンダリングを非表示。プレビューは存在しているが、非表示になります。
+  - `JPT.ShowPreview()` : メイン画面のプレビューレンダリングを表示。
+  - `JPT.PreviewTranslation()` : ボディ移動の結果プレビューを表示。
+  - `JPT.PreviewScaling()` : ボディスケーリングの結果プレビューを表示。
+  - `JPT.PreviewRotate()` : ボディ回転の結果プレビューを表示。
+  - `JPT.PreviewMirror()` : ボディミラーの結果プレビューを表示。
+  - `JPT.PreviewBCForceGeneral()` : ターゲットに一般的な力を適用する結果プレビューを表示。
+  - `JPT.PreviewBCForceNormal()` : ターゲットに法線力を適用する結果プレビューを表示。
+  - `JPT.PreviewBCPressureGeneral()` : ターゲットに一般的な圧力を適用する結果プレビューを表示。
+  - `JPT.UpdateCheckboxAssembly()` : アセンブリツリーのアイテムのチェックボックスの状態を設定。
+  - `JPT.GetAllSolverJobs()` : ソルバージョブのすべての情報（ジョブ名、ステップ、ジョブ説明）を取得。
+  - `JPT.MacroTCursorPairToDItemPair()` : カーソルペア（マクロ文字列タイプ）をDItemオブジェクトのペアに変換。
 </details>
 
 ### 📐 PSJ-GUI
@@ -229,110 +219,102 @@ PSJ-Commandのキーワード引数名を変更し、使用時の可読性を確
 - GUIコンポーネント内の値を取得するために、コンポーネント名を入力引数として渡す代わりにAPIを使用します。例：
 
 <Tabs>
-<Tab value="current" label="現在" default>
+  <Tab value="current" label="現在" default>
+    ```psj {2-5}
+    def on_execute_button_clicked(dlg):
+      argument1=dlg.get_item_text(name="...")
+      argument2=dlg.get_combox_sel(name="...")
+      argument3=dlg.get_listbox_sel(name="...")
+      argument4=dlg.get_combobox_option(name="...",index=1)
+      #以下実行関数
+    ```
+  </Tab>
 
-```psj {2-5}
-def on_execute_button_clicked(dlg):
-  argument1=dlg.get_item_text(name="...")
-  argument2=dlg.get_combox_sel(name="...")
-  argument3=dlg.get_listbox_sel(name="...")
-  argument4=dlg.get_combobox_option(name="...",index=1)
-  #以下実行関数
-```
-
-</Tab>
-<Tab value="before" label="以前">
-
-```psj
-def on_execute_button_clicked(dlg,argument1,argument2,argument3,argument4):
-  #以下実行関数
-```
-
-</Tab>
+  <Tab value="before" label="以前">
+    ```psj
+    def on_execute_button_clicked(dlg,argument1,argument2,argument3,argument4):
+      #以下実行関数
+    ```
+  </Tab>
 </Tabs>
 
 - 一部のコマンドの引数名は統一のために変更されました。
 
 <details>
+  <summary>引数名変更のリスト</summary>
 
-<summary>引数名変更のリスト</summary>
-
-| コンポーネントグループ | 旧引数名       | 新引数名 | 新引数名の例                                                 |
-| ---------------------- | -------------- | -------- | ------------------------------------------------------------ |
-| TABITEM                | tabwnd_name    | name     | dlg.add_tabwnd_page(<strong>name</strong>="TabWnd1",…)       |
-| COMBOBOX               | combobox_name  | name     | dlg.add_combobox_option(<strong>name</strong>="ComboBox2",…) |
-| LISTBOX                | listbox_name   | name     | dlg.add_listbox_option(<strong>name</strong>="ListBox3",…)   |
-| TABLE                  | table_name     | name     | dlg.get_cell_value(<strong>name</strong>="Table4",…)         |
-| PAGEITEM               | pagesctrl_name | name     | dlg.add_pageitem(<strong>name</strong>="PagesCtrl5",…)       |
-
+  | コンポーネントグループ | 旧引数名            | 新引数名 | 新引数名の例                                                         |
+  | ----------- | --------------- | ---- | -------------------------------------------------------------- |
+  | TABITEM     | tabwnd\_name    | name | dlg.add\_tabwnd\_page(<strong>name</strong>="TabWnd1",…)       |
+  | COMBOBOX    | combobox\_name  | name | dlg.add\_combobox\_option(<strong>name</strong>="ComboBox2",…) |
+  | LISTBOX     | listbox\_name   | name | dlg.add\_listbox\_option(<strong>name</strong>="ListBox3",…)   |
+  | TABLE       | table\_name     | name | dlg.get\_cell\_value(<strong>name</strong>="Table4",…)         |
+  | PAGEITEM    | pagesctrl\_name | name | dlg.add\_pageitem(<strong>name</strong>="PagesCtrl5",…)        |
 </details>
 
 - また、以下のコマンドが追加・変更されました：
 
 <details>
-<summary>新しく追加されたコマンドのリスト</summary>
+  <summary>新しく追加されたコマンドのリスト</summary>
 
-- `JDGCreator()`: Jupiterでダイアログを生成するためのクラス。
-- `dlg.on_dlg_apply()`: 適用ボタンがクリックされたときに作成した関数を実行。
-- `dlg.on_dlg_cancel()`: キャンセルボタンがクリックされたときに作成した関数を実行。
-- `dlg.on_dlg_ok()`: OKボタンがクリックされたときに作成した関数を実行。
-- `dlg.on_dlg_help()`: ヘルプボタンがクリックされたときに作成した関数を実行。
-- `dlg.do_modal()`: 作成したダイアログをモーダルモードで実行（作成したすべての関数とともにダイアログを表示）。
-- `dlg.close()`: ダイアログを閉じる。
-- `dlg.set_icon_file()`: 作成するGUIダイアログにアイコンを設定。
-- `dlg.show_tooltip()`: ユーザーがUIコンポーネントにマウスをホバーしたときにツールチップを表示。
-- `dlg.show_dlg_help_button()`: 作成するダイアログでヘルプボタンの表示/非表示を設定。
-- `dlg.on_combobox_sel()`: コンボボックスアイテムが選択された後に作成した関数を実行。
-- `dlg.on_button_clicked()`: ボタン/ラジオボタン/チェックボックスに作成した関数をバインド。
-- `dlg.on_browse()`: ファイル/フォルダブラウザコンポーネントに作成した関数をバインド。
-- `dlg.add_table_right_menu()`: テーブルのコンテキストメニュー（右クリックイベント）にオプションを追加。
-- `dlg.enable_table_column_filter()`: テーブルの列のフィルタオプションを追加。
-- `dlg.get_cell_value()`: 特定のセルの値を取得。
-- `dlg.get_table_column_width()`: テーブルの指定された列の幅を取得。
-- `dlg.get_table_sel_cell()`: 選択されたセルの情報と属性を取得。
-- `dlg.get_table_sel_range()`: 選択されたセル範囲の情報と属性を取得。
-- `dlg.insert_table_rows()`: テーブルの特定の位置に行を挿入。
-- `dlg.insert_table_columns()`: テーブルの特定の位置に列を挿入。
-- `dlg.delete_table_row()`: テーブルの特定の位置の行を削除。
-- `dlg.delete_table_column()`: テーブルの特定の位置の列を削除。
-- `dlg.is_table_cell_button()`: 入力されたセルがボタンセルかどうかを確認。
-- `dlg.is_table_cell_checkbox()`: 入力されたセルがチェックボックスセルかどうかを確認。
-- `dlg.is_table_cell_combobox()`: 入力されたセルがコンボボックスセルかどうかを確認。
-- `dlg.is_table_cell_checked()`: チェックボックスセルの状態を確認。
-- `dlg.on_table_right_menu()`: コンテキストメニューを開く/実行するときのイベントを設定。
-- `dlg.on_table_sel_changed()`: セルを選択するときのイベントを設定。
-- `dlg.on_table_button_clicked()`: ボタンセルを選択するときのイベントを設定。
-- `dlg.set_cell_value()`: 特定のセルに値を設定。
-- `dlg.set_table_cell_fill_color()`: 選択/指定されたセルに塗りつぶし色を設定。
-- `dlg.set_table_cell_text_color()`: 選択/指定されたセルのテキストに色を設定。
-- `dlg.set_table_cell_alignment()`: セルのテキスト配置を設定。
-- `dlg.set_table_column_width()`: テーブルの指定された列の幅を設定。
-- `dlg.set_table_column_data_type()`: テーブルのセルのデータ型検証を設定。
-- `dlg.set_table_cell_button()`: テーブルにボタンセルを設定。
-- `dlg.set_table_cell_checkbox()`: テーブルにチェックボックスセルを設定。
-- `dlg.select_table_range()`: テーブルの位置による特定の範囲を選択。
-- `dlg.clear_table_range()`: テーブルの位置による特定の範囲の内容をクリア。
-- `dlg.clear_table_all()`: テーブルのすべての内容をクリア。
-- `dlg.get_pagesctrl_current_page()`: PagesCtrlの現在選択されているPageItemのインデックス順序を取得。
-- `dlg.get_pagesctrl_page_name()`: PagesCtrlの現在選択されているPageItemの名前を取得。
-- `dlg.on_pagesctrl_active_page()`: PageItemを選択するときのイベントを設定。
-- `dlg.set_item_size_behavior()`: TabWnd、ImageCtrl、Table、PagesCtrlの表示動作を設定。
-
+  - `JDGCreator()`: Jupiterでダイアログを生成するためのクラス。
+  - `dlg.on_dlg_apply()`: 適用ボタンがクリックされたときに作成した関数を実行。
+  - `dlg.on_dlg_cancel()`: キャンセルボタンがクリックされたときに作成した関数を実行。
+  - `dlg.on_dlg_ok()`: OKボタンがクリックされたときに作成した関数を実行。
+  - `dlg.on_dlg_help()`: ヘルプボタンがクリックされたときに作成した関数を実行。
+  - `dlg.do_modal()`: 作成したダイアログをモーダルモードで実行（作成したすべての関数とともにダイアログを表示）。
+  - `dlg.close()`: ダイアログを閉じる。
+  - `dlg.set_icon_file()`: 作成するGUIダイアログにアイコンを設定。
+  - `dlg.show_tooltip()`: ユーザーがUIコンポーネントにマウスをホバーしたときにツールチップを表示。
+  - `dlg.show_dlg_help_button()`: 作成するダイアログでヘルプボタンの表示/非表示を設定。
+  - `dlg.on_combobox_sel()`: コンボボックスアイテムが選択された後に作成した関数を実行。
+  - `dlg.on_button_clicked()`: ボタン/ラジオボタン/チェックボックスに作成した関数をバインド。
+  - `dlg.on_browse()`: ファイル/フォルダブラウザコンポーネントに作成した関数をバインド。
+  - `dlg.add_table_right_menu()`: テーブルのコンテキストメニュー（右クリックイベント）にオプションを追加。
+  - `dlg.enable_table_column_filter()`: テーブルの列のフィルタオプションを追加。
+  - `dlg.get_cell_value()`: 特定のセルの値を取得。
+  - `dlg.get_table_column_width()`: テーブルの指定された列の幅を取得。
+  - `dlg.get_table_sel_cell()`: 選択されたセルの情報と属性を取得。
+  - `dlg.get_table_sel_range()`: 選択されたセル範囲の情報と属性を取得。
+  - `dlg.insert_table_rows()`: テーブルの特定の位置に行を挿入。
+  - `dlg.insert_table_columns()`: テーブルの特定の位置に列を挿入。
+  - `dlg.delete_table_row()`: テーブルの特定の位置の行を削除。
+  - `dlg.delete_table_column()`: テーブルの特定の位置の列を削除。
+  - `dlg.is_table_cell_button()`: 入力されたセルがボタンセルかどうかを確認。
+  - `dlg.is_table_cell_checkbox()`: 入力されたセルがチェックボックスセルかどうかを確認。
+  - `dlg.is_table_cell_combobox()`: 入力されたセルがコンボボックスセルかどうかを確認。
+  - `dlg.is_table_cell_checked()`: チェックボックスセルの状態を確認。
+  - `dlg.on_table_right_menu()`: コンテキストメニューを開く/実行するときのイベントを設定。
+  - `dlg.on_table_sel_changed()`: セルを選択するときのイベントを設定。
+  - `dlg.on_table_button_clicked()`: ボタンセルを選択するときのイベントを設定。
+  - `dlg.set_cell_value()`: 特定のセルに値を設定。
+  - `dlg.set_table_cell_fill_color()`: 選択/指定されたセルに塗りつぶし色を設定。
+  - `dlg.set_table_cell_text_color()`: 選択/指定されたセルのテキストに色を設定。
+  - `dlg.set_table_cell_alignment()`: セルのテキスト配置を設定。
+  - `dlg.set_table_column_width()`: テーブルの指定された列の幅を設定。
+  - `dlg.set_table_column_data_type()`: テーブルのセルのデータ型検証を設定。
+  - `dlg.set_table_cell_button()`: テーブルにボタンセルを設定。
+  - `dlg.set_table_cell_checkbox()`: テーブルにチェックボックスセルを設定。
+  - `dlg.select_table_range()`: テーブルの位置による特定の範囲を選択。
+  - `dlg.clear_table_range()`: テーブルの位置による特定の範囲の内容をクリア。
+  - `dlg.clear_table_all()`: テーブルのすべての内容をクリア。
+  - `dlg.get_pagesctrl_current_page()`: PagesCtrlの現在選択されているPageItemのインデックス順序を取得。
+  - `dlg.get_pagesctrl_page_name()`: PagesCtrlの現在選択されているPageItemの名前を取得。
+  - `dlg.on_pagesctrl_active_page()`: PageItemを選択するときのイベントを設定。
+  - `dlg.set_item_size_behavior()`: TabWnd、ImageCtrl、Table、PagesCtrlの表示動作を設定。
 </details>
 
 <details>
+  <summary>変更または修正されたコマンドのリスト</summary>
 
-<summary>変更または修正されたコマンドのリスト</summary>
-
-- `dlg.add_groupbox()`: GroupBoxの`width`と`height`引数を削除。
-- `dlg.add_textbox()`: テキストボックス内のテキストの配置と読み取り専用状態を制御する引数をサポート。
-- `dlg.add_combobox()`: コンボボックスのデフォルト表示オプションを制御する引数をサポート。
-- `dlg.add_checkbox()`: チェックボックス内のテキストの配置を制御する引数をサポート。
-- `dlg.add_table()`: テーブルの制御を強化する引数をサポート。
-- `dlg.add_tabwnd()`: `TabCtrl`から`TabWnd`に名前を変更。
-- `dlg.add_button()`: 画像ボタンをサポート。
-- `dlg.add_spin()`: 整数と倍精度浮動小数点のスピンをサポート。
-
+  - `dlg.add_groupbox()`: GroupBoxの`width`と`height`引数を削除。
+  - `dlg.add_textbox()`: テキストボックス内のテキストの配置と読み取り専用状態を制御する引数をサポート。
+  - `dlg.add_combobox()`: コンボボックスのデフォルト表示オプションを制御する引数をサポート。
+  - `dlg.add_checkbox()`: チェックボックス内のテキストの配置を制御する引数をサポート。
+  - `dlg.add_table()`: テーブルの制御を強化する引数をサポート。
+  - `dlg.add_tabwnd()`: `TabCtrl`から`TabWnd`に名前を変更。
+  - `dlg.add_button()`: 画像ボタンをサポート。
+  - `dlg.add_spin()`: 整数と倍精度浮動小数点のスピンをサポート。
 </details>
 
 ### ⚙ マクロ
@@ -340,32 +322,30 @@ def on_execute_button_clicked(dlg,argument1,argument2,argument3,argument4):
 - 後処理とテンプレート利用に関連するマクロが追加されました：
 
 <details>
+  <summary>新しく追加されたマクロのリスト</summary>
 
-<summary>新しく追加されたマクロのリスト</summary>
-
-- `CmdActivateWindow`: 特定のPreまたはPostウィンドウをアクティブ化するマクロ。
-- `CmdDistancePlot`: 距離プロットのマクロ。
-- `CmdMaxMinPlot`: 最大最小プロットのマクロ。
-- `CreateTemplate`: テンプレート作成のマクロ。
-- `DeleteTemplate`: テンプレート削除のマクロ。
-- `LoadTemplate`: 現在のドキュメントにテンプレートを読み込むマクロ。
-- `CopyTemplate`: テンプレートコピーのマクロ。
-- `UpdateTemplate`: 指定されたテンプレートを更新するマクロ。
-- `ExportTemplate`: テンプレートを.xmlファイルにエクスポートするマクロ。
-- `ImportTemplate`: .xmlファイルからテンプレートをインポートするマクロ。
-- `AttachTemplateContour`: 既存のテンプレートにコンター設定を添付するマクロ。
-- `AttachTemplateDeformation`: 既存のテンプレートに変形設定を添付するマクロ。
-- `AttachTemplateViewPoint`: 既存のテンプレートにビューポイント設定を添付するマクロ。
-- `AttachTemplateDiagram`: 既存のテンプレートにダイアログ設定を添付するマクロ。
-- `AttachTemplateVector`: 既存のテンプレートにベクトル設定を添付するマクロ。
-- `AttachTemplateCircle`: 既存のテンプレートに円設定を添付するマクロ。
-- `AttachTemplateCrossSection`: 既存のテンプレートに断面設定を添付するマクロ。
-- `AttachTemplateAnimation`: 既存のテンプレートに断面設定を添付するマクロ。
-- `CmdSaveOpenTsdv`: ポストツールウィンドウのツリーを保存/読み込みするマクロ。
-- `CreateNewChartWindow`: 新しいチャートウィンドウを作成するマクロ。
-- `CmdMarkupSearchPoint`: 入力値から結果データ上/内部の位置を選択するマクロ。
-- `CmdMarkupSearchMultiPoints`: 入力値から結果データ上/内部の複数の位置を選択するマクロ。
-
+  - `CmdActivateWindow`: 特定のPreまたはPostウィンドウをアクティブ化するマクロ。
+  - `CmdDistancePlot`: 距離プロットのマクロ。
+  - `CmdMaxMinPlot`: 最大最小プロットのマクロ。
+  - `CreateTemplate`: テンプレート作成のマクロ。
+  - `DeleteTemplate`: テンプレート削除のマクロ。
+  - `LoadTemplate`: 現在のドキュメントにテンプレートを読み込むマクロ。
+  - `CopyTemplate`: テンプレートコピーのマクロ。
+  - `UpdateTemplate`: 指定されたテンプレートを更新するマクロ。
+  - `ExportTemplate`: テンプレートを.xmlファイルにエクスポートするマクロ。
+  - `ImportTemplate`: .xmlファイルからテンプレートをインポートするマクロ。
+  - `AttachTemplateContour`: 既存のテンプレートにコンター設定を添付するマクロ。
+  - `AttachTemplateDeformation`: 既存のテンプレートに変形設定を添付するマクロ。
+  - `AttachTemplateViewPoint`: 既存のテンプレートにビューポイント設定を添付するマクロ。
+  - `AttachTemplateDiagram`: 既存のテンプレートにダイアログ設定を添付するマクロ。
+  - `AttachTemplateVector`: 既存のテンプレートにベクトル設定を添付するマクロ。
+  - `AttachTemplateCircle`: 既存のテンプレートに円設定を添付するマクロ。
+  - `AttachTemplateCrossSection`: 既存のテンプレートに断面設定を添付するマクロ。
+  - `AttachTemplateAnimation`: 既存のテンプレートに断面設定を添付するマクロ。
+  - `CmdSaveOpenTsdv`: ポストツールウィンドウのツリーを保存/読み込みするマクロ。
+  - `CreateNewChartWindow`: 新しいチャートウィンドウを作成するマクロ。
+  - `CmdMarkupSearchPoint`: 入力値から結果データ上/内部の位置を選択するマクロ。
+  - `CmdMarkupSearchMultiPoints`: 入力値から結果データ上/内部の複数の位置を選択するマクロ。
 </details>
 
 - マクロのパス記述はスラッシュ（/）で区切るように統一され、`CmdExportLoad`、`CmdImportGauge`などの一部のインポートおよび保存コマンドが更新されました。
@@ -374,15 +354,15 @@ def on_execute_button_clicked(dlg,argument1,argument2,argument3,argument4):
 
 ### 🚅 サンプル
 
-- ユーザーがデータ型を熟練して使用/処理する方法を指導するサンプル*[PSJデータ型の操作](../tutorials/basic/manipulate-PSJ-data-type)*を追加。
-- ユーザーが選択から取得したエンティティを取得し、処理する方法を指導するサンプル*[選択からエンティティを取得](../tutorials/basic/get-entity-from-selection)*を追加。
-- ユーザーがアセンブリツリーと選択監視ウィンドウのチェックボックスを効率的に制御する方法を指導するサンプル*[ウィンドウチェックボックスの更新](../tutorials/basic/update-window-checkbox)*を追加。
-- PSJ-GUI、特にテーブルコンポーネントを効果的に使用する方法をユーザーに指導するため、*[12の基本テーブルサンプル](../tutorials/basic/create-table)*と*[6つの高度なテーブルサンプル](../tutorials/basic/table-advanced-sample-1)*を追加。
+- ユーザーがデータ型を熟練して使用/処理する方法を指導するサンプル\*[PSJデータ型の操作](../tutorials/basic/manipulate-PSJ-data-type)\*を追加。
+- ユーザーが選択から取得したエンティティを取得し、処理する方法を指導するサンプル\*[選択からエンティティを取得](../tutorials/basic/get-entity-from-selection)\*を追加。
+- ユーザーがアセンブリツリーと選択監視ウィンドウのチェックボックスを効率的に制御する方法を指導するサンプル\*[ウィンドウチェックボックスの更新](../tutorials/basic/update-window-checkbox)\*を追加。
+- PSJ-GUI、特にテーブルコンポーネントを効果的に使用する方法をユーザーに指導するため、\*[12の基本テーブルサンプル](../tutorials/basic/create-table)_と_[6つの高度なテーブルサンプル](../tutorials/basic/table-advanced-sample-1)\*を追加。
 
 #### 📝 その他
 
-- 新しいタイプ`JPT.PathType.FILE_PATH`でチュートリアル*[Jupiterパス情報の取得](../tutorials/basic/get-jupiter-path-information)*を更新。
-- 新しくアップグレードされたPSJ-GUIでサンプル*[標準ボルトの作成](../tutorials/advanced/creating-bolt)*を更新。
+- 新しいタイプ`JPT.PathType.FILE_PATH`でチュートリアル\*[Jupiterパス情報の取得](../tutorials/basic/get-jupiter-path-information)\*を更新。
+- 新しくアップグレードされたPSJ-GUIでサンプル\*[標準ボルトの作成](../tutorials/advanced/creating-bolt)\*を更新。
 
 ## 🐛 バグ修正
 
@@ -390,7 +370,7 @@ def on_execute_button_clicked(dlg,argument1,argument2,argument3,argument4):
 
 - 引数名の誤字を修正
 
-| PSJ-Command                                | 旧             | 新                                                               |
+| PSJ-Command                                | 旧              | 新                                                                |
 | ------------------------------------------ | -------------- | ---------------------------------------------------------------- |
 | [Home.Find](../psj-command/home/Home.Find) | strSeletedType | [strSelectedType](../psj-command/home/Home.Find#strselectedtype) |
 

@@ -12,7 +12,9 @@
         {
             "files": ["*.md", "*.mdx"],
             "options": {
-                "tabWidth": 2
+                "proseWrap": "preserve",
+                "tabWidth": 2,
+                "embeddedLanguageFormatting": "off"
             }
         }
     ]

@@ -33,8 +33,8 @@ Utilityに多くのアップデートを加えました。これにより、ス�
 
 - PSJ-Command:
   - 新規 _[`DItemType`](../data-type/psj-command/DItem-types)_ が追加されました。
-    <details>
 
+<details>
 <summary id="new-ditem-type">新規追加されたDItemType一覧</summary>
 
 | INT NOTATION | TYPE OF DITEM                                     |
@@ -138,8 +138,8 @@ Utilityに多くのアップデートを加えました。これにより、ス�
 - PSJマテリアル用の新規データタイプ _[`Material Unit Types`](../data-type/psj-command/material-unit-types)_
   を追加しました。
 - PSJマテリアル用の `Material Property` の新規データタイプを追加
-  <details>
 
+<details>
 <summary id="new-material-property">新規追加されたMaterial Propertyデータタイプ一覧</summary>
 
 | PROPERTY                                                                                                   | DESCRIPTION                                       |
@@ -804,35 +804,41 @@ ditem_list = const_ditem + pressure_ditem + connect_ditem
 - 新規PSJ Utilityを追加しました。
 
 <details>
+<summary id="new-psj-utility">新規追加されたPSJ Utility一覧</summary>
 
-<summary id="new-psj-utility">新規追加されたPSJ Utility一覧</summary>- `JPT.CastDItemToDSubGroup`:
-DItemをDSubGroupにキャスト。 - `JPT.ClearDraw`: メインウィンドウ内の全ての描画をクリア。 - `JPT.ClearMacroLog` :
-マクロウィンドウ内の既存テキストを全てクリア。 - `JPT.ClearOutputLog` : 出力ウィンドウ内の既存テキストを全てクリア。 -
-`JPT.DrawArrow`: メインウィンドウに矢印を描画。 - `JPT.DrawLine`: メインウィンドウに線を描画。 - `JPT.DrawPoint`:
-メインウィンドウに点を描画。 - `JPT.DrawRect`: ウィンドウ座標でメインウィンドウに四角形を描画。 - `JPT.GetAllFieldData`
-: ドキュメント内の全てのフィールドデータを取得します。 - `JPT.GetAllLibraryMaterials` :
-現在のライブラリ（ライブラリデータベース）内のマテリアルを取得。 - `JPT.GetAllMaterials` :
-現在のドキュメント（ユーザーデータベース）内の全てのマテリアルを取得。 - `JPT.GetAllPostFreqResponses`:
-全ての周波数応答を取得。 - `JPT.GetAllPostFreqResponseSolvers`: 全ての周波数応答（ソルバー）を取得。 -
-`JPT.GetAllPostGururiResponses`: 全てのGururi応答を取得。 - `JPT.GetAllPostResultCurve`: 全てのPost結果カーブを取得。 -
-`JPT.GetAllPostTransResponses`: 全ての過渡応答を取得。 - `JPT.GetAllPostTransResponseSolvers`:
-全ての過渡応答（ソルバー）を取得。 - `JPT.GetAllSubGroups` : 現在のドキュメント内の全てのサブグループを取得。 -
-`JPT.GetPostSolverType` : 現在インポートしている結果ファイルの結果タイプを取得。 - `JPT.RunSunShine`: SunShineを実行。 -
-`JPT.SaveToMLIB` : データベース内のマテリアルを.mlibファイルに保存。 - `JPT.ShowMappingData` :
-PSJによるマッピング表示を表示
+- `JPT.CastDItemToDSubGroup`: DItemをDSubGroupにキャスト。
+- `JPT.ClearDraw`: メインウィンドウ内の全ての描画をクリア。
+- `JPT.ClearMacroLog` : マクロウィンドウ内の既存テキストを全てクリア。
+- `JPT.ClearOutputLog` : 出力ウィンドウ内の既存テキストを全てクリア。
+- `JPT.DrawArrow`: メインウィンドウに矢印を描画。
+- `JPT.DrawLine`: メインウィンドウに線を描画。
+- `JPT.DrawPoint`: メインウィンドウに点を描画。
+- `JPT.DrawRect`: ウィンドウ座標でメインウィンドウに四角形を描画。
+- `JPT.GetAllFieldData`: ドキュメント内の全てのフィールドデータを取得します。
+- `JPT.GetAllLibraryMaterials`: 現在のライブラリ（ライブラリデータベース）内のマテリアルを取得。
+- `JPT.GetAllMaterials`: 現在のドキュメント（ユーザーデータベース）内の全てのマテリアルを取得。
+- `JPT.GetAllPostFreqResponses`: 全ての周波数応答を取得。
+- `JPT.GetAllPostFreqResponseSolvers`: 全ての周波数応答（ソルバー）を取得。
+- `JPT.GetAllPostGururiResponses`: 全てのGururi応答を取得。
+- `JPT.GetAllPostResultCurve`: 全てのPost結果カーブを取得。
+- `JPT.GetAllPostTransResponses`: 全ての過渡応答を取得。
+- `JPT.GetAllPostTransResponseSolvers`: 全ての過渡応答（ソルバー）を取得。
+- `JPT.GetAllSubGroups` : 現在のドキュメント内の全てのサブグループを取得。
+- `JPT.GetPostSolverType` : 現在インポートしている結果ファイルの結果タイプを取得。
+- `JPT.RunSunShine`: SunShineを実行。
+- `JPT.SaveToMLIB` : データベース内のマテリアルを.mlibファイルに保存。
+- `JPT.ShowMappingData` : PSJによるマッピング表示を表示
 
 </details>
 
 - 一部のPSJ Utilityを修正しました。
 
 <details>
+<summary id="mod-psj-utility">変更・修正されたPSJ Utility一覧</summary>
 
-<summary id="mod-psj-utility">変更・修正されたPSJ Utility一覧</summary>- `JPT.GetAssemblyEntityData` :
-取得したキーに含まれる空白文字を自動的にトリム。 -
-`JPT.GetAllNodes`、`JPT.GetAllElems`、`JPT.GetAllByTypeID(JPT.DItemType.NODE)` :
-Postドキュメントで実行された場合に0を返すように修正しました。 -
-`JPT.GetAllPostNodes`、`JPT.GetAllPostElems`、`JPT.GetAllByTypeID(JPT.DItemType.POST_NODE)` :
-Preドキュメントで実行された場合に0を返すように修正しました。
+- `JPT.GetAssemblyEntityData` : 取得したキーに含まれる空白文字を自動的にトリム。
+- `JPT.GetAllNodes`、`JPT.GetAllElems`、`JPT.GetAllByTypeID(JPT.DItemType.NODE)` : Postドキュメントで実行された場合に0を返すように修正しました。
+- `JPT.GetAllPostNodes`、`JPT.GetAllPostElems`、`JPT.GetAllByTypeID(JPT.DItemType.POST_NODE)` : Preドキュメントで実行された場合に0を返すように修正しました。
 
 </details>
 
@@ -870,8 +876,8 @@ Preドキュメントで実行された場合に0を返すように修正しま�
 </details>
 
 - セレクターに新規引数 _text_ を追加しました。任意のラベル名を指定可能です。
-  <details>
 
+<details>
 <summary id="mod-dlg-selector">サポートされているセレクター一覧</summary>- `dlg.add_1delement_selector` -
 `dlg.add_2delement_selector` - `dlg.add_3delement_selector` - `dlg.add_vertex_selector` - `dlg.add_node_selector` -
 `dlg.add_edge_selector` - `dlg.add_elementedge_selector` - `dlg.add_barpart_selector` - `dlg.add_face_selector` -
@@ -893,34 +899,44 @@ Preドキュメントで実行された場合に0を返すように修正しま�
 - 新規マクロ：
 
 <details>
+<summary id="new-macro">新規追加されたマクロ一覧</summary>
 
-<summary id="new-macro">新規追加されたマクロ一覧</summary>- `AddResultsAbaqus` :
-現在のJupiterデータベースにAbaqus結果を追加します。 - `AddResultsActran` :
-現在のJupiterデータベースにActran結果を追加します。 - `AddResultsADVC` :
-現在のJupiterデータベースにADVC結果を追加しまします。 - `AddResultsLSDyna` :
-現在のJupiterデータベースにLS-Dyna結果を追加します。 - `AddResultsMappedMeshFile` : Mapped Mesh
-Fileに書かれた結果を現在のJupiterデータベースに追加します。 - `AddResultsNastran` :
-現在のJupiterデータベースにNastran結果を追加します。 - `AddResultsPermas` :
-現在のJupiterデータベースにPermas結果を追加します。 - `AddResultsSysnoise`:
-現在のJupiterデータベースにSysNoise結果を追加しましす。 - `AddResultsUniversal` :
-現在のJupiterデータベースにUniversal結果を追加します。 - `AddUserResultDefine` :
-現在のJupiterデータベースにユーザー定義結果を追加します。 - `Capture_CopyToClipboardTileWindow` :
-メインウィンドウのタイル表示画像をクリップボードにコピーします。 - `CmdPostAnimationExportMovieToFile`:
-動画をエクスポート。このマクロはCmdPostAnimationExportMovieから置き換えられました。 - `CreateGroupDraftAngle`:
-各抜き勾配の節点グループを作成します。 - `DRAFT_ANGLE`: 金型モデル内のメッシュの抜き勾配を測定して抜き勾配を検証します。
-- `ExportPreferenceSettings`: プリファレンス設定をエクスポートします（.jsonファイル）。 - `HideContourDraftAngle`: Draft
-Angle機能の結果等高線を非表示にします。 - `ImportAbaqus` : Abaqus結果をインポートします。 - `ImportADVC` :
-ADVC結果をインポートします。 - `ImportAnsys` : Ansys結果をインポートします。 - `ImportFrontISTR` : Front
-ISTR結果をインポートします。 - `ImportLsDyna` : LS-Dyna結果をインポートします。 - `ImportMappedMeshFileDat` : Mapped
-Mesh Fileに書かれた結果をインポートします。 - `ImportMarc` : Marc結果をインポートします。 - `ImportMarcMesh` :
-MarcメッシュをPostドキュメントとしてインポートします。 - `ImportMuxWeld` : MuxWeld結果をインポートします。 -
-`ImportNastran` : Nastran結果をインポートします。 - `ImportOptishapeTS` : Optishape-TS結果をインポートします。 -
-`ImportPermas` : Permas結果をインポートします。 - `ImportPreferenceSettings`:
-プリファレンス設定をインポートします（.jsonファイル）。 - `ImportRadioss` : Radioss結果をインポートします。 -
-`ImportSTDFile` : STDファイルをインポートします。 - `ImportSunShineUStar` : SunShine（UStar）結果をインポートします。 -
-`ImportUniversal` : Universal結果をインポートします。 - `ImportUniversalMesh` :
-UniversalメッシュをPostドキュメントとしてインポートします。 - `ShowContourDraftAngle`: Draft
-Angle機能の結果等高線を表示します。 - `ViewShowLocalCoordinate`: ローカル座標表示をオン/オフします。
+- `AddResultsAbaqus` : 現在のJupiterデータベースにAbaqus結果を追加します。
+- `AddResultsActran` : 現在のJupiterデータベースにActran結果を追加します。
+- `AddResultsADVC` : 現在のJupiterデータベースにADVC結果を追加しまします。
+- `AddResultsLSDyna` : 現在のJupiterデータベースにLS-Dyna結果を追加します。
+- `AddResultsMappedMeshFile` : Mapped Mesh Fileに書かれた結果を現在のJupiterデータベースに追加します。
+- `AddResultsNastran` : 現在のJupiterデータベースにNastran結果を追加します。
+- `AddResultsPermas` : 現在のJupiterデータベースにPermas結果を追加します。
+- `AddResultsSysnoise`: 現在のJupiterデータベースにSysNoise結果を追加しましす。
+- `AddResultsUniversal` : 現在のJupiterデータベースにUniversal結果を追加します。
+- `AddUserResultDefine` : 現在のJupiterデータベースにユーザー定義結果を追加します。
+- `Capture_CopyToClipboardTileWindow` : メインウィンドウのタイル表示画像をクリップボードにコピーします。
+- `CmdPostAnimationExportMovieToFile`: 動画をエクスポート。このマクロはCmdPostAnimationExportMovieから置き換えられました。
+- `CreateGroupDraftAngle`: 各抜き勾配の節点グループを作成します。
+- `DRAFT_ANGLE`: 金型モデル内のメッシュの抜き勾配を測定して抜き勾配を検証します。
+- `ExportPreferenceSettings`: プリファレンス設定をエクスポートします（.jsonファイル）。
+- `HideContourDraftAngle`: Draft Angle機能の結果等高線を非表示にします。
+- `ImportAbaqus` : Abaqus結果をインポートします。
+- `ImportADVC` : ADVC結果をインポートします。
+- `ImportAnsys` : Ansys結果をインポートします。
+- `ImportFrontISTR` : Front ISTR結果をインポートします。
+- `ImportLsDyna` : LS-Dyna結果をインポートします。
+- `ImportMappedMeshFileDat` : Mapped Mesh Fileに書かれた結果をインポートします。
+- `ImportMarc` : Marc結果をインポートします。
+- `ImportMarcMesh` : MarcメッシュをPostドキュメントとしてインポートします。
+- `ImportMuxWeld` : MuxWeld結果をインポートします。
+- `ImportNastran` : Nastran結果をインポートします。
+- `ImportOptishapeTS` : Optishape-TS結果をインポートします。
+- `ImportPermas` : Permas結果をインポートします。
+- `ImportPreferenceSettings`: プリファレンス設定をインポートします（.jsonファイル）。
+- `ImportRadioss` : Radioss結果をインポートします。
+- `ImportSTDFile` : STDファイルをインポートします。
+- `ImportSunShineUStar` : SunShine（UStar）結果をインポートします。
+- `ImportUniversal` : Universal結果をインポートします。
+- `ImportUniversalMesh` : UniversalメッシュをPostドキュメントとしてインポートします。
+- `ShowContourDraftAngle`: Draft Angle機能の結果等高線を表示します。
+- `ViewShowLocalCoordinate`: ローカル座標表示をオン/オフします。
 
 </details>
 
@@ -928,13 +944,14 @@ Angle機能の結果等高線を表示します。 - `ViewShowLocalCoordinate`: 
 
 <details>
 <summary id="mod-macro">変更・修正されたマクロ一覧</summary>
-        - `CmdPostAnimationExportMovie`: このマクロはCmdPostAnimationExportMovieToFileに置き換えられました。V5.1からは使用できません。
 
-    :::note
+- `CmdPostAnimationExportMovie`: このマクロはCmdPostAnimationExportMovieToFileに置き換えられました。V5.1からは使用できません。
 
-    PSJ Command実装があるマクロについては、PSJ Command側で引数の更新が行われると、マクロも同時に更新されるため、本項目では未記載としています。PSJ実装のないマクロ固有の変更やマクロの変更のみ記載しています。
+:::note
 
-    :::
+PSJ Command実装があるマクロについては、PSJ Command側で引数の更新が行われると、マクロも同時に更新されるため、本項目では未記載としています。PSJ実装のないマクロ固有の変更やマクロの変更のみ記載しています。
+
+:::
 
 </details>
 

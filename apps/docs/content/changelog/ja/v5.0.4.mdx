@@ -11,7 +11,6 @@ tags: ['Release']
 ---
 
 :::tip[Highlight updates]
-
 V5.0.4では、主に表示操作を強化するためのAPI機能を追加しました。また、新機能や新オプション用にマクロやPSJ
 Commandを更新しています。
 
@@ -20,7 +19,6 @@ Commandを更新しています。
 - ライセンス状況をより簡単に確認できるマクロ・APIを追加しました。
 - 画像キャプチャマクロ・APIに、画像トリミングのオプションを追加しました。
 - 値を取得するAPIに、表示中のエンティティのみに限定するオプションを追加しました。
-
 :::
 
 ## 🚀 新機能
@@ -28,30 +26,28 @@ Commandを更新しています。
 ### 📦 データタイプ
 
 - PSJ-Command:
-  - 列挙型　*[`AnalysisType`](../data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)* に新規タイプを追加しました。
+  - 列挙型　_[`AnalysisType`](../data-type/psj-utility/post-utility/enumeration-types/post-analysis-types)_ に新規タイプを追加しました。
 
 <details>
-        <summary>新規追加Post Analysis型一覧</summary>
+  <summary>新規追加Post Analysis型一覧</summary>
 
-| 整数表記 | POST ANALYSISタイプ                                        |
-| -------- | ---------------------------------------------------------- |
-| 10       | `JPT.PostAnalysisType.POST_ANALYSIS_SHAPE_OPTIMIZATION`    |
-| 11       | `JPT.PostAnalysisType.POST_ANALYSIS_TOPOLOGY_OPTIMIZATION` |
-
+  | 整数表記 | POST ANALYSISタイプ                                           |
+  | ---- | ---------------------------------------------------------- |
+  | 10   | `JPT.PostAnalysisType.POST_ANALYSIS_SHAPE_OPTIMIZATION`    |
+  | 11   | `JPT.PostAnalysisType.POST_ANALYSIS_TOPOLOGY_OPTIMIZATION` |
 </details>
 
 - PSJ-Utility:
-  - 列挙型　*[`DTableType`](../data-type/psj-utility/post-utility/enumeration-types/post-dtable-types)*
+  - 列挙型　_[`DTableType`](../data-type/psj-utility/post-utility/enumeration-types/post-dtable-types)_
     に新規タイプを追加しました。
 
 <details>
-        <summary>新規追加Post DTables型一覧</summary>
+  <summary>新規追加Post DTables型一覧</summary>
 
-| 整数表記 | POST DTABLEタイプ                 |
-| -------- | --------------------------------- | ------------------ |
-| 96       | `JPT.DTableType.DTABLE_POST_NODE` | Post Node table    |
-| 97       | `JPT.DTableType.DTABLE_POST_ELEM` | Post Element table |
-
+  \| 整数表記 | POST DTABLEタイプ                 |
+  \| -------- | --------------------------------- | ------------------ |
+  \| 96       | `JPT.DTableType.DTABLE_POST_NODE` | Post Node table    |
+  \| 97       | `JPT.DTableType.DTABLE_POST_ELEM` | Post Element table |
 </details>
 
 ### ⌘ PSJ-Command
@@ -59,23 +55,19 @@ Commandを更新しています。
 新規オプションの追加や、操作性・保守性向上のためのPSJコマンド更新を実施しました。
 
 <details>
+  <summary>新規追加コマンド一覧</summary>
 
-<summary>新規追加コマンド一覧</summary>
-
-- `MainWindow.RightClick.SetPartAppearance`: パート外観の表示・非表示に対応しました。
-
+  - `MainWindow.RightClick.SetPartAppearance`: パート外観の表示・非表示に対応しました。
 </details>
 
 <details>
-  
-- また、下記のコマンドが変更されました。
-  
-<summary>更新コマンド一覧</summary>
+  - また、下記のコマンドが変更されました。
 
-- `Home.CopyToClipboard`: 表示されているエンティティの範囲に合わせてキャプチャされた画像を切り取るオプションが追加されました。
-- `Home.ToImage`: 表示されているエンティティの範囲に合わせてキャプチャされた画像を切り取るオプションが追加されました。
-- `Home.ToPPTX`: 表示されているエンティティの範囲に合わせてキャプチャされた画像を切り取るオプションが追加されました。
+  <summary>更新コマンド一覧</summary>
 
+  - `Home.CopyToClipboard`: 表示されているエンティティの範囲に合わせてキャプチャされた画像を切り取るオプションが追加されました。
+  - `Home.ToImage`: 表示されているエンティティの範囲に合わせてキャプチャされた画像を切り取るオプションが追加されました。
+  - `Home.ToPPTX`: 表示されているエンティティの範囲に合わせてキャプチャされた画像を切り取るオプションが追加されました。
 </details>
 
 ### 🛠 PSJ-Utility
@@ -85,16 +77,20 @@ Commandを更新しています。
 - 新規に10個のAPIコマンドを追加しました。
 
 <details>
+<summary>新規追加API一覧</summary>
 
-<summary>新規追加API一覧</summary>- `JPT.GetAllPostNodes` : 全てのPost節点 （読み取り専用）を取得します。
-Postドキュメントでのみ動作します。 - `JPT.GetAllPostElems` : 全てのPost要素 （読み取り専用）を取得します。
-Postドキュメントでのみ動作します。 - `JPT.EnableAllLicenses` : 利用可能なすべてのライセンスを有効にします。 -
-`JPT.GetAllContacts` : 全ての存在する接触情報を取得します。 - `JPT.GetAllLicensesStatus` :
-すべてのライセンス状態を取得します。 - `JPT.GetInternalIDRefItem`: 参照エンティティの内部IDを取得します。 -
-`JPT.GetResultTitle`: 結果がロードされているとき、タイトルの内容を取得します。 - `JPT.GetScreenHeight` :
-メインウィンドウの高さを取得します。 - `JPT.GetScreenPositionOfEntities` :
-指定したエンティティのメインウィンドウ内での位置を取得します。 - `JPT.GetScreenWidth` :
-メインウィンドウの幅を取得します。
+- `JPT.GetAllPostNodes` : 全てのPost節点 （読み取り専用）を取得します。
+  Postドキュメントでのみ動作します。
+- `JPT.GetAllPostElems` : 全てのPost要素 （読み取り専用）を取得します。
+  Postドキュメントでのみ動作します。
+- `JPT.EnableAllLicenses` : 利用可能なすべてのライセンスを有効にします。
+- `JPT.GetAllContacts` : 全ての存在する接触情報を取得します。
+- `JPT.GetAllLicensesStatus` : すべてのライセンス状態を取得します。
+- `JPT.GetInternalIDRefItem`: 参照エンティティの内部IDを取得します。
+- `JPT.GetResultTitle`: 結果がロードされているとき、タイトルの内容を取得します。
+- `JPT.GetScreenHeight` : メインウィンドウの高さを取得します。
+- `JPT.GetScreenPositionOfEntities` : 指定したエンティティのメインウィンドウ内での位置を取得します。
+- `JPT.GetScreenWidth` : メインウィンドウの幅を取得します。
 
 </details>
 
@@ -102,13 +98,13 @@ Postドキュメントでのみ動作します。 - `JPT.EnableAllLicenses` : �
 
 <details>
 <summary>変更コマンド一覧</summary>
-        - `JPT.GetAllNodes` : Postドキュメント上で実行された場合、この関数がPreドキュメント専用であることを表示するようにしました。
-        - `JPT.GetAllElems` : Postドキュメント上で実行された場合、この関数がPreドキュメント専用であることを表示するようにしました。
-        - `JPT.GetMaxResultId` : 表示されているエンティティについてのみ値を取得できるようにしました。
-        - `JPT.GetMaxResultValue` : 表示されているエンティティについてのみ値を取得できるようにしました。
-        - `JPT.GetMinResultId` : 表示されているエンティティについてのみ値を取得できるようにしました。
-        - `JPT.GetMinResultValue` : 表示されているエンティティについてのみ値を取得できるようにしました。
 
+- `JPT.GetAllNodes` : Postドキュメント上で実行された場合、この関数がPreドキュメント専用であることを表示するようにしました。
+- `JPT.GetAllElems` : Postドキュメント上で実行された場合、この関数がPreドキュメント専用であることを表示するようにしました。
+- `JPT.GetMaxResultId` : 表示されているエンティティについてのみ値を取得できるようにしました。
+- `JPT.GetMaxResultValue` : 表示されているエンティティについてのみ値を取得できるようにしました。
+- `JPT.GetMinResultId` : 表示されているエンティティについてのみ値を取得できるようにしました。
+- `JPT.GetMinResultValue` : 表示されているエンティティについてのみ値を取得できるようにしました。
 </details>
 
 ### 📐 PSJ-GUI
@@ -134,7 +130,8 @@ Postドキュメントでのみ動作します。 - `JPT.EnableAllLicenses` : �
 
 <details>
 <summary>新規追加コマンド一覧</summary>
-        - `dlg.set_item_visible`: コンポーネントの状態を「表示」または「非表示」に設定します。
+
+- `dlg.set_item_visible`: コンポーネントの状態を「表示」または「非表示」に設定します。
 
 </details>
 
@@ -143,17 +140,19 @@ Postドキュメントでのみ動作します。 - `JPT.EnableAllLicenses` : �
 - 新規に10個のマクロを追加しました。
 
 <details>
+<summary>新規追加マクロ一覧</summary>
 
-<summary>新規追加マクロ一覧</summary>- `ALIGNMENTBYOOBB` : OOBB（Object Oriented Boundary
-Box）を使用して、対象パートの位置を基準パートの位置に合わせる機能のマクロです。 -
-`CmdWriteCSVForGeneralReportLinearStatic`: レポート機能（静解析）をCSVファイルにエクスポートするためのマクロです。 -
-`CmdWriteCSVForGeneralReportModal`: レポート機能（モード解析）をCSVファイルにエクスポートするためのマクロです。 -
-`ExportGroup`: グループのエクスポートマクロを追加しました。 - `ExportWindowSettings`:
-ウィンドウ設定エクスポートマクロを追加しました。 - `ImportGroup`: グループのインポートマクロを追加しました。 -
-`SetHidingElementFactor`:（トポロジー最適化用）非表示要素の係数と結果を指定するマクロを追加しました。 -
-`SetPartAppearance` : パート外観の表示・非表示を切り替えるマクロを追加しました。 - `ToPre`:
-ポストドキュメントをプレドキュメントに変換するためのマクロを追加しました - `ToPost`: macro for convert Pre document to
-Post document.
+- `ALIGNMENTBYOOBB` : OOBB（Object Oriented Boundary
+  Box）を使用して、対象パートの位置を基準パートの位置に合わせる機能のマクロです。
+- `CmdWriteCSVForGeneralReportLinearStatic`: レポート機能（静解析）をCSVファイルにエクスポートするためのマクロです。
+- `CmdWriteCSVForGeneralReportModal`: レポート機能（モード解析）をCSVファイルにエクスポートするためのマクロです。
+- `ExportGroup`: グループのエクスポートマクロを追加しました。
+- `ExportWindowSettings`: ウィンドウ設定エクスポートマクロを追加しました。
+- `ImportGroup`: グループのインポートマクロを追加しました。
+- `SetHidingElementFactor`:（トポロジー最適化用）非表示要素の係数と結果を指定するマクロを追加しました。
+- `SetPartAppearance` : パート外観の表示・非表示を切り替えるマクロを追加しました。
+- `ToPre`: ポストドキュメントをプレドキュメントに変換するためのマクロを追加しました
+- `ToPost`: macro for convert Pre document to Post document.
 
 </details>
 
@@ -161,11 +160,12 @@ Post document.
 
 <details>
 <summary>変更マクロ一覧</summary>
-        - `ADVC_Structure`:　gray_scale_ratio_tol及びoutput_gray_scale_ratioを出力するオプションを追加しました。
-        - `Capture_CopyToClipboardEx`: 表示されているエンティティの範囲にキャプチャされた画像をトリミングするオプションが追加されました。
-        - `Capture_ToPPT`: 表示されているエンティティの範囲にキャプチャされた画像をトリミングするオプションが追加されました。
-        - `Capture_ToImageEx`: 表示されているエンティティの範囲にキャプチャされた画像をトリミングするオプションが追加されました。
-        - `Prop2DShell`: ERP設定及び温度変化設定用オプションが追加されました。
+
+- `ADVC_Structure`:　gray\_scale\_ratio\_tol及びoutput\_gray\_scale\_ratioを出力するオプションを追加しました。
+- `Capture_CopyToClipboardEx`: 表示されているエンティティの範囲にキャプチャされた画像をトリミングするオプションが追加されました。
+- `Capture_ToPPT`: 表示されているエンティティの範囲にキャプチャされた画像をトリミングするオプションが追加されました。
+- `Capture_ToImageEx`: 表示されているエンティティの範囲にキャプチャされた画像をトリミングするオプションが追加されました。
+- `Prop2DShell`: ERP設定及び温度変化設定用オプションが追加されました。
 
 </details>
 
@@ -191,7 +191,7 @@ Post document.
 
 #### 📝 API
 
-- Postドキュメントで`JPT.GetAllByTypeID()`を使用した場合、POST_NODEおよびPOST_ELEMタイプに対して間違った値を返す不具合を修正しました。
+- Postドキュメントで`JPT.GetAllByTypeID()`を使用した場合、POST\_NODEおよびPOST\_ELEMタイプに対して間違った値を返す不具合を修正しました。
 - DNODEクラスのisFloating属性をチェックするのに時間がかかる問題を修正しました。
 - `JPT.GetMaxIDEntity()`が誤った値を返す不具合を修正しました。
 

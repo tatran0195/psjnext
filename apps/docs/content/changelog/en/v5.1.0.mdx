@@ -802,19 +802,30 @@ ditem_list = const_ditem + pressure_ditem + connect_ditem
 
 <details>
 
-<summary id="new-psj-utility">List of newly added command</summary>- `JPT.CastDItemToDSubGroup`: Cast DItem to
-DSubGroup. - `JPT.ClearDraw`: Clear all the drawings in Main Window. - `JPT.ClearMacroLog` : Clear all the text existing
-in the Macro Window. - `JPT.ClearOutputLog` : Clear all the text existing in the Output Window. - `JPT.DrawArrow`: Draw
-an arrow in Main Window. - `JPT.DrawLine`: Draw a line in Main Window. - `JPT.DrawPoint`: Draw a point in Main Window. -
-`JPT.DrawRect`: Draw a rectangle on Main Window by window coordinate. - `JPT.GetAllFieldData` : Get all the field data
-inside a document. - `JPT.GetAllLibraryMaterials` : Get the material in current library (library data base). -
-`JPT.GetAllMaterials` : Get all materials in current document (user data base). - `JPT.GetAllPostFreqResponses`: Get all
-Frequency responses. - `JPT.GetAllPostFreqResponseSolvers`: Get all Frequency responses (Solver). -
-`JPT.GetAllPostGururiResponses`: Get all Gururi responses. - `JPT.GetAllPostResultCurve`: Get all Post result curves. -
-`JPT.GetAllPostTransResponses`: Get all Transient responses. - `JPT.GetAllPostTransResponseSolvers`: Get all Transient
-responses (Solver). - `JPT.GetAllSubGroups` : Get all subgroups in current document. - `JPT.GetPostSolverType` : Get the
-result type of the current importing result file. - `JPT.RunSunShine`: Run SunShine to solve an analysis problem. -
-`JPT.SaveToMLIB` : Save materials in database to .mlib file. - `JPT.ShowMappingData` : Show Mapping Display by PSJ
+<summary id="new-psj-utility">List of newly added command</summary>
+
+- `JPT.CastDItemToDSubGroup`: Cast DItem to DSubGroup. 
+- `JPT.ClearDraw`: Clear all the drawings in Main Window. 
+- `JPT.ClearMacroLog` : Clear all the text existing in the Macro Window. 
+- `JPT.ClearOutputLog` : Clear all the text existing in the Output Window. 
+- `JPT.DrawArrow`: Draw an arrow in Main Window. 
+- `JPT.DrawLine`: Draw a line in Main Window. 
+- `JPT.DrawPoint`: Draw a point in Main Window. 
+- `JPT.DrawRect`: Draw a rectangle on Main Window by window coordinate. 
+- `JPT.GetAllFieldData` : Get all the field data inside a document. 
+- `JPT.GetAllLibraryMaterials` : Get the material in current library (library data base). 
+- `JPT.GetAllMaterials` : Get all materials in current document (user data base). 
+- `JPT.GetAllPostFreqResponses`: Get all Frequency responses.
+- `JPT.GetAllPostFreqResponseSolvers`: Get all Frequency responses (Solver).
+- `JPT.GetAllPostGururiResponses`: Get all Gururi responses.
+- `JPT.GetAllPostResultCurve`: Get all Post result curves.
+- `JPT.GetAllPostTransResponses`: Get all Transient responses.
+- `JPT.GetAllPostTransResponseSolvers`: Get all Transient responses (Solver).
+- `JPT.GetAllSubGroups` : Get all subgroups in current document.
+- `JPT.GetPostSolverType` : Get the result type of the current importing result file.
+- `JPT.RunSunShine`: Run SunShine to solve an analysis problem.
+- `JPT.SaveToMLIB` : Save materials in database to .mlib file.
+- `JPT.ShowMappingData` : Show Mapping Display by PSJ
 
 </details>
 
@@ -822,11 +833,11 @@ result type of the current importing result file. - `JPT.RunSunShine`: Run SunSh
 
 <details>
 
-<summary id="mod-psj-utility">List of commands changed and modified</summary>- `JPT.GetAssemblyEntityData` :
-Automatically trim whitespaces contained in the retrieved key. - `JPT.GetAllNodes`, `JPT.GetAllElems`,
-`JPT.GetAllByTypeID(JPT.DItemType.NODE)` : Modified to return a count of 0 when executed on Post documents. -
-`JPT.GetAllPostNodes`, `JPT.GetAllPostElems`, `JPT.GetAllByTypeID(JPT.DItemType.POST_NODE)` : Modified to return a count
-of 0 when executed on Pre documents.
+<summary id="mod-psj-utility">List of commands changed and modified</summary>
+
+- `JPT.GetAssemblyEntityData` : Automatically trim whitespaces contained in the retrieved key.
+- `JPT.GetAllNodes`, `JPT.GetAllElems`, `JPT.GetAllByTypeID(JPT.DItemType.NODE)` : Modified to return a count of 0 when executed on Post documents.
+- `JPT.GetAllPostNodes`, `JPT.GetAllPostElems`, `JPT.GetAllByTypeID(JPT.DItemType.POST_NODE)` : Modified to return a count of 0 when executed on Pre documents.
 
 </details>
 
@@ -898,27 +909,44 @@ of 0 when executed on Pre documents.
 
 <details>
 
-<summary id="new-macro">List of newly added macros</summary>- `AddResultsAbaqus` : Add Abaqus results to the current
-Jupiter Database. - `AddResultsActran` : Add Actran results to the current Jupiter Database. - `AddResultsADVC` : Add
-ADVC results to the current Jupiter Database. - `AddResultsLSDyna` : Add LS-Dyna results to the current Jupiter
-Database. - `AddResultsMappedMeshFile` : Add retults written in Mapped Mesh File to the current Jupiter Database. -
-`AddResultsNastran` : Add Nastran results to the current Jupiter Database. - `AddResultsPermas` : Add Permas results to
-the current Jupiter Database. - `AddResultsSysnoise`: Add SysNoise results to the current Jupiter Database. -
-`AddResultsUniversal` : Add Universal results to the current Jupiter Database. - `AddUserResultDefine` : Add user
-defined results to the current Jupiter Database. - `Capture_CopyToClipboardTileWindow` : Copy tiled image of Main Window
-to clipboard. - `CmdPostAnimationExportMovieToFile`: Export movie. This macro is replaced from
-CmdPostAnimationExportMovie. - `CreateGroupDraftAngle`: Create the nodal groups for each draft angle. - `DRAFT_ANGLE`:
-Measures the draft angle of the mesh in the mold model to verify the draft angle. - `ExportPreferenceSettings`: Export
-settings of Preferences (.json file). - `HideContourDraftAngle`: Hide result contour of Draft Angle function. -
-`ImportAbaqus` : Import Abaqus result. - `ImportADVC` : Import ADVC result. - `ImportAnsys` : Import Ansys result. -
-`ImportFrontISTR` : Import Front ISTR result. - `ImportLsDyna` : Import LS-Dyna result. - `ImportMappedMeshFileDat` :
-Import result written in Mapped Mesh File. - `ImportMarc` : Import Marc result. - `ImportMarcMesh` : Import Marc Mesh as
-a Post document. - `ImportMuxWeld` : Import MuxWeld result. - `ImportNastran` : Import Nastran result. -
-`ImportOptishapeTS` : Import Optishape-TS result. - `ImportPermas` : Import Permas result. - `ImportPreferenceSettings`:
-Import settings of Preferences (.json file). - `ImportRadioss` : Import Radioss result. - `ImportSTDFile` : Import STD
-file. - `ImportSunShineUStar` : Import SunShine (UStar) result. - `ImportUniversal` : Import Universal result. -
-`ImportUniversalMesh` : Import Universal mesh as a Post document. - `ShowContourDraftAngle`: Display result contour of
-Draft Angle function. - `ViewShowLocalCoordinate`: Turn on/off local coordinate display.
+<summary id="new-macro">List of newly added macros</summary>
+
+- `AddResultsAbaqus` : Add Abaqus results to the current Jupiter Database.
+- `AddResultsActran` : Add Actran results to the current Jupiter Database.
+- `AddResultsADVC` : Add ADVC results to the current Jupiter Database.
+- `AddResultsLSDyna` : Add LS-Dyna results to the current Jupiter Database.
+- `AddResultsMappedMeshFile` : Add retults written in Mapped Mesh File to the current Jupiter Database.
+- `AddResultsNastran` : Add Nastran results to the current Jupiter Database.
+- `AddResultsPermas` : Add Permas results to the current Jupiter Database.
+- `AddResultsSysnoise`: Add SysNoise results to the current Jupiter Database.
+- `AddResultsUniversal` : Add Universal results to the current Jupiter Database.
+- `AddUserResultDefine` : Add user defined results to the current Jupiter Database.
+- `Capture_CopyToClipboardTileWindow` : Copy tiled image of Main Window to clipboard.
+- `CmdPostAnimationExportMovieToFile`: Export movie. This macro is replaced from CmdPostAnimationExportMovie.
+- `CreateGroupDraftAngle`: Create the nodal groups for each draft angle.
+- `DRAFT_ANGLE`: Measures the draft angle of the mesh in the mold model to verify the draft angle.
+- `ExportPreferenceSettings`: Export settings of Preferences (.json file).
+- `HideContourDraftAngle`: Hide result contour of Draft Angle function.
+- `ImportAbaqus` : Import Abaqus result.
+- `ImportADVC` : Import ADVC result.
+- `ImportAnsys` : Import Ansys result.
+- `ImportFrontISTR` : Import Front ISTR result.
+- `ImportLsDyna` : Import LS-Dyna result.
+- `ImportMappedMeshFileDat` : Import result written in Mapped Mesh File.
+- `ImportMarc` : Import Marc result.
+- `ImportMarcMesh` : Import Marc Mesh as a Post document.
+- `ImportMuxWeld` : Import MuxWeld result.
+- `ImportNastran` : Import Nastran result.
+- `ImportOptishapeTS` : Import Optishape-TS result.
+- `ImportPermas` : Import Permas result.
+- `ImportPreferenceSettings`: Import settings of Preferences (.json file).
+- `ImportRadioss` : Import Radioss result.
+- `ImportSTDFile` : Import STD file.
+- `ImportSunShineUStar` : Import SunShine (UStar) result.
+- `ImportUniversal` : Import Universal result.
+- `ImportUniversalMesh` : Import Universal mesh as a Post document.
+- `ShowContourDraftAngle`: Display result contour of Draft Angle function.
+- `ViewShowLocalCoordinate`: Turn on/off local coordinate display.
 
 </details>
 
@@ -1013,4 +1041,3 @@ Draft Angle function. - `ViewShowLocalCoordinate`: Turn on/off local coordinate 
 - Fix the bug where `JPT.GetResultIncrements` returns the Result Increment ID incorrectly.
 - Correct the description of `JPT.GetMinResultValue()` and `JPT.GetMaxResultValue()`.
 - Fix the bug where `JPT.GetInternalIDRefItem` returned 0 when ID duplication occured across different entities.
-#### Broken Heading

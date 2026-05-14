@@ -21,6 +21,6 @@ This is an instance of a PostDataOp class, represents Post Data Option informati
 | phaseAngle     | Phase angle value.                                                                                       |
 | userCoordSysId | ID of User-defined Coordinate System. ID equals `0` if none of user-defined Coordinate System specified. |
 
-[//]: # 'amt is not documented yet'
+[//]: # "amt is not documented yet"
 
 <!-- | amt               | [Amount](post-result-data-amt-types) option information                                                                                       | -->

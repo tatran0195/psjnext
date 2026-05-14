@@ -62,44 +62,43 @@ In detail:
 - Add new API commands :
 
 <details>
-    <summary>List of newly added command</summary>
+<summary>List of newly added command</summary>
 
-    - `JPT.ShowMultiMappingData`
-    - `JPT.OtherCommand`
+- `JPT.ShowMultiMappingData`
+- `JPT.OtherCommand`
 
 </details>
 
 <details>
-    <summary>List of new commands added</summary>
+<summary>List of new commands added</summary>
 
-    | Pre-Command                                                                                                               |
-    | ------------------------------------------------------------------------------------------------------------------------- |
-    | _[`Assemble.ConvertToSharedFaces`](../psj-command/assemble/Assemble-ConvertToSharedFaces)_                                |
-    | _[`Connections.SpringsDampers.Bush.AnyEntities`](../psj-command/connections/Connections-SpringsDampers-Bush-AnyEntities)_ |
-    | _[`Connections.SpringsDampers.Bush.OnetoOne`](../psj-command/connections/Connections-SpringsDampers-Bush-OnetoOne)_       |
-    | _[`Connections.SpringsDampers.Bush.TwoNodes`](../psj-command/connections/Connections-SpringsDampers-Bush-TwoNodes)_       |
-    | _[`Exchange.ClayWork`](../psj-command/exchange/Exchange-ClayWork)_                                                        |
-    | _[`Exchange.ReplaceSolidMesh`](../psj-command/exchange/Exchange-ReplaceSolidMesh)_                                        |
-    | _[`Exchange.AssembleSolidMesh`](../psj-command/exchange/Exchange-AssembleSolidMesh)_                                      |
-    | _[`Geometry.Transform.BestFit`](../psj-command/geometry/Geometry-Transform-BestFit)_                                      |
-    | _[`Geometry.Transform.OOBBAlignment`](../psj-command/geometry/Geometry-Transform-OOBBAlignment)_                          |
-    | _[`Home.ToPPTX_3DModel`](../psj-command/home/Home-ToPPTX_3DModel)_                                                        |
-    | _[`MainWindow.RightClick.SelectSurfaceColor`](../psj-command/main-window/MainWindow-RightClick-SelectSurfaceColor)_       |
+| Pre-Command                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------- |
+| _[`Assemble.ConvertToSharedFaces`](../psj-command/assemble/Assemble-ConvertToSharedFaces)_                                |
+| _[`Connections.SpringsDampers.Bush.AnyEntities`](../psj-command/connections/Connections-SpringsDampers-Bush-AnyEntities)_ |
+| _[`Connections.SpringsDampers.Bush.OnetoOne`](../psj-command/connections/Connections-SpringsDampers-Bush-OnetoOne)_       |
+| _[`Connections.SpringsDampers.Bush.TwoNodes`](../psj-command/connections/Connections-SpringsDampers-Bush-TwoNodes)_       |
+| _[`Exchange.ClayWork`](../psj-command/exchange/Exchange-ClayWork)_                                                        |
+| _[`Exchange.ReplaceSolidMesh`](../psj-command/exchange/Exchange-ReplaceSolidMesh)_                                        |
+| _[`Exchange.AssembleSolidMesh`](../psj-command/exchange/Exchange-AssembleSolidMesh)_                                      |
+| _[`Geometry.Transform.BestFit`](../psj-command/geometry/Geometry-Transform-BestFit)_                                      |
+| _[`Geometry.Transform.OOBBAlignment`](../psj-command/geometry/Geometry-Transform-OOBBAlignment)_                          |
+| _[`Home.ToPPTX_3DModel`](../psj-command/home/Home-ToPPTX_3DModel)_                                                        |
+| _[`MainWindow.RightClick.SelectSurfaceColor`](../psj-command/main-window/MainWindow-RightClick-SelectSurfaceColor)_       |
 
-    | Post-Command                                                                                                      |
-    | ----------------------------------------------------------------------------------------------------------------- |
-    | _[`Analysis.Nastran.DirectFrequencyResponse`](../psj-command/analysis/Analysis-Nastran-DirectFrequencyResponse)_  |
-    | _[`Calculation.PeakSearchUpdateViewSetting`](../psj-command/calculation/Calculation-PeakSearchUpdateViewSetting)_ |
-    | _[`Post.Calculation.StressRecovery`](../psj-command/property/Properties-ElemRelatedInfo-Bar)_                     |
-    | _[`Post.Calculation.FatigueMaterial`](../psj-command/property/Properties-ElemRelatedInfo-Bar)_                    |
-    | _[`Post.Calculation.FatigueStrength`](../psj-command/property/Properties-ElemRelatedInfo-Bar)_                    |
+| Post-Command                                                                                                      |
+| ----------------------------------------------------------------------------------------------------------------- |
+| _[`Analysis.Nastran.DirectFrequencyResponse`](../psj-command/analysis/Analysis-Nastran-DirectFrequencyResponse)_  |
+| _[`Calculation.PeakSearchUpdateViewSetting`](../psj-command/calculation/Calculation-PeakSearchUpdateViewSetting)_ |
+| _[`Post.Calculation.StressRecovery`](../psj-command/property/Properties-ElemRelatedInfo-Bar)_                     |
+| _[`Post.Calculation.FatigueMaterial`](../psj-command/property/Properties-ElemRelatedInfo-Bar)_                    |
+| _[`Post.Calculation.FatigueStrength`](../psj-command/property/Properties-ElemRelatedInfo-Bar)_                    |
 
 </details>
 
 - Some commands are updated the return value as below:
 
 <details>
-
 <summary id="mod-psj-command-return-value">List of commands changed</summary>
 
 | PSJ-Command                                                                                         | Old return value | New return value                       |
@@ -144,8 +143,10 @@ In detail:
 
 <details>
 
-<summary id="new-psj-utility">List of newly added command</summary>- `JPT.ShowMultiMappingData`: Show contour of
-specified mapping data, including multiple data of the same type, on the current model.
+<summary id="new-psj-utility">List of newly added command</summary>
+
+- `JPT.ShowMultiMappingData`: Show contour of
+  specified mapping data, including multiple data of the same type, on the current model.
 
 </details>
 
@@ -155,24 +156,27 @@ specified mapping data, including multiple data of the same type, on the current
 
 <details>
 
-<summary id="new-macro">List of newly added macros</summary>- `SelectSurfaceColor` : Select faces by the surface color.
+<summary id="new-macro">List of newly added macros</summary>
+
+- `SelectSurfaceColor` : Select faces by the surface color.
 - `Capture_3DModel_ToPPT` : Save the model in the current document as a 3D object (.glb file) and embed it into a .pptx
-file.
+  file.
 
 </details>
 
 - Additionally, some macro are modified as below:
 
 <details>
-<summary id="mod-macro">List of marcos changed and modified</summary>
-          - `DYNAMIC_FREQ_INTERACTIVE_LOAD_AND_RESPONSE` : Updated according to change usability.
-          - `ElemRelatedInfo_Bar` : Enabled to set every properties of Elem Related Info > Bar by Macro.
-          - `ElemRelatedInfo_Beam` : Enabled to set every properties of Elem Related Info > Beam by Macro.
-          - `ElemRelatedInfo_Bush` : Enabled to set every properties of Elem Related Info > Bush by Macro.
-          - `ElemRelatedInfo_Gap` : Enabled to set every properties of Elem Related Info > Gap by Macro.
-          - `ElemRelatedInfo_Shell` : Enabled to set every properties of Elem Related Info > Shell by Macro.
-          - `ElemRelatedInfo_Rod` : Enabled to set every properties of Elem Related Info > Rod by Macro.
-          - `SetDisplayCommonLBC` : Added an option to set Contact marker.
+<summary id="mod-macro">List of macros changed and modified</summary>
+
+- `DYNAMIC_FREQ_INTERACTIVE_LOAD_AND_RESPONSE` : Updated according to change usability.
+- `ElemRelatedInfo_Bar` : Enabled to set every properties of Elem Related Info > Bar by Macro.
+- `ElemRelatedInfo_Beam` : Enabled to set every properties of Elem Related Info > Beam by Macro.
+- `ElemRelatedInfo_Bush` : Enabled to set every properties of Elem Related Info > Bush by Macro.
+- `ElemRelatedInfo_Gap` : Enabled to set every properties of Elem Related Info > Gap by Macro.
+- `ElemRelatedInfo_Shell` : Enabled to set every properties of Elem Related Info > Shell by Macro.
+- `ElemRelatedInfo_Rod` : Enabled to set every properties of Elem Related Info > Rod by Macro.
+- `SetDisplayCommonLBC` : Added an option to set Contact marker.
 
 </details>
 

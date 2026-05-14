@@ -1,12 +1,14 @@
 {
     "config": {
         "default": true,
-        "MD013": false,
-        "MD024": false,
-        "MD033": false,
-        "MD036": false,
-        "MD041": false,
-        "MD046": false,
+        "MD013": false, // line length — disable for docs
+        "MD024": false, // duplicate headers — disable for docs
+        "MD033": false, // inline html — disable for docs
+        "MD036": false, // emphasis used instead of heading — disable for docs
+        "MD041": false, // first line in document should be a heading — disable for docs
+        "MD046": false // code blocks should use fenced — disable for docs
     },
+    "globs": ["content/**/*.md", "content/**/*.mdx"],
     "ignores": ["node_modules", ".next", ".source"],
+    "fix": false
 }

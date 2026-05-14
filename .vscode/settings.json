@@ -65,5 +65,8 @@
         "source.organizeImports": "explicit",
         "source.fixAll.oxc": "explicit",
         "source.fixAll.oxlint": "explicit"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     }
 }

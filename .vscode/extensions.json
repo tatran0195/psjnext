@@ -1,0 +1,15 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "DavidAnson.vscode-markdownlint",
+        "Unifiedjs.vscode-mdx",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "csstools.postcss",
+        "vercel.turbo",
+        "oven.bun-vscode",
+        "oxc.oxlint",
+        "EditorConfig.EditorConfig",
+        "christian-kohler.path-intellisense"
+    ]
+}

@@ -1,4 +1,6 @@
-# RENUMBER_ITEM
+---
+title: RENUMBER_ITEM
+---
 
 ## Description
 
