@@ -1,14 +1,15 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import { useTheme } from '@teispace/next-themes';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'fumadocs-core/link';
-import { Menu, Moon, Sun, X } from 'lucide-react';
+import { ChevronDown, Globe, Moon, Sun, X } from 'lucide-react';
 
 import { TechnoStarLogo } from '@/components/icons/logo';
+import { LanguageSelect } from '@/layouts/shared/slots/language-select';
 import { FullSearchTrigger, SearchTrigger } from '@/layouts/shared/slots/search-trigger';
 import { navLinks } from '@/lib/nav-links';
 
@@ -104,7 +105,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                         {navLinks.map((link) => {
                             if (link.type !== 'main') return null;
                             const active = isActive(link.url);
-                            return (
+                            const linkElement = (
                                 <Link
                                     key={link.url}
                                     href={link.url}
@@ -135,6 +136,89 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                     )}
                                 </Link>
                             );
+
+                            if (link.text === 'Home') {
+                                const isDocsActive = isActive('/docs') || isActive('/api') || isActive('/tutorials');
+                                return (
+                                    <Fragment key={link.url}>
+                                        {linkElement}
+                                        {/* Documentation Mega Menu */}
+                                        <div className="group relative">
+                                            <button
+                                                className="relative px-3 py-2 text-sm font-semibold transition-colors duration-200 flex items-center gap-1"
+                                                style={{
+                                                    color: isDocsActive ? 'var(--psj-blue)' : 'var(--psj-text-2)',
+                                                    letterSpacing: 'var(--tracking-snug)',
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    if (!isDocsActive) (e.currentTarget as HTMLElement).style.color = 'var(--psj-text-1)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    if (!isDocsActive) (e.currentTarget as HTMLElement).style.color = 'var(--psj-text-2)';
+                                                }}
+                                            >
+                                                Documentation
+                                                <ChevronDown size={14} className="opacity-70 group-hover:rotate-180 transition-transform duration-200" />
+                                                {isDocsActive && (
+                                                    <motion.div
+                                                        layoutId="psj-nav-indicator"
+                                                        style={{ background: 'var(--psj-blue)' }}
+                                                        className="absolute bottom-0 left-3 right-3 h-0.5"
+                                                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                                                    />
+                                                )}
+                                            </button>
+
+                                            {/* Dropdown Container */}
+                                            <div className="absolute top-full left-0 pt-4 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50">
+                                                <div
+                                                    className="w-[600px] p-6 grid grid-cols-3 gap-6 rounded-xl shadow-xl border relative"
+                                                    style={{ background: 'var(--psj-surface-0)', borderColor: 'var(--psj-border)' }}
+                                                >
+                                                    {/* Triangle pointer */}
+                                                    <div 
+                                                        className="absolute -top-2 left-10 w-4 h-4 rotate-45 border-t border-l"
+                                                        style={{ background: 'var(--psj-surface-0)', borderColor: 'var(--psj-border)' }}
+                                                    />
+                                                    
+                                                    {/* Column 1: Framework */}
+                                                    <div>
+                                                        <h3 className="text-sm font-bold mb-3 uppercase tracking-wider" style={{ color: 'var(--psj-text-1)' }}>Framework</h3>
+                                                        <ul className="space-y-3 text-sm" style={{ color: 'var(--psj-text-2)' }}>
+                                                            <li><Link href="/docs" className="hover:text-psj-blue transition-colors">Introduction</Link></li>
+                                                            <li><Link href="/docs/quick-start" className="hover:text-psj-blue transition-colors">Quick Start</Link></li>
+                                                            <li><Link href="/docs/psj-structure" className="hover:text-psj-blue transition-colors">Structure</Link></li>
+                                                        </ul>
+                                                    </div>
+
+                                                    {/* Column 2: Guides */}
+                                                    <div>
+                                                        <h3 className="text-sm font-bold mb-3 uppercase tracking-wider" style={{ color: 'var(--psj-text-1)' }}>Guides</h3>
+                                                        <ul className="space-y-3 text-sm" style={{ color: 'var(--psj-text-2)' }}>
+                                                            <li><Link href="/docs/guides/basic" className="hover:text-psj-blue transition-colors">Basic</Link></li>
+                                                            <li><Link href="/docs/guides/intermediate" className="hover:text-psj-blue transition-colors">Intermediate</Link></li>
+                                                            <li><Link href="/docs/guides/advanced" className="hover:text-psj-blue transition-colors">Advanced</Link></li>
+                                                        </ul>
+                                                    </div>
+
+                                                    {/* Column 3: API Reference */}
+                                                    <div>
+                                                        <h3 className="text-sm font-bold mb-3 uppercase tracking-wider" style={{ color: 'var(--psj-text-1)' }}>API Reference</h3>
+                                                        <ul className="space-y-3 text-sm" style={{ color: 'var(--psj-text-2)' }}>
+                                                            <li><Link href="/docs/api/data-types" className="hover:text-psj-blue transition-colors">Data Types</Link></li>
+                                                            <li><Link href="/docs/api/macro" className="hover:text-psj-blue transition-colors">Macro</Link></li>
+                                                            <li><Link href="/docs/api/psj-command" className="hover:text-psj-blue transition-colors">PSJ Command</Link></li>
+                                                            <li><Link href="/docs/api/psj-gui" className="hover:text-psj-blue transition-colors">PSJ-GUI</Link></li>
+                                                            <li><Link href="/docs/api/psj-utility" className="hover:text-psj-blue transition-colors">PSJ-Utility</Link></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Fragment>
+                                );
+                            }
+                            return linkElement;
                         })}
                     </nav>
 
@@ -144,7 +228,12 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                         <FullSearchTrigger className="hidden sm:inline-flex h-9 w-48 bg-transparent hover:bg-psj-surface-1 border-psj-border text-psj-text-2 hover:text-psj-text-1 transition-colors" />
                         <SearchTrigger className="sm:hidden" color="ghost" />
 
-                        {/* Theme toggle */}
+                        {/* Language Switch */}
+                        <LanguageSelect className="h-9 w-9 border-none p-0 flex items-center justify-center rounded-none" style={{ color: 'var(--psj-text-2)' }}>
+                            <Globe size={15} />
+                        </LanguageSelect>
+
+                       {/* Theme toggle */}
                         <button
                             onClick={() => setTheme(isDark ? 'light' : 'dark')}
                             aria-label="Toggle theme"
@@ -175,23 +264,6 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                             ) : (
                                 <Moon size={15} style={{ color: 'var(--psj-text-1)' }} />
                             )}
-                        </button>
-
-                        {/* Mobile hamburger */}
-                        <button
-                            onClick={() => setMobileOpen((v) => !v)}
-                            aria-label="Menu"
-                            className="lg:hidden"
-                            style={{
-                                width: '36px',
-                                height: '36px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                color: 'var(--psj-text-2)',
-                            }}
-                        >
-                            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
                         </button>
                     </div>
                 </div>
@@ -232,11 +304,12 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                     <X size={20} />
                                 </button>
                             </div>
-                            <div className="flex-1 overflow-y-auto px-4 py-6 space-y-1">
+                            <div className="flex-1 overflow-y-auto px-4 py-6 space-y-2">
                                 {navLinks.map((link) => {
                                     if (link.type !== 'main') return null;
                                     const active = isActive(link.url);
-                                    return (
+                                    
+                                    const linkElement = (
                                         <Link
                                             key={link.url}
                                             href={link.url}
@@ -252,6 +325,48 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                             {link.text}
                                         </Link>
                                     );
+
+                                    if (link.text === 'Home') {
+                                        return (
+                                            <Fragment key={link.url}>
+                                                {linkElement}
+                                                {/* Mobile Documentation Nav */}
+                                                <div className="pt-2 pb-1 border-b" style={{ borderColor: 'var(--psj-border)' }}>
+                                                    <div className="px-3 pb-2 text-xs font-bold uppercase tracking-widest opacity-60" style={{ color: 'var(--psj-text-2)' }}>Documentation</div>
+                                                    <div className="pl-4 space-y-4 pt-2">
+                                                        <div>
+                                                            <div className="text-xs font-bold mb-2 uppercase" style={{ color: 'var(--psj-text-1)' }}>Framework</div>
+                                                            <div className="flex flex-col gap-3 pl-2 text-sm" style={{ color: 'var(--psj-text-2)' }}>
+                                                                <Link onClick={() => setMobileOpen(false)} href="/docs">Introduction</Link>
+                                                                <Link onClick={() => setMobileOpen(false)} href="/docs/quick-start">Quick Start</Link>
+                                                                <Link onClick={() => setMobileOpen(false)} href="/docs/psj-structure">Structure</Link>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="text-xs font-bold mb-2 uppercase" style={{ color: 'var(--psj-text-1)' }}>Guides</div>
+                                                            <div className="flex flex-col gap-3 pl-2 text-sm" style={{ color: 'var(--psj-text-2)' }}>
+                                                                <Link onClick={() => setMobileOpen(false)} href="/docs/guides/basic">Basic</Link>
+                                                                <Link onClick={() => setMobileOpen(false)} href="/docs/guides/intermediate">Intermediate</Link>
+                                                                <Link onClick={() => setMobileOpen(false)} href="/docs/guides/advanced">Advanced</Link>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="text-xs font-bold mb-2 uppercase" style={{ color: 'var(--psj-text-1)' }}>API Reference</div>
+                                                            <div className="flex flex-col gap-3 pl-2 text-sm" style={{ color: 'var(--psj-text-2)' }}>
+                                                                <Link onClick={() => setMobileOpen(false)} href="/docs/api/data-types">Data Types</Link>
+                                                                <Link onClick={() => setMobileOpen(false)} href="/docs/api/macro">Macro</Link>
+                                                                <Link onClick={() => setMobileOpen(false)} href="/docs/api/psj-command">PSJ Command</Link>
+                                                                <Link onClick={() => setMobileOpen(false)} href="/docs/api/psj-gui">PSJ-GUI</Link>
+                                                                <Link onClick={() => setMobileOpen(false)} href="/docs/api/psj-utility">PSJ-Utility</Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Fragment>
+                                        );
+                                    }
+                                    
+                                    return linkElement;
                                 })}
                             </div>
                             <div className="px-4 pb-8 pt-4 border-t" style={{ borderColor: 'var(--psj-border)' }}>
