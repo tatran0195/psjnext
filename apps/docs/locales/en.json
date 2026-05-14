@@ -149,7 +149,7 @@
             "clearFilters": "Clear all filters"
         },
         "results": {
-            "showing": "Showing {count} of {total} results",
+            "showing": "Showing {count} of {total} {count, plural, one {result} other {results}}",
             "noUpdates": "No updates matched your criteria",
             "noResults": "No results found"
         },

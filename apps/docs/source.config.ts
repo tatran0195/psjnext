@@ -20,6 +20,7 @@ import lastModified from 'fumadocs-mdx/plugins/last-modified';
 import remarkDirective from 'remark-directive';
 import { z } from 'zod';
 
+import { remarkBadge } from '@/lib/mdx-plugins/remark-badge';
 import { remarkDirectiveAdmonition } from './lib/mdx-plugins/remark-directive-admonition';
 import { remarkDirectiveFixer } from './lib/mdx-plugins/remark-directive-fixer';
 import { remarkElementIds } from './lib/mdx-plugins/remark-element-ids';
@@ -106,6 +107,7 @@ const mdxOptions: DocCollection['mdxOptions'] = async (environment) => {
         remarkPlugins: isLint
             ? [remarkElementIds]
             : [
+                  remarkBadge,
                   remarkDirectiveFixer,
                   remarkDirective,
                   [remarkDirectiveAdmonition, { types: { tip: 'idea' } }],

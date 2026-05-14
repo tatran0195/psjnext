@@ -9,16 +9,12 @@ import Markdown from 'markdown-to-jsx';
 import { Grid } from '@/components/grid-pattern';
 import { getMDXComponents } from '@/components/mdx';
 import { i18n } from '@/lib/i18n';
-import { translations } from '@/lib/i18n-translations';
 import { changelog } from '@/lib/source';
+import { getTranslations } from 'next-intl/server';
 
-interface ChangelogEntryPageProps {
-    params: Promise<{ slug: string; locale: string }>;
-}
-
-export default async function ChangelogEntryPage({ params }: ChangelogEntryPageProps) {
+export default async function ChangelogEntryPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
     const { slug, locale } = await params;
-    const t = translations[locale as keyof typeof translations]?.changelog || translations.en.changelog;
+    const t = await getTranslations('changelog');
     const dateLocale = locale === 'ja' ? 'ja-JP' : 'en-US';
 
     const page = changelog.getPages(locale).find((p) => p.data.slug === slug || p.slugs[0] === slug);
@@ -72,13 +68,13 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
             {
                 '@type': 'ListItem',
                 position: 1,
-                name: t.nav.home,
+                name: t('nav.home'),
                 item: 'https://psjdoc.e-technostar.com',
             },
             {
                 '@type': 'ListItem',
                 position: 2,
-                name: t.header.title,
+                name: t('header.title'),
                 item: `https://psjdoc.e-technostar.com/${locale}/changelog`,
             },
             {
@@ -115,7 +111,7 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
                                 style={{ color: 'var(--psj-blue)' }}
                             >
                                 <ArrowLeftIcon className="mr-2 h-4 w-4" />
-                                {t.nav.backToChangelog}
+                                {t('nav.backToChangelog')}
                             </Link>
                         </div>
 
@@ -185,13 +181,13 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
                                                 color: 'var(--psj-blue)',
                                             }}
                                         >
-                                            {t.entry.releaseDetails}
+                                            {t('entry.releaseDetails')}
                                         </div>
                                         <div
                                             className="text-5xl sm:text-7xl font-black tracking-tighter"
                                             style={{ color: 'var(--psj-text-1)' }}
                                         >
-                                            {entry.version || t.entry.defaultTitle}
+                                            {entry.version || t('entry.defaultTitle')}
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +202,7 @@ export default async function ChangelogEntryPage({ params }: ChangelogEntryPageP
                                         className="text-xs font-bold uppercase tracking-widest mb-4"
                                         style={{ color: 'var(--psj-blue)' }}
                                     >
-                                        {t.entry.highlights}
+                                        {t('entry.highlights')}
                                     </h3>
                                     <ul className="space-y-2 list-disc list-inside">
                                         {entry.highlights.map((h, i) => (
@@ -242,7 +238,7 @@ export async function generateStaticParams() {
     );
 }
 
-export async function generateMetadata({ params }: ChangelogEntryPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }): Promise<Metadata> {
     const { slug, locale } = await params;
 
     const page = changelog.getPages(locale).find((p) => p.data.slug === slug || p.slugs[0] === slug);

@@ -10,6 +10,8 @@ import * as TabsComponents from 'fumadocs-ui/components/tabs';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 
+import { Badge } from '@/components/mdx/badge';
+
 import { LinkPreview } from './mdx/link-preview';
 import { Mermaid } from './mdx/mermaid';
 import { RibbonPath } from './mdx/ribbon-path';
@@ -28,6 +30,7 @@ export function getMDXComponents(components?: MDXComponents) {
         Accordion,
         Accordions,
         RibbonPath,
+        Badge,
         Banner,
         Mermaid: ({ chart }: { chart: string }) => (
             <Suspense fallback={<div className="h-40 animate-pulse rounded-lg bg-fd-muted" />}>
