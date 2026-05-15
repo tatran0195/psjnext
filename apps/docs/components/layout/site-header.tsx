@@ -350,10 +350,10 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
         <>
             {/* ── Main Header ── */}
             <header
-                className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+                className={`sticky top-0 z-50 w-full ${
                     transparent && !scrolled
                         ? 'bg-transparent border-transparent'
-                        : 'bg-white/80 dark:bg-[#0c1220]/80 backdrop-blur-xl border-b border-psj-border'
+                        : 'bg-white dark:bg-[#0c1220] border-b border-psj-border shadow-sm'
                 }`}
                 style={{
                     height: '64px',
