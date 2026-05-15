@@ -1,9 +1,9 @@
 ---
-title: 'ACModeling.Create.Convex()'
-description: 'Create Convex In Boundary'
-introduced: '5.0.1'
-deprecated: '5.1.0'
-ribbon: 'ACModeling > Create > Convex'
+title: "ACModeling.Create.Convex()"
+description: "Create Convex In Boundary"
+version _introduced: "5.0.1"
+available _versions: "all"
+ribbon: "ACModeling > Create > Convex"
 ---
 
 ## Description
@@ -18,29 +18,41 @@ ACModeling.Create.Convex(...)
 
 ## Inputs
 
-### `crlParts` @type(List\[Cursor]) @default(\[])
+<!-- @since:5.0.1 @optional -->
+### crlParts
 
-- The part.
+- Specify the part.
+- The default value is \[].
 
-### `dMeshSize` @type(Double) @default(0.005)
+<!-- @since:5.0.1 @optional -->
+### dMeshSize
 
-- The mesh size.
+- Specify the mesh size.
+- The default value is 0.005.
 
-### `dOffset` @type(Double) @default(0.02)
+<!-- @since:5.0.1 @optional -->
+### dOffset
 
-- The offset.
+- Specify the offset.
+- The default value is 0.02.
 
-### `dRadius` @type(Double) @default(0.02)
+<!-- @since:5.0.1 @optional -->
+### dRadius
 
-- The radius.
+- Specify the radius.
+- The default value is 0.02.
 
-### `iDAxisGround` @type(Integer) @default(0)
+<!-- @since:5.0.1 @optional -->
+### iDAxisGround
 
-- The axis ground.
+- Specify the axis ground.
+- The default value is 0.
 
-### `dScale` @type(Double) @default(0.001)
+<!-- @since:5.0.1 @optional -->
+### dScale
 
-- The scale.
+- Specify the scale.
+- The default value is 0.001.
 
 ## Return Code
 

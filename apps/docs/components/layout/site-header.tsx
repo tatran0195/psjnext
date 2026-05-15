@@ -27,6 +27,7 @@ import {
     X,
     Zap,
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Fragment, ReactNode, useEffect, useState } from 'react';
 interface SiteHeaderProps {
     /** When true, header starts transparent and gains background on scroll.
@@ -81,6 +82,8 @@ interface FeaturedCalloutProps {
 }
 
 function FeaturedCallout({ version }: FeaturedCalloutProps) {
+    const t = useTranslations('layout.header.megaMenu.callout');
+
     return (
         <div className="col-span-4 bg-psj-surface-1/40 py-8 px-10 border-l border-psj-border flex flex-col justify-between relative overflow-hidden group/callout">
             {/* Background Glows */}
@@ -90,25 +93,22 @@ function FeaturedCallout({ version }: FeaturedCalloutProps) {
             <div className="relative z-10">
                 <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-psj-blue/10 border border-psj-blue/20 text-psj-blue text-[10px] font-bold mb-6 tracking-widest uppercase">
                     <Sparkles size={12} className="fill-psj-blue/20" />
-                    Latest Release
+                    {t('badge')}
                 </div>
                 <h5 className="text-[20px] font-extrabold text-psj-text-1 leading-tight mb-3 tracking-tight">
-                    What&apos;s New in <br />
+                    {t('titlePrefix')} <br />
                     <span className="text-psj-blue">Jupiter {version || '5.x'}</span>
                 </h5>
-                <p className="text-[13px] text-psj-text-3 leading-relaxed opacity-80 mb-6">
-                    Explore the latest PSJ advancements, featuring optimized Pythonic commands and the new native GUI
-                    builder.
-                </p>
+                <p className="text-[13px] text-psj-text-3 leading-relaxed opacity-80 mb-6">{t('desc')}</p>
 
                 <div className="space-y-3">
                     <div className="flex items-center gap-3 text-[11px] text-psj-text-2">
                         <Zap size={12} className="text-psj-blue" />
-                        <span className="whitespace-nowrap">New GUI Command Builder</span>
+                        <span className="whitespace-nowrap">{t('feature1')}</span>
                     </div>
                     <div className="flex items-center gap-3 text-[11px] text-psj-text-2">
                         <Zap size={12} className="text-psj-blue" />
-                        <span className="whitespace-nowrap">Enhanced PSJ-Utility API</span>
+                        <span className="whitespace-nowrap">{t('feature2')}</span>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@ function FeaturedCallout({ version }: FeaturedCalloutProps) {
                 className="psj-btn-primary w-full justify-center !text-[12px] !px-6 !py-4 !rounded-none mt-10 group/btn transition-all duration-300 hover:shadow-xl hover:shadow-psj-blue/20 relative overflow-hidden"
             >
                 <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
-                <span className="relative z-10 whitespace-nowrap">Explore Changelog</span>
+                <span className="relative z-10 whitespace-nowrap">{t('cta')}</span>
                 <ArrowRight
                     size={14}
                     className="ml-2 relative z-10 group-hover/btn:translate-x-1 transition-transform"
@@ -183,6 +183,7 @@ function ThemeToggle() {
 }
 
 export function SiteHeader({ transparent = false }: SiteHeaderProps) {
+    const t = useTranslations('layout.header');
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const pathname = usePathname();
@@ -210,61 +211,81 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
 
     const DOCS_NAVIGATION = [
         {
-            title: 'Framework',
+            title: t('megaMenu.sections.framework'),
             items: [
-                { title: 'Introduction', description: 'Core concepts', href: '/docs', icon: Home },
-                { title: 'Quick Start', description: 'Setup in minutes', href: '/docs/quick-start', icon: Zap },
-                { title: 'Structure', description: 'Architecture overview', href: '/docs/psj-structure', icon: Layers },
                 {
-                    title: 'Data Types',
-                    description: 'Type definitions',
+                    title: t('megaMenu.items.introduction.title'),
+                    description: t('megaMenu.items.introduction.desc'),
+                    href: '/docs',
+                    icon: Home,
+                },
+                {
+                    title: t('megaMenu.items.quickStart.title'),
+                    description: t('megaMenu.items.quickStart.desc'),
+                    href: '/docs/quick-start',
+                    icon: Zap,
+                },
+                {
+                    title: t('megaMenu.items.structure.title'),
+                    description: t('megaMenu.items.structure.desc'),
+                    href: '/docs/psj-structure',
+                    icon: Layers,
+                },
+                {
+                    title: t('megaMenu.items.dataTypes.title'),
+                    description: t('megaMenu.items.dataTypes.desc'),
                     href: '/docs/data-type',
                     icon: Diamond,
                 },
             ],
         },
         {
-            title: 'Guides',
+            title: t('megaMenu.sections.guides'),
             items: [
-                { title: 'Basic', description: 'Essential features', href: '/docs/guides/basic', icon: BookOpen },
                 {
-                    title: 'Intermediate',
-                    description: 'Advanced patterns',
+                    title: t('megaMenu.items.basic.title'),
+                    description: t('megaMenu.items.basic.desc'),
+                    href: '/docs/guides/basic',
+                    icon: BookOpen,
+                },
+                {
+                    title: t('megaMenu.items.intermediate.title'),
+                    description: t('megaMenu.items.intermediate.desc'),
                     href: '/docs/guides/intermediate',
                     icon: Compass,
                 },
                 {
-                    title: 'Advanced',
-                    description: 'Optimization & tuning',
+                    title: t('megaMenu.items.advanced.title'),
+                    description: t('megaMenu.items.advanced.desc'),
                     href: '/docs/guides/advanced',
                     icon: GraduationCap,
                 },
             ],
         },
         {
-            title: 'API Reference',
+            title: t('megaMenu.sections.apiReference'),
             items: [
                 {
-                    title: 'Macro',
-                    description: 'Built-in Jupiter API',
+                    title: t('megaMenu.items.macro.title'),
+                    description: t('megaMenu.items.macro.desc'),
                     href: getVersionedLink('/docs/api/macro'),
                     icon: Play,
                 },
                 {
-                    title: 'PSJ Command',
-                    description: 'Pythonic Command System',
+                    title: t('megaMenu.items.psjCommand.title'),
+                    description: t('megaMenu.items.psjCommand.desc'),
                     href: getVersionedLink('/docs/api/psj-command'),
                     icon: Terminal,
                 },
                 {
-                    title: 'PSJ-Utility',
-                    description: 'Model Querying & Helpers',
+                    title: t('megaMenu.items.psjUtility.title'),
+                    description: t('megaMenu.items.psjUtility.desc'),
                     href: getVersionedLink('/docs/api/psj-utility'),
                     icon: Package,
                 },
                 {
-                    title: 'PSJ-GUI',
-                    description: 'GUI Creation Library',
+                    title: t('megaMenu.items.psjGui.title'),
+                    description: t('megaMenu.items.psjGui.desc'),
                     href: getVersionedLink('/docs/api/psj-gui'),
                     icon: Layout,
                 },
@@ -349,10 +370,15 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                     {/* Desktop Nav */}
                     <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
                         {navLinks.map((link) => {
-                            if (link.type !== 'main') return null;
+                            if (link.type !== 'main' || typeof link.text !== 'string') return null;
                             const active = isActive(link.url);
                             const linkElement = (
-                                <MainNavLink key={link.url} href={link.url} text={link.text} isActive={active} />
+                                <MainNavLink
+                                    key={link.url}
+                                    href={link.url}
+                                    text={t(`nav.${link.text.toLowerCase()}` as Parameters<typeof t>[0])}
+                                    isActive={active}
+                                />
                             );
 
                             if (link.text === 'Home') {
@@ -360,7 +386,6 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                 return (
                                     <Fragment key={link.url}>
                                         {linkElement}
-                                        {/* Documentation Mega Menu */}
                                         <div className="group relative">
                                             <button
                                                 className={`relative px-4 py-2 text-[13px] font-semibold transition-all duration-300 flex items-center gap-1.5 group/link ${
@@ -369,7 +394,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                                         : 'text-psj-text-2 hover:text-psj-text-1'
                                                 }`}
                                             >
-                                                <span>Documentation</span>
+                                                <span>{t('nav.documentation')}</span>
                                                 <ChevronDown
                                                     size={14}
                                                     className={`transition-transform duration-300 group-hover:rotate-180 ${
@@ -504,7 +529,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                                             <Fragment key={link.url}>
                                                 {linkElement}
                                                 <div className="pt-4 pb-2 border-b border-psj-border">
-                                                    <div className="px-4 pb-4 psj-label">Documentation</div>
+                                                    <div className="px-4 pb-4 psj-label">{t('nav.documentation')}</div>
                                                     <div className="pl-6 space-y-6 pt-2 pb-4">
                                                         {DOCS_NAVIGATION.map((section) => (
                                                             <div key={section.title}>

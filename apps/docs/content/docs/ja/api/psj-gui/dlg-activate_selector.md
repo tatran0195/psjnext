@@ -1,7 +1,8 @@
 ---
-title: 'dlg.activate_selector()'
-description: 'Activate selector by selector id.'
-since: '5.1.0'
+title: "dlg.activate _selector()"
+description: "Activate selector by selector id."
+version _introduced: "5.1.0"
+available _versions: "all"
 ---
 
 ## Description
@@ -11,14 +12,15 @@ Activate selector by selector id.
 ## Syntax
 
 ```psj
-dlg.activate_selector(...)
+dlg.activate _selector(...)
 ```
 
 ## Inputs
 
-### `selector_id` @type(Integer) @required
+<!-- @since:5.1.0 @required -->
+### selector\_id
 
-- The selector id.
+- Specify the selector id.
 
 ## Return Code
 
@@ -40,27 +42,27 @@ def sampleSelection(dlg):
             select2.append(f.id)
     JPT.ClearAllSelection()
 
-    dlg.activate_selector(selector_id=0)
+    dlg.activate _selector(selector _id=0)
     for id in select1:
         JPT.SelectionByID(JPT.DItemType.FACE, id, True)
-    dlg.activate_selector(selector_id=1)
+    dlg.activate _selector(selector _id=1)
     for id in select2:
         JPT.SelectionByID(JPT.DItemType.FACE, id, True)
-
+    
 def main():
     dlg=JDGCreator(title="Dialog")
-    dlg.add_face_selector(text="Face 1")
-    dlg.add_face_selector(text="Face 2")
-    dlg.add_label(
+    dlg.add _face _selector(text="Face 1")
+    dlg.add _face _selector(text="Face 2")
+    dlg.add _label(
         name="Label2",width=200,height=70,
-        text="Click Apply button and open the selection list and confirm that "
-             "selectors with even IDs are selected in Face 1,"
+        text="Click Apply button and open the selection list and confirm that " 
+             "selectors with even IDs are selected in Face 1," 
              "and selectors with odd IDs are selected in Face 2.",
-        text_halign="left",text_valign="top",layout="Window")
-
-    dlg.generate_window()
+        text _halign="left",text _valign="top",layout="Window")
+    
+    dlg.generate _window()
     Geometry.Part.Cube()
-    dlg.on_dlg_apply(callfunc=sampleSelection)
+    dlg.on _dlg _apply(callfunc=sampleSelection)
 
 if __name__=='__main__':
     main()

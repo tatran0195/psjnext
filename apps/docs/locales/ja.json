@@ -173,5 +173,43 @@
             "releaseDetails": "更新内容の詳細",
             "missingVersion": "バージョン情報なし"
         }
+    },
+    "layout": {
+        "header": {
+            "nav": {
+                "home": "ホーム",
+                "documentation": "ドキュメント",
+                "showcase": "ショーケース",
+                "changelog": "更新履歴"
+            },
+            "megaMenu": {
+                "sections": {
+                    "framework": "フレームワーク",
+                    "guides": "ガイド",
+                    "apiReference": "APIリファレンス"
+                },
+                "items": {
+                    "introduction": { "title": "イントロダクション", "desc": "基本コンセプト" },
+                    "quickStart": { "title": "クイックスタート", "desc": "数分でセットアップ" },
+                    "structure": { "title": "構成", "desc": "アーキテクチャの概要" },
+                    "dataTypes": { "title": "データ型", "desc": "型定義の一覧" },
+                    "basic": { "title": "基本", "desc": "主要な機能" },
+                    "intermediate": { "title": "中級", "desc": "高度なパターン" },
+                    "advanced": { "title": "上級", "desc": "最適化とチューニング" },
+                    "macro": { "title": "Macro", "desc": "内蔵 Jupiter API" },
+                    "psjCommand": { "title": "PSJ Command", "desc": "Pythonic コマンドシステム" },
+                    "psjUtility": { "title": "PSJ-Utility", "desc": "モデル検索とヘルパー" },
+                    "psjGui": { "title": "PSJ-GUI", "desc": "GUI 作成ライブラリ" }
+                },
+                "callout": {
+                    "badge": "最新リリース",
+                    "titlePrefix": "Jupiter",
+                    "desc": "最新の PSJ の進化をご覧ください。最適化された Pythonic コマンドや新しいネイティブ GUI ビルダーを搭載しています。",
+                    "feature1": "新 GUI コマンドビルダー",
+                    "feature2": "強化された PSJ-Utility API",
+                    "cta": "更新履歴を見る"
+                }
+            }
+        }
     }
 }

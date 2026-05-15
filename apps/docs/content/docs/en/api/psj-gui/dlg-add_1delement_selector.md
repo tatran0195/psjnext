@@ -17,10 +17,11 @@ dlg.add _1delement _selector(...)
 
 ## Inputs
 
-<!-- @since:5.1.0 @type:String @optional @default:"1D element" -->
-### `text`
+<!-- @since:5.1.0 @optional -->
+### text
 
-- The title of selector.
+- Specify the title of selector.
+- The default value is "1D element".
 
 ## Return Code
 

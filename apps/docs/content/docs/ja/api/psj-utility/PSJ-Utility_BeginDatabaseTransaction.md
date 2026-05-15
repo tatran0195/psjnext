@@ -1,19 +1,17 @@
 ---
-title: 'JPT.BeginDatabaseTransaction()'
+title: "JPT.BeginDatabaseTransaction()"
 description: "Get all the information of all the existing groups under the specified group's name"
-since: '5.0.1'
+version _introduced: "5.0.1"
+available _versions: "all"
 ---
-
-<!-- REVIEW FLAGS — requires human review
-   [body_divergence] Body content differs across 2 of 2 versions — using latest
--->
 
 ## Description
 
 Disable screen animation, screen update, and status bar update information to improve Jupiter's performance.
 
-:::important [JPT.EndDatabaseTransaction()](JPT.EndDatabaseTransaction) should be used at the end of the process, to
-return Jupiter to the normal state. :::
+:::important
+[JPT.EndDatabaseTransaction()](JPT.EndDatabaseTransaction) should be used at the end of the process, to return Jupiter to the normal state.
+:::
 
 ## Syntax
 
@@ -23,9 +21,10 @@ JPT.BeginDatabaseTransaction("transactionName")
 
 ## Inputs
 
-### `transactionName` @type(String) @required
+<!-- @since:5.0.1 @required -->
+### transactionName
 
-- The transaction name (used to display the command name in Undo/Redo menu).
+- Specify the transaction name (used to display the command name in Undo/Redo menu).
 
 ## Return Code
 
@@ -43,36 +42,36 @@ JPT.BeginDatabaseTransaction("Make meshed model")
 # Prepare model
 Geometry.Part.Cube()
 Geometry.Part.Cube(dlOrigin=[0.01, 0.0, 0.0],
-                   strName="Cube_2",
+                   strName="Cube _2",
                    iPartColor=6409934)
 Geometry.Part.Cube(dlOrigin=[0.02, 0.0, 0.0],
-                   strName="Cube_3",
+                   strName="Cube _3",
                    iPartColor=13259210)
 Geometry.Part.Cube(dlOrigin=[0.03, 0.0, 0.0],
-                   strName="Cube_4",
+                   strName="Cube _4",
                    iPartColor=7697908)
 Geometry.Part.Cube(dlOrigin=[0.04, 0.0, 0.0],
-                   strName="Cube_5",
+                   strName="Cube _5",
                    iPartColor=7463537)
 Geometry.Part.Cube(dlOrigin=[0.05, 0.0, 0.0],
-                   strName="Cube_6",
+                   strName="Cube _6",
                    iPartColor=7434735)
 Geometry.Part.Cube(dlOrigin=[0.06, 0.0, 0.0],
-                   strName="Cube_7",
+                   strName="Cube _7",
                    iPartColor=14903267)
 Geometry.Part.Cube(dlOrigin=[0.07, 0.0, 0.0],
-                   strName="Cube_8",
+                   strName="Cube _8",
                    iPartColor=15658599)
 
 Meshing.SetMeshAttribute(crlParts=[Part(5, 6, 7, 8)],
-                         surfaceMesh=SURFACE_MESH(dGeomAngle=0.7853981634,
+                         surfaceMesh=SURFACE _MESH(dGeomAngle=0.7853981634,
                                                   iPerformanceMode=1,
                                                   dAutoMergeTinyFacesAngle=0.5235987756,
                                                   bOutputQuadMesh=True,
                                                   bGeomApprox=True,
                                                   iNextEntityOffsetId=0))
 Meshing.SurfaceMeshing(crlParts=[Part(5, 6, 7, 8)],
-                       surfaceMesh=SURFACE_MESH(dGeomAngle=0.7853981634,
+                       surfaceMesh=SURFACE _MESH(dGeomAngle=0.7853981634,
                                                 iPerformanceMode=1,
                                                 dAutoMergeTinyFacesAngle=0.5235987756,
                                                 bOutputQuadMesh=True,
@@ -100,12 +99,12 @@ Meshing.SolidMeshing(crlParts=[Part(4)],
                      bInternalMeshOnly=False,
                      iPartColor=65280)
 
-del_faces = [208, 182, 178, 204, 206, 177, 203, 179, 205, 180]
-extrude_faces = [207, 181]
+del _faces = [208, 182, 178, 204, 206, 177, 203, 179, 205, 180]
+extrude _faces = [207, 181]
 
-Geometry.DeleteEntity.Face(crlFaces=[Face(*del_faces)])
+Geometry.DeleteEntity.Face(crlFaces=[Face(*del _faces)])
 
-HexModeling.Linear(crlFaces=[Face(*extrude_faces)],
+HexModeling.Linear(crlFaces=[Face(*extrude _faces)],
                    dLength=0.01,
                    iLayer=2,
                    vecSweepDirection=[0.0,

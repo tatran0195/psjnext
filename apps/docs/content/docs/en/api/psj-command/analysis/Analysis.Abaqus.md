@@ -19,27 +19,30 @@ Analysis.Abaqus(...)
 
 ## Inputs
 
-<!-- @since:5.0.1 @type:String @required -->
-### `strName`
+<!-- @since:5.0.1 @required -->
+### strName
 
-- The Abaqus job name.
+- Specify the Abaqus job name.
 
-<!-- @since:5.0.1 @type:JOB _ABAQUS _DATA @optional @default:JOB _ABAQUS _DATA -->
-### `abaqusAnalysis`
+<!-- @since:5.0.1 @optional -->
+### abaqusAnalysis
 
-- The Abaqus Analysis input parameter.
+- Specify the Abaqus Analysis input parameter.
+- The default value is _[JOB\_ABAQUS\_DATA](./../../data-type/psj-command/parameter-types/JOB _ABAQUS _DATA)_.
 
-<!-- @since:5.0.1 @type:List[Cursor] @optional @default:[] -->
-### `crlStepSequence`
+<!-- @since:5.0.1 @optional -->
+### crlStepSequence
 
-- The list of Abaqus step defined in sequence.
+- Specify the list of Abaqus step defined in sequence.
+- The default value is \[].
 
-<!-- @since:5.0.1 @type:Cursor @optional @default:None -->
-### `crEdit`
+<!-- @since:5.0.1 @optional -->
+### crEdit
 
-- An existing Abaqus job.
+- Specify an existing Abaqus job.
   - If this parameter is used, the specified job will be modified.
   - If it is left _None_, a new job will be created.
+- The default value is _None_.
 
 ## Return Code
 

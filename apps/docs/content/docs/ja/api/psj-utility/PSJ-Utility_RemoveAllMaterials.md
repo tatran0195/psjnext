@@ -1,0 +1,42 @@
+---
+title: "JPT.RemoveAllMaterials()"
+description: "Remove all the existing material in the User material database"
+version _introduced: "5.0.1"
+available _versions: "all"
+---
+
+## Description
+
+Remove all the existing material in the User material database.
+
+## Syntax
+
+```psj
+JPT.RemoveAllMaterials()
+```
+
+## Inputs
+
+This utility function does not require any input value.
+
+## Return Code
+
+This utility function does not have output value.
+
+## Sample Code
+
+```psj {13}
+# Create materials
+Properties.Material.Add("Copper _Alloy", [Density([(DENSITY, 8.3e-09)]),
+                                         Elastic([(YOUNGS _MODULUS, 110000.0),
+                                                  (POISSONS _RATIO, 0.34)])])
+Properties.Material.Add("Stainless _Steel", [Density([(DENSITY, 7.75e-09)]),
+                                            Elastic([(YOUNGS _MODULUS, 193000.0),
+                                                     (POISSONS _RATIO, 0.31)])])
+Properties.Material.Add("Titanium _Alloy", [Density([(DENSITY, 4.62e-09)]),
+                                           Elastic([(YOUNGS _MODULUS, 96000.0),
+                                                    (POISSONS _RATIO, 0.36)])])
+
+# Remove all the created materials in the User material database
+JPT.RemoveAllMaterials()
+```

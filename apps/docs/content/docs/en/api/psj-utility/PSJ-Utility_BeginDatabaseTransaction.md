@@ -21,10 +21,10 @@ JPT.BeginDatabaseTransaction("transactionName")
 
 ## Inputs
 
-<!-- @since:5.0.1 @type:String @required -->
-### `transactionName`
+<!-- @since:5.0.1 @required -->
+### transactionName
 
-- The transaction name (used to display the command name in Undo/Redo menu).
+- Specify the transaction name (used to display the command name in Undo/Redo menu).
 
 ## Return Code
 

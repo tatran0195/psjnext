@@ -173,5 +173,43 @@
             "releaseDetails": "Release Details",
             "missingVersion": "No Version"
         }
+    },
+    "layout": {
+        "header": {
+            "nav": {
+                "home": "Home",
+                "documentation": "Documentation",
+                "showcase": "Showcase",
+                "changelog": "Changelog"
+            },
+            "megaMenu": {
+                "sections": {
+                    "framework": "Framework",
+                    "guides": "Guides",
+                    "apiReference": "API Reference"
+                },
+                "items": {
+                    "introduction": { "title": "Introduction", "desc": "Core concepts" },
+                    "quickStart": { "title": "Quick Start", "desc": "Setup in minutes" },
+                    "structure": { "title": "Structure", "desc": "Architecture overview" },
+                    "dataTypes": { "title": "Data Types", "desc": "Type definitions" },
+                    "basic": { "title": "Basic", "desc": "Essential features" },
+                    "intermediate": { "title": "Intermediate", "desc": "Advanced patterns" },
+                    "advanced": { "title": "Advanced", "desc": "Optimization & tuning" },
+                    "macro": { "title": "Macro", "desc": "Built-in Jupiter API" },
+                    "psjCommand": { "title": "PSJ Command", "desc": "Pythonic Command System" },
+                    "psjUtility": { "title": "PSJ-Utility", "desc": "Model Querying & Helpers" },
+                    "psjGui": { "title": "PSJ-GUI", "desc": "GUI Creation Library" }
+                },
+                "callout": {
+                    "badge": "Latest Release",
+                    "titlePrefix": "What's New in",
+                    "desc": "Explore the latest PSJ advancements, featuring optimized Pythonic commands and the new native GUI builder.",
+                    "feature1": "New GUI Command Builder",
+                    "feature2": "Enhanced PSJ-Utility API",
+                    "cta": "Explore Changelog"
+                }
+            }
+        }
     }
 }

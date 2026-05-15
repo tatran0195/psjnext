@@ -17,10 +17,9 @@ JPT.CastDItemToDBody(DItemObject)
 
 ## Inputs
 
-<!-- @since:5.0.1 @type:DItem @required -->
 ### `DItemObject`
 
-- The object which will be used to convert.
+- A _[DItem](../data-type/psj-utility/pre-utility/built-in-types/DItem)_ object which will be used to convert.
 
 ## Return Code
 

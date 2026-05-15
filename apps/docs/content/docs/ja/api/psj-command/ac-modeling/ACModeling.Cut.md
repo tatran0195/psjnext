@@ -1,8 +1,9 @@
 ---
-title: 'ACModeling.Cut()'
-description: 'cut for ACModeling'
-since: '5.0.1'
-ribbon: 'ACModeling > Cut'
+title: "ACModeling.Cut()"
+description: "cut for ACModeling"
+version _introduced: "5.0.1"
+available _versions: "all"
+ribbon: "ACModeling > Cut"
 ---
 
 ## Description
@@ -17,9 +18,10 @@ ACModeling.Cut(...)
 
 ## Inputs
 
-### `crlParts` @type(List\[Cursor]) @required
+<!-- @since:5.0.1 @required -->
+### crlParts
 
-- The part.
+- Specify the part.
 
 ## Return Code
 

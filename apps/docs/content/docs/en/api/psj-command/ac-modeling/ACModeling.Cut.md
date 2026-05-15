@@ -18,10 +18,10 @@ ACModeling.Cut(...)
 
 ## Inputs
 
-<!-- @since:5.0.1 @type:List[Cursor] @required -->
-### `crlParts`
+<!-- @since:5.0.1 @required -->
+### crlParts
 
-- The part.
+- Specify the part.
 
 ## Return Code
 

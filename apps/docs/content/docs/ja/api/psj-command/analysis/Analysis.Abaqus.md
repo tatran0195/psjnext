@@ -1,9 +1,10 @@
 ---
-title: 'Analysis.Abaqus()'
-description: 'Create an Abaqus job'
-since: '5.0.1'
-ribbon: 'Analysis > Abaqus'
-macro_link: '[CreateAbaqusJob](../../macro/analysis/CreateAbaqusJob)'
+title: "Analysis.Abaqus()"
+description: "Create an Abaqus job"
+version _introduced: "5.0.1"
+available _versions: "all"
+ribbon: "Analysis > Abaqus"
+macro _link: "[CreateAbaqusJob](../../macro/analysis/CreateAbaqusJob)"
 ---
 
 ## Description
@@ -18,23 +19,30 @@ Analysis.Abaqus(...)
 
 ## Inputs
 
-### `strName` @type(String) @required
+<!-- @since:5.0.1 @required -->
+### strName
 
-- The Abaqus job name.
+- Specify the Abaqus job name.
 
-### `abaqusAnalysis` @type(JOB_ABAQUS_DATA) @default(JOB_ABAQUS_DATA)
+<!-- @since:5.0.1 @optional -->
+### abaqusAnalysis
 
-- The Abaqus Analysis input parameter.
+- Specify the Abaqus Analysis input parameter.
+- The default value is _[JOB\_ABAQUS\_DATA](./../../data-type/psj-command/parameter-types/JOB _ABAQUS _DATA)_.
 
-### `crlStepSequence` @type(List\[Cursor]) @default(\[])
+<!-- @since:5.0.1 @optional -->
+### crlStepSequence
 
-- The list of Abaqus step defined in sequence.
+- Specify the list of Abaqus step defined in sequence.
+- The default value is \[].
 
-### `crEdit` @type(Cursor) @default(None)
+<!-- @since:5.0.1 @optional -->
+### crEdit
 
-- An existing Abaqus job.
+- Specify an existing Abaqus job.
   - If this parameter is used, the specified job will be modified.
-  - If it is lef&#x74;_&#x4E;one_, a new job will be created.
+  - If it is left _None_, a new job will be created.
+- The default value is _None_.
 
 ## Return Code
 
@@ -45,33 +53,33 @@ A _Cursor_ specifying the created jobs.
 ```psj {28,29}
 Geometry.Part.Cube(iPartColor=5619133)
 Meshing.SolidMeshing(crlParts=[Part(1)],
-                     bTet10=True,
-                     dGradingFactor=1.05,
-                     dStretchLimit=0.1,
-                     iSpeedVsQual=1,
-                     iRegion=1,
-                     bSafeMode=False,
-                     iParallel=12,
-                     bInternalMeshOnly=False,
+                     bTet10=True, 
+                     dGradingFactor=1.05, 
+                     dStretchLimit=0.1, 
+                     iSpeedVsQual=1, 
+                     iRegion=1, 
+                     bSafeMode=False, 
+                     iParallel=12, 
+                     bInternalMeshOnly=False, 
                      iPartColor=65280)
+                     
+Properties.Material.Add("Concrete", 
+                        [Density([(DENSITY, 2.3e-09)]), 
+                        Elastic([(YOUNGS _MODULUS, 30000.0), 
+                                 (POISSONS _RATIO, 0.18)])])
 
-Properties.Material.Add("Concrete",
-                        [Density([(DENSITY, 2.3e-09)]),
-                        Elastic([(YOUNGS_MODULUS, 30000.0),
-                                 (POISSONS_RATIO, 0.18)])])
-
-Properties.Solid(crlTargets=[Part(1)],
-                 strName="Solid Property 1",
-                 iPropertyColor=12275404,
-                 crMaterial=Material(1),
-                 iCordM=-2,
-                 dDynaRemeshVal1=DFLT_DBL,
-                 dDynaRemeshVal2=DFLT_DBL,
-                 dDispHG=DFLT_DBL,
+Properties.Solid(crlTargets=[Part(1)], 
+                 strName="Solid Property 1", 
+                 iPropertyColor=12275404, 
+                 crMaterial=Material(1), 
+                 iCordM=-2, 
+                 dDynaRemeshVal1=DFLT _DBL,
+                 dDynaRemeshVal2=DFLT _DBL, 
+                 dDispHG=DFLT _DBL, 
                  iFLG=-1)
 
-created_job = Analysis.Abaqus("Job_1",
-                              abaqusAnalysis=JOB_ABAQUS_DATA(iUnit=1))
+created _job = Analysis.Abaqus("Job _1", 
+                              abaqusAnalysis=JOB _ABAQUS _DATA(iUnit=1))
 
-JPT.Debugger(created_job)
+JPT.Debugger(created _job)
 ```

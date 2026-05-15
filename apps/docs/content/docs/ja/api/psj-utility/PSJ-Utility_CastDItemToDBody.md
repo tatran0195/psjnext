@@ -1,13 +1,13 @@
 ---
-title: 'JPT.CastDItemToDBody()'
-description: 'Convert DItem object to DBody object'
-since: '5.0.1'
+title: "JPT.CastDItemToDBody()"
+description: "Convert DItem object to DBody object"
+version _introduced: "5.0.1"
+available _versions: "all"
 ---
 
 ## Description
 
-Convert _[DItem](../data-type/psj-utility/pre-utility/built-in-types/DItem)_ object to
-_[DBody](../data-type/psj-utility/pre-utility/built-in-types/DBody)_ object to get the information of the selected body.
+Convert _[DItem](../data-type/psj-utility/pre-utility/built-in-types/DItem)_ object to _[DBody](../data-type/psj-utility/pre-utility/built-in-types/DBody)_ object to get the information of the selected body.
 
 ## Syntax
 
@@ -17,9 +17,9 @@ JPT.CastDItemToDBody(DItemObject)
 
 ## Inputs
 
-### `DItemObject` @type(DItem) @required
+### `DItemObject`
 
-- Object which will be used to convert.
+- A _[DItem](../data-type/psj-utility/pre-utility/built-in-types/DItem)_ object which will be used to convert.
 
 ## Return Code
 

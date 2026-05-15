@@ -1,13 +1,10 @@
 ---
-title: 'Analysis.AbaqusStep.DynamicExplicitStep()'
-description: 'Create Abaqus Step - Dynamic Explicit Type'
-since: '5.0.1'
-ribbon: 'Analysis > Abaqus'
+title: "Analysis.AbaqusStep.DynamicExplicitStep()"
+description: "Create Abaqus Step - Dynamic Explicit Type"
+version _introduced: "5.0.1"
+available _versions: "all"
+ribbon: "Analysis > Abaqus"
 ---
-
-<!-- REVIEW FLAGS — requires human review
-   [body_divergence] Body content differs across 2 of 2 versions — using latest
--->
 
 ## Description
 
@@ -21,67 +18,94 @@ Analysis.AbaqusStep.DynamicExplicitStep(...)
 
 ## Inputs
 
-### `strName` @type(String) @required
+<!-- @since:5.0.1 @required -->
+### strName
 
-- The Dynamic Explicit step name.
+- Specify the Dynamic Explicit step name.
 
-### `strDesp` @type(String) @default("")
+<!-- @since:5.0.1 @optional -->
+### strDesp
 
-- The step description of Dynamic Explicit analysis.
+- Specify the step description of Dynamic Explicit analysis.
+- The default value is "".
 
-### `iEnableAutomatic` @type(Integer) @default(1)
+<!-- @since:5.0.1 @optional -->
+### iEnableAutomatic
 
-- The increment method.
+- Specify the increment method.
+- The default value is 1.
 
-### `iIncrmtEstimator` @type(Integer) @default(0)
+<!-- @since:5.0.1 @optional -->
+### iIncrmtEstimator
 
-- The use of the stable increment estimator.
+- Specify the use of the stable increment estimator.
   - 0: Global
   - 1: Element by element
+- The default value is 0.
 
-### `abaqusPair1` @type(ABAQUS_PAIR) @default(ABAQUS_PAIR)
+<!-- @since:5.0.1 @optional -->
+### abaqusPair1
 
-- The maximum time increment value.
+- Specify the maximum time increment value.
+- The default value is _[ABAQUS\_PAIR](./../../data-type/psj-command/parameter-types/ABAQUS _PAIR)_.
 
-### `dTimeScalfactor` @type(Double) @default(1.0)
+<!-- @since:5.0.1 @optional -->
+### dTimeScalfactor
 
-- The time scaling factor.
+- Specify the time scaling factor.
+- The default value is 1.0.
 
-### `abaqusPair2` @type(ABAQUS_PAIR) @default(ABAQUS_PAIR)
+<!-- @since:5.0.1 @optional -->
+### abaqusPair2
 
-- The user-defined time increment.
+- Specify the user-defined time increment.
+- The default value is _[ABAQUS\_PAIR](./../../data-type/psj-command/parameter-types/ABAQUS _PAIR)_.
 
-### `iEnableNlgeom` @type(Integer) @default(1)
+<!-- @since:5.0.1 @optional -->
+### iEnableNlgeom
 
-- Whether or not to consider geometric nonlinear (large deformation) analysis.
+- Specify whether or not to consider geometric nonlinear (large deformation) analysis.
   - 0: Not consider
   - 1: Consider
+- The default value is 1.
 
-### `dTimePeriod` @type(Double) @default(1.0)
+<!-- @since:5.0.1 @optional -->
+### dTimePeriod
 
-- The analysis time.
+- Specify the analysis time.
+- The default value is 1.0.
 
-### `iEnableIncludeHeatEffect` @type(Integer) @default(0)
+<!-- @since:5.0.1 @optional -->
+### iEnableIncludeHeatEffect
 
-- Whether or not include adiabatic heating effects.
+- Specify whether or not include adiabatic heating effects.
+- The default value is 0.
 
-### `dLinearBlkVisco` @type(Double) @default(0.06)
+<!-- @since:5.0.1 @optional -->
+### dLinearBlkVisco
 
-- The linear bulk viscosity parameter.
+- Specify the linear bulk viscosity parameter.
+- The default value is 0.06.
 
-### `dQuadrBlkVisco` @type(Double) @default(1.2)
+<!-- @since:5.0.1 @optional -->
+### dQuadrBlkVisco
 
-- The quadratic bulk viscosity parameter.
+- Specify the quadratic bulk viscosity parameter.
+- The default value is 1.2.
 
-### `listAbaqusOutputRequest` @type(ABAQUS_OUTPUT_REQUEST) @default(ABAQUS_OUTPUT_REQUEST)
+<!-- @since:5.0.1 @optional -->
+### listAbaqusOutputRequest
 
-- List specifying the list of Abaqus output request.
+- Specify the list of Abaqus output request.
+- The default value is _[ABAQUS\_OUTPUT\_REQUEST](./../../data-type/psj-command/parameter-types/ABAQUS _OUTPUT _REQUEST)_.
 
-### `crEdit` @type(Cursor) @default(None)
+<!-- @since:5.0.1 @optional -->
+### crEdit
 
-- An existing Abaqus step.
+- Specify an existing Abaqus step.
   - If this parameter is used, the specified step will be modified.
-  - If it is lef&#x74;_&#x4E;one_, a new step will be created.
+  - If it is left _None_, a new step will be created.
+- The default value is _None_.
 
 ## Return Code
 
@@ -91,7 +115,7 @@ A _Cursor_ specifying the newly created or the modified Abaqus Dynamic Explicit 
 
 ```psj {1-2}
 process = Analysis.AbaqusStep.DynamicExplicitStep(strName="Step1",
-  abaqusPair1=ABAQUS_PAIR(dlTList=[0.0]), listAbaqusOutputRequest=[])
+  abaqusPair1=ABAQUS _PAIR(dlTList=[0.0]), listAbaqusOutputRequest=[])
 
 print("Result Dynamic Process has ID: " + str(process)) #for checking return value
 ```

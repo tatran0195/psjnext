@@ -17,10 +17,10 @@ dlg.activate _selector(...)
 
 ## Inputs
 
-<!-- @since:5.1.0 @type:Integer @required -->
-### `selector _id`
+<!-- @since:5.1.0 @required -->
+### selector\_id
 
-- The selector id.
+- Specify the selector id.
 
 ## Return Code
 

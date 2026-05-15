@@ -18,35 +18,41 @@ ACModeling.Create.Convex(...)
 
 ## Inputs
 
-<!-- @since:5.0.1 @type:List[Cursor] @optional @default:[] -->
-### `crlParts`
+<!-- @since:5.0.1 @optional -->
+### crlParts
 
-- The part.
+- Specify the part.
+- The default value is \[].
 
-<!-- @since:5.0.1 @type:Double @optional @default:0.005 -->
-### `dMeshSize`
+<!-- @since:5.0.1 @optional -->
+### dMeshSize
 
-- The mesh size.
+- Specify the mesh size.
+- The default value is 0.005.
 
-<!-- @since:5.0.1 @type:Double @optional @default:0.02 -->
-### `dOffset`
+<!-- @since:5.0.1 @optional -->
+### dOffset
 
-- The offset.
+- Specify the offset.
+- The default value is 0.02.
 
-<!-- @since:5.0.1 @type:Double @optional @default:0.02 -->
-### `dRadius`
+<!-- @since:5.0.1 @optional -->
+### dRadius
 
-- The radius.
+- Specify the radius.
+- The default value is 0.02.
 
-<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
-### `iDAxisGround`
+<!-- @since:5.0.1 @optional -->
+### iDAxisGround
 
-- The axis ground.
+- Specify the axis ground.
+- The default value is 0.
 
-<!-- @since:5.0.1 @type:Double @optional @default:0.001 -->
-### `dScale`
+<!-- @since:5.0.1 @optional -->
+### dScale
 
-- The scale.
+- Specify the scale.
+- The default value is 0.001.
 
 ## Return Code
 

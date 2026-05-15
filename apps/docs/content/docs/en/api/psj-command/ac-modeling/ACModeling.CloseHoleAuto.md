@@ -18,10 +18,10 @@ ACModeling.CloseHoleAuto(...)
 
 ## Inputs
 
-<!-- @since:5.0.1 @type:List[Cursor] @required -->
-### `crlClosedHoleParts`
+<!-- @since:5.0.1 @required -->
+### crlClosedHoleParts
 
-- The closed hole parts.
+- Specify the closed hole parts.
 
 ## Return Code
 

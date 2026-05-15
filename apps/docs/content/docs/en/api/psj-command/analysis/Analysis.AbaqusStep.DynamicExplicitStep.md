@@ -18,81 +18,94 @@ Analysis.AbaqusStep.DynamicExplicitStep(...)
 
 ## Inputs
 
-<!-- @since:5.0.1 @type:String @required -->
-### `strName`
+<!-- @since:5.0.1 @required -->
+### strName
 
-- The Dynamic Explicit step name.
+- Specify the Dynamic Explicit step name.
 
-<!-- @since:5.0.1 @type:String @optional @default:"" -->
-### `strDesp`
+<!-- @since:5.0.1 @optional -->
+### strDesp
 
-- The step description of Dynamic Explicit analysis.
+- Specify the step description of Dynamic Explicit analysis.
+- The default value is "".
 
-<!-- @since:5.0.1 @type:Integer @optional @default:1 -->
-### `iEnableAutomatic`
+<!-- @since:5.0.1 @optional -->
+### iEnableAutomatic
 
-- The increment method.
+- Specify the increment method.
+- The default value is 1.
 
-<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
-### `iIncrmtEstimator`
+<!-- @since:5.0.1 @optional -->
+### iIncrmtEstimator
 
-- The use of the stable increment estimator.
+- Specify the use of the stable increment estimator.
   - 0: Global
   - 1: Element by element
+- The default value is 0.
 
-<!-- @since:5.0.1 @type:ABAQUS _PAIR @optional @default:ABAQUS _PAIR -->
-### `abaqusPair1`
+<!-- @since:5.0.1 @optional -->
+### abaqusPair1
 
-- The maximum time increment value.
+- Specify the maximum time increment value.
+- The default value is _[ABAQUS\_PAIR](./../../data-type/psj-command/parameter-types/ABAQUS _PAIR)_.
 
-<!-- @since:5.0.1 @type:Double @optional @default:1.0 -->
-### `dTimeScalfactor`
+<!-- @since:5.0.1 @optional -->
+### dTimeScalfactor
 
-- The time scaling factor.
+- Specify the time scaling factor.
+- The default value is 1.0.
 
-<!-- @since:5.0.1 @type:ABAQUS _PAIR @optional @default:ABAQUS _PAIR -->
-### `abaqusPair2`
+<!-- @since:5.0.1 @optional -->
+### abaqusPair2
 
-- The user-defined time increment.
+- Specify the user-defined time increment.
+- The default value is _[ABAQUS\_PAIR](./../../data-type/psj-command/parameter-types/ABAQUS _PAIR)_.
 
-<!-- @since:5.0.1 @type:Integer @optional @default:1 -->
-### `iEnableNlgeom`
+<!-- @since:5.0.1 @optional -->
+### iEnableNlgeom
 
-- Whether or not to consider geometric nonlinear (large deformation) analysis.
+- Specify whether or not to consider geometric nonlinear (large deformation) analysis.
   - 0: Not consider
   - 1: Consider
+- The default value is 1.
 
-<!-- @since:5.0.1 @type:Double @optional @default:1.0 -->
-### `dTimePeriod`
+<!-- @since:5.0.1 @optional -->
+### dTimePeriod
 
-- The analysis time.
+- Specify the analysis time.
+- The default value is 1.0.
 
-<!-- @since:5.0.1 @type:Integer @optional @default:0 -->
-### `iEnableIncludeHeatEffect`
+<!-- @since:5.0.1 @optional -->
+### iEnableIncludeHeatEffect
 
-- Whether or not include adiabatic heating effects.
+- Specify whether or not include adiabatic heating effects.
+- The default value is 0.
 
-<!-- @since:5.0.1 @type:Double @optional @default:0.06 -->
-### `dLinearBlkVisco`
+<!-- @since:5.0.1 @optional -->
+### dLinearBlkVisco
 
-- The linear bulk viscosity parameter.
+- Specify the linear bulk viscosity parameter.
+- The default value is 0.06.
 
-<!-- @since:5.0.1 @type:Double @optional @default:1.2 -->
-### `dQuadrBlkVisco`
+<!-- @since:5.0.1 @optional -->
+### dQuadrBlkVisco
 
-- The quadratic bulk viscosity parameter.
+- Specify the quadratic bulk viscosity parameter.
+- The default value is 1.2.
 
-<!-- @since:5.0.1 @type:ABAQUS _OUTPUT _REQUEST @optional @default:ABAQUS _OUTPUT _REQUEST -->
-### `listAbaqusOutputRequest`
+<!-- @since:5.0.1 @optional -->
+### listAbaqusOutputRequest
 
-- The list specifying the list of Abaqus output request.
+- Specify the list of Abaqus output request.
+- The default value is _[ABAQUS\_OUTPUT\_REQUEST](./../../data-type/psj-command/parameter-types/ABAQUS _OUTPUT _REQUEST)_.
 
-<!-- @since:5.0.1 @type:Cursor @optional @default:None -->
-### `crEdit`
+<!-- @since:5.0.1 @optional -->
+### crEdit
 
-- An existing Abaqus step.
+- Specify an existing Abaqus step.
   - If this parameter is used, the specified step will be modified.
   - If it is left _None_, a new step will be created.
+- The default value is _None_.
 
 ## Return Code
 
