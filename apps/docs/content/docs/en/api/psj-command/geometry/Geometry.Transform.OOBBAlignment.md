@@ -84,7 +84,7 @@ Geometry.Transform.OOBBAlignment(...)
 
 ## Sample Code
 
-```pj {38-43}
+```psj {38-43}
 #Prepare model
 
 Geometry.Part.Cube(

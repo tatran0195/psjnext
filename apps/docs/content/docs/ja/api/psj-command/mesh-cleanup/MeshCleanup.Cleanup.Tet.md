@@ -114,7 +114,7 @@ Returns a string "1" if successful, or "0" if failed.
 
 ## Sample Code
 
-```pj {35-41}
+```psj {35-41}
 # Prepare model
 Geometry.Part.Cube(
   ilAxialNodes=[3, 3, 3],

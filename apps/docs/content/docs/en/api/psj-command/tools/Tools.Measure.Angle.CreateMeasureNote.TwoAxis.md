@@ -116,7 +116,7 @@ A _CursorStr_ specifying created note.
 
 ## Sample Code
 
-```pj {9-14}
+```psj {9-14}
 #Preapre model
 Geometry.Part.Cube(iPartColor=6409934)
 Tools.Coordinates.ThreeNode(strName="CRect _1", crlNodes=[Node(6, 437, 472)])

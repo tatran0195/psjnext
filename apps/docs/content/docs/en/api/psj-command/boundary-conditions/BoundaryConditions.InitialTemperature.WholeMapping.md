@@ -78,7 +78,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {17-22}
+```psj {17-22}
 # Prepare model
 Geometry.Part.Cube(iPartColor=6409934)
 Meshing.SolidMeshing(

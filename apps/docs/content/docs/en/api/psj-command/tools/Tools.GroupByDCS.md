@@ -26,7 +26,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {22}
+```psj {22}
 #Prepare model
 Geometry.Part.Cube(
     ilAxialNodes=[4, 4, 4], 

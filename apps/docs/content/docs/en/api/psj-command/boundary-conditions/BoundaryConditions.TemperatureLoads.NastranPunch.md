@@ -81,7 +81,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {7-9}
+```psj {7-9}
 # Prepare mapping data as .pch
 mapping _data _file = "C:/temp/test.pch"
 

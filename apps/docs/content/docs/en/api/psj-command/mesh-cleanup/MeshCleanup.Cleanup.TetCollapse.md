@@ -62,7 +62,7 @@ Returns a string "1" if successful, or "0" if failed.
 
 ## Sample Code
 
-```pj {36}
+```psj {36}
 Geometry.Part.Cube(
   ilAxialNodes=[3, 3, 3],
   iPartColor=7463537

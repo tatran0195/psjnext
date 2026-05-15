@@ -30,7 +30,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {3}
+```psj {3}
 # Prepare model
 Geometry.Part.Cube(ilAxialNodes=[3, 3, 3], iPartColor=7463537)
 

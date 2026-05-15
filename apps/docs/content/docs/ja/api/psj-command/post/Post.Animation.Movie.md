@@ -82,7 +82,7 @@ A _Boolean_ specifying succeeded or failed.
 
 ## Sample Code
 
-```pj {25-31}
+```psj {25-31}
 import os
 
 samplePath = os.path.join(JPT.GetProgramPath(),r"SampleData\PSJ\PSJ-Utility\PostSample\101 _solid.op2")

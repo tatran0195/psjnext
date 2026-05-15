@@ -177,7 +177,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {8-11}
+```psj {8-11}
 # Put solver data that includes temperature data.
 mapping _data _file = "C:/Temp/sol159.op2"
 

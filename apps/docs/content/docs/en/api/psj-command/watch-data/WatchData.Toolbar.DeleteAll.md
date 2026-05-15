@@ -45,7 +45,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {47-51}
+```psj {47-51}
 samplePath = JPT.GetProgramPath() + "SampleData\\PSJ\\PSJ-Utility\\PostSample\\101 _solid.op2"
 
 Home.ImportResults.Nastran(

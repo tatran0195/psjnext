@@ -100,7 +100,7 @@ A _CursorStr_ specifying created note.
 
 ## Sample Code
 
-```pj {4-6}
+```psj {4-6}
 #Please load result contains force result here.
 #Input IDs of nodes to measure.
 n1=1

@@ -53,7 +53,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {10-15}
+```psj {10-15}
 # Prepare the model
 Geometry.Part.Cube(
     dlLength=[0.003, 0.004, 0.005], 

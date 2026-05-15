@@ -157,7 +157,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {14-26}
+```psj {14-26}
 # model and environment settings
 JPT.Exec('ViewShowID(1)')
 Geometry.Part.Cube(ilAxialNodes=[4, 4, 4], iPartColor=7434735)

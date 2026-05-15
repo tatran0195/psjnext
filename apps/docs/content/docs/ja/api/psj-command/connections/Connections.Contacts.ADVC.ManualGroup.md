@@ -356,7 +356,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {}
+```psj {}
 # Prepare model
 Geometry.Part.Cube(
     iPartColor=6409934

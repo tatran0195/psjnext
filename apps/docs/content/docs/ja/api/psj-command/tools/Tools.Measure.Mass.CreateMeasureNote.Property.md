@@ -106,7 +106,7 @@ A _CursorStr_ specifying created note.
 
 ## Sample Code
 
-```pj {40-43}
+```psj {40-43}
 #Preapre model
 Geometry.Part.Cube(ilAxialNodes=[4, 4, 4], iPartColor=14903267)
 JPT.DisableScreenAnimation()

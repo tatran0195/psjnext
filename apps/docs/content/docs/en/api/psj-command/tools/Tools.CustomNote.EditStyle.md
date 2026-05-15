@@ -96,7 +96,7 @@ A _Boolean_ specifying edit custom note style works successfully or not.
 
 ## Sample Code
 
-```pj {22-26}
+```psj {22-26}
 Geometry.Part.Cube(strName="Cube _1", iPartColor=6409934)
 
 Tools.CustomNote(

@@ -59,7 +59,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {2-7}
+```psj {2-7}
 Geometry.Part.Cube()
 BoundaryConditions.InitialTemperature.Constant(
         strName="InitialTemperature _1",

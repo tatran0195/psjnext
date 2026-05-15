@@ -38,7 +38,7 @@ Connections.Contacts.ADVC.ContactTable _Advc(...)
 
 ## Sample Code
 
-```pj {18}
+```psj {18}
 Geometry.Part.Cube()
 Geometry.Part.Cube(dlOrigin=[0.01, 0.0, 0.0], 
                    strName="Cube _2", 

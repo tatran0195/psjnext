@@ -77,7 +77,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {2-7}
+```psj {2-7}
 # Prepare .pch file for setting
 mapping _data _file = "C:/temp/test.pch"
 

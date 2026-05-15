@@ -95,7 +95,7 @@ A _Boolean_ specifying the function succeeded or not.
 
 ## Sample Code
 
-```pj {13-21}
+```psj {13-21}
 #Preapre model
 Geometry.Part.Cube(iPartColor=6409934)
 JPT.DisableScreenAnimation()

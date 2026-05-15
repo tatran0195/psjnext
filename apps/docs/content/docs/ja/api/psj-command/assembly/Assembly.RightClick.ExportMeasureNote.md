@@ -49,7 +49,7 @@ A _Boolean_ specifying succeeded or not.
 
 ## Sample Code
 
-```pj {16-20}
+```psj {16-20}
 import os
 
 #Preapre model

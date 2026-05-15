@@ -2,14 +2,5 @@
     "$schema": "..\\..\\..\\..\\..\\.source\\json-schema\\docs.meta.json",
     "title": "Data Type",
     "description": "Data Type",
-    "icon": "Diamond",
-    "root": true,
-    "pages": [
-        "---PSJ Command---",
-        "...psj-command",
-        "---PSJ Utility---",
-        "...psj-utility",
-        "---PSJ GUI---",
-        "...psj-gui"
-    ]
+    "icon": "Diamond"
 }

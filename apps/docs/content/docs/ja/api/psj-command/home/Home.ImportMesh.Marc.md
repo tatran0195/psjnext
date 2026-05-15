@@ -30,7 +30,7 @@ A _Boolean_ specifying
 
 ## Sample Code
 
-```pj {4}
+```psj {4}
 #Prepare your data
 marc _file _path="C:/Temp/sample.t16"
 

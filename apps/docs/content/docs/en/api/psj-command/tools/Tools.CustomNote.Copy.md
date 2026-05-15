@@ -61,7 +61,7 @@ A _Boolean_ specifying copy custom note works successfully or not.
 
 ## Sample Code
 
-```pj {26-31}
+```psj {26-31}
 # Create a custom note and collection in document 1.
 doc1=JPT.GetActiveDocument()
 original _cnote=Tools.CustomNote.Create(

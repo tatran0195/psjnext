@@ -116,7 +116,7 @@ A _CursorStr_ specifying created note.
 
 ## Sample Code
 
-```pj {7-11}
+```psj {7-11}
 #Preapre model
 Geometry.Part.Cylinder(iPartColor=6409934)
 JPT.DisableScreenAnimation()

@@ -35,7 +35,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {3}
+```psj {3}
 # Prepare a poh5 / poh5a file to read
 poh5 _filepath = "C:/temp/mydata.poh5"
 

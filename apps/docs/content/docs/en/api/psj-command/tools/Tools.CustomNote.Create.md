@@ -150,7 +150,7 @@ A _Cursor_ specifying created custom note.
 
 ## Sample Code
 
-```pj {5-16}
+```psj {5-16}
 Geometry.Part.Cube(iPartColor=6409934)
 JPT.DisableScreenAnimation()
 JPT.ViewFitToModel()

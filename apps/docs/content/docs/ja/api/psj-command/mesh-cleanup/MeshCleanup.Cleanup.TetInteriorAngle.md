@@ -49,7 +49,7 @@ Returns a string "1" if successful, or "0" if failed.
 
 ## Sample Code
 
-```pj {24-28}
+```psj {24-28}
 Geometry.Part.Cube()
 
 Meshing.SolidMeshing(

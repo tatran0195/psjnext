@@ -40,7 +40,7 @@ A String of 1 if success, or 0 if fail.
 
 ## Sample Code
 
-```pj {2}
+```psj {2}
 Geometry.Part.Cube()
 connectFace=MainWindow.RightClick.AssociatedPick(crlInput=[Node(1)], strTarget="Face")
 JPT.Debugger(connectFace)
