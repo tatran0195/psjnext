@@ -7,7 +7,7 @@ authorURL: https://www.e-technostar.com/
 
 ## Description
 
-Create Acoustic Boundary.
+Create Acoustic Boundary. (in japanese - test)
 
 ## Syntax
 
